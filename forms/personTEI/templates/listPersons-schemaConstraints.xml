@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:local="http://syriaca.org/ns">
+   <person ident="person"
+           elementName="person"
+           elementLabel="person"
+           minOccur=""
+           maxOccur=""
+           path="/*:person"
+           currentLevel="1">
+      <availableAtts elementName="person">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="role"
+                 mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="author"/>
+                                </valList>
+                            </attDef>
+         <attDef ident="xml:id"/>
+      </availableAtts>
+      <siblingElements>
+         <child/>
+      </siblingElements>
+      <childElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </childElements>
+   </person>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="personal name"
+             minOccur=""
+             maxOccur=""
+             path="/*:person/*:persName"
+             currentLevel="2">
+      <desc>contains a proper noun or proper-noun phrase referring to a
+  person, possibly including one or more of
+  the person's forenames, surnames, honorifics, added names, etc.</desc>
+      <availableAtts elementName="persName">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="opt"/>
+         <attDef ident="resp"/>
+         <attDef ident="source"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="srophe-tags">
+                                <datatype>
+                                    <dataRef name="string"/>
+                                </datatype>
+                            </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 usage="opt">
+                                <datatype>
+                                    <dataRef key="teidata.enumerated"/>
+                                </datatype>
+                                <valList type="closed">
+                                    <valItem ident="attested"/>
+                                    <valItem ident="alternate"/>
+                                    <valItem ident="canon"/>
+                                </valList>
+                            </attDef>
+         <attDef ident="xml:id"/>
+         <attDef ident="xml:lang"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child>
+            <element ident="forename"/>
+            <element ident="addName"/>
+         </child>
+      </childElements>
+   </persName>
+   <forename ident="forename"
+             elementName="forename"
+             elementLabel="forename"
+             minOccur=""
+             maxOccur=""
+             path="/*:person/*:persName/*:forename"
+             currentLevel="3">
+      <desc>contains a forename, given or baptismal name.</desc>
+      <availableAtts elementName="forename">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="full"
+                 usage="opt">
+            <desc versionDate="2005-10-10" xml:lang="en">indicates whether the name component is given in full, as an
+abbreviation or simply as an initial.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">축약 또는 이니셜로 간단하게 이름 성분이 완전히 제시된 것인지의 여부를 나타낸다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所提供的名稱元件是否完整，為一縮寫或僅為一字首字母。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該名前要素は省略がないか，省略形か，イニシャルのような簡単なも
+    のか示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">indique si la composante du nom est donnée en intégralité, sous forme d'abréviation ou simplement d'initiale.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica si el componente del nombre aparece por completo, como una abreviatura o como una inicial.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">indica se la componente del nome compare per esteso, come abbreviazione o come iniziale</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <defaultVal>yes</defaultVal>
+            <valList type="closed">
+               <valItem ident="yes">
+                  <gloss xml:lang="en" versionDate="2009-05-28">yes</gloss>
+                  <gloss versionDate="2009-05-28" xml:lang="fr">complet</gloss>
+                  <desc versionDate="2007-06-27" xml:lang="en">the name component is spelled out in full.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이름 성분이 완전히 제시된다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">該名稱元件的拼字完整。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">el componente nombre se deletrea por completo.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">当該名前要素は，省略無く示されている．</desc>
+                  <desc versionDate="2009-05-28" xml:lang="fr">la composante du nom est orthographiée en intégralité.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">la componente del nome compare per esteso</desc>
+               </valItem>
+               <valItem ident="abb">
+                  <gloss versionDate="2007-07-04" xml:lang="en">abbreviated</gloss>
+                  <gloss versionDate="2007-12-20" xml:lang="ko">축약된</gloss>
+                  <gloss versionDate="2009-05-28" xml:lang="fr">abrégé</gloss>
+                  <gloss versionDate="2007-11-06" xml:lang="it">abbreviato</gloss>
+                  <gloss versionDate="2007-05-04" xml:lang="es">el componente del nombre aparece como forma abreviada.</gloss>
+                  <desc versionDate="2007-06-27" xml:lang="en">the name component is given in an abbreviated form.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이름 성분이 축약형으로 제시된다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">該名稱元件為縮寫形式。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">el componente conocido se da en una forma abreviada.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">当該名前要素には，省略がある．</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">la composante du nom est donnée sous forme abrégée.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">la componente del nome compare in forma abbreviata</desc>
+               </valItem>
+               <valItem ident="init">
+                  <gloss versionDate="2007-07-04" xml:lang="en">initial letter</gloss>
+                  <gloss versionDate="2007-12-20" xml:lang="ko">이니셜 문자</gloss>
+                  <gloss versionDate="2007-06-12" xml:lang="fr">initiale</gloss>
+                  <gloss versionDate="2007-11-06" xml:lang="it">lettera iniziale</gloss>
+                  <gloss versionDate="2007-05-04" xml:lang="es">el componente del nombre aparece mediante la inicial.</gloss>
+                  <desc versionDate="2007-06-27" xml:lang="en">the name component is indicated only by
+one initial.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이름 성분이 하나의 이니셜(첫글자)로 제시되었다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">該名稱元件僅以一字首字母表示。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">el componente conocido es indicado solamente por una inicial.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">当該名前要素は，イニシャルだけで示されている．</desc>
+                  <desc versionDate="2009-05-28" xml:lang="fr">la composante du nom n'est indiquée que par sa lettre initiale.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">la componente del nome è indicata da una sola iniziale</desc>
+               </valItem>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="sort"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-28">sort</gloss>
+            <gloss versionDate="2009-05-28" xml:lang="fr">ordre</gloss>
+            <desc versionDate="2012-10-24" xml:lang="en">specifies the sort order of the name component in relation to others within the name.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">사람 이름 내에 다른 것과 관련된 이름 성분의 정렬 순서를 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明個人名稱中該名稱元件與其他元件之間的排列順序。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">個人名間で並び替えをする際の順番を示す．</desc>
+            <desc versionDate="2009-05-28" xml:lang="fr">précise dans quel ordre est placé la composante par rapport aux autres dans le nom d'une personne.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">especifica la posición del componente al interno del nombre propio de persona en relación con los otros componentes.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">specifica la posizione della componente all'interno del nome proprio di persona in relazione alle altre componenti</desc>
+            <datatype>
+               <dataRef key="teidata.count"/>
+            </datatype>
+         </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="forename"/>
+            <element ident="addName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </forename>
+   <addName ident="addName"
+            elementName="addName"
+            elementLabel="additional name"
+            minOccur=""
+            maxOccur=""
+            path="/*:person/*:persName/*:addName"
+            currentLevel="3">
+      <desc>contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal
+    name.</desc>
+      <availableAtts elementName="addName">
+         <attDef ident="ref"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 usage="opt">
+                                <datatype>
+                                    <dataRef key="teidata.enumerated"/>
+                                </datatype>
+                                <valList type="closed">
+                                    <valItem ident="shuhra"/>
+                                    <valItem ident="ism"/>
+                                    <valItem ident="nasab"/>
+                                    <valItem ident="nisbah"/>
+                                    <valItem ident="kunya"/>
+                                    <valItem ident="laqab"/>
+                                    <valItem ident="patronym"/>
+                                    <valItem ident="epithet"/>
+                                    <valItem ident="acronym"/>
+                                </valList>
+                            </attDef>
+         <attDef ident="xml:id"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="forename"/>
+            <element ident="addName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </addName>
+   <birth ident="birth"
+          elementName="birth"
+          elementLabel="birth"
+          minOccur=""
+          maxOccur=""
+          path="/*:person/*:birth"
+          currentLevel="2">
+      <availableAtts elementName="birth">
+         <attDef ident="source"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </childElements>
+   </birth>
+   <date ident="date"
+         elementName="date"
+         elementLabel="date"
+         minOccur=""
+         maxOccur=""
+         path="/*:person/*:birth/*:date"
+         currentLevel="3">
+      <desc>contains a date in any format.</desc>
+      <availableAtts elementName="date">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="calendar"
+                 usage="opt"
+                 mode="replace">
+                            
+                            <valList type="closed">
+                                <valItem ident="hebrew">
+                                    <desc>Hebrew calendar</desc>
+                                </valItem>
+                                <valItem ident="alexander">
+                                    <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
+                                </valItem>
+                                <valItem ident="islamic">
+                                    <desc>Islamic Era</desc>
+                                </valItem>
+                                <valItem ident="julian">
+                                    <desc>Julian calendar</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="dur"
+                 usage="opt">
+            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
+            <gloss versionDate="2007-12-20" xml:lang="ko">지속</gloss>
+            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
+            <gloss versionDate="2007-06-12" xml:lang="fr">durée</gloss>
+            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
+            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
+            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
+            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明此元素的時間長度。
+</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">
+      時間幅を示す．
+</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">indique la longueur de cet élément dans le
+        temps</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo di tale elemento</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype>
+               <dataRef key="teidata.duration.w3c"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="dur-iso"
+                 usage="opt">
+            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
+            <gloss versionDate="2007-12-20" xml:lang="ko">지속 기간</gloss>
+            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
+            <gloss versionDate="2008-12-09" xml:lang="fr">durée</gloss>
+            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
+            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
+            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
+            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出此元素的時間長度。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該時間の長さを示す．</desc>
+            <desc versionDate="2008-12-09" xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo dell'elemento</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype>
+               <dataRef key="teidata.duration.iso"/>
+            </datatype>
+         </attDef>
+         <attDef ident="notAfter"/>
+         <attDef ident="notBefore"/>
+         <attDef ident="source"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 usage="opt"
+                 mode="change">
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="open">
+                                <valItem ident="age">
+                  <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="reign">
+                  <desc>Duration of a reign, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="life">
+                  <desc>Duration of life, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="marriage">
+                  <desc>Duration of marriage, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="generic-duration">
+                  <desc>Generic duration, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="foundation">
+                  <desc>Date of foundation</desc>
+               </valItem>
+                                <valItem ident="composition">
+                  <desc>Date of the composition of a work</desc>
+               </valItem>
+                                <valItem ident="translation">
+                  <desc>Date of the translation of a work</desc>
+               </valItem>
+                                <valItem ident="revision">
+                  <desc>Date of the revision of a work</desc>
+               </valItem>
+                                <valItem ident="recension">
+                  <desc>Date of the composition of a specific recension</desc>
+               </valItem>
+                                <valItem ident="diesNatalis">
+                  <desc>Date of a saint’s martyrdom</desc>
+               </valItem>
+                                <valItem ident="birth">
+                  <desc>Date of birth (do not use this in a person record, use element birth)</desc>
+               </valItem>
+                                <valItem ident="ascension">
+                  <desc>Date of a person’s ascension to power</desc>
+               </valItem>
+                                <valItem ident="death">
+                  <desc>Date of death</desc>
+               </valItem>
+                                <valItem ident="production">
+                                    <desc>The date of production of the document (EMA)</desc>
+                                </valItem>
+                                <valItem ident="repeated">
+                                    <desc>If the commemoration is repeated, please add this value as
+                                        well in type</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+         <attDef ident="when"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </date>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="place name"
+              minOccur=""
+              maxOccur=""
+              path="/*:person/*:birth/*:placeName"
+              currentLevel="3">
+      <desc>contains an absolute or relative place name.</desc>
+      <availableAtts elementName="placeName">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+                            <valList>
+                                <valItem ident="normalized"/>
+                                <valItem ident="library"/>
+                                <valItem ident="academicInstitution"/>
+                                <valItem ident="museum"/>
+                            </valList>
+                        </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <death ident="death"
+          elementName="death"
+          elementLabel="death"
+          minOccur=""
+          maxOccur=""
+          path="/*:person/*:death"
+          currentLevel="2">
+      <availableAtts elementName="death">
+         <attDef ident="source"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </childElements>
+   </death>
+   <date ident="date"
+         elementName="date"
+         elementLabel="date"
+         minOccur=""
+         maxOccur=""
+         path="/*:person/*:death/*:date"
+         currentLevel="3">
+      <desc>contains a date in any format.</desc>
+      <availableAtts elementName="date">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="calendar"
+                 usage="opt"
+                 mode="replace">
+                            
+                            <valList type="closed">
+                                <valItem ident="hebrew">
+                                    <desc>Hebrew calendar</desc>
+                                </valItem>
+                                <valItem ident="alexander">
+                                    <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
+                                </valItem>
+                                <valItem ident="islamic">
+                                    <desc>Islamic Era</desc>
+                                </valItem>
+                                <valItem ident="julian">
+                                    <desc>Julian calendar</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="dur"
+                 usage="opt">
+            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
+            <gloss versionDate="2007-12-20" xml:lang="ko">지속</gloss>
+            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
+            <gloss versionDate="2007-06-12" xml:lang="fr">durée</gloss>
+            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
+            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
+            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
+            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明此元素的時間長度。
+</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">
+      時間幅を示す．
+</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">indique la longueur de cet élément dans le
+        temps</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo di tale elemento</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype>
+               <dataRef key="teidata.duration.w3c"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="dur-iso"
+                 usage="opt">
+            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
+            <gloss versionDate="2007-12-20" xml:lang="ko">지속 기간</gloss>
+            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
+            <gloss versionDate="2008-12-09" xml:lang="fr">durée</gloss>
+            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
+            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
+            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
+            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出此元素的時間長度。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該時間の長さを示す．</desc>
+            <desc versionDate="2008-12-09" xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo dell'elemento</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype>
+               <dataRef key="teidata.duration.iso"/>
+            </datatype>
+         </attDef>
+         <attDef ident="notAfter"/>
+         <attDef ident="notBefore"/>
+         <attDef ident="source"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 usage="opt"
+                 mode="change">
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="open">
+                                <valItem ident="age">
+                  <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="reign">
+                  <desc>Duration of a reign, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="life">
+                  <desc>Duration of life, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="marriage">
+                  <desc>Duration of marriage, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="generic-duration">
+                  <desc>Generic duration, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
+                  </desc>
+               </valItem>
+                                <valItem ident="foundation">
+                  <desc>Date of foundation</desc>
+               </valItem>
+                                <valItem ident="composition">
+                  <desc>Date of the composition of a work</desc>
+               </valItem>
+                                <valItem ident="translation">
+                  <desc>Date of the translation of a work</desc>
+               </valItem>
+                                <valItem ident="revision">
+                  <desc>Date of the revision of a work</desc>
+               </valItem>
+                                <valItem ident="recension">
+                  <desc>Date of the composition of a specific recension</desc>
+               </valItem>
+                                <valItem ident="diesNatalis">
+                  <desc>Date of a saint’s martyrdom</desc>
+               </valItem>
+                                <valItem ident="birth">
+                  <desc>Date of birth (do not use this in a person record, use element birth)</desc>
+               </valItem>
+                                <valItem ident="ascension">
+                  <desc>Date of a person’s ascension to power</desc>
+               </valItem>
+                                <valItem ident="death">
+                  <desc>Date of death</desc>
+               </valItem>
+                                <valItem ident="production">
+                                    <desc>The date of production of the document (EMA)</desc>
+                                </valItem>
+                                <valItem ident="repeated">
+                                    <desc>If the commemoration is repeated, please add this value as
+                                        well in type</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+         <attDef ident="when"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </date>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="place name"
+              minOccur=""
+              maxOccur=""
+              path="/*:person/*:death/*:placeName"
+              currentLevel="3">
+      <desc>contains an absolute or relative place name.</desc>
+      <availableAtts elementName="placeName">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+                            <valList>
+                                <valItem ident="normalized"/>
+                                <valItem ident="library"/>
+                                <valItem ident="academicInstitution"/>
+                                <valItem ident="museum"/>
+                            </valList>
+                        </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="date"/>
+            <element ident="placeName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <floruit ident="floruit"
+            elementName="floruit"
+            elementLabel="floruit"
+            minOccur=""
+            maxOccur=""
+            path="/*:person/*:floruit"
+            currentLevel="2">
+      <availableAtts elementName="floruit">
+         <attDef ident="from"/>
+         <attDef ident="notAfter"/>
+         <attDef ident="notBefore"/>
+         <attDef ident="to"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </floruit>
+   <sex ident="sex"
+        elementName="sex"
+        elementLabel="sex"
+        minOccur=""
+        maxOccur=""
+        path="/*:person/*:sex"
+        currentLevel="2">
+      <availableAtts elementName="sex">
+         <attDef ident="source"/>
+         <attDef ident="value"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </sex>
+   <faith ident="faith"
+          elementName="faith"
+          elementLabel="faith"
+          minOccur=""
+          maxOccur=""
+          path="/*:person/*:faith"
+          currentLevel="2">
+      <availableAtts elementName="faith">
+         <attDef ident="source"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </faith>
+   <occupation ident="occupation"
+               elementName="occupation"
+               elementLabel="occupation"
+               minOccur=""
+               maxOccur=""
+               path="/*:person/*:occupation"
+               currentLevel="2">
+      <availableAtts elementName="occupation">
+         <attDef ident="source"/>
+         <attDef ident="type"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </occupation>
+   <residence ident="residence"
+              elementName="residence"
+              elementLabel="residence"
+              minOccur=""
+              maxOccur=""
+              path="/*:person/*:residence"
+              currentLevel="2">
+      <availableAtts elementName="residence">
+         <attDef ident="source"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <child>
+            <element ident="placeName"/>
+         </child>
+      </childElements>
+   </residence>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="place name"
+              minOccur=""
+              maxOccur=""
+              path="/*:person/*:residence/*:placeName"
+              currentLevel="3">
+      <desc>contains an absolute or relative place name.</desc>
+      <availableAtts elementName="placeName">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+                            <valList>
+                                <valItem ident="normalized"/>
+                                <valItem ident="library"/>
+                                <valItem ident="academicInstitution"/>
+                                <valItem ident="museum"/>
+                            </valList>
+                        </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="placeName"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="bibliographic citation"
+         minOccur=""
+         maxOccur=""
+         path="/*:person/*:bibl"
+         currentLevel="2">
+      <desc>contains a loosely-structured bibliographic citation of which the sub-components may or may
+    not be explicitly tagged.</desc>
+      <availableAtts elementName="bibl">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+                            <valList mode="replace" type="semi">
+                                <valItem ident="MS">
+                                    <desc>The reference is to a manuscript</desc>
+                                </valItem>
+                                <valItem ident="QUARTO">
+                                    <desc>The reference is to the Bodleian Quarto
+                                        Catalogues</desc>
+                                </valItem>
+                                <valItem ident="SC">
+                                    <desc>The reference is to the Bodleian Summary
+                                        Catalogue</desc>
+                                </valItem>
+                                <valItem ident="OC">
+                                    <desc>The reference is to the Bodleian Old Catalogue</desc>
+                                </valItem>
+                                <valItem ident="bible">
+                                    <desc>The reference is to the bible</desc>
+                                </valItem>
+                                <valItem ident="commentary">
+                                    <desc>The reference is to a commentary</desc>
+                                </valItem>
+                                <valItem ident="edition">
+                                    <desc>The reference is to an edition</desc>
+                                </valItem>
+                                <valItem ident="extract">
+                                    <desc>The reference is to an extract</desc>
+                                </valItem>
+                                <valItem ident="related">
+                                    <desc>The reference is to a related item</desc>
+                                </valItem>
+                                <valItem ident="text-relations">
+                                    <desc>The reference is to a textually-related item</desc>
+                                </valItem>
+                                <valItem ident="translation">
+                                    <desc>The reference is to a translation</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+         <attDef ident="xml:id"/>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child>
+            <element ident="citedRange"/>
+            <element ident="ptr"/>
+         </child>
+      </childElements>
+   </bibl>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="cited range"
+               minOccur=""
+               maxOccur=""
+               path="/*:person/*:bibl/*:citedRange"
+               currentLevel="3">
+      <desc>defines the range of cited content, often represented by pages or other units</desc>
+      <availableAtts elementName="citedRange">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="evaluate"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-28">evaluate</gloss>
+            <gloss versionDate="2009-05-28" xml:lang="fr">évalué</gloss>
+            <desc versionDate="2005-10-10" xml:lang="en">specifies the intended meaning when the target of a
+      pointer is itself a pointer.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">포인터의 대상이 포인터일 때 의도된 의미를 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">若指標的目標本身為指標，則在此說明其用意。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該ポインタの参照先がポインタである場合，その意図を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">détermine le sens attendu, si la cible d'un pointeur est elle-même un pointeur.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el significado previsto cuando la meta de un indicador es también un indicador.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">indica il significato previsto quando la destinazione di un puntatore è essa stessa un puntatore</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="all">
+                  <desc versionDate="2007-06-27" xml:lang="en">if the element pointed to is itself a pointer, then
+	  the target of that pointer will be taken, and so on, until
+	  an element is found which is not a pointer.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">만약 지시되는 요소가 포인터라면, 포인터의 대상은 포인터가 아닌 요소가 발견될 때까지 계속 연결된다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">若指向的元素本身為指標，則該指標的目標會被移除，依此類推，直到找到一個非指標的元素為止。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">si el elemento que señala a sí mismo es un indicador, entonces el target de ese indicador será tomado, y así sucesivamente, hasta que se encuentre un elemento que no sea un indicador.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">	  参照先の要素がポインターである場合，そのポインターの参照先へ
+	  と展開する．これを，参照先がポインターでなくなるまで続ける．
+	</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">si l'élément pointé est lui-même un pointeur, alors on prendra la cible de ce pointeur, et ainsi de suite jusqu'à trouver un élément qui n'est pas un pointeur.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">se l'elemento puntato è esso stesso un puntatore, allora sarà presa la destinazione di quel puntatore e così via fino a trovare un elemento che non è un puntatore</desc>
+               </valItem>
+               <valItem ident="one">
+                  <desc versionDate="2007-06-27" xml:lang="en">if the element pointed to is itself a pointer, then
+	  its target (whether a pointer or not) is taken as the target
+	  of this pointer.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">지시된 요소가 포인터라면, 그 대상(포인터이든지 아니든지)은 이 포인터의 대상으로 취급된다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">若指向的元素本身為指標，則該指標的目標(無論是否為指標)會作為這項指標的目標。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">si el elemento que señala a sí mismo es un puntero, entonces el target (puntero o no) se toma como el target de este puntero.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">	  参照先の要素がポインターである場合，(そのポインターの参照先
+	  がどうであれ)そのポインターが参照先になる．
+	</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">si l'élément pointé est lui-même un pointeur, alors sa cible (qui est ou non un pointeur) devient la cible retenue.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">se l'elemento puntato è esso stesso un puntatore, allora la sua destinazione (che sia un puntatore o meno) è presa come destinazione del puntatore</desc>
+               </valItem>
+               <valItem ident="none">
+                  <desc versionDate="2007-06-27" xml:lang="en">no further evaluation of targets is carried out
+	  beyond that needed to find the element specified in the
+	  pointer's target.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">포인터의 대상에서 명시된 요소를 발견할 필요가 없을 때 더 이상의 대상에 대한 평가는 수행되지 않는다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">尋找指標的目標元素時，未對目標進行不必要的延伸評估。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">no se realiza ninguna otra evaluación de los targets más allá de la necesaria para encontrar el elemento especificado en el target del puntero.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">	  当該ポインターの参照先から先にあるリンクへの展開は行わない．
+	</desc>
+                  <desc versionDate="2009-05-28" xml:lang="fr">aucune évaluation ultérieure des cibles n'est menée au-delà de la recherche de l'élément désigné dans la cible du pointeur.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">non viene condotta altra valutazione delle destinazioni se non quella necessaria a rintracciare l'elemento specificato nella destinazione del puntatore</desc>
+               </valItem>
+            </valList>
+            <remarks versionDate="2005-10-10" xml:lang="en">
+               <p>If no value is given, the application program is
+          responsible for deciding (possibly on the basis of user
+          input) how far to trace a chain of pointers.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>Si aucune valeur n'est fournie, c'est au programme d'application de décider
+                        (éventuellement à partir d'une donnée entrée par l'utilisateur) jusqu'où
+                        retracer une chaîne de pointeurs.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p>
+	値がない場合，ソフトウェア側がポインター連鎖の扱いを決める(恐
+	  らく利用者が指示を元に行われる)．
+	  </p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="target"
+                 usage="opt">
+            <desc versionDate="2010-05-02" xml:lang="en">specifies the destination of the reference by supplying one or more URI References</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">하나 혹은 다수의 URI 참조를 제시하여 참조의 목적지를 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用一個或多個統一資源識別符參照 (URI References) 來說明參照所指位置。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">ひとつ以上のURIで，参照先を特定する．</desc>
+            <desc versionDate="2009-01-06" xml:lang="fr">précise la cible de la référence en donnant une ou
+        plusieurs références URI</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">especifica la destinación de una referencia
+        proporcionando una o más referencias URI.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">specifica la destinazione di un riferimento, fornendo
+        uno o più riferimenti URI</desc>
+            <datatype maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+            <remarks versionDate="2007-01-21" xml:lang="en">
+               <p>One or more syntactically valid URI references, separated by whitespace. Because
+        whitespace is used to separate URIs, no whitespace is permitted inside a single URI. If a
+        whitespace character is required in a URI, it should be escaped with the normal mechanism,
+        e.g. <code>TEI%20Consortium</code>.</p>
+            </remarks>
+            <remarks versionDate="2007-01-21" xml:lang="fr">
+               <p>Une ou plusieurs références URI syntaxiquement valables, séparée par
+        un espace. Puisqu'un espace  est employé pour séparer des URIs, aucun espace
+        n’est autorisé à l'intérieur d'un URI. Si un espace est requis dans un URI, il
+        faut le représenter avec une séquence d'échappement, comme par exemple 
+        <code>TEI%20Consortium</code>.</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="targetLang"
+                 usage="opt">
+            <desc versionDate="2012-06-16" xml:lang="en">specifies the language of the content to be found at the destination referenced by <att>target</att>, using a <soCalled>language tag</soCalled> generated
+        according to <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>.</desc>
+            <datatype>
+               <dataRef key="teidata.language"/>
+            </datatype>
+            <constraintSpec ident="targetLang" scheme="schematron">
+               <constraint>
+                  <sch:rule context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
+                     <sch:assert test="@target">@targetLang should only be used on <sch:name/> if @target is specified.</sch:assert>
+                  </sch:rule>
+               </constraint>
+            </constraintSpec>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
+                  <linkGrp xml:id="pol-swh_aln_2.1-linkGrp">
+                     <ptr xml:id="pol-swh_aln_2.1.1-ptr"
+                          target="pol/UDHR/text.xml#pol_txt_1-head"
+                          type="tuv"
+                          targetLang="pl"/>
+                     <ptr xml:id="pol-swh_aln_2.1.2-ptr"
+                          target="swh/UDHR/text.xml#swh_txt_1-head"
+                          type="tuv"
+                          targetLang="sw"/>
+                  </linkGrp>
+               </egXML>
+               <p>In the example above, the <gi>linkGrp</gi> combines
+        pointers at parallel fragments of the <title>Universal
+        Declaration of Human Rights</title>: one of them is in Polish,
+        the other in Swahili.</p>
+            </exemplum>
+            <remarks xml:lang="en" versionDate="2013-12-08">
+               <p>The value must conform to BCP 47. If the value is a
+      private use code (i.e., starts with <val>x-</val> or contains
+      <val>-x-</val>), a <gi>language</gi> element with a matching
+      value for its <att>ident</att> attribute should be supplied in
+      the TEI header to document this value. Such documentation may
+      also optionally be supplied for non-private-use codes, though
+      these must remain consistent with their
+      <choice>
+                     <abbr>IETF</abbr>
+                     <expan>Internet Engineering Task
+      Force</expan>
+                  </choice> definitions.</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="unit"
+                 mode="replace">
+                            <valList type="open">
+                                <valItem ident="page">
+                                    <desc>page</desc>
+                                </valItem>
+                                <valItem ident="chapter">
+                                    <desc>chapter</desc>
+                                </valItem>
+                                <valItem ident="column">
+                                    <desc>column</desc>
+                                </valItem>
+                                <valItem ident="issue">
+                                    <desc>issue</desc>
+                                </valItem>
+                                <valItem ident="line">
+                                    <desc>line</desc>
+                                </valItem>
+                                <valItem ident="part">
+                                    <desc>part</desc>
+                                </valItem>
+                                <valItem ident="volume">
+                                    <desc>volume</desc>
+                                </valItem>
+                                <valItem ident="item">
+                                    <desc>item number</desc>
+                                </valItem>
+                                <valItem ident="fol">
+                                    <desc>folio</desc>
+                                </valItem>
+                                <valItem ident="note">
+                                    <desc>numbered note (footnote, sidenote, endnote)</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="citedRange"/>
+            <element ident="ptr"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </citedRange>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="ptr"
+        minOccur=""
+        maxOccur=""
+        path="/*:person/*:bibl/*:ptr"
+        currentLevel="3">
+      <availableAtts elementName="ptr"/>
+      <siblingElements>
+         <child>
+            <element ident="citedRange"/>
+            <element ident="ptr"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </ptr>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="identifier"
+         minOccur=""
+         maxOccur=""
+         path="/*:person/*:idno"
+         currentLevel="2">
+      <desc>supplies any form of identifier used to identify some object,
+  such as a bibliographic item, a person, a title, an organization,
+  etc. in a standardized way.</desc>
+      <availableAtts elementName="idno">
+         <attDef ident="resp"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="subtype"
+                 mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="isni"/>
+                                    <valItem mode="add" ident="viaf"/>
+                                    <valItem mode="add" ident="wiki"/>
+                                    <valItem mode="add" ident="gnd"/>
+                                    <valItem mode="add" ident="merhav"/>
+                                    <valItem mode="add" ident="rambi"/>
+                                    <valItem mode="add" ident="imhm"/>
+                                    <valItem mode="add" ident="ktiv"/>
+                                </valList>
+                            </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 usage="opt"
+                 mode="change">
+            <desc versionDate="2010-04-30" xml:lang="en">categorizes the identifier, for example as an ISBN, Social
+      Security number, etc.</desc>
+            <desc versionDate="2009-01-05" xml:lang="fr">classe un numéro dans une catégorie, par exemple
+        comme étant un numéro ISBN ou comme appartenant une autre série normalisée.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">예를 들어 ISBN 또는 기타 표준 일련번호로, 숫자를 범주화한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">表明編碼的種類，例如國際標準書號 (ISBN) 或其他標準系列編碼。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該数値の分類を示す．例えば，ISBNなど．</desc>
+            <desc versionDate="2016-11-17" xml:lang="de">bestimmt die Art des Identifikators (z. B. ISBN, Sozialversicherungsnummer, URI)</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">clasifica el número, por ejemplo como un ISBN o
+        cualquier otro número estándard.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">classifica l'identificatore, ad esempio come codice
+        ISBN o altri generi di identificatori standard.</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="semi" mode="add">
+               <valItem ident="ISBN">
+                  <desc versionDate="2016-07-02" xml:lang="en">International Standard Book Number: a 13- or (if assigned prior to 2007) 10-digit identifying number assigned by the publishing industry to a published book or similar item, registered with the <ref target="https://www.isbn-international.org"> International ISBN Agency.</ref>
+                  </desc>
+               </valItem>
+               <valItem ident="ISSN">
+                  <desc versionDate="2016-07-02" xml:lang="en">International Standard Serial Number: an eight-digit number to uniquely identify a serial publication.</desc>
+               </valItem>
+               <valItem ident="DOI">
+                  <desc versionDate="2016-07-02" xml:lang="en">Digital Object Identifier: a unique string of letters and numbers assigned to an electronic document.</desc>
+               </valItem>
+               <valItem ident="URI">
+                  <desc versionDate="2016-07-02" xml:lang="en">Uniform Resource Identifier: a string of characters to uniquely identify a resource which usually contains indication of the means of accessing that resource, the name of its host, and its filepath.</desc>
+               </valItem>
+               <valItem ident="VIAF">
+                  <desc versionDate="2016-07-02" xml:lang="en">A data number in the Virtual Internet Authority File assigned to link different names in catalogs around the world for the same entity.</desc>
+               </valItem>
+               <valItem ident="ESTC">
+                  <desc versionDate="2016-07-02" xml:lang="en">English Short-Title Catalogue number: an identifying number assigned to a document in English printed in the British Isles or North America before 1801.</desc>
+               </valItem>
+               <valItem ident="OCLC">
+                  <desc versionDate="2016-07-02" xml:lang="en">OCLC control number (record number) for the union catalog record in WorldCat, a union catalog for member libraries in the Online Computer Library Center global cooperative.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <siblingElements>
+         <child>
+            <element ident="persName"/>
+            <element ident="birth"/>
+            <element ident="death"/>
+            <element ident="floruit"/>
+            <element ident="sex"/>
+            <element ident="faith"/>
+            <element ident="occupation"/>
+            <element ident="residence"/>
+            <element ident="bibl"/>
+            <element ident="idno"/>
+         </child>
+      </siblingElements>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </idno>
+</TEI>

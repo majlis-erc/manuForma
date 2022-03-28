@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Start license statement: do not remove
+
+Schema for the encoding of arabic manuscripts
+originated from Beta maṣāḥǝft Schema
+Copyright (c) 2021- by all contributors listed in <titleStmt>, below and contributors to the github stored version
+see https://github.com/BetaMasaheft/Schema/graphs/contributors
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+End license statement: do not remove -->
+<!--requirements: 
+    
+    FIRHIST compatibility
+    
+
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Partial Manuscripts Schema, constrained for usage in XForms</title>
+                <author xml:id="MM">Maximilian de Molière</author>
+                <author xml:id="PL">Pietro Liuzzo</author>
+                <author xml:id="NG">Nathan Gibson</author>
+            </titleStmt>
+            <publicationStmt>
+                <authority>Institut für den Nahen und Mittleren Osten</authority>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
+                    Arabic in the Islamicate World</publisher>
+                <pubPlace>München</pubPlace>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
+                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
+                </availability>
+            </publicationStmt>
+            <notesStmt>
+                <note type="ns">http://www.example.org/ns/nonTEI</note>
+            </notesStmt>
+            <sourceDesc>
+                <p>created electronically</p>
+            </sourceDesc>
+        </fileDesc>
+        <revisionDesc>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
+                created by Pietro Liuzzo</change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <front>
+            <divGen type="toc"/>
+        </front>
+        <body>
+            <div>
+                <head>Information on this customization</head>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering
+                    descriptions of the manuscript layout using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
+                        Guidelines</ref> contain examples and details of that customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated schema</ref> of FIRHIST</p>
+                <p>Constrained this schema for generating forms.</p>
+            </div>
+            <div>
+                <schemaSpec ident="titleStmt" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                    <!--source="mss-compiled.odd"-->
+                    <!--       MODULES USED BY THE SCHEMA
+                the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
+                -->
+
+                    <moduleRef key="core" include="title editor respStmt resp name"/>
+                    <moduleRef key="namesdates" include="orgName"/>
+                    <moduleRef key="tei"/>
+                    <elementSpec ident="note" module="core" mode="change date">
+                        <classes mode="replace">
+                            <memberOf key="model.annotationLike"/>
+                            <memberOf key="model.annotationPart.body"/>
+                            <memberOf key="model.correspActionPart"/>
+                            <memberOf key="model.correspContextPart"/>
+                            <memberOf key="model.correspDescPart"/>
+                            <memberOf key="model.noteLike"/>
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="p"/>
+                            <elementRef key="locus"/>
+                        </content>
+                        <attList>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="xml:rend" mode="delete"/>
+                            <attDef ident="xml:style" mode="delete"/>
+                            <attDef ident="xml:rendition" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="place" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="anchored" mode="delete"/>
+                            <attDef ident="targetEnd" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="locus" module="msdescription" mode="delete"/>
+                    <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
+                    <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
+                    <elementSpec ident="TEI" module="textstructure" mode="delete"/>
+                    <elementSpec ident="msDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="catchwords" module="msdescription" mode="delete"/>
+                    <elementSpec ident="collation" module="msdescription" mode="delete"/>
+                    <elementSpec ident="condition" module="msdescription" mode="delete"/>
+                    <elementSpec ident="dim" module="msdescription" mode="delete"/>
+                    <elementSpec ident="foliation" module="msdescription" mode="delete"/>
+                    <elementSpec ident="material" module="msdescription" mode="delete"/>
+                    <elementSpec ident="objectDesc" module="msdescription" mode="delete"/>
+                    
+                    
+                    <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="layoutDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="dimensions" module="msdescription" mode="delete"/>
+                    <elementSpec ident="layout" module="msdescription" mode="delete"/>
+                    <elementSpec ident="summary" module="msdescription" mode="delete"/>
+                    <elementSpec ident="height" module="msdescription" mode="delete"/>
+                    <elementSpec ident="width" module="msdescription" mode="delete"/>
+
+                    <elementSpec ident="ab" module="linking" mode="delete"/>
+                    <elementSpec ident="p" module="core" mode="delete"/>
+                    <elementSpec ident="acquisition" mode="delete"/>
+                    <elementSpec ident="origin" mode="delete"/>
+                    <elementSpec ident="provenance" mode="delete"/>
+                    <elementSpec ident="q" mode="delete"/>
+                <elementSpec ident="placeName" mode="delete"/><elementSpec ident="origDate" mode="delete"/><elementSpec ident="origPlace" mode="delete"/><elementSpec ident="date" mode="delete"/><moduleRef key="header" include="titleStmt sponsor funder principal"/><elementSpec ident="titleStmt" mode="change"><classes mode="change"><memberOf key="att.global" mode="delete"/></classes><content><elementRef key="title"/><elementRef key="sponsor"/><elementRef key="funder"/><elementRef key="principal"/><elementRef key="editor"/><elementRef key="respStmt"/></content></elementSpec><elementSpec ident="title" mode="change"><classes mode="change"><memberOf key="att.canonical" mode="delete"/><memberOf key="att.datable" mode="delete"/><memberOf key="att.typed" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="facs" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="synch" mode="delete"/><attDef ident="sameAs" mode="delete"/><attDef ident="copyOf" mode="delete"/><attDef ident="next" mode="delete"/><attDef ident="prev" mode="delete"/><attDef ident="exclude" mode="delete"/><attDef ident="select" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="style" mode="delete"/><attDef ident="rendition" mode="delete"/><attDef ident="cert" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:base" mode="delete"/><attDef ident="xml:space" mode="delete"/><attDef ident="xml:id" mode="delete"/></attList></elementSpec><elementSpec ident="sponsor" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/><memberOf key="att.global" mode="delete"/></classes><content><elementRef key="orgName"/></content><attList><attDef ident="key" mode="delete"/></attList></elementSpec><elementSpec ident="orgName" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/><memberOf key="att.editLike" mode="delete"/><memberOf key="att.personal" mode="delete"/><memberOf key="att.typed" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="key" mode="delete"/><attDef ident="ref" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:base" mode="delete"/><attDef ident="xml:space" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="facs" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="synch" mode="delete"/><attDef ident="sameAs" mode="delete"/><attDef ident="copyOf" mode="delete"/><attDef ident="next" mode="delete"/><attDef ident="prev" mode="delete"/><attDef ident="exclude" mode="delete"/><attDef ident="select" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="style" mode="delete"/><attDef ident="rendition" mode="delete"/><attDef ident="cert" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="nymRef" mode="delete"/></attList></elementSpec><elementSpec ident="funder" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/><memberOf key="att.global" mode="delete"/></classes><content><elementRef key="orgName"/></content><attList><attDef ident="key" mode="delete"/></attList></elementSpec><elementSpec ident="principal" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/><memberOf key="att.global" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="key" mode="delete"/></attList></elementSpec><elementSpec ident="editor" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="xml:base" mode="delete"/><attDef ident="xml:space" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="facs" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="synch" mode="delete"/><attDef ident="sameAs" mode="delete"/><attDef ident="copyOf" mode="delete"/><attDef ident="next" mode="delete"/><attDef ident="prev" mode="delete"/><attDef ident="exclude" mode="delete"/><attDef ident="select" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="style" mode="delete"/><attDef ident="rendition" mode="delete"/><attDef ident="cert" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="nymRef" mode="delete"/></attList></elementSpec><elementSpec ident="respStmt" mode="change"><classes mode="change"><memberOf key="att.canonical" mode="delete"/><memberOf key="att.global" mode="delete"/></classes><content><elementRef key="resp"/><elementRef key="name"/></content></elementSpec><elementSpec ident="resp" mode="change"><classes mode="change"><memberOf key="att.canonical" mode="delete"/><memberOf key="att.datable" mode="delete"/><memberOf key="att.global" mode="delete"/></classes><content><textNode/></content></elementSpec><elementSpec ident="name" mode="change"><classes mode="change"><memberOf key="att.datable" mode="delete"/><memberOf key="att.editLike" mode="delete"/><memberOf key="att.global" mode="delete"/><memberOf key="att.personal" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="key" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="nymRef" mode="delete"/><attDef ident="subtype" mode="delete"/><attRef name="ref" class="att.canonical"/></attList></elementSpec></schemaSpec>
+            </div>
+        </body>
+    </text>
+</TEI>
