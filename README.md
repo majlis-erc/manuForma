@@ -40,4 +40,8 @@ Each subform will need a schema and a template. You will need to include the XPa
     </subforms>
 ```
 
+The forms use a two step process, a ‘local schema’ which should be a very restricted schema for the exact elements you would like included in your forms and a ‘global schema’ which should be a full version of the TEI Schema that the forms can use as a fall back to find element/attribute rules. Note, you can use your 'local schema' for both if you do not need your form to fall back on the full schema. 
+
+To create usable and quick forms it is important to be as restrictive as possible when designing your local shema. For example, only reference child elements that you will use, avoid broad classes or module references such as pLike. Instead for a paragraph, simply use a textNode as the only child. The XForms do not do well with mixed content nodes, so you will have to avoid this in your data design. 
+
 To build the form you will simply need to run the XSLT, it will use the values defined in your config.xml file to generate the necessary files to create all the form components necessary. Once the form is built, ant can be run and the applicaiton can be deployed to eXist-db. Forms built and tested with eXist-db 5.3.1. 
