@@ -13,7 +13,8 @@
            minOccur=""
            maxOccur=""
            path="/*:person"
-           currentLevel="1">
+           currentLevel="1"
+           popup="1">
       <availableAtts elementName="person">
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -25,9 +26,6 @@
                             </attDef>
          <attDef ident="xml:id"/>
       </availableAtts>
-      <siblingElements>
-         <child/>
-      </siblingElements>
       <childElements>
          <child>
             <element ident="persName"/>
@@ -49,7 +47,8 @@
              minOccur=""
              maxOccur=""
              path="/*:person/*:persName"
-             currentLevel="2">
+             currentLevel="2"
+             popup="2">
       <desc>contains a proper noun or proper-noun phrase referring to a
   person, possibly including one or more of
   the person's forenames, surnames, honorifics, added names, etc.</desc>
@@ -83,20 +82,6 @@
          <attDef ident="xml:id"/>
          <attDef ident="xml:lang"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child>
@@ -111,7 +96,8 @@
              minOccur=""
              maxOccur=""
              path="/*:person/*:persName/*:forename"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>contains a forename, given or baptismal name.</desc>
       <availableAtts elementName="forename">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -194,12 +180,6 @@ one initial.</desc>
             </datatype>
          </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="forename"/>
-            <element ident="addName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -211,7 +191,8 @@ one initial.</desc>
             minOccur=""
             maxOccur=""
             path="/*:person/*:persName/*:addName"
-            currentLevel="3">
+            currentLevel="3"
+            popup="3">
       <desc>contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal
     name.</desc>
       <availableAtts elementName="addName">
@@ -237,12 +218,6 @@ one initial.</desc>
                             </attDef>
          <attDef ident="xml:id"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="forename"/>
-            <element ident="addName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -254,24 +229,11 @@ one initial.</desc>
           minOccur=""
           maxOccur=""
           path="/*:person/*:birth"
-          currentLevel="2">
+          currentLevel="2"
+          popup="2">
       <availableAtts elementName="birth">
          <attDef ident="source"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <child>
             <element ident="date"/>
@@ -285,7 +247,8 @@ one initial.</desc>
          minOccur=""
          maxOccur=""
          path="/*:person/*:birth/*:date"
-         currentLevel="3">
+         currentLevel="3"
+         popup="3">
       <desc>contains a date in any format.</desc>
       <availableAtts elementName="date">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -431,12 +394,6 @@ one initial.</desc>
                         </attDef>
          <attDef ident="when"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="date"/>
-            <element ident="placeName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -448,7 +405,8 @@ one initial.</desc>
               minOccur=""
               maxOccur=""
               path="/*:person/*:birth/*:placeName"
-              currentLevel="3">
+              currentLevel="3"
+              popup="3">
       <desc>contains an absolute or relative place name.</desc>
       <availableAtts elementName="placeName">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -470,12 +428,6 @@ one initial.</desc>
                             </valList>
                         </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="date"/>
-            <element ident="placeName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -487,24 +439,11 @@ one initial.</desc>
           minOccur=""
           maxOccur=""
           path="/*:person/*:death"
-          currentLevel="2">
+          currentLevel="2"
+          popup="2">
       <availableAtts elementName="death">
          <attDef ident="source"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <child>
             <element ident="date"/>
@@ -518,7 +457,8 @@ one initial.</desc>
          minOccur=""
          maxOccur=""
          path="/*:person/*:death/*:date"
-         currentLevel="3">
+         currentLevel="3"
+         popup="3">
       <desc>contains a date in any format.</desc>
       <availableAtts elementName="date">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -664,12 +604,6 @@ one initial.</desc>
                         </attDef>
          <attDef ident="when"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="date"/>
-            <element ident="placeName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -681,7 +615,8 @@ one initial.</desc>
               minOccur=""
               maxOccur=""
               path="/*:person/*:death/*:placeName"
-              currentLevel="3">
+              currentLevel="3"
+              popup="3">
       <desc>contains an absolute or relative place name.</desc>
       <availableAtts elementName="placeName">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -703,12 +638,6 @@ one initial.</desc>
                             </valList>
                         </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="date"/>
-            <element ident="placeName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -720,27 +649,14 @@ one initial.</desc>
             minOccur=""
             maxOccur=""
             path="/*:person/*:floruit"
-            currentLevel="2">
+            currentLevel="2"
+            popup="2">
       <availableAtts elementName="floruit">
          <attDef ident="from"/>
          <attDef ident="notAfter"/>
          <attDef ident="notBefore"/>
          <attDef ident="to"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -752,25 +668,12 @@ one initial.</desc>
         minOccur=""
         maxOccur=""
         path="/*:person/*:sex"
-        currentLevel="2">
+        currentLevel="2"
+        popup="2">
       <availableAtts elementName="sex">
          <attDef ident="source"/>
          <attDef ident="value"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -782,24 +685,11 @@ one initial.</desc>
           minOccur=""
           maxOccur=""
           path="/*:person/*:faith"
-          currentLevel="2">
+          currentLevel="2"
+          popup="2">
       <availableAtts elementName="faith">
          <attDef ident="source"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -811,25 +701,12 @@ one initial.</desc>
                minOccur=""
                maxOccur=""
                path="/*:person/*:occupation"
-               currentLevel="2">
+               currentLevel="2"
+               popup="2">
       <availableAtts elementName="occupation">
          <attDef ident="source"/>
          <attDef ident="type"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -841,24 +718,11 @@ one initial.</desc>
               minOccur=""
               maxOccur=""
               path="/*:person/*:residence"
-              currentLevel="2">
+              currentLevel="2"
+              popup="2">
       <availableAtts elementName="residence">
          <attDef ident="source"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <child>
             <element ident="placeName"/>
@@ -871,7 +735,8 @@ one initial.</desc>
               minOccur=""
               maxOccur=""
               path="/*:person/*:residence/*:placeName"
-              currentLevel="3">
+              currentLevel="3"
+              popup="3">
       <desc>contains an absolute or relative place name.</desc>
       <availableAtts elementName="placeName">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -893,11 +758,6 @@ one initial.</desc>
                             </valList>
                         </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="placeName"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -909,7 +769,8 @@ one initial.</desc>
          minOccur=""
          maxOccur=""
          path="/*:person/*:bibl"
-         currentLevel="2">
+         currentLevel="2"
+         popup="2">
       <desc>contains a loosely-structured bibliographic citation of which the sub-components may or may
     not be explicitly tagged.</desc>
       <availableAtts elementName="bibl">
@@ -958,20 +819,6 @@ one initial.</desc>
                         </attDef>
          <attDef ident="xml:id"/>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child>
@@ -986,7 +833,8 @@ one initial.</desc>
                minOccur=""
                maxOccur=""
                path="/*:person/*:bibl/*:citedRange"
-               currentLevel="3">
+               currentLevel="3"
+               popup="3">
       <desc>defines the range of cited content, often represented by pages or other units</desc>
       <availableAtts elementName="citedRange">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -1185,12 +1033,6 @@ one initial.</desc>
                             </valList>
                         </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="citedRange"/>
-            <element ident="ptr"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -1202,14 +1044,9 @@ one initial.</desc>
         minOccur=""
         maxOccur=""
         path="/*:person/*:bibl/*:ptr"
-        currentLevel="3">
+        currentLevel="3"
+        popup="3">
       <availableAtts elementName="ptr"/>
-      <siblingElements>
-         <child>
-            <element ident="citedRange"/>
-            <element ident="ptr"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -1221,7 +1058,8 @@ one initial.</desc>
          minOccur=""
          maxOccur=""
          path="/*:person/*:idno"
-         currentLevel="2">
+         currentLevel="2"
+         popup="2">
       <desc>supplies any form of identifier used to identify some object,
   such as a bibliographic item, a person, a title, an organization,
   etc. in a standardized way.</desc>
@@ -1289,20 +1127,6 @@ one initial.</desc>
             </valList>
          </attDef>
       </availableAtts>
-      <siblingElements>
-         <child>
-            <element ident="persName"/>
-            <element ident="birth"/>
-            <element ident="death"/>
-            <element ident="floruit"/>
-            <element ident="sex"/>
-            <element ident="faith"/>
-            <element ident="occupation"/>
-            <element ident="residence"/>
-            <element ident="bibl"/>
-            <element ident="idno"/>
-         </child>
-      </siblingElements>
       <childElements>
          <textNode type="input"/>
          <child/>

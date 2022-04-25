@@ -13,7 +13,8 @@
              minOccur=""
              maxOccur=""
              path="/*:handDesc"
-             currentLevel="1">
+             currentLevel="1"
+             popup="1">
       <desc>contains a description of all the different hands used in a manuscript or other object.</desc>
       <availableAtts elementName="handDesc">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -48,7 +49,8 @@
             minOccur=""
             maxOccur=""
             path="/*:handDesc/*:summary"
-            currentLevel="2">
+            currentLevel="2"
+            popup="2">
       <desc>contains an overview of the available
   information concerning some aspect of an item or object (for example, its
 intellectual content, history, layout, typography etc.) as a
@@ -66,7 +68,8 @@ complement or alternative to the  more detailed information  carried by
              minOccur=""
              maxOccur=""
              path="/*:handDesc/*:handNote"
-             currentLevel="2">
+             currentLevel="2"
+             popup="2">
       <desc>describes a particular style or hand distinguished within a manuscript.</desc>
       <availableAtts elementName="handNote">
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -199,7 +202,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
       minOccur=""
       maxOccur=""
       path="/*:handDesc/*:handNote/*:p"
-      currentLevel="3">
+      currentLevel="3"
+      popup="3">
       <desc>marks paragraphs in prose.</desc>
       <availableAtts elementName="p"/>
       <childElements>
@@ -213,7 +217,14 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              minOccur=""
              maxOccur=""
              path="/*:handDesc/*:handNote/*:persName"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/mssTEI/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
       <desc>contains a proper noun or proper-noun phrase referring to a
   person, possibly including one or more of
   the person's forenames, surnames, honorifics, added names, etc.</desc>
@@ -308,7 +319,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
               minOccur=""
               maxOccur=""
               path="/*:handDesc/*:handNote/*:placeName"
-              currentLevel="3">
+              currentLevel="3"
+              popup="3">
       <desc>contains an absolute or relative place name.</desc>
       <availableAtts elementName="placeName">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -341,7 +353,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              minOccur=""
              maxOccur=""
              path="/*:handDesc/*:handNote/*:metamark"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>contains or describes any kind of graphic or written signal
    within a document the function of which is to determine how it
    should be read rather than forming part of the actual content of
@@ -368,7 +381,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              minOccur=""
              maxOccur=""
              path="/*:handDesc/*:handNote/*:origDate"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>contains any form of date, used to
   identify the date of origin for a manuscript, manuscript part, or other object.</desc>
       <availableAtts elementName="origDate">
@@ -423,7 +437,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
           minOccur=""
           maxOccur=""
           path="/*:handDesc/*:handNote/*:locus"
-          currentLevel="3">
+          currentLevel="3"
+          popup="3">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">

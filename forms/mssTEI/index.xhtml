@@ -4,14 +4,45 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit MSS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information" />
-      <title>Edit MSS TEI records</title>
+      <meta name="description" content="Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information Manuscript contents description. Manuscript contents description." />
+      <title>Edit MS TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
-      <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-mss">
+      <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><script type="text/javascript">
+                    /*
+                    function showHidElement(elementID) {
+                        var element = document.getElementById(elementID);
+                        console.log(elementID);
+                        if (element.style.display === "none") {
+                            element.style.display = "block";
+                        } else {
+                            element.style.display = "none";
+                        }
+                    }
+                    */
+                    /*
+                    $('.showLookup a').on('click', function(e){ // on change of state
+                        e.preventDefault(e);
+                        var current = $(this) 
+                        var $annotationsResults = $(current).closest('.lookupDiv');
+                            //If annotation results are empty load via ajax, otherwise toggle to show or hide div
+                            if($annotationsResults.style.display === "none"){
+                                $annotationsResults.style.display = "block"; 
+                            } else {
+                                $annotationsResults.style.display = "none";
+                        }   
+                    });
+                    */
+                </script><xf:model id="m-mss">
          <xf:instance id="i-rec">
             <data></data>
+         </xf:instance>
+         <xf:instance id="i-admin">
+            <TEI xmlns="http://www.tei-c.org/ns/1.0">
+               <editor role="creator"></editor>
+               <idno type="URI"></idno>
+            </TEI>
          </xf:instance>
          <xf:instance id="i-elementTemplate" src="forms/mssTEI/templates/elementTemplate.xml"></xf:instance>
          <xf:instance id="i-attributeTemplate" src="forms/mssTEI/templates/attributesTemplate.xml"></xf:instance>
@@ -33,7 +64,8 @@
          </xf:instance>
          <xf:instance id="i-selectTemplate">
             <data>
-               <template name="Generic MSS Template" src="/forms/templates/full-mss-template.xml"></template>
+               <template name="Generic MS Template" src="/forms/templates/full-mss-template.xml"></template>
+               <template name="MS part Template" src="/forms/templates/ms-part-example.xml"></template>
             </data>
          </xf:instance>
          <xf:instance id="i-subforms">
@@ -47,6 +79,7 @@
                <subform formName="additions" selected="false"></subform>
                <subform formName="bindingDesc" selected="false"></subform>
                <subform formName="history" selected="false"></subform>
+               <subform formName="msPart" selected="false"></subform>
             </data>
          </xf:instance>
          <xf:instance id="i-submission">
@@ -69,9 +102,53 @@
                <message>Submission result</message>
             </response>
          </xf:instance>
+         <xf:instance id="i-submission-params">
+            <recordManagement xmlns="">
+               
+               <saveOptions>
+                  
+                  <option name="github" enable="true">
+                     
+                     <parameter name="githubRepoName">blogs</parameter>
+                     
+                     <parameter name="githubPath">data/tei/</parameter>
+                     
+                     <parameter name="githubOwner">wsalesky</parameter>
+                     
+                     <parameter name="githubBranch">master</parameter>
+                     
+                  </option>
+                  
+                  <option name="exist-db" enable="true">
+                     
+                     <parameter name="eXistCollection">/db/apps/majlis-data/data/mss/tei</parameter>
+                     
+                  </option>
+                  
+                  <option name="download" enable="true"></option>
+                  
+               </saveOptions>
+               
+               <retrieveOptions>
+                  
+                  <option name="exist-db" enable="true">
+                     
+                     <parameter name="eXistCollection">/db/apps/majlis-data/data/mss/tei</parameter>
+                     
+                  </option>
+                  
+               </retrieveOptions>
+               
+            </recordManagement>
+         </xf:instance>
          <xf:instance id="i-move">
             <data xmlns="">
                <tmp></tmp>
+            </data>
+         </xf:instance>
+         <xf:instance id="i-repeatIndex">
+            <data xmlns="">
+               <index>1</index>
             </data>
          </xf:instance>
          <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
@@ -85,10 +162,11 @@
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'))"></xf:resource>
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
-         <xf:submission id="s-browse-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous" action="services/get-rec.xql?search=true&amp;view=all">
+         <xf:submission id="s-browse-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;view=all&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-post-to-update" action="services/upload.xql" ref="instance('i-upload')" replace="instance" instance="i-rec" method="post">
@@ -97,7 +175,8 @@
          </xf:submission>
          <xf:submission id="s-download-xml" ref="instance('i-rec')" show="new" method="post" replace="all" action="form.xq?form=services/download.xml?type=download"></xf:submission>
          <xf:submission id="s-view-xml" ref="instance('i-rec')" show="new" method="post" replace="all" action="services/submit.xql?type=view"></xf:submission>
-         <xf:submission id="s-save" ref="instance('i-rec')" replace="instance" instance="i-submission" action="services/submit.xql?type=save" method="post">
+         <xf:submission id="s-save" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
+            <xf:resource value="concat('services/submit.xql?type=save&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
             </xf:action>
@@ -105,7 +184,8 @@
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
             </xf:action>
          </xf:submission>
-         <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" action="services/submit.xql?type=github" method="post">
+         <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
+            <xf:resource value="concat('services/submit.xql?type=github&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
             </xf:action>
@@ -137,6 +217,15 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
+                        <xf:trigger appearance="minimal" class="nav-link">
+                           <xf:label><span data-feather="home"></span> Admin Page  
+                           </xf:label>
+                           <xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-admin"></xf:toggle>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link">
                            <xf:label>Title  </xf:label>
                            <xf:action ev:event="DOMActivate">
@@ -145,45 +234,117 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/titleStmt.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() &gt; 1]" id="navRepeattitleStmt">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Title  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/titleStmt.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeattitleStmt') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'msIdentifier']" class="nav-link">
-                           <xf:label>MSS Identifier  </xf:label>
+                           <xf:label>MS Identifier  </xf:label>
                            <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msIdentifier.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() &gt; 1]" id="navRepeatmsIdentifier">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>MS Identifier  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msIdentifier.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatmsIdentifier') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'msContents']" class="nav-link">
-                           <xf:label>MSS Contents  </xf:label>
+                           <xf:label>MS Contents  </xf:label>
                            <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msContents.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:msContents[position() &gt; 1]" id="navRepeatmsContents">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>MS Contents  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msContents.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatmsContents') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'mssSupport']" class="nav-link">
-                           <xf:label>MSS Support  </xf:label>
+                           <xf:label>MS Support  </xf:label>
                            <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/mssSupport.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:objectDesc/*:supportDesc[position() &gt; 1]" id="navRepeatmssSupport">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>MS Support  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/mssSupport.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatmssSupport') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'layoutDesc']" class="nav-link">
                            <xf:label>Layout Description  </xf:label>
@@ -193,9 +354,27 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/layoutDesc.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:objectDesc/*:layoutDesc[position() &gt; 1]" id="navRepeatlayoutDesc">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Layout Description  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/layoutDesc.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatlayoutDesc') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'handDesc']" class="nav-link">
                            <xf:label>Hand Description  </xf:label>
@@ -205,9 +384,27 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/handDesc.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:handDesc[position() &gt; 1]" id="navRepeathandDesc">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Hand Description  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/handDesc.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeathandDesc') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'additions']" class="nav-link">
                            <xf:label>Additions  </xf:label>
@@ -217,9 +414,27 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/additions.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:additions[position() &gt; 1]" id="navRepeatadditions">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Additions  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/additions.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatadditions') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'bindingDesc']" class="nav-link">
                            <xf:label>Binding Description  </xf:label>
@@ -229,9 +444,27 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/bindingDesc.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:bindingDesc[position() &gt; 1]" id="navRepeatbindingDesc">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Binding Description  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/bindingDesc.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatbindingDesc') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'history']" class="nav-link">
                            <xf:label>History  </xf:label>
@@ -241,15 +474,63 @@
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
                               <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/history.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:history[position() &gt; 1]" id="navRepeathistory">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>History  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/history.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeathistory') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
+                     <li class="nav-item">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'msPart']" class="nav-link">
+                           <xf:label>MS Part  </xf:label>
+                           <xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-data-entry"></xf:toggle>
+                              <xf:unload targetid="subform"></xf:unload>
+                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msPart.xhtml"></xf:load>
+                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:msPart[position() &gt; 1]" id="navRepeatmsPart">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>MS Part  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/msPart.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatmsPart') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
                   </ul>
                </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                  <h1 class="h2">Edit MSS TEI records</h1>
+                  <h1 class="h2">Edit MS TEI records</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
@@ -269,8 +550,9 @@
                      </div>
                   </div>
                </div>
-               <p class="alert alert-light hint">Create and edit MSS records for MAJLIS: The Transformation of Jewish Literature in
-                  Arabic in the Islamicate World. Record title information
+               <p class="alert alert-light hint">Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in
+                  Arabic in the Islamicate World. Record title information Manuscript contents description.
+                  Manuscript contents description.
                </p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
@@ -303,7 +585,7 @@
                            </xf:submit>
                         </div>
                         <div class="input-group mb-3">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected-search')">
+                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
                               <xf:label></xf:label>
                               <xf:itemset ref="instance('i-search-results')//*:record">
                                  <xf:label ref="@name"></xf:label>
@@ -333,8 +615,35 @@
                         </xf:group>
                      </div>
                   </xf:case>
+                  <xf:case id="view-admin">
+                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
+                        <div class="input-group mb-3">
+                           <xf:input ref="." class="form-control">
+                              <xf:label>Creator: </xf:label>
+                              <xf:alert>Add your name</xf:alert>
+                           </xf:input>
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+                              <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
+                              <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                           </xf:trigger>
+                        </div>
+                     </xf:repeat>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                        <xf:label><i class="bi bi-plus-circle"></i> Add Creator
+                           
+                        </xf:label>
+                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
+                     </xf:trigger><br /><div class="input-group mb-3">
+                        <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
+                           <xf:label>URI: </xf:label>
+                           <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
+                        </xf:input>
+                     </div>
+                  </xf:case>
                   <xf:case id="view-data-entry">
-                     <xf:group id="subform"></xf:group>
+                     <xf:group ref="instance('i-rec')">
+                        <xf:group id="subform"></xf:group>
+                     </xf:group>
                   </xf:case>
                </xf:switch>
             </main>

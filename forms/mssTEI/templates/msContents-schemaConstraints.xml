@@ -13,7 +13,8 @@
                minOccur=""
                maxOccur=""
                path="/*:msContents"
-               currentLevel="1">
+               currentLevel="1"
+               popup="1">
       <desc>describes the intellectual content of a manuscript, manuscript
     part, or other object either as a series of paragraphs or as a series of structured manuscript items.</desc>
       <availableAtts elementName="msContents">
@@ -49,7 +50,8 @@
             minOccur=""
             maxOccur=""
             path="/*:msContents/*:summary"
-            currentLevel="2">
+            currentLevel="2"
+            popup="2">
       <desc>contains an overview of the available
   information concerning some aspect of an item or object (for example, its
 intellectual content, history, layout, typography etc.) as a
@@ -67,7 +69,8 @@ complement or alternative to the  more detailed information  carried by
            minOccur=""
            maxOccur=""
            path="/*:msContents/*:msItem"
-           currentLevel="2">
+           currentLevel="2"
+           popup="2">
       <desc>describes an individual work or item within the intellectual
   content of a manuscript, manuscript part, or other object.</desc>
       <availableAtts elementName="msItem">
@@ -100,7 +103,8 @@ complement or alternative to the  more detailed information  carried by
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:locus"
-          currentLevel="3">
+          currentLevel="3"
+          popup="3">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -192,7 +196,8 @@ complement or alternative to the  more detailed information  carried by
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:title"
-          currentLevel="3">
+          currentLevel="3"
+          popup="3">
       <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -315,7 +320,8 @@ complement or alternative to the  more detailed information  carried by
            minOccur=""
            maxOccur=""
            path="/*:msContents/*:msItem/*:author"
-           currentLevel="3">
+           currentLevel="3"
+           popup="3">
       <desc>in a bibliographic reference, contains the name(s) of an
   author, personal or corporate, of a work; for example in the same
   form as that provided by a recognized bibliographic name authority.</desc>
@@ -332,7 +338,14 @@ complement or alternative to the  more detailed information  carried by
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:author/*:persName"
-             currentLevel="4">
+             currentLevel="4"
+             popup="4">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/mssTEI/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
       <desc>contains a proper noun or proper-noun phrase referring to a
   person, possibly including one or more of
   the person's forenames, surnames, honorifics, added names, etc.</desc>
@@ -398,6 +411,7 @@ complement or alternative to the  more detailed information  carried by
                         </attDef>
       </availableAtts>
       <childElements>
+         <textNode type="input"/>
          <child>
             <element ident="forename"/>
             <element ident="surname"/>
@@ -411,7 +425,8 @@ complement or alternative to the  more detailed information  carried by
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:author/*:persName/*:forename"
-             currentLevel="5">
+             currentLevel="5"
+             popup="5">
       <desc>contains a forename, given or baptismal name.</desc>
       <availableAtts elementName="forename">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -1609,7 +1624,8 @@ and that a single TEI document may contain texts in many languages.</p>
             minOccur=""
             maxOccur=""
             path="/*:msContents/*:msItem/*:author/*:persName/*:surname"
-            currentLevel="5">
+            currentLevel="5"
+            popup="5">
       <desc>contains a family (inherited) name, as opposed to a given, baptismal, or nick name.</desc>
       <availableAtts elementName="surname">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -2807,7 +2823,8 @@ and that a single TEI document may contain texts in many languages.</p>
             minOccur=""
             maxOccur=""
             path="/*:msContents/*:msItem/*:author/*:persName/*:addName"
-            currentLevel="5">
+            currentLevel="5"
+            popup="5">
       <desc>contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal
     name.</desc>
       <availableAtts elementName="addName">
@@ -4006,7 +4023,8 @@ and that a single TEI document may contain texts in many languages.</p>
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:textLang"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>describes the languages and writing systems identified within the bibliographic work  
   being described, rather than its description.</desc>
       <availableAtts elementName="textLang">
@@ -4070,7 +4088,8 @@ and that a single TEI document may contain texts in many languages.</p>
            minOccur=""
            maxOccur=""
            path="/*:msContents/*:msItem/*:rubric"
-           currentLevel="3">
+           currentLevel="3"
+           popup="3">
       <desc>contains the text of any rubric or heading attached to a particular manuscript item, that is, a string of words through which a
 manuscript or other object signals the beginning of a text division, often with an assertion as to its author and title, which is in some way set off from the text itself, typically in red ink, or by use of different size or type of script, or some other such visual device.</desc>
       <availableAtts elementName="rubric"/>
@@ -4087,7 +4106,8 @@ manuscript or other object signals the beginning of a text division, often with 
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:rubric/*:locus"
-          currentLevel="4">
+          currentLevel="4"
+          popup="4">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -4179,7 +4199,8 @@ manuscript or other object signals the beginning of a text division, often with 
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:rubric/*:q"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>contains material which is distinguished from the
     surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct
     speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and
@@ -4196,7 +4217,8 @@ manuscript or other object signals the beginning of a text division, often with 
             minOccur=""
             maxOccur=""
             path="/*:msContents/*:msItem/*:incipit"
-            currentLevel="3">
+            currentLevel="3"
+            popup="3">
       <desc>contains the incipit of a manuscript or similar object item, that is the opening words of the text proper, exclusive of any rubric which might precede it, of sufficient length to identify the work uniquely; such incipits were, in former times, frequently used a means of reference to a work, in place of a title.</desc>
       <availableAtts elementName="incipit">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -4231,7 +4253,8 @@ manuscript or other object signals the beginning of a text division, often with 
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:incipit/*:locus"
-          currentLevel="4">
+          currentLevel="4"
+          popup="4">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -4323,7 +4346,8 @@ manuscript or other object signals the beginning of a text division, often with 
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:incipit/*:q"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>contains material which is distinguished from the
     surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct
     speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and
@@ -4340,7 +4364,8 @@ manuscript or other object signals the beginning of a text division, often with 
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:explicit"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>contains the  explicit of a
 item, that is, the closing words of the text proper, exclusive of any rubric or colophon which might follow it.</desc>
       <availableAtts elementName="explicit">
@@ -4376,7 +4401,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:explicit/*:locus"
-          currentLevel="4">
+          currentLevel="4"
+          popup="4">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -4468,7 +4494,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:explicit/*:q"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>contains material which is distinguished from the
     surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct
     speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and
@@ -4485,7 +4512,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
                 minOccur=""
                 maxOccur=""
                 path="/*:msContents/*:msItem/*:finalRubric"
-                currentLevel="3">
+                currentLevel="3"
+                popup="3">
       <desc>contains the string of words that denotes the end of a text division, often with an assertion as to its author and title, usually set off from the text itself by red ink, by a different size or type of script, or by some other such visual device.</desc>
       <availableAtts elementName="finalRubric"/>
       <childElements>
@@ -4501,7 +4529,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:finalRubric/*:locus"
-          currentLevel="4">
+          currentLevel="4"
+          popup="4">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -4593,7 +4622,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:finalRubric/*:q"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>contains material which is distinguished from the
     surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct
     speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and
@@ -4610,7 +4640,8 @@ item, that is, the closing words of the text proper, exclusive of any rubric or 
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:colophon"
-             currentLevel="3">
+             currentLevel="3"
+             popup="3">
       <desc>contains the  colophon
 of an item: that is, a statement providing information regarding the date, place, agency, or reason for production of the manuscript or other object.</desc>
       <availableAtts elementName="colophon">
@@ -4652,7 +4683,8 @@ of an item: that is, a statement providing information regarding the date, place
           minOccur=""
           maxOccur=""
           path="/*:msContents/*:msItem/*:colophon/*:locus"
-          currentLevel="4">
+          currentLevel="4"
+          popup="4">
       <desc>defines a location within a manuscript, manuscript part, or other object typically 
     as a (possibly discontinuous) sequence of folio references.</desc>
       <availableAtts elementName="locus">
@@ -4744,7 +4776,8 @@ of an item: that is, a statement providing information regarding the date, place
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:colophon/*:q"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>contains material which is distinguished from the
     surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct
     speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and
@@ -4761,7 +4794,8 @@ of an item: that is, a statement providing information regarding the date, place
          minOccur=""
          maxOccur=""
          path="/*:msContents/*:msItem/*:note"
-         currentLevel="3">
+         currentLevel="3"
+         popup="3">
       <desc>contains a note or annotation.</desc>
       <availableAtts elementName="note">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -4791,7 +4825,8 @@ of an item: that is, a statement providing information regarding the date, place
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:note/*:p"
-      currentLevel="4">
+      currentLevel="4"
+      popup="4">
       <desc>marks paragraphs in prose.</desc>
       <availableAtts elementName="p"/>
       <childElements>

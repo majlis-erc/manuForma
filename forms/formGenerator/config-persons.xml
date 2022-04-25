@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <formTitle>Edit Person TEI records</formTitle>
-    <formURL>http://localhost:8080/exist/apps/manuForma/</formURL>
+    <formURL>/exist/apps/manuForma/</formURL>
     <formName>personTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
     <formDesc>Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
+    <recordManagement>
+        <saveOptions>
+            <option name="github" enable="true">
+                <parameter name="githubRepoName">blogs</parameter>
+                <parameter name="githubPath">data/tei/</parameter>
+                <parameter name="githubOwner">wsalesky</parameter>
+                <parameter name="githubBranch">master</parameter>
+            </option>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+            </option>
+            <option name="download" enable="true"/>
+        </saveOptions>
+        <retrieveOptions>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+            </option>
+        </retrieveOptions>
+    </recordManagement>
     <blankTemplates>
         <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"></template>
     </blankTemplates>
