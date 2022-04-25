@@ -53,7 +53,7 @@ declare variable $gitcommit:authorization-token := $gitcommit:git-config//*:git-
 :)(:https://github.com/wsalesky/blogs:)
 
 declare variable $gitcommit:repo := 'blogs';
-declare variable $gitcommit:authorization-token := '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';
+declare variable $gitcommit:authorization-token := '';
 declare variable $gitcommit:apiURL := 'https://api.github.com/';
 declare variable $gitcommit:owner := 'wsalesky';
 declare variable $gitcommit:repoName := 'blogs';
