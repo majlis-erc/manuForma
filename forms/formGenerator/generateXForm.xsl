@@ -1269,9 +1269,9 @@
                             <xf:output value="local-name(current())" xmlns="http://www.w3.org/2002/xforms"/>
                         </div>
                         <div xmlns="http://www.w3.org/1999/xhtml" class="col-sm-10">
-                            <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/tei:attDef[@ident = name(current())]/descendant::*:valList/*:valItem)]"></xf:input>
-                            <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/tei:attDef[@ident = name(current())]/descendant::*:valList/*:valItem]">
-                                <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/tei:attDef[@ident = name(current())]/descendant::*:valList/*:valItem">
+                            <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/*:attDef[@ident = name(current())]/descendant::*:valList/*:valItem)]"></xf:input>
+                            <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/*:attDef[@ident = name(current())]/descendant::*:valList/*:valItem]">
+                                <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/child::*/*:availableAtts/*:attDef[@ident = name(current())]/descendant::*:valList/*:valItem">
                                     <xf:label ref="@ident"/>
                                     <xf:value ref="@ident"/>
                                 </xf:itemset>
