@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <formTitle>Edit Person TEI records</formTitle>
-    <formURL>/exist/apps/manuForma/</formURL>
+    <formURL>http://localhost:8080/exist/apps/manuForma/</formURL>
     <formName>personTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
     <formDesc>Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
-    <recordManagement>
-        <saveOptions>
-            <option name="github" enable="true">
-                <parameter name="githubRepoName">blogs</parameter>
-                <parameter name="githubPath">data/tei/</parameter>
-                <parameter name="githubOwner">wsalesky</parameter>
-                <parameter name="githubBranch">master</parameter>
-            </option>
-            <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
-            </option>
-            <option name="download" enable="true"/>
-        </saveOptions>
-        <retrieveOptions>
-            <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
-            </option>
-        </retrieveOptions>
-    </recordManagement>
     <blankTemplates>
-        <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"></template>
+        <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"/>
     </blankTemplates>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
@@ -40,21 +21,21 @@
     <subforms>
         <subform xpath="/descendant::tei:titleStmt" formName="titleStmt" formLabel="Title">
             <formDesc>Record title information</formDesc>
-            <localSchema src="../schemas/titleStmt.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/persons-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/titleStmt.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Persons">
             <formDesc>Person description.</formDesc>
-            <localSchema src="../schemas/persons.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/persons-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/persons.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:listRelation" formName="listRelation" formLabel="Relation">
             <formDesc>Person description.</formDesc>
-            <localSchema src="../schemas/persons.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/persons-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/persons.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
         </subform>
     </subforms>
 </config>

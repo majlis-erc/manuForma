@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Start license statement: do not remove
+
+Schema for the encoding of arabic manuscripts
+originated from Beta maṣāḥǝft Schema
+Copyright (c) 2021- by all contributors listed in <titleStmt>, below and contributors to the github stored version
+see https://github.com/BetaMasaheft/Schema/graphs/contributors
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+End license statement: do not remove --><!--requirements: 
+    
+    FIRHIST compatibility
+    
+
+--><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Partial Manuscripts Schema, constrained for usage in XForms</title>
+                <author xml:id="PL">Maximilian de Molière</author>
+                <author xml:id="NG">Nathan Gibson</author>
+                <author xml:id="MM">Maximilian de Molière</author>
+            </titleStmt>
+            <publicationStmt>
+                <authority>Institut für den Nahen und Mittleren Osten</authority>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
+                <pubPlace>München</pubPlace>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
+                        Attribution-ShareAlike 4.0. </licence>
+                </availability>
+            </publicationStmt>
+            <notesStmt>
+                <note type="ns">http://www.example.org/ns/nonTEI</note>
+            </notesStmt>
+            <sourceDesc>
+                <p>created electronically</p>
+            </sourceDesc>
+        </fileDesc>
+        <revisionDesc>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
+            <change who="MM" when="2022-05-04">Created schema on basis of work by Nathan Gibson</change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <front>
+            <divGen type="toc"/>
+        </front>
+        <body>
+            <div>
+                <head>Information on this customization</head>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript support using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
+                    customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
+                        schema</ref> of FIRHIST</p>
+                <p>Constrained this schema for generating forms.</p>
+            </div>
+            <div>
+                <schemaSpec ident="places" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                    <!--source="mss-compiled.odd"-->
+                    <!--       MODULES USED BY THE SCHEMA
+                the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
+                -->
+
+                    <moduleRef key="core" except="list abbr add addrLine address analytic biblStruct binaryObject cb choice cit corr del distinct divGen ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode rb reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term time unclear unit note p q ref textLang"/>
+
+                    <moduleRef key="tei"/>
+
+                    <elementSpec ident="locus" module="msdescription" mode="delete"/>
+                    <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
+                    <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
+                    <elementSpec ident="TEI" module="textstructure" mode="delete"/>
+                    <elementSpec ident="msDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="catchwords" module="msdescription" mode="delete"/>
+                    <elementSpec ident="collation" module="msdescription" mode="delete"/>
+                    <elementSpec ident="condition" module="msdescription" mode="delete"/>
+                    <elementSpec ident="dim" module="msdescription" mode="delete"/>
+                    <elementSpec ident="foliation" module="msdescription" mode="delete"/>
+                    <elementSpec ident="material" module="msdescription" mode="delete"/>
+                    <elementSpec ident="objectDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="origDate" module="msdescription" mode="delete"/>
+                    <elementSpec ident="origPlace" module="msdescription" mode="delete"/>
+                    <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
+                    <elementSpec ident="watermark" module="msdescription" mode="delete"/>
+                    <elementSpec ident="p" module="core" mode="delete"/>
+                    <elementSpec ident="depth" module="msdescription" mode="delete"/>
+                    <elementSpec ident="height" module="msdescription" mode="delete"/>
+                    <elementSpec ident="width" module="msdescription" mode="delete"/>
+                    <elementSpec ident="item" module="core" mode="delete"/>
+                    <elementSpec ident="list" module="core" mode="delete"/>
+                    <elementSpec ident="measure" module="core" mode="delete"/>
+
+
+                    <elementSpec ident="dimensions" mode="delete"/>
+                    <elementSpec ident="supportDesc" mode="delete"/>
+                    <elementSpec ident="support" mode="delete"/>
+                    <elementSpec ident="extent" mode="delete"/>
+                    <elementSpec ident="formula" mode="delete"/>
+                    <moduleRef key="namesdates" include="forename placeName listPlace location geo settlement region state place surname"/>
+
+                    <elementSpec ident="textLang" mode="delete"/>
+
+                    <elementSpec ident="msContents" mode="delete"/>
+                    <elementSpec ident="msItem" mode="delete"/>
+                    <elementSpec ident="note" mode="delete"/>
+                    <elementSpec ident="summary" mode="delete"/>
+                    <elementSpec ident="persName" mode="delete"/>
+                    <elementSpec ident="rubric" mode="delete"/>
+                    <elementSpec ident="incipit" mode="delete"/>
+                    <elementSpec ident="explicit" mode="delete"/>
+                    <elementSpec ident="finalRubric" mode="delete"/>
+                    <elementSpec ident="colophon" mode="delete"/>
+                    <elementSpec ident="q" mode="delete"/>
+                    <moduleRef key="header" include="idno"/>
+                    <elementSpec ident="listPerson" mode="delete"/>
+                    <elementSpec ident="person" mode="delete"/>
+                    <elementSpec ident="addName" mode="delete"/>
+                    <elementSpec ident="forename" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="bibl" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.docStatus" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <alternate maxOccurs="unbounded" minOccurs="0">
+                                <elementRef key="citedRange"/>
+                                <elementRef key="ptr"/>
+                                <elementRef key="author"/>
+                                <elementRef key="title"/>
+                                <elementRef key="publisher"/>
+                                <elementRef key="editor"/>
+                                <elementRef key="date"/>
+                                <elementRef key="pubPlace"/>
+                                <elementRef key="series"/>
+                                <elementRef key="biblScope"/>
+                                <elementRef key="citedRange"/>
+                                <elementRef key="ptr"/>
+                            </alternate>
+                        </content>
+                        <attList>
+                            <attRef name="xml:id" class="att.global"/>
+                            <attRef name="xml:id" class="att.global"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="birth" mode="delete"/>
+                    <elementSpec ident="date" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.dimensions" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attRef name="when" class="att.datable.w3c"/>
+                            <attRef name="notBefore" class="att.datable.w3c"/>
+                            <attRef name="notAfter" class="att.datable.w3c"/>
+                            <attRef name="source" class="att.global.source"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="death" mode="delete"/>
+                    <elementSpec ident="desc" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                            <elementRef key="quote"/>
+                        </content>
+                        <attList>
+                            <attRef name="type" class="att.entryLike"/>
+                            <attRef name="xml:lang" class="att.global"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="faith" mode="delete"/>
+                    <elementSpec ident="floruit" mode="delete"/>
+                    <elementSpec ident="idno" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="subtype" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="isni"/>
+                                    <valItem mode="add" ident="viaf"/>
+                                    <valItem mode="add" ident="wiki"/>
+                                    <valItem mode="add" ident="gnd"/>
+                                    <valItem mode="add" ident="merhav"/>
+                                    <valItem mode="add" ident="rambi"/>
+                                    <valItem mode="add" ident="imhm"/>
+                                    <valItem mode="add" ident="ktiv"/>
+                                </valList>
+                            </attDef>
+                            <attRef name="resp" class="att.global.responsibility"/>
+                            <attDef ident="subtype" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="listRelation" mode="delete"/>
+                    <elementSpec ident="occupation" mode="delete"/>
+                    <elementSpec ident="placeName" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attRef name="ref" class="att.canonical"/>
+                            <attRef name="xml:id" class="att.global"/>
+                            <attRef name="xml:lang" class="att.global"/>
+                            <attRef name="source" class="att.global.source"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="relation" mode="delete"/>
+                    <elementSpec ident="residence" mode="delete"/>
+                    <elementSpec ident="sex" mode="delete"/>
+                    <elementSpec ident="citedRange" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="from" mode="delete"/>
+                            <attDef ident="to" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="ptr" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.internetMedia" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="cRef" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <moduleRef key="textstructure" include="text body"/>
+                    <elementSpec ident="listPlace" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <alternate maxOccurs="unbounded" minOccurs="0">
+                                <elementRef key="place"/>
+                            </alternate>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="text" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <alternate maxOccurs="unbounded" minOccurs="0">
+                            <elementRef key="body"/>
+                        </alternate>
+                    </elementSpec>
+                    <elementSpec ident="body" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declaring" mode="delete"/>
+                        </classes>
+                        <alternate maxOccurs="unbounded" minOccurs="0">
+                            <elementRef key="listPlace"/>
+                        </alternate>
+                    </elementSpec>
+                    <elementSpec ident="location" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <alternate maxOccurs="unbounded" minOccurs="0">
+                                <elementRef key="geo"/>
+                                <elementRef key="settlement"/>
+                                <elementRef key="region"/>
+                            </alternate>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="geo" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declaring" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attRef name="source" class="att.global.source"/>
+                        </attList>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="settlement" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="region" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="state" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                            <attRef name="resp" class="att.global.responsibility"/>
+                            <attRef name="type" class="att.entryLike"/>
+                            <attRef name="from" class="att.citing"/>
+                            <attRef name="to" class="att.citing"/>
+                        </attList>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="author" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="forename"/>
+                            <elementRef key="surname"/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="title" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="level" mode="delete"/>
+                            <attRef name="xml:lang" class="att.global"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="publisher" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="place" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="replace" usage="req">
+                                <valList type="closed" mode="replace">
+                                    <valItem ident="building">
+                                        <desc>A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates.</desc>
+                                    </valItem>
+                                    <valItem ident="cemetery">
+                                    </valItem>
+                                    <valItem ident="church">
+                                    </valItem>
+                                    <valItem ident="composite">
+                                        <desc>A named place concept which merges multiple distinct place types, such as a city and a diocese. More specific types are preferred.</desc>
+                                    </valItem>
+                                    <valItem ident="designated-space">
+                                        <desc>An area with artificial boundaries which is not necessarily built up, such as a cemetery, town square, or polo ground.</desc>
+                                    </valItem>
+                                    <valItem ident="diocese">
+                                        <desc>An ecclesiastical province governed by a bishop, archbishop, or metropolitan.</desc>
+                                    </valItem>
+                                    <valItem ident="fortification">
+                                        <desc>A military outpost such as a fort or a castle.</desc>
+                                    </valItem>
+                                    <valItem ident="island">
+                                        <desc>A land-mass smaller than a continent surrounded on all sides by water.</desc>
+                                    </valItem>
+                                    <valItem ident="madrasa">
+                                        <desc>A building or space designated for instruction in the Islamic sciences.</desc>
+                                    </valItem>
+                                    <valItem ident="monastery">
+                                        <desc>A whole monastic complex, including living quarters for the monks or nuns, the church(es), and potentially a refectory, library, school, or other part.</desc>
+                                    </valItem>
+                                    <valItem ident="mosque">
+                                        <desc>A building or designated space used for Muslim congregational prayers. It can be part of a larger building complex.</desc>
+                                    </valItem>
+                                    <valItem ident="mountain">
+                                        <desc>An elevated physical feature, from Mt. Ararat down to a prominent hill.</desc>
+                                    </valItem>
+                                    <valItem ident="natural-feature">
+                                        <desc>A natural feature for which there is no narrower category, such as a mountain or open water. Examples of this type include forests and hot springs.</desc>
+                                    </valItem>
+                                    <valItem ident="open-water">
+                                        <desc>A broad category for seas, lakes, oceans, and ponds.</desc>
+                                    </valItem>
+                                    <valItem ident="parish">
+                                        <desc>An ecclesiastical region below a diocese, presided over by a priest.</desc>
+                                    </valItem>
+                                    <valItem ident="province">
+                                        <desc>A political unit subject to a "state" but larger than a city. States often have multiple levels of administrative units (e.g. the late Ottoman vilayets, sanjaks, kazas, and nahiyes), all of which can be indicated as a "province."</desc>
+                                    </valItem>
+                                    <valItem ident="quarter">
+                                        <desc>A subdivision of an urban center.</desc>
+                                    </valItem>
+                                    <valItem ident="region">
+                                        <desc>A term indicating a geographic extent larger than a city, without a corresponding politico-administrative apparatus. The size could range from a small valley to an entire continent.</desc>
+                                    </valItem>
+                                    <valItem ident="river">
+                                        <desc>A stream of water of whatever size, from the smallest creek to the Amazon. Wadis are also included, even if they are not filled with water year-round.</desc>
+                                    </valItem>
+                                    <valItem ident="settlement">
+                                        <desc>Any collection of civilian residences, from the smallest village to the largest metropolis.</desc>
+                                    </valItem>
+                                    <valItem ident="state">
+                                        <desc>A sovereign government such as an empire, kingdom, caliphate, or independent emirate.</desc>
+                                    </valItem>
+                                    <valItem ident="synagogue">
+                                        <desc>A building designated for use in Jewish worship.</desc>
+                                    </valItem>
+                                    <valItem ident="temple">
+                                        <desc>A building designated for use in pagan worship.</desc>
+                                    </valItem>
+                                    <valItem ident="unknown">
+                                        <desc>A place whose name is known, but what sort of place it represents is unknown.</desc>
+                                    </valItem>
+                                    <valItem ident="valley">
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                        <alternate maxOccurs="unbounded" minOccurs="0">
+                            <elementRef key="placeName"/>
+                            <elementRef key="desc"/>
+                            <elementRef key="location"/>
+                            <elementRef key="state"/>
+                            <elementRef key="idno"/>
+                            <elementRef key="bibl"/>
+                        </alternate>
+                    </elementSpec>
+                    <elementSpec ident="quote" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attRef name="source" class="att.global.source"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="pubPlace" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="surname" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="biblScope" mode="change">
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="editor" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="forename"/>
+                            <elementRef key="surname"/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="series" mode="change">
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                </schemaSpec>
+            </div>
+        </body>
+    </text>
+</TEI>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns">
+    <head>
+        <title>Edit MSS TEI records</title>
+        <xf:model>
+           <xf:instance id="i-rec">
+              <TEI xmlns="http://www.tei-c.org/ns/1.0">
+                 <history>
+                    <origin>
+                       <origDate>origin1 originDate1</origDate>
+                       <origPlace>origin1 originPlace1</origPlace>
+                       <locus>origin1 locus1</locus>
+                       <persName>origin1 persName1</persName>
+                       <q>origin1 quoted1</q>
+                       <p>origin1 p1</p>
+                    </origin>
+                       <provenance>
+                       <date>provenance1 date1 </date>
+                       <placeName>provenance1 placeName1</placeName>
+                       <persName>provenance1 persName1</persName>
+                        <locus>provenance1 locus1</locus>
+                       <signatures>provenance1 signatures1</signatures>
+                       <stamp>provenance1 stamp1</stamp>
+                       <p>provenance1 p1</p>
+                    </provenance>
+                    <acquisition>
+                       <date>acquisition1 date1 </date>
+                       <placeName>acquisition1  placeName1</placeName>
+                       <persName>acquisition1 persName1</persName>
+                       <locus>acquisition1 locus1</locus>
+                       <signatures>acquisition1 signatures1</signatures>
+                       <stamp>acquisition1 stamp1</stamp>
+                       <p>acquisition1 p1</p>
+                    </acquisition>
+                 </history>
+              </TEI>
+           </xf:instance>
+           <xf:instance id="i-move">
+              <data xmlns="">
+                 <tmp/>
+              </data>
+           </xf:instance>
+        </xf:model>
+    </head>
+    <body>
+        <h2>Test move child elements</h2>
+       <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:history" id="history-root">
+          <div style="border:1px solid grey; padding:1em;">
+             <!-- Child repeat level1 -->
+             <xf:repeat id="historyrepeat-level1" ref="./*">
+                <div style="border:1px solid grey; padding:1em;">LEVEL 1: 
+                <xf:output value="local-name(current())"/>
+                <xf:input ref="."/>
+                <!-- Child repeat level2 -->
+                <xf:repeat id="historyrepeat-level2" ref="./*">
+                   <div style="border:1px solid grey; padding:1em;">LEVEL 2:
+                   <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                      <xf:label>X</xf:label>
+                      <xf:delete ev:event="DOMActivate" ref="."/>
+                   </xf:trigger> | 
+                   <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                      <xf:label> up </xf:label>
+                      <xf:action ev:event="DOMActivate">
+                         <xf:setvalue ref="instance('i-move')/tmp" value="index('historyrepeat-level2')"/>
+                         <insert origin="instance('i-rec')//*:history/*[index('historyrepeat-level1')]/*[index('historyrepeat-level2')]" nodeset="instance('i-rec')//*:history/*[index('historyrepeat-level1')]/*" at="index('historyrepeat-level2') - 1" position="before"/>
+                         <delete nodeset="instance('i-rec')//*:history/*[index('historyrepeat-level1')]/*[instance('i-move')/tmp + 1]"/>
+                      </xf:action>
+                   </xf:trigger> | 
+                   <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                      <xf:label> down </xf:label>
+                      <xf:action ev:event="DOMActivate">
+                         <xf:setvalue ref="instance('i-move')/tmp" value="index('historyrepeat-level2')"/>
+                         <insert origin="instance('i-rec')//*:history/*[index('historyrepeat-level1')]/*[index('historyrepeat-level2')]" nodeset="instance('i-rec')//*:history/*[index('historyrepeat-level1')]/*" at="index('historyrepeat-level2') + 1" position="after"/>
+                         <delete nodeset="."/>
+                      </xf:action>
+                   </xf:trigger> | <xf:output value="local-name(current())"/>
+                   <xf:input ref="."/>
+                   </div>
+                </xf:repeat>
+                </div>
+             </xf:repeat> 
+          </div>
+        </xf:group>
+    </body>
+</html>

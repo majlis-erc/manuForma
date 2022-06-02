@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-     xmlns:tei="http://www.tei-c.org/ns/1.0"
-     xmlns:sc="http://www.ascc.net/xml/schematron"
-     xmlns:xf="http://www.w3.org/2002/xforms"
-     xmlns:ev="http://www.w3.org/2001/xml-events"
-     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-     xmlns:xi="http://www.w3.org/2001/XInclude"
-     xmlns:local="http://syriaca.org/ns">
-   <titleStmt ident="titleStmt"
-              elementName="titleStmt"
-              elementLabel="title statement"
-              minOccur=""
-              maxOccur=""
-              path="/*:titleStmt"
-              currentLevel="1"
-              popup="1">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns">
+   <titleStmt ident="titleStmt" elementName="titleStmt" elementLabel="title statement" minOccur="" maxOccur="" path="/*:titleStmt" currentLevel="1" popup="1">
       <desc>groups information about the title of a work and those responsible for its content.</desc>
       <availableAtts elementName="titleStmt"/>
       <childElements>
@@ -28,31 +14,18 @@
          </child>
       </childElements>
    </titleStmt>
-   <title ident="title"
-          elementName="title"
-          elementLabel="title"
-          minOccur=""
-          maxOccur=""
-          path="/*:titleStmt/*:title"
-          currentLevel="2"
-          popup="2">
+   <title ident="title" elementName="title" elementLabel="title" minOccur="" maxOccur="" path="/*:titleStmt/*:title" currentLevel="2" popup="2">
+      <lookup xmlns="http://www.w3.org/1999/xhtml" api="http://44.192.15.2/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="form.xq?form=forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml" formName="worksTEI" elementName="title" label="New Work" formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="evidence"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="evidence" usage="opt">
                             <datatype maxOccurs="6">
                                 <dataRef key="teidata.word"/>
                             </datatype>
 
                         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="level"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="level" usage="opt">
             <desc versionDate="2005-03-05" xml:lang="en">indicates the bibliographic level for a title, that is, whether
                                         it identifies an article, book, journal, series, or
                                         unpublished material.</desc>
@@ -263,12 +236,7 @@ doit pas être utilisé.</p>
         </p>
             </remarks>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="subtype"
-                 mode="change"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="subtype" mode="change" usage="opt">
                             <datatype maxOccurs="6">
                                 <dataRef key="teidata.word"/>
                             </datatype>
@@ -281,12 +249,7 @@ doit pas être utilisé.</p>
                                 <valItem ident="translation"/>
                             </valList>
                         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="replace"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="type" mode="replace" usage="opt">
                             
                             <valList type="closed">
                                 <valItem ident="altMain">
@@ -359,11 +322,7 @@ doit pas être utilisé.</p>
                                 </valItem>
                             </valList>
                         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xml:lang" usage="opt">
             <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
             <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
             <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
@@ -453,21 +412,10 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </title>
-   <sponsor ident="sponsor"
-            elementName="sponsor"
-            elementLabel="sponsor"
-            minOccur=""
-            maxOccur=""
-            path="/*:titleStmt/*:sponsor"
-            currentLevel="2"
-            popup="2">
+   <sponsor ident="sponsor" elementName="sponsor" elementLabel="sponsor" minOccur="" maxOccur="" path="/*:titleStmt/*:sponsor" currentLevel="2" popup="2">
       <desc>specifies the name of a sponsoring organization or institution.</desc>
       <availableAtts elementName="sponsor">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" usage="opt">
             <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
             <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
             <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
@@ -501,21 +449,10 @@ and that a single TEI document may contain texts in many languages.</p>
          </child>
       </childElements>
    </sponsor>
-   <orgName ident="orgName"
-            elementName="orgName"
-            elementLabel="organization name"
-            minOccur=""
-            maxOccur=""
-            path="/*:titleStmt/*:sponsor/*:orgName"
-            currentLevel="3"
-            popup="3">
+   <orgName ident="orgName" elementName="orgName" elementLabel="organization name" minOccur="" maxOccur="" path="/*:titleStmt/*:sponsor/*:orgName" currentLevel="3" popup="3">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xml:lang" usage="opt">
             <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
             <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
             <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
@@ -605,22 +542,11 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </orgName>
-   <funder ident="funder"
-           elementName="funder"
-           elementLabel="funding body"
-           minOccur=""
-           maxOccur=""
-           path="/*:titleStmt/*:funder"
-           currentLevel="2"
-           popup="2">
+   <funder ident="funder" elementName="funder" elementLabel="funding body" minOccur="" maxOccur="" path="/*:titleStmt/*:funder" currentLevel="2" popup="2">
       <desc>specifies the name of an individual, institution, or organization responsible for the
     funding of a project or text.</desc>
       <availableAtts elementName="funder">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" usage="opt">
             <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
             <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
             <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
@@ -654,21 +580,10 @@ and that a single TEI document may contain texts in many languages.</p>
          </child>
       </childElements>
    </funder>
-   <orgName ident="orgName"
-            elementName="orgName"
-            elementLabel="organization name"
-            minOccur=""
-            maxOccur=""
-            path="/*:titleStmt/*:funder/*:orgName"
-            currentLevel="3"
-            popup="3">
+   <orgName ident="orgName" elementName="orgName" elementLabel="organization name" minOccur="" maxOccur="" path="/*:titleStmt/*:funder/*:orgName" currentLevel="3" popup="3">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xml:lang" usage="opt">
             <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
             <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
             <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
@@ -758,22 +673,11 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </orgName>
-   <principal ident="principal"
-              elementName="principal"
-              elementLabel="principal researcher"
-              minOccur=""
-              maxOccur=""
-              path="/*:titleStmt/*:principal"
-              currentLevel="2"
-              popup="2">
+   <principal ident="principal" elementName="principal" elementLabel="principal researcher" minOccur="" maxOccur="" path="/*:titleStmt/*:principal" currentLevel="2" popup="2">
       <desc>supplies the name of the principal researcher responsible for the
 creation of an electronic text.</desc>
       <availableAtts elementName="principal">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" usage="opt">
             <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
             <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
             <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
@@ -806,23 +710,12 @@ creation of an electronic text.</desc>
          <child/>
       </childElements>
    </principal>
-   <editor ident="editor"
-           elementName="editor"
-           elementLabel="editor"
-           minOccur=""
-           maxOccur=""
-           path="/*:titleStmt/*:editor"
-           currentLevel="2"
-           popup="2">
+   <editor ident="editor" elementName="editor" elementLabel="editor" minOccur="" maxOccur="" path="/*:titleStmt/*:editor" currentLevel="2" popup="2">
       <desc>contains a secondary statement of responsibility for a bibliographic item, for example the name of an
     individual, institution or organization, (or of several such) acting as editor, compiler,
     translator, etc.</desc>
       <availableAtts elementName="editor">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" usage="opt">
             <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
             <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
             <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
@@ -849,22 +742,14 @@ creation of an electronic text.</desc>
                <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
             </remarks>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="role"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="role" usage="opt">
             <desc versionDate="2009-10-12" xml:lang="en">may be used to specify further information about the entity referenced by
 this name in the form of a set of whitespace-separated values, for example the occupation of a person, or the status of a place.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.enumerated"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:id"
-                 usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xml:id" usage="opt">
             <gloss versionDate="2007-07-02" xml:lang="en">identifier</gloss>
             <gloss versionDate="2007-12-20" xml:lang="ko">확인소</gloss>
             <gloss versionDate="2008-04-06" xml:lang="es">identificador</gloss>
@@ -906,14 +791,7 @@ this name in the form of a set of whitespace-separated values, for example the o
          <child/>
       </childElements>
    </editor>
-   <respStmt ident="respStmt"
-             elementName="respStmt"
-             elementLabel="statement of responsibility"
-             minOccur=""
-             maxOccur=""
-             path="/*:titleStmt/*:respStmt"
-             currentLevel="2"
-             popup="2">
+   <respStmt ident="respStmt" elementName="respStmt" elementLabel="statement of responsibility" minOccur="" maxOccur="" path="/*:titleStmt/*:respStmt" currentLevel="2" popup="2">
       <desc>supplies a statement of responsibility for the intellectual content of a text, edition,
     recording, or series, where the specialized elements for authors, editors, etc. do not suffice
     or do not apply. May also be used to encode information about individuals or organizations 
@@ -926,14 +804,7 @@ this name in the form of a set of whitespace-separated values, for example the o
          </child>
       </childElements>
    </respStmt>
-   <resp ident="resp"
-         elementName="resp"
-         elementLabel="responsibility"
-         minOccur=""
-         maxOccur=""
-         path="/*:titleStmt/*:respStmt/*:resp"
-         currentLevel="3"
-         popup="3">
+   <resp ident="resp" elementName="resp" elementLabel="responsibility" minOccur="" maxOccur="" path="/*:titleStmt/*:respStmt/*:resp" currentLevel="3" popup="3">
       <desc>contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role 
     in the production or distribution of a work.</desc>
       <availableAtts elementName="resp"/>
@@ -942,22 +813,11 @@ this name in the form of a set of whitespace-separated values, for example the o
          <child/>
       </childElements>
    </resp>
-   <name ident="name"
-         elementName="name"
-         elementLabel="name, proper noun"
-         minOccur=""
-         maxOccur=""
-         path="/*:titleStmt/*:respStmt/*:name"
-         currentLevel="3"
-         popup="3">
+   <name ident="name" elementName="name" elementLabel="name, proper noun" minOccur="" maxOccur="" path="/*:titleStmt/*:respStmt/*:name" currentLevel="3" popup="3">
       <desc>contains a proper noun or noun phrase.</desc>
       <availableAtts elementName="name">
          <attDef ident="ref"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="type" mode="change">
                             <valList mode="replace" type="semi">
                                 <valItem ident="person">
                                     <desc>The name is of a person</desc>

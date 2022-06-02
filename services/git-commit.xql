@@ -45,20 +45,12 @@ declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace json = "http://www.json.org";
 
 (: Set up global varaibles :)
-(: Access git-api configuration file :) 
-(:
-declare variable $gitcommit:git-config := if(doc('../config.xml')) then doc('../config.xml') else <response status="fail"><message>Load config.xml file please.</message></response>;
-declare variable $gitcommit:repo := $gitcommit:git-config//*:git-submit-repository/text();
-declare variable $gitcommit:authorization-token := $gitcommit:git-config//*:git-submit-token/text();
-:)(:https://github.com/wsalesky/blogs:)
-
-declare variable $gitcommit:repo := 'blogs';
 declare variable $gitcommit:authorization-token := '';
-declare variable $gitcommit:apiURL := 'https://api.github.com/';
-declare variable $gitcommit:owner := 'wsalesky';
-declare variable $gitcommit:repoName := 'blogs';
-declare variable $gitcommit:branch := 'master';
-declare variable $gitcommit:dataPath := 'data/bibl/tei';
+declare variable $gitcommit:apiURL := 'https://api.github.com';
+declare variable $gitcommit:owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'wsalesky';
+declare variable $gitcommit:repoName := if(request:get-parameter('githubRepoName','') != '') then request:get-parameter('githubRepoName','') else 'blogs';
+declare variable $gitcommit:branch := if(request:get-parameter('githubBranch','') != '') then request:get-parameter('githubBranch','') else 'master';
+declare variable $gitcommit:dataPath := if(request:get-parameter('githubPath','') != '') then request:get-parameter('githubPath','') else 'data/tei/';
 
 declare function gitcommit:list-files(){
 (:https://github.com/wsalesky/blogs:)
@@ -87,7 +79,7 @@ declare function gitcommit:step1($data as item()*,$path as xs:string?, $commit-m
     return 
        if(starts-with(string($branch[1]/@status),'2')) then
            ('Step 1 ',gitcommit:step2($data,$path, $commit-message, $branch-sha))
-       else ('Fail step 1 ',string($branch[1]/@message))
+       else ('Fail step 1 ',string($branch[1]/@message), ' path ', concat($gitcommit:apiURL,'/repos/',$gitcommit:owner,'/',$gitcommit:repoName,'/git/refs/heads/',$gitcommit:branch))
 };
 
 declare function gitcommit:step2($data as item()*,$path as xs:string?, $commit-message as xs:string?, $branch-sha as xs:string?){
@@ -278,25 +270,27 @@ declare function gitcommit:step7($path as xs:string?, $branch-name as xs:string?
                 serialize(
                     <object>
                         <title>Updates from online corrections. {$path}</title>
-                        <body>Review submitted changes and merge into master if acceptable.</body>
+                        <body>Review submitted changes and merge into {$gitcommit:branch} if acceptable.</body>
                         <head>{$branch-name}</head>
-                        <base>master</base>
+                        <base>{$gitcommit:branch}</base>
                     </object>, 
                     <output:serialization-parameters>
                         <output:method>json</output:method>
                     </output:serialization-parameters>)
-        let $pull-request := http:send-request(
+            return       
+            let $pull-request := http:send-request(
                                 <http:request http-version="1.1" href="{xs:anyURI(concat($gitcommit:apiURL,'/repos/',$gitcommit:owner,'/',$gitcommit:repoName,'/pulls'))}" method="post">  
                                     <http:header name="Authorization" value="{concat('token ',$gitcommit:authorization-token)}"/>
                                     <http:header name="Connection" value="close"/>
                                     <http:header name="Accept" value="application/json"/>
                                     <http:body media-type="application/json" method="text">{$pull-request-data}</http:body>
                                 </http:request>)
-        let $pull-request-data := util:base64-decode($pull-request[2])
-        return ('pull request ',string($pull-request[1]/@message))
-    else ('fail pull request',$commit-ref/@message)   
+            let $pull-request-data := util:base64-decode($pull-request[2])
+            return ('pull request ',string($pull-request[1]/@message))
+        else ('fail pull request',$commit-ref/@message)   
 };
 
+(:Add better error handling. each step? :)
 declare function gitcommit:run-commit($data as item()*, $path as xs:string?, $commit-message as xs:string?) {
         if(not(empty($data))) then  
           gitcommit:step1($data, $path, $commit-message)

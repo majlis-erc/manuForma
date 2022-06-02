@@ -17,6 +17,7 @@ declare namespace json = "http://www.json.org";
 
 declare option output:method "xml";
 declare option output:media-type "text/xml";
+declare option output:omit-xml-declaration "no";
 
 (: Any post processing to TEI form data happens here :)
 declare function local:transform($nodes as node()*) as item()* {
@@ -59,39 +60,45 @@ let $file-name :=
         if($id != '') then 
             concat($id, '.xml') 
         else 'form.xml'
-let $collection-uri := concat($config:app-root,'/data')
+let $eXistCollection := if(request:get-parameter('eXistCollection','') != '') then request:get-parameter('eXistCollection','') else concat($config:app-root,'/data')
 let $github-path := if(request:get-parameter('githubPath','') != '') then request:get-parameter('githubPath','') else 'data/tei/'
 let $github-repo := if(request:get-parameter('githubRepo','') != '') then request:get-parameter('githubRepo','') else 'blogs'
 let $github-owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'wsalesky'
 let $github-branch := if(request:get-parameter('githubBranch','') != '') then request:get-parameter('githubBranch','') else 'master'
 return 
-        if(request:get-parameter('type', '') = 'save') then
+    if(request:get-parameter('type', '') = 'save') then
             try {
-                let $save := xmldb:store($collection-uri, xmldb:encode-uri($file-name), $post-processed-xml)
+                let $save := xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)
                 return 
-                 <response status="okay" code="200"><message>Record saved, thank you for your contribution. {$post-processed-xml}</message></response>  
+                 <response status="okay" code="200"><message>{$save} Record {$id} saved, thank you for your contribution. </message></response>  
             } catch * {
                 (response:set-status-code( 500 ),
                 <response status="fail">
                     <message>Failed to update resource {$id}: {concat($err:code, ": ", $err:description)}</message>
                 </response>)
             }
-        else if(request:get-parameter('type', '') = 'github') then
-           try {
+         else if(request:get-parameter('type', '') = 'github') then
+            try {
                 let $save := gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name))
                 return
                  <response status="okay" code="200">
-                    <message>Thank you for your contribution </message>
+                    <message>Record saved to the {$github-repo} GitHub. Thank you for your contribution. {$save}</message>
                  </response>  
             } catch * {
                 (response:set-status-code( 500 ),
                 <response status="fail">
                     <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
                 </response>)
-            }         
-        else if(request:get-parameter('type', '') = ('download','view')) then
+            }             
+        else if(request:get-parameter('type', '') = 'download') then
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
-                 response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)     
+                 response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)  
+        else if(request:get-parameter('type', '') = 'view') then
+                (response:set-header("Content-Type", "application/xml; charset=utf-8"),
+                 (:response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml):)
+                 (:$post-processed-xml:)
+                 <div>Hello? View XML here</div>
+                 )
         else if(request:get-parameter('type', '') = 'upload') then 
               (: (response:set-header("Content-Type", "text/xml; charset=utf-8"),
                 response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)

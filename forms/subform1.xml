@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns">
+    <head>
+        <title>Edit MSS TEI records</title>
+        <xf:model>
+            <xf:instance id="i-rec">
+                <TEI xmlns="http://www.tei-c.org/ns/1.0">
+                    <titleStmt>
+                        <title level="a" xml:lang="en">Shelf mark</title>
+                        <title level="m" xml:lang="en">MAJLIS: The Transformation of Jewish Literature in
+                            Arabic in the Islamicate World</title>
+                        <editor xml:id="rvollandt" role="general" ref="">Editor</editor>
+                        <editor role="creator" ref="#mmoliere">Maximilian de Molière</editor>
+                        <respStmt>
+                            <resp>Srophé app design and development by</resp>
+                            <name type="person" ref="http://syriaca.org/documentation/editors.xml#wsalesky">Winona Salesky</name>
+                        </respStmt>
+                    </titleStmt>
+                    <msIdentifier>
+                        <country/>
+                        <settlement/>
+                        <institution/>
+                        <repository/>
+                        <idno/>
+                        <msName/>
+                        <altIdentifier type="IMHM">
+                            <idno/>
+                        </altIdentifier>
+                        <altIdentifier type="SfarData">
+                            <idno/>
+                        </altIdentifier>
+                        <altIdentifier type="Ktiv">
+                            <idno/>
+                        </altIdentifier>
+                    </msIdentifier>
+                </TEI>
+            </xf:instance>
+        </xf:model>
+    </head>
+    <body>
+        <h2>Title</h2>
+        <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:titleStmt" id="titleStmt-root">
+            <xf:input ref="."/>
+            <!-- Child repeat level1 -->
+            <xf:repeat id="titleStmtrepeat-level1" ref="./*">
+                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                    <xf:label>X</xf:label>
+                    <xf:delete ev:event="DOMActivate" ref="."/>
+                </xf:trigger> | 
+                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                    <xf:label>Up</xf:label>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level1')"/>
+                        <insert origin="instance('i-rec')//*:titleStmt/*[index('titleStmtrepeat-level1')]" nodeset="instance('i-rec')//*:titleStmt/*" at="index('titleStmtrepeat-level1') - 1" position="before"/>
+                        <delete nodeset="instance('i-rec')//*:titleStmt/*[instance('i-move')/tmp + 1]"/>
+                    </xf:action>
+                </xf:trigger> | 
+                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                    <xf:label>down</xf:label>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level1')"/>
+                        <insert origin="instance('i-rec')//*:titleStmt/*[index('titleStmtrepeat-level1')]" nodeset="instance('i-rec')//*:titleStmt/*" at="index('titleStmtrepeat-level1') + 1" position="after"/>
+                        <delete nodeset="."/>
+                    </xf:action>
+                </xf:trigger> |
+                <xf:output value="local-name(current())"/>
+                <xf:input ref="."/>
+                <!-- Child repeat level2 -->
+                <xf:repeat id="titleStmtrepeat-level2" ref="./*">
+                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                        <xf:label>X</xf:label>
+                        <xf:delete ev:event="DOMActivate" ref="."/>
+                    </xf:trigger> | 
+                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                        <xf:label> up </xf:label>
+                        <xf:action ev:event="DOMActivate">
+                            <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level2')"/>
+                            <insert origin="instance('i-rec')//*:titleStmt/*/*[index('titleStmtrepeat-level2')]" nodeset="instance('i-rec')//*:titleStmt/*/*" at="index('titleStmtrepeat-level2') - 1" position="before"/>
+                            <delete nodeset="instance('i-rec')//*:titleStmt/*/*[instance('i-move')/tmp + 1]"/>
+                        </xf:action>
+                    </xf:trigger> | 
+                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                        <xf:label> down </xf:label>
+                        <xf:action ev:event="DOMActivate">
+                            <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level2')"/>
+                            <insert origin="instance('i-rec')//*:titleStmt/*/*[index('titleStmtrepeat-level2')]" nodeset="instance('i-rec')//*:titleStmt/*/*" at="index('titleStmtrepeat-level2') + 1" position="after"/>
+                            <delete nodeset="."/>
+                        </xf:action>
+                    </xf:trigger> | <xf:output value="local-name(current())"/>
+                    <xf:input ref="."/>
+                    <!-- Child repeat level3 -->
+                    <xf:repeat id="titleStmtrepeat-level3" ref="./*">
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                            <xf:label> X </xf:label>
+                            <xf:delete ev:event="DOMActivate" ref="."/>
+                        </xf:trigger>
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
+                            <xf:label> up </xf:label>
+                            <xf:action ev:event="DOMActivate">
+                                <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level3')"/>
+                                <insert origin="instance('i-rec')//*:titleStmt/*/*/*[index('titleStmtrepeat-level3')]" nodeset="instance('i-rec')//*:titleStmt/*/*/*" at="index('titleStmtrepeat-level3') - 1" position="before"/>
+                                <delete nodeset="instance('i-rec')//*:titleStmt/*/*/*[instance('i-move')/tmp + 1]"/>
+                            </xf:action>
+                        </xf:trigger> | 
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal">
+                            <xf:label> down </xf:label>
+                            <xf:action ev:event="DOMActivate">
+                                <xf:setvalue ref="instance('i-move')/tmp" value="index('titleStmtrepeat-level3')"/>
+                                <insert origin="instance('i-rec')//*:titleStmt/*/*/*[index('titleStmtrepeat-level3')]" nodeset="instance('i-rec')//*:titleStmt/*/*/*" at="index('titleStmtrepeat-level3') + 1" position="after"/>
+                                <delete nodeset="."/>
+                            </xf:action>
+                        </xf:trigger> | <xf:output value="local-name(current())"/>
+                        <xf:input ref="."/>
+                    </xf:repeat>
+                </xf:repeat>
+            </xf:repeat> 
+        </xf:group>
+    </body>
+</html>
