@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -36,12 +39,11 @@ End license statement: do not remove --><!--requirements:
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
-                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
-                    Arabic in the Islamicate World</publisher>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
                 <pubPlace>München</pubPlace>
                 <availability>
-                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
-                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
+                        Attribution-ShareAlike 4.0. </licence>
                 </availability>
             </publicationStmt>
             <notesStmt>
@@ -52,8 +54,7 @@ End license statement: do not remove --><!--requirements:
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
-            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
-                created by Pietro Liuzzo</change>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
         </revisionDesc>
     </teiHeader>
     <text>
@@ -63,11 +64,11 @@ End license statement: do not remove --><!--requirements:
         <body>
             <div>
                 <head>Information on this customization</head>
-                <p>Schema for MAJLIS Project. This part of the schema is used for entering
-                    descriptions of the manuscript support using XForms.</p>
-                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
-                        Guidelines</ref> contain examples and details of that customization.</p>
-                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated schema</ref> of FIRHIST</p>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript support using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
+                    customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
+                        schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
@@ -77,19 +78,24 @@ End license statement: do not remove --><!--requirements:
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" except="list abbr add addrLine address analytic bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q rb reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term time unclear unit"/>
-                    <moduleRef key="msdescription" include="msItem msPart summary rubric incipit explicit finalRubric colophon"/>
+                    <moduleRef key="core"
+                        except="list abbr add addrLine address analytic bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q rb reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term time unclear unit q"/>
+                    <moduleRef key="msdescription" include="msItem summary rubric incipit explicit finalRubric"/>
                     <moduleRef key="tei"/>
 
                     <elementSpec ident="locus" module="msdescription" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="locus.desc">The location of a text or another feature within the
+                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
+                            a range of folios.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
                             <memberOf key="att.global"/>
                             <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
                             <textNode/>
                         </content>
                         <attList>
@@ -138,6 +144,8 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="watermark" module="msdescription" mode="delete"/>
                     <elementSpec ident="p" module="core" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
                         <content>
                             <textNode/>
                             <textNode/>
@@ -185,6 +193,9 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="formula" mode="delete"/>
                     <moduleRef key="namesdates" include="persName"/>
                     <elementSpec ident="author" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">The author, editor, or compiler of a primary work. Look up the person records in
+                            the database to specify an author. Try different spellings in different languages! If no suitable record exists, create a
+                            new one. (The "ref" attribute will be filled out automatically when you link a person record to this element.)</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -195,15 +206,37 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
+                            <attRef name="ref" class="att.canonical"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="textLang" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a language code for the primary language used in
+                            the text in the attribute mainLang. The most relevant codes are: "ar": Arabic, "he": Hebrew, and "en" English. If the text
+                            contains passages in other languages, enter them in the attribute otherLangs. If you quote from the manuscript in a
+                            language other than the one marked in mainLang, you must mark the language of the quote using the xml:lang attribute. If
+                            the appropriate code is not listed consult https://r12a.github.io/app-subtags/</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <content>
                             <textNode/>
                         </content>
+                        <attList>
+                            <attDef ident="mainLang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="otherLangs" mode="change">
+                                <valList type="open" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="title" mode="change">
                         <classes mode="change">
@@ -217,21 +250,25 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attDef ident="level" mode="delete"/>
-                            <attRef name="xml:lang" class="att.global"/>
+                                <attDef ident="xml:lang" mode="change">
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                    </valList>
+                                </attDef>
                             <attRef name="ref" class="att.canonical"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="msContents" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.msExcerpt" mode="delete"/>
-                        </classes>
                         <content>
                             <elementRef key="summary"/>
                             <elementRef key="msItem"/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="msItem" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the individual textual unit found in the manuscript or manuscript part.
+                            Assign a "class"-attribute value from the list that best approximates the text's genre.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -249,11 +286,35 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="note"/>
                         </content>
                         <attList>
-                            <attRef name="xml:id" class="att.global"/>
-                            <attRef name="class" class="att.msClass"/>
+                            <attDef ident="class" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="bible"/>
+                                    <valItem mode="add" ident="bibleCommentary"/>
+                                    <valItem mode="add" ident="mishna"/>
+                                    <valItem mode="add" ident="mishnaCommentary"/>
+                                    <valItem mode="add" ident="talmud"/>
+                                    <valItem mode="add" ident="talmudCommentary"/>
+                                    <valItem mode="add" ident="halakha"/>
+                                    <valItem mode="add" ident="midrash"/>
+                                    <valItem mode="add" ident="liturgy"/>
+                                    <valItem mode="add" ident="mysticism"/>
+                                    <valItem mode="add" ident="philosophy"/>
+                                    <valItem mode="add" ident="science"/>
+                                    <valItem mode="add" ident="medicine"/>
+                                    <valItem mode="add" ident="linguistics"/>
+                                    <valItem mode="add" ident="bellesLettres"/>
+                                    <valItem mode="add" ident="poetry"/>
+                                    <valItem mode="add" ident="magic"/>
+                                    <valItem mode="add" ident="targum"/>
+                                    <valItem mode="add" ident="tafsir"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="xml:id" mode="change"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="note" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">This is the place to remark on points that don't fit the mold of the other
+                            elements or more extensive observations.</desc>
                         <classes mode="change">
                             <memberOf key="att.anchoring" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -283,7 +344,6 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
                             <elementRef key="forename"/>
                             <elementRef key="surname"/>
                             <elementRef key="addName"/>
@@ -296,6 +356,9 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     <elementSpec ident="rubric" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="rubric.desc" xml:lang="en">The words through which a manuscript signals the beginning
+                            of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape or
+                            character size.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -305,16 +368,20 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="q"/>
                         </content>
+                        <attList>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
-                    <elementSpec ident="q" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
+                    <elementSpec ident="q" mode="change"/>
                     <elementSpec ident="incipit" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">The opening words of the text proper of sufficient length
+                            to identify the work with confidence.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -324,8 +391,19 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="q"/>
                         </content>
+                        <attList>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="explicit" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">The closing words of the text proper, exclusive of any
+                            rubric or colophon which might follow it.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -335,8 +413,20 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="q"/>
                         </content>
+                        <attList>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="finalRubric" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="finalrubric.desc" xml:lang="en">The statement through which a manuscript signals the
+                            end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
+                            device.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -346,8 +436,19 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="q"/>
                         </content>
+                        <attList>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="colophon" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="colophon.desc" xml:lang="en">A statement providing information about the date, place,
+                            agency, or reason for production of the manuscript.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -356,6 +457,15 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="q"/>
                         </content>
+                        <attList>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="q" mode="change">
                         <classes mode="change">

@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:local="http://syriaca.org/ns"
+     xmlns:srophe="https://srophe.app">
+   <place ident="place"
+          elementName="place"
+          elementLabel="place"
+          minOccur=""
+          maxOccur=""
+          path="/*:place"
+          currentLevel="1"
+          popup="1">
+      <desc/>
+      <availableAtts elementName="place">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="replace"
+                 usage="req">
+                                <valList type="closed" mode="replace">
+                                    <valItem ident="building">
+                                        <desc>A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates.</desc>
+                                    </valItem>
+                                    <valItem ident="cemetery">
+                                    </valItem>
+                                    <valItem ident="church">
+                                    </valItem>
+                                    <valItem ident="composite">
+                                        <desc>A named place concept which merges multiple distinct place types, such as a city and a diocese. More specific types are preferred.</desc>
+                                    </valItem>
+                                    <valItem ident="designated-space">
+                                        <desc>An area with artificial boundaries which is not necessarily built up, such as a cemetery, town square, or polo ground.</desc>
+                                    </valItem>
+                                    <valItem ident="diocese">
+                                        <desc>An ecclesiastical province governed by a bishop, archbishop, or metropolitan.</desc>
+                                    </valItem>
+                                    <valItem ident="fortification">
+                                        <desc>A military outpost such as a fort or a castle.</desc>
+                                    </valItem>
+                                    <valItem ident="island">
+                                        <desc>A land-mass smaller than a continent surrounded on all sides by water.</desc>
+                                    </valItem>
+                                    <valItem ident="madrasa">
+                                        <desc>A building or space designated for instruction in the Islamic sciences.</desc>
+                                    </valItem>
+                                    <valItem ident="monastery">
+                                        <desc>A whole monastic complex, including living quarters for the monks or nuns, the church(es), and potentially a refectory, library, school, or other part.</desc>
+                                    </valItem>
+                                    <valItem ident="mosque">
+                                        <desc>A building or designated space used for Muslim congregational prayers. It can be part of a larger building complex.</desc>
+                                    </valItem>
+                                    <valItem ident="mountain">
+                                        <desc>An elevated physical feature, from Mt. Ararat down to a prominent hill.</desc>
+                                    </valItem>
+                                    <valItem ident="natural-feature">
+                                        <desc>A natural feature for which there is no narrower category, such as a mountain or open water. Examples of this type include forests and hot springs.</desc>
+                                    </valItem>
+                                    <valItem ident="open-water">
+                                        <desc>A broad category for seas, lakes, oceans, and ponds.</desc>
+                                    </valItem>
+                                    <valItem ident="parish">
+                                        <desc>An ecclesiastical region below a diocese, presided over by a priest.</desc>
+                                    </valItem>
+                                    <valItem ident="province">
+                                        <desc>A political unit subject to a "state" but larger than a city. States often have multiple levels of administrative units (e.g. the late Ottoman vilayets, sanjaks, kazas, and nahiyes), all of which can be indicated as a "province."</desc>
+                                    </valItem>
+                                    <valItem ident="quarter">
+                                        <desc>A subdivision of an urban center.</desc>
+                                    </valItem>
+                                    <valItem ident="region">
+                                        <desc>A term indicating a geographic extent larger than a city, without a corresponding politico-administrative apparatus. The size could range from a small valley to an entire continent.</desc>
+                                    </valItem>
+                                    <valItem ident="river">
+                                        <desc>A stream of water of whatever size, from the smallest creek to the Amazon. Wadis are also included, even if they are not filled with water year-round.</desc>
+                                    </valItem>
+                                    <valItem ident="settlement">
+                                        <desc>Any collection of civilian residences, from the smallest village to the largest metropolis.</desc>
+                                    </valItem>
+                                    <valItem ident="state">
+                                        <desc>A sovereign government such as an empire, kingdom, caliphate, or independent emirate.</desc>
+                                    </valItem>
+                                    <valItem ident="synagogue">
+                                        <desc>A building designated for use in Jewish worship.</desc>
+                                    </valItem>
+                                    <valItem ident="temple">
+                                        <desc>A building designated for use in pagan worship.</desc>
+                                    </valItem>
+                                    <valItem ident="unknown">
+                                        <desc>A place whose name is known, but what sort of place it represents is unknown.</desc>
+                                    </valItem>
+                                    <valItem ident="valley">
+                                    </valItem>
+                                </valList>
+                            </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="placeName"/>
+            <element ident="desc"/>
+            <element ident="location"/>
+            <element ident="state"/>
+            <element ident="idno"/>
+            <element ident="bibl"/>
+         </child>
+      </childElements>
+   </place>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="placeName"
+              minOccur=""
+              maxOccur=""
+              path="/*:place/*:placeName"
+              currentLevel="2"
+              popup="2">
+      <availableAtts elementName="placeName">
+         <attDef ident="ref"/>
+         <attDef ident="source"/>
+         <attDef ident="xml:id"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="xml:lang"
+                 mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <desc ident="desc"
+         elementName="desc"
+         elementLabel="desc"
+         minOccur=""
+         maxOccur=""
+         path="/*:place/*:desc"
+         currentLevel="2"
+         popup="2">
+      <availableAtts elementName="desc">
+         <attDef ident="type"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="xml:lang"
+                 mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child>
+            <element ident="quote"/>
+         </child>
+      </childElements>
+   </desc>
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="quote"
+          minOccur=""
+          maxOccur=""
+          path="/*:place/*:desc/*:quote"
+          currentLevel="3"
+          popup="3">
+      <availableAtts elementName="quote">
+         <attDef ident="source"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </quote>
+   <location ident="location"
+             elementName="location"
+             elementLabel="location"
+             minOccur=""
+             maxOccur=""
+             path="/*:place/*:location"
+             currentLevel="2"
+             popup="2">
+      <availableAtts elementName="location"/>
+      <childElements>
+         <child>
+            <element ident="geo"/>
+            <element ident="settlement"/>
+            <element ident="region"/>
+         </child>
+      </childElements>
+   </location>
+   <geo ident="geo"
+        elementName="geo"
+        elementLabel="geo"
+        minOccur=""
+        maxOccur=""
+        path="/*:place/*:location/*:geo"
+        currentLevel="3"
+        popup="3">
+      <availableAtts elementName="geo">
+         <attDef ident="source"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </geo>
+   <settlement ident="settlement"
+               elementName="settlement"
+               elementLabel="settlement"
+               minOccur=""
+               maxOccur=""
+               path="/*:place/*:location/*:settlement"
+               currentLevel="3"
+               popup="3">
+      <availableAtts elementName="settlement"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </settlement>
+   <region ident="region"
+           elementName="region"
+           elementLabel="region"
+           minOccur=""
+           maxOccur=""
+           path="/*:place/*:location/*:region"
+           currentLevel="3"
+           popup="3">
+      <availableAtts elementName="region"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </region>
+   <state ident="state"
+          elementName="state"
+          elementLabel="state"
+          minOccur=""
+          maxOccur=""
+          path="/*:place/*:state"
+          currentLevel="2"
+          popup="2">
+      <availableAtts elementName="state">
+         <attDef ident="from"/>
+         <attDef ident="resp"/>
+         <attDef ident="to"/>
+         <attDef ident="type"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </state>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="idno"
+         minOccur=""
+         maxOccur=""
+         path="/*:place/*:idno"
+         currentLevel="2"
+         popup="2">
+      <availableAtts elementName="idno"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </idno>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="bibl"
+         minOccur=""
+         maxOccur=""
+         path="/*:place/*:bibl"
+         currentLevel="2"
+         popup="2">
+      <availableAtts elementName="bibl">
+         <attDef ident="xml:id"/>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="citedRange"/>
+            <element ident="ptr"/>
+            <element ident="author"/>
+            <element ident="title"/>
+            <element ident="publisher"/>
+            <element ident="editor"/>
+            <element ident="date"/>
+            <element ident="pubPlace"/>
+            <element ident="series"/>
+            <element ident="biblScope"/>
+         </child>
+      </childElements>
+   </bibl>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="citedRange"
+               minOccur=""
+               maxOccur=""
+               path="/*:place/*:bibl/*:citedRange"
+               currentLevel="3"
+               popup="3">
+      <availableAtts elementName="citedRange"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </citedRange>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="ptr"
+        minOccur=""
+        maxOccur=""
+        path="/*:place/*:bibl/*:ptr"
+        currentLevel="3"
+        popup="3">
+      <availableAtts elementName="ptr"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </ptr>
+   <author ident="author"
+           elementName="author"
+           elementLabel="author"
+           minOccur=""
+           maxOccur=""
+           path="/*:place/*:bibl/*:author"
+           currentLevel="3"
+           popup="3">
+      <availableAtts elementName="author"/>
+      <childElements>
+         <child>
+            <element ident="forename"/>
+            <element ident="surname"/>
+         </child>
+      </childElements>
+   </author>
+   <forename ident="forename"
+             elementName="forename"
+             elementLabel="forename"
+             minOccur=""
+             maxOccur=""
+             path="/*:place/*:bibl/*:author/*:forename"
+             currentLevel="4"
+             popup="4">
+      <availableAtts elementName="forename"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </forename>
+   <surname ident="surname"
+            elementName="surname"
+            elementLabel="surname"
+            minOccur=""
+            maxOccur=""
+            path="/*:place/*:bibl/*:author/*:surname"
+            currentLevel="4"
+            popup="4">
+      <availableAtts elementName="surname"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </surname>
+   <title ident="title"
+          elementName="title"
+          elementLabel="title"
+          minOccur=""
+          maxOccur=""
+          path="/*:place/*:bibl/*:title"
+          currentLevel="3"
+          popup="3">
+      <availableAtts elementName="title">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="xml:lang"
+                 mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </title>
+   <publisher ident="publisher"
+              elementName="publisher"
+              elementLabel="publisher"
+              minOccur=""
+              maxOccur=""
+              path="/*:place/*:bibl/*:publisher"
+              currentLevel="3"
+              popup="3">
+      <availableAtts elementName="publisher"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </publisher>
+   <editor ident="editor"
+           elementName="editor"
+           elementLabel="editor"
+           minOccur=""
+           maxOccur=""
+           path="/*:place/*:bibl/*:editor"
+           currentLevel="3"
+           popup="3">
+      <availableAtts elementName="editor"/>
+      <childElements>
+         <child>
+            <element ident="forename"/>
+            <element ident="surname"/>
+         </child>
+      </childElements>
+   </editor>
+   <forename ident="forename"
+             elementName="forename"
+             elementLabel="forename"
+             minOccur=""
+             maxOccur=""
+             path="/*:place/*:bibl/*:editor/*:forename"
+             currentLevel="4"
+             popup="4">
+      <availableAtts elementName="forename"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </forename>
+   <surname ident="surname"
+            elementName="surname"
+            elementLabel="surname"
+            minOccur=""
+            maxOccur=""
+            path="/*:place/*:bibl/*:editor/*:surname"
+            currentLevel="4"
+            popup="4">
+      <availableAtts elementName="surname"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </surname>
+   <date ident="date"
+         elementName="date"
+         elementLabel="date"
+         minOccur=""
+         maxOccur=""
+         path="/*:place/*:bibl/*:date"
+         currentLevel="3"
+         popup="3">
+      <availableAtts elementName="date">
+         <attDef ident="notAfter"/>
+         <attDef ident="notBefore"/>
+         <attDef ident="source"/>
+         <attDef ident="when"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </date>
+   <pubPlace ident="pubPlace"
+             elementName="pubPlace"
+             elementLabel="pubPlace"
+             minOccur=""
+             maxOccur=""
+             path="/*:place/*:bibl/*:pubPlace"
+             currentLevel="3"
+             popup="3">
+      <availableAtts elementName="pubPlace"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </pubPlace>
+   <series ident="series"
+           elementName="series"
+           elementLabel="series"
+           minOccur=""
+           maxOccur=""
+           path="/*:place/*:bibl/*:series"
+           currentLevel="3"
+           popup="3">
+      <availableAtts elementName="series"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </series>
+   <biblScope ident="biblScope"
+              elementName="biblScope"
+              elementLabel="biblScope"
+              minOccur=""
+              maxOccur=""
+              path="/*:place/*:bibl/*:biblScope"
+              currentLevel="3"
+              popup="3">
+      <availableAtts elementName="biblScope"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </biblScope>
+</TEI>

@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -76,7 +79,8 @@ End license statement: do not remove --><!--requirements:
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" except="list abbr add addrLine address analytic biblStruct binaryObject cb choice cit corr del distinct divGen ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode rb reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term time unclear unit note p q ref textLang"/>
+                    <moduleRef key="core"
+                        except="list abbr add addrLine address analytic biblStruct binaryObject cb choice cit corr del distinct divGen ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode rb reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term time unclear unit note p q ref textLang"/>
 
                     <moduleRef key="tei"/>
 
@@ -211,7 +215,13 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attRef name="type" class="att.entryLike"/>
-                            <attRef name="xml:lang" class="att.global"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="faith" mode="delete"/>
@@ -225,22 +235,6 @@ End license statement: do not remove --><!--requirements:
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="subtype" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="isni"/>
-                                    <valItem mode="add" ident="viaf"/>
-                                    <valItem mode="add" ident="wiki"/>
-                                    <valItem mode="add" ident="gnd"/>
-                                    <valItem mode="add" ident="merhav"/>
-                                    <valItem mode="add" ident="rambi"/>
-                                    <valItem mode="add" ident="imhm"/>
-                                    <valItem mode="add" ident="ktiv"/>
-                                </valList>
-                            </attDef>
-                            <attRef name="resp" class="att.global.responsibility"/>
-                            <attDef ident="subtype" mode="delete"/>
-                        </attList>
                     </elementSpec>
                     <elementSpec ident="listRelation" mode="delete"/>
                     <elementSpec ident="occupation" mode="delete"/>
@@ -260,7 +254,13 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="nymRef" mode="delete"/>
                             <attRef name="ref" class="att.canonical"/>
                             <attRef name="xml:id" class="att.global"/>
-                            <attRef name="xml:lang" class="att.global"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
                             <attRef name="source" class="att.global.source"/>
                         </attList>
                     </elementSpec>
@@ -417,7 +417,13 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attDef ident="level" mode="delete"/>
-                            <attRef name="xml:lang" class="att.global"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar"/>
+                                    <valItem mode="add" ident="en"/>
+                                    <valItem mode="add" ident="he"/>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="publisher" mode="change">

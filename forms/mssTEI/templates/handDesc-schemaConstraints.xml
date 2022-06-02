@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns">
-   <handDesc ident="handDesc" elementName="handDesc" elementLabel="description of hands" minOccur="" maxOccur="" path="/*:handDesc" currentLevel="1" popup="1">
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:local="http://syriaca.org/ns"
+     xmlns:srophe="https://srophe.app">
+   <handDesc ident="handDesc"
+             elementName="handDesc"
+             elementLabel="description of hands"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc"
+             currentLevel="1"
+             popup="1">
       <desc>Describe the hands found in this manuscript, or part of the manuscript. Indicate the number of hands in the attribute.</desc>
       <availableAtts elementName="handDesc">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="hands">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="hands">
             <gloss xml:lang="en" versionDate="2007-06-12">hands</gloss>
             <gloss versionDate="2007-06-12" xml:lang="fr">mains</gloss>
             <desc versionDate="2005-01-14" xml:lang="en">specifies the number of distinct hands identified within the manuscript</desc>
@@ -26,7 +44,14 @@
          </child>
       </childElements>
    </handDesc>
-   <summary ident="summary" elementName="summary" elementLabel="summary" minOccur="" maxOccur="" path="/*:handDesc/*:summary" currentLevel="2" popup="2">
+   <summary ident="summary"
+            elementName="summary"
+            elementLabel="summary"
+            minOccur=""
+            maxOccur=""
+            path="/*:handDesc/*:summary"
+            currentLevel="2"
+            popup="2">
       <desc>Outline your observations of the main features of the script.</desc>
       <availableAtts elementName="summary"/>
       <childElements>
@@ -34,10 +59,19 @@
          <child/>
       </childElements>
    </summary>
-   <handNote ident="handNote" elementName="handNote" elementLabel="note on hand" minOccur="" maxOccur="" path="/*:handDesc/*:handNote" currentLevel="2" popup="2">
+   <handNote ident="handNote"
+             elementName="handNote"
+             elementLabel="note on hand"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote"
+             currentLevel="2"
+             popup="2">
       <desc>Describe the script used by the hand. Use the attribute values to describe the "script" (Oriental, Sefardic …), "mode" (square, non-square …), "quality" (careless, trained …), "medium" (brown, black …) and "scope". If there is more than one hand used in the manuscript or manuscript part, create multiple handNote elements and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="handNote">
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="medium">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="medium">
                                 <datatype>
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
@@ -50,7 +84,9 @@
                                     <valItem ident="unidentified"/>
                                 </valList>
                             </attDef>
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="mode">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="mode">
                                 <datatype>
                                     <dataRef name="string"/>
                                 </datatype>
@@ -62,7 +98,9 @@
                                     <valItem ident="unidentified"/>
                                 </valList>
                             </attDef>
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="quality">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="quality">
                                 <datatype>
                                     <dataRef name="string"/>
                                 </datatype>
@@ -76,7 +114,10 @@
                                 </valList>
                             </attDef>
          <attDef ident="scope"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="scribe">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="scribe">
             <desc versionDate="2010-09-28" xml:lang="en">gives a name or other identifier for the scribe
 believed to be responsible for this hand.</desc>
             <desc versionDate="2007-12-20" xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
@@ -92,7 +133,10 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
             </datatype>
       
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="scribeRef">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="scribeRef">
             <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
       elsewhere in the description.</desc>
             <desc versionDate="2019-09-16" xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
@@ -100,7 +144,9 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="script">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="script">
                                 <datatype>
                                     <dataRef key="teidata.name"/>
                                 </datatype>
@@ -117,7 +163,10 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
                                     <valItem ident="naskh"/>
                                 </valList>
                             </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="scriptRef">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="scriptRef">
             <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the script or writing style used by
 this hand, typically supplied by a <gi>scriptNote</gi> element
       elsewhere in the description.</desc>
@@ -126,7 +175,12 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xml:id" mode="change" usage="req"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="xml:id"
+                 mode="change"
+                 usage="req"/>
       </availableAtts>
       <childElements>
          <child>
@@ -139,7 +193,14 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          </child>
       </childElements>
    </handNote>
-   <p ident="p" elementName="p" elementLabel="paragraph" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:p" currentLevel="3" popup="3">
+   <p ident="p"
+      elementName="p"
+      elementLabel="paragraph"
+      minOccur=""
+      maxOccur=""
+      path="/*:handDesc/*:handNote/*:p"
+      currentLevel="3"
+      popup="3">
       <desc>Enter prose text to connect the fields dedicated to specific elements and form a coherent descriptive text.</desc>
       <availableAtts elementName="p"/>
       <childElements>
@@ -147,13 +208,37 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          <child/>
       </childElements>
    </p>
-   <persName ident="persName" elementName="persName" elementLabel="personal name" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:persName" currentLevel="3" popup="3">
-      <lookup xmlns="http://www.w3.org/1999/xhtml" api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="form.xq?form=forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml" formName="personTEI" elementName="persName" label="New Persons" formURL="form.xq?form=forms/personTEI/index.xhtml"/>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="personal name"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:persName"
+             currentLevel="3"
+             popup="3">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/mssTEI/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New Persons"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
       <desc>Look up the person records in the database to identify the person. Try different spellings in different languages! If no suitable record exists, create a new one. Use the "role" attribute to specify the person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically when you link a record to this element.)</desc>
       <availableAtts elementName="persName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" mode="change" usage="rec"/>
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="role" usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="role"
+                 usage="opt">
                                 <datatype>
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
@@ -163,7 +248,12 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                                     <valItem ident="masorator"/>
                                 </valList>
                             </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="type" mode="replace" usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="replace"
+                 usage="opt">
                             <valList type="closed">
                                 <valItem ident="main">
                                     <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
@@ -223,13 +313,38 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          <child/>
       </childElements>
    </persName>
-   <placeName ident="placeName" elementName="placeName" elementLabel="place name" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:placeName" currentLevel="3" popup="3">
-      <lookup xmlns="http://www.w3.org/1999/xhtml" api="http://44.192.15.2/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="form.xq?form=forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml" formName="placeTEI" elementName="placeName" label="New Places" formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="place name"
+              minOccur=""
+              maxOccur=""
+              path="/*:handDesc/*:handNote/*:placeName"
+              currentLevel="3"
+              popup="3">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="http://44.192.15.2/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
+              formURL="form.xq?form=forms/mssTEI/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up places"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New Places"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
       <desc>Look up the place records in the database to specify a settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="ref" mode="change" usage="rec"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="type" mode="change">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
                             <valList>
                                 <valItem ident="normalized"/>
                                 <valItem ident="library"/>
@@ -243,10 +358,20 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          <child/>
       </childElements>
    </placeName>
-   <metamark ident="metamark" elementName="metamark" elementLabel="metamark" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:metamark" currentLevel="3" popup="3">
+   <metamark ident="metamark"
+             elementName="metamark"
+             elementLabel="metamark"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:metamark"
+             currentLevel="3"
+             popup="3">
       <desc>Describes the use of complementary characters like vocalization or recitation in prose and choose the appropriate "function" from the attribute list.</desc>
       <availableAtts elementName="metamark">
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="function" mode="change">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="function"
+                 mode="change">
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="vocalization"/>
                                     <valItem mode="add" ident="recitation"/>
@@ -258,10 +383,22 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          <child/>
       </childElements>
    </metamark>
-   <origDate ident="origDate" elementName="origDate" elementLabel="origin date" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:origDate" currentLevel="3" popup="3">
+   <origDate ident="origDate"
+             elementName="origDate"
+             elementLabel="origin date"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:origDate"
+             currentLevel="3"
+             popup="3">
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore" attributes together.</desc>
       <availableAtts elementName="origDate">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="evidence" mode="replace" usage="opt">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="evidence"
+                 mode="replace"
+                 usage="opt">
                             
                             <datatype maxOccurs="6">
                                 <dataRef key="teidata.word"/>
@@ -301,10 +438,20 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
          <child/>
       </childElements>
    </origDate>
-   <locus ident="locus" elementName="locus" elementLabel="locus" minOccur="" maxOccur="" path="/*:handDesc/*:handNote/*:locus" currentLevel="3" popup="3">
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="locus"
+          minOccur=""
+          maxOccur=""
+          path="/*:handDesc/*:handNote/*:locus"
+          currentLevel="3"
+          popup="3">
       <desc>The location of a text or another feature within the manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="from">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="from">
             <gloss xml:lang="en" versionDate="2007-06-12">from</gloss>
             <gloss versionDate="2007-06-12" xml:lang="fr">depuis</gloss>
             <desc versionDate="2013-12-21" xml:lang="en">specifies the
@@ -323,7 +470,10 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <dataRef key="teidata.word"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="to">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="to">
             <gloss xml:lang="en" versionDate="2007-06-12">to</gloss>
             <gloss versionDate="2007-06-12" xml:lang="fr">jusqu'à</gloss>
             <desc versionDate="2013-12-21" xml:lang="en">specifies the

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" omit-xml-declaration="yes"/>
     <xsl:template match="/">
         <div style="margin-right:1.5em">
@@ -14,7 +14,7 @@
         </div>
     </xsl:template>
     <xsl:template match="@*" xml:space="preserve">
-						<span style="color:red"> <xsl:value-of select="name()"/></span>
+						<span style="color:red">&#160;<xsl:value-of select="name()"/></span>
 						<span style="color:black">=</span>
 						<span style="color:blue">"<b><xsl:value-of select="."/></b>"</span>
 					</xsl:template>

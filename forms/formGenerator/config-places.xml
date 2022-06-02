@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Branding name for website, used for building HTML nav -->
+    <formBrandName>manuForma</formBrandName>
+    <!-- Internal/eXist location of application, used for building HTML nav -->
+    <formURL>/exist/apps/manuForma/</formURL>
+    <!-- Title/h1 for form -->
+    <formTitle>Edit Place TEI records</formTitle>
+    <!-- Form name, used to create form element and links to forms and subforms -->
+    <formName>placeTEI</formName>
+    <!-- Form author -->
+    <formAuthor>majlis-erc</formAuthor>
+    <!-- Form description -->
+    <formDesc>Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World.</formDesc>
+    <!-- Language to output lables, hints etc, if empty defaults to English -->
+    <formLang>en</formLang>
+    <!-- Saving and managing created TEI files -->
+    <recordManagement>
+        <saveOptions>
+            <option name="github" enable="true">
+                <parameter name="githubRepoName">majlis-data</parameter>
+                <parameter name="githubPath">data/places/tei/</parameter>
+                <parameter name="githubOwner">majlis-erc</parameter>
+                <parameter name="githubBranch">main</parameter>
+            </option>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/places/tei</parameter>
+            </option>
+            <option name="download" enable="true"/>
+        </saveOptions>
+        <retrieveOptions>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/places/tei</parameter>
+            </option>
+        </retrieveOptions>
+    </recordManagement>
+    <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
+    <blankTemplates>
+        <template name="Place Template" src="/forms/templates/place-fulltemplate.xml"></template>
+    </blankTemplates>
+    
+    <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
+    <lookups>
+        <!--        http://44.192.15.2/ -->
+        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"></lookup>
+        <popup formName="personTEI" elementName="persName" label="New Persons"></popup>
+    </lookups>
+    <!--
+        For better performance the TEI records are into sections. Each section will output a form. 
+        This will allow better load and response time for forms, and a step-by-step method of editing records. 
+        In process records can be stored in the eXist-db database or downloaded to the file system, where they can be loaded 
+        into the form again as needed. 
+        
+        List forms in order of editing preference.
+    -->
+    <subforms>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
+            <formDesc>Record title information</formDesc>
+            <localSchema src="../schemas/titleStmt.xml"></localSchema>
+            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
+            <xmlTemplate src="../templates/place-fulltemplate.xml"></xmlTemplate>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="listPlace" formLabel="Place" repeat="no">
+            <localSchema src="../schemas/place-schema.xml"></localSchema>
+            <globalSchema src="../schemas/place-schema.xml"></globalSchema>
+            <xmlTemplate src="../templates/place-fulltemplate.xml"></xmlTemplate>
+        </subform>        
+    </subforms>
+</config>
