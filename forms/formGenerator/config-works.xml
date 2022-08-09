@@ -36,18 +36,18 @@
     </recordManagement>
     <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
     <blankTemplates>
-        <template name="Work Template" src="/forms/templates/work-fulltemplate.xml"></template>
+        <template name="Work Template" src="/forms/templates/work-fulltemplate.xml"/>
     </blankTemplates>
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
         <!--        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"></lookup>-->
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"></lookup>
+        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
         <!--        <lookup api="http://localhost:8080/exist/apps/majlis/api/search/placeName?q=" elementName="placeName" formName="placeName" lookupLabel="Look up places"></lookup>-->
-        <popup formName="personTEI" elementName="persName" label="New Persons"></popup>
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"></lookup>
+        <popup formName="personTEI" elementName="persName" label="New Persons"/>
+        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
         <!--        <lookup api="http://localhost:8080/exist/apps/majlis/api/search/placeName?q=" elementName="placeName" formName="placeName" lookupLabel="Look up places"></lookup>-->
-        <popup formName="placeTEI" elementName="placeName" label="New Places"></popup>
+        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
     </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. 
@@ -60,14 +60,14 @@
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
             <formDesc>Record title information</formDesc>
-            <localSchema src="../schemas/titleStmt.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"></xmlTemplate>
+            <localSchema src="../schemas/titleStmt.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibl" repeat="no">
-            <localSchema src="../schemas/work-schema.xml"></localSchema>
-            <globalSchema src="../schemas/work-schema.xml"></globalSchema>
-            <xmlTemplate src="../templates/work-fulltemplate.xml"></xmlTemplate>
+            <localSchema src="../schemas/work-schema.xml"/>
+            <globalSchema src="../schemas/work-schema.xml"/>
+            <xmlTemplate src="../templates/work-fulltemplate.xml"/>
         </subform>        
     </subforms>
 </config>

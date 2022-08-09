@@ -36,14 +36,14 @@
     </recordManagement>
     <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
     <blankTemplates>
-        <template name="Place Template" src="/forms/templates/place-fulltemplate.xml"></template>
+        <template name="Place Template" src="/forms/templates/place-fulltemplate.xml"/>
     </blankTemplates>
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
         <!--        http://44.192.15.2/ -->
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"></lookup>
-        <popup formName="personTEI" elementName="persName" label="New Persons"></popup>
+        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
+        <popup formName="personTEI" elementName="persName" label="New Persons"/>
     </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. 
@@ -56,14 +56,14 @@
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
             <formDesc>Record title information</formDesc>
-            <localSchema src="../schemas/titleStmt.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"></xmlTemplate>
+            <localSchema src="../schemas/titleStmt.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="listPlace" formLabel="Place" repeat="no">
-            <localSchema src="../schemas/place-schema.xml"></localSchema>
-            <globalSchema src="../schemas/place-schema.xml"></globalSchema>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"></xmlTemplate>
+            <localSchema src="../schemas/place-schema.xml"/>
+            <globalSchema src="../schemas/place-schema.xml"/>
+            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
         </subform>        
     </subforms>
 </config>

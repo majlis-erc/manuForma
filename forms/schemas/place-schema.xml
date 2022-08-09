@@ -20,15 +20,12 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove -->
-<!--requirements: 
+End license statement: do not remove --><!--requirements: 
     
     FIRHIST compatibility
     
 
--->
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
-    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
+--><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -79,8 +76,7 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core"
-                        except="list abbr add addrLine address analytic biblStruct binaryObject cb choice cit corr del distinct divGen ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode rb reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term time unclear unit note p q ref textLang"/>
+                    <moduleRef key="core" except="list abbr add addrLine address analytic biblStruct binaryObject cb choice cit corr del distinct divGen ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode rb reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term time unclear unit note p q ref textLang"/>
 
                     <moduleRef key="tei"/>
 
@@ -181,6 +177,8 @@ End license statement: do not remove -->
                     </elementSpec>
                     <elementSpec ident="birth" mode="delete"/>
                     <elementSpec ident="date" mode="change">
+                        <desc xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
+                            case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -220,6 +218,9 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
                                     <valItem mode="add" ident="he"/>
+                                    <valItem mode="add" ident="he-Latn"/>
+                                    <valItem mode="add" ident="ar-Latn"/>
+                                    <valItem mode="add" ident="ar-Hebr"/>
                                 </valList>
                             </attDef>
                         </attList>
@@ -259,6 +260,9 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
                                     <valItem mode="add" ident="he"/>
+                                    <valItem mode="add" ident="he-Latn"/>
+                                    <valItem mode="add" ident="ar-Latn"/>
+                                    <valItem mode="add" ident="ar-Hebr"/>
                                 </valList>
                             </attDef>
                             <attRef name="source" class="att.global.source"/>
@@ -339,6 +343,7 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="geo" mode="change">
+                        <desc xml:lang="en">Provide the geographical position of the place in the following format: "latitude longitude" (without dividing comma).</desc>
                         <classes mode="change">
                             <memberOf key="att.declaring" mode="delete"/>
                         </classes>
@@ -359,12 +364,14 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="type" mode="delete"/>
+                            <attDef ident="source" mode="change" usage="opt"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="region" mode="change">
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.naming" mode="delete"/>
+                            <attDef ident="source" mode="change" usage="opt"/>
                         </classes>
                         <content>
                             <textNode/>
@@ -422,6 +429,9 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
                                     <valItem mode="add" ident="he"/>
+                                    <valItem mode="add" ident="he-Latn"/>
+                                    <valItem mode="add" ident="ar-Latn"/>
+                                    <valItem mode="add" ident="ar-Hebr"/>
                                 </valList>
                             </attDef>
                         </attList>
@@ -528,6 +538,7 @@ End license statement: do not remove -->
                         </alternate>
                     </elementSpec>
                     <elementSpec ident="quote" mode="change">
+                        <desc xml:lang="en">A text section mentioning the place.</desc>
                         <classes mode="change">
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>

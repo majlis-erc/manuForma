@@ -28,6 +28,10 @@ declare function local:transform($nodes as node()*) as item()* {
   let $URI := if(starts-with($generateID, $config:base-uri)) then $generateID 
               else concat($config:base-uri,'/',$type,'/',$generateID)
    :) 
+   (:
+  let $userInfo := doc(concat($config:nav-base,'/userInfo'))
+  let $user := $userInfo//*:user
+  :)
   let $URI := $generateID
   let $id := tokenize($URI,'/')[last()] 
   return 
@@ -39,10 +43,21 @@ declare function local:transform($nodes as node()*) as item()* {
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
                 {($node/@*[. != ''], local:transform($node/node()))}
             </TEI>
+        (:            
+        case element(tei:revisionDesc) return 
+            <revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
+                {($node/@*[. != ''], local:transform($node/node()))}
+                <change when="{current-dateTime()}" who="#{string($user)}" test="{concat($config:nav-base,'/userInfo')}">XForms Editing by {string($user)}</change>
+            </revisionDesc>   
+         :)   
         case element() return local:passthru($node)
         default return local:transform($node/node())
 };
 
+(: 
+add change element? revisionDesc/change 
+ex: <change n="1.0" when="2018-03-21-04:00" who="#TGM">CREATED: record</change>
+:)
 (: Recurse through child nodes :)
 declare function local:passthru($node as node()*) as item()* { 
     element {local-name($node)} {($node/@*[. != ''], local:transform($node/node()))}

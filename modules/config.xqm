@@ -98,3 +98,19 @@ declare function config:app-info($node as node(), $model as map(*)) {
             </tr>
         </table>
 };
+
+(: manuForma additions :)
+(: Establish main navigation for app, used in templates for absolute links. :)
+declare variable $config:nav-base := 
+    let $config := doc(concat($config:app-root, "/repo.xml"))
+    return 
+    if($config//repo:nav-base/text() != '') then $config//repo:nav-base/text()
+    else if($config//repo:nav-base/text() = '/') then ''
+    else '';
+    
+declare variable $config:login-domain := 
+    let $config := doc(concat($config:app-root, "/repo.xml"))
+    return 
+        if($config//repo:login-domain/text() != '') then $config//repo:login-domain/text()
+        else if($config//repo:login-domain/text() = '/') then 'org.exist.login'
+        else '';

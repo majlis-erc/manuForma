@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+    <appTitle>manuForma</appTitle>
     <formTitle>Edit Person TEI records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
     <formName>personTEI</formName>
@@ -27,8 +28,12 @@
         </retrieveOptions>
     </recordManagement>
     <blankTemplates>
-        <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"></template>
+        <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"/>
     </blankTemplates>
+    <lookups>
+        <lookup api="http://localhost:8080//exist/apps/majlis/api/search/bibl?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+<!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
+    </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
         and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
@@ -40,21 +45,21 @@
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
             <formDesc>Record title information</formDesc>
-            <localSchema src="../schemas/titleStmt.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/full-mss-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/titleStmt.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Persons">
             <formDesc>Person description.</formDesc>
-            <localSchema src="../schemas/persons.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/persons-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/persons.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:listRelation" formName="listRelation" formLabel="Relation">
             <formDesc>Person description.</formDesc>
-            <localSchema src="../schemas/persons.xml"></localSchema>
-            <globalSchema src="../schemas/mss-compiled.odd"></globalSchema>
-            <xmlTemplate src="../templates/persons-template.xml"></xmlTemplate>
+            <localSchema src="../schemas/persons.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
         </subform>
     </subforms>
 </config>

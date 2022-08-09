@@ -1,19 +1,20 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:local="http://syriaca.org/ns" xmlns:srophe="https://srophe.app">
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns">
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information Manuscript contents description. Manuscript contents description." />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      <meta name="author" content="majlis-erc"/>
+      <meta name="description" content="Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information Manuscript contents description. Manuscript contents description."/>
       <title>Edit MS TEI records</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
-      <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
-      <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
-      <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-mss">
-         <xf:instance id="i-schemaConstraints" src="forms/mssTEI/templates/msIdentifier-schemaConstraints.xml"></xf:instance>
-         <xf:instance id="i-msIdentifier-schemaConstraints" src="forms/mssTEI/templates/msIdentifier-schemaConstraints.xml"></xf:instance>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
+      <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+      <link rel="stylesheet" type="text/css" href="resources/css/xforms.css"/><script type="text/javascript" src="resources/js/jquery.min.js"/><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"/><xf:model id="m-mss">
+         <xf:instance id="i-schemaConstraints" src="forms/mssTEI/templates/msIdentifier-schemaConstraints.xml"/>
+         <xf:instance id="i-msIdentifier-schemaConstraints" src="forms/mssTEI/templates/msIdentifier-schemaConstraints.xml"/>
          <xf:instance id="i-msIdentifier-subforms">
-            <data xmlns=""></data>
+            <data xmlns=""/>
          </xf:instance>
          <xf:instance id="i-msIdentifier-repeatIndex">
             <data xmlns="">
@@ -25,91 +26,91 @@
    <body>
       <h2 class="h3 mainElement">
          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
-            <xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]"></xf:delete>
+            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+            <xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]"/>
          </xf:trigger>
          <xf:trigger class="btn controls add" appearance="minimal">
-            <xf:label><i class="bi bi-plus-circle"></i></xf:label>
-            <xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-elementTemplate')//*[local-name() = 'msIdentifier']" position="after"></xf:insert>
+            <xf:label><i class="bi bi-plus-circle"/></xf:label>
+            <xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-elementTemplate')//*[local-name() = 'msIdentifier']" position="after"/>
          </xf:trigger>Identifier
       </h2>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]" id="msIdentifier-root">
          <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
             <div class="btn-group" role="group">
                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                  <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
-                  <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                  <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+                  <xf:delete ev:event="DOMActivate" ref="."/>
                </xf:trigger><span class="elementLabel">
-                  <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><i class="bi bi-question-circle triggerElementTooltip"></i><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                  <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/><i class="bi bi-question-circle triggerElementTooltip"/><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/></span><div class="input-group float-end">
                   <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
-                     <xf:label></xf:label>
+                     <xf:label/>
                      <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                        <xf:label ref="@ident"></xf:label>
-                        <xf:value ref="@ident"></xf:value>
+                        <xf:label ref="@ident"/>
+                        <xf:value ref="@ident"/>
                      </xf:itemset>
                      <xf:action ev:event="xforms-value-changed">
-                        <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                        <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                      </xf:action>
                   </xf:select1>
                   <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                     <xf:label><i class="bi bi-plus-circle"></i> Attribute
+                     <xf:label><i class="bi bi-plus-circle"/> Attribute
                      </xf:label>
-                     <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                     <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                     <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                     <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                     <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                     <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                   </xf:trigger>
                   <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                     <xf:label></xf:label>
+                     <xf:label/>
                      <xf:item>
                         <xf:label> - select - </xf:label>
-                        <xf:value></xf:value>
+                        <xf:value/>
                      </xf:item>
                      <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
-                        <xf:label ref="@ident"></xf:label>
-                        <xf:value ref="@ident"></xf:value>
+                        <xf:label ref="@ident"/>
+                        <xf:value ref="@ident"/>
                      </xf:itemset>
                      <xf:action ev:event="xforms-value-changed">
-                        <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                        <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                      </xf:action>
                   </xf:select1>
                   <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                     <xf:label><i class="bi bi-plus-circle"></i> Child Element
+                     <xf:label><i class="bi bi-plus-circle"/> Child Element
                      </xf:label>
-                     <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
-                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                     <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"/>
+                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                   </xf:trigger>
                   <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                     <xf:label><i class="bi bi-search"></i> Lookup  
+                     <xf:label><i class="bi bi-search"/> Lookup  
                      </xf:label>
                      <xf:action ev:event="DOMActivate">
-                        <xf:toggle case="LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                        <xf:toggle case="LookupUnHide" ev:event="DOMActivate"/>
                         <xf:load show="embed" targetid="subformLookup">
-                           <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                           <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                         </xf:load>
                      </xf:action>
                   </xf:trigger>
                   <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                     <xf:label><i class="bi bi-search"></i> New  
-                        <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
+                     <xf:label><i class="bi bi-search"/> New  
+                        <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"/> 
                      </xf:label>
                      <xf:action ev:event="DOMActivate">
                         <xf:load show="new">
-                           <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                           <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"/>
                         </xf:load>
                      </xf:action>
                   </xf:trigger>
                   <xf:switch class="lookupSwitch" style="width:.5em;">
-                     <xf:case id="LookupHide" style="display:none;"></xf:case>
+                     <xf:case id="LookupHide" style="display:none;"/>
                      <xf:case id="LookupUnHide">
                         <div class="lookupDisplay">
-                           <xf:group id="subformLookup"></xf:group>
+                           <xf:group id="subformLookup"/>
                            <div class="text-right">
                               <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
-                                 <xf:label><i class="bi bi-x-circle"></i> Close
+                                 <xf:label><i class="bi bi-x-circle"/> Close
                                  </xf:label>
-                                 <xf:toggle case="LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                 <xf:unload targetid="subformLookup"></xf:unload>
+                                 <xf:toggle case="LookupHide" ev:event="DOMActivate"/>
+                                 <xf:unload targetid="subformLookup"/>
                               </xf:trigger>
                            </div>
                         </div>
@@ -120,25 +121,25 @@
          </div>
          <div class="element">
             <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-               <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"></xf:input>
-               <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea>  
+               <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"/>
+               <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>  
                  
                
                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                      <div class="input-group">
-                        <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input>
+                        <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
                         <xf:select1 ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
                            <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
-                              <xf:label ref="@ident"></xf:label>
-                              <xf:value ref="@ident"></xf:value>
+                              <xf:label ref="@ident"/>
+                              <xf:value ref="@ident"/>
                            </xf:itemset>
                         </xf:select1>
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i> 
-                              <xf:output value="local-name(current())"></xf:output>
+                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> 
+                              <xf:output value="local-name(current())"/>
                            </xf:label>
-                           <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                           <xf:delete ev:event="DOMActivate" ref="."/>
                         </xf:trigger>
                      </div>
                   </div>
@@ -151,95 +152,95 @@
                   <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                      <div class="btn-group" role="group">
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
-                           <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+                           <xf:delete ev:event="DOMActivate" ref="."/>
                         </xf:trigger>
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
-                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label>
+                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"/></xf:label>
                            <xf:action ev:event="DOMActivate">
-                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel1')"></setvalue>
-                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel1') - 1" position="before"></insert>
-                              <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
+                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel1')"/>
+                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel1') - 1" position="before"/>
+                              <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"/>
                            </xf:action>
                         </xf:trigger>
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline">
-                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label>
+                           <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"/></xf:label>
                            <xf:action ev:event="DOMActivate">
-                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel1')"></setvalue>
-                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel1') + 1" position="after"></insert>
-                              <delete nodeset="."></delete>
+                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel1')"/>
+                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel1') + 1" position="after"/>
+                              <delete nodeset="."/>
                            </xf:action>
                         </xf:trigger><span class="elementLabel">
-                           <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><i class="bi bi-question-circle triggerElementTooltip"></i><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                           <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/><i class="bi bi-question-circle triggerElementTooltip"/><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/></span><div class="input-group float-end">
                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
-                              <xf:label></xf:label>
+                              <xf:label/>
                               <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                                 <xf:label ref="@ident"></xf:label>
-                                 <xf:value ref="@ident"></xf:value>
+                                 <xf:label ref="@ident"/>
+                                 <xf:value ref="@ident"/>
                               </xf:itemset>
                               <xf:action ev:event="xforms-value-changed">
-                                 <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                 <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                               </xf:action>
                            </xf:select1>
                            <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                              <xf:label><i class="bi bi-plus-circle"></i> Attribute
+                              <xf:label><i class="bi bi-plus-circle"/> Attribute
                               </xf:label>
-                              <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                              <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                              <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                              <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                              <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                              <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                            </xf:trigger>
                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                              <xf:label></xf:label>
+                              <xf:label/>
                               <xf:item>
                                  <xf:label> - select - </xf:label>
-                                 <xf:value></xf:value>
+                                 <xf:value/>
                               </xf:item>
                               <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
-                                 <xf:label ref="@ident"></xf:label>
-                                 <xf:value ref="@ident"></xf:value>
+                                 <xf:label ref="@ident"/>
+                                 <xf:value ref="@ident"/>
                               </xf:itemset>
                               <xf:action ev:event="xforms-value-changed">
-                                 <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                 <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                               </xf:action>
                            </xf:select1>
                            <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                              <xf:label><i class="bi bi-plus-circle"></i> Child Element
+                              <xf:label><i class="bi bi-plus-circle"/> Child Element
                               </xf:label>
-                              <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
-                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                              <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"/>
+                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                            </xf:trigger>
                            <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                              <xf:label><i class="bi bi-search"></i> Lookup  
+                              <xf:label><i class="bi bi-search"/> Lookup  
                               </xf:label>
                               <xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="msIdentifierRepeatLevel1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                 <xf:toggle case="msIdentifierRepeatLevel1LookupUnHide" ev:event="DOMActivate"/>
                                  <xf:load show="embed" targetid="msIdentifierRepeatLevel1subformLookup">
-                                    <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                    <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                                  </xf:load>
                               </xf:action>
                            </xf:trigger>
                            <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                              <xf:label><i class="bi bi-search"></i> New  
-                                 <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
+                              <xf:label><i class="bi bi-search"/> New  
+                                 <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"/> 
                               </xf:label>
                               <xf:action ev:event="DOMActivate">
                                  <xf:load show="new">
-                                    <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                    <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"/>
                                  </xf:load>
                               </xf:action>
                            </xf:trigger>
                            <xf:switch class="lookupSwitch" style="width:.5em;">
-                              <xf:case id="msIdentifierRepeatLevel1LookupHide" style="display:none;"></xf:case>
+                              <xf:case id="msIdentifierRepeatLevel1LookupHide" style="display:none;"/>
                               <xf:case id="msIdentifierRepeatLevel1LookupUnHide">
                                  <div class="lookupDisplay">
-                                    <xf:group id="msIdentifierRepeatLevel1subformLookup"></xf:group>
+                                    <xf:group id="msIdentifierRepeatLevel1subformLookup"/>
                                     <div class="text-right">
                                        <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
-                                          <xf:label><i class="bi bi-x-circle"></i> Close
+                                          <xf:label><i class="bi bi-x-circle"/> Close
                                           </xf:label>
-                                          <xf:toggle case="msIdentifierRepeatLevel1LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                          <xf:unload targetid="msIdentifierRepeatLevel1subformLookup"></xf:unload>
+                                          <xf:toggle case="msIdentifierRepeatLevel1LookupHide" ev:event="DOMActivate"/>
+                                          <xf:unload targetid="msIdentifierRepeatLevel1subformLookup"/>
                                        </xf:trigger>
                                     </div>
                                  </div>
@@ -250,25 +251,25 @@
                   </div>
                   <div class="element">
                      <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                        <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"></xf:input>
-                        <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea>  
+                        <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"/>
+                        <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>  
                           
                         
                         <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
                            <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                               <div class="input-group">
-                                 <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input>
+                                 <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
                                  <xf:select1 ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
                                     <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
-                                       <xf:label ref="@ident"></xf:label>
-                                       <xf:value ref="@ident"></xf:value>
+                                       <xf:label ref="@ident"/>
+                                       <xf:value ref="@ident"/>
                                     </xf:itemset>
                                  </xf:select1>
                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i> 
-                                       <xf:output value="local-name(current())"></xf:output>
+                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> 
+                                       <xf:output value="local-name(current())"/>
                                     </xf:label>
-                                    <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                    <xf:delete ev:event="DOMActivate" ref="."/>
                                  </xf:trigger>
                               </div>
                            </div>
@@ -281,95 +282,95 @@
                            <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                               <div class="btn-group" role="group">
                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
-                                    <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+                                    <xf:delete ev:event="DOMActivate" ref="."/>
                                  </xf:trigger>
                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
-                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label>
+                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"/></xf:label>
                                     <xf:action ev:event="DOMActivate">
-                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel2')"></setvalue>
-                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*" at="index('msIdentifierRepeatLevel2') - 1" position="before"></insert>
-                                       <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[instance('i-move')/tmp + 1]"></delete>
+                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel2')"/>
+                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*" at="index('msIdentifierRepeatLevel2') - 1" position="before"/>
+                                       <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[instance('i-move')/tmp + 1]"/>
                                     </xf:action>
                                  </xf:trigger>
                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline">
-                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label>
+                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"/></xf:label>
                                     <xf:action ev:event="DOMActivate">
-                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel2')"></setvalue>
-                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*" at="index('msIdentifierRepeatLevel2') + 1" position="after"></insert>
-                                       <delete nodeset="."></delete>
+                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel2')"/>
+                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*" at="index('msIdentifierRepeatLevel2') + 1" position="after"/>
+                                       <delete nodeset="."/>
                                     </xf:action>
                                  </xf:trigger><span class="elementLabel">
-                                    <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><i class="bi bi-question-circle triggerElementTooltip"></i><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                                    <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/><i class="bi bi-question-circle triggerElementTooltip"/><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/></span><div class="input-group float-end">
                                     <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
-                                       <xf:label></xf:label>
+                                       <xf:label/>
                                        <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                                          <xf:label ref="@ident"></xf:label>
-                                          <xf:value ref="@ident"></xf:value>
+                                          <xf:label ref="@ident"/>
+                                          <xf:value ref="@ident"/>
                                        </xf:itemset>
                                        <xf:action ev:event="xforms-value-changed">
-                                          <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                          <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                                        </xf:action>
                                     </xf:select1>
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                                       <xf:label><i class="bi bi-plus-circle"></i> Attribute
+                                       <xf:label><i class="bi bi-plus-circle"/> Attribute
                                        </xf:label>
-                                       <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                                       <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                                       <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                                       <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                                       <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                                       <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                                     </xf:trigger>
                                     <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                                       <xf:label></xf:label>
+                                       <xf:label/>
                                        <xf:item>
                                           <xf:label> - select - </xf:label>
-                                          <xf:value></xf:value>
+                                          <xf:value/>
                                        </xf:item>
                                        <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
-                                          <xf:label ref="@ident"></xf:label>
-                                          <xf:value ref="@ident"></xf:value>
+                                          <xf:label ref="@ident"/>
+                                          <xf:value ref="@ident"/>
                                        </xf:itemset>
                                        <xf:action ev:event="xforms-value-changed">
-                                          <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                          <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                                        </xf:action>
                                     </xf:select1>
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                                       <xf:label><i class="bi bi-plus-circle"></i> Child Element
+                                       <xf:label><i class="bi bi-plus-circle"/> Child Element
                                        </xf:label>
-                                       <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
-                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                                       <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"/>
+                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                                     </xf:trigger>
                                     <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                                       <xf:label><i class="bi bi-search"></i> Lookup  
+                                       <xf:label><i class="bi bi-search"/> Lookup  
                                        </xf:label>
                                        <xf:action ev:event="DOMActivate">
-                                          <xf:toggle case="msIdentifierRepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                          <xf:toggle case="msIdentifierRepeatLevel2LookupUnHide" ev:event="DOMActivate"/>
                                           <xf:load show="embed" targetid="msIdentifierRepeatLevel2subformLookup">
-                                             <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                             <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                                           </xf:load>
                                        </xf:action>
                                     </xf:trigger>
                                     <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                                       <xf:label><i class="bi bi-search"></i> New  
-                                          <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
+                                       <xf:label><i class="bi bi-search"/> New  
+                                          <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"/> 
                                        </xf:label>
                                        <xf:action ev:event="DOMActivate">
                                           <xf:load show="new">
-                                             <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                             <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"/>
                                           </xf:load>
                                        </xf:action>
                                     </xf:trigger>
                                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                                       <xf:case id="msIdentifierRepeatLevel2LookupHide" style="display:none;"></xf:case>
+                                       <xf:case id="msIdentifierRepeatLevel2LookupHide" style="display:none;"/>
                                        <xf:case id="msIdentifierRepeatLevel2LookupUnHide">
                                           <div class="lookupDisplay">
-                                             <xf:group id="msIdentifierRepeatLevel2subformLookup"></xf:group>
+                                             <xf:group id="msIdentifierRepeatLevel2subformLookup"/>
                                              <div class="text-right">
                                                 <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
-                                                   <xf:label><i class="bi bi-x-circle"></i> Close
+                                                   <xf:label><i class="bi bi-x-circle"/> Close
                                                    </xf:label>
-                                                   <xf:toggle case="msIdentifierRepeatLevel2LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                                   <xf:unload targetid="msIdentifierRepeatLevel2subformLookup"></xf:unload>
+                                                   <xf:toggle case="msIdentifierRepeatLevel2LookupHide" ev:event="DOMActivate"/>
+                                                   <xf:unload targetid="msIdentifierRepeatLevel2subformLookup"/>
                                                 </xf:trigger>
                                              </div>
                                           </div>
@@ -380,25 +381,25 @@
                            </div>
                            <div class="element">
                               <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                                 <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"></xf:input>
-                                 <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea>  
+                                 <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"/>
+                                 <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>  
                                    
                                  
                                  <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
                                     <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                        <div class="input-group">
-                                          <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input>
+                                          <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
                                           <xf:select1 ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
                                              <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
-                                                <xf:label ref="@ident"></xf:label>
-                                                <xf:value ref="@ident"></xf:value>
+                                                <xf:label ref="@ident"/>
+                                                <xf:value ref="@ident"/>
                                              </xf:itemset>
                                           </xf:select1>
                                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i> 
-                                                <xf:output value="local-name(current())"></xf:output>
+                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> 
+                                                <xf:output value="local-name(current())"/>
                                              </xf:label>
-                                             <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                             <xf:delete ev:event="DOMActivate" ref="."/>
                                           </xf:trigger>
                                        </div>
                                     </div>
@@ -411,95 +412,95 @@
                                     <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                                        <div class="btn-group" role="group">
                                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
-                                             <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+                                             <xf:delete ev:event="DOMActivate" ref="."/>
                                           </xf:trigger>
                                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
-                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label>
+                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"/></xf:label>
                                              <xf:action ev:event="DOMActivate">
-                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel3')"></setvalue>
-                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[index('msIdentifierRepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*" at="index('msIdentifierRepeatLevel3') - 1" position="before"></insert>
-                                                <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[instance('i-move')/tmp + 1]"></delete>
+                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel3')"/>
+                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[index('msIdentifierRepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*" at="index('msIdentifierRepeatLevel3') - 1" position="before"/>
+                                                <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[instance('i-move')/tmp + 1]"/>
                                              </xf:action>
                                           </xf:trigger>
                                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline">
-                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label>
+                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"/></xf:label>
                                              <xf:action ev:event="DOMActivate">
-                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel3')"></setvalue>
-                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[index('msIdentifierRepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*" at="index('msIdentifierRepeatLevel3') + 1" position="after"></insert>
-                                                <delete nodeset="."></delete>
+                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel3')"/>
+                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*[index('msIdentifierRepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel1')]/*[index('msIdentifierRepeatLevel2')]/*" at="index('msIdentifierRepeatLevel3') + 1" position="after"/>
+                                                <delete nodeset="."/>
                                              </xf:action>
                                           </xf:trigger><span class="elementLabel">
-                                             <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><i class="bi bi-question-circle triggerElementTooltip"></i><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                                             <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/><i class="bi bi-question-circle triggerElementTooltip"/><xf:output ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/></span><div class="input-group float-end">
                                              <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
-                                                <xf:label></xf:label>
+                                                <xf:label/>
                                                 <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                                                   <xf:label ref="@ident"></xf:label>
-                                                   <xf:value ref="@ident"></xf:value>
+                                                   <xf:label ref="@ident"/>
+                                                   <xf:value ref="@ident"/>
                                                 </xf:itemset>
                                                 <xf:action ev:event="xforms-value-changed">
-                                                   <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                                   <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                                                 </xf:action>
                                              </xf:select1>
                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                                                <xf:label><i class="bi bi-plus-circle"></i> Attribute
+                                                <xf:label><i class="bi bi-plus-circle"/> Attribute
                                                 </xf:label>
-                                                <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                                                <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                                                <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                                                <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                                              </xf:trigger>
                                              <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                                                <xf:label></xf:label>
+                                                <xf:label/>
                                                 <xf:item>
                                                    <xf:label> - select - </xf:label>
-                                                   <xf:value></xf:value>
+                                                   <xf:value/>
                                                 </xf:item>
                                                 <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
-                                                   <xf:label ref="@ident"></xf:label>
-                                                   <xf:value ref="@ident"></xf:value>
+                                                   <xf:label ref="@ident"/>
+                                                   <xf:value ref="@ident"/>
                                                 </xf:itemset>
                                                 <xf:action ev:event="xforms-value-changed">
-                                                   <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                                   <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                                                 </xf:action>
                                              </xf:select1>
                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                                                <xf:label><i class="bi bi-plus-circle"></i> Child Element
+                                                <xf:label><i class="bi bi-plus-circle"/> Child Element
                                                 </xf:label>
-                                                <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
-                                                <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                                                <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                                                <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"/>
+                                                <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                                                <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                                              </xf:trigger>
                                              <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                                                <xf:label><i class="bi bi-search"></i> Lookup  
+                                                <xf:label><i class="bi bi-search"/> Lookup  
                                                 </xf:label>
                                                 <xf:action ev:event="DOMActivate">
-                                                   <xf:toggle case="msIdentifierRepeatLevel3LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                                   <xf:toggle case="msIdentifierRepeatLevel3LookupUnHide" ev:event="DOMActivate"/>
                                                    <xf:load show="embed" targetid="msIdentifierRepeatLevel3subformLookup">
-                                                      <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                      <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                                                    </xf:load>
                                                 </xf:action>
                                              </xf:trigger>
                                              <xf:trigger appearance="minimal" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                                                <xf:label><i class="bi bi-search"></i> New  
-                                                   <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
+                                                <xf:label><i class="bi bi-search"/> New  
+                                                   <xf:output value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"/> 
                                                 </xf:label>
                                                 <xf:action ev:event="DOMActivate">
                                                    <xf:load show="new">
-                                                      <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                      <xf:resource value="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"/>
                                                    </xf:load>
                                                 </xf:action>
                                              </xf:trigger>
                                              <xf:switch class="lookupSwitch" style="width:.5em;">
-                                                <xf:case id="msIdentifierRepeatLevel3LookupHide" style="display:none;"></xf:case>
+                                                <xf:case id="msIdentifierRepeatLevel3LookupHide" style="display:none;"/>
                                                 <xf:case id="msIdentifierRepeatLevel3LookupUnHide">
                                                    <div class="lookupDisplay">
-                                                      <xf:group id="msIdentifierRepeatLevel3subformLookup"></xf:group>
+                                                      <xf:group id="msIdentifierRepeatLevel3subformLookup"/>
                                                       <div class="text-right">
                                                          <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
-                                                            <xf:label><i class="bi bi-x-circle"></i> Close
+                                                            <xf:label><i class="bi bi-x-circle"/> Close
                                                             </xf:label>
-                                                            <xf:toggle case="msIdentifierRepeatLevel3LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                                            <xf:unload targetid="msIdentifierRepeatLevel3subformLookup"></xf:unload>
+                                                            <xf:toggle case="msIdentifierRepeatLevel3LookupHide" ev:event="DOMActivate"/>
+                                                            <xf:unload targetid="msIdentifierRepeatLevel3subformLookup"/>
                                                          </xf:trigger>
                                                       </div>
                                                    </div>
@@ -510,25 +511,25 @@
                                     </div>
                                     <div class="element">
                                        <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                                          <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"></xf:input>
-                                          <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea>  
+                                          <xf:input class="elementInput" ref=".[(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"/>
+                                          <xf:textarea class="elementTextArea" ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>  
                                             
                                           
                                           <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
                                              <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                 <div class="input-group">
-                                                   <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input>
+                                                   <xf:input ref=".[not(instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
                                                    <xf:select1 ref=".[instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
                                                       <xf:itemset ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
-                                                         <xf:label ref="@ident"></xf:label>
-                                                         <xf:value ref="@ident"></xf:value>
+                                                         <xf:label ref="@ident"/>
+                                                         <xf:value ref="@ident"/>
                                                       </xf:itemset>
                                                    </xf:select1>
                                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                                      <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i> 
-                                                         <xf:output value="local-name(current())"></xf:output>
+                                                      <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> 
+                                                         <xf:output value="local-name(current())"/>
                                                       </xf:label>
-                                                      <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                                      <xf:delete ev:event="DOMActivate" ref="."/>
                                                    </xf:trigger>
                                                 </div>
                                              </div>
