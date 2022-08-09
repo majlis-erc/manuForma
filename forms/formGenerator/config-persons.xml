@@ -31,8 +31,10 @@
         <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"/>
     </blankTemplates>
     <lookups>
-        <lookup api="http://localhost:8080//exist/apps/majlis/api/search/bibl?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
-<!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
+        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
+        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
+        <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+        <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
     </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 

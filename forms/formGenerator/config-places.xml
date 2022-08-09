@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+    <appTitle>manuForma</appTitle>
     <!-- Branding name for website, used for building HTML nav -->
     <formBrandName>manuForma</formBrandName>
     <!-- Internal/eXist location of application, used for building HTML nav -->
@@ -41,9 +42,9 @@
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
-        <!--        http://44.192.15.2/ -->
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
+        <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
         <popup formName="personTEI" elementName="persName" label="New Persons"/>
+        <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
     </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. 
