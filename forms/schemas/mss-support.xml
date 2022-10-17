@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -75,8 +78,10 @@ End license statement: do not remove --><!--requirements:
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp note noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear unit"/>
-                    <moduleRef key="msdescription" include="catchwords collation condition depth dimensions foliation height locus material objectDesc origDate origPlace"/>
+                    <moduleRef key="core"
+                        except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp note noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear unit"/>
+                    <moduleRef key="msdescription"
+                        include="catchwords collation condition depth dimensions foliation height locus material objectDesc origDate origPlace"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
@@ -200,8 +205,7 @@ End license statement: do not remove --><!--requirements:
                             history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
                             supplied for the key attribute a generic description that fits best your overall impression.</desc>
                         <content>
-                            <textNode/>
-                            <textNode/>
+                            <elementRef key="p"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -637,7 +641,46 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="width" module="msdescription" mode="delete"/>
+                    <elementSpec ident="width" module="msdescription" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">The width of the leaf, measured in millimeters.</desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="atLeast" mode="delete"/>
+                            <attDef ident="atMost" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="confidence" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="extent" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="max" mode="delete"/>
+                            <attDef ident="min" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="precision" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="quantity" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="scope" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="unit" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
                     <elementSpec ident="item" module="core" mode="delete"/>
                     <elementSpec ident="list" module="core" mode="delete"/>
                     <elementSpec ident="measure" module="core" mode="change">
@@ -692,11 +735,6 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <alternate maxOccurs="unbounded" minOccurs="0">
-                                <elementRef key="height"/>
-                                <elementRef key="width"/>
-                                <elementRef key="depth"/>
-                            </alternate>
                             <alternate maxOccurs="unbounded" minOccurs="0">
                                 <elementRef key="height"/>
                                 <elementRef key="width"/>

@@ -36,13 +36,7 @@ function app:display-userinfo($node as node(), $model as map(*)) {
         <div>
             <h1>{$user} : {$userName}</h1>
             <h3>Your Records:</h3>
-            {(:for $coursepack in $coursepacks
-             return 
-                    <div class="indent">
-                        <h4><a href="{$config:nav-base}/coursepack/{string($coursepack/@id)}">{string($coursepack/@title)}</a></h4>
-                        <p class="desc">{$coursepack/desc/text()}</p>
-                    </div> 
-            :) 'Work in progress' }
+            { 'Work in progress' }
         </div>
 };
 
@@ -77,7 +71,7 @@ declare function app:username-login($node as node(), $model as map(*)) {
              <ul class="nav navbar-nav" xmlns="http://www.w3.org/1999/xhtml">
                 <li>
                     <p class="navbar-btn">
-                        <button type="button" class="btn btn-sm btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal"><span class="bi bi-person"/> Login</button>
+                        <button type="button" class="btn btn-sm btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal"><span class="bi bi-person"/> Login </button>
                     </p>
                 </li>
             </ul>

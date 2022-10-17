@@ -65,6 +65,7 @@
                <subform formName="handDesc" selected="false"></subform>
                <subform formName="additions" selected="false"></subform>
                <subform formName="bindingDesc" selected="false"></subform>
+               <subform formName="accMat" selected="false"></subform>
                <subform formName="history" selected="false"></subform>
                <subform formName="msPart" selected="false"></subform>
             </data>
@@ -472,6 +473,36 @@
                                  <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/bindingDesc.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatbindingDesc') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
+                     <li class="nav-item">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'accMat']" class="nav-link">
+                           <xf:label>Accompanying Material  </xf:label>
+                           <xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-data-entry"></xf:toggle>
+                              <xf:unload targetid="subform"></xf:unload>
+                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/accMat.xhtml"></xf:load>
+                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() &gt; 1]" id="navRepeataccMat">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Accompanying Material  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/accMat.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeataccMat') + 1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                         </li>

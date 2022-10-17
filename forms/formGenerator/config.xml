@@ -6,13 +6,13 @@
     <!-- Internal/eXist location of application, used for building HTML nav -->
     <formURL>/exist/apps/manuForma/</formURL>
     <!-- Title/h1 for form -->
-    <formTitle>Edit Works TEI records</formTitle>
+    <formTitle>Edit MS TEI records</formTitle>
     <!-- Form name, used to create form element and links to forms and subforms -->
-    <formName>worksTEI</formName>
+    <formName>mssTEI</formName>
     <!-- Form author -->
     <formAuthor>majlis-erc</formAuthor>
     <!-- Form description -->
-    <formDesc>Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World.</formDesc>
+    <formDesc>Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World.</formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <!-- Saving and managing created TEI files -->
@@ -20,24 +20,25 @@
         <saveOptions>
             <option name="github" enable="true">
                 <parameter name="githubRepoName">majlis-data</parameter>
-                <parameter name="githubPath">data/works/tei/</parameter>
+                <parameter name="githubPath">data/manuscripts/tei/</parameter>
                 <parameter name="githubOwner">majlis-erc</parameter>
                 <parameter name="githubBranch">main</parameter>
             </option>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/works/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/manuscripts/tei</parameter>
             </option>
             <option name="download" enable="true"/>
         </saveOptions>
         <retrieveOptions>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/works/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/manuscripts/tei</parameter>
             </option>
         </retrieveOptions>
     </recordManagement>
     <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
     <blankTemplates>
-        <template name="Work Template" src="/forms/templates/work-fulltemplate.xml"/>
+        <template name="Generic MS Template" src="/forms/templates/full-mss-template.xml"/>
+        <template name="MS part Template" src="/forms/templates/ms-part-example.xml"/>
     </blankTemplates>
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
@@ -46,6 +47,8 @@
         <popup formName="personTEI" elementName="persName" label="New Persons"/>
         <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
         <popup formName="placeTEI" elementName="placeName" label="New Places"/>
+        <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
+        <popup formName="worksTEI" elementName="title" label="New Work"/>
         <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
     </lookups>
     <!--
@@ -61,12 +64,97 @@
             <formDesc>Record title information</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibl" repeat="no">
-            <localSchema src="../schemas/work-schema.xml"/>
-            <globalSchema src="../schemas/work-schema.xml"/>
-            <xmlTemplate src="../templates/work-fulltemplate.xml"/>
-        </subform>        
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identifier" repeat="no">
+            <localSchema src="../schemas/mss-msidentifier.xml"/>
+            <globalSchema src="../schemas/mss-msidentifier.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Contents" repeat="no">
+            <localSchema src="../schemas/mss-msitem.xml"/>
+            <globalSchema src="../schemas/mss-msitem.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Manuscript contents description.</formDesc>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
+            <localSchema src="../schemas/mss-support.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Layout Description" repeat="no">
+            <localSchema src="../schemas/mss-layout.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+            <localSchema src="../schemas/mss-hand.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
+            <localSchema src="../schemas/mss-additions.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc" formName="bindingDesc" formLabel="Binding Description" repeat="no">
+            <localSchema src="../schemas/mss-binding.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Accompanying Material" repeat="no">
+            <localSchema src="../schemas/mss-accMat.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform> 
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="History" repeat="no">
+            <localSchema src="../schemas/mss-history.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
+            <xmlTemplate src="../templates/ms-part-example.xml"/>
+            <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
+                <localSchema src="../schemas/mss-msidentifier.xml"/>
+                <globalSchema src="../schemas/mss-msidentifier.xml"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+            </subform>
+            <subform xpath="tei:msContents" formName="msContents" formLabel="MS Contents">
+                <localSchema src="../schemas/mss-msitem.xml"/>
+                <globalSchema src="../schemas/mss-msitem.xml"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Manuscript contents description.</formDesc>
+            </subform>
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="MS Support">
+                <localSchema src="../schemas/mss-support.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+            </subform>
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Layout Description" repeat="no">
+                <localSchema src="../schemas/mss-layout.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+            </subform>
+            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+                <localSchema src="../schemas/mss-hand.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+            </subform>
+            <subform xpath="tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
+                <localSchema src="../schemas/mss-additions.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+            </subform>
+            <subform xpath="tei:physDesc/tei:bindingDesc" formName="bindingDesc" formLabel="Binding Description" repeat="no">
+                <localSchema src="../schemas/mss-binding.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+            </subform>       
+            <subform xpath="tei:history" formName="history" formLabel="History" repeat="no">
+                <localSchema src="../schemas/mss-history.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+            </subform>
+        </subform>
     </subforms>
 </config>

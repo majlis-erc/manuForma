@@ -1697,9 +1697,11 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
+                    <!--
                     <xsl:when test="not($childElements/child::*)">
                         <textNode type="input"/>
                     </xsl:when>
+                    -->
                 </xsl:choose>
                 <xsl:copy-of select="$childElements"/>
             </childElements>
