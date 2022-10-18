@@ -69,445 +69,18 @@ End license statement: do not remove -->
                     customization.</p>
                 <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
                         schema</ref> of FIRHIST</p>
-                <p>Constrained this schema for generating forms.</p>
+                <p>Constrained this schema for generating forms in manuForma.</p>
             </div>
             <div>
-                <schemaSpec ident="persons" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                <schemaSpec ident="relations" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
                     <!--source="mss-compiled.odd"-->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-
-                    <moduleRef key="core"
-                        except="list abbr add addrLine address analytic biblScope biblStruct binaryObject cb choice cit corr del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode pubPlace publisher quote rb reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term time unclear unit author note p q ref textLang title"/>
-
-                    <moduleRef key="tei"/>
-
-                    <elementSpec ident="locus" module="msdescription" mode="delete"/>
-                    <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
-                    <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
-                    <elementSpec ident="TEI" module="textstructure" mode="delete"/>
-                    <elementSpec ident="msDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="catchwords" module="msdescription" mode="delete"/>
-                    <elementSpec ident="collation" module="msdescription" mode="delete"/>
-                    <elementSpec ident="condition" module="msdescription" mode="delete"/>
-                    <elementSpec ident="dim" module="msdescription" mode="delete"/>
-                    <elementSpec ident="foliation" module="msdescription" mode="delete"/>
-                    <elementSpec ident="material" module="msdescription" mode="delete"/>
-                    <elementSpec ident="objectDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="origDate" module="msdescription" mode="delete"/>
-                    <elementSpec ident="origPlace" module="msdescription" mode="delete"/>
-                    <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="watermark" module="msdescription" mode="delete"/>
-                    <elementSpec ident="p" module="core" mode="delete"/>
-                    <elementSpec ident="depth" module="msdescription" mode="delete"/>
-                    <elementSpec ident="height" module="msdescription" mode="delete"/>
-                    <elementSpec ident="width" module="msdescription" mode="delete"/>
-                    <elementSpec ident="item" module="core" mode="delete"/>
-                    <elementSpec ident="list" module="core" mode="delete"/>
-                    <elementSpec ident="measure" module="core" mode="delete"/>
-
-
-                    <elementSpec ident="dimensions" mode="delete"/>
-                    <elementSpec ident="supportDesc" mode="delete"/>
-                    <elementSpec ident="support" mode="delete"/>
-                    <elementSpec ident="extent" mode="delete"/>
-                    <elementSpec ident="formula" mode="delete"/>
                     <moduleRef key="namesdates"
-                        include="persName listPerson person addName forename birth placeName death floruit sex faith occupation residence"/>
-                    <elementSpec ident="author" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="surname"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="textLang" mode="delete"/>
-                    <elementSpec ident="title" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="level" mode="opt"/>
-                            <attDef ident="xml:lang" mode="delete">
-                            </attDef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="msContents" mode="delete"/>
-                    <elementSpec ident="msItem" mode="delete"/>
-                    <elementSpec ident="note" mode="delete"/>
-                    <elementSpec ident="summary" mode="delete"/>
-                    <elementSpec ident="persName" mode="change">
-                        <desc xml:lang="en">You can either create child elements for every component like ism, kunya, etc. OR you enter the full form
-                            into the field.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="addName"/>
-                            <elementRef key="addName"/>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="opt"/>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                            <attRef name="xml:id" class="att.global"/>
-                            <attDef ident="xml:lang" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
-                            <attDef ident="srophe-tags">
-                                <datatype>
-                                    <dataRef name="string"/>
-                                </datatype>
-                            </attDef>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="resp" class="att.global.responsibility"/>
-                            <attDef ident="type" usage="opt">
-                                <datatype>
-                                    <dataRef key="teidata.enumerated"/>
-                                </datatype>
-                                <valList type="closed">
-                                    <valItem ident="attested"/>
-                                    <valItem ident="alternate"/>
-                                    <valItem ident="canon"/>
-                                </valList>
-                            </attDef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="rubric" mode="delete"/>
-                    <elementSpec ident="incipit" mode="delete"/>
-                    <elementSpec ident="explicit" mode="delete"/>
-                    <elementSpec ident="finalRubric" mode="delete"/>
-                    <elementSpec ident="colophon" mode="delete"/>
-                    <elementSpec ident="q" mode="delete"/>
-                    <moduleRef key="header" include="idno"/>
-                    <elementSpec ident="listPerson" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="person"/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="person" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="persName"/>
-                            <elementRef key="birth"/>
-                            <elementRef key="death"/>
-                            <elementRef key="floruit"/>
-                            <elementRef key="sex"/>
-                            <elementRef key="faith"/>
-                            <elementRef key="occupation"/>
-                            <elementRef key="residence"/>
-                            <elementRef key="bibl"/>
-                            <elementRef key="idno"/>
-                        </content>
-                        <attList>
-                            <attDef ident="role" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="author"/>
-                                </valList>
-                            </attDef>
-                            <attDef ident="sex" mode="delete"/>
-                            <attDef ident="age" mode="delete"/>
-                            <attRef name="xml:id" class="att.global"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="addName" mode="change">
-                        <desc xml:lang="en">Name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the type
-                            of name from the attribute list.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                            <attDef ident="type" usage="opt">
-                                <datatype>
-                                    <dataRef key="teidata.enumerated"/>
-                                </datatype>
-                                <valList type="closed">
-                                    <valItem ident="shuhra"/>
-                                    <valItem ident="ism"/>
-                                    <valItem ident="nasab"/>
-                                    <valItem ident="nisbah"/>
-                                    <valItem ident="kunya"/>
-                                    <valItem ident="laqab"/>
-                                    <valItem ident="patronym"/>
-                                    <valItem ident="epithet"/>
-                                    <valItem ident="acronym"/>
-                                </valList>
-                            </attDef>
-                            <attRef name="xml:id" class="att.global"/>
-                            <attRef name="ref" class="att.canonical"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="forename" mode="change">
-                        <desc xml:lang="en">A person's given name.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="bibl" mode="change">
-                        <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.declarable" mode="delete"/>
-                            <memberOf key="att.docStatus" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="author"/>
-                            <elementRef key="title"/>
-                            <elementRef key="editor"/>
-                            <elementRef key="date"/>
-                            <elementRef key="pubPlace"/>
-                            <elementRef key="publisher"/>
-                            <elementRef key="series"/>
-                            <elementRef key="biblScope"/>
-                            <elementRef key="citedRange"/>
-                            <elementRef key="ptr"/>
-                        </content>
-                        <attList>
-                            <attRef name="xml:id" class="att.global"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="series" mode="change">
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="publisher" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="biblScope" mode="change">
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="birth" mode="change">
-                        <desc xml:lang="en">Provide the date and place of birth in the respective child elements.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.dimensions" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="date"/>
-                            <elementRef key="placeName"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attDef ident="calendar" mode="delete"/>
-                            <attDef ident="period" mode="delete"/>
-                            <attDef ident="when-custom" mode="delete"/>
-                            <attDef ident="notBefore-custom" mode="delete"/>
-                            <attDef ident="notAfter-custom" mode="delete"/>
-                            <attDef ident="from-custom" mode="delete"/>
-                            <attDef ident="to-custom" mode="delete"/>
-                            <attDef ident="datingPoint" mode="delete"/>
-                            <attDef ident="datingMethod" mode="delete"/>
-                            <attDef ident="when-iso" mode="delete"/>
-                            <attDef ident="notBefore-iso" mode="delete"/>
-                            <attDef ident="notAfter-iso" mode="delete"/>
-                            <attDef ident="from-iso" mode="delete"/>
-                            <attDef ident="to-iso" mode="delete"/>
-                            <attDef ident="when" mode="delete"/>
-                            <attDef ident="notBefore" mode="delete"/>
-                            <attDef ident="notAfter" mode="delete"/>
-                            <attDef ident="from" mode="delete"/>
-                            <attDef ident="to" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="date" mode="change">
-                        <desc xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
-                            case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.dimensions" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attRef name="when" class="att.datable.w3c"/>
-                            <attRef name="notBefore" class="att.datable.w3c"/>
-                            <attRef name="notAfter" class="att.datable.w3c"/>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="death" mode="change">
-                        <desc xml:lang="en">Provide the date and place of death in the respective child elements.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.dimensions" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="date"/>
-                            <elementRef key="placeName"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="desc" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="faith" mode="change">
-                        <desc xml:lang="en">Specify the religion of the person.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="floruit" mode="change">
-                        <desc xml:lang="en">Specify the period of intellectual activity. Fill in the date in the agreed-upon calendrical system. Use
-                            the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter "and "notBefore"
-                            attributes together.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.dimensions" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attRef name="from" class="att.citing"/>
-                            <attRef name="to" class="att.citing"/>
-                            <attRef name="notBefore" class="att.datable.w3c"/>
-                            <attRef name="notAfter" class="att.datable.w3c"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="idno" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="subtype" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="isni"/>
-                                    <valItem mode="add" ident="viaf"/>
-                                    <valItem mode="add" ident="wiki"/>
-                                    <valItem mode="add" ident="gnd"/>
-                                    <valItem mode="add" ident="merhav"/>
-                                    <valItem mode="add" ident="rambi"/>
-                                    <valItem mode="add" ident="imhm"/>
-                                    <valItem mode="add" ident="ktiv"/>
-                                </valList>
-                            </attDef>
-                            <attRef name="resp" class="att.global.responsibility"/>
-                        </attList>
-                    </elementSpec>
+                        include="persName listPerson"/>
+                    <moduleRef key="core"
+                        include="desc"/>
                     <elementSpec ident="listRelation" mode="change">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -517,103 +90,6 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="relation"/>
                         </content>
-                    </elementSpec>
-                    <elementSpec ident="occupation" mode="change">
-                        <desc xml:lang="en">Describe the person's profession. This is NOT the role the person played with regard to the
-                            manuscripts.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="code" mode="delete"/>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="type" class="att.entryLike"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="editor" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="surname"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="surname" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="pubPlace" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="placeName" mode="change">
-                        <desc xml:lang="en">Look up the place records in the database to specify a settlement or town. Try different spellings in
-                            different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
-                            when you link a place record to this element.)</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                            <attRef name="ref" class="att.canonical"/>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
                     </elementSpec>
                     <elementSpec ident="relation" mode="change">
                         <desc xml:lang="en">Specify the relationship between the person and another person or object. Choose the kind of relation from
@@ -896,7 +372,6 @@ End license statement: do not remove -->
                                                 >Beta maṣāḥǝft SPARQL query for examples.</ref>
                                         </desc>
                                     </valItem>
-
                                     <valItem ident="saws:isCopierOf">
                                         <desc>@active: Person, @passive: Manuscript. If you can, edit the manuscript record with
                                             persName[@role='scribe'] instead. http://purl.org/saws/ontology#isCopierOf <ref
@@ -910,15 +385,12 @@ End license statement: do not remove -->
                                                 >Beta maṣāḥǝft SPARQL query for examples.</ref>
                                         </desc>
                                     </valItem>
-
-
                                     <valItem ident="ecrm:P129i_is_subject_of">
                                         <desc>@active: Person, @passive: Work. http://erlangen-crm.org/current/P129i_is_subject_of <ref
                                                 target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+ecrm%3AP129i_is_subject_of+%3Fy%7D+LIMIT+25"
                                                 >Beta maṣāḥǝft SPARQL query for examples.</ref>
                                         </desc>
                                     </valItem>
-
                                     <valItem ident="saws:isAttributedAuthorOf">
                                         <desc>@active: Person, @passive: Work. http://purl.org/saws/ontology#isAttributedAuthorOf <ref
                                                 target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AisAttributedAuthorOf+%3Fy%7D+LIMIT+25"
@@ -932,7 +404,6 @@ End license statement: do not remove -->
                                                 target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Ashare-a-name+%3Fy%7D+LIMIT+25"
                                                 >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
                                     </valItem>
-
                                     <valItem ident="syriaca:has-relation-to-place">
                                         <desc>@active: Person, @passive: Place. <ref
                                                 target="http://syriaca.org/documentation/relations.html#has-relation-to-place">definition in
@@ -966,71 +437,16 @@ End license statement: do not remove -->
                                 </valList>
                             </attDef>
                         </attList>
-
-
                     </elementSpec>
-                    <elementSpec ident="residence" mode="change">
-                        <desc xml:lang="en">Where did the person live?</desc>
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="placeName"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="sex" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="value" class="teidata.sex"/>
-                            <attRef name="cert" class="att.global.responsibility">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="high"/>
-                                    <valItem mode="add" ident="medium"/>
-                                    <valItem mode="add" ident="low"/>
-                                </valList>
-                            </attRef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="citedRange" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="from" mode="delete"/>
-                            <attDef ident="to" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="ptr" mode="change">
+                    <elementSpec ident="desc" mode="change">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
-                        <attList>
-                            <attDef ident="cRef" mode="delete"/>
-                            <attDef ident="targetLang" mode="delete"/>
-                            <attDef ident="evaluate" mode="delete"/>
-                        </attList>
+                        <content>
+                            <p/>
+                            <listBibl/>
+                        </content>
                     </elementSpec>
                 </schemaSpec>
             </div>

@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -75,7 +78,8 @@ End license statement: do not remove --><!--requirements:
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                    <moduleRef key="core"
+                        except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription" except="physDesc"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
@@ -92,6 +96,7 @@ End license statement: do not remove --><!--requirements:
                             impression.</desc>
                         <content>
                             <elementRef key="p"/>
+                            <elementRef key="dimensions"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -165,7 +170,7 @@ End license statement: do not remove --><!--requirements:
                         </classes>
                     </elementSpec>
                     <elementSpec ident="objectDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="origDate" module="msdescription" mode="change">
+                    <elementSpec ident="origDate" module="msdescription" mode="delete">
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="origdate.desc">Fill in the date in the agreed-upon calendrical system.
                             Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
                             attributes together.</desc>
@@ -231,7 +236,7 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="calendar" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="origPlace" module="msdescription" mode="change">
+                    <elementSpec ident="origPlace" module="msdescription" mode="delete">
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="origplace.desc">Look up the place records in the database to specify the
                             location where the manuscript or manuscript part was produced. Try different spellings in different languages! If no
                             suitable record exists, create a new one. (The "ref" attribute will be filled out automatically when you link a place
@@ -452,12 +457,9 @@ End license statement: do not remove --><!--requirements:
                             values "true" or "false".</desc>
                         <content>
                             <alternate maxOccurs="unbounded" minOccurs="1">
-                                <elementRef key="dimensions"/>
                                 <elementRef key="condition"/>
                                 <elementRef key="decoNote"/>
                                 <elementRef key="p"/>
-                                <elementRef key="origPlace"/>
-                                <elementRef key="origDate"/>
                             </alternate>
                         </content>
                         <attList>

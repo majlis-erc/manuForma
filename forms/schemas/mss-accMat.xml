@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Start license statement: do not remove
+
+Schema for the encoding of arabic manuscripts
+originated from Beta maṣāḥǝft Schema
+Copyright (c) 2021- by all contributors listed in <titleStmt>, below and contributors to the github stored version
+see https://github.com/BetaMasaheft/Schema/graphs/contributors
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+End license statement: do not remove -->
+<!--requirements: 
+    
+    FIRHIST compatibility
+    
+
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Partial Manuscripts Schema, constrained for usage in XForms</title>
+                <author xml:id="MM">Maximilian de Molière</author>
+                <author xml:id="PL">Pietro Liuzzo</author>
+                <author xml:id="NG">Nathan Gibson</author>
+            </titleStmt>
+            <publicationStmt>
+                <authority>Institut für den Nahen und Mittleren Osten</authority>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
+                <pubPlace>München</pubPlace>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
+                        Attribution-ShareAlike 4.0. </licence>
+                </availability>
+            </publicationStmt>
+            <notesStmt>
+                <note type="ns">http://www.example.org/ns/nonTEI</note>
+            </notesStmt>
+            <sourceDesc>
+                <p>created electronically</p>
+            </sourceDesc>
+        </fileDesc>
+        <revisionDesc>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <front>
+            <divGen type="toc"/>
+        </front>
+        <body>
+            <div>
+                <head>Information on this customization</head>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript layout using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
+                    customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
+                        schema</ref> of FIRHIST</p>
+                <p>Constrained this schema for generating forms.</p>
+            </div>
+            <div>
+                <schemaSpec ident="mss-accMat" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                    <!--source="mss-compiled.odd"-->
+                    <!--       MODULES USED BY THE SCHEMA
+                the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
+                -->
+
+                    <moduleRef key="core" include="p q"/>
+                    <moduleRef key="namesdates" include="persName"/>
+                    <moduleRef key="msdescription" include="accMat"/>
+                    <elementSpec ident="p" module="core" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
+                    <elementSpec ident="q" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Quotation from the manuscript. Use the "xml:lang" attribute to specify the
+                            language.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.ascribed.directed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="who" mode="delete"/>
+                            <attList>
+                                <attDef ident="xml:lang" mode="change">
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                        <valItem mode="add" ident="ru"/>
+                                        <valItem mode="add" ident="he-Latn"/>
+                                        <valItem mode="add" ident="ar-Latn"/>
+                                        <valItem mode="add" ident="ar-Hebr"/>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="persName" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database to identify the person. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" attribute to specify the
+                            person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
+                            when you link a record to this element.)</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="key" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="accMat" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Materials that are not part of the manuscript per se, e.g. slips by librarians explaining the contents.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="p"/>
+                            <elementRef key="q"/>
+                            <elementRef key="persName"/>
+                        </content>
+                        <attList>
+                            <attDef ident="resp" mode="change"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="key" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                </schemaSpec>
+            </div>
+        </body>
+    </text>
+</TEI>

@@ -80,7 +80,7 @@ return
         <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="username already exists">
             <message><div>Username already exists, please select a different username {$userName}.</div></message>
         </response>)
-    else if($user != '') then 
+   else if($user != '') then 
       try {
         let $newUser := local:create-user($json-data)
         return 
@@ -89,7 +89,8 @@ return
             util:declare-option("exist:serialize", "method=json media-type=application/json"),
             <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
                 <message><div>New user {$userName} has been created. userParam: {request:get-parameter('user', '')}</div></message>
-            </response>)
+            </response>,
+            login:set-user("org.exist.login", (), true())
             )
         } catch * {
             (response:set-status-code( 500 ),
