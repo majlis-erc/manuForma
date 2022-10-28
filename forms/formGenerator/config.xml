@@ -12,7 +12,7 @@
     <!-- Form author -->
     <formAuthor>majlis-erc</formAuthor>
     <!-- Form description -->
-    <formDesc>Create and edit MS records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World.</formDesc>
+    <formDesc></formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <!-- Saving and managing created TEI files -->
@@ -60,8 +60,8 @@
         List forms in order of editing preference.
     -->
     <subforms>
-        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
-            <formDesc>Record title information</formDesc>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no">
+            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -70,19 +70,20 @@
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>The Identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Contents" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content Description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Manuscript contents description.</formDesc>
+            <formDesc>Describe the textual contents in detail with msItem or in general terms with summary.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
             <localSchema src="../schemas/mss-support.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Layout Description" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
             <localSchema src="../schemas/mss-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -102,7 +103,7 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Accompanying Material" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage Data" repeat="no">
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -119,18 +120,18 @@
                 <globalSchema src="../schemas/mss-msidentifier.xml"/>
                 <xmlTemplate src="../templates/ms-part-example.xml"/>
             </subform>
-            <subform xpath="tei:msContents" formName="msContents" formLabel="MS Contents">
+            <subform xpath="tei:msContents" formName="msContents" formLabel="Content Description">
                 <localSchema src="../schemas/mss-msitem.xml"/>
                 <globalSchema src="../schemas/mss-msitem.xml"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Manuscript contents description.</formDesc>
+                <formDesc>Describe the textual contents in detail with msItem or in general terms with summary.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="MS Support">
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support">
                 <localSchema src="../schemas/mss-support.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/ms-part-example.xml"/>
             </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Layout Description" repeat="no">
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
                 <localSchema src="../schemas/mss-layout.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
