@@ -28,7 +28,7 @@
         </retrieveOptions>
     </recordManagement>
     <blankTemplates>
-        <template name="Relations Template" src="/forms/templates/relations-template.xml"/>
+        <template name="Relations Template" src="/forms/templates/relations-fulltemplate.xml"/>
     </blankTemplates>
     <lookups>
         <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
@@ -55,11 +55,11 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:text/tei:body" formName="relation" formLabel="Relation">
+        <subform xpath="/tei:TEI/descendant::tei:text/tei:body/tei:ab" formName="relation" formLabel="Relation">
             <formDesc>Record information drawn from the source.</formDesc>
-            <localSchema src="../schemas/relations.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <localSchema src="../schemas/relations-schema.xml"/>
+            <globalSchema src="../schemas/relations-schema.xml"/>
             <xmlTemplate src="../templates/relations-template.xml"/>
-        </subform>
+            </subform>
     </subforms>
 </config>
