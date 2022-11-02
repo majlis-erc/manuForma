@@ -1588,6 +1588,9 @@
                 <xsl:when test="$elementRules/descendant::tei:gloss[@xml:lang = 'en']">
                     <xsl:value-of select="$elementRules/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
                 </xsl:when>
+                <xsl:when test="$elementRules/descendant::tei:gloss">
+                    <xsl:value-of select="$elementRules/descendant::tei:gloss[1]"/>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$elementName"/>
                 </xsl:otherwise>
@@ -1676,11 +1679,13 @@
                                 <xsl:when test="$elementRules/descendant::tei:desc[@xml:lang = 'en']">
                                     <xsl:value-of select="$elementRules/descendant::tei:desc[@xml:lang = 'en'][1]"/>
                                 </xsl:when>
+                                <xsl:otherwise><xsl:value-of select="$elementRules/descendant::tei:desc[1]"/></xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:when test="$elementRules/descendant::tei:desc[@xml:lang = 'en']">
                             <xsl:value-of select="$elementRules/descendant::tei:desc[@xml:lang = 'en'][1]"/>
                         </xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$elementRules/descendant::tei:desc[1]"/></xsl:otherwise>
                     </xsl:choose>
                 </desc>
             </xsl:if>
