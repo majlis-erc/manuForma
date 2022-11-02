@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -36,12 +39,11 @@ End license statement: do not remove --><!--requirements:
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
-                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
-                    Arabic in the Islamicate World</publisher>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
                 <pubPlace>München</pubPlace>
                 <availability>
-                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
-                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
+                        Attribution-ShareAlike 4.0. </licence>
                 </availability>
             </publicationStmt>
             <notesStmt>
@@ -52,8 +54,7 @@ End license statement: do not remove --><!--requirements:
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
-            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
-                created by Pietro Liuzzo</change>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
         </revisionDesc>
     </teiHeader>
     <text>
@@ -63,11 +64,11 @@ End license statement: do not remove --><!--requirements:
         <body>
             <div>
                 <head>Information on this customization</head>
-                <p>Schema for MAJLIS Project. This part of the schema is used for entering
-                    descriptions of the manuscript support using XForms.</p>
-                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
-                        Guidelines</ref> contain examples and details of that customization.</p>
-                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated schema</ref> of FIRHIST</p>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript support using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
+                    customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
+                        schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
@@ -78,7 +79,7 @@ End license statement: do not remove --><!--requirements:
                 -->
 
 
-                    <moduleRef key="msdescription" include="repository msName altIdentifier"/>
+                    <moduleRef key="msdescription" include="repository msName institution"/>
                     <moduleRef key="tei"/>
 
                     <elementSpec ident="locus" module="msdescription" mode="delete"/>
@@ -104,8 +105,6 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="item" module="core" mode="delete"/>
                     <elementSpec ident="list" module="core" mode="delete"/>
                     <elementSpec ident="measure" module="core" mode="delete"/>
-
-
                     <elementSpec ident="dimensions" mode="delete"/>
                     <elementSpec ident="supportDesc" mode="delete"/>
                     <elementSpec ident="support" mode="delete"/>
@@ -141,6 +140,9 @@ End license statement: do not remove --><!--requirements:
                     </elementSpec>
                     <moduleRef key="header" include="idno"/>
                     <elementSpec ident="msIdentifier" mode="change">
+                        <gloss>Add Elements to Identifier &lt;msIdentifier/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en" xml:id="msidentifier.desc">This section contains all the call marks, names, and
+                            other information to identify the manuscript.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -153,73 +155,146 @@ End license statement: do not remove --><!--requirements:
                                 <elementRef key="msName"/>
                                 <elementRef key="altIdentifier"/>
                             </sequence>
+                            <sequence maxOccurs="1" minOccurs="1">
+                                <elementRef key="institution"/>
+                                <elementRef key="repository"/>
+                                <elementRef key="collection"/>
+                                <elementRef key="idno"/>
+                                <elementRef key="msName"/>
+                                <elementRef key="objectName"/>
+                                <elementRef key="altIdentifier"/>
+                                <elementRef key="country"/>
+                                <elementRef key="settlement"/>
+                            </sequence>
+                            <sequence maxOccurs="1" minOccurs="1">
+                                <sequence maxOccurs="1" minOccurs="1">
+                                    <elementRef key="institution"/>
+                                    <elementRef key="repository"/>
+                                    <elementRef key="idno"/>
+                                    <elementRef key="msName"/>
+                                    <elementRef key="altIdentifier"/>
+                                    <elementRef key="country"/>
+                                    <elementRef key="settlement"/>
+                                </sequence>
+                            </sequence>
                         </content>
                     </elementSpec>
                     <elementSpec ident="country" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Specify the country where the holding institution is situated.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
+                        <content>
+                            <textNode/>
+                            <textNode/>
+                        </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="settlement" mode="change">
+                        <gloss>City &lt;settlement/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">The city or town where the holding institution is based.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
+                        <content>
+                            <textNode/>
+                            <textNode/>
+                        </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="institution" mode="change">
+                    <elementSpec ident="collection" mode="change">
+                        <desc versionDate="2022-05-26" xml:id="collection.desc" xml:lang="en">The name of a collection within which the manuscript is
+                            stored, possibly part of a library.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
                         </classes>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="repository" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="idno" mode="change">
+                        <gloss>Shelfmark &lt;idno/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">The call mark of a manuscript, used within the holding institution or by external
+                            authorities who provide alternate identifiers.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
                         </classes>
                         <content>
+                            <textNode/>
                             <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="msName" mode="change">
+                        <gloss>Name by which manuscript is generally known &lt;msName/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Nicknames and epithets used for the manuscript by scholars (e.g. "Machsor
+                            Lipsiae").</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
                             <textNode/>
+                            <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="altIdentifier" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">Alternate Identifiers. This can be older shelf marks and identifiers in databases
+                            like IMHM, SfarData and Ktiv. Specify where this identifier is used in the "type" attribute.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
                         </classes>
                         <content>
                             <elementRef key="idno"/>
+                            <sequence maxOccurs="1" minOccurs="1">
+                                <elementRef key="idno"/>
+                                <elementRef key="note"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <valList type="open" mode="change">
+                                    <valItem mode="add" ident="IMHM"/>
+                                    <valItem mode="add" ident="SfarData"/>
+                                    <valItem mode="add" ident="Ktiv"/>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="institution" mode="change">
+                        <desc versionDate="2022-05-26" xml:lang="en">The name of a library which holds the manuscript.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.naming" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
                 </schemaSpec>

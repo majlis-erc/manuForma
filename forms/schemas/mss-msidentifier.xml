@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-End license statement: do not remove --><!--requirements: 
+End license statement: do not remove -->
+<!--requirements: 
     
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -137,6 +140,7 @@ End license statement: do not remove --><!--requirements:
                     </elementSpec>
                     <moduleRef key="header" include="idno"/>
                     <elementSpec ident="msIdentifier" mode="change">
+                        <gloss>Add Elements to Identifier &lt;msIdentifier/&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en" xml:id="msidentifier.desc">This section contains all the call marks, names, and
                             other information to identify the manuscript.</desc>
                         <classes mode="change">
@@ -194,6 +198,7 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     <elementSpec ident="settlement" mode="change">
+                        <gloss>City &lt;settlement/&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">The city or town where the holding institution is based.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -211,8 +216,8 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="repository" mode="change">
-                        <desc versionDate="2022-05-26" xml:id="repository.desc" xml:lang="en">The name of a repository within which the manuscript is
+                    <elementSpec ident="collection" mode="change">
+                        <desc versionDate="2022-05-26" xml:id="collection.desc" xml:lang="en">The name of a collection within which the manuscript is
                             stored, possibly part of a library.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -227,6 +232,7 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     <elementSpec ident="idno" mode="change">
+                        <gloss>Shelfmark &lt;idno/&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">The call mark of a manuscript, used within the holding institution or by external
                             authorities who provide alternate identifiers.</desc>
                         <classes mode="change">
@@ -241,6 +247,7 @@ End license statement: do not remove --><!--requirements:
                         </content>
                     </elementSpec>
                     <elementSpec ident="msName" mode="change">
+                        <gloss>Name by which manuscript is generally known &lt;msName/&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">Nicknames and epithets used for the manuscript by scholars (e.g. "Machsor
                             Lipsiae").</desc>
                         <classes mode="change">
@@ -269,7 +276,7 @@ End license statement: do not remove --><!--requirements:
                         <attList>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="type" mode="change">
-                                <valList type="closed" mode="change">
+                                <valList type="open" mode="change">
                                     <valItem mode="add" ident="IMHM"/>
                                     <valItem mode="add" ident="SfarData"/>
                                     <valItem mode="add" ident="Ktiv"/>
