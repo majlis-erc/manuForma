@@ -1525,19 +1525,33 @@
         <xsl:variable name="childElements" select="local:childElements($elementName,$subform)"/>
         <xsl:variable name="path" select="concat($path, '/tei:', $elementName)"/>
         <xsl:variable name="id" select="replace(replace(concat(replace($path,'/',''),generate-id(.)),' ',''),'tei:','')"/>
+        <!--
         <xsl:variable name="elementLabel">
             <xsl:choose>
-                <xsl:when test="$elementRules/descendant::tei:gloss[@xml:lang = $formLang]">
-                    <xsl:value-of select="$elementRules/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant::tei:gloss[@xml:lang = 'en']">
-                    <xsl:value-of select="$elementRules/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en']">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en']">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$elementName"/>
                 </xsl:otherwise>
             </xsl:choose> 
         </xsl:variable>
+        -->
         <xsl:variable name="maxOccur">
             <xsl:choose>
                 <xsl:when test="$max != ''">
@@ -1676,14 +1690,23 @@
         <xsl:variable name="id" select="replace(replace(concat(replace($path,'/',''),generate-id(.)),' ',''),'\*:','')"/>
         <xsl:variable name="elementLabel">
             <xsl:choose>
-                <xsl:when test="$elementRules/descendant::tei:gloss[@xml:lang = $formLang]">
-                    <xsl:value-of select="$elementRules/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant::tei:gloss[@xml:lang = 'en']">
-                    <xsl:value-of select="$elementRules/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en']">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant::tei:gloss">
-                    <xsl:value-of select="$elementRules/descendant::tei:gloss[1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en']">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                </xsl:when>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$elementName"/>
