@@ -84,6 +84,7 @@ End license statement: do not remove -->
                         except="accMat additional additions adminInfo altIdentifier binding bindingDesc collection colophon custEvent custodialHist decoDesc decoNote depth explicit filiation finalRubric handDesc heraldry history incipit institution msContents msIdentifier msItem msItemStruct msName msPart musicNotation objectType recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc acquisition catchwords collation condition foliation locusGrp material msDesc msFrag objectDesc origDate origPlace origin physDesc provenance summary"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="change date">
+                        <gloss>Note &lt;note&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">This is the place to remark on points that don't fit the mold of the other
                             elements or more extensive observations.</desc>
                         <classes mode="replace">
@@ -166,6 +167,7 @@ End license statement: do not remove -->
 
 
                     <elementSpec ident="p" module="core" mode="change">
+                        <gloss>Text Block &lt;p&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
                             coherent descriptive text.</desc>
                         <content>
@@ -206,6 +208,7 @@ End license statement: do not remove -->
                     <elementSpec ident="q" mode="delete"/>
 
                     <elementSpec ident="dim" mode="change">
+                        <gloss>Space Between Columns &lt;dim&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Specify the amount of space between two columns of text in millimeters.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -236,6 +239,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="height" mode="change">
+                        <gloss>*Text Space Height &lt;height&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">The height of the text space, measured in
                             millimeters.</desc>
                         <classes mode="change">
@@ -250,6 +254,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="width" mode="change">
+                        <gloss>*Text Space Width &lt;width&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">The width of the text space, measured in millimeters.</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -263,6 +268,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="ab" mode="change">
+                        <gloss>Pricking/Ruling &lt;ab&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Describe pricking and ruling of the page layout and choose appropriate values for
                             the "type" attribute.</desc>
                         <classes mode="change">
@@ -285,6 +291,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="dimensions" mode="change">
+                        <gloss>*Text Space &lt;dimensions&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">The measurements of the text space.</desc>
                         <content>
                             <alternate maxOccurs="unbounded" minOccurs="0">
@@ -295,6 +302,7 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="layout" mode="change">
+                        <gloss>*Text Layout Container (2/2) &lt;layout&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="layout.desc">Provide the typology of the layout and describe it. Specify
                             the number of columns and lines in the correct attributes.</desc>
                         <content>
@@ -315,6 +323,7 @@ End license statement: do not remove -->
                         </classes>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
+                        <gloss>Text Layout Summary &lt;summary&gt;</gloss>
                         <desc versionDate="2022-06-01" xml:lang="en" xml:id="summary.desc">Outline your observations of the main features in this
                             context.</desc>
                         <content>
@@ -332,6 +341,7 @@ End license statement: do not remove -->
                         </classes>
                     </elementSpec>
                     <elementSpec ident="layoutDesc" mode="change">
+                        <gloss>*Text Layout Container (1/2) &lt;layoutDesc&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">This element contains layout descriptions.</desc>
                         <content>
                             <elementRef key="summary"/>
@@ -348,10 +358,51 @@ End license statement: do not remove -->
                             <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                     </elementSpec>
-                    <elementSpec ident="locus" mode="change">
+                    <elementSpec ident="locus" module="msdescription" mode="change">
+                        <gloss>Folios &lt;locus/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="locus.desc">The location of a text or another feature within the
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.pPart.msdesc"/>
+                            <memberOf key="att.pointing"/>
+                            <memberOf key="att.global"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="scheme" mode="delete"/>
+                        </attList>
                     </elementSpec>
                 </schemaSpec>
             </div>
