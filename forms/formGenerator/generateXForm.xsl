@@ -126,16 +126,40 @@
         </child>
     </xsl:function>
     
-    <!-- WS:Note may not be needed -->
-    <xsl:function name="local:siblingElements">
-        <xsl:param name="parentElementName"/>
+    <!-- 
+        Check local and global schemas for element rules 
+        @param: elementName - name of element to lookup in the schema
+        @param: subform  - name of subform, for locating the correct local schema customizations
+    -->    
+    <xsl:function name="local:localElementRules">
         <xsl:param name="elementName"/>
         <xsl:param name="subform"/>
-        <xsl:variable name="elementRules" select="local:elementRules($parentElementName, $subform)"/>
+        <xsl:variable name="localSchemaDoc" select="document($configDoc//subform[@formName = $subform]/localSchema/@src)"/>
+        <rules xmlns="http://www.tei-c.org/ns/1.0">
+            <local>
+                <xsl:for-each select="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                    <xsl:copy-of select="."/>
+                </xsl:for-each>
+            </local>
+        </rules>
+    </xsl:function>
+    
+    <!-- 
+        Find all child elements for selected element, check local schema rules first, then global schema rules
+        @param: elementName - name of element to lookup in the schema
+        @param: subform  - name of subform, for locating the correct local schema customizations
+    -->
+    <xsl:function name="local:localChildElements">
+        <xsl:param name="elementName"/>
+        <xsl:param name="subform"/>
+        <xsl:variable name="elementRules" select="local:localElementRules($elementName, $subform)"/>
         <xsl:variable name="elementRefs">
             <xsl:variable name="rules">
                 <xsl:choose>
                     <xsl:when test="$elementRules/tei:local/descendant-or-self::tei:content">
+                        <xsl:copy-of select="$elementRules/tei:local"/>
+                    </xsl:when>
+                    <xsl:when test="$elementRules/tei:local/descendant-or-self::tei:alternate">
                         <xsl:copy-of select="$elementRules/tei:local"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -143,11 +167,12 @@
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:variable>
-            <xsl:for-each-group select="$rules/descendant-or-self::tei:content/descendant-or-self::*[@key]" group-by="@key">
+            <xsl:for-each-group select="$rules/descendant-or-self::tei:content/descendant-or-self::*[@key] | $rules/descendant-or-self::tei:alternate/descendant-or-self::*[@key] " group-by="@key">
                 <xsl:choose>
-                    <xsl:when test="current-grouping-key() = ('model.gLike','macro.xtext','macro.phraseSeq','macro.specialPara','model.pLike')">
+                    <xsl:when test="(current-grouping-key() = ('macro.specialPara','model.pLike')) or (contains(current-grouping-key(),'macro.specialPara') or contains(current-grouping-key(),'model.pLike'))">
                         <element xmlns="http://www.tei-c.org/ns/1.0" ident="p"/>
                     </xsl:when>
+                    <xsl:when test="(current-grouping-key() = ('model.gLike','macro.xtext','macro.phraseSeq')) or (contains(current-grouping-key(),'macro.phraseSeq') or contains(current-grouping-key(),'macro.xtext') or contains(current-grouping-key(),'model.gLike'))"/>
                     <xsl:when test="contains(current-grouping-key(),'.')">
                         <xsl:choose>
                             <xsl:when test="contains(current-grouping-key(),'macro.')">
@@ -374,12 +399,38 @@
         </xsl:result-document>
         <!-- Output an XForm for each subform listed in the config.xml subforms section -->
         <xsl:for-each select="$configDoc//subforms/subform">
+            <xsl:variable name="schemaInstanceDoc">
+                <xsl:variable name="subform" select="."/>
+                <xsl:call-template name="generateSchemaInstance">
+                    <xsl:with-param name="subform" select="$subform"/>
+                </xsl:call-template>
+            </xsl:variable>
+            <xsl:variable name="levels">
+                <xsl:for-each select="$schemaInstanceDoc//@currentLevel">
+                    <xsl:sort select="xs:integer(.)" order="descending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:copy-of select="string(.)"/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="maxLevel">
+                <xsl:choose>
+                    <xsl:when test="$levels castable as xs:integer"><xsl:value-of select="xs:integer($levels)"/></xsl:when>
+                    <xsl:otherwise>1</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <xsl:variable name="subform" select="."/>
             <xsl:variable name="formName" select="@formName"/>
             <!-- Ouput XForms xml instance with finalized schema rules -->
             <xsl:result-document href="../{$mainFormName}/templates/{$formName}-schemaConstraints.xml" format="tei">
                 <xsl:call-template name="generateSchemaInstance">
                     <xsl:with-param name="subform" select="."/>
+                </xsl:call-template>
+            </xsl:result-document>
+            <xsl:result-document href="../{$mainFormName}/templates/{$formName}-elementTemplate.xml" format="tei">
+                <xsl:call-template name="elementTemplate">
+                    <xsl:with-param name="subform" select="$formName"/>
+                    <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 </xsl:call-template>
             </xsl:result-document>
             <xsl:result-document href="../{concat($mainFormName,'/',$formName)}.xhtml" format="xform">
@@ -836,6 +887,7 @@
                 <xf:model id="m-mss">
                     <xf:instance id="i-schemaConstraints" src="forms/{$mainFormName}/templates/{$subformName}-schemaConstraints.xml"/>
                     <xf:instance id="i-{string($subformName)}-schemaConstraints" src="forms/{$mainFormName}/templates/{$subformName}-schemaConstraints.xml"/>
+                    <xf:instance id="i-{string($subformName)}-elementTemplate" src="forms/{$mainFormName}/templates/{$subformName}-elementTemplate.xml"/>
                     <xf:instance id="i-{string($subformName)}-subforms">
                         <data xmlns="">
                             <xsl:for-each select="$subform/subform">
@@ -884,7 +936,7 @@
                     </xf:trigger>
                     <xf:trigger class="btn controls add" appearance="minimal">
                         <xf:label><i class="bi bi-plus-circle"/></xf:label>
-                        <xf:insert ev:event="DOMActivate" context="{$parentXPath}" origin="instance('i-elementTemplate')//*[local-name() = '{$elementName}']" position="after"/>
+                        <xf:insert ev:event="DOMActivate" context="{$parentXPath}" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{$elementName}']" position="after"/>
                     </xf:trigger> 
                     <xsl:value-of select="$subform/@formLabel"/>
                     <xsl:if test="$subform/subform"> [<xf:output value="instance('i-repeatIndex')/index"/>]</xsl:if>
@@ -1214,8 +1266,8 @@
                         </xf:action>
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Child Element</xf:label>
-                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"/>
+                        <xf:label><i class="bi bi-plus-circle"/> Child Element </xf:label>
+                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                     </xf:trigger>
@@ -1356,6 +1408,8 @@
         Adds all elements/attributes listed in global or local schemas
     -->
     <xsl:template name="elementTemplate">
+        <xsl:param name="subform"/>
+        <xsl:param name="maxLevel"/>
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:variable name="globalSchemaDoc">
                 <xsl:for-each select="$configDoc//subform">
@@ -1369,10 +1423,37 @@
             </xsl:variable> 
             <xsl:for-each-group select="$globalSchemaDoc//descendant-or-self::tei:elementSpec | $localSchemaDoc//descendant-or-self::tei:elementSpec" group-by="@ident">
                 <xsl:sort select="current-grouping-key()"/>
-                <xsl:element name="{current-grouping-key()}" namespace="http://www.tei-c.org/ns/1.0"/>
+                <xsl:element name="{current-grouping-key()}" namespace="http://www.tei-c.org/ns/1.0">
+                    <xsl:call-template name="expandElements">
+                        <xsl:with-param name="elementName" select="current-grouping-key()"></xsl:with-param>
+                        <xsl:with-param name="subform" select="$subform"/>
+                        <xsl:with-param name="currentLevel">1</xsl:with-param>
+                        <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                    </xsl:call-template>
+                </xsl:element>
             </xsl:for-each-group>
         </TEI>
     </xsl:template>
+    <xsl:template name="expandElements">
+        <xsl:param name="elementName"/>
+        <xsl:param name="subform"/>
+        <xsl:param name="currentLevel"/>
+        <xsl:param name="maxLevel"/>
+        <xsl:variable name="childElements" select="local:localChildElements($elementName,$subform)"/>
+        <xsl:if test="$currentLevel &lt;= $maxLevel and not(empty($childElements))">
+            <xsl:for-each-group select="$childElements/descendant-or-self::*:element[not(@classRef = 'true')]" group-by="@ident">
+                <xsl:element name="{current-grouping-key()}" namespace="http://www.tei-c.org/ns/1.0">
+                    <xsl:call-template name="expandElements">
+                        <xsl:with-param name="elementName" select="current-grouping-key()"></xsl:with-param>
+                        <xsl:with-param name="subform" select="$subform"/>
+                        <xsl:with-param name="currentLevel" select="$currentLevel + 1"/>
+                        <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                    </xsl:call-template>
+                </xsl:element>
+            </xsl:for-each-group>
+        </xsl:if>
+    </xsl:template>
+    
 
     <xsl:template name="attributesTemplate">
         <xsl:variable name="globalSchemaDoc">
@@ -1577,7 +1658,6 @@
         <xsl:variable name="elementRules" select="local:elementRules($elementName,$subformName)"/>
         <xsl:variable name="allAttributes" select="local:allAttributes($elementName,$subformName)"/>
         <xsl:variable name="childElements" select="local:childElements($elementName,$subformName)"/>
-        <xsl:variable name="siblingElements" select="local:siblingElements($parentElementName, $elementName,$subformName)"/>
         <xsl:variable name="path" select="concat($path, '/*:', $elementName)"/>
         <xsl:variable name="id" select="replace(replace(concat(replace($path,'/',''),generate-id(.)),' ',''),'\*:','')"/>
         <xsl:variable name="elementLabel">
