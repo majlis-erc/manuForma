@@ -665,6 +665,7 @@
                                             </xf:action>
                                         </xf:trigger>
                                     </li>
+                                    <!--
                                     <li class="nav-item">
                                         <xf:trigger appearance="minimal" class="nav-link">
                                             <xf:label><span data-feather="home"/> Admin Page  </xf:label>
@@ -673,6 +674,7 @@
                                             </xf:action>
                                         </xf:trigger>
                                     </li>
+                                    -->
                                     <xsl:for-each select="$configDoc//subforms/subform">
                                         <xsl:variable name="subformPath" select="@xpath"/>
                                         <xsl:variable name="elementName" select="substring-after(tokenize(@xpath,'/')[last()],':')"/>
@@ -724,6 +726,12 @@
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
                                         <div class="submission float-end">
+                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
+                                                <xf:label><span data-feather="home"/> Admin Metadata  </xf:label>
+                                                <xf:action ev:event="DOMActivate">
+                                                    <xf:toggle case="view-admin"/>
+                                                </xf:action>
+                                            </xf:trigger>
                                             <xsl:if test="$configDoc//saveOptions/option[@name='github'][@enable='true']">
                                                 <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
                                                     <xf:label> Submit to GitHub </xf:label>
