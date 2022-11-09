@@ -718,7 +718,9 @@
                         </nav>
                         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                                <h1 class="h2"><xsl:value-of select="$configDoc//formTitle"/></h1>
+                                <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
+                                    <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"/>
+                                </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
                                         <div class="submission float-end">
@@ -727,24 +729,28 @@
                                                     <xf:label> Submit to GitHub </xf:label>
                                                 </xf:submit>
                                             </xsl:if>
+                                            <!--
                                             <xsl:if test="$configDoc//saveOptions/option[@name='exist-db'][@enable='true']">
                                                 <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-save" appearance="minimal">
                                                     <xf:label> Save to Database </xf:label>
                                                 </xf:submit>
                                             </xsl:if>
+                                            -->
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
-                                                <xf:label> Download XML </xf:label>
+                                                <xf:label> Download XML (Chrome Only)</xf:label>
                                             </xf:submit>
+                                            <!--
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal">
                                                 <xf:label> View XML </xf:label>
                                             </xf:submit>
+                                            -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Form description -->
                             <xsl:if test="$configDoc//formDesc != ''">
-                                <p class="alert alert-light hint"><xsl:value-of select="$configDoc//formDesc"/></p>
+                                <p class="alert alert-light hint"><xsl:value-of select="$configDoc//formDesc[1]"/></p>
                             </xsl:if>
                             <xf:switch id="edit" class="mainContent panel">
                                 <xf:case id="view-main-entry" selected="true()">
