@@ -750,7 +750,7 @@
                             </div>
                             <!-- Form description -->
                             <xsl:if test="$configDoc//formDesc != ''">
-                                <p class="alert alert-light hint"><xsl:value-of select="$configDoc//formDesc[1]"/></p>
+                                <p class="alert alert-light hint"><xsl:value-of select="$configDoc/config/formDesc[1]"/></p>
                             </xsl:if>
                             <xf:switch id="edit" class="mainContent panel">
                                 <xf:case id="view-main-entry" selected="true()">
