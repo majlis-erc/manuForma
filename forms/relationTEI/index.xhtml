@@ -181,12 +181,6 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" class="nav-link"><xf:label><span data-feather="home"></span> Admin Page  </xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-admin"></xf:toggle>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link"><xf:label>Header  </xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
@@ -239,21 +233,22 @@
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                  <h1 class="h2">Edit Relation TEI Records</h1>
+                  <h1 class="h2"><xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output></h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><span data-feather="home"></span> Admin Metadata  </xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-save" appearance="minimal"><xf:label> Save to Database </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal"><xf:label> View XML </xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
                </div>
                <p class="alert alert-light hint">Create and edit relation records for MAJLIS: The Transformation of Jewish Literature
-                  in Arabic in the Islamicate World Record information about the projects in which these
-                  data was generated. Record information drawn from the source.</p>
+                  in Arabic in the Islamicate World</p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
                      <div class="fileLoading">

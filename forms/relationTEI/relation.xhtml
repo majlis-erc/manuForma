@@ -12,6 +12,7 @@
       <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-mss">
          <xf:instance id="i-schemaConstraints" src="forms/relationTEI/templates/relation-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-relation-schemaConstraints" src="forms/relationTEI/templates/relation-schemaConstraints.xml"></xf:instance>
+         <xf:instance id="i-relation-elementTemplate" src="forms/relationTEI/templates/relation-elementTemplate.xml"></xf:instance>
          <xf:instance id="i-relation-subforms"><data xmlns=""></data></xf:instance>
          <xf:instance id="i-relation-repeatIndex"><data xmlns="">
                <index>1</index></data></xf:instance>
@@ -21,7 +22,7 @@
       <h2 class="h3 mainElement">
          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:text/*:body/*:ab[position() = instance('i-repeatIndex')/index]"></xf:delete>
          </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:text/*:body/" origin="instance('i-elementTemplate')//*[local-name() = 'ab']" position="after"></xf:insert>
+         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:text/*:body/" origin="instance('i-relation-elementTemplate')/*[local-name() = 'ab']" position="after"></xf:insert>
          </xf:trigger>Relation</h2>
       <p class="alert alert-light hint">Record information drawn from the source.</p>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:text/*:body/*:ab[position() = instance('i-repeatIndex')/index]" id="ab-root">
@@ -47,7 +48,7 @@
                         <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                      </xf:action>
                   </xf:select1>
-                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                   </xf:trigger>
@@ -133,7 +134,7 @@
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
@@ -219,7 +220,7 @@
                                           <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                        </xf:action>
                                     </xf:select1>
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                     </xf:trigger>
@@ -305,7 +306,7 @@
                                                    <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                 </xf:action>
                                              </xf:select1>
-                                             <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                                             <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                              </xf:trigger>
@@ -391,7 +392,7 @@
                                                             <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                          </xf:action>
                                                       </xf:select1>
-                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                                          <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                                       </xf:trigger>
@@ -477,7 +478,7 @@
                                                                      <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                                   </xf:action>
                                                                </xf:select1>
-                                                               <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
+                                                               <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                                   <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                                                   <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                                                </xf:trigger>
