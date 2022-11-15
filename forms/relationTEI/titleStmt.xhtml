@@ -13,6 +13,7 @@
          <xf:instance id="i-schemaConstraints" src="forms/relationTEI/templates/titleStmt-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-titleStmt-schemaConstraints" src="forms/relationTEI/templates/titleStmt-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-titleStmt-elementTemplate" src="forms/relationTEI/templates/titleStmt-elementTemplate.xml"></xf:instance>
+
          <xf:instance id="i-titleStmt-subforms">
             <data xmlns=""></data>
          </xf:instance>
@@ -21,6 +22,7 @@
                <index>1</index>
             </data>
          </xf:instance>
+
       </xf:model>
    </head>
    <body>
@@ -78,6 +80,7 @@
                      <xf:label><i class="bi bi-plus-circle"></i> Child Element 
                      </xf:label>
                      <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                   </xf:trigger>
@@ -208,6 +211,7 @@
                               <xf:label><i class="bi bi-plus-circle"></i> Child Element 
                               </xf:label>
                               <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
@@ -338,6 +342,7 @@
                                        <xf:label><i class="bi bi-plus-circle"></i> Child Element 
                                        </xf:label>
                                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                     </xf:trigger>
@@ -464,10 +469,12 @@
                                                    <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                 </xf:action>
                                              </xf:select1>
+
                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
                                                 <xf:label><i class="bi bi-plus-circle"></i> Child Element 
                                                 </xf:label>
                                                 <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                              </xf:trigger>
