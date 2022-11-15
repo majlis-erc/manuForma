@@ -191,12 +191,6 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" class="nav-link"><xf:label><span data-feather="home"></span> Admin Page  </xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-admin"></xf:toggle>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link"><xf:label>Header  </xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
@@ -489,38 +483,21 @@
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                  <h1 class="h2">Edit MS TEI records</h1>
+                  <h1 class="h2"><xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output></h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><span data-feather="home"></span> Admin Metadata  </xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-save" appearance="minimal"><xf:label> Save to Database </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal"><xf:label> View XML </xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
                </div>
-               <p class="alert alert-light hint">Create and Edit Manuscript Records Record information pertaining to the institutions
-                  and people behind the project. The identifier is the major reference unit of a manuscript
-                  where Information can be added on the holding institution and references to existing
-                  cataloging data. Define the Type of Manuscript. Describe the textual contents in detail
-                  or in general terms. Describe the writing material of the manuscript. Describe the
-                  text layout of the manuscript. If necessary, you can define multiple text layouts.
-                  Describe the scribal hands of the manuscript. If there are multiple hands, use separate
-                  description containers. Describe any additions to the manuscript that were made after
-                  its original production. Describe the binding of the manuscript. Add descriptions
-                  of the manuscript from earlier catalogs and internal library records. Describe the
-                  production of the manuscript, traces left by previous owners, and how it was acquired
-                  by its present library. The identifier is the major reference unit of a codicological
-                  unit where Information can be added on the holding institution and references to existing
-                  cataloging data. Describe the textual contents in detail or in general terms. Describe
-                  the writing material of the codicological unit. Describe the text layout of the codicological
-                  unit. If necessary, you can define multiple text layouts. Describe the scribal hands
-                  of the codicological unit. If there are multiple hands, use separate description containers.
-                  Describe any additions to the codicological unit that were made after its original
-                  production. Describe the production of the codicological unit, traces left by previous
-                  owners, and how it was acquired by its present library.</p>
+               <p class="alert alert-light hint">Create and Edit Manuscript Records</p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
                      <div class="fileLoading">
