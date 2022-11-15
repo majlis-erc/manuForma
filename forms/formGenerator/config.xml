@@ -1,68 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <!-- Branding name for website, used for building HTML nav -->
-    <formBrandName>manuForma</formBrandName>
-    <!-- Internal/eXist location of application, used for building HTML nav -->
+    <appTitle>manuForma</appTitle>
+    <formTitle>Edit Relation TEI Records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
-    <!-- Title/h1 for form -->
-    <formTitle>Edit Works TEI records</formTitle>
-    <!-- Form name, used to create form element and links to forms and subforms -->
-    <formName>worksTEI</formName>
-    <!-- Form author -->
+    <formName>relationTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
-    <!-- Form description -->
-    <formDesc>Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World.</formDesc>
+    <formDesc>Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
+
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
-    <!-- Saving and managing created TEI files -->
     <recordManagement>
         <saveOptions>
             <option name="github" enable="true">
                 <parameter name="githubRepoName">majlis-data</parameter>
-                <parameter name="githubPath">data/works/tei/</parameter>
+                <parameter name="githubPath">data/relations/tei/</parameter>
                 <parameter name="githubOwner">majlis-erc</parameter>
                 <parameter name="githubBranch">main</parameter>
             </option>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/works/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/relations/tei</parameter>
             </option>
             <option name="download" enable="true"/>
         </saveOptions>
         <retrieveOptions>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/works/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/relations/tei</parameter>
+
             </option>
         </retrieveOptions>
     </recordManagement>
-    <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
     <blankTemplates>
-        <template name="Work Template" src="/forms/templates/work-fulltemplate.xml"/>
+        <template name="Relations Template" src="/forms/templates/relations-fulltemplate.xml"/>
+
     </blankTemplates>
-    
-    <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
-        <!--        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"></lookup>-->
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
-        <!--        <lookup api="http://localhost:8080/exist/apps/majlis/api/search/placeName?q=" elementName="placeName" formName="placeName" lookupLabel="Look up places"></lookup>-->
-        <popup formName="personTEI" elementName="persName" label="New Persons"/>
-        <lookup api="http://44.192.15.2/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
-        <!--        <lookup api="http://localhost:8080/exist/apps/majlis/api/search/placeName?q=" elementName="placeName" formName="placeName" lookupLabel="Look up places"></lookup>-->
-        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
+        <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
+        <popup formName="personTEI" elementName="persName" label="Create New Person Record"/>
+        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
+        <popup formName="placeTEI" elementName="placeName" label="Create New Place Record"/>
+        <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up Zotero record"/>
+        <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
+        <popup formName="worksTEI" elementName="title" label="Create New Work Record"/>
+        <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
+
     </lookups>
     <!--
-        For better performance the TEI records are into sections. Each section will output a form. 
-        This will allow better load and response time for forms, and a step-by-step method of editing records. 
-        In process records can be stored in the eXist-db database or downloaded to the file system, where they can be loaded 
+        For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
+        and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
         into the form again as needed. 
         
         List forms in order of editing preference.
+        additions
     -->
     <subforms>
-        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
-            <formDesc>Record title information</formDesc>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no">
+            <formDesc>Record information about the projects in which these data was generated.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:text/tei:body/tei:ab" formName="relation" formLabel="Relation">
+            <formDesc>Record information drawn from the source.</formDesc>
+            <localSchema src="../schemas/relations-schema.xml"/>
+            <globalSchema src="../schemas/relations-schema.xml"/>
+            <xmlTemplate src="../templates/relations-template.xml"/>
+
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibl" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
