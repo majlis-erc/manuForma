@@ -77,6 +77,48 @@
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Define the Type of Manuscript.</formDesc>
+            <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
+                <localSchema src="../schemas/mss-msidentifier.xml"/>
+                <globalSchema src="../schemas/mss-msidentifier.xml"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+                <formDesc>The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
+            </subform>
+            <subform xpath="tei:msContents" formName="msContents" formLabel="Content Description">
+                <localSchema src="../schemas/mss-msitem.xml"/>
+                <globalSchema src="../schemas/mss-msitem.xml"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
+            </subform>
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support">
+                <localSchema src="../schemas/mss-support.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+                <formDesc>Describe the writing material of the codicological unit.</formDesc>
+            </subform>
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
+                <localSchema src="../schemas/mss-layout.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts.</formDesc>
+            </subform>
+            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+                <localSchema src="../schemas/mss-hand.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+                <formDesc>Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers.</formDesc>
+            </subform>
+            <subform xpath="tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
+                <localSchema src="../schemas/mss-additions.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Describe any additions to the codicological unit that were made after its original production.</formDesc>
+            </subform>       
+            <subform xpath="tei:history" formName="history" formLabel="History" repeat="no">
+                <localSchema src="../schemas/mss-history.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library.</formDesc>
+            </subform>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content Description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
