@@ -6,6 +6,7 @@
     <formName>relationTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
     <formDesc>Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
+    
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <recordManagement>
@@ -24,11 +25,13 @@
         <retrieveOptions>
             <option name="exist-db" enable="true">
                 <parameter name="eXistCollection">/db/apps/majlis-data/data/relations/tei</parameter>
+                
             </option>
         </retrieveOptions>
     </recordManagement>
     <blankTemplates>
         <template name="Relations Template" src="/forms/templates/relations-fulltemplate.xml"/>
+        
     </blankTemplates>
     <lookups>
         <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
@@ -39,6 +42,7 @@
         <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
         <popup formName="worksTEI" elementName="title" label="Create New Work Record"/>
         <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
+        
     </lookups>
     <!--
         For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
@@ -60,6 +64,12 @@
             <localSchema src="../schemas/relations-schema.xml"/>
             <globalSchema src="../schemas/relations-schema.xml"/>
             <xmlTemplate src="../templates/relations-template.xml"/>
-            </subform>
+            
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibl" repeat="no">
+            <localSchema src="../schemas/work-schema.xml"/>
+            <globalSchema src="../schemas/work-schema.xml"/>
+            <xmlTemplate src="../templates/work-fulltemplate.xml"/>
+        </subform>        
     </subforms>
 </config>
