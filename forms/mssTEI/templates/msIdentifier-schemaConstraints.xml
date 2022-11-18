@@ -111,30 +111,29 @@
    </msName>
    <altIdentifier ident="altIdentifier"
                   elementName="altIdentifier"
-                  elementLabel="Alternate Identifier &lt;altIdentifier/&gt;"
+                  elementLabel="Add Alternate Identifier &lt;altIdentifier/&gt;"
                   minOccur=""
                   maxOccur=""
                   path="/*:msIdentifier/*:altIdentifier"
                   currentLevel="2"
                   popup="2">
       <desc>Alternate Identifiers. This can be older shelf marks and identifiers in databases
-                            like IMHM, SfarData and Ktiv. Specify where this identifier is used in the "type" attribute.</desc>
+                            like IMHM, SfarData, Ktiv, FGP and old (identifiers). Specify where this identifier is used in the "type" attribute.</desc>
       <availableAtts elementName="altIdentifier">
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  mode="change">
-                                <valList type="open" mode="change">
-                                    <valItem mode="add" ident="IMHM"/>
-                                    <valItem mode="add" ident="SfarData"/>
-                                    <valItem mode="add" ident="Ktiv"/>
-                                </valList>
-                            </attDef>
+            <valList type="open" mode="change">
+               <valItem mode="add" ident="IMHM"/>
+               <valItem mode="add" ident="SfarData"/>
+               <valItem mode="add" ident="Ktiv"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
             <element ident="idno"/>
-            <element ident="note"/>
          </child>
       </childElements>
    </altIdentifier>
@@ -154,19 +153,6 @@
          <child/>
       </childElements>
    </idno>
-   <note ident="note"
-         elementName="note"
-         elementLabel="note"
-         minOccur=""
-         maxOccur=""
-         path="/*:msIdentifier/*:altIdentifier/*:note"
-         currentLevel="3"
-         popup="3">
-      <availableAtts elementName="note"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </note>
    <objectName ident="objectName"
                elementName="objectName"
                elementLabel="objectName"

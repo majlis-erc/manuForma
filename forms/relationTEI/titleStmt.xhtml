@@ -12,15 +12,9 @@
       <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-mss">
          <xf:instance id="i-schemaConstraints" src="forms/relationTEI/templates/titleStmt-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-titleStmt-schemaConstraints" src="forms/relationTEI/templates/titleStmt-schemaConstraints.xml"></xf:instance>
-         <xf:instance id="i-titleStmt-elementTemplate" src="forms/relationTEI/templates/titleStmt-elementTemplate.xml"></xf:instance>
-         <xf:instance id="i-titleStmt-subforms">
-            <data xmlns=""></data>
-         </xf:instance>
-         <xf:instance id="i-titleStmt-repeatIndex">
-            <data xmlns="">
-               <index>1</index>
-            </data>
-         </xf:instance>
+         <xf:instance id="i-titleStmt-subforms"><data xmlns=""></data></xf:instance>
+         <xf:instance id="i-titleStmt-repeatIndex"><data xmlns="">
+               <index>1</index></data></xf:instance>
       </xf:model>
    </head>
    <body>
@@ -74,10 +68,7 @@
                         <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                      </xf:action>
                   </xf:select1>
-                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                     <xf:label><i class="bi bi-plus-circle"></i> Child Element 
-                     </xf:label>
-                     <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                   </xf:trigger>
@@ -91,11 +82,7 @@
                         </xf:load>
                      </xf:action>
                   </xf:trigger>
-                  <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
-                     <xf:label><i class="bi bi-plus-circle"></i> New  
-                        <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
-                     </xf:label>
-                     <xf:action ev:event="DOMActivate">
+                  <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> New  <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> </xf:label><xf:action ev:event="DOMActivate">
                         <xf:load show="new">
                            <xf:resource value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
                         </xf:load>
@@ -144,7 +131,8 @@
                         </xf:trigger>
                      </div>
                   </div>
-               </xf:repeat>
+                   
+                  </xf:repeat>
             </div>
             <xf:repeat id="titleStmtRepeatLevel1" ref="./*[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
                <div class="nested">
@@ -202,10 +190,7 @@
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                              <xf:label><i class="bi bi-plus-circle"></i> Child Element 
-                              </xf:label>
-                              <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
@@ -219,11 +204,7 @@
                                  </xf:load>
                               </xf:action>
                            </xf:trigger>
-                           <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
-                              <xf:label><i class="bi bi-plus-circle"></i> New  
-                                 <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
-                              </xf:label>
-                              <xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> New  <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:load show="new">
                                     <xf:resource value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
                                  </xf:load>
@@ -272,7 +253,8 @@
                                  </xf:trigger>
                               </div>
                            </div>
-                        </xf:repeat>
+                            
+                           </xf:repeat>
                      </div>
                      <xf:repeat id="titleStmtRepeatLevel2" ref="./*[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
                         <div class="nested">
@@ -330,10 +312,7 @@
                                           <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                        </xf:action>
                                     </xf:select1>
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                                       <xf:label><i class="bi bi-plus-circle"></i> Child Element 
-                                       </xf:label>
-                                       <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                     </xf:trigger>
@@ -347,11 +326,7 @@
                                           </xf:load>
                                        </xf:action>
                                     </xf:trigger>
-                                    <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
-                                       <xf:label><i class="bi bi-plus-circle"></i> New  
-                                          <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
-                                       </xf:label>
-                                       <xf:action ev:event="DOMActivate">
+                                    <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> New  <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> </xf:label><xf:action ev:event="DOMActivate">
                                           <xf:load show="new">
                                              <xf:resource value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
                                           </xf:load>
@@ -400,7 +375,8 @@
                                           </xf:trigger>
                                        </div>
                                     </div>
-                                 </xf:repeat>
+                                     
+                                    </xf:repeat>
                               </div>
                               <xf:repeat id="titleStmtRepeatLevel3" ref="./*[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
                                  <div class="nested">
@@ -458,10 +434,7 @@
                                                    <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                 </xf:action>
                                              </xf:select1>
-                                             <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                                                <xf:label><i class="bi bi-plus-circle"></i> Child Element 
-                                                </xf:label>
-                                                <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-titleStmt-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                                             <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Child Element</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-elementTemplate')//*[local-name() = instance('i-insert-elements')//*:element]" position="after"></xf:insert>
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                                                 <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                                              </xf:trigger>
@@ -475,11 +448,7 @@
                                                    </xf:load>
                                                 </xf:action>
                                              </xf:trigger>
-                                             <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
-                                                <xf:label><i class="bi bi-plus-circle"></i> New  
-                                                   <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> 
-                                                </xf:label>
-                                                <xf:action ev:event="DOMActivate">
+                                             <xf:trigger appearance="minimal" ref=".[instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> New  <xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output> </xf:label><xf:action ev:event="DOMActivate">
                                                    <xf:load show="new">
                                                       <xf:resource value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
                                                    </xf:load>
@@ -528,7 +497,8 @@
                                                    </xf:trigger>
                                                 </div>
                                              </div>
-                                          </xf:repeat>
+                                              
+                                             </xf:repeat>
                                        </div>
                                     </div>
                                  </div>
