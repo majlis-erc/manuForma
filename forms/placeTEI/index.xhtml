@@ -15,11 +15,16 @@
                     return d.toISOString();
                     }
                 </script><xf:model id="m-mss">
-         <xf:instance id="i-rec"><data></data></xf:instance>
+         <xf:instance id="i-rec">
+            <data></data>
+         </xf:instance>
          <xf:instance id="i-user" src="userInfo"></xf:instance>
-         <xf:instance id="i-login"><data>
+         <xf:instance id="i-login">
+            <data>
                <user></user>
-               <password></password></data></xf:instance>
+               <password></password>
+            </data>
+         </xf:instance>
          <xf:instance id="i-admin">
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
                <editor role="creator"></editor>
@@ -32,14 +37,29 @@
          <xf:instance id="i-upload">
             <xml-base64 xsi:type="xs:base64Binary"></xml-base64>
          </xf:instance>
-         <xf:instance id="i-search"><data><q></q></data></xf:instance>
-         <xf:instance id="i-search-results"><data></data></xf:instance>
-         <xf:instance id="i-selected-search"><data></data></xf:instance>
-         <xf:instance id="i-selected"><data></data></xf:instance>
-         <xf:instance id="i-selectTemplate"><data><template name="Place Template" src="/forms/templates/place-fulltemplate.xml"></template></data></xf:instance>
-         <xf:instance id="i-subforms"><data>
+         <xf:instance id="i-search">
+            <data><q></q></data>
+         </xf:instance>
+         <xf:instance id="i-search-results">
+            <data></data>
+         </xf:instance>
+         <xf:instance id="i-selected-search">
+            <data></data>
+         </xf:instance>
+         <xf:instance id="i-selected">
+            <data></data>
+         </xf:instance>
+         <xf:instance id="i-selectTemplate">
+            <data>
+               <template name="Place Template" src="/forms/templates/place-fulltemplate.xml"></template>
+            </data>
+         </xf:instance>
+         <xf:instance id="i-subforms">
+            <data>
                <subform formName="titleStmt" selected="false"></subform>
-               <subform formName="listPlace" selected="false"></subform></data></xf:instance>
+               <subform formName="listPlace" selected="false"></subform>
+            </data>
+         </xf:instance>
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
@@ -74,29 +94,41 @@
                      <parameter name="githubOwner">majlis-erc</parameter>
                      
                      <parameter name="githubBranch">main</parameter>
-                     </option>
+                     
+                  </option>
                   
                   <option name="exist-db" enable="true">
                      
                      <parameter name="eXistCollection">/db/apps/majlis-data/data/places/tei</parameter>
-                     </option>
+                     
+                  </option>
                   
                   <option name="download" enable="true"></option>
-                  </saveOptions>
+                  
+               </saveOptions>
                
                <retrieveOptions>
                   
                   <option name="exist-db" enable="true">
                      
                      <parameter name="eXistCollection">/db/apps/majlis-data/data/places/tei</parameter>
-                     </option>
-                  </retrieveOptions>
-               </recordManagement>
+                     
+                  </option>
+                  
+               </retrieveOptions>
+               
+            </recordManagement>
          </xf:instance>
-         <xf:instance id="i-move"><data xmlns="">
-               <tmp></tmp></data></xf:instance>
-         <xf:instance id="i-repeatIndex"><data xmlns="">
-               <index>1</index></data></xf:instance>
+         <xf:instance id="i-move">
+            <data xmlns="">
+               <tmp></tmp>
+            </data>
+         </xf:instance>
+         <xf:instance id="i-repeatIndex">
+            <data xmlns="">
+               <index>1</index>
+            </data>
+         </xf:instance>
          <xf:instance id="i-prettyPrint" src="forms/formGenerator/prettyPrint.xsl"></xf:instance>
          <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
             <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"></xf:resource>
@@ -147,7 +179,8 @@
             </xf:action>
             <xf:action ev:event="xforms-submit-error">
                <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email
-                  them to us.</xf:message>
+                  them to us.
+               </xf:message>
             </xf:action>
          </xf:submission>
       </xf:model>
@@ -163,7 +196,9 @@
                   </ul><span class="d-flex" role="search" id="userInfo">
                      <ul class="nav navbar-nav">
                         <li>
-                           <p class="navbar-btn"><xf:output xmlns="http://www.w3.org/2002/xforms" value="instance('i-user')//*:user" class="btn btn-sm btn btn-outline-light"></xf:output></p>
+                           <p class="navbar-btn">
+                              <xf:output xmlns="http://www.w3.org/2002/xforms" value="instance('i-user')//*:user" class="btn btn-sm btn btn-outline-light"></xf:output>
+                           </p>
                         </li>
                      </ul></span></div>
             </div>
@@ -175,13 +210,18 @@
                <div class="position-sticky pt-3">
                   <ul class="nav flex-column">
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" class="nav-link"><xf:label><span data-feather="home"></span> Main Page  </xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger appearance="minimal" class="nav-link">
+                           <xf:label><span data-feather="home"></span> Main Page  
+                           </xf:label>
+                           <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-main-entry"></xf:toggle>
                            </xf:action>
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link"><xf:label>Title  </xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link">
+                           <xf:label>Title  </xf:label>
+                           <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
@@ -193,7 +233,11 @@
                      </li>
                      <xf:repeat ref="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() &gt; 1]" id="navRepeattitleStmt">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Title  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Title  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
                                  <xf:unload targetid="subform"></xf:unload>
                                  <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
@@ -205,7 +249,9 @@
                         </li>
                      </xf:repeat>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPlace']" class="nav-link"><xf:label>Place  </xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPlace']" class="nav-link">
+                           <xf:label>Place  </xf:label>
+                           <xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
@@ -217,7 +263,11 @@
                      </li>
                      <xf:repeat ref="instance('i-rec')//descendant::*:body/*:listPlace/*:place[position() &gt; 1]" id="navRepeatlistPlace">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Place  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link">
+                              <xf:label>Place  [
+                                 <xf:output value="position() + 1"></xf:output>]
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
                                  <xf:unload targetid="subform"></xf:unload>
                                  <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
@@ -233,50 +283,85 @@
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                  <h1 class="h2"><xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output></h1>
+                  <h1 class="h2">
+                     Edit Record: 
+                     <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output>
+                  </h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
-                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><span data-feather="home"></span> Admin Metadata  </xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm">
+                              <xf:label><span data-feather="home"></span> Admin Metadata  
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-admin"></xf:toggle>
                               </xf:action>
                            </xf:trigger>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
+                              <xf:label> Submit to GitHub </xf:label>
+                           </xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
+                              <xf:label> Download XML (Chrome Only)</xf:label>
+                           </xf:submit>
                         </div>
                      </div>
                   </div>
                </div>
                <p class="alert alert-light hint">Create and edit Place records for MAJLIS: The Transformation of Jewish Literature
-                  in Arabic in the Islamicate World.</p>
+                  in Arabic in the Islamicate World.
+               </p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
                      <div class="fileLoading">
                         <h4 class="h6">New <small class="text-muted">(from template)</small></h4>
                         <div class="input-group mb-3">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')"><xf:label></xf:label><xf:itemset ref="instance('i-selectTemplate')//*:template"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
+                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')">
+                              <xf:label></xf:label>
+                              <xf:itemset ref="instance('i-selectTemplate')//*:template">
+                                 <xf:label ref="@name"></xf:label>
+                                 <xf:value ref="@src"></xf:value>
                               </xf:itemset>
                            </xf:select1>
-                           <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal"><xf:label> Load template </xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
+                              <xf:label> Load template </xf:label>
+                           </xf:submit>
                         </div>
                      </div>
                      <div class="fileLoading">
                         <h4 class="h6">Search <small class="text-muted">(database)</small></h4>
-                        <div class="input-group mb-3"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
+                        <div class="input-group mb-3">
+                           <xf:input class="form-control" ref="instance('i-search')" incremental="true">
+                              <xf:label></xf:label>
+                           </xf:input>
+                           <xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal">
+                              <xf:label> Search </xf:label>
+                           </xf:submit>
+                           <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
+                              <xf:label> Browse </xf:label>
+                           </xf:submit>
                         </div>
                         <div class="input-group mb-3">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
+                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
+                              <xf:label></xf:label>
+                              <xf:itemset ref="instance('i-search-results')//*:record">
+                                 <xf:label ref="@name"></xf:label>
+                                 <xf:value ref="@src"></xf:value>
                               </xf:itemset>
                            </xf:select1>
-                           <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load selected record </xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
+                              <xf:label> Load selected record </xf:label>
+                           </xf:submit>
                         </div>
                      </div>
                      <div class="fileLoading">
                         <h4 class="h6">Upload <small class="text-muted">(from file system)</small></h4>
                         <div class="input-group mb-3">
-                           <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal"><xf:label></xf:label></xf:upload>
-                           <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal"><xf:label>Load</xf:label></xf:submit>
+                           <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
+                              <xf:label></xf:label>
+                           </xf:upload>
+                           <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
+                              <xf:label>Load</xf:label>
+                           </xf:submit>
                         </div>
                      </div>
                      <div class="card preview">
@@ -288,13 +373,28 @@
                   </xf:case>
                   <xf:case id="view-admin">
                      <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
-                        <div class="input-group mb-3"><xf:input ref="." class="form-control"><xf:label>Creator: </xf:label><xf:alert>Add your name</xf:alert></xf:input><xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                        <div class="input-group mb-3">
+                           <xf:input ref="." class="form-control">
+                              <xf:label>Creator: </xf:label>
+                              <xf:alert>Add your name</xf:alert>
+                           </xf:input>
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+                              <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
+                              <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                            </xf:trigger>
                         </div>
                      </xf:repeat>
-                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add Creator
-                           </xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
-                     </xf:trigger><br /><div class="input-group mb-3"><xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                        <xf:label><i class="bi bi-plus-circle"></i> Add Creator
+                           
+                        </xf:label>
+                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
+                     </xf:trigger><br /><div class="input-group mb-3">
+                        <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
+                           <xf:label>URI: </xf:label>
+                           <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
+                        </xf:input>
+                     </div>
                   </xf:case>
                   <xf:case id="view-data-entry">
                      <xf:group ref="instance('i-rec')">
