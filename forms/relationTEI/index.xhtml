@@ -219,15 +219,6 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" class="nav-link">
-                           <xf:label><span data-feather="home"></span> Admin Page  
-                           </xf:label>
-                           <xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-admin"></xf:toggle>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link">
                            <xf:label>Header  </xf:label>
                            <xf:action ev:event="DOMActivate">
@@ -298,6 +289,13 @@
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm">
+                              <xf:label><span data-feather="home"></span> Admin Metadata  
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
                               <xf:label> Submit to GitHub </xf:label>
                            </xf:submit>
@@ -309,8 +307,7 @@
                   </div>
                </div>
                <p class="alert alert-light hint">Create and edit relation records for MAJLIS: The Transformation of Jewish Literature
-                  in Arabic in the Islamicate World Record information about the projects in which these
-                  data was generated. Record information drawn from the source.
+                  in Arabic in the Islamicate World
                </p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
