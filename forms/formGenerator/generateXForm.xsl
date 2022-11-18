@@ -673,7 +673,7 @@
                                         </xf:trigger>
                                     </li>
                                     -->
-                                    <xsl:for-each select="$configDoc//subforms/subform">
+                                    <xsl:for-each select="$configDoc//subforms/subform[not(@formLabel = 'Header')]">
                                         <xsl:variable name="subformPath" select="@xpath"/>
                                         <xsl:variable name="elementName" select="substring-after(tokenize(@xpath,'/')[last()],':')"/>
                                         <xsl:variable name="path" select="replace(replace(replace(replace(replace($subformPath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//'),'tei:','*:')"/>
@@ -719,7 +719,7 @@
                         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
-                                    <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"/>
+                                   Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"/>
                                 </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
@@ -730,6 +730,27 @@
                                                     <xf:toggle case="view-admin"/>
                                                 </xf:action>
                                             </xf:trigger>
+                                            <xsl:for-each select="$configDoc//subforms/subform[@formLabel = 'Header']">
+                                                <xsl:variable name="subformPath" select="@xpath"/>
+                                                <xsl:variable name="elementName" select="substring-after(tokenize(@xpath,'/')[last()],':')"/>
+                                                <xsl:variable name="path" select="replace(replace(replace(replace(replace($subformPath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//'),'tei:','*:')"/>
+                                                <xsl:variable name="repeatIndexId" select="concat('navRepeat',@formName)"/>
+                                                <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = '{string(@formName)}']" class="btn btn-outline-secondary btn-sm">
+                                                        <xf:label><xsl:value-of select="string(@formLabel)"/>  </xf:label>
+                                                        <xf:action ev:event="DOMActivate">
+                                                            <xf:toggle case="view-data-entry"/>
+                                                            <xf:unload targetid="subform"/>
+                                                            <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"/>
+                                                            <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="{concat('form.xq?form=forms/',$mainFormName,'/',@formName,'.xhtml')}"/>
+                                                            <xf:setvalue ref="@selected" value="'true'"/>
+                                                            <xsl:element name="setvalue" namespace="http://www.w3.org/2002/xforms">
+                                                                <xsl:attribute name="ref">instance('i-repeatIndex')/index</xsl:attribute>
+                                                                <xsl:attribute name="value">1</xsl:attribute>
+                                                            </xsl:element>
+                                                        </xf:action>
+                                                    </xf:trigger>
+                                                
+                                            </xsl:for-each>
                                             <xsl:if test="$configDoc//saveOptions/option[@name='github'][@enable='true']">
                                                 <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
                                                     <xf:label> Submit to GitHub </xf:label>

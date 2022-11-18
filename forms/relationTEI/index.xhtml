@@ -219,36 +219,6 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link">
-                           <xf:label>Header  </xf:label>
-                           <xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/relationTEI/titleStmt.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() &gt; 1]" id="navRepeattitleStmt">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link">
-                              <xf:label>Header  [
-                                 <xf:output value="position() + 1"></xf:output>]
-                              </xf:label>
-                              <xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/relationTEI/titleStmt.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeattitleStmt') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'relation']" class="nav-link">
                            <xf:label>Relation  </xf:label>
                            <xf:action ev:event="DOMActivate">
@@ -284,6 +254,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                   <h1 class="h2">
+                     Edit Record: 
                      <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output>
                   </h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
@@ -294,6 +265,17 @@
                               </xf:label>
                               <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="btn btn-outline-secondary btn-sm">
+                              <xf:label>Header  </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/relationTEI/titleStmt.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
