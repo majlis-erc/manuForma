@@ -1708,13 +1708,13 @@
             <xsl:attribute name="path" select="$path"/>
             <xsl:attribute name="currentLevel" select="$currentLevel"/>
             <xsl:attribute name="popup" select="$currentLevel"/>
-            <xsl:if test="$configDoc/descendant::*:lookup[@elementName = $elementName]">
+            <xsl:if test="$configDoc/descendant::*:lookup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
                 <lookup>
                     <xsl:copy-of select="$configDoc/descendant::*:lookup[@elementName = $elementName]/@*"/>
                     <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',$elementName,'.xhtml')"/>
                 </lookup>
             </xsl:if>      
-            <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName]">
+            <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
                 <popup>
                     <xsl:copy-of select="$configDoc/descendant::*:popup[@elementName = $elementName]/@*"/>
                     <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
