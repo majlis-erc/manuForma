@@ -61,7 +61,7 @@
     -->
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no">
-            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
+            <formDesc>Entry-ID / URI.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -70,105 +70,118 @@
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
+            <formDesc>Location and name of holding institution / Shelfmark(s) (current and old) / References to existing catalogues and cataloguing data.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Define the Type of Manuscript.</formDesc>
+            <formDesc>Type of manuscript (single / composite (consisting of subsequently joined components) / multiple (produced as one unit).</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content Description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
+            <formDesc>Title(s) / Author(s) / Language / Discipline &amp; Genre / Folios / Incipit / Explicit / Colophon.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
             <localSchema src="../schemas/mss-support.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the writing material of the manuscript.</formDesc>
+            <formDesc>Writing Material / Codicology (physical aspects of the codex) / Quiring / Origin of Materials / Conservation.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
             <localSchema src="../schemas/mss-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the text layout of the manuscript. If necessary, you can define multiple text layouts.</formDesc>
+            <formDesc>Page Layout / Arrangement and use of space / Pricking / Ruling.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers.</formDesc>
+            <formDesc>Palaeography / Description of Scribal Hand / Place &amp; Date of Copy.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
             <localSchema src="../schemas/mss-additions.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe any additions to the manuscript that were made after its original production.</formDesc>
+            <formDesc>Readers’ notes / Certificate or note of transmission / Statements of ownership, sale, loan, bequest.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc" formName="bindingDesc" formLabel="Binding Description" repeat="no">
             <localSchema src="../schemas/mss-binding.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the binding of the manuscript.</formDesc>
+            <formDesc>Type, time, and place of binding.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage Data" repeat="no">
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
+            <formDesc>Previous records of manuscript conservation and descriptions.</formDesc>
         </subform> 
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="History" repeat="no">
             <localSchema src="../schemas/mss-history.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library.</formDesc>
+            <formDesc>Production of the manuscript / Traces left by previous owners / Acquisition by its present library.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
             <xmlTemplate src="../templates/ms-part-example.xml"/>
-            <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
+            
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identifier" repeat="no">
                 <localSchema src="../schemas/mss-msidentifier.xml"/>
                 <globalSchema src="../schemas/mss-msidentifier.xml"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Location and name of holding institution / Shelfmark(s) (current and old) / References to existing catalogues and cataloguing data.</formDesc>
             </subform>
-            <subform xpath="tei:msContents" formName="msContents" formLabel="Content Description">
+            <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
+                <localSchema src="../schemas/mss-definition.xml"/>
+                <globalSchema src="../schemas/mss-definition.xml"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Type of manuscript (single / composite (consisting of subsequently joined components) / multiple (produced as one unit).</formDesc>
+            </subform>
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content Description" repeat="no">
                 <localSchema src="../schemas/mss-msitem.xml"/>
                 <globalSchema src="../schemas/mss-msitem.xml"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
+                <formDesc>Title(s) / Author(s) / Language / Discipline &amp; Genre / Folios / Incipit / Explicit / Colophon.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support">
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
                 <localSchema src="../schemas/mss-support.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>Describe the writing material of the codicological unit.</formDesc>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Writing Material / Codicology (physical aspects of the codex) / Quiring / Origin of Materials / Conservation.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
                 <localSchema src="../schemas/mss-layout.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts.</formDesc>
+                <formDesc>Page Layout / Arrangement and use of space / Pricking / Ruling.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
                 <localSchema src="../schemas/mss-hand.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers.</formDesc>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Palaeography / Description of Scribal Hand / Place &amp; Date of Copy.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
                 <localSchema src="../schemas/mss-additions.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe any additions to the codicological unit that were made after its original production.</formDesc>
-            </subform>       
-            <subform xpath="tei:history" formName="history" formLabel="History" repeat="no">
+                <formDesc>Readers’ notes / Certificate or note of transmission / Statements of ownership, sale, loan, bequest.</formDesc>
+            </subform>
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage Data" repeat="no">
+                <localSchema src="../schemas/mss-accMat.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Previous records of manuscript conservation and descriptions.</formDesc>
+            </subform> 
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="History" repeat="no">
                 <localSchema src="../schemas/mss-history.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library.</formDesc>
+                <formDesc>Production of the manuscript / Traces left by previous owners / Acquisition by its present library.</formDesc>
             </subform>
         </subform>
     </subforms>
