@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <decoDesc ident="decoDesc"
+             elementName="decoDesc"
+             elementLabel="*Text Layout Container &lt;decoDesc/&gt;"
+             minOccur=""
+             maxOccur=""
+             path="/*:decoDesc"
+             currentLevel="1"
+             popup="1">
+      <desc>Note your observations about graphic marks, spaces between paragraphs and other markers that structure the text in one of the fields below.</desc>
+      <availableAtts elementName="decoDesc"/>
+      <childElements>
+         <child>
+            <element ident="summary"/>
+            <element ident="decoNote"/>
+         </child>
+      </childElements>
+   </decoDesc>
+   <summary ident="summary"
+            elementName="summary"
+            elementLabel="Text Layout Summary &lt;summary/&gt;"
+            minOccur=""
+            maxOccur=""
+            path="/*:decoDesc/*:summary"
+            currentLevel="2"
+            popup="2">
+      <desc>Make a blanket statement about the text's layout.</desc>
+      <availableAtts elementName="summary"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </summary>
+   <decoNote ident="decoNote"
+             elementName="decoNote"
+             elementLabel="Text Layout Note &lt;decoNote/&gt;"
+             minOccur=""
+             maxOccur=""
+             path="/*:decoDesc/*:decoNote"
+             currentLevel="2"
+             popup="2">
+      <desc>Describe graphic marks, spaces between paragraphs and other markers that structure the text. Choose the appropriate attribute for the @type field from the list.</desc>
+      <availableAtts elementName="decoNote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="color"
+                 usage="opt"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="pastedown"
+                 usage="opt">
+            <datatype maxOccurs="3">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="semi">
+               <valItem ident="UTI">
+                  <desc>Under the turn-ins. The pastedown is pasted under the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="OTI">
+                  <desc>Over the turn-ins. The pastedown is pasted over the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="L">
+                  <desc>Left pastedown, on the upper board.</desc>
+               </valItem>
+               <valItem ident="R">
+                  <desc>Right pastedown, on the lower board.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="rend"
+                 mode="replace"
+                 usage="opt">
+            <valList type="open">
+               <valItem ident="damaged"/>
+               <valItem ident="intact"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="repaired"
+                 usage="opt">
+            <datatype maxOccurs="1">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="Y"/>
+               <valItem ident="N"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="subtype"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
+            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
+            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
+          c'est nécessaire.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <remarks versionDate="2013-01-13" xml:lang="en">
+               <p>The <att>subtype</att> attribute may be used to provide any
+sub-classification for the element additional to that provided by its
+<att>type</att> attribute.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
+                        sous-classification pour cet élément, en plus de celle fournie par son
+                        propre attribut <att>type</att>.</p>
+            </remarks>
+            <remarks xml:lang="es" versionDate="2008-04-06">
+               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
+<att>type</att> (tipo) de atributo.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p>
+	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
+    素の下位分類を示すために使われる．
+    </p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="noGraphicMarksOfTextNavigation"/>
+               <valItem mode="add" ident="spaceBetweenParagraphs"/>
+               <valItem mode="add" ident="rubric"/>
+               <valItem mode="add" ident="secitonNumbering"/>
+               <valItem mode="add" ident="EnlargedTitlesIncipits"/>
+               <valItem mode="add" ident="explicits"/>
+               <valItem mode="add" ident="colors"/>
+               <valItem mode="add" ident="changeScriptRegister"/>
+               <valItem mode="add" ident="changeScriptType"/>
+               <valItem mode="add" ident="Decoration"/>
+               <valItem mode="add" ident="other"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="xml:id"
+                 mode="change"
+                 usage="req"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </decoNote>
+</TEI>

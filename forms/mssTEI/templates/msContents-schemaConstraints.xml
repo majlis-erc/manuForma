@@ -70,7 +70,7 @@
                <valItem mode="add" ident="linguistics"/>
                <valItem mode="add" ident="bellesLettres"/>
                <valItem mode="add" ident="poetry"/>
-               <valItem mode="add" ident="magic"/>
+               <valItem mode="add" ident="occultScience"/>
                <valItem mode="add" ident="targum"/>
                <valItem mode="add" ident="tafsir"/>
             </valList>
@@ -294,30 +294,34 @@
    </textLang>
    <rubric ident="rubric"
            elementName="rubric"
-           elementLabel="Rubric &lt;rubric/&gt;"
+           elementLabel="Text Division &lt;rubric/&gt;"
            minOccur=""
            maxOccur=""
            path="/*:msContents/*:msItem/*:rubric"
            currentLevel="3"
            popup="3">
-      <desc>The words through which a manuscript signals the beginning
-                            of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape or
-                            character size.</desc>
+      <desc>Note the diffent divisions that structure the text.</desc>
       <availableAtts elementName="rubric">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="textDivider"/>
+            </valList>
+         </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-            <attDef ident="xml:lang" mode="change">
-               <valList type="closed" mode="change">
-                  <valItem mode="add" ident="ar"/>
-                  <valItem mode="add" ident="en"/>
-                  <valItem mode="add" ident="he"/>
-                  <valItem mode="add" ident="he-Latn"/>
-                  <valItem mode="add" ident="ar-Latn"/>
-                  <valItem mode="add" ident="ar-Hebr"/>
-               </valList>
-            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>
