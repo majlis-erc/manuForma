@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and Edit Manuscript Records Entry-ID / URI. Location and name of holding institution / Shelfmark(s) (current and old) / References to existing catalogues and cataloguing data. Type of manuscript (single / composite (consisting of subsequently joined components) / multiple (produced as one unit). Title(s) / Author(s) / Language / Discipline &amp; Genre / Folios / Incipit / Explicit / Colophon. Writing Material / Codicology (physical aspects of the codex) / Quiring / Origin of Materials / Conservation. Page Layout / Arrangement and use of space / Pricking / Ruling. Palaeography / Description of Scribal Hand / Place &amp; Date of Copy. Graphic Markers / Numbering / Textual Dividers / Script Change. Readers’ notes / Certificate or note of transmission / Statements of ownership, sale, loan, bequest. Type, time, and place of binding. Previous records of manuscript conservation and descriptions. Production of the manuscript / Traces left by previous owners / Acquisition by its present library. Location and name of holding institution / Shelfmark(s) (current and old) / References to existing catalogues and cataloguing data. Type of manuscript (single / composite (consisting of subsequently joined components) / multiple (produced as one unit). Title(s) / Author(s) / Language / Discipline &amp; Genre / Folios / Incipit / Explicit / Colophon. Writing Material / Codicology (physical aspects of the codex) / Quiring / Origin of Materials / Conservation. Page Layout / Arrangement and use of space / Pricking / Ruling. Palaeography / Description of Scribal Hand / Place &amp; Date of Copy. Graphic Markers / Numbering / Textual Dividers / Script Change. Readers’ notes / Certificate or note of transmission / Statements of ownership, sale, loan, bequest. Previous records of manuscript conservation and descriptions. Production of the manuscript / Traces left by previous owners / Acquisition by its present library." />
+      <meta name="description" content="Create and Edit Manuscript Records Record information pertaining to the institutions and people behind the project. The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the text layout of the manuscript. If necessary, you can define multiple text layouts. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library. The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data. Describe the textual contents in detail or in general terms. Describe the writing material of the codicological unit. Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts. Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers. Describe any additions to the codicological unit that were made after its original production. Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library." />
       <title>Edit MS TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -13,7 +13,8 @@
          <xf:instance id="i-schemaConstraints" src="forms/mssTEI/templates/msPart-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-msPart-schemaConstraints" src="forms/mssTEI/templates/msPart-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-msPart-elementTemplate" src="forms/mssTEI/templates/msPart-elementTemplate.xml"></xf:instance>
-         <xf:instance id="i-msPart-subforms"><data xmlns="">
+         <xf:instance id="i-msPart-subforms">
+            <data xmlns="">
                <subform formName="msIdentifier" selected="false"></subform>
                <subform formName="objectDesc" selected="false"></subform>
                <subform formName="msContents" selected="false"></subform>
@@ -22,7 +23,6 @@
                <subform formName="handDesc" selected="false"></subform>
                <subform formName="decoDesc" selected="false"></subform>
                <subform formName="additions" selected="false"></subform>
-               <subform formName="accMat" selected="false"></subform>
                <subform formName="history" selected="false"></subform></data></xf:instance>
          <xf:instance id="i-msPart-repeatIndex"><data xmlns="">
                <index>1</index></data></xf:instance>
@@ -30,10 +30,16 @@
    </head>
    <body>
       <h2 class="h3 mainElement">
-         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]"></xf:delete>
+         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
+            <xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]"></xf:delete>
          </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-msPart-elementTemplate')/*[local-name() = 'msPart']" position="after"></xf:insert>
-         </xf:trigger>MS Part [<xf:output value="instance('i-repeatIndex')/index"></xf:output>]</h2>
+         <xf:trigger class="btn controls add" appearance="minimal">
+            <xf:label><i class="bi bi-plus-circle"></i></xf:label>
+            <xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-msPart-elementTemplate')/*[local-name() = 'msPart']" position="after"></xf:insert>
+         </xf:trigger>MS Part [
+         <xf:output value="instance('i-repeatIndex')/index"></xf:output>]
+      </h2>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]" id="msPart-root">
          <div class="container-fluid">
             <div class="row">
@@ -41,22 +47,11 @@
                   <div class="position-sticky pt-3">
                      <ul class="nav flex-column">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msIdentifier']"><xf:label>Identifier  </xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msIdentifier']"><xf:label>MS Identifier  </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
                                  <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/msIdentifier.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'objectDesc']"><xf:label>Codicological Definition  </xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
-                                 <xf:unload targetid="msPartSubform"></xf:unload>
-                                 <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/objectDesc.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
@@ -74,7 +69,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'mssSupport']"><xf:label>Support  </xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'mssSupport']">
+                              <xf:label>Support  </xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -85,7 +82,7 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'layoutDesc']"><xf:label>Page Layout  </xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'layoutDesc']"><xf:label>Text Layout  </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -96,22 +93,13 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'handDesc']"><xf:label>Hand Description  </xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'handDesc']">
+                              <xf:label>Hand Description  </xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
                                  <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/handDesc.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'decoDesc']"><xf:label>Text Layout  </xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
-                                 <xf:unload targetid="msPartSubform"></xf:unload>
-                                 <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/decoDesc.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
@@ -123,17 +111,6 @@
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
                                  <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/additions.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'accMat']"><xf:label>Heritage Data  </xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
-                                 <xf:unload targetid="msPartSubform"></xf:unload>
-                                 <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="msPartSubform" resource="form.xq?form=forms/mssTEI/msPart/accMat.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-msPart-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>

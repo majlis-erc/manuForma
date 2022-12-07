@@ -10,7 +10,7 @@
      xmlns:local="http://syriaca.org/ns">
    <titleStmt ident="titleStmt"
               elementName="titleStmt"
-              elementLabel=""
+              elementLabel="title statement"
               minOccur=""
               maxOccur=""
               path="/*:titleStmt"
@@ -31,23 +31,12 @@
    </titleStmt>
    <title ident="title"
           elementName="title"
-          elementLabel=""
+          elementLabel="title"
           minOccur=""
           maxOccur=""
           path="/*:titleStmt/*:title"
           currentLevel="2"
           popup="2">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
-              formURL="form.xq?form=forms/mssTEI/lookup/title.xhtml"
-              elementName="title"
-              formName="title"
-              lookupLabel="Look up title"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="worksTEI"
-             elementName="title"
-             label="New Work"
-             formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -55,10 +44,11 @@
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="evidence"
                  usage="opt">
-            <datatype maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-         </attDef>
+                            <datatype maxOccurs="6">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -280,95 +270,96 @@ doit pas être utilisé.</p>
                  ident="subtype"
                  mode="change"
                  usage="opt">
-            <datatype maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="supplication"/>
-               <valItem ident="expanded"/>
-               <valItem ident="inscriptio"/>
-               <valItem ident="subscriptio"/>
-               <valItem ident="embedded"/>
-               <valItem ident="translation"/>
-            </valList>
-         </attDef>
+                            <datatype maxOccurs="6">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="closed">
+                                <valItem ident="supplication"/>
+                                <valItem ident="expanded"/>
+                                <valItem ident="inscriptio"/>
+                                <valItem ident="subscriptio"/>
+                                <valItem ident="embedded"/>
+                                <valItem ident="translation"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="altMain">
-                  <desc>Alternative version of main title.</desc>
-               </valItem>
-               <valItem ident="secondary">
-                  <desc>A secondary title.</desc>
-               </valItem>
-               <valItem ident="altSecondary">
-                  <desc>Alternative version of secondary title.</desc>
-               </valItem>
-               <valItem ident="tertiary">
-                  <desc>A tertiary title.</desc>
-               </valItem>
-               <valItem ident="altTertiary">
-                  <desc>Alternative version of tertiary title.</desc>
-               </valItem>
-               <valItem ident="complete">
-                  <desc>the work is contained completely in the manuscript</desc>
-               </valItem>
-               <valItem ident="incomplete">
-                  <desc>the work is contained incompletely in the manuscript, i.e.
+                            
+                            <valList type="closed">
+                                <valItem ident="altMain">
+                                    <desc>Alternative version of main title.</desc>
+                                </valItem>
+                                <valItem ident="secondary">
+                                    <desc>A secondary title.</desc>
+                                </valItem>
+                                <valItem ident="altSecondary">
+                                    <desc>Alternative version of secondary title.</desc>
+                                </valItem>
+                                <valItem ident="tertiary">
+                                    <desc>A tertiary title.</desc>
+                                </valItem>
+                                <valItem ident="altTertiary">
+                                    <desc>Alternative version of tertiary title.</desc>
+                                </valItem>
+                                <valItem ident="complete">
+                                    <desc>the work is contained completely in the manuscript</desc>
+                                </valItem>
+                                <valItem ident="incomplete">
+                                    <desc>the work is contained incompletely in the manuscript, i.e.
                                         even only a small part is missing </desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>Transliteration of the title</desc>
-               </valItem>
-               <valItem ident="supplied">
-                  <desc>syriaca.org: an existing print catalogue provides a
+                                </valItem>
+                                <valItem ident="normalized">
+                                    <desc>Transliteration of the title</desc>
+                                </valItem>
+                                <valItem ident="supplied">
+                                    <desc>syriaca.org: an existing print catalogue provides a
                                         descriptive title</desc>
-               </valItem>
-               <valItem ident="uniform">
-                  <desc>syriaca.org: a title for such work established by the
+                                </valItem>
+                                <valItem ident="uniform">
+                                    <desc>syriaca.org: a title for such work established by the
                                         editor or cataloguer</desc>
-               </valItem>
-               <valItem ident="main">
-                  <desc>for titleStmt, specifies to which title to give priority
+                                </valItem>
+                                <valItem ident="main">
+                                    <desc>for titleStmt, specifies to which title to give priority
                                         in output.</desc>
-               </valItem>
-               <valItem ident="short">
-                  <desc>for titleStmt, contains an abbreviated form of the title,
+                                </valItem>
+                                <valItem ident="short">
+                                    <desc>for titleStmt, contains an abbreviated form of the title,
                                         typically citation forms like Sal. Mar. or Jn. or
                                         Gen..</desc>
-               </valItem>
-               <valItem ident="D'usage">
-                  <desc>EMA</desc>
-               </valItem>
-               <valItem ident="académique">
-                  <desc>EMA</desc>
-               </valItem>
-               <valItem ident="Forgé">
-                  <desc>EMA</desc>
-               </valItem>
-               <valItem ident="Original">
-                  <desc>EMA</desc>
-               </valItem>
-               <valItem ident="sub">
-                  <desc>The title is a subtitle or title of a part</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>The title is an alternate title, translation, or
+                                </valItem>
+                                <valItem ident="D'usage">
+                                    <desc>EMA</desc>
+                                </valItem>
+                                <valItem ident="académique">
+                                    <desc>EMA</desc>
+                                </valItem>
+                                <valItem ident="Forgé">
+                                    <desc>EMA</desc>
+                                </valItem>
+                                <valItem ident="Original">
+                                    <desc>EMA</desc>
+                                </valItem>                               
+                                <valItem ident="sub">
+                                    <desc>The title is a subtitle or title of a part</desc>
+                                </valItem>
+                                <valItem ident="alt">
+                                    <desc>The title is an alternate title, translation, or
                                         alias</desc>
-               </valItem>
-               <valItem ident="desc">
-                  <desc>The title is a descriptive paraphrase of the work
+                                </valItem>
+                                <valItem ident="desc">
+                                    <desc>The title is a descriptive paraphrase of the work
                                         functioning as a title</desc>
-               </valItem>
-               <valItem ident="collection">
-                  <desc>The title is of a collection</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="collection">
+                                    <desc>The title is of a collection</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -465,7 +456,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </title>
    <sponsor ident="sponsor"
             elementName="sponsor"
-            elementLabel=""
+            elementLabel="sponsor"
             minOccur=""
             maxOccur=""
             path="/*:titleStmt/*:sponsor"
@@ -493,7 +484,7 @@ and that a single TEI document may contain texts in many languages.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -513,7 +504,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </sponsor>
    <orgName ident="orgName"
             elementName="orgName"
-            elementLabel=""
+            elementLabel="organization name"
             minOccur=""
             maxOccur=""
             path="/*:titleStmt/*:sponsor/*:orgName"
@@ -617,7 +608,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </orgName>
    <funder ident="funder"
            elementName="funder"
-           elementLabel=""
+           elementLabel="funding body"
            minOccur=""
            maxOccur=""
            path="/*:titleStmt/*:funder"
@@ -646,7 +637,7 @@ and that a single TEI document may contain texts in many languages.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -666,7 +657,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </funder>
    <orgName ident="orgName"
             elementName="orgName"
-            elementLabel=""
+            elementLabel="organization name"
             minOccur=""
             maxOccur=""
             path="/*:titleStmt/*:funder/*:orgName"
@@ -770,7 +761,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </orgName>
    <principal ident="principal"
               elementName="principal"
-              elementLabel=""
+              elementLabel="principal researcher"
               minOccur=""
               maxOccur=""
               path="/*:titleStmt/*:principal"
@@ -799,7 +790,7 @@ creation of an electronic text.</desc>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -848,7 +839,7 @@ creation of an electronic text.</desc>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -918,7 +909,7 @@ this name in the form of a set of whitespace-separated values, for example the o
    </editor>
    <respStmt ident="respStmt"
              elementName="respStmt"
-             elementLabel=""
+             elementLabel="statement of responsibility"
              minOccur=""
              maxOccur=""
              path="/*:titleStmt/*:respStmt"
@@ -938,7 +929,7 @@ this name in the form of a set of whitespace-separated values, for example the o
    </respStmt>
    <resp ident="resp"
          elementName="resp"
-         elementLabel=""
+         elementLabel="responsibility"
          minOccur=""
          maxOccur=""
          path="/*:titleStmt/*:respStmt/*:resp"
@@ -954,7 +945,7 @@ this name in the form of a set of whitespace-separated values, for example the o
    </resp>
    <name ident="name"
          elementName="name"
-         elementLabel=""
+         elementLabel="name, proper noun"
          minOccur=""
          maxOccur=""
          path="/*:titleStmt/*:respStmt/*:name"
@@ -968,25 +959,25 @@ this name in the form of a set of whitespace-separated values, for example the o
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  mode="change">
-            <valList mode="replace" type="semi">
-               <valItem ident="person">
-                  <desc>The name is of a person</desc>
-               </valItem>
-               <valItem ident="place">
-                  <desc>The name is of a place</desc>
-               </valItem>
-               <valItem ident="org">
-                  <desc>The name is of an organisation</desc>
-               </valItem>
-               <valItem ident="unknown">
-                  <desc>The type of name is unknown</desc>
-               </valItem>
-               <valItem ident="other">
-                  <desc>The name is of another type (you may also provide a
+                            <valList mode="replace" type="semi">
+                                <valItem ident="person">
+                                    <desc>The name is of a person</desc>
+                                </valItem>
+                                <valItem ident="place">
+                                    <desc>The name is of a place</desc>
+                                </valItem>
+                                <valItem ident="org">
+                                    <desc>The name is of an organisation</desc>
+                                </valItem>
+                                <valItem ident="unknown">
+                                    <desc>The type of name is unknown</desc>
+                                </valItem>
+                                <valItem ident="other">
+                                    <desc>The name is of another type (you may also provide a
                                         custom value)</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>

@@ -27,9 +27,15 @@
          </xf:instance>
          <xf:instance id="i-admin">
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
-               <editor role="creator"></editor>
+               <editor role="creator" ref=""></editor>
                <idno type="URI"></idno>
             </TEI>
+         </xf:instance>
+         <xf:instance id="i-projectSpecificData" src="forms/templates/editionStmtProjectOptions.xml"></xf:instance>
+         <xf:instance id="i-projectSpecificDataSelected">
+            <data>
+               <selected id="" value="TEST"></selected>
+            </data>
          </xf:instance>
          <xf:instance id="i-elementTemplate" src="forms/relationTEI/templates/elementTemplate.xml"></xf:instance>
          <xf:instance id="i-attributeTemplate" src="forms/relationTEI/templates/attributesTemplate.xml"></xf:instance>
@@ -190,7 +196,7 @@
    <body>
       <header>
          <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/">&gt;manuForma</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/">manuForma</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav me-auto mb-2 mb-md-0">
                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="/exist/apps/manuForma/">Home</a></li>
                      <li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -340,6 +346,21 @@
                            </xf:submit>
                         </div>
                      </div>
+                     <hr />
+                     <h4>Select project</h4>
+                     <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
+                        <xf:itemset ref="instance('i-projectSpecificData')//*:option">
+                           <xf:label ref="@name"></xf:label>
+                           <xf:value ref="@name"></xf:value>
+                        </xf:itemset>
+                     </xf:select1>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                        <xf:label>Load Project Metadata</xf:label>
+                        <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
+                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:editionStmt" position="after"></xf:insert>
+                        <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                     </xf:trigger>
+                     <hr />
                      <div class="fileLoading">
                         <h4 class="h6">Search <small class="text-muted">(database)</small></h4>
                         <div class="input-group mb-3">
@@ -396,10 +417,15 @@
                               <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                            </xf:trigger>
                         </div>
+                        <div class="input-group mb-3">
+                           <xf:input ref="@ref" class="form-control">
+                              <xf:label>Ref: </xf:label>
+                           </xf:input>
+                        </div>
+                        <hr />
                      </xf:repeat>
                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
                         <xf:label><i class="bi bi-plus-circle"></i> Add Creator
-                           
                         </xf:label>
                         <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
                      </xf:trigger><br /><div class="input-group mb-3">

@@ -464,9 +464,11 @@
             <xsl:call-template name="attributesTemplate"/>
         </xsl:result-document>
         <!-- Output an XForm with all possible attributes, used to add new attributes -->
+        <!--
         <xsl:result-document href="../{$mainFormName}/templates/availableAttributes.xml" format="tei">
             <xsl:call-template name="availableAttributes"/>
         </xsl:result-document>
+        -->
     </xsl:template>
     
     <!-- Template for forms index page -->
@@ -509,10 +511,28 @@
                     </xf:instance>
                     <xf:instance id="i-admin">
                         <TEI xmlns="http://www.tei-c.org/ns/1.0">
-                            <editor role="creator"/>
+                            <editor role="creator" ref=""/>
                             <idno type="URI"/>
                         </TEI>
                     </xf:instance>
+                    <!-- Project Specific Data -->
+                    <xsl:if test="$configDoc//*:projectSpecificData/*:xmlPath[@src != '']">
+                        <xsl:variable name="dataSrc" select="$configDoc//*:projectSpecificData/*:xmlPath/@src"/>
+                        <xsl:variable name="src">
+                            <xsl:choose>
+                                <xsl:when test="starts-with($dataSrc, '/forms/')">
+                                    <xsl:value-of select="replace($dataSrc,'/forms/','forms/')"/>
+                                </xsl:when>
+                                <xsl:otherwise><xsl:value-of select="string($configDoc//*:projectSpecificData/*:template/@src)"/></xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xf:instance id="i-projectSpecificData" src="{$src}"/>
+                        <xf:instance id="i-projectSpecificDataSelected">
+                            <data>
+                                <selected id="" value="TEST"/>
+                            </data>                            
+                        </xf:instance>
+                    </xsl:if>
                     <xf:instance id="i-elementTemplate" src="forms/{$mainFormName}/templates/elementTemplate.xml"/>
                     <xf:instance id="i-attributeTemplate" src="forms/{$mainFormName}/templates/attributesTemplate.xml"/>
                     <xf:instance id="i-availableElements" src="forms/{$mainFormName}/templates/elementTemplate.xml"/>
@@ -583,8 +603,7 @@
                         </data>
                     </xf:instance>
                     <!-- Pretty print -->
-                    <xf:instance id="i-prettyPrint" src="forms/formGenerator/prettyPrint.xsl">
-                    </xf:instance>
+                    <xf:instance id="i-prettyPrint" src="forms/formGenerator/prettyPrint.xsl"></xf:instance>
                     <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"/>
                         <xf:action ev:event="xforms-submit-done">
@@ -797,6 +816,25 @@
                                             </xf:submit>
                                         </div>
                                     </div>
+                                    
+                                    <xsl:if test="$configDoc//*:projectSpecificData/*:xmlPath[@src != '']">
+                                        <hr/>
+                                        <h4>Select project</h4>
+                                        <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
+                                            <xf:itemset ref="instance('i-projectSpecificData')//*:option">
+                                                <xf:label ref="@name"/>
+                                                <xf:value ref="@name"/>
+                                            </xf:itemset>
+                                        </xf:select1>
+                                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                                            <xf:label>Load Project Metadata</xf:label> 
+                                            <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}"/>
+                                            <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
+                                            <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                                        </xf:trigger>
+                                        <hr/>
+                                    </xsl:if>
+                                    
                                     <div class="fileLoading">
                                         <h4 class="h6">Continue Work With Existing Record <small class="text-muted">(Load From Database)</small></h4>
                                         <div class="input-group mb-3">
@@ -857,10 +895,15 @@
                                                 <xf:delete ev:event="DOMActivate" ref="."/>
                                             </xf:trigger>
                                         </div>
+                                        <div class="input-group mb-3">
+                                            <xf:input ref="@ref" class="form-control">
+                                                <xf:label>Ref: </xf:label>
+                                            </xf:input>
+                                        </div>
+                                        <hr/>
                                     </xf:repeat>
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                        <xf:label><i class="bi bi-plus-circle"/> Add Creator
-                                        </xf:label>
+                                        <xf:label><i class="bi bi-plus-circle"/> Add Creator</xf:label>
                                         <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                                     </xf:trigger><br/>
                                     <div class="input-group mb-3">
@@ -1182,37 +1225,6 @@
                 <xsl:otherwise><xsl:value-of select="$xpathIndex"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <!-- Unecessary? 
-        <xsl:variable name="schemaInstanceDoc">
-            <xsl:call-template name="generateSchemaInstance">
-                <xsl:with-param name="subform" select="$subform"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="maxLevel">
-            <xsl:choose>
-                <xsl:when test="$subform/parent::*:subform">
-                    <xsl:variable name="schemaInstanceDoc">
-                        <xsl:call-template name="generateSchemaInstance">
-                            <xsl:with-param name="subform" select="$subform"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="levels">
-                        <xsl:for-each select="$schemaInstanceDoc//@currentLevel">
-                            <xsl:sort select="xs:integer(.)" order="descending"/>
-                            <xsl:if test="position() = 1">
-                                <xsl:copy-of select="string(.)"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:choose>
-                        <xsl:when test="$levels castable as xs:integer"><xsl:value-of select="xs:integer($levels)"/></xsl:when>
-                        <xsl:otherwise>1</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="$maxLevel"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        -->
         <!-- Build XForm element -->
         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
             <div class="btn-group" role="group">
@@ -1343,13 +1355,27 @@
         </div>
         <div class="element">   
             <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                <xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']) or (not(child::*) and (instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:textNode[@type='input']))]"/>
-                <xf:textarea class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>  
-                  
+                <!-- If controlled element values in schemaConstraints file -->
+                <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
+                    <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem">
+                        <xf:label ref="@ident"/>
+                        <xf:value ref="@ident"/>
+                    </xf:itemset>
+                </xf:select1>
+                <!-- Element input -->
+                <xf:input class="elementInput" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"/>
+                <!--
+                <xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>
+                -->
+                <!-- Element input for textbox style input -->
+                <xf:textarea class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
+                <!-- Element attributes -->
                 <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*"> 
                     <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                         <div class="input-group">
+                            <!-- Attribute value -->
                             <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
+                            <!-- If controlled attribute values in schemaConstraints file -->
                             <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
                                 <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
                                     <xf:label ref="@ident"/>
@@ -1403,7 +1429,7 @@
         <xsl:variable name="home" select="$app-root"/>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$app-root}">><xsl:value-of select="$configDoc//appTitle"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"/></button><div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$app-root}"><xsl:value-of select="$configDoc//appTitle"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"/></button><div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{$app-root}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -1507,7 +1533,7 @@
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
             <element>
                 <!-- Go through global and local schema, output one of every attribute -->
-                <xsl:for-each-group select="$globalSchemaDoc//tei:attDef | $localSchemaDoc//tei:attDef" group-by="@ident">
+                <xsl:for-each-group select="$globalSchemaDoc//*:attDef | $localSchemaDoc//*:attDef" group-by="@ident">
                     <xsl:sort select="@ident" order="ascending"/>
                     <xsl:variable name="attName" select="@ident"/>
                     <xsl:attribute name="{$attName}"/>
@@ -1515,6 +1541,7 @@
             </element>
         </TEI>
     </xsl:template>
+    <!-- Duplicate of above attributesTemplate test and remove -->
     <xsl:template name="availableAttributes">
         <xsl:variable name="globalSchemaDoc">
             <xsl:for-each select="$configDoc//subform">
@@ -1656,13 +1683,13 @@
                     <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
                 </xsl:when>
                 <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang]">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
                 </xsl:when>
                 <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en']">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
                 </xsl:when>
                 <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[1]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$elementName"/>
@@ -1763,6 +1790,11 @@
                 </desc>
             </xsl:if>
             <xsl:copy-of select="$allAttributes"/>
+            <xsl:if test="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]">
+                <controlledValues xmlns="http://www.tei-c.org/ns/1.0">
+                    <xsl:copy-of select="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]" copy-namespaces="true"/>    
+                </controlledValues>
+            </xsl:if>
             <childElements xmlns="http://www.tei-c.org/ns/1.0">
                 <xsl:choose>
                     <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">

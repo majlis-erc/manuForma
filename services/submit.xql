@@ -23,7 +23,7 @@ declare option output:omit-xml-declaration "no";
 declare function local:transform($nodes as node()*) as item()* {
   for $node in $nodes
   let $type := if($node/ancestor::tei:TEI/descendant::tei:body/tei:entryFree) then'keyword'  else 'place' 
-  let $generateID := $node/ancestor::tei:TEI/descendant::tei:body/child::*[1]/tei:idno[@type='URI'][not(empty(.))][1]
+  let $generateID := replace($node/ancestor::tei:TEI/descendant::tei:publicationStmt/tei:idno[@type='URI'][not(empty(.))][1],'/tei','')
   (:
   let $URI := if(starts-with($generateID, $config:base-uri)) then $generateID 
               else concat($config:base-uri,'/',$type,'/',$generateID)
@@ -31,6 +31,15 @@ declare function local:transform($nodes as node()*) as item()* {
    (:
   let $userInfo := doc(concat($config:nav-base,'/userInfo'))
   let $user := $userInfo//*:user
+  element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('name',$id,'-',
+                        count($node/preceding-sibling::*[local-name(.) = 'term']) + 1) },
+                        if($node/@source[. != '']) then 
+                            attribute source { concat('#bibl',$id,'-', $node/@source)}
+                        else (),
+                        local:transform($node/node())
+                    }
   :)
   let $URI := $generateID
   let $id := tokenize($URI,'/')[last()] 
@@ -43,7 +52,166 @@ declare function local:transform($nodes as node()*) as item()* {
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
                 {($node/@*[. != ''], local:transform($node/node()))}
             </TEI>
-        (:            
+        case element(tei:ab) return
+            if($node[@type='factoid'][@subtype='relation']) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('factoid-',$id )},
+                        local:passthru($node)
+                    }
+            else local:passthru($node)
+        case element(tei:idno) return
+            if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('name-',count($node/preceding-sibling::tei:idno) + 1 )},
+                        local:passthru($node)
+                    }
+            else local:passthru($node)  
+            (: 
+             attribute xml:id { concat($id, generate-id($node) )},
+            /ab/bibl/ptr/@target="{Filenumber}" WS: NOTE not done
+         case element(tei:ptr) return
+            if($node[parent::tei:bibl][ancestor::tei:ab[@type='factoid'][@subtype='relation']]) then
+                
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'target') and not(name(.) = 'source')],
+                        attribute xml:id { concat($id, generate-id($node) )},
+                        local:passthru($node)
+                    }
+            else local:passthru($node)
+            :)
+        case element(tei:place) return
+            if($node[parent::tei:listPlace]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('place-',$id )},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)             
+        case element(tei:placeName) return
+            if($node[parent::tei:place/parent::tei:listPlace]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('name-',count($node/preceding-sibling::tei:placeName) + 1 )},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)
+        case element(tei:bibl) return
+            if($node[parent::tei:place/parent::tei:listPlace] or $node[parent::tei:person/parent::tei:listPerson or parent::tei:note/parent::tei:bibl/parent::tei:body] or $node[parent::tei:bibl/parent::tei:bibl/parent::tei:body]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('bibl-',count($node/preceding-sibling::tei:bibl) + 1 )},
+                        local:passthru($node)
+                    } 
+            else if($node[parent::tei:body/parent::tei:text]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('work-',$id)},
+                        local:passthru($node)
+                    }  
+            else if($node[parent::tei:listBibl/parent::tei:additional/parent::tei:msDesc]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('bibl-',
+                        (count($node/parent::tei:listBibl/parent::tei:additional/preceding-sibling::tei:additional) + 1),
+                        (count($node/parent::tei:listBibl/preceding-sibling::tei:listBibl) + 1),
+                        (count($node/preceding-sibling::tei:bibl) + 1 ))
+                        },
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)        
+           (:     
+            else if($node[parent::tei:note/parent::tei:bibl/parent::tei:body]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('bibl-',count(preceding-sibling::tei:bibl) + 1 )},
+                        local:passthru($node)
+                    }   
+            else if($node[parent::tei:bibl/parent::tei:bibl/parent::tei:body]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('bibl-',count(preceding-sibling::tei:bibl) + 1 )},
+                        local:passthru($node)
+                    }                      
+            else local:passthru($node)
+            :)
+        case element(tei:title) return
+            if($node[parent::tei:bibl/parent::tei:body]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('title-',count($node/preceding-sibling::tei:title) + 1 )},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)
+        case element(tei:person) return
+            if($node[parent::tei:listPerson]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('person-',$id )},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node) 
+        case element(tei:persName) return
+            if($node[parent::tei:person/parent::tei:listPerson]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('name-',count($node/preceding-sibling::tei:persName) + 1 )},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)
+        case element(tei:msDesc) return
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('ms-',$id)},
+                        local:passthru($node)
+                    }
+        case element(tei:msItem) return
+            if($node[parent::tei:msContents/parent::tei:msDesc]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('item-',(count($node/parent::tei:msContents/preceding-sibling::tei:msContents) + 1),
+                        (count($node/preceding-sibling::tei:msItem) + 1 ))},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)  
+        case element(tei:layout) return
+            if($node[parent::tei:layoutDesc/parent::tei:objectDesc/parent::tei:physDesc/parent::tei:msDesc]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('layout-',
+                        (count($node/parent::tei:layoutDesc/parent::tei:objectDesc/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
+                        (count($node/parent::tei:layoutDesc/parent::tei:objectDesc/preceding-sibling::tei:objectDesc) + 1),
+                        (count($node/parent::tei:layoutDesc/preceding-sibling::tei:layoutDesc) + 1),
+                        (count($node/preceding-sibling::tei:layout) + 1 ))},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)
+        case element(tei:handNote) return
+            if($node[parent::tei:handDesc/parent::tei:physDesc/parent::tei:msDesc]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('hand-',
+                        (count($node/parent::tei:handDesc/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
+                        (count($node/parent::tei:handDesc/preceding-sibling::tei:handDesc) + 1),
+                        (count($node/preceding-sibling::tei:handNote) + 1 ))},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node)   
+        case element(tei:item) return
+            if($node[parent::tei:list/parent::tei:additions/parent::tei:physDesc/parent::tei:msDesc]) then
+                element { local-name($node) } 
+                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        attribute xml:id { concat('add-',
+                        (count($node/parent::tei:list/parent::tei:additions/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
+                        (count($node/parent::tei:list/parent::tei:additions/preceding-sibling::tei:additions) + 1),
+                        (count($node/parent::tei:list/preceding-sibling::tei:list) + 1),
+                        (count($node/preceding-sibling::tei:item) + 1 ))},
+                        local:passthru($node)
+                    } 
+            else local:passthru($node) 
+        (:   
+
         case element(tei:revisionDesc) return 
             <revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
                 {($node/@*[. != ''], local:transform($node/node()))}
@@ -67,7 +235,7 @@ let $data := if(request:get-parameter('postdata','')) then request:get-parameter
 let $record := 
         if($data instance of node()) then
             $data//tei:TEI
-        else fn:parse-xml($data) 
+        else parse-xml-fragment($data) 
 let $post-processed-xml := local:transform($record)    
 let $uri := replace($post-processed-xml/descendant::tei:idno[1],'/tei','')
 let $id := tokenize($uri,'/')[last()]

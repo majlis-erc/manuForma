@@ -10,7 +10,7 @@
      xmlns:local="http://syriaca.org/ns">
    <history ident="history"
             elementName="history"
-            elementLabel=""
+            elementLabel="history"
             minOccur=""
             maxOccur=""
             path="/*:history"
@@ -46,6 +46,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -158,6 +160,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -181,6 +184,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -189,6 +193,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -212,6 +217,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -385,6 +391,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -738,6 +745,7 @@ the TEI header.</p>
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -914,7 +922,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </history>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:p"
@@ -946,7 +954,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </summary>
    <origin ident="origin"
            elementName="origin"
-           elementLabel=""
+           elementLabel="origin"
            minOccur=""
            maxOccur=""
            path="/*:history/*:origin"
@@ -968,7 +976,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </origin>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:origin/*:p"
@@ -984,7 +992,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </p>
    <q ident="q"
       elementName="q"
-      elementLabel=""
+      elementLabel="quoted"
       minOccur=""
       maxOccur=""
       path="/*:history/*:origin/*:q"
@@ -1122,15 +1130,15 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="xml:lang"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
-            </valList>
-         </attDef>
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                        <valItem mode="add" ident="he-Latn"/>
+                                        <valItem mode="add" ident="ar-Latn"/>
+                                        <valItem mode="add" ident="ar-Hebr"/>
+                                    </valList>
+                                </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -1139,7 +1147,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </q>
    <origPlace ident="origPlace"
               elementName="origPlace"
-              elementLabel=""
+              elementLabel="origin place"
               minOccur=""
               maxOccur=""
               path="/*:history/*:origin/*:origPlace"
@@ -1159,7 +1167,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </origPlace>
    <origDate ident="origDate"
              elementName="origDate"
-             elementLabel=""
+             elementLabel="origin date"
              minOccur=""
              maxOccur=""
              path="/*:history/*:origin/*:origDate"
@@ -1207,35 +1215,36 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="evidence"
                  mode="replace"
                  usage="opt">
-            <datatype maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="lettering">
-                  <desc>Text dated palaeographically</desc>
-               </valItem>
-               <valItem ident="nomenclature">
-                  <desc>Text dated by nomenclature or onomastics</desc>
-               </valItem>
-               <valItem ident="prosopography">
-                  <desc>Text dated by known persons named or implied within
+                            
+                            <datatype maxOccurs="6">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="lettering">
+                                    <desc>Text dated palaeographically</desc>
+                                </valItem>
+                                <valItem ident="nomenclature">
+                                    <desc>Text dated by nomenclature or onomastics</desc>
+                                </valItem>
+                                <valItem ident="prosopography">
+                                    <desc>Text dated by known persons named or implied within
                                         it</desc>
-               </valItem>
-               <valItem ident="reign">
-                  <desc>Text dated by the reign of a ruler</desc>
-               </valItem>
-               <valItem ident="titulature">
-                  <desc>Text dated by the use of official titles</desc>
-               </valItem>
-               <valItem ident="internal-date">
-                  <desc>Text dated by explicit internal date</desc>
-               </valItem>
-               <valItem ident="context">
-                  <desc>Archaeological, epigraphic, iconographic or other context
+                                </valItem>
+                                <valItem ident="reign">
+                                    <desc>Text dated by the reign of a ruler</desc>
+                                </valItem>
+                                <valItem ident="titulature">
+                                    <desc>Text dated by the use of official titles</desc>
+                                </valItem>
+                                <valItem ident="internal-date">
+                                    <desc>Text dated by explicit internal date</desc>
+                                </valItem>
+                                <valItem ident="context">
+                                    <desc>Archaeological, epigraphic, iconographic or other context
                                         of the text support</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1294,12 +1303,12 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="precision"
                  mode="replace">
-            <valList type="closed">
-               <valItem ident="low"/>
-               <valItem ident="medium"/>
-               <valItem ident="high"/>
-            </valList>
-         </attDef>
+                            <valList type="closed">
+                                <valItem ident="low"/>
+                                <valItem ident="medium"/>
+                                <valItem ident="high"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1439,7 +1448,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </origDate>
    <locus ident="locus"
           elementName="locus"
-          elementLabel=""
+          elementLabel="locus"
           minOccur=""
           maxOccur=""
           path="/*:history/*:origin/*:locus"
@@ -1611,7 +1620,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </locus>
    <persName ident="persName"
              elementName="persName"
-             elementLabel=""
+             elementLabel="personal name"
              minOccur=""
              maxOccur=""
              path="/*:history/*:origin/*:persName"
@@ -1645,58 +1654,59 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="main">
-                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>the normalized transcription of the name in fidal or
+                            <valList type="closed">
+                                <valItem ident="main">
+                                    <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
+                                </valItem>
+                                <valItem ident="normalized">
+                                    <desc>the normalized transcription of the name in fidal or
                                         another script</desc>
-               </valItem>
-               <valItem ident="given">
-                  <desc>name received later in life, different from the other
+                                </valItem>
+                                <valItem ident="given">
+                                    <desc>name received later in life, different from the other
                                         specified types of names</desc>
-               </valItem>
-               <valItem ident="birth">
-                  <desc>name given at birth</desc>
-               </valItem>
-               <valItem ident="baptismal">
-                  <desc>name given at baptism</desc>
-               </valItem>
-               <valItem ident="regnal">
-                  <desc>name given on coronation (kings and queens but also
+                                </valItem>
+                                <valItem ident="birth">
+                                    <desc>name given at birth</desc>
+                                </valItem>
+                                <valItem ident="baptismal">
+                                    <desc>name given at baptism</desc>
+                                </valItem>
+                                <valItem ident="regnal">
+                                    <desc>name given on coronation (kings and queens but also
                                         patriarchs)</desc>
-               </valItem>
-               <valItem ident="monastic">
-                  <desc>name given on entering monastic life </desc>
-               </valItem>
-               <valItem ident="horse">
-                  <desc>the name of the battle horse of kings and rulers</desc>
-               </valItem>
-               <valItem ident="nick">
-                  <desc>a name given to a person associated to his occupation or
+                                </valItem>
+                                <valItem ident="monastic">
+                                    <desc>name given on entering monastic life </desc>
+                                </valItem>
+                                <valItem ident="horse">
+                                    <desc>the name of the battle horse of kings and rulers</desc>
+                                </valItem>
+                                <valItem ident="nick">
+                                    <desc>a name given to a person associated to his occupation or
                                         other deeds</desc>
-               </valItem>
-               <valItem ident="war">
-                  <desc>nom de guerre (if different from horse name, e.g.
+                                </valItem>
+                                <valItem ident="war">
+                                    <desc>nom de guerre (if different from horse name, e.g.
                                         Malas)</desc>
-               </valItem>
-               <valItem ident="hypocoristic">
-                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
+                                </valItem>
+                                <valItem ident="hypocoristic">
+                                    <desc>short form (diminutive or abbreviated, e.g. Taklo for
                                         Takla Māryām)</desc>
-               </valItem>
-               <valItem ident="patronymic">
-                  <desc>father's name, esp. for eventual Russian names, but could
+                                </valItem>
+                                <valItem ident="patronymic">
+                                    <desc>father's name, esp. for eventual Russian names, but could
                                         be also highlighted in others</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>alternative name</desc>
-               </valItem>
-               <valItem ident="tabot">
-                  <desc>the saint to whom the tābot is dedicated</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="alt">
+                                    <desc>alternative name</desc>
+                                </valItem>
+
+                                <valItem ident="tabot">
+                                    <desc>the saint to whom the tābot is dedicated</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -1705,7 +1715,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </persName>
    <provenance ident="provenance"
                elementName="provenance"
-               elementLabel=""
+               elementLabel="provenance"
                minOccur=""
                maxOccur=""
                path="/*:history/*:provenance"
@@ -1730,7 +1740,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </provenance>
    <date ident="date"
          elementName="date"
-         elementLabel=""
+         elementLabel="date"
          minOccur=""
          maxOccur=""
          path="/*:history/*:provenance/*:date"
@@ -1768,21 +1778,22 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="calendar"
                  usage="opt"
                  mode="replace">
-            <valList type="closed">
-               <valItem ident="hebrew">
-                  <desc>Hebrew calendar</desc>
-               </valItem>
-               <valItem ident="alexander">
-                  <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
-               </valItem>
-               <valItem ident="islamic">
-                  <desc>Islamic Era</desc>
-               </valItem>
-               <valItem ident="julian">
-                  <desc>Julian calendar</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                            
+                            <valList type="closed">
+                                <valItem ident="hebrew">
+                                    <desc>Hebrew calendar</desc>
+                                </valItem>
+                                <valItem ident="alexander">
+                                    <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
+                                </valItem>
+                                <valItem ident="islamic">
+                                    <desc>Islamic Era</desc>
+                                </valItem>
+                                <valItem ident="julian">
+                                    <desc>Julian calendar</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1901,12 +1912,12 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="precision"
                  mode="replace">
-            <valList type="closed">
-               <valItem ident="low"/>
-               <valItem ident="medium"/>
-               <valItem ident="high"/>
-            </valList>
-         </attDef>
+                            <valList type="closed">
+                                <valItem ident="low"/>
+                                <valItem ident="medium"/>
+                                <valItem ident="high"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1983,66 +1994,66 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="type"
                  usage="opt"
                  mode="change">
-            <datatype maxOccurs="3">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="open">
-               <valItem ident="age">
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="open">
+                                <valItem ident="age">
                   <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="reign">
+                                <valItem ident="reign">
                   <desc>Duration of a reign, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="life">
+                                <valItem ident="life">
                   <desc>Duration of life, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="marriage">
+                                <valItem ident="marriage">
                   <desc>Duration of marriage, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="generic-duration">
+                                <valItem ident="generic-duration">
                   <desc>Generic duration, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="foundation">
+                                <valItem ident="foundation">
                   <desc>Date of foundation</desc>
                </valItem>
-               <valItem ident="composition">
+                                <valItem ident="composition">
                   <desc>Date of the composition of a work</desc>
                </valItem>
-               <valItem ident="translation">
+                                <valItem ident="translation">
                   <desc>Date of the translation of a work</desc>
                </valItem>
-               <valItem ident="revision">
+                                <valItem ident="revision">
                   <desc>Date of the revision of a work</desc>
                </valItem>
-               <valItem ident="recension">
+                                <valItem ident="recension">
                   <desc>Date of the composition of a specific recension</desc>
                </valItem>
-               <valItem ident="diesNatalis">
+                                <valItem ident="diesNatalis">
                   <desc>Date of a saint’s martyrdom</desc>
                </valItem>
-               <valItem ident="birth">
+                                <valItem ident="birth">
                   <desc>Date of birth (do not use this in a person record, use element birth)</desc>
                </valItem>
-               <valItem ident="ascension">
+                                <valItem ident="ascension">
                   <desc>Date of a person’s ascension to power</desc>
                </valItem>
-               <valItem ident="death">
+                                <valItem ident="death">
                   <desc>Date of death</desc>
                </valItem>
-               <valItem ident="production">
-                  <desc>The date of production of the document (EMA)</desc>
-               </valItem>
-               <valItem ident="repeated">
-                  <desc>If the commemoration is repeated, please add this value as
+                                <valItem ident="production">
+                                    <desc>The date of production of the document (EMA)</desc>
+                                </valItem>
+                                <valItem ident="repeated">
+                                    <desc>If the commemoration is repeated, please add this value as
                                         well in type</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -2112,7 +2123,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </date>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:provenance/*:p"
@@ -2128,7 +2139,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </p>
    <q ident="q"
       elementName="q"
-      elementLabel=""
+      elementLabel="quoted"
       minOccur=""
       maxOccur=""
       path="/*:history/*:provenance/*:q"
@@ -2266,15 +2277,15 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="xml:lang"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
-            </valList>
-         </attDef>
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                        <valItem mode="add" ident="he-Latn"/>
+                                        <valItem mode="add" ident="ar-Latn"/>
+                                        <valItem mode="add" ident="ar-Hebr"/>
+                                    </valList>
+                                </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -2283,7 +2294,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </q>
    <locus ident="locus"
           elementName="locus"
-          elementLabel=""
+          elementLabel="locus"
           minOccur=""
           maxOccur=""
           path="/*:history/*:provenance/*:locus"
@@ -2455,7 +2466,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </locus>
    <persName ident="persName"
              elementName="persName"
-             elementLabel=""
+             elementLabel="personal name"
              minOccur=""
              maxOccur=""
              path="/*:history/*:provenance/*:persName"
@@ -2489,58 +2500,59 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="main">
-                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>the normalized transcription of the name in fidal or
+                            <valList type="closed">
+                                <valItem ident="main">
+                                    <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
+                                </valItem>
+                                <valItem ident="normalized">
+                                    <desc>the normalized transcription of the name in fidal or
                                         another script</desc>
-               </valItem>
-               <valItem ident="given">
-                  <desc>name received later in life, different from the other
+                                </valItem>
+                                <valItem ident="given">
+                                    <desc>name received later in life, different from the other
                                         specified types of names</desc>
-               </valItem>
-               <valItem ident="birth">
-                  <desc>name given at birth</desc>
-               </valItem>
-               <valItem ident="baptismal">
-                  <desc>name given at baptism</desc>
-               </valItem>
-               <valItem ident="regnal">
-                  <desc>name given on coronation (kings and queens but also
+                                </valItem>
+                                <valItem ident="birth">
+                                    <desc>name given at birth</desc>
+                                </valItem>
+                                <valItem ident="baptismal">
+                                    <desc>name given at baptism</desc>
+                                </valItem>
+                                <valItem ident="regnal">
+                                    <desc>name given on coronation (kings and queens but also
                                         patriarchs)</desc>
-               </valItem>
-               <valItem ident="monastic">
-                  <desc>name given on entering monastic life </desc>
-               </valItem>
-               <valItem ident="horse">
-                  <desc>the name of the battle horse of kings and rulers</desc>
-               </valItem>
-               <valItem ident="nick">
-                  <desc>a name given to a person associated to his occupation or
+                                </valItem>
+                                <valItem ident="monastic">
+                                    <desc>name given on entering monastic life </desc>
+                                </valItem>
+                                <valItem ident="horse">
+                                    <desc>the name of the battle horse of kings and rulers</desc>
+                                </valItem>
+                                <valItem ident="nick">
+                                    <desc>a name given to a person associated to his occupation or
                                         other deeds</desc>
-               </valItem>
-               <valItem ident="war">
-                  <desc>nom de guerre (if different from horse name, e.g.
+                                </valItem>
+                                <valItem ident="war">
+                                    <desc>nom de guerre (if different from horse name, e.g.
                                         Malas)</desc>
-               </valItem>
-               <valItem ident="hypocoristic">
-                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
+                                </valItem>
+                                <valItem ident="hypocoristic">
+                                    <desc>short form (diminutive or abbreviated, e.g. Taklo for
                                         Takla Māryām)</desc>
-               </valItem>
-               <valItem ident="patronymic">
-                  <desc>father's name, esp. for eventual Russian names, but could
+                                </valItem>
+                                <valItem ident="patronymic">
+                                    <desc>father's name, esp. for eventual Russian names, but could
                                         be also highlighted in others</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>alternative name</desc>
-               </valItem>
-               <valItem ident="tabot">
-                  <desc>the saint to whom the tābot is dedicated</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="alt">
+                                    <desc>alternative name</desc>
+                                </valItem>
+
+                                <valItem ident="tabot">
+                                    <desc>the saint to whom the tābot is dedicated</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -2549,7 +2561,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </persName>
    <signatures ident="signatures"
                elementName="signatures"
-               elementLabel=""
+               elementLabel="signatures"
                minOccur=""
                maxOccur=""
                path="/*:history/*:provenance/*:signatures"
@@ -2583,6 +2595,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -2695,6 +2709,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -2718,6 +2733,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -2726,6 +2742,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -2749,6 +2766,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2922,6 +2940,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -3262,6 +3281,7 @@ sub-classification for the element additional to that provided by its
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
+      
             <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
  classification scheme or typology.</desc>
             <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
@@ -3353,6 +3373,7 @@ sub-classification for the element additional to that provided by its
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3525,7 +3546,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </signatures>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:provenance/*:signatures/*:p"
@@ -3541,7 +3562,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </p>
    <stamp ident="stamp"
           elementName="stamp"
-          elementLabel=""
+          elementLabel="stamp"
           minOccur=""
           maxOccur=""
           path="/*:history/*:provenance/*:stamp"
@@ -3557,7 +3578,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </stamp>
    <placeName ident="placeName"
               elementName="placeName"
-              elementLabel=""
+              elementLabel="place name"
               minOccur=""
               maxOccur=""
               path="/*:history/*:provenance/*:placeName"
@@ -3583,13 +3604,13 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  mode="change">
-            <valList>
-               <valItem ident="normalized"/>
-               <valItem ident="library"/>
-               <valItem ident="academicInstitution"/>
-               <valItem ident="museum"/>
-            </valList>
-         </attDef>
+                            <valList>
+                                <valItem ident="normalized"/>
+                                <valItem ident="library"/>
+                                <valItem ident="academicInstitution"/>
+                                <valItem ident="museum"/>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3598,7 +3619,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </placeName>
    <acquisition ident="acquisition"
                 elementName="acquisition"
-                elementLabel=""
+                elementLabel="acquisition"
                 minOccur=""
                 maxOccur=""
                 path="/*:history/*:acquisition"
@@ -3622,7 +3643,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </acquisition>
    <placeName ident="placeName"
               elementName="placeName"
-              elementLabel=""
+              elementLabel="place name"
               minOccur=""
               maxOccur=""
               path="/*:history/*:acquisition/*:placeName"
@@ -3648,13 +3669,13 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  mode="change">
-            <valList>
-               <valItem ident="normalized"/>
-               <valItem ident="library"/>
-               <valItem ident="academicInstitution"/>
-               <valItem ident="museum"/>
-            </valList>
-         </attDef>
+                            <valList>
+                                <valItem ident="normalized"/>
+                                <valItem ident="library"/>
+                                <valItem ident="academicInstitution"/>
+                                <valItem ident="museum"/>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3663,7 +3684,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </placeName>
    <date ident="date"
          elementName="date"
-         elementLabel=""
+         elementLabel="date"
          minOccur=""
          maxOccur=""
          path="/*:history/*:acquisition/*:date"
@@ -3701,21 +3722,22 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="calendar"
                  usage="opt"
                  mode="replace">
-            <valList type="closed">
-               <valItem ident="hebrew">
-                  <desc>Hebrew calendar</desc>
-               </valItem>
-               <valItem ident="alexander">
-                  <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
-               </valItem>
-               <valItem ident="islamic">
-                  <desc>Islamic Era</desc>
-               </valItem>
-               <valItem ident="julian">
-                  <desc>Julian calendar</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                            
+                            <valList type="closed">
+                                <valItem ident="hebrew">
+                                    <desc>Hebrew calendar</desc>
+                                </valItem>
+                                <valItem ident="alexander">
+                                    <desc>Era of Alexander of Macedon, year 1 = 319 BC</desc>
+                                </valItem>
+                                <valItem ident="islamic">
+                                    <desc>Islamic Era</desc>
+                                </valItem>
+                                <valItem ident="julian">
+                                    <desc>Julian calendar</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3834,12 +3856,12 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="precision"
                  mode="replace">
-            <valList type="closed">
-               <valItem ident="low"/>
-               <valItem ident="medium"/>
-               <valItem ident="high"/>
-            </valList>
-         </attDef>
+                            <valList type="closed">
+                                <valItem ident="low"/>
+                                <valItem ident="medium"/>
+                                <valItem ident="high"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3916,66 +3938,66 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="type"
                  usage="opt"
                  mode="change">
-            <datatype maxOccurs="3">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="open">
-               <valItem ident="age">
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="open">
+                                <valItem ident="age">
                   <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="reign">
+                                <valItem ident="reign">
                   <desc>Duration of a reign, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="life">
+                                <valItem ident="life">
                   <desc>Duration of life, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="marriage">
+                                <valItem ident="marriage">
                   <desc>Duration of marriage, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="generic-duration">
+                                <valItem ident="generic-duration">
                   <desc>Generic duration, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
                </valItem>
-               <valItem ident="foundation">
+                                <valItem ident="foundation">
                   <desc>Date of foundation</desc>
                </valItem>
-               <valItem ident="composition">
+                                <valItem ident="composition">
                   <desc>Date of the composition of a work</desc>
                </valItem>
-               <valItem ident="translation">
+                                <valItem ident="translation">
                   <desc>Date of the translation of a work</desc>
                </valItem>
-               <valItem ident="revision">
+                                <valItem ident="revision">
                   <desc>Date of the revision of a work</desc>
                </valItem>
-               <valItem ident="recension">
+                                <valItem ident="recension">
                   <desc>Date of the composition of a specific recension</desc>
                </valItem>
-               <valItem ident="diesNatalis">
+                                <valItem ident="diesNatalis">
                   <desc>Date of a saint’s martyrdom</desc>
                </valItem>
-               <valItem ident="birth">
+                                <valItem ident="birth">
                   <desc>Date of birth (do not use this in a person record, use element birth)</desc>
                </valItem>
-               <valItem ident="ascension">
+                                <valItem ident="ascension">
                   <desc>Date of a person’s ascension to power</desc>
                </valItem>
-               <valItem ident="death">
+                                <valItem ident="death">
                   <desc>Date of death</desc>
                </valItem>
-               <valItem ident="production">
-                  <desc>The date of production of the document (EMA)</desc>
-               </valItem>
-               <valItem ident="repeated">
-                  <desc>If the commemoration is repeated, please add this value as
+                                <valItem ident="production">
+                                    <desc>The date of production of the document (EMA)</desc>
+                                </valItem>
+                                <valItem ident="repeated">
+                                    <desc>If the commemoration is repeated, please add this value as
                                         well in type</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -4045,7 +4067,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </date>
    <stamp ident="stamp"
           elementName="stamp"
-          elementLabel=""
+          elementLabel="stamp"
           minOccur=""
           maxOccur=""
           path="/*:history/*:acquisition/*:stamp"
@@ -4061,7 +4083,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </stamp>
    <signatures ident="signatures"
                elementName="signatures"
-               elementLabel=""
+               elementLabel="signatures"
                minOccur=""
                maxOccur=""
                path="/*:history/*:acquisition/*:signatures"
@@ -4095,6 +4117,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -4207,6 +4231,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -4230,6 +4255,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -4238,6 +4264,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -4261,6 +4288,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4434,6 +4462,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -4774,6 +4803,7 @@ sub-classification for the element additional to that provided by its
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
+      
             <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
  classification scheme or typology.</desc>
             <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
@@ -4865,6 +4895,7 @@ sub-classification for the element additional to that provided by its
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5037,7 +5068,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </signatures>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:acquisition/*:signatures/*:p"
@@ -5053,7 +5084,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </p>
    <p ident="p"
       elementName="p"
-      elementLabel=""
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:history/*:acquisition/*:p"
@@ -5069,7 +5100,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </p>
    <persName ident="persName"
              elementName="persName"
-             elementLabel=""
+             elementLabel="personal name"
              minOccur=""
              maxOccur=""
              path="/*:history/*:acquisition/*:persName"
@@ -5103,58 +5134,59 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="main">
-                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>the normalized transcription of the name in fidal or
+                            <valList type="closed">
+                                <valItem ident="main">
+                                    <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
+                                </valItem>
+                                <valItem ident="normalized">
+                                    <desc>the normalized transcription of the name in fidal or
                                         another script</desc>
-               </valItem>
-               <valItem ident="given">
-                  <desc>name received later in life, different from the other
+                                </valItem>
+                                <valItem ident="given">
+                                    <desc>name received later in life, different from the other
                                         specified types of names</desc>
-               </valItem>
-               <valItem ident="birth">
-                  <desc>name given at birth</desc>
-               </valItem>
-               <valItem ident="baptismal">
-                  <desc>name given at baptism</desc>
-               </valItem>
-               <valItem ident="regnal">
-                  <desc>name given on coronation (kings and queens but also
+                                </valItem>
+                                <valItem ident="birth">
+                                    <desc>name given at birth</desc>
+                                </valItem>
+                                <valItem ident="baptismal">
+                                    <desc>name given at baptism</desc>
+                                </valItem>
+                                <valItem ident="regnal">
+                                    <desc>name given on coronation (kings and queens but also
                                         patriarchs)</desc>
-               </valItem>
-               <valItem ident="monastic">
-                  <desc>name given on entering monastic life </desc>
-               </valItem>
-               <valItem ident="horse">
-                  <desc>the name of the battle horse of kings and rulers</desc>
-               </valItem>
-               <valItem ident="nick">
-                  <desc>a name given to a person associated to his occupation or
+                                </valItem>
+                                <valItem ident="monastic">
+                                    <desc>name given on entering monastic life </desc>
+                                </valItem>
+                                <valItem ident="horse">
+                                    <desc>the name of the battle horse of kings and rulers</desc>
+                                </valItem>
+                                <valItem ident="nick">
+                                    <desc>a name given to a person associated to his occupation or
                                         other deeds</desc>
-               </valItem>
-               <valItem ident="war">
-                  <desc>nom de guerre (if different from horse name, e.g.
+                                </valItem>
+                                <valItem ident="war">
+                                    <desc>nom de guerre (if different from horse name, e.g.
                                         Malas)</desc>
-               </valItem>
-               <valItem ident="hypocoristic">
-                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
+                                </valItem>
+                                <valItem ident="hypocoristic">
+                                    <desc>short form (diminutive or abbreviated, e.g. Taklo for
                                         Takla Māryām)</desc>
-               </valItem>
-               <valItem ident="patronymic">
-                  <desc>father's name, esp. for eventual Russian names, but could
+                                </valItem>
+                                <valItem ident="patronymic">
+                                    <desc>father's name, esp. for eventual Russian names, but could
                                         be also highlighted in others</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>alternative name</desc>
-               </valItem>
-               <valItem ident="tabot">
-                  <desc>the saint to whom the tābot is dedicated</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="alt">
+                                    <desc>alternative name</desc>
+                                </valItem>
+
+                                <valItem ident="tabot">
+                                    <desc>the saint to whom the tābot is dedicated</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -5163,7 +5195,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </persName>
    <locus ident="locus"
           elementName="locus"
-          elementLabel=""
+          elementLabel="locus"
           minOccur=""
           maxOccur=""
           path="/*:history/*:acquisition/*:locus"
@@ -5335,7 +5367,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </locus>
    <q ident="q"
       elementName="q"
-      elementLabel=""
+      elementLabel="quoted"
       minOccur=""
       maxOccur=""
       path="/*:history/*:acquisition/*:q"
@@ -5473,15 +5505,15 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="xml:lang"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
-            </valList>
-         </attDef>
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                        <valItem mode="add" ident="he-Latn"/>
+                                        <valItem mode="add" ident="ar-Latn"/>
+                                        <valItem mode="add" ident="ar-Hebr"/>
+                                    </valList>
+                                </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
