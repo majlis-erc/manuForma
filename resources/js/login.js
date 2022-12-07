@@ -61,6 +61,7 @@ $("#newUserForm").submit(function( event ) {
   var form = $(this);
   var url = $(this).attr('action');
   var data = ConvertFormToJSON(form);
+  
   $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
   });
@@ -69,11 +70,13 @@ $("#newUserForm").submit(function( event ) {
    // Return success 
    if(message == 'success') {
       $('#responseBody').html(message);
+      //window.location.reload();
    } else {
-         alert('Error: ' + message);
+        alert('This username already exists.');
+      //$('#responseBody').html('Username already exists.');
       $(form)[0].reset();
     }
-    }).fail( function(jqXHR, textStatus, errorThrown) {
+  }).fail( function(jqXHR, textStatus, errorThrown) {
     // do fail notice
     console.log(textStatus);
   });
@@ -85,23 +88,23 @@ $("#loginForm").submit(function( event ) {
   event.preventDefault();
   var form = $(this);
   var url = $(this).attr('action');
-  $.post(url, form.serialize(), function(data) { 
-    $('.modal-body').html('Logged in!');
+  var formData = form.serialize();
+  $.get(url, formData, function(data) {
+    console.log(data);
+    if (data.fail) {
+        $('#loginResponseBody').html('Wrong user or password');
+        $(form)[0].reset();
+        console.log(data);
+    } else {
+       $('#loginResponseBody').html('Success.');
+       window.location.reload();
+       console.log(data);
+    }
   }).fail( function(jqXHR, textStatus, errorThrown) {
     // do fail notice
-    alert('Wrong user name or password');
     console.log(textStatus);
-  },'xml');
+  });
   //end post
-});
-
-$("#loginForm .closeModal").click(function( event ) {
-    window.location.reload();
-});
-
-$("#newUserForm .closeModal").click(function( event ) {
-//On close relaunch window, and relaunch login? at least for newUser? 
-    window.location.reload();
 });
 
 //loginModal
@@ -129,4 +132,5 @@ $('.authenticate').click(function(event) {
 
 */
 });
+
 

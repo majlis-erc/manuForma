@@ -12,11 +12,9 @@ declare variable $exist:prefix external;
 declare variable $exist:root external;
 
 (:Variables for login module. :)
-declare variable $nav-base := $config:nav-base;
-(:
+declare variable $nav-base := '/exist/apps/manuForma';
 declare variable $userParam := request:get-parameter("user", ());
 declare variable $logout := request:get-parameter("logout", ());
-:)
 
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -25,40 +23,6 @@ if ($exist:path eq '') then
     
 (: Log users in or out :)
 else if ($exist:resource = "login") then 
-    (
-    login:set-user("org.exist.login", (), true()),
-    let $user := request:get-attribute("org.exist.login.user")
-    let $userParam := request:get-parameter("user","")
-    let $logout := request:get-parameter("logout",())
-    (:let $user := if(request:get-parameter("user", ()) != '') then request:get-parameter("user", ()) else request:get-attribute("org.exist.login.user"):)
-    return
-         try {
-                if($user and sm:list-users() = $user) then 
-                        <response status="success" message="Logged in">
-                            <message><div>Logged in as {$user}</div></message>
-                        </response>
-                else if($userParam and sm:list-users() = $userParam) then
-                        <response status="success" message="Logged in">
-                            <message><div>Logged in as {$userParam}</div></message>
-                        </response>                       
-                else if($logout = 'true') then 
-                        <response status="success" message="Logged out">
-                            <message><div>You have been logged out. </div></message>
-                        </response>
-                 else (
-                    (response:set-status-code( 500 ), 
-                        <response status="fail" message="Wrong user or password user: {$user} userParam: {$userParam}">
-                            <message><div>Wrong user or password user: {$user} userParam: {$userParam}</div></message>
-                        </response>)
-                 )
-         } catch * {
-            (response:set-status-code( 500 ), 
-             <response status="fail" message="Wrong user or password user: {$user} userParam: {$userParam}">
-                <message>{$err:description}</message>
-             </response>)
-         }
-         )
-(:
     (util:declare-option("exist:serialize", "method=json media-type=application/json"),
     try {
         let $loggedIn := login:set-user($config:login-domain, (), true())
@@ -89,7 +53,7 @@ else if ($exist:resource = "login") then
         </response>
     })
     
-:)    
+    
 (: Check user credentials :)
 else if ($exist:resource = "userInfo") then 
     ((:util:declare-option("exist:serialize", "method=json media-type=application/json"),:)

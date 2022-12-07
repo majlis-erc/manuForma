@@ -4,8 +4,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and Edit Manuscript Records Record information pertaining to the institutions and people behind the project. The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data. Define the Type of Manuscript. The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data. Describe the textual contents in detail or in general terms. Describe the writing material of the codicological unit. Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts. Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers. Describe any additions to the codicological unit that were made after its original production. Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the text layout of the manuscript. If necessary, you can define multiple text layouts. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library. The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data. Describe the textual contents in detail or in general terms. Describe the writing material of the codicological unit. Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts. Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers. Describe any additions to the codicological unit that were made after its original production. Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library." />
-      <title>Edit MS TEI records</title>
+      <meta name="description" content="Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World Create and Edit Manuscript Records Record information about the projects in which these data was generated. The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the text layout of the manuscript. If necessary, you can define multiple text layouts. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library. The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data. Describe the textual contents in detail or in general terms. Describe the writing material of the codicological unit. Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts. Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers. Describe any additions to the codicological unit that were made after its original production. Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library." />
+      <title>Edit Relation TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
@@ -27,9 +27,15 @@
          </xf:instance>
          <xf:instance id="i-admin">
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
-               <editor role="creator"></editor>
+               <editor role="creator" ref=""></editor>
                <idno type="URI"></idno>
             </TEI>
+         </xf:instance>
+         <xf:instance id="i-projectSpecificData" src="forms/templates/editionStmtProjectOptions.xml"></xf:instance>
+         <xf:instance id="i-projectSpecificDataSelected">
+            <data>
+               <selected id="" value="TEST"></selected>
+            </data>
          </xf:instance>
          <xf:instance id="i-elementTemplate" src="forms/mssTEI/templates/elementTemplate.xml"></xf:instance>
          <xf:instance id="i-attributeTemplate" src="forms/mssTEI/templates/attributesTemplate.xml"></xf:instance>
@@ -199,7 +205,7 @@
    <body>
       <header>
          <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/">&gt;manuForma</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/">manuForma</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav me-auto mb-2 mb-md-0">
                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="/exist/apps/manuForma/">Home</a></li>
                      <li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -229,40 +235,6 @@
                            </xf:action>
                         </xf:trigger>
                      </li>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" class="nav-link"><xf:label><span data-feather="home"></span> Admin Page  </xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-admin"></xf:toggle>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link"><xf:label>Header  </xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/titleStmt.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() &gt; 1]" id="navRepeattitleStmt">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link">
-                              <xf:label>Header  [
-                                 <xf:output value="position() + 1"></xf:output>]
-                              </xf:label>
-                              <xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/titleStmt.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeattitleStmt') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
                      <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'msIdentifier']" class="nav-link">
                            <xf:label>Identifier  </xf:label>
@@ -598,19 +570,44 @@
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-                  <h1 class="h2">Edit MS TEI records</h1>
+                  <h1 class="h2">
+                     Edit Record: 
+                     <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output>
+                  </h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-save" appearance="minimal"><xf:label> Save to Database </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal"><xf:label> View XML </xf:label></xf:submit>
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm">
+                              <xf:label><span data-feather="home"></span> Admin Metadata  
+                              </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="btn btn-outline-secondary btn-sm">
+                              <xf:label>Header  </xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/mssTEI/titleStmt.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
+                              <xf:label> Submit to GitHub </xf:label>
+                           </xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
+                              <xf:label> Download XML (Chrome Only)</xf:label>
+                           </xf:submit>
                         </div>
                      </div>
                   </div>
                </div>
-               <p class="alert alert-light hint">Create and Edit Manuscript Records</p>
+               <p class="alert alert-light hint">Create and edit relation records for MAJLIS: The Transformation of Jewish Literature
+                  in Arabic in the Islamicate World
+               </p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
                      <div class="fileLoading">
@@ -628,6 +625,21 @@
                            </xf:submit>
                         </div>
                      </div>
+                     <hr />
+                     <h4>Select project</h4>
+                     <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
+                        <xf:itemset ref="instance('i-projectSpecificData')//*:option">
+                           <xf:label ref="@name"></xf:label>
+                           <xf:value ref="@name"></xf:value>
+                        </xf:itemset>
+                     </xf:select1>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                        <xf:label>Load Project Metadata</xf:label>
+                        <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
+                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:editionStmt" position="after"></xf:insert>
+                        <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                     </xf:trigger>
+                     <hr />
                      <div class="fileLoading">
                         <h4 class="h6">Search <small class="text-muted">(database)</small></h4>
                         <div class="input-group mb-3">
@@ -684,10 +696,15 @@
                               <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                            </xf:trigger>
                         </div>
+                        <div class="input-group mb-3">
+                           <xf:input ref="@ref" class="form-control">
+                              <xf:label>Ref: </xf:label>
+                           </xf:input>
+                        </div>
+                        <hr />
                      </xf:repeat>
                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
                         <xf:label><i class="bi bi-plus-circle"></i> Add Creator
-                           
                         </xf:label>
                         <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
                      </xf:trigger><br /><div class="input-group mb-3">
