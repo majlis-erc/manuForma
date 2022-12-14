@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <appTitle>manuForma</appTitle>
-    <formTitle>Edit Relation TEI Records</formTitle>
+    <formTitle>Edit MS TEI records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
     <formName>mssTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
-    <formDesc>Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
+    <formDesc>Create and Edit Manuscript Records</formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <formDesc>Create and Edit Manuscript Records</formDesc>
@@ -60,7 +60,7 @@
     -->
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
-            <formDesc>Record information about the projects in which these data was generated.</formDesc>
+            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -70,46 +70,6 @@
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
-            <controlledValuesElements>
-                <element ident="country">
-                    <valList type="closed">
-                        <valItem ident="Russia"/>
-                        <valItem ident="USA"/>
-                        <valItem ident="England"/>
-                        <valItem ident="Israel"/>
-                        <valItem ident="Hungary"/>
-                        <valItem ident="France"/>
-                    </valList>
-                </element>
-                <element ident="institution">
-                    <valList type="closed">
-                        <valItem ident="National Library of Russia"/>
-                        <valItem ident="British Library"/>
-                        <valItem ident="Ben Zvi Institute"/>
-                        <valItem ident="Library of the Hungarian Academy of Sciences"/>
-                        <valItem ident="Cambridge University Library"/>
-                        <valItem ident="National Library of France"/>
-                        <valItem ident="Alliance Israélite Universelle"/>
-                        <valItem ident="Jewish Theological Seminary"/>
-                    </valList>
-                </element>
-                <element ident="settlement">
-                    <valList type="closed">
-                        <valItem ident="St. Petersburg"/>
-                        <valItem ident="London"/>
-                        <valItem ident="Jerusalem"/>
-                        <valItem ident="Budapest"/>
-                        <valItem ident="Cambridge"/>
-                        <valItem ident="Paris"/>
-                        <valItem ident="New York"/>
-                    </valList>
-                </element>
-                <element ident="repository">
-                    <valList type="closed">
-                        <valItem ident="Kaufmann"/>
-                    </valList>
-                </element>
-            </controlledValuesElements>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
@@ -209,6 +169,6 @@
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
                 <formDesc>Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library.</formDesc>
             </subform>
-        </subform>
+        </subform>    
     </subforms>
 </config>
