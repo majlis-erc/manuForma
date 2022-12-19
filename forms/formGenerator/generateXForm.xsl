@@ -802,7 +802,7 @@
                                 <xf:case id="view-main-entry" selected="true()">
                                     <!-- Load an existing template -->
                                     <div class="fileLoading">
-                                        <h4 class="h6">Create New Record<small class="text-muted">(Start With Blank Template File)</small></h4>
+                                        <h4 class="h6">New <small class="text-muted">(from template)</small></h4>
                                         <div class="input-group mb-3">
                                             <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')">
                                                  <xf:label/>
@@ -812,7 +812,7 @@
                                                  </xf:itemset>
                                              </xf:select1>
                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
-                                                <xf:label> Load Template File </xf:label>    
+                                                <xf:label> Load template </xf:label>    
                                             </xf:submit>
                                         </div>
                                     </div>
@@ -836,7 +836,7 @@
                                     </xsl:if>
                                     
                                     <div class="fileLoading">
-                                        <h4 class="h6">Continue Work With Existing Record <small class="text-muted">(Load From Database)</small></h4>
+                                        <h4 class="h6">Search <small class="text-muted">(database)</small></h4>
                                         <div class="input-group mb-3">
                                             <xf:input class="form-control" ref="instance('i-search')" incremental="true">
                                                 <xf:label/>
@@ -857,19 +857,19 @@
                                                 </xf:itemset>
                                             </xf:select1>
                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
-                                                <xf:label> Load Selected Record </xf:label>
+                                                <xf:label> Load selected record </xf:label>
                                             </xf:submit>
                                         </div>
                                     </div>
                                     <div class="fileLoading">
-                                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
+                                        <h4 class="h6">Upload <small class="text-muted">(from file system)</small></h4>
                                         <div class="input-group mb-3">
                                             <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
                                                 <xf:label/>
                                             </xf:upload>
                                             <!-- WS:Note add upload graphic, make inline with above? -->
                                             <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
-                                                <xf:label>Load Record</xf:label>
+                                                <xf:label>Load</xf:label>
                                             </xf:submit>
                                         </div>
                                     </div>                                    
@@ -1313,7 +1313,7 @@
                         </xf:action>
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Add </xf:label>
+                        <xf:label><i class="bi bi-plus-circle"/> Child Element </xf:label>
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>

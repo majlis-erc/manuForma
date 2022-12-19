@@ -174,6 +174,9 @@ End license statement: do not remove -->
                             <elementRef key="p"/>
                             <elementRef key="formula"/>
                             <elementRef key="catchwords"/>
+                            <elementRef key="p"/>
+                            <elementRef key="formula"/>
+                            <elementRef key="catchwords"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -183,7 +186,6 @@ End license statement: do not remove -->
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="mainStructures" mode="delete"/>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
@@ -207,7 +209,7 @@ End license statement: do not remove -->
                             history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
                             supplied for the key attribute a generic description that fits best your overall impression.</desc>
                         <content>
-                            <textNode/>
+                            <elementRef key="p"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -287,10 +289,6 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
-                            <attDef ident="calendar" mode="delete"/>
-                            <attDef ident="datingMethod" mode="delete"/>
-                            <attDef ident="datingPoint" mode="delete"/>
-                            <attDef ident="from" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="material" module="msdescription" mode="change">
@@ -391,7 +389,7 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="origDate" module="msdescription" mode="delete">
+                    <elementSpec ident="origDate" module="msdescription" mode="change">
                         <gloss>Date of Origin &lt;origDate/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date in the agreed-upon calendrical system.
                             Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
@@ -450,7 +448,7 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="origPlace" module="msdescription" mode="delete">
+                    <elementSpec ident="origPlace" module="msdescription" mode="change">
                         <gloss>Place of Origin &lt;origPlace/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="origplace.desc" xml:lang="en">Look up the place records in the database to specify the
                             location where the manuscript or manuscript part was produced. Try different spellings in different languages! If no
@@ -699,7 +697,7 @@ End license statement: do not remove -->
                     <elementSpec ident="item" module="core" mode="delete"/>
                     <elementSpec ident="list" module="core" mode="delete"/>
                     <elementSpec ident="measure" module="core" mode="change">
-                        <gloss>Number of Folios &lt;measure/&gt;</gloss>
+                        <gloss>Measurements of Book Block &lt;measure/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">How many folios does the manuscript/this codicological unit contain?</desc>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -740,9 +738,6 @@ End license statement: do not remove -->
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
-                        <content>
-                            <textNode/>
-                        </content>
                     </elementSpec>
                     <moduleRef key="header" include="extent"/>
                     <moduleRef key="figures" include="formula"/>
@@ -752,14 +747,6 @@ End license statement: do not remove -->
                             leaves.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.global.rendition" mode="delete"/>
-                            <memberOf key="att.global.linking" mode="delete"/>
-                            <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/>
-                            <memberOf key="att.global.change" mode="delete"/>
-                            <memberOf key="att.global.responsibility" mode="delete"/>
-                            <memberOf key="att.global.source" mode="delete"/>
-                            <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
@@ -779,8 +766,6 @@ End license statement: do not remove -->
                             <attDef ident="min" mode="delete"/>
                             <attDef ident="max" mode="delete"/>
                             <attDef ident="confidence" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
                             <attDef ident="type" usage="opt">
                                 <datatype>
                                     <dataRef key="teidata.enumerated"/>
@@ -826,7 +811,7 @@ End license statement: do not remove -->
                         </classes>
                     </elementSpec>
                     <elementSpec ident="extent" mode="change">
-                        <gloss>Measurements of Book Block &lt;extent/&gt;</gloss>
+                        <gloss>Number of Folios &lt;extent/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Give the total number of folios for the call mark or msPart.</desc>
                         <content>
                             <elementRef key="measure"/>
