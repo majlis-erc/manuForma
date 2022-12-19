@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <appTitle>manuForma</appTitle>
-    <formTitle>Edit Relation TEI Records</formTitle>
+    <formTitle>Edit MS TEI Records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
     <formName>mssTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
-    <formDesc>Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
+    <formDesc></formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <formDesc>Create and Edit Manuscript Records</formDesc>
@@ -60,12 +60,12 @@
     -->
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
-            <formDesc>Record information about the projects in which these data was generated.</formDesc>
+            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identifier" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identification" repeat="no">
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -129,11 +129,11 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the writing material of the manuscript.</formDesc>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Page Layout" repeat="no">
             <localSchema src="../schemas/mss-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the text layout of the manuscript. If necessary, you can define multiple text layouts.</formDesc>
+            <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
@@ -185,13 +185,19 @@
                 <xmlTemplate src="../templates/ms-part-example.xml"/>
                 <formDesc>Describe the writing material of the codicological unit.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Text Layout" repeat="no">
+            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Page Layout" repeat="no">
                 <localSchema src="../schemas/mss-layout.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the text layout of the codicological unit. If necessary, you can define multiple text layouts.</formDesc>
+                <formDesc>Describe the page layout of the codicological unit. If necessary, you can define multiple page layouts.</formDesc>
             </subform>
             <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+                <localSchema src="../schemas/mss-hand.xml"/>
+                <globalSchema src="../schemas/mss-compiled.odd"/>
+                <xmlTemplate src="../templates/ms-part-example.xml"/>
+                <formDesc>Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers.</formDesc>
+            </subform>
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout" repeat="no">
                 <localSchema src="../schemas/mss-hand.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/ms-part-example.xml"/>
