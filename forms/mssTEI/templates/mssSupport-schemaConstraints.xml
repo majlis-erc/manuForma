@@ -2653,7 +2653,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </locus>
    <extent ident="extent"
            elementName="extent"
-           elementLabel="Number of Folios &lt;extent/&gt;"
+           elementLabel="Measurements of Book Block &lt;extent/&gt;"
            minOccur=""
            maxOccur=""
            path="/*:supportDesc/*:extent"
@@ -3552,7 +3552,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </extent>
    <measure ident="measure"
             elementName="measure"
-            elementLabel="Measurements of Book Block &lt;measure/&gt;"
+            elementLabel="Number of Folios &lt;measure/&gt;"
             minOccur=""
             maxOccur=""
             path="/*:supportDesc/*:extent/*:measure"
@@ -3575,6 +3575,7 @@ and that a single TEI document may contain texts in many languages.</p>
          </attDef>
       </availableAtts>
       <childElements>
+         <textNode type="input"/>
          <child/>
       </childElements>
    </measure>
@@ -3589,20 +3590,6 @@ and that a single TEI document may contain texts in many languages.</p>
       <desc>This elements contains the measurements of the
                             leaves.</desc>
       <availableAtts elementName="dimensions">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="rend"
-                 mode="replace"
-                 usage="opt">
-            <datatype maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="pricked"/>
-               <valItem ident="ruled"/>
-            </valList>
-         </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
@@ -3612,66 +3599,6 @@ and that a single TEI document may contain texts in many languages.</p>
             </datatype>
             <valList>
                <valItem ident="leaves"/>
-            </valList>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="unit"
-                 usage="opt">
-            <desc versionDate="2007-08-02" xml:lang="en">names the unit used for the measurement</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">측정 단위의 이름을 기술한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">度量單位的名稱。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該大きさの単位を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">noms des unités utilisées pour la mesure.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">especifica las unidades usadas para la medición.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica le unità usate per la misurazione</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="cm">
-                  <gloss versionDate="2007-08-02" xml:lang="en">centimetres</gloss>
-                  <gloss versionDate="2019-04-08" xml:lang="ja">センチメートル</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">centimètres</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">centímetros</gloss>
-                  <gloss versionDate="2007-01-21" xml:lang="it">centimetri</gloss>
-               </valItem>
-               <valItem ident="mm">
-                  <gloss versionDate="2007-08-02" xml:lang="en">millimetres</gloss>
-                  <gloss versionDate="2019-04-08" xml:lang="ja">ミリメートル</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">millimètres</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">milímetros</gloss>
-                  <gloss versionDate="2007-01-21" xml:lang="it">millimetri</gloss>
-               </valItem>
-               <valItem ident="in">
-                  <gloss versionDate="2007-08-02" xml:lang="en">inches</gloss>
-                  <gloss versionDate="2019-04-08" xml:lang="ja">インチ</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">pouces</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">pulgadas</gloss>
-                  <gloss versionDate="2007-01-21" xml:lang="it">pollici</gloss>
-               </valItem>
-               <valItem ident="line">
-                  <desc versionDate="2007-08-02" xml:lang="en">lines of text</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">텍스트의 행</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">líneas de texto</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">テキスト行</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">lignes de texte</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">righe di testo</desc>
-               </valItem>
-               <valItem ident="char">
-                  <gloss versionDate="2007-08-02" xml:lang="en">characters</gloss>
-                  <gloss versionDate="2019-04-08" xml:lang="ja">文字</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">문자</gloss>
-                  <gloss versionDate="2008-04-06" xml:lang="es">caracteres</gloss>
-                  <gloss versionDate="2007-11-06" xml:lang="it">caratteri</gloss>
-                  <desc versionDate="2007-08-02" xml:lang="en">characters of text</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">텍스트의 문자</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">caracteres del texto</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">文字列</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">caractères du texte</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">caratteri di testo</desc>
-               </valItem>
             </valList>
          </attDef>
       </availableAtts>
@@ -3739,131 +3666,6 @@ and that a single TEI document may contain texts in many languages.</p>
       <desc>Describe how the folios or pages in the manuscript are
                             numbered (Arabic numerals, Hebrew letters etc.), if there are multiple such devices and their range.</desc>
       <availableAtts elementName="foliation">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="calendar"
-                 usage="opt">
-            <desc versionDate="2011-11-25" xml:lang="en">indicates the system or calendar to which the
-        date represented by the content of this element belongs.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">날짜 표현 시스템 또는 달력 표시 형식을 표시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明該日期表示所使用的曆法計算系統。</desc>
-            <desc xml:lang="ja" versionDate="2019-02-03">この要素を含むコンテントにおける日付の暦やシステムを示す．</desc>
-            <desc versionDate="2009-01-06" xml:lang="fr">indique le système ou le calendrier auquel
-        appartient la date exprimée dans le contenu de l'élément.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el sistema o calendario en que se muestra
-        una fecha.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica il sistema o calendario al quale la data
-        appartiene.</desc>
-            <datatype>
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <constraintSpec ident="calendar" scheme="schematron">
-               <constraint>
-                  <sch:rule context="tei:*[@calendar]">
-                     <sch:assert test="string-length(.) gt 0"> @calendar indicates the system or calendar to
-              which the date represented by the content of this element belongs, but this
-              <sch:name/> element has no textual content.</sch:assert>
-                  </sch:rule>
-               </constraint>
-            </constraintSpec>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">He was born on <date calendar="#gregorian">Feb. 22, 1732</date> (<date calendar="#julian" when="1732-02-22"> Feb. 11, 1731/32,
-            O.S.</date>).</egXML>
-            </exemplum>
-            <exemplum versionDate="2008-04-06" xml:lang="fr">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Bouiller_Rapport"> L'année
-          1960 fut, en vertu du calendrier grégorien, bissextile ; le 22 juin tomba ainsi le jour de
-          l'été, le <date calendar="#gregorian">22 juin</date>. </egXML>
-            </exemplum>
-            <remarks xml:lang="en" versionDate="2015-05-29">
-               <p>Note that the <att>calendar</att> attribute (unlike <att>datingMethod</att> defined in
-            <ident type="class">att.datable.custom</ident>) defines the calendar system of the date
-          in the original material defined by the parent element, <emph>not</emph> the calendar to
-          which the date is normalized.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2019-02-03">
-               <p>
-                  <att>calendar</att>属性は(<ident type="class">att.datable.custom</ident>クラスで定義される<att>datingMethod</att>属性と異なり、
-        親要素によって定義される原資料の日付の暦日システムを定義するものであり、
-        どの暦日に日付を正規化するかではない。</p>
-            </remarks>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="datingMethod"
-                 usage="opt">
-            <desc versionDate="2012-08-15" xml:lang="en">supplies a pointer to a <gi>calendar</gi> element or other
-        means of interpreting the values of the custom dating attributes.</desc>
-            <desc xml:lang="ja" versionDate="2019-02-03">ここで提供するポインタは，<gi>calendar</gi> 要素や慣習的な日付をあらわす属性値を解釈する方法を指す。</desc>
-            <datatype>
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#STOW">Contayning the Originall, Antiquity, Increaſe, Moderne 
-            eſtate, and deſcription of that Citie, written in the yeare 
-            <date when-custom="1598" calendar="#julian" datingMethod="#julian">1598</date>. by Iohn Stow 
-            Citizen of London.</egXML>
-               <p>In this example, the <att>calendar</att> attribute points to a <gi>calendar</gi> element for the 
-          Julian calendar, specifying that the text content of the <gi>date</gi> element is a 
-          Julian date, and the <att>datingMethod</att> attribute also points to the Julian calendar
-          to indicate that the content of the <att>when-custom</att> attribute value is Julian too.</p>
-            </exemplum>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <date when="1382-06-28"
-                        when-custom="6890-06-20"
-                        datingMethod="#creationOfWorld">
-            μηνὶ Ἰουνίου εἰς <num>κ</num> ἔτους <num>ςωϞ</num>
-                  </date>
-               </egXML>
-               <p>In this example, a date is given in a Mediaeval text measured "from the creation of the world", which is normalised
-        (in <att>when</att>) to the Gregorian date, but is also normalized (in <att>when-custom</att>) to a
-        machine-actionable, numeric version of the date from the Creation.</p>
-            </exemplum>
-            <remarks xml:lang="en" versionDate="2015-05-29">
-               <p>Note that the <att>datingMethod</att> attribute (unlike
-        <att>calendar</att> defined in <ident type="class">att.datable</ident>) defines
-        the calendar or dating system to which the date described by the parent element is normalized (i.e. in the  
-        <att>when-custom</att> or other <att>X-custom</att> attributes), <emph>not</emph> the calendar of the
-        original date in the element.</p>
-            </remarks>
-            <remarks versionDate="2019-02-13" xml:lang="ja">
-               <p>（<ident type="class">att.datable</ident>で定義される<att>calendar</att> 属性とは違って）
-        <att>datingMethod</att>属性が定義するのは，親要素で記述された日付を正規化した暦や暦法であり，
-        当該要素中のオリジナルの日付の暦<emph>ではない</emph>．</p>
-            </remarks>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="datingPoint"
-                 usage="opt">
-            <desc versionDate="2011-11-25" xml:lang="en">supplies a pointer to some location defining a named point in time with reference to which the datable item is understood to have occurred</desc>
-            <desc xml:lang="ja" versionDate="2019-02-03">ここで提供するポインタは、年代測定可能な事柄が起きたとされる名前付の時間幅を定義する場所を指す。
-      </desc>
-            <datatype>
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="from"
-                 usage="opt">
-            <desc versionDate="2008-02-10" xml:lang="en">indicates the starting point of the period in standard form, e.g. yyyy-mm-dd.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표준 형식으로 기간의 시작 지점을 표시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">以標準格式表示該段時間的起始點。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">標準形で当該時間幅の始点を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique le point de départ d'une période sous une
-        forme normalisée, par ex. aaaa-mm-jj</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica l'inizio del periodo nel formato standard</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el punto de inicio del período en el formato estándard.</desc>
-            <datatype>
-               <dataRef key="teidata.temporal.w3c"/>
-            </datatype>
-         </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -4267,21 +4069,7 @@ and that a single TEI document may contain texts in many languages.</p>
       <desc>Describe the scope and composition of quires in prose
                             inside the p element. For quiring formulas use the element of the same name and for the system for ordering quires use the
                             catchwords element.</desc>
-      <availableAtts elementName="collation">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="mainStructures">
-            <desc>Specifies the typical quire structure(s) of the book,
-                                according to English notation (i.e. the number of folios in the
-                                original quire), e.g. <val>8</val>, <val>6 8</val>. Note: This
-                                is a customization which is not currently part of the TEI P5
-                                standard.</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
-               <dataRef key="teidata.count"/>
-            </datatype>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="collation"/>
       <childElements>
          <child>
             <element ident="p"/>
@@ -4374,25 +4162,8 @@ and that a single TEI document may contain texts in many languages.</p>
          </attDef>
       </availableAtts>
       <childElements>
-         <child>
-            <element ident="p"/>
-         </child>
-      </childElements>
-   </condition>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Text Block &lt;p/&gt;"
-      minOccur=""
-      maxOccur=""
-      path="/*:supportDesc/*:condition/*:p"
-      currentLevel="3"
-      popup="3">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
+         <textNode type="input"/>
          <child/>
       </childElements>
-   </p>
+   </condition>
 </TEI>
