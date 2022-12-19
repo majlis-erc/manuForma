@@ -5,10 +5,10 @@
     <formURL>/exist/apps/manuForma/</formURL>
     <formName>mssTEI</formName>
     <formAuthor>majlis-erc</formAuthor>
-    <formDesc></formDesc>
+    <formDesc> </formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
-    <formDesc>Create and Edit Manuscript Records</formDesc>
+    <formDesc> </formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
     <!-- Saving and managing created TEI files -->
@@ -51,8 +51,9 @@
         <xmlPath name="Project Picker" src="/forms/templates/editionStmtProjectOptions.xml" element="editionStmt"/>
     </projectSpecificData>
     <!--
-        For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
-        and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
+        For better performance the TEI records are into sections. Each section will output a form. 
+        This will allow better load and response time for forms, and a step-by-step method of editing records. 
+        In process records can be stored in the eXist-db database or downloaded to the file system, where they can be loaded 
         into the form again as needed. 
         
         List forms in order of editing preference.
@@ -69,13 +70,13 @@
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>The identifier is the major reference unit of a manuscript where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
+            <formDesc>Add shelfmark and information on the holding institution and alternate references to existing cataloging data.</formDesc>
             <controlledValuesElements>
                 <element ident="country">
                     <valList type="closed">
                         <valItem ident="Russia"/>
                         <valItem ident="USA"/>
-                        <valItem ident="England"/>
+                        <valItem ident="Great Britain"/>
                         <valItem ident="Israel"/>
                         <valItem ident="Hungary"/>
                         <valItem ident="France"/>
@@ -135,6 +136,13 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
         </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
+            repeat="no">
+            <localSchema src="../schemas/mss-layout.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe the graphical signs of the manuscript.</formDesc>
+        </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
@@ -191,13 +199,14 @@
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
                 <formDesc>Describe the page layout of the codicological unit. If necessary, you can define multiple page layouts.</formDesc>
             </subform>
-            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
-                <localSchema src="../schemas/mss-hand.xml"/>
+            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
+                repeat="no">
+                <localSchema src="../schemas/mss-layout.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers.</formDesc>
+                <xmlTemplate src="../templates/full-mss-template.xml"/>
+                <formDesc>Describe the graphical signs of the manuscript.</formDesc>
             </subform>
-            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout" repeat="no">
+            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
                 <localSchema src="../schemas/mss-hand.xml"/>
                 <globalSchema src="../schemas/mss-compiled.odd"/>
                 <xmlTemplate src="../templates/ms-part-example.xml"/>
