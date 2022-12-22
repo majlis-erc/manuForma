@@ -13,7 +13,8 @@
          <xf:instance id="i-schemaConstraints" src="forms/mssTEI/templates/msPart-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-msPart-schemaConstraints" src="forms/mssTEI/templates/msPart-schemaConstraints.xml"></xf:instance>
          <xf:instance id="i-msPart-elementTemplate" src="forms/mssTEI/templates/msPart-elementTemplate.xml"></xf:instance>
-         <xf:instance id="i-msPart-subforms"><data xmlns="">
+         <xf:instance id="i-msPart-subforms">
+            <data xmlns="">
                <subform formName="msIdentifier" selected="false"></subform>
                <subform formName="msContents" selected="false"></subform>
                <subform formName="mssSupport" selected="false"></subform>
@@ -21,17 +22,28 @@
                <subform formName="decoDesc" selected="false"></subform>
                <subform formName="handDesc" selected="false"></subform>
                <subform formName="additions" selected="false"></subform>
-               <subform formName="history" selected="false"></subform></data></xf:instance>
-         <xf:instance id="i-msPart-repeatIndex"><data xmlns="">
-               <index>1</index></data></xf:instance>
+               <subform formName="history" selected="false"></subform>
+            </data>
+         </xf:instance>
+         <xf:instance id="i-msPart-repeatIndex">
+            <data xmlns="">
+               <index>1</index>
+            </data>
+         </xf:instance>
       </xf:model>
    </head>
    <body>
       <h2 class="h3 mainElement">
-         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]"></xf:delete>
+         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label>
+            <xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]"></xf:delete>
          </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-msPart-elementTemplate')/*[local-name() = 'msPart']" position="after"></xf:insert>
-         </xf:trigger>MS Part [<xf:output value="instance('i-repeatIndex')/index"></xf:output>]</h2>
+         <xf:trigger class="btn controls add" appearance="minimal">
+            <xf:label><i class="bi bi-plus-circle"></i></xf:label>
+            <xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-msPart-elementTemplate')/*[local-name() = 'msPart']" position="after"></xf:insert>
+         </xf:trigger>MS Part [
+         <xf:output value="instance('i-repeatIndex')/index"></xf:output>]
+      </h2>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:msPart[position() = instance('i-repeatIndex')/index]" id="msPart-root">
          <div class="container-fluid">
             <div class="row">
@@ -39,7 +51,9 @@
                   <div class="position-sticky pt-3">
                      <ul class="nav flex-column">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msIdentifier']"><xf:label>MS Identifier</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msIdentifier']">
+                              <xf:label>MS Identifier</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -50,7 +64,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msContents']"><xf:label>Content Description</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'msContents']">
+                              <xf:label>Content Description</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -61,7 +77,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'mssSupport']"><xf:label>Support</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'mssSupport']">
+                              <xf:label>Support</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -72,7 +90,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'layoutDesc']"><xf:label>Page Layout</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'layoutDesc']">
+                              <xf:label>Page Layout</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -83,7 +103,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'decoDesc']"><xf:label>Text Layout</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'decoDesc']">
+                              <xf:label>Text Layout</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -94,7 +116,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'handDesc']"><xf:label>Hand Description</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'handDesc']">
+                              <xf:label>Hand Description</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -105,7 +129,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'additions']"><xf:label>Additions</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'additions']">
+                              <xf:label>Additions</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
@@ -116,7 +142,9 @@
                            </xf:trigger>
                         </li>
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'history']"><xf:label>History</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link" ref="instance('i-msPart-subforms')//*:subform[@formName = 'history']">
+                              <xf:label>History</xf:label>
+                              <xf:action ev:event="DOMActivate">
                                  <xf:toggle case="msPartSubformDataEntry"></xf:toggle>
                                  <xf:unload targetid="msPartSubform"></xf:unload>
                                  <xf:setvalue value="'false'" ref="instance('i-msPart-subforms')//*:subform[@selected = 'true']/@selected"></xf:setvalue>
