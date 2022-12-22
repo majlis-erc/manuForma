@@ -1305,7 +1305,7 @@
                             <xf:value/>
                         </xf:item>
                         <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
-                            <xf:label ref="@ident"/>
+                            <xf:label ref="@label"/>
                             <xf:value ref="@ident"/>
                         </xf:itemset>
                         <xf:action ev:event="xforms-value-changed">                            
@@ -1807,13 +1807,43 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
-                    <!--
-                    <xsl:when test="not($childElements/child::*)">
-                        <textNode type="input"/>
-                    </xsl:when>
-                    -->
                 </xsl:choose>
-                <xsl:copy-of select="$childElements"/>
+                <xsl:if test="$childElements">
+                    <child>
+                        <xsl:for-each select="$childElements/child::*">
+                            <xsl:variable name="childName" select="@ident"/>
+                            <xsl:variable name="elementRules" select="local:elementRules($childName,$subformName)"/>
+                            <xsl:variable name="childLabel">
+                                <xsl:choose>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang]">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                                    </xsl:when>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en']">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                                    </xsl:when>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
+                                    </xsl:when>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang]">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                                    </xsl:when>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en']">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                                    </xsl:when>
+                                    <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss">
+                                        <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[1]"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$elementName"/>
+                                    </xsl:otherwise>
+                                </xsl:choose> 
+                            </xsl:variable>
+                            <element ident="{$childName}" label="{$childLabel}"/>
+                        </xsl:for-each>
+                    </child>
+                </xsl:if>
+                
+<!--                <xsl:copy-of select="$childElements"/>-->
             </childElements>
         </xsl:element>
         <xsl:if test="$childElements/descendant-or-self::*:element[not(@classRef = 'true')]">

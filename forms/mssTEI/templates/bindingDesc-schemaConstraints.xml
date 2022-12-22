@@ -21,10 +21,10 @@
       <availableAtts elementName="bindingDesc"/>
       <childElements>
          <child>
-            <element ident="p"/>
-            <element ident="decoNote"/>
-            <element ident="condition"/>
-            <element ident="binding"/>
+            <element ident="p" label="Text Block  &lt;p&gt;"/>
+            <element ident="decoNote" label="Decoration Description Container  &lt;decoNote&gt;"/>
+            <element ident="condition" label="State of the Binding &lt;condition&gt;"/>
+            <element ident="binding" label="*Binding Description Container (2/2)  &lt;binding&gt;"/>
          </child>
       </childElements>
    </bindingDesc>
@@ -65,173 +65,175 @@
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="pastedown"
                  usage="opt">
-            <datatype maxOccurs="3">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="UTI">
-                  <desc>Under the turn-ins. The pastedown is pasted under the
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="UTI">
+                                    <desc>Under the turn-ins. The pastedown is pasted under the
                                         turn-ins.</desc>
-               </valItem>
-               <valItem ident="OTI">
-                  <desc>Over the turn-ins. The pastedown is pasted over the
+                                </valItem>
+                                <valItem ident="OTI">
+                                    <desc>Over the turn-ins. The pastedown is pasted over the
                                         turn-ins.</desc>
-               </valItem>
-               <valItem ident="L">
-                  <desc>Left pastedown, on the upper board.</desc>
-               </valItem>
-               <valItem ident="R">
-                  <desc>Right pastedown, on the lower board.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="L">
+                                    <desc>Left pastedown, on the upper board.</desc>
+                                </valItem>
+                                <valItem ident="R">
+                                    <desc>Right pastedown, on the lower board.</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="repaired"
                  usage="opt">
-            <datatype maxOccurs="1">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="Y"/>
-               <valItem ident="N"/>
-            </valList>
-         </attDef>
+                            <datatype maxOccurs="1">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="closed">
+
+                                <valItem ident="Y"/>
+                                <valItem ident="N"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="frame">
-                  <desc>an ornament around the page</desc>
-               </valItem>
-               <valItem ident="miniature">
-                  <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
+                                <valList type="closed">
+                                    <valItem ident="frame">
+                                        <desc>an ornament around the page</desc>
+                                    </valItem>
+                                    <valItem ident="miniature">
+                                        <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
                                             or more columns of text. </desc>
-               </valItem>
-               <valItem ident="band">
-                  <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
+                                    </valItem>
+                                    <valItem ident="band">
+                                        <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
                                             used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="punctuation"/>
-               <valItem ident="headpiece">
-                  <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
+                                    </valItem>
+                                    <valItem ident="punctuation"/>
+                                    <valItem ident="headpiece">
+                                        <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
                                             used to mark the beginning of a new text or section of text. With two specifications, for Band (single
                                             border) and Frame (border encompassing multiple sides of text)</desc>
-               </valItem>
-               <valItem ident="headpieceFrame">
-                  <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
+                                    </valItem>
+                                    <valItem ident="headpieceFrame">
+                                        <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
                                             space. Typically used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="headpieceBand">
-                  <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
+                                    </valItem>
+                                    <valItem ident="headpieceBand">
+                                        <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
                                             Typically used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="doodles">
-                  <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
+                                    </valItem>
+                                    <valItem ident="doodles">
+                                        <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
                                             “extras”)</desc>
-               </valItem>
-               <valItem ident="drawing">
-                  <desc>A monochrome or bichrome image that is not painted.</desc>
-               </valItem>
-               <valItem ident="diagram">
-                  <desc>A drawing that conveys information or knowledge in schematic form.</desc>
-               </valItem>
-               <valItem ident="initial">
-                  <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
+                                    </valItem>
+                                    <valItem ident="drawing">
+                                        <desc>A monochrome or bichrome image that is not painted.</desc>
+                                    </valItem>
+                                    <valItem ident="diagram">
+                                        <desc>A drawing that conveys information or knowledge in schematic form.</desc>
+                                    </valItem>
+                                    <valItem ident="initial">
+                                        <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
                                             motifs.</desc>
-               </valItem>
-               <valItem ident="map"/>
-               <valItem ident="marginal">
-                  <desc>A small miniature painted next to one of the margins of the text.</desc>
-               </valItem>
-               <valItem ident="mixed"/>
-               <valItem ident="other"/>
-               <valItem ident="ornamentation"/>
-               <valItem ident="paratext"/>
-               <valItem ident="rubrication"/>
-               <valItem ident="secondary"/>
-               <valItem ident="tooling"/>
-               <valItem ident="unspecified"/>
-               <valItem ident="engraving">
-                  <desc>An image on paper created with a printing plate.</desc>
-               </valItem>
-               <valItem ident="printedImage">
-                  <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
-               </valItem>
-               <valItem ident="overCover">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="overlappingCornerFO">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="overlappingCornerHTO">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="toungedCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="stitchedCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="mitredCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="openMitredCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="Other">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="bindingMaterial">
-                  <desc>to be used in binding description. Materials of which the binding is made.</desc>
-               </valItem>
-               <valItem ident="Headband">
-                  <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
-               </valItem>
-               <valItem ident="Tailband">
-                  <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
-               </valItem>
-               <valItem ident="Endbands">
-                  <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
+                                    </valItem>
+                                    <valItem ident="map"/>
+                                    <valItem ident="marginal">
+                                        <desc>A small miniature painted next to one of the margins of the text.</desc>
+                                    </valItem>
+                                    <valItem ident="mixed"/>
+                                    <valItem ident="other"/>
+                                    <valItem ident="ornamentation"/>
+                                    <valItem ident="paratext"/>
+                                    <valItem ident="rubrication"/>
+                                    <valItem ident="secondary"/>
+                                    <valItem ident="tooling"/>
+                                    <valItem ident="unspecified"/>
+                                    <valItem ident="engraving">
+                                        <desc>An image on paper created with a printing plate.</desc>
+                                    </valItem>
+                                    <valItem ident="printedImage">
+                                        <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
+                                    </valItem>
+                                    <valItem ident="overCover">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="overlappingCornerFO">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="overlappingCornerHTO">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="toungedCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="stitchedCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="mitredCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="openMitredCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="Other">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="bindingMaterial">
+                                        <desc>to be used in binding description. Materials of which the binding is made.</desc>
+                                    </valItem>
+                                    <valItem ident="Headband">
+                                        <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
+                                    </valItem>
+                                    <valItem ident="Tailband">
+                                        <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
+                                    </valItem>
+                                    <valItem ident="Endbands">
+                                        <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
                                             head and tail of the spine of a book. The ethiopian endbands are usually slit-braid stripes of leather or
                                             link-stitch sewings. </desc>
-               </valItem>
-               <valItem ident="Fastening">
-                  <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
+                                    </valItem>
+                                    <valItem ident="Fastening">
+                                        <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
                                             of fastenings can be holes and pins on the outer edge of the boards.</desc>
-               </valItem>
-               <valItem ident="Spine">
-                  <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
-               </valItem>
-               <valItem ident="SlipCase">
-                  <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
+                                    </valItem>
+                                    <valItem ident="Spine">
+                                        <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
+                                    </valItem>
+                                    <valItem ident="SlipCase">
+                                        <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
                                         </desc>
-               </valItem>
-               <valItem ident="Boards">
-                  <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
+                                    </valItem>
+                                    <valItem ident="Boards">
+                                        <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
                                             to protect and support a bookblock.</desc>
-               </valItem>
-               <valItem ident="SewingStations">
-                  <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
+                                    </valItem>
+                                    <valItem ident="SewingStations">
+                                        <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
                                             when sewing a book.</desc>
-               </valItem>
-               <valItem ident="EndLeaves">
-                  <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
+                                    </valItem>
+                                    <valItem ident="EndLeaves">
+                                        <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
                                             protection to the text leaves.</desc>
-               </valItem>
-               <valItem ident="Cover">
-                  <desc>The material that constitutes the immediate covering of the completed binding.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                    </valItem>
+                                    <valItem ident="Cover">
+                                        <desc>The material that constitutes the immediate covering of the completed binding.</desc>
+                                    </valItem>
+
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p"/>
-            <element ident="material"/>
+            <element ident="p" label="Text Block  &lt;p&gt;"/>
+            <element ident="material" label="Binding Material &lt;material&gt;"/>
          </child>
       </childElements>
    </decoNote>
@@ -270,32 +272,32 @@
       function or use of the material in relation to the object
       as a whole.</desc>
             <datatype minOccurs="1" maxOccurs="1">
-               <dataRef key="teidata.enumerated"/>
+	              <dataRef key="teidata.enumerated"/>
             </datatype>
             <valList type="open">
-               <valItem ident="binding">
-                  <desc xml:lang="en" versionDate="2020-11-12">covering
+	              <valItem ident="binding">
+	                 <desc xml:lang="en" versionDate="2020-11-12">covering
 	  material of a codex</desc>
-               </valItem>
-               <valItem ident="endband">
-                  <desc xml:lang="en" versionDate="2020-11-12">sewing at the
+	              </valItem>
+	              <valItem ident="endband">
+	                 <desc xml:lang="en" versionDate="2020-11-12">sewing at the
 	  head or tail of the codex spine to strengthen the binding,
 	  often decorative</desc>
-               </valItem>
-               <valItem ident="slipcase">
-                  <desc xml:lang="en" versionDate="2020-11-12">removable
+	              </valItem>
+	              <valItem ident="slipcase">
+	                 <desc xml:lang="en" versionDate="2020-11-12">removable
 	  protective cover for a set of one or more codices</desc>
-               </valItem>
-               <valItem ident="support">
-                  <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
-               </valItem>
-               <valItem ident="tie">
-                  <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
+	              </valItem>
+	              <valItem ident="support">
+	                 <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
+	              </valItem>
+	              <valItem ident="tie">
+	                 <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
 	  string used to bind or close a codex or rolled scroll</desc>
-               </valItem>
+	              </valItem>
             </valList>
             <remarks xml:lang="en" versionDate="2020-11-12">
-               <p>The sample values here are for descriptive bibliography.
+	              <p>The sample values here are for descriptive bibliography.
 	Other sets of sample values might include <val>armrests</val>,
 	<val>legs</val>, <val>tabletop</val>, <val>pan</val>, and
 	<val>back</val> for furniture; or <val>wall</val>,
@@ -308,22 +310,22 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="key"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="paper"/>
-               <valItem mode="add" ident="parchment"/>
-               <valItem mode="add" ident="papyrus"/>
-               <valItem mode="add" ident="cardboard"/>
-               <valItem mode="add" ident="leather"/>
-               <valItem mode="add" ident="metal"/>
-               <valItem mode="add" ident="textile"/>
-               <valItem mode="add" ident="other"/>
-               <valItem mode="add" ident="silk"/>
-               <valItem mode="add" ident="stone"/>
-               <valItem mode="add" ident="bronze"/>
-               <valItem mode="add" ident="alabaster"/>
-               <valItem mode="add" ident="cotton"/>
-            </valList>
-         </attDef>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="paper"/>
+                                    <valItem mode="add" ident="parchment"/>
+                                    <valItem mode="add" ident="papyrus"/>
+                                    <valItem mode="add" ident="cardboard"/>
+                                    <valItem mode="add" ident="leather"/>
+                                    <valItem mode="add" ident="metal"/>
+                                    <valItem mode="add" ident="textile"/>
+                                    <valItem mode="add" ident="other"/>
+                                    <valItem mode="add" ident="silk"/>
+                                    <valItem mode="add" ident="stone"/>
+                                    <valItem mode="add" ident="bronze"/>
+                                    <valItem mode="add" ident="alabaster"/>
+                                    <valItem mode="add" ident="cotton"/>
+                                </valList>
+                            </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -344,7 +346,7 @@
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -385,16 +387,16 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="key"
                  usage="opt">
-            <datatype>
-               <dataRef key="teidata.text"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="deficient"/>
-               <valItem ident="good"/>
-               <valItem ident="intact"/>
-               <valItem ident="other"/>
-            </valList>
-         </attDef>
+                                <datatype>
+                                    <dataRef key="teidata.text"/>
+                                </datatype>
+                                <valList type="closed">
+                                    <valItem ident="deficient"/>
+                                    <valItem ident="good"/>
+                                    <valItem ident="intact"/>
+                                    <valItem ident="other"/>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -417,17 +419,17 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="contemporary"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="true"/>
-               <valItem mode="add" ident="false"/>
-            </valList>
-         </attDef>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="true"/>
+                                    <valItem mode="add" ident="false"/>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="condition"/>
-            <element ident="decoNote"/>
-            <element ident="p"/>
+            <element ident="condition" label="State of the Binding &lt;condition&gt;"/>
+            <element ident="decoNote" label="Decoration Description Container  &lt;decoNote&gt;"/>
+            <element ident="p" label="Text Block  &lt;p&gt;"/>
          </child>
       </childElements>
    </binding>
@@ -447,16 +449,16 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="key"
                  usage="opt">
-            <datatype>
-               <dataRef key="teidata.text"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="deficient"/>
-               <valItem ident="good"/>
-               <valItem ident="intact"/>
-               <valItem ident="other"/>
-            </valList>
-         </attDef>
+                                <datatype>
+                                    <dataRef key="teidata.text"/>
+                                </datatype>
+                                <valList type="closed">
+                                    <valItem ident="deficient"/>
+                                    <valItem ident="good"/>
+                                    <valItem ident="intact"/>
+                                    <valItem ident="other"/>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -484,173 +486,175 @@
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="pastedown"
                  usage="opt">
-            <datatype maxOccurs="3">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="UTI">
-                  <desc>Under the turn-ins. The pastedown is pasted under the
+                            <datatype maxOccurs="3">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="UTI">
+                                    <desc>Under the turn-ins. The pastedown is pasted under the
                                         turn-ins.</desc>
-               </valItem>
-               <valItem ident="OTI">
-                  <desc>Over the turn-ins. The pastedown is pasted over the
+                                </valItem>
+                                <valItem ident="OTI">
+                                    <desc>Over the turn-ins. The pastedown is pasted over the
                                         turn-ins.</desc>
-               </valItem>
-               <valItem ident="L">
-                  <desc>Left pastedown, on the upper board.</desc>
-               </valItem>
-               <valItem ident="R">
-                  <desc>Right pastedown, on the lower board.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="L">
+                                    <desc>Left pastedown, on the upper board.</desc>
+                                </valItem>
+                                <valItem ident="R">
+                                    <desc>Right pastedown, on the lower board.</desc>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="repaired"
                  usage="opt">
-            <datatype maxOccurs="1">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="Y"/>
-               <valItem ident="N"/>
-            </valList>
-         </attDef>
+                            <datatype maxOccurs="1">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="closed">
+
+                                <valItem ident="Y"/>
+                                <valItem ident="N"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  mode="replace"
                  usage="opt">
-            <valList type="closed">
-               <valItem ident="frame">
-                  <desc>an ornament around the page</desc>
-               </valItem>
-               <valItem ident="miniature">
-                  <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
+                                <valList type="closed">
+                                    <valItem ident="frame">
+                                        <desc>an ornament around the page</desc>
+                                    </valItem>
+                                    <valItem ident="miniature">
+                                        <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
                                             or more columns of text. </desc>
-               </valItem>
-               <valItem ident="band">
-                  <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
+                                    </valItem>
+                                    <valItem ident="band">
+                                        <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
                                             used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="punctuation"/>
-               <valItem ident="headpiece">
-                  <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
+                                    </valItem>
+                                    <valItem ident="punctuation"/>
+                                    <valItem ident="headpiece">
+                                        <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
                                             used to mark the beginning of a new text or section of text. With two specifications, for Band (single
                                             border) and Frame (border encompassing multiple sides of text)</desc>
-               </valItem>
-               <valItem ident="headpieceFrame">
-                  <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
+                                    </valItem>
+                                    <valItem ident="headpieceFrame">
+                                        <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
                                             space. Typically used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="headpieceBand">
-                  <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
+                                    </valItem>
+                                    <valItem ident="headpieceBand">
+                                        <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
                                             Typically used to mark the beginning of a new text or section of text.</desc>
-               </valItem>
-               <valItem ident="doodles">
-                  <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
+                                    </valItem>
+                                    <valItem ident="doodles">
+                                        <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
                                             “extras”)</desc>
-               </valItem>
-               <valItem ident="drawing">
-                  <desc>A monochrome or bichrome image that is not painted.</desc>
-               </valItem>
-               <valItem ident="diagram">
-                  <desc>A drawing that conveys information or knowledge in schematic form.</desc>
-               </valItem>
-               <valItem ident="initial">
-                  <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
+                                    </valItem>
+                                    <valItem ident="drawing">
+                                        <desc>A monochrome or bichrome image that is not painted.</desc>
+                                    </valItem>
+                                    <valItem ident="diagram">
+                                        <desc>A drawing that conveys information or knowledge in schematic form.</desc>
+                                    </valItem>
+                                    <valItem ident="initial">
+                                        <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
                                             motifs.</desc>
-               </valItem>
-               <valItem ident="map"/>
-               <valItem ident="marginal">
-                  <desc>A small miniature painted next to one of the margins of the text.</desc>
-               </valItem>
-               <valItem ident="mixed"/>
-               <valItem ident="other"/>
-               <valItem ident="ornamentation"/>
-               <valItem ident="paratext"/>
-               <valItem ident="rubrication"/>
-               <valItem ident="secondary"/>
-               <valItem ident="tooling"/>
-               <valItem ident="unspecified"/>
-               <valItem ident="engraving">
-                  <desc>An image on paper created with a printing plate.</desc>
-               </valItem>
-               <valItem ident="printedImage">
-                  <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
-               </valItem>
-               <valItem ident="overCover">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="overlappingCornerFO">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="overlappingCornerHTO">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="toungedCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="stitchedCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="mitredCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="openMitredCorner">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="Other">
-                  <desc>to be used in binding description</desc>
-               </valItem>
-               <valItem ident="bindingMaterial">
-                  <desc>to be used in binding description. Materials of which the binding is made.</desc>
-               </valItem>
-               <valItem ident="Headband">
-                  <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
-               </valItem>
-               <valItem ident="Tailband">
-                  <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
-               </valItem>
-               <valItem ident="Endbands">
-                  <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
+                                    </valItem>
+                                    <valItem ident="map"/>
+                                    <valItem ident="marginal">
+                                        <desc>A small miniature painted next to one of the margins of the text.</desc>
+                                    </valItem>
+                                    <valItem ident="mixed"/>
+                                    <valItem ident="other"/>
+                                    <valItem ident="ornamentation"/>
+                                    <valItem ident="paratext"/>
+                                    <valItem ident="rubrication"/>
+                                    <valItem ident="secondary"/>
+                                    <valItem ident="tooling"/>
+                                    <valItem ident="unspecified"/>
+                                    <valItem ident="engraving">
+                                        <desc>An image on paper created with a printing plate.</desc>
+                                    </valItem>
+                                    <valItem ident="printedImage">
+                                        <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
+                                    </valItem>
+                                    <valItem ident="overCover">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="overlappingCornerFO">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="overlappingCornerHTO">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="toungedCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="stitchedCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="mitredCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="openMitredCorner">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="Other">
+                                        <desc>to be used in binding description</desc>
+                                    </valItem>
+                                    <valItem ident="bindingMaterial">
+                                        <desc>to be used in binding description. Materials of which the binding is made.</desc>
+                                    </valItem>
+                                    <valItem ident="Headband">
+                                        <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
+                                    </valItem>
+                                    <valItem ident="Tailband">
+                                        <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
+                                    </valItem>
+                                    <valItem ident="Endbands">
+                                        <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
                                             head and tail of the spine of a book. The ethiopian endbands are usually slit-braid stripes of leather or
                                             link-stitch sewings. </desc>
-               </valItem>
-               <valItem ident="Fastening">
-                  <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
+                                    </valItem>
+                                    <valItem ident="Fastening">
+                                        <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
                                             of fastenings can be holes and pins on the outer edge of the boards.</desc>
-               </valItem>
-               <valItem ident="Spine">
-                  <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
-               </valItem>
-               <valItem ident="SlipCase">
-                  <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
+                                    </valItem>
+                                    <valItem ident="Spine">
+                                        <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
+                                    </valItem>
+                                    <valItem ident="SlipCase">
+                                        <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
                                         </desc>
-               </valItem>
-               <valItem ident="Boards">
-                  <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
+                                    </valItem>
+                                    <valItem ident="Boards">
+                                        <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
                                             to protect and support a bookblock.</desc>
-               </valItem>
-               <valItem ident="SewingStations">
-                  <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
+                                    </valItem>
+                                    <valItem ident="SewingStations">
+                                        <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
                                             when sewing a book.</desc>
-               </valItem>
-               <valItem ident="EndLeaves">
-                  <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
+                                    </valItem>
+                                    <valItem ident="EndLeaves">
+                                        <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
                                             protection to the text leaves.</desc>
-               </valItem>
-               <valItem ident="Cover">
-                  <desc>The material that constitutes the immediate covering of the completed binding.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                    </valItem>
+                                    <valItem ident="Cover">
+                                        <desc>The material that constitutes the immediate covering of the completed binding.</desc>
+                                    </valItem>
+
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p"/>
-            <element ident="material"/>
+            <element ident="p" label="Text Block  &lt;p&gt;"/>
+            <element ident="material" label="Binding Material &lt;material&gt;"/>
          </child>
       </childElements>
    </decoNote>
@@ -689,32 +693,32 @@
       function or use of the material in relation to the object
       as a whole.</desc>
             <datatype minOccurs="1" maxOccurs="1">
-               <dataRef key="teidata.enumerated"/>
+	              <dataRef key="teidata.enumerated"/>
             </datatype>
             <valList type="open">
-               <valItem ident="binding">
-                  <desc xml:lang="en" versionDate="2020-11-12">covering
+	              <valItem ident="binding">
+	                 <desc xml:lang="en" versionDate="2020-11-12">covering
 	  material of a codex</desc>
-               </valItem>
-               <valItem ident="endband">
-                  <desc xml:lang="en" versionDate="2020-11-12">sewing at the
+	              </valItem>
+	              <valItem ident="endband">
+	                 <desc xml:lang="en" versionDate="2020-11-12">sewing at the
 	  head or tail of the codex spine to strengthen the binding,
 	  often decorative</desc>
-               </valItem>
-               <valItem ident="slipcase">
-                  <desc xml:lang="en" versionDate="2020-11-12">removable
+	              </valItem>
+	              <valItem ident="slipcase">
+	                 <desc xml:lang="en" versionDate="2020-11-12">removable
 	  protective cover for a set of one or more codices</desc>
-               </valItem>
-               <valItem ident="support">
-                  <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
-               </valItem>
-               <valItem ident="tie">
-                  <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
+	              </valItem>
+	              <valItem ident="support">
+	                 <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
+	              </valItem>
+	              <valItem ident="tie">
+	                 <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
 	  string used to bind or close a codex or rolled scroll</desc>
-               </valItem>
+	              </valItem>
             </valList>
             <remarks xml:lang="en" versionDate="2020-11-12">
-               <p>The sample values here are for descriptive bibliography.
+	              <p>The sample values here are for descriptive bibliography.
 	Other sets of sample values might include <val>armrests</val>,
 	<val>legs</val>, <val>tabletop</val>, <val>pan</val>, and
 	<val>back</val> for furniture; or <val>wall</val>,
@@ -727,22 +731,22 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="key"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="paper"/>
-               <valItem mode="add" ident="parchment"/>
-               <valItem mode="add" ident="papyrus"/>
-               <valItem mode="add" ident="cardboard"/>
-               <valItem mode="add" ident="leather"/>
-               <valItem mode="add" ident="metal"/>
-               <valItem mode="add" ident="textile"/>
-               <valItem mode="add" ident="other"/>
-               <valItem mode="add" ident="silk"/>
-               <valItem mode="add" ident="stone"/>
-               <valItem mode="add" ident="bronze"/>
-               <valItem mode="add" ident="alabaster"/>
-               <valItem mode="add" ident="cotton"/>
-            </valList>
-         </attDef>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="paper"/>
+                                    <valItem mode="add" ident="parchment"/>
+                                    <valItem mode="add" ident="papyrus"/>
+                                    <valItem mode="add" ident="cardboard"/>
+                                    <valItem mode="add" ident="leather"/>
+                                    <valItem mode="add" ident="metal"/>
+                                    <valItem mode="add" ident="textile"/>
+                                    <valItem mode="add" ident="other"/>
+                                    <valItem mode="add" ident="silk"/>
+                                    <valItem mode="add" ident="stone"/>
+                                    <valItem mode="add" ident="bronze"/>
+                                    <valItem mode="add" ident="alabaster"/>
+                                    <valItem mode="add" ident="cotton"/>
+                                </valList>
+                            </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -763,7 +767,7 @@
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
