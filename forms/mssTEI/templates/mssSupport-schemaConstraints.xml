@@ -45,6 +45,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -157,6 +159,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -180,6 +183,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -188,6 +192,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -211,6 +216,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -259,39 +265,39 @@ contexts.</p>
                  ident="material"
                  mode="replace"
                  usage="rec">
-            <desc>The material composing the majority of the support</desc>
-            <datatype maxOccurs="1">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="perg">
-                  <desc>The object is composed of parchment or vellum</desc>
-               </valItem>
-               <valItem ident="chart">
-                  <desc>The object is composed of any kind of paper. Give more details, 
+                            <desc>The material composing the majority of the support</desc>
+                            <datatype maxOccurs="1">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="perg">
+                                    <desc>The object is composed of parchment or vellum</desc>
+                                </valItem>
+                                <valItem ident="chart">
+                                    <desc>The object is composed of any kind of paper. Give more details, 
                                         if any, in a child <gi>support</gi> element.</desc>
-               </valItem>
-               <valItem ident="papyrus">
-                  <desc>The object is composed of papyrus.</desc>
-               </valItem>
-               <valItem ident="palm">
-                  <desc>The object is composed of palm leaves.</desc>
-               </valItem>
-               <valItem ident="mixed">
-                  <desc>The object is composed of a combination of paper and
+                                </valItem>
+                                <valItem ident="papyrus">
+                                    <desc>The object is composed of papyrus.</desc>
+                                </valItem>
+                                <valItem ident="palm">
+                                    <desc>The object is composed of palm leaves.</desc>
+                                </valItem>
+                                <valItem ident="mixed">
+                                    <desc>The object is composed of a combination of paper and
                                         parchment. The nature of the combination should be
                                         specified in the <gi>support</gi> element.</desc>
-               </valItem>
-               <valItem ident="other">
-                  <desc>The object is composed of another material (e.g.
+                                </valItem>
+                                <valItem ident="other">
+                                    <desc>The object is composed of another material (e.g.
                                         wood).</desc>
-               </valItem>
-               <valItem ident="unknown">
-                  <desc>The material of which is object is composed is not
+                                </valItem>
+                                <valItem ident="unknown">
+                                    <desc>The material of which is object is composed is not
                                         known.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -423,6 +429,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -776,6 +783,7 @@ the TEI header.</p>
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -942,11 +950,11 @@ and that a single TEI document may contain texts in many languages.</p>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="support"/>
-            <element ident="extent"/>
-            <element ident="foliation"/>
-            <element ident="collation"/>
-            <element ident="condition"/>
+            <element ident="support" label="Writing Support &lt;support/&gt;"/>
+            <element ident="extent" label="Measurements of Book Block &lt;extent/&gt;"/>
+            <element ident="foliation" label="Foliation &lt;foliation/&gt;"/>
+            <element ident="collation" label="Composition of Quires &lt;collation/&gt;"/>
+            <element ident="condition" label="State of Conservation &lt;condition/&gt;"/>
          </child>
       </childElements>
    </supportDesc>
@@ -963,12 +971,12 @@ and that a single TEI document may contain texts in many languages.</p>
       <availableAtts elementName="support"/>
       <childElements>
          <child>
-            <element ident="p"/>
-            <element ident="material"/>
-            <element ident="watermark"/>
-            <element ident="origPlace"/>
-            <element ident="origDate"/>
-            <element ident="locus"/>
+            <element ident="p" label="Text Block &lt;p/&gt;"/>
+            <element ident="material" label="Writing Material &lt;material/&gt;"/>
+            <element ident="watermark" label="watermark"/>
+            <element ident="origPlace" label="Place of Origin &lt;origPlace/&gt;"/>
+            <element ident="origDate" label="Date of Origin &lt;origDate/&gt;"/>
+            <element ident="locus" label="Folios &lt;locus/&gt;"/>
          </child>
       </childElements>
    </support>
@@ -1030,23 +1038,23 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="key"
                  mode="replace"
                  usage="req">
-            <valList type="closed">
-               <valItem ident="wood"/>
-               <valItem ident="papyrus"/>
-               <valItem ident="cardboard"/>
-               <valItem ident="leather"/>
-               <valItem ident="metal"/>
-               <valItem ident="paper"/>
-               <valItem ident="textile"/>
-               <valItem ident="other"/>
-               <valItem ident="parchment"/>
-               <valItem ident="silk"/>
-               <valItem ident="stone"/>
-               <valItem ident="bronze"/>
-               <valItem ident="alabaster"/>
-               <valItem ident="cotton"/>
-            </valList>
-         </attDef>
+                                <valList type="closed">
+                                    <valItem ident="wood"/>
+                                    <valItem ident="papyrus"/>
+                                    <valItem ident="cardboard"/>
+                                    <valItem ident="leather"/>
+                                    <valItem ident="metal"/>
+                                    <valItem ident="paper"/>
+                                    <valItem ident="textile"/>
+                                    <valItem ident="other"/>
+                                    <valItem ident="parchment"/>
+                                    <valItem ident="silk"/>
+                                    <valItem ident="stone"/>
+                                    <valItem ident="bronze"/>
+                                    <valItem ident="alabaster"/>
+                                    <valItem ident="cotton"/>
+                                </valList>
+                            </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1096,6 +1104,7 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
+      
             <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
  classification scheme or typology.</desc>
             <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
@@ -1173,6 +1182,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -1285,6 +1296,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -1308,6 +1320,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -1316,6 +1329,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -1339,6 +1353,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1512,6 +1527,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -1865,6 +1881,7 @@ the TEI header.</p>
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2265,7 +2282,7 @@ and that a single TEI document may contain texts in many languages.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
                   <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
                </egXML>
-            </exemplum>
+            </exemplum>         
             <remarks versionDate="2014-01-09" xml:lang="en">
                <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
             </remarks>
@@ -2524,7 +2541,7 @@ and that a single TEI document may contain texts in many languages.</p>
                </egXML>
             </exemplum>
             <exemplum versionDate="2016-03-28" xml:lang="fr">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Ormesson-douane">Shakespeare meurt dix jours plus tard, à Stratford-on-Avon,
+	              <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Ormesson-douane">Shakespeare meurt dix jours plus tard, à Stratford-on-Avon,
 	  Warwickshire, dans l'Angleterre protestante et dans le
 	  calendrier julien, le
 	  <date calendar="#julian" when="--05-03">mardi 23 avril ancien style</date>,
@@ -2687,6 +2704,8 @@ element on which the <att>ana</att> attribute appears.</desc>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
+
             <remarks versionDate="2006-01-05" xml:lang="en">
                <p>When multiple values are given, they may reflect either
 multiple divergent interpretations of an ambiguous text, or multiple
@@ -2799,6 +2818,7 @@ contexts.</p>
             <datatype maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
+
             <exemplum xml:lang="en" versionDate="2017-05-11">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
                   <group>
@@ -2822,6 +2842,7 @@ contexts.</p>
                </egXML>
                <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
             </exemplum>
+      
             <exemplum xml:lang="en" versionDate="2017-05-25">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           
@@ -2830,6 +2851,7 @@ contexts.</p>
                      <placeName>London</placeName>
                      <desc>The city of London...</desc>
                   </place>
+        
                   <!-- In a literary personography called "people.xml" -->
                   <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
                      <persName type="lit">London</persName>
@@ -2853,6 +2875,7 @@ contexts.</p>
            substituted for the physical city, or vice versa, but there is obviously a correspondence 
            between them.</p>
             </exemplum>
+      
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3026,6 +3049,7 @@ contexts.</p>
             <lb/>On Her <lb/>
                      <hi rend="case(mixed)">New Blazing-World</hi>. </head>
                </egXML>
+        
             </exemplum>
             <exemplum versionDate="2010-02-26" xml:lang="fr">
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Belloy">
@@ -3379,6 +3403,7 @@ the TEI header.</p>
                   </div>
                </egXML>
             </exemplum>
+     
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3545,8 +3570,8 @@ and that a single TEI document may contain texts in many languages.</p>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="measure"/>
-            <element ident="dimensions"/>
+            <element ident="measure" label="Number of Folios &lt;measure/&gt;"/>
+            <element ident="dimensions" label="Writing Material Dimensions &lt;dimensions/&gt;"/>
          </child>
       </childElements>
    </extent>
@@ -3564,15 +3589,15 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="unit"
                  mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="leaf">
-                  <desc xml:lang="en">used for leafs.</desc>
-               </valItem>
-               <valItem mode="add" ident="quire">
-                  <desc xml:lang="en">used to describe the quires.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="leaf">
+                                        <desc xml:lang="en">used for leafs.</desc>
+                                    </valItem>
+                                    <valItem mode="add" ident="quire">
+                                        <desc xml:lang="en">used to describe the quires.</desc>
+                                    </valItem>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3594,19 +3619,19 @@ and that a single TEI document may contain texts in many languages.</p>
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  usage="opt">
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList>
-               <valItem ident="leaves"/>
-            </valList>
-         </attDef>
+                                <datatype>
+                                    <dataRef key="teidata.enumerated"/>
+                                </datatype>
+                                <valList>
+                                    <valItem ident="leaves"/>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="height"/>
-            <element ident="width"/>
-            <element ident="depth"/>
+            <element ident="height" label="Height of Writing Material &lt;height/&gt;"/>
+            <element ident="width" label="Width of Writing Material &lt;width/&gt;"/>
+            <element ident="depth" label="Depth of Writing Material &lt;depth/&gt;"/>
          </child>
       </childElements>
    </dimensions>
@@ -3827,11 +3852,11 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="rendition"
                  mode="replace"
                  usage="req">
-            <valList type="closed">
-               <valItem ident="original"/>
-               <valItem ident="modern"/>
-            </valList>
-         </attDef>
+                                <valList type="closed">
+                                    <valItem ident="original"/>
+                                    <valItem ident="modern"/>
+                                </valList>
+                            </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3929,7 +3954,7 @@ and that a single TEI document may contain texts in many languages.</p>
                </egXML>
             </exemplum>
             <exemplum versionDate="2016-03-28" xml:lang="fr">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Ormesson-douane">Shakespeare meurt dix jours plus tard, à Stratford-on-Avon,
+	              <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Ormesson-douane">Shakespeare meurt dix jours plus tard, à Stratford-on-Avon,
 	  Warwickshire, dans l'Angleterre protestante et dans le
 	  calendrier julien, le
 	  <date calendar="#julian" when="--05-03">mardi 23 avril ancien style</date>,
@@ -4072,9 +4097,9 @@ and that a single TEI document may contain texts in many languages.</p>
       <availableAtts elementName="collation"/>
       <childElements>
          <child>
-            <element ident="p"/>
-            <element ident="formula"/>
-            <element ident="catchwords"/>
+            <element ident="p" label="Text Block &lt;p/&gt;"/>
+            <element ident="formula" label="Quire Formula &lt;formula/&gt;"/>
+            <element ident="catchwords" label="Catchwords &lt;catchwords/&gt;"/>
          </child>
       </childElements>
    </collation>
@@ -4145,21 +4170,21 @@ and that a single TEI document may contain texts in many languages.</p>
                  ident="key"
                  mode="replace"
                  usage="req">
-            <valList type="closed">
-               <valItem ident="deficient">
-                  <desc>The item is badly preserved and severely damaged.</desc>
-               </valItem>
-               <valItem ident="good">
-                  <desc>The item is preserved with minimal damages.</desc>
-               </valItem>
-               <valItem ident="intact">
-                  <desc>The item is preserved completely undamaged.</desc>
-               </valItem>
-               <valItem ident="other">
-                  <desc>If you use this value, please provide in the description a proper motivation, otherwise avoid it.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                <valList type="closed">
+                                    <valItem ident="deficient">
+                                        <desc>The item is badly preserved and severely damaged.</desc>
+                                    </valItem>
+                                    <valItem ident="good">
+                                        <desc>The item is preserved with minimal damages.</desc>
+                                    </valItem>
+                                    <valItem ident="intact">
+                                        <desc>The item is preserved completely undamaged.</desc>
+                                    </valItem>
+                                    <valItem ident="other">
+                                        <desc>If you use this value, please provide in the description a proper motivation, otherwise avoid it.</desc>
+                                    </valItem>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
