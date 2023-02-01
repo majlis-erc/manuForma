@@ -25,7 +25,9 @@ End license statement: do not remove --><!--requirements:
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -36,12 +38,11 @@ End license statement: do not remove --><!--requirements:
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
-                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
-                    Arabic in the Islamicate World</publisher>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
                 <pubPlace>München</pubPlace>
                 <availability>
-                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
-                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
+                        Attribution-ShareAlike 4.0. </licence>
                 </availability>
             </publicationStmt>
             <notesStmt>
@@ -52,8 +53,7 @@ End license statement: do not remove --><!--requirements:
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
-            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
-                created by Pietro Liuzzo</change>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
         </revisionDesc>
     </teiHeader>
     <text>
@@ -63,11 +63,11 @@ End license statement: do not remove --><!--requirements:
         <body>
             <div>
                 <head>Information on this customization</head>
-                <p>Schema for MAJLIS Project. This part of the schema is used for entering
-                    descriptions of the manuscript additions using XForms.</p>
-                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
-                        Guidelines</ref> contain examples and details of that customization.</p>
-                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated schema</ref> of FIRHIST</p>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript additions using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
+                    customization.</p>
+                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
+                        schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
@@ -76,12 +76,17 @@ End license statement: do not remove --><!--requirements:
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-                    
-                    <moduleRef key="core" except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name note noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
-                    <moduleRef key="msdescription" except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc objectType origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
+
+                    <moduleRef key="core"
+                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name note noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                    <moduleRef key="msdescription"
+                        except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc objectType origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
-                    <elementSpec ident="locus" module="msdescription" mode="change"><desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">The location of a text or another feature within the manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe a range of folios.</desc>
+                    <elementSpec ident="locus" module="msdescription" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">The location of a text or another feature within the
+                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
+                            a range of folios.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -90,7 +95,8 @@ End license statement: do not remove --><!--requirements:
                         </classes>
                         <content>
                             <textNode/>
-                        <textNode/></content>
+                            <textNode/>
+                        </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
@@ -142,7 +148,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="height" module="msdescription" mode="delete"/>
                     <elementSpec ident="width" module="msdescription" mode="delete"/>
                     <elementSpec ident="ab" module="linking" mode="delete"/>
-                    
+
                     <elementSpec ident="binding" module="msdescription" mode="delete"/>
                     <elementSpec ident="bindingDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="decoNote" module="msdescription" mode="delete"/>
@@ -154,7 +160,10 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="p"/>
                             <elementRef key="locus"/>
                             <elementRef key="desc"/>
-                        <elementRef key="p"/><elementRef key="locus"/><elementRef key="desc"/></content>
+                            <elementRef key="p"/>
+                            <elementRef key="locus"/>
+                            <elementRef key="desc"/>
+                        </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -181,10 +190,12 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="list" module="core" mode="change"><desc versionDate="2022-05-27" xml:lang="en">A sequence of bullet points ("item") organized as a list.</desc>
+                    <elementSpec ident="list" module="core" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">A sequence of bullet points ("item") organized as a list.</desc>
                         <content>
                             <elementRef key="item"/>
-                        <elementRef key="item"/></content>
+                            <elementRef key="item"/>
+                        </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -206,18 +217,22 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            
+
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="desc" module="core" mode="change"><desc versionDate="2022-05-27" xml:lang="en">Describes or defines the kind of addition. Choose a value from the list of the "type" attribute.</desc>
+                    <elementSpec ident="desc" module="core" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Describes or defines the kind of addition. Choose a value from the list of the
+                            "type" attribute.</desc>
                         <content>
                             <elementRef key="q"/>
                             <textNode/>
-                        <elementRef key="q"/><textNode/></content>
+                            <elementRef key="q"/>
+                            <textNode/>
+                        </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -238,7 +253,7 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            
+
                             <attDef ident="versionDate" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -247,17 +262,69 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     <elementSpec ident="ref" module="core" mode="delete"/>
-                    
+
                     <elementSpec ident="persName" module="namesdates" mode="delete"/>
                     <elementSpec ident="title" module="core" mode="delete"/>
-                    
-                    <elementSpec ident="additions" mode="change"><desc versionDate="2022-05-27" xml:id="additions.desc" xml:lang="en">Any relevant additions found within a manuscript such as marginalia or other annotations. You can give a summary in the p element and describe specific additions inside list elements.</desc>
+
+                    <elementSpec ident="additions" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="additions.desc" xml:lang="en">Any relevant additions found within a manuscript such as
+                            marginalia or other annotations. You can give a summary in the p element and describe specific additions inside list
+                            elements.</desc>
                         <content>
                             <elementRef key="p"/>
                             <elementRef key="list"/>
-                        <elementRef key="p"/><elementRef key="list"/></content>
+                            <elementRef key="p"/>
+                            <elementRef key="list"/>
+                        </content>
                     </elementSpec>
-                <elementSpec ident="q" mode="change"><desc versionDate="2022-05-27" xml:lang="en">Quotation from the manuscript.</desc><classes mode="change"><memberOf key="att.ascribed.directed" mode="delete"/></classes><content><textNode/></content><attList><attDef ident="type" mode="delete"/><attDef ident="who" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="facs" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="synch" mode="delete"/><attDef ident="sameAs" mode="delete"/><attDef ident="copyOf" mode="delete"/><attDef ident="next" mode="delete"/><attDef ident="prev" mode="delete"/><attDef ident="exclude" mode="delete"/><attDef ident="select" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="style" mode="delete"/><attDef ident="rendition" mode="delete"/><attDef ident="cert" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:base" mode="delete"/><attDef ident="xml:space" mode="delete"/></attList></elementSpec><elementSpec ident="p" mode="change"><desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a coherent descriptive text.</desc><classes mode="change"><memberOf key="att.declaring" mode="delete"/><memberOf key="att.fragmentable" mode="delete"/><memberOf key="att.global" mode="delete"/><memberOf key="att.written" mode="delete"/></classes><content><textNode/></content></elementSpec></schemaSpec>
+                    <elementSpec ident="q" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Quotation from the manuscript.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.ascribed.directed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="who" mode="delete"/>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="p" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.fragmentable" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                </schemaSpec>
             </div>
         </body>
     </text>
