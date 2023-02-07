@@ -1381,7 +1381,9 @@
                                                 </xf:trigger>
                                                 <span class="elementLabel">
                                                     <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/>
-                                                    <i class="bi bi-question-circle triggerElementTooltip"/>
+                                                    <a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg"/></a>
+                                                    <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"/>    
+                                                    <a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"/></a>
                                                     <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/>
                                                 </span>
                                                 <div class="input-group float-end">
@@ -1583,7 +1585,9 @@
                         </xsl:if>
                         <span class="elementLabel">
                             <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"/>
-                            <i class="bi bi-question-circle triggerElementTooltip"/>
+                            <a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg"/></a>
+                            <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"/>
+                            <a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"/></a>
                             <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/>
                         </span>
                         <div class="input-group float-end">
@@ -1979,23 +1983,23 @@
         <xsl:variable name="id" select="replace(replace(concat(replace($path,'/',''),generate-id(.)),' ',''),'\*:','')"/>
         <xsl:variable name="elementLabel">
             <xsl:choose>
-                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang]">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = $formLang][not(@type='tei')]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[not(@type='tei')][@xml:lang = $formLang][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en']">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[@xml:lang = 'en'][not(@type='tei')]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[not(@type='tei')][@xml:lang = 'en'][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[not(@type='tei')]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:local/descendant::tei:gloss[not(@type='tei')][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang]">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = $formLang][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')][@xml:lang = $formLang]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')][@xml:lang = $formLang][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en']">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[@xml:lang = 'en'][1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')][@xml:lang = 'en']">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')][@xml:lang = 'en'][1]"/>
                 </xsl:when>
-                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss">
-                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[1]"/>
+                <xsl:when test="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')]">
+                    <xsl:value-of select="$elementRules/descendant-or-self::tei:global/descendant::tei:gloss[not(@type='tei')][1]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$elementName"/>
@@ -2062,6 +2066,9 @@
             <xsl:attribute name="path" select="$path"/>
             <xsl:attribute name="currentLevel" select="$currentLevel"/>
             <xsl:attribute name="popup" select="$currentLevel"/>
+            <xsl:attribute name="teiElement">
+                <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
+            </xsl:attribute>
             <xsl:if test="$configDoc/descendant::*:lookup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
                 <lookup>
                     <xsl:copy-of select="$configDoc/descendant::*:lookup[@elementName = $elementName]/@*"/>
