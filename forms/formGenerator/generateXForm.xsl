@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.01 Beta
+        Version: 1.02 Beta
         
 
         NOTES: 
@@ -1493,18 +1493,6 @@
                                                 </xf:repeat>
                                             </div>
                                             <xsl:if test="$currentLevel &lt;= $maxLevel">
-                                                <xsl:variable name="childRepeatID">
-                                                    <!--
-                                                    <xsl:choose>
-                                                        <xsl:when test="$subform/parent::*:subform">
-                                                            <xsl:value-of select="concat(string($subform/parent::*:subform/@formName),'Subform',$subformName,'RepeatLevel',if(string($currentLevel) != '') then string($currentLevel) else '1')"/></xsl:when>
-                                                        <xsl:otherwise>
-                                                            <xsl:value-of select="concat($subformName,'RepeatLevel',position(),'child',if(string($currentLevel) != '') then string($currentLevel) else '1')"/>
-                                                        </xsl:otherwise>
-                                                    </xsl:choose>
-                                                    -->
-                                                    <xsl:value-of select="concat($grpRepeatID,'RepeatLevel',position(),'child',if(string($currentLevel) != '') then string($currentLevel) else '1')"/>
-                                                </xsl:variable>
                                                 <xsl:variable name="childRepeatID">
                                                     <xsl:choose>
                                                         <xsl:when test="$grpRepeatID">
