@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <handDesc ident="handDesc"
+             elementName="handDesc"
+             elementLabel="description of hands"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc"
+             currentLevel="1"
+             popup="1"
+             teiElement="&lt;handDesc/&gt;">
+      <desc>Describe the hands found in this manuscript, or part of the
+                            manuscript. Indicate the number of hands in the attribute.</desc>
+      <availableAtts elementName="handDesc">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="hands">
+            <gloss xml:lang="en" versionDate="2007-06-12">hands</gloss>
+            <gloss versionDate="2007-06-12" xml:lang="fr">mains</gloss>
+            <desc versionDate="2005-01-14" xml:lang="en">specifies the number of distinct hands identified within the manuscript</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">원고 내에서 식별되는 필적 수를 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">說明在手稿中可清楚識別的書寫者人數。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該手書き資料中で特定可能な筆致の数を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">spécifie le nombre de mains différentes qui ont
+          pu être identifiées dans le manuscrit</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">especifica el número de manos distintas identificadas al interno de un manuscrito.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">specifica il numero delle diverse mani identificate all'interno del manoscritto</desc>
+            <datatype>
+               <dataRef key="teidata.count"/>
+            </datatype>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="summary" label="Paleography Summary"/>
+            <element ident="handNote" label="*Description of Scribal Hand"/>
+         </child>
+      </childElements>
+   </handDesc>
+   <summary ident="summary"
+            elementName="summary"
+            elementLabel="Paleography Summary"
+            minOccur=""
+            maxOccur=""
+            path="/*:handDesc/*:summary"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;summary/&gt;">
+      <desc>Outline your observations of the main features of the
+                            script.</desc>
+      <availableAtts elementName="summary"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </summary>
+   <handNote ident="handNote"
+             elementName="handNote"
+             elementLabel="*Description of Scribal Hand"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;handNote/&gt;">
+      <desc>Describe the script used by the hand. Use the attribute values to describe the
+                            "script" (Oriental, Sefardic …), "mode" (square, non-square …), "quality" (careless, trained …), "medium" (brown, black …)
+                            and "scope". If there is more than one hand used in the manuscript or manuscript part, create multiple handNote elements
+                            and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
+                            using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+      <availableAtts elementName="handNote">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="medium">
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="brown"/>
+               <valItem ident="black"/>
+               <valItem ident="pigments"/>
+               <valItem ident="mixed"/>
+               <valItem ident="plantBased"/>
+               <valItem ident="unidentified"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="rendition">
+            <datatype>
+               <dataRef name="string"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="unidentified"/>
+               <valItem ident="untrained"/>
+               <valItem ident="careless"/>
+               <valItem ident="current"/>
+               <valItem ident="calligraphic"/>
+               <valItem ident="monumental"/>
+            </valList>
+         </attDef>
+         <attDef ident="scope"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="scribe">
+            <desc versionDate="2010-09-28" xml:lang="en">gives a name or other identifier for the scribe
+believed to be responsible for this hand.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
+            <desc versionDate="2019-09-16" xml:lang="ja">
+        当該筆致に対応すると考えられる筆写者の名前またはその他の識別子を示す。
+</desc>
+            <desc versionDate="2009-05-27" xml:lang="fr">donne un nom normalisé ou un autre
+identifiant pour le scribe reconnu comme responsable de cette main.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">assegna un nome o altro identificatore standard al trascrittore che si ritiene corrisponda alla mano in questione</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">asigna un nombre u otro identificador estándard para el transcriptor que se identifica con la mano en cuestión.</desc>
+            <datatype>
+               <dataRef key="teidata.name"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="scribeRef">
+            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
+      elsewhere in the description.</desc>
+            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="script">
+            <datatype>
+               <dataRef key="teidata.name"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="oriental"/>
+               <valItem ident="yemenite"/>
+               <valItem ident="sephardi"/>
+               <valItem ident="byzantine"/>
+               <valItem ident="italian"/>
+               <valItem ident="ashkenazi"/>
+               <valItem ident="unidentified"/>
+               <valItem ident="abbasidBookHand"/>
+               <valItem ident="newStyle"/>
+               <valItem ident="naskh"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="scriptRef">
+            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the script or writing style used by
+this hand, typically supplied by a <gi>scriptNote</gi> element
+      elsewhere in the description.</desc>
+            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆体や書記スタイルについての詳細な記述へポイントする。典型的には記述のどこかで<gi>scriptNote</gi>要素によって補われる。</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="style">
+            <datatype>
+               <dataRef name="string"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident=""/>
+               <valItem ident="square"/>
+               <valItem ident="nonSquare"/>
+               <valItem ident="cursive"/>
+               <valItem ident="unidentified"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="xml:id"
+                 mode="change"
+                 usage="req"/>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="p" label="Text Block"/>
+            <element ident="persName" label="Person"/>
+            <element ident="placeName" label="Place"/>
+            <element ident="metamark" label="Special Graphic Signs"/>
+            <element ident="origDate" label="Date of Origin"/>
+            <element ident="locus" label="Folios"/>
+         </child>
+      </childElements>
+   </handNote>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Text Block"
+      minOccur=""
+      maxOccur=""
+      path="/*:handDesc/*:handNote/*:p"
+      currentLevel="3"
+      popup="3"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:persName"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New Persons"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
+      <desc>Look up the person records in the database to identify the person. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" attribute to specify the
+                            person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
+                            when you link a record to this element.)</desc>
+      <availableAtts elementName="persName">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="role"
+                 usage="opt">
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="scribe"/>
+               <valItem ident="vocalizer"/>
+               <valItem ident="masorator"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="type"
+                 mode="replace"
+                 usage="opt">
+            <valList type="closed">
+               <valItem ident="main">
+                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
+               </valItem>
+               <valItem ident="normalized">
+                  <desc>the normalized transcription of the name in fidal or
+                                        another script</desc>
+               </valItem>
+               <valItem ident="given">
+                  <desc>name received later in life, different from the other
+                                        specified types of names</desc>
+               </valItem>
+               <valItem ident="birth">
+                  <desc>name given at birth</desc>
+               </valItem>
+               <valItem ident="baptismal">
+                  <desc>name given at baptism</desc>
+               </valItem>
+               <valItem ident="regnal">
+                  <desc>name given on coronation (kings and queens but also
+                                        patriarchs)</desc>
+               </valItem>
+               <valItem ident="monastic">
+                  <desc>name given on entering monastic life </desc>
+               </valItem>
+               <valItem ident="horse">
+                  <desc>the name of the battle horse of kings and rulers</desc>
+               </valItem>
+               <valItem ident="nick">
+                  <desc>a name given to a person associated to his occupation or
+                                        other deeds</desc>
+               </valItem>
+               <valItem ident="war">
+                  <desc>nom de guerre (if different from horse name, e.g.
+                                        Malas)</desc>
+               </valItem>
+               <valItem ident="hypocoristic">
+                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
+                                        Takla Māryām)</desc>
+               </valItem>
+               <valItem ident="patronymic">
+                  <desc>father's name, esp. for eventual Russian names, but could
+                                        be also highlighted in others</desc>
+               </valItem>
+               <valItem ident="alt">
+                  <desc>alternative name</desc>
+               </valItem>
+               <valItem ident="tabot">
+                  <desc>the saint to whom the tābot is dedicated</desc>
+               </valItem>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </persName>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place"
+              minOccur=""
+              maxOccur=""
+              path="/*:handDesc/*:handNote/*:placeName"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up places"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New Places"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+      <desc>Look up the place records in the database to specify a settlement or town. Try
+                            different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be
+                            filled out automatically when you link a place record to this element.)</desc>
+      <availableAtts elementName="placeName">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 mode="change"
+                 usage="rec"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="type"
+                 mode="change">
+            <valList>
+               <valItem ident="normalized"/>
+               <valItem ident="library"/>
+               <valItem ident="academicInstitution"/>
+               <valItem ident="museum"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <metamark ident="metamark"
+             elementName="metamark"
+             elementLabel="Special Graphic Signs"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:metamark"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;metamark/&gt;">
+      <desc>Describes the use of complementary characters like vocalization or recitation in
+                            prose and choose the appropriate "function" from the attribute list.</desc>
+      <availableAtts elementName="metamark">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="function"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="vocalization"/>
+               <valItem mode="add" ident="recitation"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </metamark>
+   <origDate ident="origDate"
+             elementName="origDate"
+             elementLabel="Date of Origin"
+             minOccur=""
+             maxOccur=""
+             path="/*:handDesc/*:handNote/*:origDate"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;origDate/&gt;">
+      <desc>Fill in the date in the agreed-upon calendrical system.
+                            Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
+                            attributes together.</desc>
+      <availableAtts elementName="origDate">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="evidence"
+                 mode="replace"
+                 usage="opt">
+            <datatype maxOccurs="6">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="semi">
+               <valItem ident="lettering">
+                  <desc>Text dated palaeographically</desc>
+               </valItem>
+               <valItem ident="nomenclature">
+                  <desc>Text dated by nomenclature or onomastics</desc>
+               </valItem>
+               <valItem ident="prosopography">
+                  <desc>Text dated by known persons named or implied within
+                                        it</desc>
+               </valItem>
+               <valItem ident="reign">
+                  <desc>Text dated by the reign of a ruler</desc>
+               </valItem>
+               <valItem ident="titulature">
+                  <desc>Text dated by the use of official titles</desc>
+               </valItem>
+               <valItem ident="internal-date">
+                  <desc>Text dated by explicit internal date</desc>
+               </valItem>
+               <valItem ident="context">
+                  <desc>Archaeological, epigraphic, iconographic or other context
+                                        of the text support</desc>
+               </valItem>
+            </valList>
+         </attDef>
+         <attDef ident="notAfter"/>
+         <attDef ident="notBefore"/>
+         <attDef ident="when"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </origDate>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="Folios"
+          minOccur=""
+          maxOccur=""
+          path="/*:handDesc/*:handNote/*:locus"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;locus/&gt;">
+      <desc>The location of a text or another feature within the
+                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
+                            a range of folios.</desc>
+      <availableAtts elementName="locus">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="from">
+            <gloss xml:lang="en" versionDate="2007-06-12">from</gloss>
+            <gloss versionDate="2007-06-12" xml:lang="fr">depuis</gloss>
+            <desc versionDate="2013-12-21" xml:lang="en">specifies the
+      starting point of the location in a normalized form, typically a
+      page number.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
+            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, le point de
+        départ de la localisation.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el punto de inicio de una localización en una
+        forma estándard.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">specifica l'inizio della posizione in forma
+        normalizzata</desc>
+            <datatype>
+               <dataRef key="teidata.word"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="to">
+            <gloss xml:lang="en" versionDate="2007-06-12">to</gloss>
+            <gloss versionDate="2007-06-12" xml:lang="fr">jusqu'à</gloss>
+            <desc versionDate="2013-12-21" xml:lang="en">specifies the
+      end-point of the location in a normalized form, typically as a
+      page number.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
+            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
+        pour la localisation.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el punto final de una localización en una
+        forma estándard.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">specifica il termine della posizione in forma
+        normalizzata</desc>
+            <datatype>
+               <dataRef key="teidata.word"/>
+            </datatype>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </locus>
+</TEI>

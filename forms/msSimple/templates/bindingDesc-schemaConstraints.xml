@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <bindingDesc ident="bindingDesc"
+                elementName="bindingDesc"
+                elementLabel="*Binding Description Container (1/2)"
+                minOccur=""
+                maxOccur=""
+                path="/*:bindingDesc"
+                currentLevel="1"
+                popup="1"
+                teiElement="&lt;bindingDesc/&gt;">
+      <desc>Container element for description of the
+                            binding.</desc>
+      <availableAtts elementName="bindingDesc"/>
+      <childElements>
+         <child>
+            <element ident="p" label="Text Block"/>
+            <element ident="decoNote" label="Decoration Description Container"/>
+            <element ident="condition" label="State of the Binding"/>
+            <element ident="binding" label="*Binding Description Container (2/2)"/>
+         </child>
+      </childElements>
+   </bindingDesc>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Text Block"
+      minOccur=""
+      maxOccur=""
+      path="/*:bindingDesc/*:p"
+      currentLevel="2"
+      popup="2"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
+   <decoNote ident="decoNote"
+             elementName="decoNote"
+             elementLabel="Decoration Description Container"
+             minOccur=""
+             maxOccur=""
+             path="/*:bindingDesc/*:decoNote"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;decoNote/&gt;">
+      <desc>Describe the manuscript’s decoration. Choose the "type"
+                            from the list.</desc>
+      <availableAtts elementName="decoNote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="color"
+                 usage="opt"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="pastedown"
+                 usage="opt">
+            <datatype maxOccurs="3">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="semi">
+               <valItem ident="UTI">
+                  <desc>Under the turn-ins. The pastedown is pasted under the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="OTI">
+                  <desc>Over the turn-ins. The pastedown is pasted over the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="L">
+                  <desc>Left pastedown, on the upper board.</desc>
+               </valItem>
+               <valItem ident="R">
+                  <desc>Right pastedown, on the lower board.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="repaired"
+                 usage="opt">
+            <datatype maxOccurs="1">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="Y"/>
+               <valItem ident="N"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="replace"
+                 usage="opt">
+            <valList type="closed">
+               <valItem ident="frame">
+                  <desc>an ornament around the page</desc>
+               </valItem>
+               <valItem ident="miniature">
+                  <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
+                                            or more columns of text. </desc>
+               </valItem>
+               <valItem ident="band">
+                  <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
+                                            used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="punctuation"/>
+               <valItem ident="headpiece">
+                  <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
+                                            used to mark the beginning of a new text or section of text. With two specifications, for Band (single
+                                            border) and Frame (border encompassing multiple sides of text)</desc>
+               </valItem>
+               <valItem ident="headpieceFrame">
+                  <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
+                                            space. Typically used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="headpieceBand">
+                  <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
+                                            Typically used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="doodles">
+                  <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
+                                            “extras”)</desc>
+               </valItem>
+               <valItem ident="drawing">
+                  <desc>A monochrome or bichrome image that is not painted.</desc>
+               </valItem>
+               <valItem ident="diagram">
+                  <desc>A drawing that conveys information or knowledge in schematic form.</desc>
+               </valItem>
+               <valItem ident="initial">
+                  <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
+                                            motifs.</desc>
+               </valItem>
+               <valItem ident="map"/>
+               <valItem ident="marginal">
+                  <desc>A small miniature painted next to one of the margins of the text.</desc>
+               </valItem>
+               <valItem ident="mixed"/>
+               <valItem ident="other"/>
+               <valItem ident="ornamentation"/>
+               <valItem ident="paratext"/>
+               <valItem ident="rubrication"/>
+               <valItem ident="secondary"/>
+               <valItem ident="tooling"/>
+               <valItem ident="unspecified"/>
+               <valItem ident="engraving">
+                  <desc>An image on paper created with a printing plate.</desc>
+               </valItem>
+               <valItem ident="printedImage">
+                  <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
+               </valItem>
+               <valItem ident="overCover">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="overlappingCornerFO">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="overlappingCornerHTO">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="toungedCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="stitchedCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="mitredCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="openMitredCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="Other">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="bindingMaterial">
+                  <desc>to be used in binding description. Materials of which the binding is made.</desc>
+               </valItem>
+               <valItem ident="Headband">
+                  <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
+               </valItem>
+               <valItem ident="Tailband">
+                  <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
+               </valItem>
+               <valItem ident="Endbands">
+                  <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
+                                            head and tail of the spine of a book. The ethiopian endbands are usually slit-braid stripes of leather or
+                                            link-stitch sewings. </desc>
+               </valItem>
+               <valItem ident="Fastening">
+                  <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
+                                            of fastenings can be holes and pins on the outer edge of the boards.</desc>
+               </valItem>
+               <valItem ident="Spine">
+                  <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
+               </valItem>
+               <valItem ident="SlipCase">
+                  <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
+                                        </desc>
+               </valItem>
+               <valItem ident="Boards">
+                  <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
+                                            to protect and support a bookblock.</desc>
+               </valItem>
+               <valItem ident="SewingStations">
+                  <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
+                                            when sewing a book.</desc>
+               </valItem>
+               <valItem ident="EndLeaves">
+                  <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
+                                            protection to the text leaves.</desc>
+               </valItem>
+               <valItem ident="Cover">
+                  <desc>The material that constitutes the immediate covering of the completed binding.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="p" label="Text Block"/>
+            <element ident="material" label="Binding Material"/>
+         </child>
+      </childElements>
+   </decoNote>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Text Block"
+      minOccur=""
+      maxOccur=""
+      path="/*:bindingDesc/*:decoNote/*:p"
+      currentLevel="3"
+      popup="3"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
+   <material ident="material"
+             elementName="material"
+             elementLabel="Binding Material"
+             minOccur=""
+             maxOccur=""
+             path="/*:bindingDesc/*:decoNote/*:material"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;material/&gt;">
+      <desc>Describe the writing material. Choose from the list what
+                            kind of material is used in the manuscript/this codicological unit.</desc>
+      <availableAtts elementName="material">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="function">
+            <desc versionDate="2020-11-12" xml:lang="en">describes the
+      function or use of the material in relation to the object
+      as a whole.</desc>
+            <datatype minOccurs="1" maxOccurs="1">
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="open">
+               <valItem ident="binding">
+                  <desc xml:lang="en" versionDate="2020-11-12">covering
+	  material of a codex</desc>
+               </valItem>
+               <valItem ident="endband">
+                  <desc xml:lang="en" versionDate="2020-11-12">sewing at the
+	  head or tail of the codex spine to strengthen the binding,
+	  often decorative</desc>
+               </valItem>
+               <valItem ident="slipcase">
+                  <desc xml:lang="en" versionDate="2020-11-12">removable
+	  protective cover for a set of one or more codices</desc>
+               </valItem>
+               <valItem ident="support">
+                  <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
+               </valItem>
+               <valItem ident="tie">
+                  <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
+	  string used to bind or close a codex or rolled scroll</desc>
+               </valItem>
+            </valList>
+            <remarks xml:lang="en" versionDate="2020-11-12">
+               <p>The sample values here are for descriptive bibliography.
+	Other sets of sample values might include <val>armrests</val>,
+	<val>legs</val>, <val>tabletop</val>, <val>pan</val>, and
+	<val>back</val> for furniture; or <val>wall</val>,
+	<val>floor</val>, <val>window</val>, <val>column</val>,
+	<val>ceiling</val>, <val>roof</val>, <val>stairs</val>,
+	<val>chimney</val> for architecture.</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="key"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="paper"/>
+               <valItem mode="add" ident="parchment"/>
+               <valItem mode="add" ident="papyrus"/>
+               <valItem mode="add" ident="cardboard"/>
+               <valItem mode="add" ident="leather"/>
+               <valItem mode="add" ident="metal"/>
+               <valItem mode="add" ident="textile"/>
+               <valItem mode="add" ident="other"/>
+               <valItem mode="add" ident="silk"/>
+               <valItem mode="add" ident="stone"/>
+               <valItem mode="add" ident="bronze"/>
+               <valItem mode="add" ident="alabaster"/>
+               <valItem mode="add" ident="cotton"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 usage="opt">
+            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
+            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
+            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
+            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
+        means of one or more URIs.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2014-01-09" xml:lang="en">
+               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="target">
+            <desc versionDate="2013-04-16" xml:lang="en">identifies one or more elements to which the metamark applies.</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </material>
+   <condition ident="condition"
+              elementName="condition"
+              elementLabel="State of the Binding"
+              minOccur=""
+              maxOccur=""
+              path="/*:bindingDesc/*:condition"
+              currentLevel="2"
+              popup="2"
+              teiElement="&lt;condition/&gt;">
+      <desc>Preservation, conservation and restoration history;
+                            present state of fragment; damages. Choose from the list a generic description that fits best your overall
+                            impression.</desc>
+      <availableAtts elementName="condition">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="key"
+                 usage="opt">
+            <datatype>
+               <dataRef key="teidata.text"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="deficient"/>
+               <valItem ident="good"/>
+               <valItem ident="intact"/>
+               <valItem ident="other"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </condition>
+   <binding ident="binding"
+            elementName="binding"
+            elementLabel="*Binding Description Container (2/2)"
+            minOccur=""
+            maxOccur=""
+            path="/*:bindingDesc/*:binding"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;binding/&gt;">
+      <desc>Description of the material, dimensions, and preservation
+                            of the binding. Specify in the attribute if the binding is contemporary to the manuscript's production or not with the
+                            values "true" or "false".</desc>
+      <availableAtts elementName="binding">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="contemporary"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="true"/>
+               <valItem mode="add" ident="false"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="condition" label="State of the Binding"/>
+            <element ident="decoNote" label="Decoration Description Container"/>
+            <element ident="p" label="Text Block"/>
+         </child>
+      </childElements>
+   </binding>
+   <condition ident="condition"
+              elementName="condition"
+              elementLabel="State of the Binding"
+              minOccur=""
+              maxOccur=""
+              path="/*:bindingDesc/*:binding/*:condition"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;condition/&gt;">
+      <desc>Preservation, conservation and restoration history;
+                            present state of fragment; damages. Choose from the list a generic description that fits best your overall
+                            impression.</desc>
+      <availableAtts elementName="condition">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="key"
+                 usage="opt">
+            <datatype>
+               <dataRef key="teidata.text"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="deficient"/>
+               <valItem ident="good"/>
+               <valItem ident="intact"/>
+               <valItem ident="other"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </condition>
+   <decoNote ident="decoNote"
+             elementName="decoNote"
+             elementLabel="Decoration Description Container"
+             minOccur=""
+             maxOccur=""
+             path="/*:bindingDesc/*:binding/*:decoNote"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;decoNote/&gt;">
+      <desc>Describe the manuscript’s decoration. Choose the "type"
+                            from the list.</desc>
+      <availableAtts elementName="decoNote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="color"
+                 usage="opt"/>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="pastedown"
+                 usage="opt">
+            <datatype maxOccurs="3">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="semi">
+               <valItem ident="UTI">
+                  <desc>Under the turn-ins. The pastedown is pasted under the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="OTI">
+                  <desc>Over the turn-ins. The pastedown is pasted over the
+                                        turn-ins.</desc>
+               </valItem>
+               <valItem ident="L">
+                  <desc>Left pastedown, on the upper board.</desc>
+               </valItem>
+               <valItem ident="R">
+                  <desc>Right pastedown, on the lower board.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="repaired"
+                 usage="opt">
+            <datatype maxOccurs="1">
+               <dataRef key="teidata.word"/>
+            </datatype>
+            <valList type="closed">
+               <valItem ident="Y"/>
+               <valItem ident="N"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="replace"
+                 usage="opt">
+            <valList type="closed">
+               <valItem ident="frame">
+                  <desc>an ornament around the page</desc>
+               </valItem>
+               <valItem ident="miniature">
+                  <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
+                                            or more columns of text. </desc>
+               </valItem>
+               <valItem ident="band">
+                  <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
+                                            used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="punctuation"/>
+               <valItem ident="headpiece">
+                  <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
+                                            used to mark the beginning of a new text or section of text. With two specifications, for Band (single
+                                            border) and Frame (border encompassing multiple sides of text)</desc>
+               </valItem>
+               <valItem ident="headpieceFrame">
+                  <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
+                                            space. Typically used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="headpieceBand">
+                  <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
+                                            Typically used to mark the beginning of a new text or section of text.</desc>
+               </valItem>
+               <valItem ident="doodles">
+                  <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
+                                            “extras”)</desc>
+               </valItem>
+               <valItem ident="drawing">
+                  <desc>A monochrome or bichrome image that is not painted.</desc>
+               </valItem>
+               <valItem ident="diagram">
+                  <desc>A drawing that conveys information or knowledge in schematic form.</desc>
+               </valItem>
+               <valItem ident="initial">
+                  <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
+                                            motifs.</desc>
+               </valItem>
+               <valItem ident="map"/>
+               <valItem ident="marginal">
+                  <desc>A small miniature painted next to one of the margins of the text.</desc>
+               </valItem>
+               <valItem ident="mixed"/>
+               <valItem ident="other"/>
+               <valItem ident="ornamentation"/>
+               <valItem ident="paratext"/>
+               <valItem ident="rubrication"/>
+               <valItem ident="secondary"/>
+               <valItem ident="tooling"/>
+               <valItem ident="unspecified"/>
+               <valItem ident="engraving">
+                  <desc>An image on paper created with a printing plate.</desc>
+               </valItem>
+               <valItem ident="printedImage">
+                  <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
+               </valItem>
+               <valItem ident="overCover">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="overlappingCornerFO">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="overlappingCornerHTO">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="toungedCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="stitchedCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="mitredCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="openMitredCorner">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="Other">
+                  <desc>to be used in binding description</desc>
+               </valItem>
+               <valItem ident="bindingMaterial">
+                  <desc>to be used in binding description. Materials of which the binding is made.</desc>
+               </valItem>
+               <valItem ident="Headband">
+                  <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
+               </valItem>
+               <valItem ident="Tailband">
+                  <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
+               </valItem>
+               <valItem ident="Endbands">
+                  <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
+                                            head and tail of the spine of a book. The ethiopian endbands are usually slit-braid stripes of leather or
+                                            link-stitch sewings. </desc>
+               </valItem>
+               <valItem ident="Fastening">
+                  <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
+                                            of fastenings can be holes and pins on the outer edge of the boards.</desc>
+               </valItem>
+               <valItem ident="Spine">
+                  <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
+               </valItem>
+               <valItem ident="SlipCase">
+                  <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
+                                        </desc>
+               </valItem>
+               <valItem ident="Boards">
+                  <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
+                                            to protect and support a bookblock.</desc>
+               </valItem>
+               <valItem ident="SewingStations">
+                  <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
+                                            when sewing a book.</desc>
+               </valItem>
+               <valItem ident="EndLeaves">
+                  <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
+                                            protection to the text leaves.</desc>
+               </valItem>
+               <valItem ident="Cover">
+                  <desc>The material that constitutes the immediate covering of the completed binding.</desc>
+               </valItem>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="p" label="Text Block"/>
+            <element ident="material" label="Binding Material"/>
+         </child>
+      </childElements>
+   </decoNote>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Text Block"
+      minOccur=""
+      maxOccur=""
+      path="/*:bindingDesc/*:binding/*:decoNote/*:p"
+      currentLevel="4"
+      popup="4"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
+   <material ident="material"
+             elementName="material"
+             elementLabel="Binding Material"
+             minOccur=""
+             maxOccur=""
+             path="/*:bindingDesc/*:binding/*:decoNote/*:material"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;material/&gt;">
+      <desc>Describe the writing material. Choose from the list what
+                            kind of material is used in the manuscript/this codicological unit.</desc>
+      <availableAtts elementName="material">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="function">
+            <desc versionDate="2020-11-12" xml:lang="en">describes the
+      function or use of the material in relation to the object
+      as a whole.</desc>
+            <datatype minOccurs="1" maxOccurs="1">
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="open">
+               <valItem ident="binding">
+                  <desc xml:lang="en" versionDate="2020-11-12">covering
+	  material of a codex</desc>
+               </valItem>
+               <valItem ident="endband">
+                  <desc xml:lang="en" versionDate="2020-11-12">sewing at the
+	  head or tail of the codex spine to strengthen the binding,
+	  often decorative</desc>
+               </valItem>
+               <valItem ident="slipcase">
+                  <desc xml:lang="en" versionDate="2020-11-12">removable
+	  protective cover for a set of one or more codices</desc>
+               </valItem>
+               <valItem ident="support">
+                  <desc xml:lang="en" versionDate="2020-11-12">the surface for writing</desc>
+               </valItem>
+               <valItem ident="tie">
+                  <desc xml:lang="en" versionDate="2020-11-12">a ribbon or
+	  string used to bind or close a codex or rolled scroll</desc>
+               </valItem>
+            </valList>
+            <remarks xml:lang="en" versionDate="2020-11-12">
+               <p>The sample values here are for descriptive bibliography.
+	Other sets of sample values might include <val>armrests</val>,
+	<val>legs</val>, <val>tabletop</val>, <val>pan</val>, and
+	<val>back</val> for furniture; or <val>wall</val>,
+	<val>floor</val>, <val>window</val>, <val>column</val>,
+	<val>ceiling</val>, <val>roof</val>, <val>stairs</val>,
+	<val>chimney</val> for architecture.</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="key"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="paper"/>
+               <valItem mode="add" ident="parchment"/>
+               <valItem mode="add" ident="papyrus"/>
+               <valItem mode="add" ident="cardboard"/>
+               <valItem mode="add" ident="leather"/>
+               <valItem mode="add" ident="metal"/>
+               <valItem mode="add" ident="textile"/>
+               <valItem mode="add" ident="other"/>
+               <valItem mode="add" ident="silk"/>
+               <valItem mode="add" ident="stone"/>
+               <valItem mode="add" ident="bronze"/>
+               <valItem mode="add" ident="alabaster"/>
+               <valItem mode="add" ident="cotton"/>
+            </valList>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 usage="opt">
+            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
+            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
+            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
+            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
+        means of one or more URIs.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2014-01-09" xml:lang="en">
+               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="target">
+            <desc versionDate="2013-04-16" xml:lang="en">identifies one or more elements to which the metamark applies.</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </material>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Text Block"
+      minOccur=""
+      maxOccur=""
+      path="/*:bindingDesc/*:binding/*:p"
+      currentLevel="3"
+      popup="3"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
+</TEI>

@@ -15,7 +15,8 @@
                  maxOccur=""
                  path="/*:msIdentifier"
                  currentLevel="1"
-                 popup="1">
+                 popup="1"
+                 teiElement="&lt;msIdentifier/&gt;">
       <desc>This section contains all the call marks, names, and
                             other information to identify the manuscript.</desc>
       <availableAtts elementName="msIdentifier"/>
@@ -40,22 +41,23 @@
                 maxOccur=""
                 path="/*:msIdentifier/*:institution"
                 currentLevel="2"
-                popup="2">
+                popup="2"
+                teiElement="&lt;institution/&gt;">
       <desc>The name of a library which holds the manuscript.</desc>
       <availableAtts elementName="institution"/>
       <controlledValues>
          <element xmlns="" ident="institution">
-                    <valList type="closed">
-                        <valItem ident="National Library of Russia"/>
-                        <valItem ident="British Library"/>
-                        <valItem ident="Ben Zvi Institute"/>
-                        <valItem ident="Library of the Hungarian Academy of Sciences"/>
-                        <valItem ident="Cambridge University Library"/>
-                        <valItem ident="National Library of France"/>
-                        <valItem ident="Alliance Israélite Universelle"/>
-                        <valItem ident="Jewish Theological Seminary"/>
-                    </valList>
-                </element>
+            <valList type="closed">
+               <valItem ident="National Library of Russia"/>
+               <valItem ident="British Library"/>
+               <valItem ident="Ben Zvi Institute"/>
+               <valItem ident="Library of the Hungarian Academy of Sciences"/>
+               <valItem ident="Cambridge University Library"/>
+               <valItem ident="National Library of France"/>
+               <valItem ident="Alliance Israélite Universelle"/>
+               <valItem ident="Jewish Theological Seminary"/>
+            </valList>
+         </element>
       </controlledValues>
       <childElements>
          <textNode type="input"/>
@@ -69,15 +71,9 @@
                maxOccur=""
                path="/*:msIdentifier/*:repository"
                currentLevel="2"
-               popup="2">
+               popup="2"
+               teiElement="&lt;repository/&gt;">
       <availableAtts elementName="repository"/>
-      <controlledValues>
-         <element xmlns="" ident="repository">
-                    <valList type="closed">
-                        <valItem ident="Kaufmann"/>
-                    </valList>
-                </element>
-      </controlledValues>
       <childElements>
          <child/>
       </childElements>
@@ -89,10 +85,20 @@
                maxOccur=""
                path="/*:msIdentifier/*:collection"
                currentLevel="2"
-               popup="2">
+               popup="2"
+               teiElement="&lt;collection/&gt;">
       <desc>The name of a collection within which the manuscript is
                             stored, possibly part of a library.</desc>
       <availableAtts elementName="collection"/>
+      <controlledValues>
+         <element xmlns="" ident="collection">
+            <valList type="closed">
+               <valItem ident="Kaufmann"/>
+               <valItem ident="Or."/>
+               <valItem ident="T-S Ar."/>
+            </valList>
+         </element>
+      </controlledValues>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -105,7 +111,8 @@
          maxOccur=""
          path="/*:msIdentifier/*:idno"
          currentLevel="2"
-         popup="2">
+         popup="2"
+         teiElement="&lt;idno/&gt;">
       <desc>The call mark of a manuscript, used within the holding institution or by external
                             authorities who provide alternate identifiers.</desc>
       <availableAtts elementName="idno"/>
@@ -121,7 +128,8 @@
            maxOccur=""
            path="/*:msIdentifier/*:msName"
            currentLevel="2"
-           popup="2">
+           popup="2"
+           teiElement="&lt;msName/&gt;">
       <desc>Nicknames and epithets used for the manuscript by scholars (e.g. "Machsor
                             Lipsiae").</desc>
       <availableAtts elementName="msName"/>
@@ -137,7 +145,8 @@
                   maxOccur=""
                   path="/*:msIdentifier/*:altIdentifier"
                   currentLevel="2"
-                  popup="2">
+                  popup="2"
+                  teiElement="&lt;altIdentifier/&gt;">
       <desc>Alternate Identifiers. This can be older shelf marks and identifiers in databases
                             like IMHM, SfarData, Ktiv, FGP and old (identifiers). Specify where this identifier is used in the "type" attribute.</desc>
       <availableAtts elementName="altIdentifier">
@@ -145,14 +154,14 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  mode="change">
-                                <valList type="open" mode="change">
-                                    <valItem mode="add" ident="IMHM"/>
-                                    <valItem mode="add" ident="SfarData"/>
-                                    <valItem mode="add" ident="Ktiv"/>
-                                    <valItem mode="add" ident="old"/>
-                                    <valItem mode="add" ident="FGP"/>
-                                </valList>
-                            </attDef>
+            <valList type="open" mode="change">
+               <valItem mode="add" ident="IMHM"/>
+               <valItem mode="add" ident="SfarData"/>
+               <valItem mode="add" ident="Ktiv"/>
+               <valItem mode="add" ident="old"/>
+               <valItem mode="add" ident="FGP"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
@@ -167,7 +176,8 @@
          maxOccur=""
          path="/*:msIdentifier/*:altIdentifier/*:idno"
          currentLevel="3"
-         popup="3">
+         popup="3"
+         teiElement="&lt;idno/&gt;">
       <desc>The call mark of a manuscript, used within the holding institution or by external
                             authorities who provide alternate identifiers.</desc>
       <availableAtts elementName="idno"/>
@@ -183,7 +193,8 @@
                maxOccur=""
                path="/*:msIdentifier/*:objectName"
                currentLevel="2"
-               popup="2">
+               popup="2"
+               teiElement="&lt;objectName/&gt;">
       <availableAtts elementName="objectName"/>
       <childElements>
          <child/>
@@ -196,20 +207,21 @@
             maxOccur=""
             path="/*:msIdentifier/*:country"
             currentLevel="2"
-            popup="2">
+            popup="2"
+            teiElement="&lt;country/&gt;">
       <desc>Specify the country where the holding institution is situated.</desc>
       <availableAtts elementName="country"/>
       <controlledValues>
          <element xmlns="" ident="country">
-                    <valList type="closed">
-                        <valItem ident="Russia"/>
-                        <valItem ident="USA"/>
-                        <valItem ident="Great Britain"/>
-                        <valItem ident="Israel"/>
-                        <valItem ident="Hungary"/>
-                        <valItem ident="France"/>
-                    </valList>
-                </element>
+            <valList type="closed">
+               <valItem ident="Russia"/>
+               <valItem ident="USA"/>
+               <valItem ident="Great Britain"/>
+               <valItem ident="Israel"/>
+               <valItem ident="Hungary"/>
+               <valItem ident="France"/>
+            </valList>
+         </element>
       </controlledValues>
       <childElements>
          <textNode type="input"/>
@@ -223,21 +235,22 @@
                maxOccur=""
                path="/*:msIdentifier/*:settlement"
                currentLevel="2"
-               popup="2">
+               popup="2"
+               teiElement="&lt;settlement/&gt;">
       <desc>The city or town where the holding institution is based.</desc>
       <availableAtts elementName="settlement"/>
       <controlledValues>
          <element xmlns="" ident="settlement">
-                    <valList type="closed">
-                        <valItem ident="St. Petersburg"/>
-                        <valItem ident="London"/>
-                        <valItem ident="Jerusalem"/>
-                        <valItem ident="Budapest"/>
-                        <valItem ident="Cambridge"/>
-                        <valItem ident="Paris"/>
-                        <valItem ident="New York"/>
-                    </valList>
-                </element>
+            <valList type="closed">
+               <valItem ident="St. Petersburg"/>
+               <valItem ident="London"/>
+               <valItem ident="Jerusalem"/>
+               <valItem ident="Budapest"/>
+               <valItem ident="Cambridge"/>
+               <valItem ident="Paris"/>
+               <valItem ident="New York"/>
+            </valList>
+         </element>
       </controlledValues>
       <childElements>
          <textNode type="input"/>
