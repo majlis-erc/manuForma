@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config>
+<config type="wizard">
     <appTitle>manuForma</appTitle>
     <formTitle>Edit MS TEI Records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
-    <formName>mssTEI</formName>
+    <formName>msSimple</formName>
     <formAuthor>majlis-erc</formAuthor>
     <formDesc> </formDesc>
     <!-- Language to output lables, hints etc, if empty defaults to English -->
@@ -32,10 +32,10 @@
         </retrieveOptions>
     </recordManagement>
     <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
-    <blankTemplates>
+    <!--<blankTemplates>
         <template name="Generic MS Template" src="/forms/templates/full-mss-template.xml"/>
         <template name="MS part Template" src="/forms/templates/ms-part-example.xml"/>
-    </blankTemplates>
+    </blankTemplates>-->
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
@@ -105,12 +105,28 @@
                         <valItem ident="New York"/>
                     </valList>
                 </element>
-                <element ident="repository">
+                <element ident="collection">
                     <valList type="closed">
                         <valItem ident="Kaufmann"/>
+                        <valItem ident="Or."/>
+                        <valItem ident="T-S Ar."/>
                     </valList>
                 </element>
             </controlledValuesElements>
+            <elementGroups>
+                <group groupLabel="Identification via location, institution, shelfmark" groupNo="1">
+                    <element xpath="tei:country"/>
+                    <element xpath="tei:settlement"/>
+                    <element xpath="tei:idno"/>
+                    <element xpath="tei:institution"/>
+                    <element xpath="tei:collection"/>
+                </group>
+                <group groupLabel="Identification via old shelfmark" groupNo="2">
+                    <element xpath="tei:altIdentifier"/>
+                    <element xpath="tei:msName"/>
+                    <element xpath="tei:idno"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
@@ -123,6 +139,23 @@
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
+            <elementGroups>
+                <group groupLabel="Basic Text Information (Subject Field, Folios, Author, Title, Language)" groupNo="1">
+                    <element xpath="tei:locus"/>
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:author"/>
+                    <element xpath="tei:textLang"/>
+                </group>
+                <group groupLabel="Detailed Text Information (Text Division, Incipit, Explicit, Final Rubric, Colophon, Notes)" groupNo="2">
+                    <element xpath="tei:rubric"/>
+                    <element xpath="tei:incipit"/>
+                    <element xpath="tei:explicit"/>
+                    <element xpath="tei:colophon"/>
+                    <element xpath="tei:locus"/>
+                    <element xpath="tei:q"/>
+                    <element xpath="tei:note"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
             <localSchema src="../schemas/mss-support.xml"/>
