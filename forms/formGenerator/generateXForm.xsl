@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 0.01 Beta
+        Version: 1.01 Beta
         
 
         NOTES: 
