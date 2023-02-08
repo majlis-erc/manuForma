@@ -32,13 +32,13 @@
                <div id="collapse1" class="accordion-collapse show" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
-                        <div class="input-group mb-3 float-end"><span class="input-group-text" id="basic-addon1">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msContents-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>locus</xf:label><xf:value>locus</xf:value>
+                        <div class="input-group mb-3 float-end"><span class="input-group-text" id="basic-addon1">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msContents-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>msItem/locus</xf:label><xf:value>msItem/locus</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>title</xf:label><xf:value>title</xf:value>
+                              <xf:item><xf:label>msItem/title</xf:label><xf:value>msItem/title</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>author</xf:label><xf:value>author</xf:value>
+                              <xf:item><xf:label>msItem/author</xf:label><xf:value>msItem/author</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>textLang</xf:label><xf:value>textLang</xf:value>
+                              <xf:item><xf:label>msItem/textLang</xf:label><xf:value>msItem/textLang</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
@@ -50,19 +50,19 @@
                            </xf:trigger>
                         </div>
                      </div>
-                     <xf:repeat id="msContentsRepeatLevel11" ref="./*[self::*:locus | self::*:title | self::*:author | self::*:textLang]">
+                     <xf:repeat id="msContentsRepeatLevel11" ref="./*[self::*:msItem/self::*:locus | self::*:msItem/self::*:title | self::*:msItem/self::*:author | self::*:msItem/self::*:textLang]">
                         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:locus | self::*:title | self::*:author | self::*:textLang][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:msItem/self::*:locus | self::*:msItem/self::*:title | self::*:msItem/self::*:author | self::*:msItem/self::*:textLang][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:locus | self::*:title | self::*:author | self::*:textLang][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:msItem/self::*:locus | self::*:msItem/self::*:title | self::*:msItem/self::*:author | self::*:msItem/self::*:textLang][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
@@ -591,19 +591,31 @@
                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
-                        <div class="input-group mb-3 float-end"><span class="input-group-text" id="basic-addon1">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msContents-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>rubric</xf:label><xf:value>rubric</xf:value>
+                        <div class="input-group mb-3 float-end"><span class="input-group-text" id="basic-addon1">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msContents-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>msItem/rubric</xf:label><xf:value>msItem/rubric</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>incipit</xf:label><xf:value>incipit</xf:value>
+                              <xf:item><xf:label>msItem/rubric/q</xf:label><xf:value>msItem/rubric/q</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>explicit</xf:label><xf:value>explicit</xf:value>
+                              <xf:item><xf:label>msItem/rubric/locus</xf:label><xf:value>msItem/rubric/locus</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>colophon</xf:label><xf:value>colophon</xf:value>
+                              <xf:item><xf:label>msItem/incipit</xf:label><xf:value>msItem/incipit</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>locus</xf:label><xf:value>locus</xf:value>
+                              <xf:item><xf:label>msItem/incipit/q</xf:label><xf:value>msItem/incipit/q</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>q</xf:label><xf:value>q</xf:value>
+                              <xf:item><xf:label>msItem/incipit/locus</xf:label><xf:value>msItem/incipit/locus</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>note</xf:label><xf:value>note</xf:value>
+                              <xf:item><xf:label>msItem/explicit</xf:label><xf:value>msItem/explicit</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/explicit/q</xf:label><xf:value>msItem/explicit/q</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/explicit/locus</xf:label><xf:value>msItem/explicit/locus</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/colophon</xf:label><xf:value>msItem/colophon</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/colophon/locus</xf:label><xf:value>msItem/colophon/locus</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/colophon/q</xf:label><xf:value>msItem/colophon/q</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>msItem/note</xf:label><xf:value>msItem/note</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
@@ -615,19 +627,19 @@
                            </xf:trigger>
                         </div>
                      </div>
-                     <xf:repeat id="msContentsRepeatLevel21" ref="./*[self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:locus | self::*:q | self::*:note]">
+                     <xf:repeat id="msContentsRepeatLevel21" ref="./*[self::*:msItem/self::*:rubric | self::*:msItem/self::*:rubric/self::*:q | self::*:msItem/self::*:rubric/self::*:locus | self::*:msItem/self::*:incipit | self::*:msItem/self::*:incipit/self::*:q | self::*:msItem/self::*:incipit/self::*:locus | self::*:msItem/self::*:explicit | self::*:msItem/self::*:explicit/self::*:q | self::*:msItem/self::*:explicit/self::*:locus | self::*:msItem/self::*:colophon | self::*:msItem/self::*:colophon/self::*:locus | self::*:msItem/self::*:colophon/self::*:q | self::*:msItem/self::*:note]">
                         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:locus | self::*:q | self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:msItem/self::*:rubric | self::*:msItem/self::*:rubric/self::*:q | self::*:msItem/self::*:rubric/self::*:locus | self::*:msItem/self::*:incipit | self::*:msItem/self::*:incipit/self::*:q | self::*:msItem/self::*:incipit/self::*:locus | self::*:msItem/self::*:explicit | self::*:msItem/self::*:explicit/self::*:q | self::*:msItem/self::*:explicit/self::*:locus | self::*:msItem/self::*:colophon | self::*:msItem/self::*:colophon/self::*:locus | self::*:msItem/self::*:colophon/self::*:q | self::*:msItem/self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:locus | self::*:q | self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:msItem/self::*:rubric | self::*:msItem/self::*:rubric/self::*:q | self::*:msItem/self::*:rubric/self::*:locus | self::*:msItem/self::*:incipit | self::*:msItem/self::*:incipit/self::*:q | self::*:msItem/self::*:incipit/self::*:locus | self::*:msItem/self::*:explicit | self::*:msItem/self::*:explicit/self::*:q | self::*:msItem/self::*:explicit/self::*:locus | self::*:msItem/self::*:colophon | self::*:msItem/self::*:colophon/self::*:locus | self::*:msItem/self::*:colophon/self::*:q | self::*:msItem/self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
