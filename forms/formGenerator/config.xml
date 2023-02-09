@@ -149,8 +149,14 @@
                     <element xpath="tei:author"/>
                     <element xpath="tei:persName"/>
                     <element xpath="tei:textLang"/>
+                    <element xpath="tei:rubric"/>
+                    <element xpath="tei:incipit"/>
+                    <element xpath="tei:explicit"/>
+                    <element xpath="tei:colophon"/>
+                    <element xpath="tei:q"/>
+                    <element xpath="tei:note"/>
                 </group>
-                <group groupLabel="Detailed Text Information (Text Division, Incipit, Explicit, Final Rubric, Colophon, Notes)" groupNo="3">
+                <!--<group groupLabel="Detailed Text Information (Text Division, Incipit, Explicit, Final Rubric, Colophon, Notes)" groupNo="3">
                     <element xpath="tei:rubric"/>
                     <element xpath="tei:incipit"/>
                     <element xpath="tei:explicit"/>
@@ -158,7 +164,7 @@
                     <element xpath="tei:locus"/>
                     <element xpath="tei:q"/>
                     <element xpath="tei:note"/>
-                </group>
+                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
@@ -166,6 +172,19 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the writing material of the manuscript.</formDesc>
+            <elementGroups>
+                <group groupLabel="Define the support material of the manuscript." groupNo="1">
+                    <element xpath="tei:support"/>
+                </group>
+                <group groupLabel="Measurements of the Book Block (No. Leafs, Dimensions)" groupNo="2">
+                    <element xpath="tei:extent"/>
+                </group>
+                <group groupLabel="Additional Properties of the Book Block (Foliation, Composition of Quires, Catchwords, State of Conservation)" groupNo="3">
+                    <element xpath="tei:foliation"/>
+                    <element xpath="tei:collation"/>
+                    <element xpath="tei:condition"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Page Layout" repeat="no">
             <localSchema src="../schemas/mss-layout.xml"/>
