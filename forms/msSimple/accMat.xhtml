@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library. The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data. Describe the textual contents in detail or in general terms. Describe the writing material of the codicological unit. Describe the page layout of the codicological unit. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers. Describe any additions to the codicological unit that were made after its original production. Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library." />
+      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
       <title>Edit MS TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -26,256 +26,296 @@
          </xf:trigger>Heritage Data</h2>
       <p class="alert alert-light hint">Add descriptions of the manuscript from earlier catalogs and internal library records.</p>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]" id="accMat-root">
-         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
-            <div class="btn-group" role="group">
-               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-               </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
-                  <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                     </xf:itemset>
-                     <xf:action ev:event="xforms-value-changed">
-                        <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
-                     </xf:action>
-                  </xf:select1>
-                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                     <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                     <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
-                  </xf:trigger>
-                  <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
-                     </xf:item>
-                     <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
-                     </xf:itemset>
-                     <xf:action ev:event="xforms-value-changed">
-                        <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
-                     </xf:action>
-                  </xf:select1>
-                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
-                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
-                  </xf:trigger>
-                  <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
-                        <xf:toggle case="LookupUnHide" ev:event="DOMActivate"></xf:toggle>
-                        <xf:load show="embed" targetid="subformLookup">
-                           <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
-                        </xf:load>
-                     </xf:action>
-                  </xf:trigger>
-                  <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
-                        <xf:load show="new">
-                           <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
-                        </xf:load>
-                     </xf:action>
-                  </xf:trigger>
-                  <xf:switch class="lookupSwitch" style="width:.5em;">
-                     <xf:case id="LookupHide" style="display:none;"></xf:case>
-                     <xf:case id="LookupUnHide">
-                        <div class="lookupDisplay">
-                           <xf:group id="subformLookup"></xf:group>
-                           <div class="text-right">
-                              <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                 <xf:unload targetid="subformLookup"></xf:unload>
-                              </xf:trigger>
-                           </div>
-                        </div>
-                     </xf:case>
-                  </xf:switch>
-               </div>
-            </div>
-         </div>
-         <div class="element">
-            <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-               <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
-                  <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                  </xf:itemset>
-               </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
-                  <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                     <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                           <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                           </xf:itemset>
-                        </xf:select1>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                        </xf:trigger>
-                     </div>
-                  </div>
-               </xf:repeat>
-            </div>
-            <xf:repeat id="accMatRepeatLevel1" ref="./*[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
-               <div class="nested">
-                  <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
-                     <div class="btn-group" role="group">
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                        </xf:trigger>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                              <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel1')"></setvalue>
-                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*" at="index('accMatRepeatLevel1') - 1" position="before"></insert>
-                              <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
-                           </xf:action>
-                        </xf:trigger>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                              <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel1')"></setvalue>
-                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*" at="index('accMatRepeatLevel1') + 1" position="after"></insert>
-                              <delete nodeset="."></delete>
-                           </xf:action>
-                        </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                              </xf:itemset>
-                              <xf:action ev:event="xforms-value-changed">
-                                 <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
-                              </xf:action>
-                           </xf:select1>
-                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                              <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                              <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
-                           </xf:trigger>
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
+         <div class="accordion" id="elementGroup">
+            <div class="accordion-item">
+               <h2 class="accordion-header" id="heading1"><button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">List the scholars involved (if known) and quote from the heritage material.</button></h2>
+               <div id="collapse1" class="accordion-collapse show" aria-labelledby="heading1" data-bs-parent="#elementGroup">
+                  <div class="accordion-body">
+                     <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
+                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>p</xf:label><xf:value>p</xf:value>
                               </xf:item>
-                              <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
-                              </xf:itemset>
+                              <xf:item><xf:label>persName</xf:label><xf:value>persName</xf:value>
+                              </xf:item>
+                              <xf:item><xf:label>q</xf:label><xf:value>q</xf:value>
+                              </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
-                           <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="accMatRepeatLevel1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
-                                 <xf:load show="embed" targetid="accMatRepeatLevel1subformLookup">
-                                    <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
-                                 </xf:load>
-                              </xf:action>
-                           </xf:trigger>
-                           <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:load show="new">
-                                    <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
-                                 </xf:load>
-                              </xf:action>
-                           </xf:trigger>
-                           <xf:switch class="lookupSwitch" style="width:.5em;">
-                              <xf:case id="accMatRepeatLevel1LookupHide" style="display:none;"></xf:case>
-                              <xf:case id="accMatRepeatLevel1LookupUnHide">
-                                 <div class="lookupDisplay">
-                                    <xf:group id="accMatRepeatLevel1subformLookup"></xf:group>
-                                    <div class="text-right">
-                                       <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="accMatRepeatLevel1LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                          <xf:unload targetid="accMatRepeatLevel1subformLookup"></xf:unload>
+                        </div>
+                     </div>
+                     <xf:repeat id="accMatRepeatLevel11" ref="./*[self::*:p | self::*:persName | self::*:q]">
+                        <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
+                           <div class="btn-group" role="group">
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                              </xf:trigger>
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:p | self::*:persName | self::*:q][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
+                                    <delete nodeset="."></delete>
+                                 </xf:action>
+                              </xf:trigger>
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:p | self::*:persName | self::*:q][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
+                                    <delete nodeset="."></delete>
+                                 </xf:action>
+                              </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                                 <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                    </xf:itemset>
+                                    <xf:action ev:event="xforms-value-changed">
+                                       <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                    </xf:action>
+                                 </xf:select1>
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
+                                    <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
+                                    <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                                 </xf:trigger>
+                                 <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
+                                    </xf:item>
+                                    <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
+                                    </xf:itemset>
+                                    <xf:action ev:event="xforms-value-changed">
+                                       <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                    </xf:action>
+                                 </xf:select1>
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
+                                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                                 </xf:trigger>
+                                 <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:toggle case="accMatRepeatLevel11LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                       <xf:load show="embed" targetid="accMatRepeatLevel11subformLookup">
+                                          <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                       </xf:load>
+                                    </xf:action>
+                                 </xf:trigger>
+                                 <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:load show="new">
+                                          <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                       </xf:load>
+                                    </xf:action>
+                                 </xf:trigger>
+                                 <xf:switch class="lookupSwitch" style="width:.5em;">
+                                    <xf:case id="accMatRepeatLevel11LookupHide" style="display:none;"></xf:case>
+                                    <xf:case id="accMatRepeatLevel11LookupUnHide">
+                                       <div class="lookupDisplay">
+                                          <xf:group id="accMatRepeatLevel11subformLookup"></xf:group>
+                                          <div class="text-right">
+                                             <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="accMatRepeatLevel11LookupHide" ev:event="DOMActivate"></xf:toggle>
+                                                <xf:unload targetid="accMatRepeatLevel11subformLookup"></xf:unload>
+                                             </xf:trigger>
+                                          </div>
+                                       </div>
+                                    </xf:case>
+                                 </xf:switch>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="element">
+                           <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
+                              <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
+                                 <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                 </xf:itemset>
+                              </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
+                                 <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                                    <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
+                                          <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                          </xf:itemset>
+                                       </xf:select1>
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                        </xf:trigger>
                                     </div>
                                  </div>
-                              </xf:case>
-                           </xf:switch>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="element">
-                     <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                        <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
-                           <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                           </xf:itemset>
-                        </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
-                           <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                              <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                                    <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                                    </xf:itemset>
-                                 </xf:select1>
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                                 </xf:trigger>
-                              </div>
+                              </xf:repeat>
                            </div>
-                        </xf:repeat>
-                     </div>
-                     <xf:repeat id="accMatRepeatLevel1RepeatLevel2" ref="./*[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
-                        <div class="nested">
-                           <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
-                              <div class="btn-group" role="group">
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                                 </xf:trigger>
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                       <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel1RepeatLevel2')"></setvalue>
-                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]/*[index('accMatRepeatLevel1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]/*" at="index('accMatRepeatLevel1RepeatLevel2') - 1" position="before"></insert>
-                                       <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]/*[instance('i-move')/tmp + 1]"></delete>
-                                    </xf:action>
-                                 </xf:trigger>
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                       <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel1RepeatLevel2')"></setvalue>
-                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]/*[index('accMatRepeatLevel1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel1')]/*" at="index('accMatRepeatLevel1RepeatLevel2') + 1" position="after"></insert>
-                                       <delete nodeset="."></delete>
-                                    </xf:action>
-                                 </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
-                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                                       </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed">
-                                          <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
-                                       </xf:action>
-                                    </xf:select1>
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
-                                       <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
-                                       <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
-                                    </xf:trigger>
-                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
-                                       </xf:item>
-                                       <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
-                                       </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed">
-                                          <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
-                                       </xf:action>
-                                    </xf:select1>
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
-                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
-                                       <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
-                                    </xf:trigger>
-                                    <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
-                                          <xf:toggle case="accMatRepeatLevel1RepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
-                                          <xf:load show="embed" targetid="accMatRepeatLevel1RepeatLevel2subformLookup">
-                                             <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
-                                          </xf:load>
-                                       </xf:action>
-                                    </xf:trigger>
-                                    <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
-                                          <xf:load show="new">
-                                             <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
-                                          </xf:load>
-                                       </xf:action>
-                                    </xf:trigger>
-                                    <xf:switch class="lookupSwitch" style="width:.5em;">
-                                       <xf:case id="accMatRepeatLevel1RepeatLevel2LookupHide" style="display:none;"></xf:case>
-                                       <xf:case id="accMatRepeatLevel1RepeatLevel2LookupUnHide">
-                                          <div class="lookupDisplay">
-                                             <xf:group id="accMatRepeatLevel1RepeatLevel2subformLookup"></xf:group>
-                                             <div class="text-right">
-                                                <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="accMatRepeatLevel1RepeatLevel2LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                                   <xf:unload targetid="accMatRepeatLevel1RepeatLevel2subformLookup"></xf:unload>
+                           <xf:repeat id="accMatRepeatLevel11RepeatLevel1child1" ref="./*[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
+                              <div class="nested">
+                                 <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
+                                    <div class="btn-group" role="group">
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                       </xf:trigger>
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                             <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel11RepeatLevel1child1')"></setvalue>
+                                             <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*" at="index('accMatRepeatLevel11RepeatLevel1child1') - 1" position="before"></insert>
+                                             <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
+                                          </xf:action>
+                                       </xf:trigger>
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                             <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel11RepeatLevel1child1')"></setvalue>
+                                             <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*" at="index('accMatRepeatLevel11RepeatLevel1child1') + 1" position="after"></insert>
+                                             <delete nodeset="."></delete>
+                                          </xf:action>
+                                       </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                                          <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                             </xf:itemset>
+                                             <xf:action ev:event="xforms-value-changed">
+                                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                             </xf:action>
+                                          </xf:select1>
+                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
+                                             <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
+                                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                                          </xf:trigger>
+                                          <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
+                                             </xf:item>
+                                             <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
+                                             </xf:itemset>
+                                             <xf:action ev:event="xforms-value-changed">
+                                                <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                             </xf:action>
+                                          </xf:select1>
+                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                                             <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
+                                             <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                                          </xf:trigger>
+                                          <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:toggle case="accMatRepeatLevel11RepeatLevel1child1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                                <xf:load show="embed" targetid="accMatRepeatLevel11RepeatLevel1child1subformLookup">
+                                                   <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                </xf:load>
+                                             </xf:action>
+                                          </xf:trigger>
+                                          <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:load show="new">
+                                                   <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                </xf:load>
+                                             </xf:action>
+                                          </xf:trigger>
+                                          <xf:switch class="lookupSwitch" style="width:.5em;">
+                                             <xf:case id="accMatRepeatLevel11RepeatLevel1child1LookupHide" style="display:none;"></xf:case>
+                                             <xf:case id="accMatRepeatLevel11RepeatLevel1child1LookupUnHide">
+                                                <div class="lookupDisplay">
+                                                   <xf:group id="accMatRepeatLevel11RepeatLevel1child1subformLookup"></xf:group>
+                                                   <div class="text-right">
+                                                      <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="accMatRepeatLevel11RepeatLevel1child1LookupHide" ev:event="DOMActivate"></xf:toggle>
+                                                         <xf:unload targetid="accMatRepeatLevel11RepeatLevel1child1subformLookup"></xf:unload>
+                                                      </xf:trigger>
+                                                   </div>
+                                                </div>
+                                             </xf:case>
+                                          </xf:switch>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="element">
+                                    <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
+                                       <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
+                                          <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                          </xf:itemset>
+                                       </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
+                                          <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                                             <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
+                                                   <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                                   </xf:itemset>
+                                                </xf:select1>
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                                 </xf:trigger>
                                              </div>
                                           </div>
-                                       </xf:case>
-                                    </xf:switch>
+                                       </xf:repeat>
+                                    </div>
+                                    <xf:repeat id="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2" ref="./*[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements/*:child]">
+                                       <div class="nested">
+                                          <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
+                                             <div class="btn-group" role="group">
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                                </xf:trigger>
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                      <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2')"></setvalue>
+                                                      <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]/*[index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]/*" at="index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2') - 1" position="before"></insert>
+                                                      <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]/*[instance('i-move')/tmp + 1]"></delete>
+                                                   </xf:action>
+                                                </xf:trigger>
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                      <setvalue ref="instance('i-move')/tmp" value="index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2')"></setvalue>
+                                                      <insert origin="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]/*[index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:accMat[position() = instance('i-repeatIndex')/index]/*[index('accMatRepeatLevel11RepeatLevel1child1')]/*" at="index('accMatRepeatLevel11RepeatLevel1child1RepeatLevel2') + 1" position="after"></insert>
+                                                      <delete nodeset="."></delete>
+                                                   </xf:action>
+                                                </xf:trigger><span class="elementLabel"><xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+                                                   <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                                      </xf:itemset>
+                                                      <xf:action ev:event="xforms-value-changed">
+                                                         <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                                      </xf:action>
+                                                   </xf:select1>
+                                                   <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]"><xf:label><i class="bi bi-plus-circle"></i> Attribute</xf:label><xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"></xf:insert>
+                                                      <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"></xf:setvalue>
+                                                      <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
+                                                   </xf:trigger>
+                                                   <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label> - select - </xf:label><xf:value></xf:value>
+                                                      </xf:item>
+                                                      <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element"><xf:label ref="@label"></xf:label><xf:value ref="@ident"></xf:value>
+                                                      </xf:itemset>
+                                                      <xf:action ev:event="xforms-value-changed">
+                                                         <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
+                                                      </xf:action>
+                                                   </xf:select1>
+                                                   <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add </xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-accMat-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                                                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
+                                                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+                                                   </xf:trigger>
+                                                   <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:toggle case="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                                         <xf:load show="embed" targetid="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2subformLookup">
+                                                            <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                         </xf:load>
+                                                      </xf:action>
+                                                   </xf:trigger>
+                                                   <xf:trigger appearance="minimal" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus-circle"></i> New  <xf:output value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:load show="new">
+                                                            <xf:resource value="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                         </xf:load>
+                                                      </xf:action>
+                                                   </xf:trigger>
+                                                   <xf:switch class="lookupSwitch" style="width:.5em;">
+                                                      <xf:case id="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2LookupHide" style="display:none;"></xf:case>
+                                                      <xf:case id="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2LookupUnHide">
+                                                         <div class="lookupDisplay">
+                                                            <xf:group id="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2subformLookup"></xf:group>
+                                                            <div class="text-right">
+                                                               <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x-circle"></i> Close</xf:label><xf:toggle case="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2LookupHide" ev:event="DOMActivate"></xf:toggle>
+                                                                  <xf:unload targetid="accMatRepeatLevel11RepeatLevel1child1RepeatLevel2subformLookup"></xf:unload>
+                                                               </xf:trigger>
+                                                            </div>
+                                                         </div>
+                                                      </xf:case>
+                                                   </xf:switch>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="element">
+                                             <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
+                                                <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
+                                                   <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                                   </xf:itemset>
+                                                </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
+                                                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                                                      <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
+                                                            <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
+                                                            </xf:itemset>
+                                                         </xf:select1>
+                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                                         </xf:trigger>
+                                                      </div>
+                                                   </div>
+                                                </xf:repeat>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </xf:repeat>
                                  </div>
                               </div>
-                           </div>
-                           <div class="element">
-                              <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                                 <xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
-                                    <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                                    </xf:itemset>
-                                 </xf:select1><xf:input class="elementInput" ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"></xf:input><xf:textarea class="elementTextArea" ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"></xf:textarea><xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*">
-                                    <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                                       <div class="input-group"><xf:input ref=".[not(instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"></xf:input><xf:select1 ref=".[instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                                             <xf:itemset ref="instance('i-accMat-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
-                                             </xf:itemset>
-                                          </xf:select1>
-                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="local-name(current())"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                                          </xf:trigger>
-                                       </div>
-                                    </div>
-                                 </xf:repeat>
-                              </div>
-                           </div>
+                           </xf:repeat>
                         </div>
                      </xf:repeat>
                   </div>
                </div>
-            </xf:repeat>
+            </div>
          </div>
       </xf:group>
    </body>

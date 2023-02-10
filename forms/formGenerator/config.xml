@@ -191,6 +191,14 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summarize the Page Layout." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Define the Page Layout  (No. columns / written lines, Text Space, Folios, Pricking, Ruling)" groupNo="2">
+                    <element xpath="tei:layout"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
             repeat="no">
@@ -198,38 +206,85 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the graphical signs of the manuscript.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summarize the graphical signs of the manuscript." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Describe the graphical signs of the manuscript." groupNo="2">
+                    <element xpath="tei:decoNote"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summarize the hands you find in the manuscript." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Describe the Properties of the Hand in Standard Vocabulary." groupNo="2">
+                    <element xpath="tei:handNote"/>
+                </group>
+            </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="additions" formLabel="Additions" repeat="no">
             <localSchema src="../schemas/mss-additions.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe any additions to the manuscript that were made after its original production.</formDesc>
+            <elementGroups>
+                <group groupLabel="Itemize the additions to the manuscript." groupNo="1">
+                    <element xpath="tei:item"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc" formName="bindingDesc" formLabel="Binding Description" repeat="no">
             <localSchema src="../schemas/mss-binding.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
+            <elementGroups>
+                <group groupLabel="State if the binding is contemporary to the book block and its dimensions. You can also give  additional information (Origin, Material, State)." groupNo="1">
+                    <element xpath="tei:binding"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage Data" repeat="no">
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
+            <elementGroups>
+                <group groupLabel="List the scholars involved (if known) and quote from the heritage material." groupNo="1">
+                    <element xpath="tei:p"/>
+                    <element xpath="tei:persName"/>
+                    <element xpath="tei:q"/>
+                </group>
+            </elementGroups>
         </subform> 
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="History" repeat="no">
             <localSchema src="../schemas/mss-history.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summarize the history of the manuscript." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Give an account of the manuscript's production (Date of Origin, Place of Origin, Folios, Person (Scribe, Patron), Quotation)." groupNo="2">
+                    <element xpath="tei:origin"/>
+                </group>
+                <group groupLabel="Describe the traces left by later owners of the manuscript (Date, Place, Folios, Person, Quotation, Stamp)." groupNo="3">
+                    <element xpath="tei:provenance"/>
+                </group>
+                <group groupLabel="Give an account how the manuscript came into the present holding institution (Date, Place, Folios, Person, Quotation, Stamp)." groupNo="4">
+                    <element xpath="tei:acquisition"/>
+                </group>
+            </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
+        <!--<subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
             <xmlTemplate src="../templates/ms-part-example.xml"/>
             <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
                 <localSchema src="../schemas/mss-msidentifier.xml"/>
@@ -280,6 +335,6 @@
                 <xmlTemplate src="../templates/full-mss-template.xml"/>
                 <formDesc>Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library.</formDesc>
             </subform>
-        </subform>
+        </subform>-->
     </subforms>
 </config>
