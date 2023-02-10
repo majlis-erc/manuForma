@@ -797,8 +797,8 @@
                             </xsl:if>
                             <xf:switch id="edit" class="mainContent panel">
                                 <xf:case id="view-main-entry" selected="true()">
-                                    <!-- Load an existing template -->
-                                    <div class="fileLoading">
+                                    <!-- Load an existing template - Deactivated for the moment -->
+                                    <!--<div class="fileLoading">
                                         <h4 class="h6">Create New Record<small class="text-muted">(Start With Blank Template File)</small></h4>
                                         <div class="input-group mb-3">
                                             <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')">
@@ -812,7 +812,7 @@
                                                 <xf:label> Load Template File </xf:label>    
                                             </xf:submit>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     
                                     <xsl:if test="$configDoc//*:projectSpecificData/*:xmlPath[@src != '']">
                                         <hr/>
