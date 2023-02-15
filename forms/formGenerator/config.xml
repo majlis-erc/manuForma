@@ -82,7 +82,7 @@
                         <valItem ident="France"/>
                     </valList>
                 </element>
-                <element ident="institution">
+                <element ident="repository">
                     <valList type="closed">
                         <valItem ident="National Library of Russia"/>
                         <valItem ident="British Library"/>
@@ -127,11 +127,27 @@
                 </group>
             </elementGroups>
         </subform>
+        <subform xpath="/tei:TEI/tei:facsimile" formName="reproductions" formLabel="Reproductions" repeat="no">
+            <localSchema src="../schemas/mss-reproductions.xml"/>
+            <globalSchema src="../schemas/mss-reproductions.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Where do we find reproductions like scans or microfilms?</formDesc>
+            <elementGroups>
+                <group groupLabel="Reproduction" groupNo="1">
+                    <element xpath="tei:graphic"/>
+                </group>
+            </elementGroups>
+        </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Define the Type of Manuscript.</formDesc>
+            <elementGroups>
+                <group groupLabel="Manuscript type" groupNo="1">
+                    <element xpath="tei:objectDesc"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content Description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
@@ -142,7 +158,7 @@
                 <group groupLabel="Summary of the contents" groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Basic Text Information (Subject Field, Folios, Author, Title, Language)" groupNo="2">
+                <group groupLabel="Basic text information for text unit (subject Field, folios, author, title, language)" groupNo="2">
                     <element xpath="tei:msItem"/>
                     <element xpath="tei:locus"/>
                     <element xpath="tei:title"/>
@@ -156,15 +172,6 @@
                     <element xpath="tei:q"/>
                     <element xpath="tei:note"/>
                 </group>
-                <!--<group groupLabel="Detailed Text Information (Text Division, Incipit, Explicit, Final Rubric, Colophon, Notes)" groupNo="3">
-                    <element xpath="tei:rubric"/>
-                    <element xpath="tei:incipit"/>
-                    <element xpath="tei:explicit"/>
-                    <element xpath="tei:colophon"/>
-                    <element xpath="tei:locus"/>
-                    <element xpath="tei:q"/>
-                    <element xpath="tei:note"/>
-                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
@@ -176,10 +183,10 @@
                 <group groupLabel="Define the support material of the manuscript." groupNo="1">
                     <element xpath="tei:support"/>
                 </group>
-                <group groupLabel="Measurements of the Book Block (No. Leafs, Dimensions)" groupNo="2">
+                <group groupLabel="Measurements of the book block (No. Leafs, Dimensions)" groupNo="2">
                     <element xpath="tei:extent"/>
                 </group>
-                <group groupLabel="Additional Properties of the Book Block (Foliation, Composition of Quires, Catchwords, State of Conservation)" groupNo="3">
+                <group groupLabel="Additional properties of the book block (foliation, composition of quires, catchwords, state of conservation)" groupNo="3">
                     <element xpath="tei:foliation"/>
                     <element xpath="tei:collation"/>
                     <element xpath="tei:condition"/>
@@ -192,17 +199,17 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
             <elementGroups>
-                <group groupLabel="Summarize the Page Layout." groupNo="1">
+                <group groupLabel="Summarize the page layout." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Define the Page Layout  (No. columns / written lines, Text Space, Folios, Pricking, Ruling)" groupNo="2">
+                <group groupLabel="Define the page layout  (No. columns / written lines, text space, folios, pricking, ruling)" groupNo="2">
                     <element xpath="tei:layout"/>
                 </group>
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
             repeat="no">
-            <localSchema src="../schemas/mss-layout.xml"/>
+            <localSchema src="../schemas/mss-decoDesc.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the graphical signs of the manuscript.</formDesc>
@@ -210,7 +217,7 @@
                 <group groupLabel="Summarize the graphical signs of the manuscript." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Describe the graphical signs of the manuscript." groupNo="2">
+                <group groupLabel="Describe individual aspects of  graphical signage in the manuscript." groupNo="2">
                     <element xpath="tei:decoNote"/>
                 </group>
             </elementGroups>
@@ -240,14 +247,19 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc" formName="bindingDesc" formLabel="Binding Description" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc/tei:binding" formName="bindingDesc" formLabel="Binding Description" repeat="no">
             <localSchema src="../schemas/mss-binding.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="State if the binding is contemporary to the book block and its dimensions. You can also give  additional information (Origin, Material, State)." groupNo="1">
-                    <element xpath="tei:binding"/>
+                <group groupLabel="If you can, describe the binding's origin. And give the bindings dimensions and provide information on the material." groupNo="1">
+                    <element xpath="tei:decoNote"/>
+                </group>
+            </elementGroups>
+            <elementGroups>
+                <group groupLabel="Characterize the state of conservation of the binding." groupNo="2">
+                    <element xpath="tei:condition"/>
                 </group>
             </elementGroups>
         </subform>
