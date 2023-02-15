@@ -72,21 +72,18 @@ End license statement: do not remove -->
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
-                <schemaSpec ident="mss-definition" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                <schemaSpec ident="mss-reproductions" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
                     <!--source="mss-compiled.odd"-->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
+                    <moduleRef key="transcr" include="facsimile"/>
+                    <moduleRef key="core" include="graphic"/>
 
-                    
-                    <moduleRef key="msdescription"
-                        include="objectDesc"/>
-                    <moduleRef key="tei"/>
-                    <elementSpec ident="objectDesc" module="msdescription" mode="change">
-                        <gloss>Choose the Type of Manuscript</gloss>
-                        <gloss type="tei">&lt;objectDesc&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Contains descriptions of the manuscript's physical components. Use the "form"
-                            attribute to indicate if the manuscript was created as a single unit, a composite, or a multiple text manuscript.</desc>
+                    <elementSpec ident="facsimile" module="transcr" mode="change">
+                        <gloss>Reproductions</gloss>
+                        <gloss type="tei">&lt;facsimile&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Contains information where reproductions of the manuscript may be found.</desc>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -95,19 +92,6 @@ End license statement: do not remove -->
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="form" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="single">
-                                        <desc xml:lang="en">used for Single manuscript</desc>
-                                    </valItem>
-                                    <valItem mode="add" ident="composite">
-                                        <desc xml:lang="en">used for Composite manuscript</desc>
-                                    </valItem>
-                                    <valItem mode="add" ident="multiple">
-                                        <desc xml:lang="en">used for multiple text manuscript</desc>
-                                    </valItem>
-                                </valList>
-                            </attDef>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
@@ -118,7 +102,51 @@ End license statement: do not remove -->
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
+                            <attDef ident="type" mode="replace" usage="opt">
+                                <valList type="closed">
+                                    <valItem ident="IMHM"></valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="decls" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+
+                    <elementSpec ident="graphic" module="core" mode="change">
+                        <gloss>Reproduction link</gloss>
+                        <gloss type="tei">&lt;graphic&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Contains the link to one reproduction in source. Select the type from the dropdown
+                            list.</desc>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="width" mode="delete"/>
+                            <attDef ident="height" mode="delete"/>
+                            <attDef ident="scale" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="mimeType" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="change"/>
+                            <attDef ident="subtype" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
