@@ -32,10 +32,10 @@
         </retrieveOptions>
     </recordManagement>
     <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
-    <!--<blankTemplates>
+    <blankTemplates>
         <template name="Generic MS Template" src="/forms/templates/full-mss-template.xml"/>
         <template name="MS part Template" src="/forms/templates/ms-part-example.xml"/>
-    </blankTemplates>-->
+    </blankTemplates>
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
@@ -138,7 +138,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:objectDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
+        <subform xpath="/tei:TEI//tei:physDesc" formName="objectDesc" formLabel="Codicological Definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -207,6 +207,8 @@
                 </group>
             </elementGroups>
         </subform>
+        <!-- the decoDesc schema does not have an elementSpec for decoDesc -->
+        <!--
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
             repeat="no">
             <localSchema src="../schemas/mss-decoDesc.xml"/>
@@ -222,6 +224,7 @@
                 </group>
             </elementGroups>
         </subform>
+        -->
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
@@ -295,7 +298,7 @@
                     <element xpath="tei:acquisition"/>
                 </group>
             </elementGroups>
-        </subform>
+        </subform>        
         <!--<subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
             <xmlTemplate src="../templates/ms-part-example.xml"/>
             <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
