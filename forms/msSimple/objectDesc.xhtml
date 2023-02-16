@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
+      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Where do we find reproductions like scans or microfilms? Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
       <title>Edit MS TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -32,7 +32,7 @@
                <div id="collapse1" class="accordion-collapse show" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
-                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-objectDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>objectDesc</xf:label><xf:value>objectDesc</xf:value>
+                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-objectDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>.</xf:label><xf:value>.</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
@@ -44,19 +44,19 @@
                            </xf:trigger>
                         </div>
                      </div>
-                     <xf:repeat id="objectDescRepeatLevel11" ref="./*[self::*:objectDesc]">
+                     <xf:repeat id="objectDescRepeatLevel11" ref="./*[.]">
                         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:objectDesc][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[.][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:objectDesc][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[.][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>

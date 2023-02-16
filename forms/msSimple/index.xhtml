@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
+      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Where do we find reproductions like scans or microfilms? Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
       <title>Edit MS TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -43,6 +43,7 @@
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
                <subform formName="msIdentifier" selected="false"></subform>
+               <subform formName="reproductions" selected="false"></subform>
                <subform formName="objectDesc" selected="false"></subform>
                <subform formName="msContents" selected="false"></subform>
                <subform formName="mssSupport" selected="false"></subform>
@@ -208,6 +209,30 @@
                                  <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/msSimple/msIdentifier.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatmsIdentifier') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
+                     <li class="nav-item">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'reproductions']" class="nav-link"><xf:label>Reproductions</xf:label><xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-data-entry"></xf:toggle>
+                              <xf:unload targetid="subform"></xf:unload>
+                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/msSimple/reproductions.xhtml"></xf:load>
+                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <xf:repeat ref="instance('i-rec')//*:facsimile[position() &gt; 1]" id="navRepeatreproductions">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Reproductions  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/msSimple/reproductions.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatreproductions') + 1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                         </li>
@@ -484,41 +509,71 @@
                <p class="alert alert-light hint"> </p>
                <xf:switch id="edit" class="mainContent panel">
                   <xf:case id="view-main-entry" selected="true()">
-                     <hr />
-                     <h4>Select project</h4>
-                     <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
-                        <xf:itemset ref="instance('i-projectSpecificData')//*:option"><xf:label ref="@name"></xf:label><xf:value ref="@name"></xf:value>
-                        </xf:itemset>
-                     </xf:select1>
-                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label>Load Project Metadata</xf:label><xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
-                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:editionStmt" position="after"></xf:insert>
-                        <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
-                     </xf:trigger>
-                     <hr />
-                     <div class="fileLoading">
-                        <h4 class="h6">Continue Work With Existing Record <small class="text-muted">(Load From Database)</small></h4>
-                        <div class="input-group mb-3"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
+                     <div class="accordion" id="loadRecords">
+                        <div class="accordion-item">
+                           <h2 class="accordion-header" id="headingProjectMetadata"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectMetadata" aria-expanded="false" aria-controls="collapseProjectMetadata">
+                                 Assign Project Metadata
+                                 </button></h2>
+                           <div id="collapseProjectMetadata" class="accordion-collapse" aria-labelledby="headingProjectMetadata" data-bs-parent="#loadRecords">
+                              <div class="accordion-body">
+                                 <hr />
+                                 <h4>Select project</h4>
+                                 <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
+                                    <xf:itemset ref="instance('i-projectSpecificData')//*:option"><xf:label ref="@name"></xf:label><xf:value ref="@name"></xf:value>
+                                    </xf:itemset>
+                                 </xf:select1>
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label>Load Project Metadata</xf:label><xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
+                                    <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:editionStmt" position="after"></xf:insert>
+                                    <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                                 </xf:trigger>
+                                 <hr />
+                              </div>
+                           </div>
                         </div>
-                        <div class="input-group mb-3">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
-                              </xf:itemset>
-                           </xf:select1>
-                           <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
+                        <div class="accordion-item">
+                           <h2 class="accordion-header" id="headingExistingRecord"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExistingRecord" aria-expanded="false" aria-controls="collapseExistingRecord">
+                                 Continue work with existing record
+                                 </button></h2>
+                           <div id="collapseNewRecord" class="accordion-collapse" aria-labelledby="headingExistingRecord" data-bs-parent="#loadRecords">
+                              <div class="accordion-body">
+                                 <div class="fileLoading">
+                                    <div class="input-group mb-3"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
+                                          </xf:itemset>
+                                       </xf:select1>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                     <div class="fileLoading">
-                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
-                        <div class="input-group mb-3">
-                           <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal"><xf:label></xf:label></xf:upload>
-                           <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal"><xf:label>Load Record</xf:label></xf:submit>
+                        <div class="accordion-item">
+                           <h2 class="accordion-header" id="headingNewRecord"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewRecord" aria-expanded="false" aria-controls="collapseNewRecord">
+                                 New Record
+                                 </button></h2>
+                           <div id="collapseNewRecord" class="accordion-collapse" aria-labelledby="headingNewRecord" data-bs-parent="#loadRecords">
+                              <div class="accordion-body">
+                                 <div class="fileLoading">
+                                    <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
+                                    <div class="input-group mb-3">
+                                       <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal"><xf:label></xf:label></xf:upload>
+                                       <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal"><xf:label>Load Record</xf:label></xf:submit>
+                                    </div>
+                                 </div>
+                                 <div class="fileLoading">
+                                    <div class="input-group mb-3">
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')"><xf:label></xf:label><xf:itemset ref="instance('i-selectTemplate')//*:template"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
+                                          </xf:itemset>
+                                       </xf:select1>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal"><xf:label> Load Template File </xf:label></xf:submit>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                     <div class="card preview">
-                        <div class="card-header">Preview XML</div>
-                        <xf:group>
-                           <xf:setvalue ref="instance('i-rec')" ev:event="DOMActivate" value="transform(instance('i-rec'),serialize(instance('i-prettyPrint')),true())"></xf:setvalue>
-                        </xf:group>
                      </div>
                   </xf:case>
                   <xf:case id="view-admin">
