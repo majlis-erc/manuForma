@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.02 Beta
+        Version: 1.04 Beta
         
 
         NOTES: 
@@ -797,88 +797,140 @@
                             </xsl:if>
                             <xf:switch id="edit" class="mainContent panel">
                                 <xf:case id="view-main-entry" selected="true()">
-                                    <!-- Load an existing template - Deactivated for the moment -->
-                                    <!--<div class="fileLoading">
-                                        <h4 class="h6">Create New Record<small class="text-muted">(Start With Blank Template File)</small></h4>
-                                        <div class="input-group mb-3">
-                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')">
-                                                 <xf:label/>
-                                                 <xf:itemset ref="instance('i-selectTemplate')//*:template">
-                                                     <xf:label ref="@name"/>
-                                                     <xf:value ref="@src"/>
-                                                 </xf:itemset>
-                                             </xf:select1>
-                                            <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
-                                                <xf:label> Load Template File </xf:label>    
-                                            </xf:submit>
+                                    <div class="accordion" id="loadRecords">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingProjectMetadata">
+                                                <button class="accordion-button" 
+                                                    type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#collapseProjectMetadata" 
+                                                    aria-expanded="false" 
+                                                    aria-controls="collapseProjectMetadata">
+                                                    Assign Project Metadata
+                                                </button>
+                                            </h2>
+                                            <div id="collapseProjectMetadata" 
+                                                class="accordion-collapse" 
+                                                aria-labelledby="headingProjectMetadata" 
+                                                data-bs-parent="#loadRecords">
+                                                <div class="accordion-body">
+                                                    <xsl:if test="$configDoc//*:projectSpecificData/*:xmlPath[@src != '']">
+                                                        <hr/>
+                                                        <h4>Select project</h4>
+                                                        <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
+                                                            <xf:itemset ref="instance('i-projectSpecificData')//*:option">
+                                                                <xf:label ref="@name"/>
+                                                                <xf:value ref="@name"/>
+                                                            </xf:itemset>
+                                                        </xf:select1>
+                                                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                                                            <xf:label>Load Project Metadata</xf:label> 
+                                                            <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}"/>
+                                                            <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
+                                                            <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                                                        </xf:trigger>
+                                                        <hr/>
+                                                    </xsl:if>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>-->
-                                    
-                                    <xsl:if test="$configDoc//*:projectSpecificData/*:xmlPath[@src != '']">
-                                        <hr/>
-                                        <h4>Select project</h4>
-                                        <xf:select1 ref="instance('i-projectSpecificDataSelected')//*:selected" class="elementSelect">
-                                            <xf:itemset ref="instance('i-projectSpecificData')//*:option">
-                                                <xf:label ref="@name"/>
-                                                <xf:value ref="@name"/>
-                                            </xf:itemset>
-                                        </xf:select1>
-                                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                            <xf:label>Load Project Metadata</xf:label> 
-                                            <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}"/>
-                                            <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
-                                            <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
-                                        </xf:trigger>
-                                        <hr/>
-                                    </xsl:if>
-                                    
-                                    <div class="fileLoading">
-                                        <h4 class="h6">Continue Work With Existing Record <small class="text-muted">(Load From Database)</small></h4>
-                                        <div class="input-group mb-3">
-                                            <xf:input class="form-control" ref="instance('i-search')" incremental="true">
-                                                <xf:label/>
-                                            </xf:input>
-                                            <xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal">
-                                                <xf:label> Search </xf:label>
-                                            </xf:submit>
-                                            <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
-                                                <xf:label> Browse </xf:label>
-                                            </xf:submit>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingExistingRecord">
+                                                <button class="accordion-button" 
+                                                    type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#collapseExistingRecord" 
+                                                    aria-expanded="false" 
+                                                    aria-controls="collapseExistingRecord">
+                                                    Continue work with existing record
+                                                </button>
+                                            </h2>
+                                            <div id="collapseNewRecord" 
+                                                class="accordion-collapse" 
+                                                aria-labelledby="headingExistingRecord" 
+                                                data-bs-parent="#loadRecords">
+                                                <div class="accordion-body">
+                                                    <div class="fileLoading">
+                                                        <div class="input-group mb-3">
+                                                            <xf:input class="form-control" ref="instance('i-search')" incremental="true">
+                                                                <xf:label/>
+                                                            </xf:input>
+                                                            <xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal">
+                                                                <xf:label> Search </xf:label>
+                                                            </xf:submit>
+                                                            <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
+                                                                <xf:label> Browse </xf:label>
+                                                            </xf:submit>
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
+                                                                <xf:label/>
+                                                                <xf:itemset ref="instance('i-search-results')//*:record">
+                                                                    <xf:label ref="@name"/>
+                                                                    <xf:value ref="@src"/>
+                                                                </xf:itemset>
+                                                            </xf:select1>
+                                                            <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
+                                                                <xf:label> Load Selected Record </xf:label>
+                                                            </xf:submit>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="input-group mb-3">
-                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
-                                                <xf:label/>
-                                                <xf:itemset ref="instance('i-search-results')//*:record">
-                                                    <xf:label ref="@name"/>
-                                                    <xf:value ref="@src"/>
-                                                </xf:itemset>
-                                            </xf:select1>
-                                            <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
-                                                <xf:label> Load Selected Record </xf:label>
-                                            </xf:submit>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingNewRecord">
+                                                <button class="accordion-button" 
+                                                    type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#collapseNewRecord" 
+                                                    aria-expanded="false" 
+                                                    aria-controls="collapseNewRecord">
+                                                    New Record
+                                                </button>
+                                            </h2>
+                                            <div id="collapseNewRecord" 
+                                                class="accordion-collapse" 
+                                                aria-labelledby="headingNewRecord" 
+                                                data-bs-parent="#loadRecords">
+                                                <div class="accordion-body">
+                                                    <div class="fileLoading">
+                                                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
+                                                        <div class="input-group mb-3">
+                                                            <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
+                                                                <xf:label/>
+                                                            </xf:upload>
+                                                            <!-- WS:Note add upload graphic, make inline with above? -->
+                                                            <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
+                                                                <xf:label>Load Record</xf:label>
+                                                            </xf:submit>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="fileLoading">
+                                                        <div class="input-group mb-3">
+                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')">
+                                                                <xf:label/>
+                                                                <xf:itemset ref="instance('i-selectTemplate')//*:template">
+                                                                    <xf:label ref="@name"/>
+                                                                    <xf:value ref="@src"/>
+                                                                </xf:itemset>
+                                                            </xf:select1>
+                                                            <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
+                                                                <xf:label> Load Template File </xf:label>    
+                                                            </xf:submit>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="fileLoading">
-                                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
-                                        <div class="input-group mb-3">
-                                            <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
-                                                <xf:label/>
-                                            </xf:upload>
-                                            <!-- WS:Note add upload graphic, make inline with above? -->
-                                            <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
-                                                <xf:label>Load Record</xf:label>
-                                            </xf:submit>
-                                        </div>
-                                    </div>                                    
+                                    
+                                     <!--                                 
                                     <div class="card preview">
                                         <div class="card-header">Preview XML</div>
                                         <xf:group>
-                                            <!--
                                             <xf:output value="serialize(instance('i-rec'))"/>
-                                            -->
                                             <xf:setvalue ref="instance('i-rec')" ev:event="DOMActivate" value="transform(instance('i-rec'),serialize(instance('i-prettyPrint')),true())"/>
                                         </xf:group>
                                     </div>
+                                    -->
                                 </xf:case>
                                 <xf:case id="view-admin">
                                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
@@ -1274,6 +1326,7 @@
                     <xsl:for-each select="$subform/elementGroups/group">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading{@groupNo}">
+                                <!-- {if(position() = 1) then '' else 'collapsed'} -->
                                 <button class="accordion-button {if(position() = 1) then '' else 'collapsed'}" 
                                     type="button" data-bs-toggle="collapse" 
                                     data-bs-target="#collapse{@groupNo}" 

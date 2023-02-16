@@ -37,6 +37,8 @@
                               </xf:item>
                               <xf:item><xf:label>settlement</xf:label><xf:value>settlement</xf:value>
                               </xf:item>
+                              <xf:item><xf:label>repository</xf:label><xf:value>repository</xf:value>
+                              </xf:item>
                               <xf:item><xf:label>idno</xf:label><xf:value>idno</xf:value>
                               </xf:item>
                               <xf:item><xf:label>institution</xf:label><xf:value>institution</xf:value>
@@ -53,19 +55,19 @@
                            </xf:trigger>
                         </div>
                      </div>
-                     <xf:repeat id="msIdentifierRepeatLevel11" ref="./*[self::*:country | self::*:settlement | self::*:idno | self::*:institution | self::*:collection]">
+                     <xf:repeat id="msIdentifierRepeatLevel11" ref="./*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection]">
                         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:country | self::*:settlement | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:country | self::*:settlement | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
