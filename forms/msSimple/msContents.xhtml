@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Where do we find reproductions like scans or microfilms? Define the Type of Manuscript. Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
+      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution and alternate references to existing cataloging data. Where do we find reproductions like scans or microfilms? Specify the type of manuscript (single / composite / multiple text). Describe the textual contents in detail or in general terms. Describe the writing material of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe the graphical signs of the manuscript. Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers. Describe any additions to the manuscript that were made after its original production. Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library." />
       <title>Edit MS TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -28,7 +28,7 @@
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:msContents[position() = instance('i-repeatIndex')/index]" id="msContents-root">
          <div class="accordion" id="elementGroup">
             <div class="accordion-item">
-               <h2 class="accordion-header" id="heading1"><button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Summary of the contents</button></h2>
+               <h2 class="accordion-header" id="heading1"><button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Summary of contents</button></h2>
                <div id="collapse1" class="accordion-collapse show" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
@@ -580,33 +580,11 @@
                </div>
             </div>
             <div class="accordion-item">
-               <h2 class="accordion-header" id="heading2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Basic text information for text unit (subject field, folios, author, title, language)</button></h2>
+               <h2 class="accordion-header" id="heading2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Detailed description of text unit(s): title, author, language, rubrics, etc.</button></h2>
                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
                         <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msContents-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>msItem</xf:label><xf:value>msItem</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>locus</xf:label><xf:value>locus</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>title</xf:label><xf:value>title</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>author</xf:label><xf:value>author</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>persName</xf:label><xf:value>persName</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>textLang</xf:label><xf:value>textLang</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>rubric</xf:label><xf:value>rubric</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>incipit</xf:label><xf:value>incipit</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>explicit</xf:label><xf:value>explicit</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>colophon</xf:label><xf:value>colophon</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>q</xf:label><xf:value>q</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>note</xf:label><xf:value>note</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
@@ -618,19 +596,19 @@
                            </xf:trigger>
                         </div>
                      </div>
-                     <xf:repeat id="msContentsRepeatLevel21" ref="./*[self::*:msItem | self::*:locus | self::*:title | self::*:author | self::*:persName | self::*:textLang | self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:q | self::*:note]">
+                     <xf:repeat id="msContentsRepeatLevel21" ref="./*[self::*:msItem]">
                         <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:msItem | self::*:locus | self::*:title | self::*:author | self::*:persName | self::*:textLang | self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:q | self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:msItem][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:msItem | self::*:locus | self::*:title | self::*:author | self::*:persName | self::*:textLang | self::*:rubric | self::*:incipit | self::*:explicit | self::*:colophon | self::*:q | self::*:note][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:msItem][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
