@@ -80,6 +80,21 @@
                         <valItem ident="Israel"/>
                         <valItem ident="Hungary"/>
                         <valItem ident="France"/>
+                        <valItem ident="Egypt"/>
+                        <valItem ident="Germany"/>
+                    </valList>
+                </element>
+                <element ident="settlement">
+                    <valList type="closed">
+                        <valItem ident="St. Petersburg"/>
+                        <valItem ident="London"/>
+                        <valItem ident="Jerusalem"/>
+                        <valItem ident="Budapest"/>
+                        <valItem ident="Cambridge"/>
+                        <valItem ident="Paris"/>
+                        <valItem ident="New York"/>
+                        <valItem ident="Cairo"/>
+                        <valItem ident="Leipzig"/>
                     </valList>
                 </element>
                 <element ident="repository">
@@ -92,24 +107,35 @@
                         <valItem ident="National Library of France"/>
                         <valItem ident="Alliance Israélite Universelle"/>
                         <valItem ident="Jewish Theological Seminary"/>
-                    </valList>
-                </element>
-                <element ident="settlement">
-                    <valList type="closed">
-                        <valItem ident="St. Petersburg"/>
-                        <valItem ident="London"/>
-                        <valItem ident="Jerusalem"/>
-                        <valItem ident="Budapest"/>
-                        <valItem ident="Cambridge"/>
-                        <valItem ident="Paris"/>
-                        <valItem ident="New York"/>
+                        <valItem ident="Karaite Synogogue"/>
+                        <valItem ident="Universitätsbibliothek Leipzig"/>
+                        <valItem ident="Institute of Oriental Manuscripts"/>
+                        <valItem ident="Sassoon"/>
                     </valList>
                 </element>
                 <element ident="collection">
                     <valList type="closed">
+                        <valItem ident="Arab.-Yevr."/>
+                        <valItem ident="Firk. Arab."/>
+                        <valItem ident="Yevr. I"/>
+                        <valItem ident="Yevr. I A"/>
+                        <valItem ident="Yevr. I B"/>
+                        <valItem ident="Yevr. I Bibl."/>
+                        <valItem ident="Yevr. II A"/>
+                        <valItem ident="Yevr. II B"/>
+                        <valItem ident="Yevr. II C"/>
+                        <valItem ident="Yevr. II K"/>
+                        <valItem ident="Yevr. III A"/>
+                        <valItem ident="Yevr. III B"/>
+                        <valItem ident="Yevr. IV"/>
+                        <valItem ident="Yevr.-Arab. I"/>
+                        <valItem ident="Yevr.-Arab. II"/>
                         <valItem ident="Kaufmann"/>
                         <valItem ident="Or."/>
-                        <valItem ident="T-S Ar."/>
+                        <valItem ident="T-S"/>
+                        <valItem ident="hebr."/>
+                        <valItem ident="Vollers"/>
+                        <valItem ident="Add."/>
                     </valList>
                 </element>
             </controlledValuesElements>
@@ -122,7 +148,7 @@
                     <element xpath="tei:institution"/>
                     <element xpath="tei:collection"/>
                 </group>
-                <group groupLabel="Identification via old shelfmark, name, catalog, or database" groupNo="2">
+                <group groupLabel="Identification via old shelfmark or via catalogues and databases" groupNo="2">
                     <element xpath="tei:altIdentifier"/>
                     <element xpath="tei:msName"/>
                 </group>
@@ -143,7 +169,7 @@
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Type of manuscript (single / composite (consisting of subsequently joined components) / multiple (produced as one unit).</formDesc>
+            <formDesc>Specify the type of manuscript (single / composite / multiple text).</formDesc>
             <elementGroups>
                 <group groupLabel="Manuscript type" groupNo="1">
                     <element xpath="."/>
@@ -156,22 +182,11 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of the contents" groupNo="1">
+                <group groupLabel="Summary of contents" groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Basic text information for text unit (subject field, folios, author, title, language)" groupNo="2">
+                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupNo="2">
                     <element xpath="tei:msItem"/>
-                    <element xpath="tei:locus"/>
-                    <element xpath="tei:title"/>
-                    <element xpath="tei:author"/>
-                    <element xpath="tei:persName"/>
-                    <element xpath="tei:textLang"/>
-                    <element xpath="tei:rubric"/>
-                    <element xpath="tei:incipit"/>
-                    <element xpath="tei:explicit"/>
-                    <element xpath="tei:colophon"/>
-                    <element xpath="tei:q"/>
-                    <element xpath="tei:note"/>
                 </group>
             </elementGroups>
         </subform>
@@ -280,7 +295,7 @@
                 </group>
             </elementGroups>
         </subform> 
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="History" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="Manuscript History" repeat="no">
             <localSchema src="../schemas/mss-history.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
