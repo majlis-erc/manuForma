@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.04 Beta
+        Version: 1.05 Beta
         
 
         NOTES: 
@@ -800,7 +800,7 @@
                                     <div class="accordion" id="loadRecords">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingProjectMetadata">
-                                                <button class="accordion-button" 
+                                                <button class="accordion-button collapsed" 
                                                     type="button" data-bs-toggle="collapse" 
                                                     data-bs-target="#collapseProjectMetadata" 
                                                     aria-expanded="false" 
@@ -809,7 +809,7 @@
                                                 </button>
                                             </h2>
                                             <div id="collapseProjectMetadata" 
-                                                class="accordion-collapse" 
+                                                class="accordion-collapse collapse" 
                                                 aria-labelledby="headingProjectMetadata" 
                                                 data-bs-parent="#loadRecords">
                                                 <div class="accordion-body">
@@ -835,7 +835,7 @@
                                         </div>
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingExistingRecord">
-                                                <button class="accordion-button" 
+                                                <button class="accordion-button collapsed" 
                                                     type="button" data-bs-toggle="collapse" 
                                                     data-bs-target="#collapseExistingRecord" 
                                                     aria-expanded="false" 
@@ -843,8 +843,8 @@
                                                     Continue work with existing record
                                                 </button>
                                             </h2>
-                                            <div id="collapseNewRecord" 
-                                                class="accordion-collapse" 
+                                            <div id="collapseExistingRecord" 
+                                                class="accordion-collapse collapse" 
                                                 aria-labelledby="headingExistingRecord" 
                                                 data-bs-parent="#loadRecords">
                                                 <div class="accordion-body">
@@ -878,7 +878,7 @@
                                         </div>
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingNewRecord">
-                                                <button class="accordion-button" 
+                                                <button class="accordion-button collapsed" 
                                                     type="button" data-bs-toggle="collapse" 
                                                     data-bs-target="#collapseNewRecord" 
                                                     aria-expanded="false" 
@@ -887,7 +887,7 @@
                                                 </button>
                                             </h2>
                                             <div id="collapseNewRecord" 
-                                                class="accordion-collapse" 
+                                                class="accordion-collapse collapse" 
                                                 aria-labelledby="headingNewRecord" 
                                                 data-bs-parent="#loadRecords">
                                                 <div class="accordion-body">
@@ -1326,24 +1326,23 @@
                     <xsl:for-each select="$subform/elementGroups/group">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading{@groupNo}">
-                                <!-- {if(position() = 1) then '' else 'collapsed'} -->
-                                <button class="accordion-button {if(position() = 1) then '' else 'collapsed'}" 
+                                <button class="accordion-button collapsed" 
                                     type="button" data-bs-toggle="collapse" 
                                     data-bs-target="#collapse{@groupNo}" 
-                                    aria-expanded="{if(position() = 1) then 'true' else 'false'}" 
+                                    aria-expanded="false" 
                                     aria-controls="collapse{@groupNo}">
                                     <xsl:value-of select="@groupLabel"/>
                                 </button>
                             </h2>
                             <div id="collapse{@groupNo}" 
-                                class="accordion-collapse {if(position() = 1) then 'show' else 'collapse'}" 
+                                class="accordion-collapse collapse" 
                                 aria-labelledby="heading{@groupNo}" 
                                 data-bs-parent="#elementGroup">
                                 <div class="accordion-body">
                                     <!-- Add elements from element group -->
                                     <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
                                         <div class="input-group mb-3 float-end">
-                                            <span class="input-group-text">Available Elements</span>
+                                            <span class="input-group-text">Available Fields</span>
                                             <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
                                                 <xf:label/>
                                                 <xsl:for-each select="element">
