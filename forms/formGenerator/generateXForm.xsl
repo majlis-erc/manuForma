@@ -1342,7 +1342,7 @@
                                     <!-- Add elements from element group -->
                                     <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
                                         <div class="input-group mb-3 float-end">
-                                            <span class="input-group-text">Available Elements</span>
+                                            <span class="input-group-text">Available Fields</span>
                                             <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
                                                 <xf:label/>
                                                 <xsl:for-each select="element">
