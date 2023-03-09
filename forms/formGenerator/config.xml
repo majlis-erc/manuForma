@@ -184,7 +184,7 @@
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
+            <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
                 <group groupLabel="Summary of contents" groupNo="1">
                     <element xpath="tei:summary"/>
@@ -194,7 +194,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Physical description: Writing material" repeat="no">
             <localSchema src="../schemas/mss-support.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -213,7 +213,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Page Layout" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Physical description: Page Layout" repeat="no">
             <localSchema src="../schemas/mss-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -227,7 +227,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Physical description: Text Layout"
             repeat="no">
             <localSchema src="../schemas/mss-decoDesc.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
@@ -242,7 +242,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Physical description: Hand Description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -256,13 +256,13 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="additions" formLabel="Additions" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="additions" formLabel="Incodicated Documents" repeat="no">
             <localSchema src="../schemas/mss-additions.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe any additions to the manuscript that were made after its original production.</formDesc>
             <elementGroups>
-                <group groupLabel="Itemize the additions to the manuscript." groupNo="1">
+                <group groupLabel="Add one item per incodicated document." groupNo="1">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -305,9 +305,9 @@
                 <group groupLabel="Summarize the history of the manuscript." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
+                <!--<group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
                     <element xpath="tei:origin"/>
-                </group>
+                </group>-->
                 <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupNo="3">
                     <element xpath="tei:provenance"/>
                 </group>
