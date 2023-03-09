@@ -883,7 +883,7 @@
                                                     data-bs-target="#collapseNewRecord" 
                                                     aria-expanded="false" 
                                                     aria-controls="collapseNewRecord">
-                                                    New Record
+                                                    Upload Record
                                                 </button>
                                             </h2>
                                             <div id="collapseNewRecord" 
