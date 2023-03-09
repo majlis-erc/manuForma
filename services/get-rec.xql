@@ -32,24 +32,32 @@ let $data :=
         if(request:get-parameter('view','') = 'all') then
             <data>{
                 for $r in collection(request:get-parameter('eXistCollection',''))//tei:TEI
-                return <record src="{document-uri(root($r))}" name="{string($r/descendant::tei:title[1])}"/>
+                let $title := string($r/descendant::tei:title[1])
+                order by $title
+                return <record src="{document-uri(root($r))}" name="{$title}"/>
             }</data>
         else if(request:get-parameter('q','') != '') then
             <data>{
                 for $r in collection(request:get-parameter('eXistCollection',''))//tei:TEI[descendant::tei:teiHeader[ft:query(.,request:get-parameter('q',''))] or descendant::tei:body[ft:query(.,request:get-parameter('q',''))]]
-                return <record src="{document-uri(root($r))}" name="{string($r/descendant::tei:title[1])}"/>
+                let $title := string($r/descendant::tei:title[1])
+                order by $title
+                return <record src="{document-uri(root($r))}" name="{$title}"/>
             }</data> 
         else ()    
     else if(request:get-parameter('search','') = 'true') then
         if(request:get-parameter('view','') = 'all') then 
             <data>{
                 for $r in collection($config:app-root || '/data')//tei:TEI
-                return <record src="{document-uri(root($r))}" name="{string($r/descendant::tei:title[1])}"/>
+                let $title := string($r/descendant::tei:title[1])
+                order by $title
+                return <record src="{document-uri(root($r))}" name="{$title}"/>
             }</data>
         else if(request:get-parameter('q','') != '') then
             <data>{
                 for $r in collection($config:app-root || '/data')//tei:TEI[descendant::tei:teiHeader[ft:query(.,request:get-parameter('q',''))]]
-                return <record src="{document-uri(root($r))}" name="{string($r/descendant::tei:title[1])}"/>
+                let $title := string($r/descendant::tei:title[1])
+                order by $title
+                return <record src="{document-uri(root($r))}" name="{$title}"/>
             }</data>
         else ()
     else if(request:get-parameter('github','') = 'browse') then
