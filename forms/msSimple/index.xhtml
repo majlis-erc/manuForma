@@ -39,7 +39,7 @@
          <xf:instance id="i-search-results"><data></data></xf:instance>
          <xf:instance id="i-selected-search"><data></data></xf:instance>
          <xf:instance id="i-selected"><data></data></xf:instance>
-         <xf:instance id="i-selectTemplate"><data></data></xf:instance>
+         <xf:instance id="i-selectTemplate"><data><template name="Generic MS Template" src="/forms/templates/full-mss-template.xml"></template><template name="MS part Template" src="/forms/templates/ms-part-example.xml"></template></data></xf:instance>
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
                <subform formName="msIdentifier" selected="false"></subform>
@@ -248,7 +248,7 @@
                            </xf:action>
                         </xf:trigger>
                      </li>
-                     <xf:repeat ref="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() &gt; 1]" id="navRepeatobjectDesc">
+                     <xf:repeat ref="instance('i-rec')///*:physDesc[position() &gt; 1]" id="navRepeatobjectDesc">
                         <li class="nav-item">
                            <xf:trigger appearance="minimal" class="nav-link"><xf:label>Codicological Definition  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
