@@ -20,12 +20,12 @@
    </head>
    <body>
       <h2 class="h3 mainElement">
-         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]"></xf:delete>
+         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="///*:physDesc[position() = instance('i-repeatIndex')/index]"></xf:delete>
          </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:physDesc/" origin="instance('i-objectDesc-elementTemplate')/*[local-name() = 'objectDesc']" position="after"></xf:insert>
+         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="///" origin="instance('i-objectDesc-elementTemplate')/*[local-name() = 'physDesc']" position="after"></xf:insert>
          </xf:trigger>Codicological Definition</h2>
       <p class="alert alert-light hint">Specify the type of manuscript (single / composite / multiple text).</p>
-      <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]" id="objectDesc-root">
+      <xf:group namespace="http://www.w3.org/2002/xforms" ref="///*:physDesc[position() = instance('i-repeatIndex')/index]" id="physDesc-root">
          <div class="accordion" id="elementGroup">
             <div class="accordion-item">
                <h2 class="accordion-header" id="heading1"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Manuscript type</button></h2>
@@ -137,13 +137,13 @@
                                        </xf:trigger>
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('objectDescRepeatLevel11RepeatLevel1child1')"></setvalue>
-                                             <insert origin="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]/*[index('objectDescRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]/*" at="index('objectDescRepeatLevel11RepeatLevel1child1') - 1" position="before"></insert>
-                                             <delete nodeset="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
+                                             <insert origin="instance('i-rec')///*:physDesc[position() = instance('i-repeatIndex')/index]/*[index('objectDescRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')///*:physDesc[position() = instance('i-repeatIndex')/index]/*" at="index('objectDescRepeatLevel11RepeatLevel1child1') - 1" position="before"></insert>
+                                             <delete nodeset="instance('i-rec')///*:physDesc[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
                                           </xf:action>
                                        </xf:trigger>
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('objectDescRepeatLevel11RepeatLevel1child1')"></setvalue>
-                                             <insert origin="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]/*[index('objectDescRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:physDesc/*:objectDesc[position() = instance('i-repeatIndex')/index]/*" at="index('objectDescRepeatLevel11RepeatLevel1child1') + 1" position="after"></insert>
+                                             <insert origin="instance('i-rec')///*:physDesc[position() = instance('i-repeatIndex')/index]/*[index('objectDescRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')///*:physDesc[position() = instance('i-repeatIndex')/index]/*" at="index('objectDescRepeatLevel11RepeatLevel1child1') + 1" position="after"></insert>
                                              <delete nodeset="."></delete>
                                           </xf:action>
                                        </xf:trigger><span class="elementLabel"><xf:output value="instance('i-objectDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-objectDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-objectDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
