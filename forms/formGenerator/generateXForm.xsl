@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.05 Beta
+        Version: 1.06 Beta
         
 
         NOTES: 
@@ -1055,6 +1055,7 @@
                 </xsl:variable>
                 <!-- WS:Note need to move up and down, also if parent element does not exist will be a problem -->
                 <h2 class="h3 mainElement">
+                    <!--
                     <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
                         <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
                         <xf:delete ev:event="DOMActivate" ref="{$path}[position() = instance('{$repeatIndex}')/index]"/>
@@ -1063,6 +1064,7 @@
                         <xf:label><i class="bi bi-plus-circle"/></xf:label>
                         <xf:insert ev:event="DOMActivate" context="{$parentXPath}" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{$elementName}']" position="after"/>
                     </xf:trigger> 
+                    -->
                     <xsl:value-of select="$subform/@formLabel"/>
                     <xsl:if test="$subform/subform"> [<xf:output value="instance('i-repeatIndex')/index"/>]</xsl:if>
                 </h2>
@@ -1460,7 +1462,7 @@
                                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
                                                             <xf:delete ev:event="DOMActivate" ref="."/>
                                                         </xf:trigger>
-                                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
+                                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*[{$groupElements}]">
                                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"/></xf:label>
                                                             <xf:action ev:event="DOMActivate">
                                                                 <!-- Store index of current item -->
@@ -1481,7 +1483,7 @@
                                                                 </xsl:element>
                                                             </xf:action>
                                                         </xf:trigger>
-                                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline">
+                                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*[{$groupElements}]">
                                                             <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"/></xf:label>
                                                             <xf:action ev:event="DOMActivate">
                                                                 <!-- Store index of current item -->
@@ -1672,12 +1674,16 @@
             <xsl:otherwise>
                 <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                     <div class="btn-group" role="group">
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
-                            <xf:delete ev:event="DOMActivate" ref="."/>
-                        </xf:trigger>
+                        <!-- 
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline" 
+                            ref="self::node()[count(../[local-name() = local-name(current())]) &gt; 1]">
+                        -->
                         <xsl:if test="$currentLevel &gt; 1">
-                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline">
+                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
+                                <xf:delete ev:event="DOMActivate" ref="."/>
+                            </xf:trigger>
+                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*">
                                 <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"/></xf:label>
                                 <xf:action ev:event="DOMActivate">
                                     <!-- Store index of current item -->
@@ -1698,7 +1704,7 @@
                                     </xsl:element>
                                 </xf:action>
                             </xf:trigger>
-                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline">
+                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*">
                                 <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"/></xf:label>
                                 <xf:action ev:event="DOMActivate">
                                     <!-- Store index of current item -->
@@ -1877,7 +1883,8 @@
                 </div>
             </xsl:otherwise>
         </xsl:choose>
-        </xsl:template>
+        
+    </xsl:template>
     
     
     <!-- Shared navbar -->
