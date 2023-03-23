@@ -965,18 +965,17 @@ and that a single TEI document may contain texts in many languages.</p>
       <availableAtts elementName="support"/>
       <childElements>
          <child>
-            <element ident="p" label="Text Block"/>
+            <element ident="p" label="Free Text Box"/>
             <element ident="material" label="Writing Material"/>
             <element ident="watermark" label="watermark"/>
             <element ident="origPlace" label="Place of Origin"/>
             <element ident="origDate" label="Date of Origin"/>
-            <element ident="locus" label="Folios"/>
          </child>
       </childElements>
    </support>
    <p ident="p"
       elementName="p"
-      elementLabel="Text Block"
+      elementLabel="Free Text Box"
       minOccur=""
       maxOccur=""
       path="/*:supportDesc/*:support/*:p"
@@ -2564,101 +2563,6 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </origDate>
-   <locus ident="locus"
-          elementName="locus"
-          elementLabel="Folios"
-          minOccur=""
-          maxOccur=""
-          path="/*:supportDesc/*:support/*:locus"
-          currentLevel="3"
-          popup="3"
-          teiElement="&lt;locus/&gt;">
-      <desc>The location of a text or another feature within the
-                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
-                            a range of folios.</desc>
-      <availableAtts elementName="locus">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="from">
-            <gloss xml:lang="en" versionDate="2007-06-12">from</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">depuis</gloss>
-            <desc versionDate="2013-12-21" xml:lang="en">specifies the
-      starting point of the location in a normalized form, typically a
-      page number.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
-            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, le point de
-        départ de la localisation.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el punto de inicio de una localización en una
-        forma estándard.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica l'inizio della posizione in forma
-        normalizzata</desc>
-            <datatype>
-               <dataRef key="teidata.word"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="target"
-                 usage="opt">
-            <desc versionDate="2010-05-02" xml:lang="en">specifies the destination of the reference by supplying one or more URI References</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">하나 혹은 다수의 URI 참조를 제시하여 참조의 목적지를 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">用一個或多個統一資源識別符參照 (URI References) 來說明參照所指位置。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">ひとつ以上のURIで，参照先を特定する．</desc>
-            <desc versionDate="2009-01-06" xml:lang="fr">précise la cible de la référence en donnant une ou
-        plusieurs références URI</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">especifica la destinación de una referencia
-        proporcionando una o más referencias URI.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica la destinazione di un riferimento, fornendo
-        uno o più riferimenti URI</desc>
-            <datatype maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <remarks versionDate="2007-01-21" xml:lang="en">
-               <p>One or more syntactically valid URI references, separated by whitespace. Because
-        whitespace is used to separate URIs, no whitespace is permitted inside a single URI. If a
-        whitespace character is required in a URI, it should be escaped with the normal mechanism,
-        e.g. <code>TEI%20Consortium</code>.</p>
-            </remarks>
-            <remarks versionDate="2007-01-21" xml:lang="fr">
-               <p>Une ou plusieurs références URI syntaxiquement valables, séparée par
-        un espace. Puisqu'un espace  est employé pour séparer des URIs, aucun espace
-        n’est autorisé à l'intérieur d'un URI. Si un espace est requis dans un URI, il
-        faut le représenter avec une séquence d'échappement, comme par exemple 
-        <code>TEI%20Consortium</code>.</p>
-            </remarks>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="to">
-            <gloss xml:lang="en" versionDate="2007-06-12">to</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">jusqu'à</gloss>
-            <desc versionDate="2013-12-21" xml:lang="en">specifies the
-      end-point of the location in a normalized form, typically as a
-      page number.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
-            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
-        pour la localisation.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el punto final de una localización en una
-        forma estándard.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica il termine della posizione in forma
-        normalizzata</desc>
-            <datatype>
-               <dataRef key="teidata.word"/>
-            </datatype>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </locus>
    <extent ident="extent"
            elementName="extent"
            elementLabel="Measurements of Book Block"
@@ -4088,7 +3992,7 @@ and that a single TEI document may contain texts in many languages.</p>
       <availableAtts elementName="collation"/>
       <childElements>
          <child>
-            <element ident="p" label="Text Block"/>
+            <element ident="p" label="Free Text Box"/>
             <element ident="formula" label="Quire Formula"/>
             <element ident="catchwords" label="Catchwords"/>
          </child>
@@ -4096,7 +4000,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </collation>
    <p ident="p"
       elementName="p"
-      elementLabel="Text Block"
+      elementLabel="Free Text Box"
       minOccur=""
       maxOccur=""
       path="/*:supportDesc/*:collation/*:p"
