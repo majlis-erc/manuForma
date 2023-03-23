@@ -19,11 +19,7 @@
       </xf:model>
    </head>
    <body>
-      <h2 class="h3 mainElement">
-         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]"></xf:delete>
-         </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:msDesc/" origin="instance('i-msIdentifier-elementTemplate')/*[local-name() = 'msIdentifier']" position="after"></xf:insert>
-         </xf:trigger>Identification</h2>
+      <h2 class="h3 mainElement">Identification</h2>
       <p class="alert alert-light hint">Add shelfmark and information on the holding institution and alternate references
          to existing cataloging data.</p>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]" id="msIdentifier-root">
@@ -33,23 +29,23 @@
                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
-                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Fields</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>country</xf:label><xf:value>country</xf:value>
+                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'country']/@elementLabel"></xf:label><xf:value>country</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>settlement</xf:label><xf:value>settlement</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'settlement']/@elementLabel"></xf:label><xf:value>settlement</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>repository</xf:label><xf:value>repository</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'repository']/@elementLabel"></xf:label><xf:value>repository</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>idno</xf:label><xf:value>idno</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'idno']/@elementLabel"></xf:label><xf:value>idno</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>institution</xf:label><xf:value>institution</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'institution']/@elementLabel"></xf:label><xf:value>institution</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>collection</xf:label><xf:value>collection</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'collection']/@elementLabel"></xf:label><xf:value>collection</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-msIdentifier-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i> Add</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-msIdentifier-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
@@ -60,13 +56,13 @@
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
-                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                     <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
-                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                     <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:country | self::*:settlement | self::*:repository | self::*:idno | self::*:institution | self::*:collection][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
@@ -146,13 +142,13 @@
                                     <div class="btn-group" role="group">
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                        </xf:trigger>
-                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1')"></setvalue>
                                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1') - 1" position="before"></insert>
                                              <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
                                           </xf:action>
                                        </xf:trigger>
-                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1')"></setvalue>
                                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1') + 1" position="after"></insert>
                                              <delete nodeset="."></delete>
@@ -232,13 +228,13 @@
                                              <div class="btn-group" role="group">
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                                 </xf:trigger>
-                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')"></setvalue>
                                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2') - 1" position="before"></insert>
                                                       <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[instance('i-move')/tmp + 1]"></delete>
                                                    </xf:action>
                                                 </xf:trigger>
-                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')"></setvalue>
                                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2') + 1" position="after"></insert>
                                                       <delete nodeset="."></delete>
@@ -318,13 +314,13 @@
                                                       <div class="btn-group" role="group">
                                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                                          </xf:trigger>
-                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3')"></setvalue>
                                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3') - 1" position="before"></insert>
                                                                <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]/*[instance('i-move')/tmp + 1]"></delete>
                                                             </xf:action>
                                                          </xf:trigger>
-                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3')"></setvalue>
                                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1')]/*[index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2')]/*" at="index('msIdentifierRepeatLevel11RepeatLevel1child1RepeatLevel2RepeatLevel3') + 1" position="after"></insert>
                                                                <delete nodeset="."></delete>
@@ -417,15 +413,15 @@
                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
-                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Fields</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label>altIdentifier</xf:label><xf:value>altIdentifier</xf:value>
+                        <div class="input-group mb-3 float-end"><span class="input-group-text">Available Elements</span><xf:select1 xmlns="http://www.w3.org/2002/xforms" class="addElementsGrp" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]"><xf:label></xf:label><xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'altIdentifier']/@elementLabel"></xf:label><xf:value>altIdentifier</xf:value>
                               </xf:item>
-                              <xf:item><xf:label>msName</xf:label><xf:value>msName</xf:value>
+                              <xf:item><xf:label ref="instance('i-msIdentifier-schemaConstraints')/*[local-name() = 'msName']/@elementLabel"></xf:label><xf:value>msName</xf:value>
                               </xf:item>
                               <xf:action ev:event="xforms-value-changed">
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus-circle"></i> Add</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-msIdentifier-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i> Add</xf:label><xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-msIdentifier-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-msIdentifier-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
                            </xf:trigger>
@@ -436,13 +432,13 @@
                            <div class="btn-group" role="group">
                               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                               </xf:trigger>
-                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*[self::*:altIdentifier | self::*:msName]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                     <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:altIdentifier | self::*:msName][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                     <delete nodeset="."></delete>
                                  </xf:action>
                               </xf:trigger>
-                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                              <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*[self::*:altIdentifier | self::*:msName]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                     <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:altIdentifier | self::*:msName][1]/preceding-sibling::*) + 1"></setvalue>
                                     <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                     <delete nodeset="."></delete>
@@ -522,13 +518,13 @@
                                     <div class="btn-group" role="group">
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                        </xf:trigger>
-                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1')"></setvalue>
                                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1') - 1" position="before"></insert>
                                              <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
                                           </xf:action>
                                        </xf:trigger>
-                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                              <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1')"></setvalue>
                                              <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1') + 1" position="after"></insert>
                                              <delete nodeset="."></delete>
@@ -608,13 +604,13 @@
                                              <div class="btn-group" role="group">
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                                 </xf:trigger>
-                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')"></setvalue>
                                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2') - 1" position="before"></insert>
                                                       <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[instance('i-move')/tmp + 1]"></delete>
                                                    </xf:action>
                                                 </xf:trigger>
-                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                       <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')"></setvalue>
                                                       <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2') + 1" position="after"></insert>
                                                       <delete nodeset="."></delete>
@@ -694,13 +690,13 @@
                                                       <div class="btn-group" role="group">
                                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                                          </xf:trigger>
-                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3')"></setvalue>
                                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3') - 1" position="before"></insert>
                                                                <delete nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]/*[instance('i-move')/tmp + 1]"></delete>
                                                             </xf:action>
                                                          </xf:trigger>
-                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                                <setvalue ref="instance('i-move')/tmp" value="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3')"></setvalue>
                                                                <insert origin="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:msDesc/*:msIdentifier[position() = instance('i-repeatIndex')/index]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1')]/*[index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2')]/*" at="index('msIdentifierRepeatLevel21RepeatLevel2child1RepeatLevel2RepeatLevel3') + 1" position="after"></insert>
                                                                <delete nodeset="."></delete>

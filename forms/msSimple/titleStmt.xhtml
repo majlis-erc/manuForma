@@ -19,17 +19,11 @@
       </xf:model>
    </head>
    <body>
-      <h2 class="h3 mainElement">
-         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]"></xf:delete>
-         </xf:trigger>
-         <xf:trigger class="btn controls add" appearance="minimal"><xf:label><i class="bi bi-plus-circle"></i></xf:label><xf:insert ev:event="DOMActivate" context="//descendant::*:teiHeader/*:fileDesc/" origin="instance('i-titleStmt-elementTemplate')/*[local-name() = 'titleStmt']" position="after"></xf:insert>
-         </xf:trigger>Header</h2>
+      <h2 class="h3 mainElement">Header</h2>
       <p class="alert alert-light hint">Record information pertaining the institutions and people behind the project.</p>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]" id="titleStmt-root">
          <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
-            <div class="btn-group" role="group">
-               <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-               </xf:trigger><span class="elementLabel"><xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
+            <div class="btn-group" role="group"><span class="elementLabel"><xf:output value="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/@elementLabel" class="elementLabel"></xf:output><a href="#" class="triggerTEITooltip"><img src="resources/images/TEI-175.jpg" /></a><xf:output ref="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/@teiElement" class="TEITooltip"></xf:output><a href="#" class="triggerElementTooltip"><i class="bi bi-question-circle"></i></a><xf:output ref="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"></xf:output></span><div class="input-group float-end">
                   <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]"><xf:label></xf:label><xf:itemset ref="instance('i-titleStmt-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef"><xf:label ref="@ident"></xf:label><xf:value ref="@ident"></xf:value>
                      </xf:itemset>
                      <xf:action ev:event="xforms-value-changed">
@@ -104,13 +98,13 @@
                      <div class="btn-group" role="group">
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                         </xf:trigger>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                               <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1')"></setvalue>
                               <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*" at="index('titleStmtRepeatLevel1') - 1" position="before"></insert>
                               <delete nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[instance('i-move')/tmp + 1]"></delete>
                            </xf:action>
                         </xf:trigger>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                               <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1')"></setvalue>
                               <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*" at="index('titleStmtRepeatLevel1') + 1" position="after"></insert>
                               <delete nodeset="."></delete>
@@ -190,13 +184,13 @@
                               <div class="btn-group" role="group">
                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                  </xf:trigger>
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                        <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1RepeatLevel2')"></setvalue>
                                        <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*" at="index('titleStmtRepeatLevel1RepeatLevel2') - 1" position="before"></insert>
                                        <delete nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[instance('i-move')/tmp + 1]"></delete>
                                     </xf:action>
                                  </xf:trigger>
-                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                        <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1RepeatLevel2')"></setvalue>
                                        <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*" at="index('titleStmtRepeatLevel1RepeatLevel2') + 1" position="after"></insert>
                                        <delete nodeset="."></delete>
@@ -276,13 +270,13 @@
                                        <div class="btn-group" role="group">
                                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                           </xf:trigger>
-                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref="preceding-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                 <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3')"></setvalue>
                                                 <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]/*[index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]/*" at="index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3') - 1" position="before"></insert>
                                                 <delete nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]/*[instance('i-move')/tmp + 1]"></delete>
                                              </xf:action>
                                           </xf:trigger>
-                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref="following-sibling::*"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
                                                 <setvalue ref="instance('i-move')/tmp" value="index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3')"></setvalue>
                                                 <insert origin="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]/*[index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3')]" nodeset="instance('i-rec')//descendant::*:teiHeader/*:fileDesc/*:titleStmt[position() = instance('i-repeatIndex')/index]/*[index('titleStmtRepeatLevel1')]/*[index('titleStmtRepeatLevel1RepeatLevel2')]/*" at="index('titleStmtRepeatLevel1RepeatLevel2RepeatLevel3') + 1" position="after"></insert>
                                                 <delete nodeset="."></delete>
