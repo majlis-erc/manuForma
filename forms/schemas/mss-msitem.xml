@@ -148,12 +148,11 @@ End license statement: do not remove -->
                     <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="watermark" module="msdescription" mode="delete"/>
                     <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Text Block</gloss>
+                        <gloss>Free text box</gloss>
                         <gloss type="tei">&lt;p/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
                             coherent descriptive text.</desc>
                         <content>
-                            <textNode/>
                             <textNode/>
                         </content>
                         <attList>
@@ -218,7 +217,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="textLang" mode="change">
-                        <gloss>Text Language</gloss>
+                        <gloss>Text language</gloss>
                         <gloss type="tei">&lt;textLang/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a language code for the primary language used in
                             the text in the attribute mainLang. The most relevant codes are: "ar": Arabic, "he": Hebrew, and "en" English. If the text
@@ -244,9 +243,6 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
                                     <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
                                 </valList>
                             </attDef>
                         </attList>
@@ -279,7 +275,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="msContents" mode="change">
-                        <gloss>Add Your Content Descriptions</gloss>
+                        <gloss>Add your content descriptions</gloss>
                         <gloss type="tei">&lt;msContents/&gt;</gloss>
                         <content>
                             <elementRef key="summary"/>
@@ -287,7 +283,7 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="msItem" mode="change">
-                        <gloss>*Text Unit</gloss>
+                        <gloss>*Text unit</gloss>
                         <gloss type="tei">&lt;msItem/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Describe the individual textual unit found in the manuscript or manuscript part.
                             Assign a "class"-attribute value from the list that best approximates the text's genre.</desc>
@@ -299,12 +295,12 @@ End license statement: do not remove -->
                             <elementRef key="locus"/>
                             <elementRef key="title"/>
                             <elementRef key="author"/>
+                            <elementRef key="docDate"/>
                             <elementRef key="textLang"/>
                             <elementRef key="rubric"/>
                             <elementRef key="incipit"/>
                             <elementRef key="explicit"/>
                             <elementRef key="finalRubric"/>
-                            <elementRef key="colophon"/>
                             <elementRef key="note"/>
                         </content>
                         <attList>
@@ -352,7 +348,7 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
-                        <gloss>Content Summary</gloss>
+                        <gloss>Content summary</gloss>
                         <gloss type="tei">&lt;summary/&gt;</gloss>
                         <desc xml:lang="en">Add a short summary of contents in one sentence. There is space for a detailed description below.</desc>
                         <classes mode="change">
@@ -363,7 +359,7 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
-                        <gloss>*Author Name</gloss>
+                        <gloss>*Author name</gloss>
                         <gloss type="tei">&lt;persName/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
@@ -385,6 +381,25 @@ End license statement: do not remove -->
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
+                    
+                    <elementSpec ident="docDate" mode="change">
+                        <gloss>Date of composition</gloss>
+                        <gloss type="tei">&lt;docDate/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">The date of the text's original composition.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
                     <elementSpec ident="rubric" mode="change">
                         <gloss>Rubric</gloss>
                         <gloss type="tei">&lt;rubric/&gt;</gloss>
@@ -479,7 +494,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="finalRubric" mode="change">
-                        <gloss>Final Rubric</gloss>
+                        <gloss>Final rubric</gloss>
                         <gloss type="tei">&lt;finalRubric/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="finalrubric.desc" xml:lang="en">The statement through which a manuscript signals the
                             end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
