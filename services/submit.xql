@@ -57,7 +57,8 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('factoid-',$id )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     }
             else local:passthru($node)
         case element(tei:idno) return
@@ -65,7 +66,8 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:idno) + 1 )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     }
             else local:passthru($node)  
             (: 
@@ -86,7 +88,8 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('place-',$id )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)             
         case element(tei:placeName) return
@@ -94,7 +97,8 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:placeName) + 1 )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)
         case element(tei:bibl) return
@@ -102,13 +106,15 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('bibl-',count($node/preceding-sibling::tei:bibl) + 1 )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else if($node[parent::tei:body/parent::tei:text]) then
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('work-',$id)},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     }  
             else if($node[parent::tei:listBibl/parent::tei:additional/parent::tei:msDesc]) then
                 element { local-name($node) } 
@@ -118,30 +124,17 @@ declare function local:transform($nodes as node()*) as item()* {
                         (count($node/parent::tei:listBibl/preceding-sibling::tei:listBibl) + 1),
                         (count($node/preceding-sibling::tei:bibl) + 1 ))
                         },
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)        
-           (:     
-            else if($node[parent::tei:note/parent::tei:bibl/parent::tei:body]) then
-                element { local-name($node) } 
-                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
-                        attribute xml:id { concat('bibl-',count(preceding-sibling::tei:bibl) + 1 )},
-                        local:passthru($node)
-                    }   
-            else if($node[parent::tei:bibl/parent::tei:bibl/parent::tei:body]) then
-                element { local-name($node) } 
-                    {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
-                        attribute xml:id { concat('bibl-',count(preceding-sibling::tei:bibl) + 1 )},
-                        local:passthru($node)
-                    }                      
-            else local:passthru($node)
-            :)
         case element(tei:title) return
             if($node[parent::tei:bibl/parent::tei:body]) then
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('title-',count($node/preceding-sibling::tei:title) + 1 )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)
         case element(tei:person) return
@@ -149,7 +142,8 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('person-',$id )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node) 
         case element(tei:persName) return
@@ -157,14 +151,16 @@ declare function local:transform($nodes as node()*) as item()* {
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:persName) + 1 )},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)
         case element(tei:msDesc) return
                 element { local-name($node) } 
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('ms-',$id)},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     }
         case element(tei:msItem) return
             if($node[parent::tei:msContents/parent::tei:msDesc]) then
@@ -172,7 +168,8 @@ declare function local:transform($nodes as node()*) as item()* {
                     {   $node/@*[. != '' and not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         attribute xml:id { concat('item-',(count($node/parent::tei:msContents/preceding-sibling::tei:msContents) + 1),
                         (count($node/preceding-sibling::tei:msItem) + 1 ))},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)  
         case element(tei:layout) return
@@ -184,7 +181,8 @@ declare function local:transform($nodes as node()*) as item()* {
                         (count($node/parent::tei:layoutDesc/parent::tei:objectDesc/preceding-sibling::tei:objectDesc) + 1),
                         (count($node/parent::tei:layoutDesc/preceding-sibling::tei:layoutDesc) + 1),
                         (count($node/preceding-sibling::tei:layout) + 1 ))},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)
         case element(tei:handNote) return
@@ -195,7 +193,8 @@ declare function local:transform($nodes as node()*) as item()* {
                         (count($node/parent::tei:handDesc/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
                         (count($node/parent::tei:handDesc/preceding-sibling::tei:handDesc) + 1),
                         (count($node/preceding-sibling::tei:handNote) + 1 ))},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node)   
         case element(tei:item) return
@@ -207,7 +206,8 @@ declare function local:transform($nodes as node()*) as item()* {
                         (count($node/parent::tei:list/parent::tei:additions/preceding-sibling::tei:additions) + 1),
                         (count($node/parent::tei:list/preceding-sibling::tei:list) + 1),
                         (count($node/preceding-sibling::tei:item) + 1 ))},
-                        local:passthru($node)
+                        for $n in $node/node()
+                        return local:transform($n)
                     } 
             else local:passthru($node) 
         (:   
@@ -279,9 +279,38 @@ return
         else if(request:get-parameter('type', '') = 'view') then
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
                  (:response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml):)
-                 (:$post-processed-xml:)
-                 <div>Hello? View XML here</div>
+                 $post-processed-xml
+                 (:<div>Hello? View XML here</div>:)
                  )
+        else if(request:get-parameter('type', '') = 'previewHTML') then 
+                  (response:set-header("Content-Type", "text/html; charset=utf-8"),
+                        <html xmlns="http://www.w3.org/1999/xhtml">
+                            <head>
+                                <title>Preview TEI Record</title>
+                                 <link rel="stylesheet" type="text/css" href="/exist/rest/apps/majlis/resources/bootstrap/css/bootstrap.min.css"/>
+                                 <link rel="stylesheet" type="text/css" href="/exist/rest/apps/majlis/resources/css/sm-core-css.css"/>
+                                 <link rel="stylesheet" type="text/css" href="/exist/rest/apps/majlis/resources/css/style.css"/>
+                                <link rel="stylesheet" type="text/css" href="/exist/rest/apps/majlis/resources/css/majlis.css"/>
+                                <link href="/exist/rest/apps/majlis/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+                            </head>
+                            <body>
+                                <h1>Record preview</h1>
+                                <div class="record">{
+                                    transform:transform($post-processed-xml, doc('/db/apps/majlis/resources/xsl/tei2html.xsl'), 
+                                    <parameters>
+                                        <param name="data-root" value="'/db/apps/majlis-data/data'"/>
+                                        <param name="app-root" value="'/db/apps/majlis'"/>
+                                        <param name="nav-base" value="'majlis'"/>
+                                        <param name="base-uri" value="https://jalit.org"/>
+                                    </parameters>
+                                    )}
+                                </div>
+                            </body>
+                            <script type="text/javascript" src="/exist/rest/apps/majlis/resources/js/jquery.min.js">&#160;</script>
+                                <script type="text/javascript" src="/exist/rest/apps/majlis/resources/jquery-ui/jquery-ui.min.js">&#160;</script>
+                                <script type="text/javascript" src="/exist/rest/apps/majlis/resources/bootstrap/js/bootstrap.min.js">&#160;</script>
+                        </html>
+                        )
         else if(request:get-parameter('type', '') = 'upload') then 
               (: (response:set-header("Content-Type", "text/xml; charset=utf-8"),
                 response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)
