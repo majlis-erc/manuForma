@@ -20,7 +20,40 @@
       <desc>Contains information where reproductions of the manuscript may be found.</desc>
       <availableAtts elementName="facsimile"/>
       <childElements>
-         <child/>
+         <child>
+            <element ident="graphic" label="Reproduction link"/>
+         </child>
       </childElements>
    </facsimile>
+   <graphic ident="graphic"
+            elementName="graphic"
+            elementLabel="Reproduction link"
+            minOccur=""
+            maxOccur=""
+            path="/*:facsimile/*:graphic"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;graphic/&gt;">
+      <desc>Contains the link to one reproduction in source. Select the type from the dropdown
+                            list.</desc>
+      <availableAtts elementName="graphic">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="source"
+                 mode="replace"
+                 usage="opt">
+                                <valList type="closed">
+                                    <valItem ident="Ktiv">Ktiv</valItem>
+                                    <valItem ident="holdingInstitution">Holding institution</valItem>
+                                </valList>
+                            </attDef>
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="type"
+                 mode="change"/>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </graphic>
 </TEI>
