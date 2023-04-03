@@ -10,7 +10,7 @@
      xmlns:local="http://syriaca.org/ns">
    <layoutDesc ident="layoutDesc"
                elementName="layoutDesc"
-               elementLabel="*Page layout"
+               elementLabel="*Page Layout"
                minOccur=""
                maxOccur=""
                path="/*:layoutDesc"
@@ -21,14 +21,14 @@
       <availableAtts elementName="layoutDesc"/>
       <childElements>
          <child>
-            <element ident="summary" label="Page layout summary"/>
+            <element ident="summary" label="Page Layout Summary"/>
             <element ident="layout" label="*Detailed description of page layout"/>
          </child>
       </childElements>
    </layoutDesc>
    <summary ident="summary"
             elementName="summary"
-            elementLabel="Page layout summary"
+            elementLabel="Page Layout Summary"
             minOccur=""
             maxOccur=""
             path="/*:layoutDesc/*:summary"
@@ -81,36 +81,37 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="rulingMedium">
-            <desc>Specifies the medium  used to carry out the
+                            <desc>Specifies the medium  used to carry out the
                                 ruling. Note: This is a customization which is not currently
                                 part of the TEI P5 standard.</desc>
-            <datatype minOccurs="1" maxOccurs="1">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="ink">
-                  <desc>The ruling is carried out using ink.</desc>
-               </valItem>
-               <valItem ident="leadpoint">
-                  <desc>The ruling is carried out using leadpoint or
+                            <datatype minOccurs="1" maxOccurs="1">
+                                <dataRef key="teidata.enumerated"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="ink">
+                                    <desc>The ruling is carried out using ink.</desc>
+                                </valItem>
+                                <valItem ident="leadpoint">
+                                    <desc>The ruling is carried out using leadpoint or
                                         plummet.</desc>
-               </valItem>
-               <valItem ident="hardpoint">
-                  <desc>The ruling is carried out using hardpoint or
+                                </valItem>
+                                <valItem ident="hardpoint">
+                                    <desc>The ruling is carried out using hardpoint or
                                         drypoint.</desc>
-               </valItem>
-               <valItem ident="crayon">
-                  <desc>The ruling is carried out using ‘crayon’.</desc>
-               </valItem>
-               <valItem ident="mixed">
-                  <desc>The ruling is carried out using several
+                                </valItem>
+                                <valItem ident="crayon">
+                                    <desc>The ruling is carried out using ‘crayon’.</desc>
+                                </valItem>
+                                <valItem ident="mixed">
+                                    <desc>The ruling is carried out using several
                                         methods.</desc>
-               </valItem>
-               <valItem ident="board">
-                  <desc>The ruling is carried out using a board.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                <valItem ident="board">
+                                    <desc>The ruling is carried out using a board.</desc>
+                                </valItem>
+                                
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -154,27 +155,29 @@ sub-classification for the element additional to that provided by its
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="topLine">
-            <desc>Specifies the whether the writing is above top line, below top
+                            <desc>Specifies the whether the writing is above top line, below top
                                 line, or mixed. Note: This is a customization which is not
                                 currently part of the TEI P5 standard.</desc>
-            <valList type="closed">
-               <valItem ident="above">
-                  <desc>The writing is above top line.</desc>
-               </valItem>
-               <valItem ident="below">
-                  <desc>The writing is below top line.</desc>
-               </valItem>
-               <valItem ident="mixed">
-                  <desc>The writing is variously above and below top line with
+                            <valList type="closed">
+                                <valItem ident="above">
+                                    <desc>The writing is above top line.</desc>
+                                </valItem>
+                                <valItem ident="below">
+                                    <desc>The writing is below top line.</desc>
+                                </valItem>
+                                <valItem ident="mixed">
+                                    <desc>The writing is variously above and below top line with
                                         no clear pattern.</desc>
-               </valItem>
-            </valList>
-         </attDef>
+                                </valItem>
+                                
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
+      
             <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
  classification scheme or typology.</desc>
             <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
@@ -237,9 +240,9 @@ sub-classification for the element additional to that provided by its
       <childElements>
          <child>
             <element ident="note" label="Note"/>
-            <element ident="dimensions" label="*Text space"/>
+            <element ident="dimensions" label="*Text Space"/>
             <element ident="ab" label="Pricking/Ruling"/>
-            <element ident="p" label="Free text box"/>
+            <element ident="p" label="Text Block"/>
             <element ident="locus" label="Folios"/>
          </child>
       </childElements>
@@ -299,14 +302,14 @@ sub-classification for the element additional to that provided by its
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p" label="Free text box"/>
+            <element ident="p" label="Text Block"/>
             <element ident="locus" label="Folios"/>
          </child>
       </childElements>
    </note>
    <p ident="p"
       elementName="p"
-      elementLabel="Free text box"
+      elementLabel="Text Block"
       minOccur=""
       maxOccur=""
       path="/*:layoutDesc/*:layout/*:note/*:p"
@@ -418,7 +421,7 @@ sub-classification for the element additional to that provided by its
    </locus>
    <dimensions ident="dimensions"
                elementName="dimensions"
-               elementLabel="*Text space"
+               elementLabel="*Text Space"
                minOccur=""
                maxOccur=""
                path="/*:layoutDesc/*:layout/*:dimensions"
@@ -433,14 +436,14 @@ sub-classification for the element additional to that provided by its
                  ident="rend"
                  mode="replace"
                  usage="opt">
-            <datatype maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="pricked"/>
-               <valItem ident="ruled"/>
-            </valList>
-         </attDef>
+                            <datatype maxOccurs="6">
+                                <dataRef key="teidata.word"/>
+                            </datatype>
+                            <valList type="semi">
+                                <valItem ident="pricked"/>
+                                <valItem ident="ruled"/>
+                            </valList>
+                        </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -498,41 +501,41 @@ sub-classification for the element additional to that provided by its
             </datatype>
             <valList type="semi">
                <valItem ident="binding">
-                  <desc>The dimensions concerns the binding(s)</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the binding(s)</desc>
+                                </valItem>
                <valItem ident="folia">
-                  <desc>The dimensions concerns the folia as a whole</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the folia as a whole</desc>
+                                </valItem>
                <valItem ident="leaf">
-                  <desc>The dimensions concerns the leaf</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the leaf</desc>
+                                </valItem>
                <valItem ident="line-height">
-                  <desc>The dimensions concerns the line-height</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the line-height</desc>
+                                </valItem>
                <valItem ident="ruled">
-                  <desc>The dimensions concerns the ruling</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the ruling</desc>
+                                </valItem>
                <valItem ident="written">
-                  <desc>The dimensions concerns the written area</desc>
-               </valItem>
+                                    <desc>The dimensions concerns the written area</desc>
+                                </valItem>
                <valItem ident="other">
-                  <desc>The dimensions concerns other/unspecified aspects (you
+                                    <desc>The dimensions concerns other/unspecified aspects (you
                                         may also provide a custom value)</desc>
-               </valItem>
+                                </valItem>
             </valList>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="dim" label="Space between columns"/>
-            <element ident="width" label="*Text space width"/>
-            <element ident="height" label="*Text space height"/>
+            <element ident="dim" label="Space Between Columns"/>
+            <element ident="width" label="*Text Space Width"/>
+            <element ident="height" label="*Text Space Height"/>
          </child>
       </childElements>
    </dimensions>
    <dim ident="dim"
         elementName="dim"
-        elementLabel="Space between columns"
+        elementLabel="Space Between Columns"
         minOccur=""
         maxOccur=""
         path="/*:layoutDesc/*:layout/*:dimensions/*:dim"
@@ -545,13 +548,13 @@ sub-classification for the element additional to that provided by its
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  usage="opt">
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList>
-               <valItem ident="intercolumn"/>
-            </valList>
-         </attDef>
+                                <datatype>
+                                    <dataRef key="teidata.enumerated"/>
+                                </datatype>
+                                <valList>
+                                    <valItem ident="intercolumn"/>
+                                </valList>
+                            </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="unit"
@@ -564,7 +567,7 @@ sub-classification for the element additional to that provided by its
    </dim>
    <width ident="width"
           elementName="width"
-          elementLabel="*Text space width"
+          elementLabel="*Text Space Width"
           minOccur=""
           maxOccur=""
           path="/*:layoutDesc/*:layout/*:dimensions/*:width"
@@ -585,7 +588,7 @@ sub-classification for the element additional to that provided by its
    </width>
    <height ident="height"
            elementName="height"
-           elementLabel="*Text space height"
+           elementLabel="*Text Space Height"
            minOccur=""
            maxOccur=""
            path="/*:layoutDesc/*:layout/*:dimensions/*:height"
@@ -621,11 +624,11 @@ sub-classification for the element additional to that provided by its
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="type"
                  mode="change">
-            <valList mode="change">
-               <valItem mode="add" ident="ruling"/>
-               <valItem mode="add" ident="pricking"/>
-            </valList>
-         </attDef>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="ruling"/>
+                                    <valItem mode="add" ident="pricking"/>
+                                </valList>
+                            </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -634,7 +637,7 @@ sub-classification for the element additional to that provided by its
    </ab>
    <p ident="p"
       elementName="p"
-      elementLabel="Free text box"
+      elementLabel="Text Block"
       minOccur=""
       maxOccur=""
       path="/*:layoutDesc/*:layout/*:p"

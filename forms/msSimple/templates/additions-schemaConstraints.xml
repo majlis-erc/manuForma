@@ -10,7 +10,7 @@
      xmlns:local="http://syriaca.org/ns">
    <list ident="list"
          elementName="list"
-         elementLabel="List of incodicated documents"
+         elementLabel="list"
          minOccur=""
          maxOccur=""
          path="/*:list"
@@ -118,32 +118,32 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="item" label="Document"/>
+            <element ident="item" label="item"/>
          </child>
       </childElements>
    </list>
    <item ident="item"
          elementName="item"
-         elementLabel="Document"
+         elementLabel="item"
          minOccur=""
          maxOccur=""
          path="/*:list/*:item"
          currentLevel="2"
          popup="2"
          teiElement="&lt;item/&gt;">
-      <desc>Describe the incodicated document.</desc>
+      <desc>contains one component of a list.</desc>
       <availableAtts elementName="item"/>
       <childElements>
          <child>
-            <element ident="p" label="Free text box"/>
+            <element ident="p" label="paragraph"/>
             <element ident="locus" label="locus"/>
-            <element ident="quote" label="Quote"/>
+            <element ident="desc" label="description"/>
          </child>
       </childElements>
    </item>
    <p ident="p"
       elementName="p"
-      elementLabel="Free text box"
+      elementLabel="paragraph"
       minOccur=""
       maxOccur=""
       path="/*:list/*:item/*:p"
@@ -253,95 +253,159 @@
          <child/>
       </childElements>
    </locus>
-   <quote ident="quote"
-          elementName="quote"
-          elementLabel="Quote"
-          minOccur=""
-          maxOccur=""
-          path="/*:list/*:item/*:quote"
-          currentLevel="3"
-          popup="3"
-          teiElement="&lt;quote/&gt;">
-      <desc>Quote the incodicated document in full or in part.</desc>
-      <availableAtts elementName="quote">
+   <desc ident="desc"
+         elementName="desc"
+         elementLabel="description"
+         minOccur=""
+         maxOccur=""
+         path="/*:list/*:item/*:desc"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;desc/&gt;">
+      <desc>Describes or defines the kind of addition. Choose a value from the list of the
+                            "type" attribute.</desc>
+      <availableAtts elementName="desc">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="defective"
+                 ident="type"
+                 mode="replace"
                  usage="opt">
-            <desc versionDate="2007-03-05" xml:lang="en">indicates whether the passage being quoted is defective,
-      i.e. incomplete through loss or damage.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">인용 어구의 결합 여부를 표시한다. 즉, 손실 또는 손상을 통한 불완전성</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所引用的段落是否不完全，例如因遺失或損毀而不完全。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">
-      当該部分に問題があるかどうかを示す．例えば，欠損や損傷による不完
-      全さなど．
-</desc>
-            <desc versionDate="2009-05-28" xml:lang="fr">indique si le passage décrit est fautif, i.e. incomplet en raison d'une lacune ou d'une détérioration.</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica se il brano citato sia o meno incompleto a causa di perdite o danni</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica si el pasaje que se describe es completo o no, p.ej. si ha sufrido pérdidas o daños.</desc>
-            <datatype>
-               <dataRef key="teidata.xTruthValue"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="notation"
-                 usage="opt">
-            <desc versionDate="2012-03-26" xml:lang="en">names the notation used for the content of the element.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">요소 내용으로 사용되어 앞서 정의된 표기법 이름을 제시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供先前已定義過、適用於該元素內容的記號名稱。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の内容にある既定表記法の名前を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">précise le nom d'une notation définie précédemment,
-        utilisée dans le contenu de l'élément.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el nombre de una anotación definida
-        previamente y usada para el contenido de un elemento.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">fornisce il nome di un'annotazione definita
-        precedentemente utilizzata come contenuto dell'elemento.</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="subtype"
-                 usage="opt">
-            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
-            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
-            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
-          c'est nécessaire.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <remarks versionDate="2013-01-13" xml:lang="en">
-               <p>The <att>subtype</att> attribute may be used to provide any
-sub-classification for the element additional to that provided by its
-<att>type</att> attribute.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
-                        sous-classification pour cet élément, en plus de celle fournie par son
-                        propre attribut <att>type</att>.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
-<att>type</att> (tipo) de atributo.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2008-04-05">
-               <p>
-	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
-    素の下位分類を示すために使われる．
-    </p>
-            </remarks>
-         </attDef>
+                            <valList type="closed">
+                                
+                                <valItem ident="DonationNote">
+                                </valItem>
+                                <valItem ident="OwnershipNote">
+                                </valItem>
+                                <valItem ident="PurchaseNote">
+                                </valItem>
+                                <valItem ident="AcquisitionNote">
+                                </valItem>
+                                <valItem ident="ReceiptNote"/>
+                                <valItem ident="Admonition">
+                                </valItem>
+                                <valItem ident="LandGrant">
+                                </valItem>
+                                <valItem ident="FoundationCharter">
+                                </valItem>
+                                <valItem ident="Genealogy">
+                                </valItem>
+                                <valItem ident="ScribalSignature">
+                                </valItem>
+                                <valItem ident="Supplication">
+                                </valItem>
+                                <valItem ident="Subscription">
+                                </valItem>
+                                <valItem ident="Doxology">
+                                </valItem>
+                                <valItem ident="Exhortation">
+                                </valItem>
+                                <valItem ident="Invocation">
+                                </valItem>
+                                <valItem ident="Inventory">
+                                </valItem>
+                                <valItem ident="ScribalNoteCommencing">
+                                </valItem>
+                                <valItem ident="ScribalNoteOrdering">
+                                </valItem>
+                                <valItem ident="ScribalNoteCommissioning">
+                                </valItem>
+                                <valItem ident="ScribalNoteCompleting">
+                                </valItem>
+                                <valItem ident="ScribalNoteAssigningLand">
+                                </valItem>
+                                <valItem ident="ScribalNoteBequeathing">
+                                </valItem>
+                                <valItem ident="RecordReconciliation">
+                                </valItem>
+                                <valItem ident="RecordLitigation">
+                                </valItem>
+                                <valItem ident="RecordTransaction">
+                                </valItem>
+                                <valItem ident="RecordDistribution">
+                                </valItem>
+                                <valItem ident="RecordGuarantors">
+                                </valItem>
+                                <valItem ident="Record">
+                                </valItem>
+                                <valItem ident="ScribalSupplication">
+                                </valItem>
+                                <valItem ident="Unclear">
+                                </valItem>
+                                <valItem ident="GuarantorsList">
+                                </valItem>
+                                <valItem ident="CommemorativeNote">
+                                </valItem>
+                                <valItem ident="Condemnation">
+                                </valItem>
+                                <valItem ident="ProtectivePrayer">
+                                </valItem>
+                                <valItem ident="Poem">
+                                </valItem>
+                                <valItem ident="PoemQene">
+                                </valItem>
+                                <valItem ident="PoemSalam">
+                                </valItem>
+                                <valItem ident="PoemArke">
+                                </valItem>
+                                <valItem ident="StampExlibris">
+                                </valItem>
+                                <valItem ident="CalendaricNote">
+                                </valItem>
+                                <valItem ident="Excerpt">
+                                </valItem>
+                                <valItem ident="Letter">
+                                </valItem>
+                                <valItem ident="MagicFormula">
+                                </valItem>
+                                <valItem ident="MagicText">
+                                </valItem>
+                                <valItem ident="Comment">
+                                </valItem>
+                                <valItem ident="Correction">
+                                </valItem>
+                                <valItem ident="Gloss">
+                                </valItem>
+                                <valItem ident="Excommunication">
+                        </valItem>
+                                <valItem ident="GuestText">
+                                </valItem>
+                                <valItem ident="MalkeHymn">
+                                </valItem>
+                                <valItem ident="Directive">
+                                </valItem>
+                                <valItem ident="Asmat">
+                                </valItem>
+                                <valItem ident="CustomaryLaw">
+                                </valItem>
+                                <valItem ident="Statutes">
+                                </valItem>
+                                <valItem ident="MixedNote">
+                                </valItem>
+                                <valItem ident="findingAid">
+                                    
+                                </valItem>
+                            </valList>
+                        </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child>
+            <element ident="q" label="quoted"/>
+         </child>
+      </childElements>
+   </desc>
+   <q ident="q"
+      elementName="q"
+      elementLabel="quoted"
+      minOccur=""
+      maxOccur=""
+      path="/*:list/*:item/*:desc/*:q"
+      currentLevel="4"
+      popup="4"
+      teiElement="&lt;q/&gt;">
+      <desc>Quotation from the manuscript.</desc>
+      <availableAtts elementName="q">
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -435,5 +499,5 @@ and that a single TEI document may contain texts in many languages.</p>
          <textNode type="input"/>
          <child/>
       </childElements>
-   </quote>
+   </q>
 </TEI>
