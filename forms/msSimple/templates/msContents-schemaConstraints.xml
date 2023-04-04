@@ -10,7 +10,7 @@
      xmlns:local="http://syriaca.org/ns">
    <msContents ident="msContents"
                elementName="msContents"
-               elementLabel="Add Your Content Descriptions"
+               elementLabel="Add your content descriptions"
                minOccur=""
                maxOccur=""
                path="/*:msContents"
@@ -20,14 +20,14 @@
       <availableAtts elementName="msContents"/>
       <childElements>
          <child>
-            <element ident="summary" label="Content Summary"/>
-            <element ident="msItem" label="*Text Unit"/>
+            <element ident="summary" label="Content summary"/>
+            <element ident="msItem" label="*Text unit"/>
          </child>
       </childElements>
    </msContents>
    <summary ident="summary"
             elementName="summary"
-            elementLabel="Content Summary"
+            elementLabel="Content summary"
             minOccur=""
             maxOccur=""
             path="/*:msContents/*:summary"
@@ -43,7 +43,7 @@
    </summary>
    <msItem ident="msItem"
            elementName="msItem"
-           elementLabel="*Text Unit"
+           elementLabel="*Text unit"
            minOccur=""
            maxOccur=""
            path="/*:msContents/*:msItem"
@@ -57,28 +57,28 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="class"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="bible"/>
-                                    <valItem mode="add" ident="bibleCommentary"/>
-                                    <valItem mode="add" ident="mishna"/>
-                                    <valItem mode="add" ident="mishnaCommentary"/>
-                                    <valItem mode="add" ident="talmud"/>
-                                    <valItem mode="add" ident="talmudCommentary"/>
-                                    <valItem mode="add" ident="halakha"/>
-                                    <valItem mode="add" ident="midrash"/>
-                                    <valItem mode="add" ident="liturgy"/>
-                                    <valItem mode="add" ident="mysticism"/>
-                                    <valItem mode="add" ident="philosophy"/>
-                                    <valItem mode="add" ident="science"/>
-                                    <valItem mode="add" ident="medicine"/>
-                                    <valItem mode="add" ident="linguistics"/>
-                                    <valItem mode="add" ident="bellesLettres"/>
-                                    <valItem mode="add" ident="poetry"/>
-                                    <valItem mode="add" ident="magic"/>
-                                    <valItem mode="add" ident="targum"/>
-                                    <valItem mode="add" ident="tafsir"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="bible"/>
+               <valItem mode="add" ident="bibleCommentary"/>
+               <valItem mode="add" ident="mishna"/>
+               <valItem mode="add" ident="mishnaCommentary"/>
+               <valItem mode="add" ident="talmud"/>
+               <valItem mode="add" ident="talmudCommentary"/>
+               <valItem mode="add" ident="halakha"/>
+               <valItem mode="add" ident="midrash"/>
+               <valItem mode="add" ident="liturgy"/>
+               <valItem mode="add" ident="mysticism"/>
+               <valItem mode="add" ident="philosophy"/>
+               <valItem mode="add" ident="science"/>
+               <valItem mode="add" ident="medicine"/>
+               <valItem mode="add" ident="linguistics"/>
+               <valItem mode="add" ident="bellesLettres"/>
+               <valItem mode="add" ident="poetry"/>
+               <valItem mode="add" ident="magic"/>
+               <valItem mode="add" ident="targum"/>
+               <valItem mode="add" ident="tafsir"/>
+            </valList>
+         </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:id"
@@ -89,12 +89,12 @@
             <element ident="locus" label="*Folios"/>
             <element ident="title" label="*Title"/>
             <element ident="author" label="Author"/>
-            <element ident="textLang" label="Text Language"/>
+            <element ident="docDate" label="Date of composition"/>
+            <element ident="textLang" label="Text language"/>
             <element ident="rubric" label="Rubric"/>
             <element ident="incipit" label="Incipit"/>
             <element ident="explicit" label="Explicit"/>
-            <element ident="finalRubric" label="Final Rubric"/>
-            <element ident="colophon" label="Colophon"/>
+            <element ident="finalRubric" label="Final rubric"/>
             <element ident="note" label="Note"/>
          </child>
       </childElements>
@@ -152,15 +152,15 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -184,13 +184,13 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="persName" label="*Author Name"/>
+            <element ident="persName" label="*Author name"/>
          </child>
       </childElements>
    </author>
    <persName ident="persName"
              elementName="persName"
-             elementLabel="*Author Name"
+             elementLabel="*Author name"
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:author/*:persName"
@@ -260,9 +260,25 @@
          <child/>
       </childElements>
    </addName>
+   <docDate ident="docDate"
+            elementName="docDate"
+            elementLabel="Date of composition"
+            minOccur=""
+            maxOccur=""
+            path="/*:msContents/*:msItem/*:docDate"
+            currentLevel="3"
+            popup="3"
+            teiElement="&lt;docDate/&gt;">
+      <desc>The date of the text's original composition.</desc>
+      <availableAtts elementName="docDate"/>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </docDate>
    <textLang ident="textLang"
              elementName="textLang"
-             elementLabel="Text Language"
+             elementLabel="Text language"
              minOccur=""
              maxOccur=""
              path="/*:msContents/*:msItem/*:textLang"
@@ -279,25 +295,22 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="mainLang"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+            </valList>
+         </attDef>
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="otherLangs"
                  mode="change">
-                                <valList type="open" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
+            <valList type="open" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -321,17 +334,17 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-                                <attDef ident="xml:lang" mode="change">
-                                    <valList type="closed" mode="change">
-                                        <valItem mode="add" ident="ar"/>
-                                        <valItem mode="add" ident="en"/>
-                                        <valItem mode="add" ident="he"/>
-                                        <valItem mode="add" ident="he-Latn"/>
-                                        <valItem mode="add" ident="ar-Latn"/>
-                                        <valItem mode="add" ident="ar-Hebr"/>
-                                    </valList>
-                                </attDef>
-                            </attDef>
+            <attDef ident="xml:lang" mode="change">
+               <valList type="closed" mode="change">
+                  <valItem mode="add" ident="ar"/>
+                  <valItem mode="add" ident="en"/>
+                  <valItem mode="add" ident="he"/>
+                  <valItem mode="add" ident="he-Latn"/>
+                  <valItem mode="add" ident="ar-Latn"/>
+                  <valItem mode="add" ident="ar-Hebr"/>
+               </valList>
+            </attDef>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
@@ -398,15 +411,15 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
@@ -473,15 +486,15 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
@@ -534,7 +547,7 @@
    </q>
    <finalRubric ident="finalRubric"
                 elementName="finalRubric"
-                elementLabel="Final Rubric"
+                elementLabel="Final rubric"
                 minOccur=""
                 maxOccur=""
                 path="/*:msContents/*:msItem/*:finalRubric"
@@ -549,15 +562,15 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
@@ -608,81 +621,6 @@
          <child/>
       </childElements>
    </q>
-   <colophon ident="colophon"
-             elementName="colophon"
-             elementLabel="Colophon"
-             minOccur=""
-             maxOccur=""
-             path="/*:msContents/*:msItem/*:colophon"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;colophon/&gt;">
-      <desc>A statement providing information about the date, place,
-                            agency, or reason for production of the manuscript.</desc>
-      <availableAtts elementName="colophon">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
-                                </valList>
-                            </attDef>
-      </availableAtts>
-      <childElements>
-         <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="q" label="Quotation"/>
-         </child>
-      </childElements>
-   </colophon>
-   <locus ident="locus"
-          elementName="locus"
-          elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
-          path="/*:msContents/*:msItem/*:colophon/*:locus"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;locus/&gt;">
-      <desc>The location of a text or another feature within the
-                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
-                            a range of folios.</desc>
-      <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
-      </availableAtts>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </locus>
-   <q ident="q"
-      elementName="q"
-      elementLabel="Quotation"
-      minOccur=""
-      maxOccur=""
-      path="/*:msContents/*:msItem/*:colophon/*:q"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;q/&gt;">
-      <availableAtts elementName="q"/>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </q>
    <note ident="note"
          elementName="note"
          elementLabel="Note"
@@ -697,13 +635,13 @@
       <availableAtts elementName="note"/>
       <childElements>
          <child>
-            <element ident="p" label="Text Block"/>
+            <element ident="p" label="Free text box"/>
          </child>
       </childElements>
    </note>
    <p ident="p"
       elementName="p"
-      elementLabel="Text Block"
+      elementLabel="Free text box"
       minOccur=""
       maxOccur=""
       path="/*:msContents/*:msItem/*:note/*:p"
