@@ -79,9 +79,9 @@ End license statement: do not remove -->
                 -->
 
                     <moduleRef key="core"
-                        except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp note noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear unit"/>
+                        except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp note noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear"/>
                     <moduleRef key="msdescription"
-                        include="catchwords collation condition depth dimensions foliation height locus material objectDesc origDate origPlace"/>
+                        include="catchwords collation condition dimensions foliation height locus material objectDesc origDate origPlace"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
@@ -177,6 +177,7 @@ End license statement: do not remove -->
                             <elementRef key="p"/>
                             <elementRef key="formula"/>
                             <elementRef key="catchwords"/>
+                            <elementRef key="unit"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -204,12 +205,10 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="condition" module="msdescription" mode="change">
-                        <gloss>State of conservation</gloss>
-                        <gloss type="tei">&lt;condition/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
-                            supplied for the key attribute a generic description that fits best your overall impression.</desc>
+                    <elementSpec ident="material" module="msdescription" mode="change">
+                        <gloss>Parchment quire</gloss>
+                        <gloss type="tei">&lt;unit/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:id="material.desc" xml:lang="en">Describe the parchment quire.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -221,20 +220,55 @@ End license statement: do not remove -->
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
+                            <attDef ident="function" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="unit" mode="delete"/>
+                            <attDef ident="unitRef" mode="delete"/>
+                            <attDef ident="quantity" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="condition" module="msdescription" mode="change">
+                        <gloss>State of conservation</gloss>
+                        <gloss type="tei">&lt;condition/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe the preservation, conservation and restoration
+                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
+                            supplied for the key attribute a generic description that fits best your overall impression.</desc>
+                        <content>
+                            <elementRef key="p"/>
+                            <elementRef key="ab"/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
                             <attDef ident="key" mode="replace" usage="req">
                                 <valList type="closed">
-                                    <valItem ident="deficient">
-                                        <desc>The item is badly preserved and severely damaged.</desc>
-                                    </valItem>
-                                    <valItem ident="good">
-                                        <desc>The item is preserved with minimal damages.</desc>
-                                    </valItem>
-                                    <valItem ident="intact">
-                                        <desc>The item is preserved completely undamaged.</desc>
-                                    </valItem>
-                                    <valItem ident="other">
-                                        <desc>If you use this value, please provide in the description a proper motivation, otherwise avoid it.</desc>
-                                    </valItem>
+                                    <valItem ident="complete"/>
+                                    <valItem ident="partOfCodex"/>
+                                    <valItem ident="fragment"/>
+                                    <valItem ident="unidentified"/>
                                 </valList>
                             </attDef>
                             <attDef ident="n" mode="delete"/>
@@ -295,6 +329,21 @@ End license statement: do not remove -->
                             <attDef ident="datingMethod" mode="delete"/>
                             <attDef ident="datingPoint" mode="delete"/>
                             <attDef ident="from" mode="delete"/>
+                            <attDef ident="from-custom" mode="delete"/>
+                            <attDef ident="from-iso" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"/>
+                            <attDef ident="notAfter-custom" mode="delete"/>
+                            <attDef ident="notAfter-iso" mode="delete"/>
+                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="notBefore-custom" mode="delete"/>
+                            <attDef ident="notBefore-iso" mode="delete"/>
+                            <attDef ident="period" mode="delete"/>
+                            <attDef ident="to" mode="delete"/>
+                            <attDef ident="to-custom" mode="delete"/>
+                            <attDef ident="to-iso" mode="delete"/>
+                            <attDef ident="when" mode="delete"/>
+                            <attDef ident="when-custom" mode="delete"/>
+                            <attDef ident="when-iso" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="material" module="msdescription" mode="change">
@@ -307,6 +356,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
@@ -331,6 +381,7 @@ End license statement: do not remove -->
                                     <valItem ident="cotton"/>
                                 </valList>
                             </attDef>
+                            <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
@@ -344,6 +395,7 @@ End license statement: do not remove -->
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
                             <attDef ident="target" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -544,7 +596,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="watermark" module="msdescription" mode="delete"/>
-                  
+
                     <elementSpec ident="p" module="core" mode="change">
                         <gloss>Free text box</gloss>
                         <gloss type="tei">&lt;p/&gt;</gloss>
@@ -581,48 +633,7 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="depth" module="msdescription" mode="change">
-                        <gloss>Depth of writing material</gloss>
-                        <gloss type="tei">&lt;depth/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="depth.desc" xml:lang="en">The depth of the book block, measured in millimeters.</desc>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="atLeast" mode="delete"/>
-                            <attDef ident="atMost" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="confidence" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="extent" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="max" mode="delete"/>
-                            <attDef ident="min" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="precision" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="quantity" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="scope" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
-                    </elementSpec>
+
                     <elementSpec ident="height" module="msdescription" mode="change">
                         <gloss>Height of writing material</gloss>
                         <gloss type="tei">&lt;height/&gt;</gloss>
@@ -710,7 +721,7 @@ End license statement: do not remove -->
                     <elementSpec ident="item" module="core" mode="delete"/>
                     <elementSpec ident="list" module="core" mode="delete"/>
                     <elementSpec ident="measure" module="core" mode="change">
-                        <gloss>Number of folios</gloss>
+                        <gloss>Total number of folios</gloss>
                         <gloss type="tei">&lt;measure/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">How many folios does the manuscript/this codicological unit contain?</desc>
                         <attList>
@@ -740,9 +751,6 @@ End license statement: do not remove -->
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="leaf">
                                         <desc xml:lang="en">used for leafs.</desc>
-                                    </valItem>
-                                    <valItem mode="add" ident="quire">
-                                        <desc xml:lang="en">used to describe the quires.</desc>
                                     </valItem>
                                 </valList>
                             </attDef>
@@ -779,7 +787,6 @@ End license statement: do not remove -->
                             <alternate maxOccurs="unbounded" minOccurs="0">
                                 <elementRef key="height"/>
                                 <elementRef key="width"/>
-                                <elementRef key="depth"/>
                             </alternate>
                         </content>
                         <attList>
@@ -828,12 +835,12 @@ End license statement: do not remove -->
                             <elementRef key="watermark"/>
                             <elementRef key="origPlace"/>
                             <elementRef key="origDate"/>
-                        </content> 
+                        </content>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
                             <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/> 
+                            <memberOf key="att.global.facs" mode="delete"/>
                             <memberOf key="att.global.change" mode="delete"/>
                             <memberOf key="att.global.responsibility" mode="delete"/>
                             <memberOf key="att.global.source" mode="delete"/>
@@ -847,6 +854,30 @@ End license statement: do not remove -->
                             <elementRef key="measure"/>
                             <elementRef key="dimensions"/>
                         </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
                     </elementSpec>
                     <elementSpec ident="formula" mode="change">
                         <gloss>Quire formula</gloss>
@@ -863,6 +894,36 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attRef name="ref" class="att.canonical"/>
+                        </attList>
+                    </elementSpec>
+
+                    <elementSpec ident="ab" mode="change">
+                        <gloss>State of writing</gloss>
+                        <gloss type="tei">&lt;ab&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the ink and so forth.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.fragmentable" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <valList mode="change">
+                                    <valItem mode="add" ident="writing"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="rend" mode="change">
+                                <valList mode="change">
+                                    <valItem mode="add" ident="visible"/>
+                                    <valItem mode="add" ident="illegible"/>
+                                    <valItem mode="add" ident="erased"/>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                 </schemaSpec>
