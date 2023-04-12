@@ -78,14 +78,50 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
                     <moduleRef key="core"
-                        except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
-                    <moduleRef key="msdescription" include="decoDesc decoNote summary"/>
+                        except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                    <moduleRef key="msdescription" include="decoDesc decoNote p summary"/>
                     <moduleRef key="tei"/>
-                    
+                    <elementSpec ident="p" module="core" mode="change">
+                        <gloss>Free text box</gloss>
+                        <gloss type="tei">&lt;p&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+
                     <elementSpec ident="summary" module="msdescription" mode="change">
-                        <gloss>Page layout summary</gloss>
+                        <gloss>Text layout summary</gloss>
                         <gloss type="tei">&lt;summary&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Outline your observations of the page layout in general terms.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Outline your observations of the text layout in general terms.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -144,12 +180,52 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="decoNote" module="msdescription" mode="change">
-                        <gloss>Page Layout</gloss>
-                        <gloss type="tei">&lt;decoNote&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the page layout.</desc>
+
+                    <elementSpec ident="desc" module="core" mode="change">
+                        <gloss>Text layout description</gloss>
+                        <gloss type="tei">&lt;desc&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list those descriptions which match what you can see in the
+                            manurscript.</desc>
                         <content>
                             <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="versionDate" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+
+                    <elementSpec ident="decoNote" module="msdescription" mode="change">
+                        <gloss>Text Layout</gloss>
+                        <gloss type="tei">&lt;decoNote&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the text layout.</desc>
+                        <content>
+                            <elementRef key="desc"/>
+                            <elementRef key="p"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -171,132 +247,7 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <!--<attDef ident="type" mode="replace" usage="opt">
-                                <valList type="closed">
-                                    <valItem ident="frame">
-                                        <desc>an ornament around the page</desc>
-                                    </valItem>
-                                    <valItem ident="miniature">
-                                        <desc>An independent illustration in colour that occupies the full-page or part of the equivalent space of one
-                                            or more columns of text. </desc>
-                                    </valItem>
-                                    <valItem ident="band">
-                                        <desc>A border that surrounds a text or image and may occupy the margins and intercolumnar space. Typically
-                                            used to mark the beginning of a new text or section of text.</desc>
-                                    </valItem>
-                                    <valItem ident="punctuation"/>
-                                    <valItem ident="headpiece">
-                                        <desc>A decorative border that surrounds a text and may occupy the margins and intercolumnar space. Typically
-                                            used to mark the beginning of a new text or section of text. With two specifications, for Band (single
-                                            border) and Frame (border encompassing multiple sides of text)</desc>
-                                    </valItem>
-                                    <valItem ident="headpieceFrame">
-                                        <desc>Decorative frame encompassing all four sides of the text and may occupy the margins and intercolumnar
-                                            space. Typically used to mark the beginning of a new text or section of text.</desc>
-                                    </valItem>
-                                    <valItem ident="headpieceBand">
-                                        <desc>Single decorative border that surrounds a text and may occupy the margins and intercolumnar space.
-                                            Typically used to mark the beginning of a new text or section of text.</desc>
-                                    </valItem>
-                                    <valItem ident="doodles">
-                                        <desc>crude drawings which do not belong to the primary strata of the manuscript (already encoded as
-                                            “extras”)</desc>
-                                    </valItem>
-                                    <valItem ident="drawing">
-                                        <desc>A monochrome or bichrome image that is not painted.</desc>
-                                    </valItem>
-                                    <valItem ident="diagram">
-                                        <desc>A drawing that conveys information or knowledge in schematic form.</desc>
-                                    </valItem>
-                                    <valItem ident="initial">
-                                        <desc>An enlarged letter at the beginning of a text of paragraph that features figurative or decorative
-                                            motifs.</desc>
-                                    </valItem>
-                                    <valItem ident="map"/>
-                                    <valItem ident="marginal">
-                                        <desc>A small miniature painted next to one of the margins of the text.</desc>
-                                    </valItem>
-                                    <valItem ident="mixed"/>
-                                    <valItem ident="other"/>
-                                    <valItem ident="ornamentation"/>
-                                    <valItem ident="paratext"/>
-                                    <valItem ident="rubrication"/>
-                                    <valItem ident="secondary"/>
-                                    <valItem ident="tooling"/>
-                                    <valItem ident="unspecified"/>
-                                    <valItem ident="engraving">
-                                        <desc>An image on paper created with a printing plate.</desc>
-                                    </valItem>
-                                    <valItem ident="printedImage">
-                                        <desc>A printed image, usually of devotional character, glued to a manuscript</desc>
-                                    </valItem>
-                                    <valItem ident="overCover">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="overlappingCornerFO">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="overlappingCornerHTO">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="toungedCorner">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="stitchedCorner">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="mitredCorner">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="openMitredCorner">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="Other">
-                                        <desc>to be used in binding description</desc>
-                                    </valItem>
-                                    <valItem ident="bindingMaterial">
-                                        <desc>to be used in binding description. Materials of which the binding is made.</desc>
-                                    </valItem>
-                                    <valItem ident="Headband">
-                                        <desc>to be used in binding description. Endband at the head end of the spine of a book.</desc>
-                                    </valItem>
-                                    <valItem ident="Tailband">
-                                        <desc>for use in binding description. Endband at the tail end of the spine of a book.</desc>
-                                    </valItem>
-                                    <valItem ident="Endbands">
-                                        <desc>for use in binding description. Structural and decorative elements of the binding which are found at the
-                                            head and tail of the spine of a book. The ethiopian endbands are usually slit-braid stripes of leather or
-                                            link-stitch sewings. </desc>
-                                    </valItem>
-                                    <valItem ident="Fastening">
-                                        <desc>for use in binding description. Stripe of different form and material used to keep closed a book. Traces
-                                            of fastenings can be holes and pins on the outer edge of the boards.</desc>
-                                    </valItem>
-                                    <valItem ident="Spine">
-                                        <desc>for use in binding description. The part of the book opposite the fore-edge.</desc>
-                                    </valItem>
-                                    <valItem ident="SlipCase">
-                                        <desc>for use in binding description. Portable leather case with attached slip where the manuscript is kept.
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="Boards">
-                                        <desc>for use in binding description. Components made from one or more pieces of material (usually wood) used
-                                            to protect and support a bookblock.</desc>
-                                    </valItem>
-                                    <valItem ident="SewingStations">
-                                        <desc>for use in binding description. Sewing stations are created by passing a thread through a spine fold
-                                            when sewing a book.</desc>
-                                    </valItem>
-                                    <valItem ident="EndLeaves">
-                                        <desc>for use in binding description. All the leaves found at each side of a bookblock, intended to give
-                                            protection to the text leaves.</desc>
-                                    </valItem>
-                                    <valItem ident="Cover">
-                                        <desc>The material that constitutes the immediate covering of the completed binding.</desc>
-                                    </valItem>
-
-                                </valList>
-                            </attDef>-->
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
