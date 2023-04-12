@@ -144,6 +144,7 @@
             <element ident="ab" label="Pricking/Ruling"/>
             <element ident="p" label="Free text box"/>
             <element ident="locus" label="Specific range of folios for this layout"/>
+            <element ident="metamark" label="Justification"/>
          </child>
       </childElements>
    </layout>
@@ -1705,6 +1706,29 @@ sub-classification for the element additional to that provided by its
             </valList>
          </attDef>
       </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="ab">
+            <valList type="closed">
+               <valItem ident="There is pricking"/>
+               <valItem ident="No pricking"/>
+               <valItem ident="No pricking can be seen"/>
+               <valItem ident=" "/>
+               <valItem ident="There is ruling"/>
+               <valItem ident="No ruling"/>
+               <valItem ident="No ruling can be seen"/>
+               <valItem ident=" "/>
+               <valItem ident="Prickings for horizontal lines"/>
+               <valItem ident="Prickings for vertical lines"/>
+               <valItem ident="Prickings for horizontal and vertical lines"/>
+               <valItem ident="Prickings for additional lines"/>
+               <valItem ident="Double prickings for certain lines"/>
+               <valItem ident=" "/>
+               <valItem ident="Framework only"/>
+               <valItem ident="Grid of single vertical and horizontal lines"/>
+               <valItem ident="Variable"/>
+            </valList>
+         </element>
+      </controlledValues>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -1822,4 +1846,49 @@ sub-classification for the element additional to that provided by its
          <child/>
       </childElements>
    </locus>
+   <metamark ident="metamark"
+             elementName="metamark"
+             elementLabel="Justification"
+             minOccur=""
+             maxOccur=""
+             path="/*:layoutDesc/*:layout/*:metamark"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;metamark/&gt;">
+      <desc/>
+      <availableAtts elementName="metamark">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="function"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="justification"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="metamark">
+            <valList type="closed">
+               <valItem ident="Left-hand margin is not even"/>
+               <valItem ident="Space fillers"/>
+               <valItem ident="Extended letters"/>
+               <valItem ident="Reduced letters"/>
+               <valItem ident="Broken letters"/>
+               <valItem ident="Anticipation"/>
+               <valItem ident="Abbreviation"/>
+               <valItem ident="Change of script register"/>
+               <valItem ident="Writing above the line horizontal"/>
+               <valItem ident="Writing above the line oblique"/>
+               <valItem ident="Writing below the line"/>
+               <valItem ident="Vertical writing"/>
+               <valItem ident="Change of orientation of letter components"/>
+               <valItem ident="Other"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </metamark>
 </TEI>
