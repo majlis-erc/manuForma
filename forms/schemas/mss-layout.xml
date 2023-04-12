@@ -78,73 +78,13 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" include="p"/>
+                    <moduleRef key="core" include="desc p"/>
+                    <moduleRef key="transcr" include="metamark"/>
                     <moduleRef key="linking" include="ab"/>
                     <moduleRef key="msdescription"
                         except="accMat additional additions adminInfo altIdentifier binding bindingDesc collection colophon custEvent custodialHist decoDesc decoNote depth explicit filiation finalRubric handDesc heraldry history incipit institution msContents msIdentifier msItem msItemStruct msName msPart musicNotation objectType recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc acquisition catchwords collation condition foliation locusGrp material msDesc msFrag objectDesc origDate origPlace origin physDesc provenance summary"/>
                     <moduleRef key="tei"/>
-                    <elementSpec ident="note" module="core" mode="change date">
-                        <gloss>Note</gloss>
-                        <gloss type="tei">&lt;note&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">This is the place to remark on points that don't fit the mold of the other
-                            elements or more extensive observations.</desc>
-                        <classes mode="replace">
-                            <memberOf key="model.annotationLike"/>
-                            <memberOf key="model.annotationPart.body"/>
-                            <memberOf key="model.correspActionPart"/>
-                            <memberOf key="model.correspContextPart"/>
-                            <memberOf key="model.correspDescPart"/>
-                            <memberOf key="model.noteLike"/>
-                            <memberOf key="att.anchoring" mode="delete"/>
-                            <memberOf key="att.global"/>
-                            <memberOf key="att.placement" mode="delete"/>
-                            <memberOf key="att.pointing" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                            <memberOf key="att.written" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="p"/>
-                            <elementRef key="locus"/>
-                            <elementRef key="p"/>
-                            <elementRef key="locus"/>
-                        </content>
-                        <attList>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                            <attDef ident="xml:rend" mode="delete"/>
-                            <attDef ident="xml:style" mode="delete"/>
-                            <attDef ident="xml:rendition" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="place" mode="delete"/>
-                            <attDef ident="targetLang" mode="delete"/>
-                            <attDef ident="target" mode="delete"/>
-                            <attDef ident="evaluate" mode="delete"/>
-                            <attDef ident="type" mode="delete"/>
-                            <attDef ident="subtype" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="anchored" mode="delete"/>
-                            <attDef ident="targetEnd" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-
+                    
                     <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
                     <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
                     <elementSpec ident="TEI" module="textstructure" mode="delete"/>
@@ -162,9 +102,44 @@ End license statement: do not remove -->
 
 
 
-                    <elementSpec ident="summary" module="msdescription" mode="delete"/>
+                    
 
-
+                    <elementSpec ident="desc" module="core" mode="change">
+                        <gloss>Page layout description</gloss>
+                        <gloss type="tei">&lt;desc&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list those descriptions which match what you can see in the manurscript.</desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="versionDate" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
 
 
                     <elementSpec ident="p" module="core" mode="change">
@@ -241,7 +216,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="height" mode="change">
-                        <gloss>*Text space height</gloss>
+                        <gloss>*Height of written area</gloss>
                         <gloss type="tei">&lt;height&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">The height of the text space, measured in
                             millimeters.</desc>
@@ -257,7 +232,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="width" mode="change">
-                        <gloss>*Text space width</gloss>
+                        <gloss>*Width of written area</gloss>
                         <gloss type="tei">&lt;width&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">The width of the text space, measured in millimeters.</desc>
                         <classes mode="change">
@@ -296,7 +271,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="dimensions" mode="change">
-                        <gloss>*Text space</gloss>
+                        <gloss>*Text block</gloss>
                         <gloss type="tei">&lt;dimensions&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">The measurements of the text space.</desc>
                         <content>
@@ -318,6 +293,28 @@ End license statement: do not remove -->
                             <memberOf key="att.dimensions" mode="delete"/>
                         </classes>
                     </elementSpec>
+                    <elementSpec ident="metamark" mode="change">
+                        <gloss>Justification</gloss>
+                        <gloss type="tei">&lt;metamark/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en"></desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.spanning" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="function" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="justification"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="target" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
                     <elementSpec ident="layout" mode="change">
                         <gloss>*Detailed description of page layout</gloss>
                         <gloss type="tei">&lt;layout&gt;</gloss>
@@ -343,6 +340,10 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="streams" mode="delete"/>
                             <attDef ident="ruledLines" mode="delete"/>
+                            <attDef ident="rulingMedium" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="topLine" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
@@ -351,7 +352,7 @@ End license statement: do not remove -->
                         <desc versionDate="2022-06-01" xml:lang="en" xml:id="summary.desc">Outline your observations of the main features in this
                             context.</desc>
                         <content>
-                            <textNode/>
+                            <elementRef key="desc"></elementRef>
                         </content>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -384,7 +385,7 @@ End license statement: do not remove -->
                         </classes>
                     </elementSpec>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <gloss>Folios</gloss>
+                        <gloss>Specific range of folios for this layout</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="locus.desc">The location of a text or another feature within the
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
