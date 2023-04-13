@@ -212,6 +212,19 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                     </elementSpec>
+
+                    <elementSpec ident="scriptDesc" mode="change">
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en"/>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <sequence maxOccurs="unbounded" minOccurs="1">
+                                <elementRef key="scriptNote"/>
+                            </sequence>
+                        </content>
+                    </elementSpec>
+
                     <elementSpec ident="metamark" mode="change">
                         <gloss>Special graphic signs</gloss>
                         <gloss type="tei">&lt;metamark/&gt;</gloss>
@@ -314,7 +327,6 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
@@ -341,6 +353,52 @@ End license statement: do not remove -->
                         <attList>
                             <attRef name="xml:id" class="att.global"/>
                             <attRef name="scope" class="att.dimensions"/>
+                            <attDef ident="script" mode="delete"/>
+                            <attDef ident="medium">
+                                <datatype>
+                                    <dataRef key="teidata.enumerated"/>
+                                </datatype>
+                                <valList type="closed">
+                                    <valItem ident="brown"/>
+                                    <valItem ident="black"/>
+                                    <valItem ident="pigments"/>
+                                    <valItem ident="mixed"/>
+                                    <valItem ident="plantBased"/>
+                                    <valItem ident="unidentified"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+
+                    <elementSpec ident="scriptNote" mode="change">
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the script used by the hand. Use the attribute values to describe the
+                            "script" (Oriental, Sefardic …), "mode" (square, non-square …), "quality" (careless, trained …), "medium" (brown, black …)
+                            and "scope". If there is more than one hand used in the manuscript or manuscript part, create multiple handNote elements
+                            and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
+                            using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+                        <gloss>*Description of script</gloss>
+                        <gloss type="tei">&lt;scriptNote/&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="p"/>
+                        </content>
+                        <attList>
+                            <attRef name="xml:id" class="att.global"/>
+                            <attRef name="xml:lang" class="att.global">
+                                <valList type="closed">
+                                    <valItem ident="hebrew"/>
+                                    <valItem ident="arabic"/>
+                                    <valItem ident="latin"/>
+                                    <valItem ident="greek"/>
+                                    <valItem ident="syriac"/>
+                                    <valItem ident="other"/>
+                                </valList>
+                            </attRef>
+                            <attRef name="scope" class="att.dimensions"/>
                             <attDef ident="script">
                                 <datatype>
                                     <dataRef key="teidata.name"/>
@@ -358,32 +416,19 @@ End license statement: do not remove -->
                                     <valItem ident="naskh"/>
                                 </valList>
                             </attDef>
-                            <attDef ident="medium">
-                                <datatype>
-                                    <dataRef key="teidata.enumerated"/>
-                                </datatype>
-                                <valList type="closed">
-                                    <valItem ident="brown"/>
-                                    <valItem ident="black"/>
-                                    <valItem ident="pigments"/>
-                                    <valItem ident="mixed"/>
-                                    <valItem ident="plantBased"/>
-                                    <valItem ident="unidentified"/>
-                                </valList>
-                            </attDef>
+                            <attDef ident="medium"> </attDef>
                             <attDef ident="style">
                                 <datatype>
                                     <dataRef name="string"/>
                                 </datatype>
                                 <valList type="closed">
-                                    <valItem ident=""/>
                                     <valItem ident="square"/>
                                     <valItem ident="nonSquare"/>
                                     <valItem ident="cursive"/>
                                     <valItem ident="unidentified"/>
                                 </valList>
                             </attDef>
-                            <attDef ident="rendition">
+                            <attDef ident="rend">
                                 <datatype>
                                     <dataRef name="string"/>
                                 </datatype>
