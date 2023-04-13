@@ -360,7 +360,7 @@
                         </li>
                      </xf:repeat>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'handDesc']" class="nav-link"><xf:label>Physical description: hand description</xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'handDesc']" class="nav-link"><xf:label>Physical description: script/hand description</xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
@@ -370,9 +370,9 @@
                            </xf:action>
                         </xf:trigger>
                      </li>
-                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc/*:handDesc[position() &gt; 1]" id="navRepeathandDesc">
+                     <xf:repeat ref="instance('i-rec')//descendant::*:msDesc/*:physDesc[position() &gt; 1]" id="navRepeathandDesc">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Physical description: hand description  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Physical description: script/hand description  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
                                  <xf:unload targetid="subform"></xf:unload>
                                  <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>

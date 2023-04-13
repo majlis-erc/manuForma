@@ -238,7 +238,7 @@
                 <group groupLabel="Summary of page layout." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupNo="2">
+                <group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupNo="2"  repeatable="yes">
                     <element xpath="tei:layout"/>
                 </group>
             </elementGroups>
@@ -301,7 +301,6 @@
             </controlledValuesElements>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:decoDesc" formName="decoDesc" formLabel="Physical description: text layout"
-
             repeat="no">
             <localSchema src="../schemas/mss-decoDesc.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
@@ -334,17 +333,20 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Physical description: hand description" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc" formName="handDesc" formLabel="Physical description: script/hand description" repeat="no">
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers.</formDesc>
             <elementGroups>
-                <group groupLabel="Summarize the hands you find in the manuscript." groupNo="1">
-                    <element xpath="tei:summary"/>
+                <group groupLabel="Summary of script." groupNo="1">
+                    <element xpath="tei:handDesc/tei:summary"/>
                 </group>
-                <group groupLabel="Describe the properties of the hand in standard vocabulary." groupNo="2"  repeatable="yes">
-                    <element xpath="tei:handNote"/>
+                <group groupLabel="Script definition." groupNo="2"  repeatable="yes">
+                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
+                </group>
+                <group groupLabel="Scribal hand(s)." groupNo="3"  repeatable="yes">
+                    <element xpath="tei:handDesc/tei:handNote"/>
                 </group>
             </elementGroups>
         </subform>
