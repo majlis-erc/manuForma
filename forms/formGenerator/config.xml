@@ -354,12 +354,46 @@
             <localSchema src="../schemas/mss-additions.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Describe any additions to the manuscript that were made after its original production.</formDesc>
+            <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and cite the incodicated document." groupNo="1" repeatable="yes">
+                <group groupLabel="Describe and transcribe the incodicated document." groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Colophon"/> 
+                        <valItem ident="Patronage"/>
+                        <valItem ident="Certificates of transmission"/>
+                        <valItem ident="Certificates of endowment"/>	
+                        <valItem ident="Bequest statements"/>
+                        <valItem ident="Ownership statements"/> 
+                        <valItem ident="Contract – Sale"/> 
+                        <valItem ident="Contract – Donation"/>
+                        <valItem ident="Contract – Personal status"/>
+                        <valItem ident="Contract of employment of a scribe"/>
+                        <valItem ident="Ex libris"/>
+                        <valItem ident="Inventory"/>
+                        <valItem ident="Book list"/>
+                        <valItem ident="Family genealogy"/>
+                        <valItem ident="Note"/>
+                        <valItem ident="Proofreading note"/>
+                        <valItem ident="Ijāza"/>
+                        <valItem ident="Transmission note"/>
+                        <valItem ident="Reader’s formula"/>
+                        <valItem ident="Signatures"/> 
+                        <valItem ident="Stamps"/> 
+                        <valItem ident="Talismanic inscriptions"/>
+                        <valItem ident="Magic squares"/>
+                        <valItem ident="Magic letters"/>
+                        <valItem ident="Solomon seal"/>
+                        <valItem ident="Kabīkaj"/>
+                        <valItem ident="Geomantic figures"/>
+                        <valItem ident="Observations"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc/tei:binding" formName="bindingDesc" formLabel="Binding description" repeat="no">
             <localSchema src="../schemas/mss-binding.xml"/>
@@ -367,7 +401,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="If you can, describe the binding's origin. And give the bindings dimensions and provide information on the material." groupNo="1">
+                <group groupLabel="Describe the binding's origin and give the bindings dimensions and provide information on the material." groupNo="1">
                     <element xpath="tei:decoNote"/>
                 </group>
             </elementGroups>
@@ -376,6 +410,15 @@
                     <element xpath="tei:condition"/>
                 </group>
             </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Unbound"/> 
+                        <valItem ident="Original"/>
+                        <valItem ident="Later"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage data" repeat="no">
             <localSchema src="../schemas/mss-accMat.xml"/>

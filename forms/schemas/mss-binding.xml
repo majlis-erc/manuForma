@@ -337,6 +337,11 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="binding"/>
+                                </valList>
+                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -431,7 +436,7 @@ End license statement: do not remove -->
 
                     <elementSpec ident="ab" module="linking" mode="delete"/>
                     <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Text Block</gloss>
+                        <gloss>Free text box</gloss>
                         <gloss type="tei">&lt;p&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
                             coherent descriptive text.</desc>
@@ -568,6 +573,7 @@ End license statement: do not remove -->
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the manuscript’s decoration. Choose the "type"
                             from the list.</desc>
                         <content>
+                            <elementRef key="objectType"/>
                             <elementRef key="p"/>
                             <elementRef key="material"/>
                             <elementRef key="dimensions"/>
@@ -729,7 +735,7 @@ End license statement: do not remove -->
                         <gloss type="tei">&lt;depth&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en" xml:id="depth.desc">The depth of the binding, measured in millimeters.</desc>
                         <content>
-                            <empty/>
+                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -765,6 +771,23 @@ End license statement: do not remove -->
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
+                    </elementSpec>
+                    <elementSpec ident="objectType" mode="change">
+                        <gloss>Type of binding</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
                     </elementSpec>
                 </schemaSpec>
             </div>

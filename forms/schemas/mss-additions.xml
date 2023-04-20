@@ -78,9 +78,9 @@ End license statement: do not remove --><!--requirements:
                 -->
 
                     <moduleRef key="core"
-                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name note noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name note noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription"
-                        except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc objectType origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
+                        except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
@@ -96,7 +96,6 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
                             <textNode/>
                         </content>
                         <attList>
@@ -162,6 +161,7 @@ End license statement: do not remove --><!--requirements:
                         <desc versionDate="2022-05-27" xml:lang="en">Describe the incodicated document.</desc>
                         <content>
                             <elementRef key="p"/>
+                            <elementRef key="objectType"/>
                             <elementRef key="locus"/>
                             <elementRef key="quote"/>
                         </content>
@@ -224,40 +224,7 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="desc" module="core" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Describes or defines the kind of addition. Choose a value from the list of the
-                            "type" attribute.</desc>
-                        <content>
-                            <elementRef key="q"/>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="subtype" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="versionDate" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
-                    </elementSpec>
+                    
                     <elementSpec ident="ref" module="core" mode="delete"/>
 
                     <elementSpec ident="persName" module="namesdates" mode="delete"/>
@@ -268,13 +235,12 @@ End license statement: do not remove --><!--requirements:
                             marginalia or other annotations. You can give a summary in the p element and describe specific additions inside list
                             elements.</desc>
                         <content>
-                            <elementRef key="p"/>
                             <elementRef key="list"/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="quote" mode="change">
-                        <gloss>Quote</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Quote the incodicated document in full or in part.</desc>
+                        <gloss>Transcription</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Transcribe the incodicated document in full or in part.</desc>
                         <classes mode="change">
                             <memberOf key="att.ascribed.directed" mode="delete"/>
                         </classes>
@@ -286,6 +252,8 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="who" mode="delete"/>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
+                            <attDef ident="notation" mode="delete"/>
+                            <attDef ident="defective" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
@@ -297,14 +265,23 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="rend" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
                             <attDef ident="resp" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="xml:lang" mode="change">
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar"/>
+                                        <valItem mode="add" ident="en"/>
+                                        <valItem mode="add" ident="he"/>
+                                    </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="p" mode="change">
@@ -316,6 +293,24 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.fragmentable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="objectType" mode="change">
+                        <gloss>Type of incodicated document</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
                         </classes>
                         <content>
                             <textNode/>
