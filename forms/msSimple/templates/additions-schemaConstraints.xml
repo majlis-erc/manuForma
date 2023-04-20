@@ -136,8 +136,9 @@
       <childElements>
          <child>
             <element ident="p" label="Free text box"/>
+            <element ident="objectType" label="Type of incodicated document"/>
             <element ident="locus" label="Folios"/>
-            <element ident="quote" label="Quote"/>
+            <element ident="quote" label="Transcription"/>
          </child>
       </childElements>
    </item>
@@ -158,6 +159,135 @@
          <child/>
       </childElements>
    </p>
+   <objectType ident="objectType"
+               elementName="objectType"
+               elementLabel="Type of incodicated document"
+               minOccur=""
+               maxOccur=""
+               path="/*:list/*:item/*:objectType"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;objectType/&gt;">
+      <desc>Choose from the list.</desc>
+      <availableAtts elementName="objectType">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="key"
+                 usage="opt">
+            <desc versionDate="2008-09-05" xml:lang="en">provides an externally-defined means of identifying the entity (or entities) being
+        named, using a coded value of some kind.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr"> fournit un moyen, défini de façon externe,
+        d'identifier l'entité (ou les entités) nommé(es), en utilisant une valeur codée
+        d'un certain type.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">何らかのコード化された値を用いて，名付けられたエンティティを識別する外部的に定義された手段を提供する．</desc>
+            <datatype>
+               <dataRef key="teidata.text"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <author>
+                     <name key="name 427308" type="organisation">[New Zealand Parliament, Legislative Council]</name>
+                  </author>
+               </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="fr" source="#NONE">
+                  <author>
+                     <name key="Hugo, Victor (1802-1885)" ref="http://www.idref.fr/026927608">Victor Hugo</name>
+                  </author>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2013-06-20" xml:lang="en">
+               <p>The value may be a unique identifier from a database, or any other externally-defined
+          string identifying the referent. </p>
+               <p>No particular syntax is proposed for the values of the <att>key</att> attribute, since 
+          its form will depend entirely on practice within a given project. For the same reason, this 
+          attribute is not recommended in data interchange, since there is no way of ensuring 
+          that the values used by one project are distinct from those used by another. In such
+          a situation, a preferable approach for magic tokens which follows standard practice 
+          on the Web is to use a <att>ref</att> attribute whose value is a tag URI as defined in 
+          <ref target="#RFC4151">RFC 4151</ref>.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur peut être un identifiant unique dans une base de données, ou toute autre chaîne
+          définie de façon externe identifiant le référent. </p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値はデータベースにおけるユニークな識別子や、外部で定義された指示対象を特定するなんらかの文字列であってよい。<att>key</att>属性の値に関してさだまった構文は提案されていない。なぜならば、それぞれのプロジェクトのやりかたに完全に依存するからである。同様の理由によって、データの相互交換においてこの属性は推奨されない。在るプロジェクトで用いられた値が他のプロジェクトの値と異なることを保証できないからである。そのような場面における魔法石的対処は、<ref target="#RFC4151">RFC4151</ref>に定義されるタグURIを値とする<att>ref</att>属性を用いて、標準的なウェブにおける習慣にしたがってmagic tokenを使うことである。</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 usage="opt">
+            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
+            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
+            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
+            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
+        means of one or more URIs.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2014-01-09" xml:lang="en">
+               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
+            </remarks>
+         </attDef>
+      </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="objectType">
+            <valList type="closed">
+               <valItem ident="Colophon"/>
+               <valItem ident="Patronage"/>
+               <valItem ident="Certificates of transmission"/>
+               <valItem ident="Certificates of endowment"/>
+               <valItem ident="Bequest statements"/>
+               <valItem ident="Ownership statements"/>
+               <valItem ident="Contract – Sale"/>
+               <valItem ident="Contract – Donation"/>
+               <valItem ident="Contract – Personal status"/>
+               <valItem ident="Contract of employment of a scribe"/>
+               <valItem ident="Ex libris"/>
+               <valItem ident="Inventory"/>
+               <valItem ident="Book list"/>
+               <valItem ident="Family genealogy"/>
+               <valItem ident="Note"/>
+               <valItem ident="Proofreading note"/>
+               <valItem ident="Ijāza"/>
+               <valItem ident="Transmission note"/>
+               <valItem ident="Reader’s formula"/>
+               <valItem ident="Signatures"/>
+               <valItem ident="Stamps"/>
+               <valItem ident="Talismanic inscriptions"/>
+               <valItem ident="Magic squares"/>
+               <valItem ident="Magic letters"/>
+               <valItem ident="Solomon seal"/>
+               <valItem ident="Kabīkaj"/>
+               <valItem ident="Geomantic figures"/>
+               <valItem ident="Observations"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </objectType>
    <locus ident="locus"
           elementName="locus"
           elementLabel="Folios"
@@ -255,180 +385,24 @@
    </locus>
    <quote ident="quote"
           elementName="quote"
-          elementLabel="Quote"
+          elementLabel="Transcription"
           minOccur=""
           maxOccur=""
           path="/*:list/*:item/*:quote"
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Quote the incodicated document in full or in part.</desc>
+      <desc>Transcribe the incodicated document in full or in part.</desc>
       <availableAtts elementName="quote">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="defective"
-                 usage="opt">
-            <desc versionDate="2007-03-05" xml:lang="en">indicates whether the passage being quoted is defective,
-      i.e. incomplete through loss or damage.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">인용 어구의 결합 여부를 표시한다. 즉, 손실 또는 손상을 통한 불완전성</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所引用的段落是否不完全，例如因遺失或損毀而不完全。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">
-      当該部分に問題があるかどうかを示す．例えば，欠損や損傷による不完
-      全さなど．
-</desc>
-            <desc versionDate="2009-05-28" xml:lang="fr">indique si le passage décrit est fautif, i.e. incomplet en raison d'une lacune ou d'une détérioration.</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica se il brano citato sia o meno incompleto a causa di perdite o danni</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica si el pasaje que se describe es completo o no, p.ej. si ha sufrido pérdidas o daños.</desc>
-            <datatype>
-               <dataRef key="teidata.xTruthValue"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="notation"
-                 usage="opt">
-            <desc versionDate="2012-03-26" xml:lang="en">names the notation used for the content of the element.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">요소 내용으로 사용되어 앞서 정의된 표기법 이름을 제시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供先前已定義過、適用於該元素內容的記號名稱。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の内容にある既定表記法の名前を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">précise le nom d'une notation définie précédemment,
-        utilisée dans le contenu de l'élément.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el nombre de una anotación definida
-        previamente y usada para el contenido de un elemento.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">fornisce il nome di un'annotazione definita
-        precedentemente utilizzata come contenuto dell'elemento.</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="subtype"
-                 usage="opt">
-            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
-            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
-            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
-          c'est nécessaire.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <remarks versionDate="2013-01-13" xml:lang="en">
-               <p>The <att>subtype</att> attribute may be used to provide any
-sub-classification for the element additional to that provided by its
-<att>type</att> attribute.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
-                        sous-classification pour cet élément, en plus de celle fournie par son
-                        propre attribut <att>type</att>.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
-<att>type</att> (tipo) de atributo.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2008-04-05">
-               <p>
-	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
-    素の下位分類を示すために使われる．
-    </p>
-            </remarks>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="xml:lang"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">langue</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">lingua</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">言語</gloss>
-            <desc versionDate="2013-01-07" xml:lang="en">indicates the language of the element content using a <soCalled>tag</soCalled> generated
-        according to <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>에 따라 생성된
-        <soCalled>tag</soCalled>를 사용하는 요소 내용의 언어를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">使用<ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC3066</ref>的代碼，指出該元素內容的使用語言</desc>
-            <desc xml:lang="ja" versionDate="2019-06-08">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>に従って生成された<soCalled>タグ</soCalled>を用いて要素の内容の言語を示す。</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la langue du contenu de l'élément en
-        utilisant les codes du <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ref>
-            </desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la lengua del contenido del elemento
-        utilizando los códigos extraídos de <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-          3066</ref>
-            </desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica la lingua del contenuto dell'elemento
-        utilizzando i codici tratti da <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-        3066</ref>
-            </desc>
-            <datatype>
-               <dataRef key="teidata.language"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                  <p> … The consequences of
-	  this rapid depopulation were the loss of the last
-	  <foreign xml:lang="rap">ariki</foreign> or chief
-	  (Routledge 1920:205,210) and their connections to
-	  ancestral territorial organization.</p>
-               </egXML>
-            </exemplum>
-            <remarks versionDate="2019-11-14" xml:lang="en">
-               <p>The <att>xml:lang</att> value will be inherited from the immediately
-enclosing element, or from its parent, and so on up the document hierarchy.
-It is generally good practice to specify <att>xml:lang</att> at the highest
-appropriate level, noticing that a different default may be needed for the
-<gi>teiHeader</gi> from that needed for the associated resource element or elements,
-and that a single TEI document may contain texts in many languages.</p>
-               <p>The authoritative list of registered language subtags is maintained by IANA and 
-          is available at <ptr target="http://www.iana.org/assignments/language-subtag-registry"/>. 
-          For a good general overview of the construction of language tags, see 
-          <ptr target="http://www.w3.org/International/articles/language-tags/"/>, and for 
-          a practical step-by-step guide, see 
-          <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/>.</p>
-               <p>The value used must conform with BCP 47. If the value is a
-      private use code (i.e., starts with <val>x-</val> or contains
-      <val>-x-</val>), a <gi>language</gi> element with a matching
-      value for its <att>ident</att> attribute should be supplied in
-      the TEI header to document this value. Such documentation may
-      also optionally be supplied for non-private-use codes, though
-      these must remain consistent with their
-      <choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task
-      Force</expan>
-                  </choice> definitions.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p> Si aucune valeur n'est indiquée pour <att>xml:lang</att>, la valeur de
-            l'attribut<att>xml:lang</att> de l'élément immédiatement supérieur est héritée ; c'est
-          pour cette raison qu'une valeur devrait toujours être attribuée à l'élément du plus haut
-          niveau hiérarchique (<gi>TEI</gi>).</p>
-               <p>La valeur doit être conforme au BCP 47. Si la
-        valeur est un code d'usage privé (c'est-à-dire commence par <code>x-</code> ou contient
-      <code>-x-</code>),  il devrait correspondre à la valeur d'un attribut <att>ident</att> d'un élément <gi>language</gi> fourni dans l'en-tête TEI du document courant.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>Si no se especifica ningún valor para <att>xml:lang</att>, el valor de <att>xml:lang</att> para el elemento inmediatamente englobado, se hereda; por esta razón, un valor
-          se debe especificar siempre en el elemento exterior (<gi>TEI</gi>).</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2019-06-16">
-               <p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="http://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task Force</expan>
-                  </choice> による定義と整合していなければならない。</p>
-            </remarks>
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>

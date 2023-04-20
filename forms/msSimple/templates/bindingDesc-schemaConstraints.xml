@@ -35,7 +35,7 @@
          <child>
             <element ident="condition" label="State of the Binding"/>
             <element ident="decoNote" label="Decoration Description Container"/>
-            <element ident="p" label="Text Block"/>
+            <element ident="p" label="Free text box"/>
             <element ident="origPlace" label="Place of Origin"/>
             <element ident="origDate" label="Date of Origin"/>
          </child>
@@ -261,15 +261,120 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p" label="Text Block"/>
+            <element ident="objectType" label="Type of binding"/>
+            <element ident="p" label="Free text box"/>
             <element ident="material" label="Binding Material"/>
             <element ident="dimensions" label="Binding Dimensions"/>
          </child>
       </childElements>
    </decoNote>
+   <objectType ident="objectType"
+               elementName="objectType"
+               elementLabel="Type of binding"
+               minOccur=""
+               maxOccur=""
+               path="/*:binding/*:decoNote/*:objectType"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;objectType/&gt;">
+      <desc>Choose from the list.</desc>
+      <availableAtts elementName="objectType">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="key"
+                 usage="opt">
+            <desc versionDate="2008-09-05" xml:lang="en">provides an externally-defined means of identifying the entity (or entities) being
+        named, using a coded value of some kind.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr"> fournit un moyen, défini de façon externe,
+        d'identifier l'entité (ou les entités) nommé(es), en utilisant une valeur codée
+        d'un certain type.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">何らかのコード化された値を用いて，名付けられたエンティティを識別する外部的に定義された手段を提供する．</desc>
+            <datatype>
+               <dataRef key="teidata.text"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <author>
+                     <name key="name 427308" type="organisation">[New Zealand Parliament, Legislative Council]</name>
+                  </author>
+               </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="fr" source="#NONE">
+                  <author>
+                     <name key="Hugo, Victor (1802-1885)" ref="http://www.idref.fr/026927608">Victor Hugo</name>
+                  </author>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2013-06-20" xml:lang="en">
+               <p>The value may be a unique identifier from a database, or any other externally-defined
+          string identifying the referent. </p>
+               <p>No particular syntax is proposed for the values of the <att>key</att> attribute, since 
+          its form will depend entirely on practice within a given project. For the same reason, this 
+          attribute is not recommended in data interchange, since there is no way of ensuring 
+          that the values used by one project are distinct from those used by another. In such
+          a situation, a preferable approach for magic tokens which follows standard practice 
+          on the Web is to use a <att>ref</att> attribute whose value is a tag URI as defined in 
+          <ref target="#RFC4151">RFC 4151</ref>.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur peut être un identifiant unique dans une base de données, ou toute autre chaîne
+          définie de façon externe identifiant le référent. </p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値はデータベースにおけるユニークな識別子や、外部で定義された指示対象を特定するなんらかの文字列であってよい。<att>key</att>属性の値に関してさだまった構文は提案されていない。なぜならば、それぞれのプロジェクトのやりかたに完全に依存するからである。同様の理由によって、データの相互交換においてこの属性は推奨されない。在るプロジェクトで用いられた値が他のプロジェクトの値と異なることを保証できないからである。そのような場面における魔法石的対処は、<ref target="#RFC4151">RFC4151</ref>に定義されるタグURIを値とする<att>ref</att>属性を用いて、標準的なウェブにおける習慣にしたがってmagic tokenを使うことである。</p>
+            </remarks>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="ref"
+                 usage="opt">
+            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
+            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
+            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
+            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
+        means of one or more URIs.</desc>
+            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
+            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
+            <datatype minOccurs="1" maxOccurs="unbounded">
+               <dataRef key="teidata.pointer"/>
+            </datatype>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
+                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2014-01-09" xml:lang="en">
+               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
+            </remarks>
+            <remarks versionDate="2009-05-25" xml:lang="fr">
+               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2018-12-31">
+               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
+            </remarks>
+         </attDef>
+      </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="objectType">
+            <valList type="closed">
+               <valItem ident="Unbound"/>
+               <valItem ident="Original"/>
+               <valItem ident="Later"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </objectType>
    <p ident="p"
       elementName="p"
-      elementLabel="Text Block"
+      elementLabel="Free text box"
       minOccur=""
       maxOccur=""
       path="/*:binding/*:decoNote/*:p"
@@ -414,45 +519,12 @@
                teiElement="&lt;dimensions/&gt;">
       <desc>The measurements of the binding.</desc>
       <availableAtts elementName="dimensions">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
-                 mode="change"
-                 rend="change">
-            <desc versionDate="2005-01-14" xml:lang="en">indicates which aspect of the object is being measured.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">대상의 어떤 측면이 측정되고 있는지를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出物件被測量的部分。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該計測対象を示す．</desc>
-            <desc versionDate="2008-03-30" xml:lang="fr">indique quel aspect de l'objet est mesuré.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica que aspecto del objeto se mide.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica quale aspetto dell'oggetto viene misurato</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList type="semi">
-               <valItem ident="binding">
-                  <desc>The dimensions concerns the binding(s)</desc>
-               </valItem>
-               <valItem ident="folia">
-                  <desc>The dimensions concerns the folia as a whole</desc>
-               </valItem>
-               <valItem ident="leaf">
-                  <desc>The dimensions concerns the leaf</desc>
-               </valItem>
-               <valItem ident="line-height">
-                  <desc>The dimensions concerns the line-height</desc>
-               </valItem>
-               <valItem ident="ruled">
-                  <desc>The dimensions concerns the ruling</desc>
-               </valItem>
-               <valItem ident="written">
-                  <desc>The dimensions concerns the written area</desc>
-               </valItem>
-               <valItem ident="other">
-                  <desc>The dimensions concerns other/unspecified aspects (you
-                                        may also provide a custom value)</desc>
-               </valItem>
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="binding"/>
             </valList>
          </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -1718,6 +1790,7 @@ and that a single TEI document may contain texts in many languages.</p>
       <desc>The depth of the binding, measured in millimeters.</desc>
       <availableAtts elementName="depth"/>
       <childElements>
+         <textNode type="input"/>
          <child/>
       </childElements>
    </depth>
@@ -1739,7 +1812,7 @@ and that a single TEI document may contain texts in many languages.</p>
    </width>
    <p ident="p"
       elementName="p"
-      elementLabel="Text Block"
+      elementLabel="Free text box"
       minOccur=""
       maxOccur=""
       path="/*:binding/*:p"
