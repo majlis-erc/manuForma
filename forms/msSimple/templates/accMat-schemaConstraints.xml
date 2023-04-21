@@ -8,17 +8,131 @@
      xmlns:xs="http://www.w3.org/2001/XMLSchema"
      xmlns:xf="http://www.w3.org/2002/xforms"
      xmlns:local="http://syriaca.org/ns">
-   <accMat ident="accMat"
-           elementName="accMat"
-           elementLabel="Heritage Data Container"
-           minOccur=""
-           maxOccur=""
-           path="/*:accMat"
-           currentLevel="1"
-           popup="1"
-           teiElement="&lt;accMat/&gt;">
-      <desc>Materials that are not part of the manuscript per se, e.g. slips by librarians explaining the contents.</desc>
-      <availableAtts elementName="accMat">
+   <list ident="list"
+         elementName="list"
+         elementLabel="List of heritage data documents"
+         minOccur=""
+         maxOccur=""
+         path="/*:list"
+         currentLevel="1"
+         popup="1"
+         teiElement="&lt;list/&gt;">
+      <desc>A sequence of bullet points ("item") organized as a list.</desc>
+      <availableAtts elementName="list">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="type"
+                 usage="opt"
+                 mode="change">
+            <gloss xml:lang="en" versionDate="2017-06-25">type</gloss>
+            <gloss versionDate="2017-06-25" xml:lang="de">Typ</gloss>
+            <desc versionDate="2014-07-29" xml:lang="en">describes the nature of the items in the list.</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">beschreibt die Art der Listenpunkte.</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList type="semi" mode="add">
+               <valItem ident="gloss">
+                  <gloss xml:lang="en" versionDate="2017-06-25">gloss</gloss>
+                  <gloss versionDate="2017-06-25" xml:lang="de">Gloss</gloss>
+                  <desc versionDate="2016-11-25" xml:lang="en">each list item glosses some term or concept, which is given by a <gi>label</gi> element
+            preceding the list item.</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">목록의 각 항목은 선행하는 요소에서 제시된 용어 또는 개념에 대한 설명이다.</desc>
+                  <desc versionDate="2007-05-02" xml:lang="zh-TW">各列表項目為一些字詞或概念下註解，每個項目之前並帶有標籤元素。</desc>
+                  <desc versionDate="2008-04-06" xml:lang="es">cada item de la lista glosa algun término o
+            concepto de los que han sido dados por un elemento de la lista de la etiqueta que
+            precede.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">リスト項目は，当該リスト項目に先行してあるラベル要素で示され
+            たある用語や意義をまとめたものである．</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">chaque item de la liste commente un terme ou un
+            concept qui est donné par un élément <gi>label</gi> précédant l'item de la liste.</desc>
+                  <desc versionDate="2007-01-21" xml:lang="it">ogni voce dell'elenco è la glossa di un termine o
+            concetto dato da un elemento legenda che precede la voce stessa</desc>
+                  <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt erläutert einen Begriff oder ein Konzept, das von einem voranstehenden <gi>label</gi>-Element genannt wird.</desc>
+               </valItem>
+               <valItem ident="index">
+                  <gloss xml:lang="en" versionDate="2017-06-25">index</gloss>
+                  <gloss versionDate="2017-06-25" xml:lang="de">Index</gloss>
+                  <desc versionDate="2014-05-04" xml:lang="en">each list item is an entry in an index such as the alphabetical topical index 
+          at the back of a print volume.</desc>
+                  <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist ein Registereintrag z. B. in einem alphabetisch geordneten 
+                Sachregister am Ende einer Druckausgabe.</desc>
+               </valItem>
+               <valItem ident="instructions">
+                  <gloss xml:lang="en" versionDate="2017-06-25">instructions</gloss>
+                  <gloss versionDate="2017-06-25" xml:lang="de">Arbeitsschritt</gloss>
+                  <desc versionDate="2014-05-04" xml:lang="en">each list item is a step in a sequence of instructions, as in a
+            recipe.</desc>
+                  <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist ein Arbeitsschritt in einer Folge von Anweisungen, 
+                wie z. B. in einem Rezept.</desc>
+               </valItem>
+               <valItem ident="litany">
+                  <gloss xml:lang="en" versionDate="2017-06-25">litany</gloss>
+                  <gloss versionDate="2017-06-25" xml:lang="de">Litanei</gloss>
+                  <desc versionDate="2014-05-04" xml:lang="en">each list item is one of a sequence of petitions, supplications 
+            or invocations, typically in a religious ritual.</desc>
+                  <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist Teil einer Reihenfolge von Gebeten, Bitten oder Anrufungen die 
+                üblicherweise in einem religiösen Ritual verwendet werden.</desc>
+               </valItem>
+               <valItem ident="syllogism">
+                  <gloss xml:lang="en" versionDate="2017-06-25">syllogism</gloss>
+                  <gloss versionDate="2017-06-25" xml:lang="de">logischer Schluss</gloss>
+                  <desc versionDate="2014-05-04" xml:lang="en">each list item is part of an argument consisting of two or more propositions 
+            and a final conclusion derived from them.</desc>
+                  <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist Teil eines Arguments, das aus zwei oder mehr Prämissen 
+                und einem daraus gezogenen Schluss besteht.</desc>
+               </valItem>
+            </valList>
+            <remarks versionDate="2014-07-30" xml:lang="en">
+               <p>Previous versions of these Guidelines recommended the use
+        of <att>type</att> on <gi>list</gi> to encode the rendering or
+        appearance of a list (whether it was bulleted, numbered,
+        etc.). The current recommendation is to use the
+        <att>rend</att> or <att>style</att> attributes for these
+        aspects of a list, while using <att>type</att> for the more
+        appropriate task of characterizing the nature of the content
+        of a list.</p>
+               <p>The formal syntax of the element declarations allows
+        <gi>label</gi> tags to be omitted from lists tagged <tag>list
+        type="gloss"</tag>; this is however a semantic error.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>La syntaxe formelle des déclarations d'élément permet d'omettre les étiquettes de balises
+          des listes balisées par <tag>list type="gloss"</tag> mais c'est une erreur sémantique.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p> 当該要素の宣言では，要素<gi>label</gi>は，タグ<tag>list type="gloss"</tag>中で省略することができることになっているが，
+          これは意味上のエラーになる． </p>
+            </remarks>
+            <remarks versionDate="2016-11-25" xml:lang="de">
+               <p>In älteren Versionen dieser Richtlinien wurde empfohlen, mit dem Attribut <att>type</att> am <gi>list</gi>-Element 
+              die Darstellung oder das Erscheinungsbild einer Liste zu kodieren (also ob sie z. B. nummeriert oder mit Symbolen 
+              versehen ist). Die aktuelle Empfehlung ist, dafür die Attribute <att>rend</att> oder <att>style</att> zu verwenden, 
+              während mit <att>type</att> der Inhalt der Liste charakterisiert werden sollte.</p>
+               <p>Die formale Syntax der Elementdeklaration 
+                erlaubt es, Listen vom <tag>list type="gloss"</tag> ohne das Element <gi>label</gi> zu verwenden; das ist jedoch ein 
+                semantischer Fehler.</p>
+            </remarks>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="item" label="Document"/>
+         </child>
+      </childElements>
+   </list>
+   <item ident="item"
+         elementName="item"
+         elementLabel="Document"
+         minOccur=""
+         maxOccur=""
+         path="/*:list/*:item"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;item/&gt;">
+      <desc>Describe the document and give a transcription.</desc>
+      <availableAtts elementName="item">
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="resp"
@@ -26,194 +140,155 @@
       </availableAtts>
       <childElements>
          <child>
+            <element ident="quote" label="Transcription"/>
+            <element ident="persName" label="Author"/>
             <element ident="p" label="Free text box"/>
-            <element ident="q" label="Transcription"/>
-            <element ident="persName" label="Person"/>
          </child>
       </childElements>
-   </accMat>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      minOccur=""
-      maxOccur=""
-      path="/*:accMat/*:p"
-      currentLevel="2"
-      popup="2"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
-   <q ident="q"
-      elementName="q"
-      elementLabel="Transcription"
-      minOccur=""
-      maxOccur=""
-      path="/*:accMat/*:q"
-      currentLevel="2"
-      popup="2"
-      teiElement="&lt;q/&gt;">
+   </item>
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription"
+          minOccur=""
+          maxOccur=""
+          path="/*:list/*:item/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
       <desc>Quotation from the manuscript. Use the "xml:lang" attribute to specify the
                             language.</desc>
-      <availableAtts elementName="q">
+      <availableAtts elementName="quote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="defective"
+                 usage="opt">
+            <desc versionDate="2007-03-05" xml:lang="en">indicates whether the passage being quoted is defective,
+      i.e. incomplete through loss or damage.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">인용 어구의 결합 여부를 표시한다. 즉, 손실 또는 손상을 통한 불완전성</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所引用的段落是否不完全，例如因遺失或損毀而不完全。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">
+      当該部分に問題があるかどうかを示す．例えば，欠損や損傷による不完
+      全さなど．
+</desc>
+            <desc versionDate="2009-05-28" xml:lang="fr">indique si le passage décrit est fautif, i.e. incomplet en raison d'une lacune ou d'une détérioration.</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica se il brano citato sia o meno incompleto a causa di perdite o danni</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica si el pasaje que se describe es completo o no, p.ej. si ha sufrido pérdidas o daños.</desc>
+            <datatype>
+               <dataRef key="teidata.xTruthValue"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="notation"
+                 usage="opt">
+            <desc versionDate="2012-03-26" xml:lang="en">names the notation used for the content of the element.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">요소 내용으로 사용되어 앞서 정의된 표기법 이름을 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供先前已定義過、適用於該元素內容的記號名稱。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の内容にある既定表記法の名前を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">précise le nom d'une notation définie précédemment,
+        utilisée dans le contenu de l'élément.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el nombre de una anotación definida
+        previamente y usada para el contenido de un elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">fornisce il nome di un'annotazione definita
+        precedentemente utilizzata come contenuto dell'elemento.</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="subtype"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
+            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
+            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
+          c'est nécessaire.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <remarks versionDate="2013-01-13" xml:lang="en">
+               <p>The <att>subtype</att> attribute may be used to provide any
+sub-classification for the element additional to that provided by its
+<att>type</att> attribute.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
+                        sous-classification pour cet élément, en plus de celle fournie par son
+                        propre attribut <att>type</att>.</p>
+            </remarks>
+            <remarks xml:lang="es" versionDate="2008-04-06">
+               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
+<att>type</att> (tipo) de atributo.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p>
+	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
+    素の下位分類を示すために使われる．
+    </p>
+            </remarks>
+         </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
-            <gloss xml:lang="en" versionDate="2016-11-25">type</gloss>
-            <gloss versionDate="2016-11-25" xml:lang="de">Typ</gloss>
-            <desc versionDate="2007-07-18" xml:lang="en">may be used to indicate whether the offset passage is spoken or thought, or to
-        characterize it more finely.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표시된 단락이 대화인지 사고인지를 나타내거나, 더 자세하게 규정하는 데 사용될 수 있다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">可用來指出引文內容為言詞或思想，或者做更詳細的引文描述。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該部分が，発話されたものか，思考されたものかを示すため，または
-        より詳細に性質を示すために使われるかもしれない．</desc>
-            <desc versionDate="2008-12-09" xml:lang="fr">peut être utilisé pour indiquer si le passage cité
-        correspond à une parole ou à une pensée ou encore pour le caractériser plus finement.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">Puede usarse para indicar si el material citado es
-        hablado o pensado, o para caracterizarlo con más precisión.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">può essere usato per indicare se il brano citato è
-        parlato o pensato, oppure per caratterizzarlo con maggior precisione.</desc>
-            <desc versionDate="2016-11-25" xml:lang="de">kann verwendet werden, um anzuzeigen, ob die abgesetzte 
-        Textpassage gesprochen oder gedacht wird, oder um sie auf andere Weise detaillierter zu beschreiben.</desc>
+            <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
+ classification scheme or typology.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用合適的分類標準或類型來描述該元素。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の分類を示す．</desc>
+            <desc versionDate="2009-05-29" xml:lang="fr">caractérise l'élément en utilisant n'importe quel système ou typologie de classification approprié.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">caracteriza el elemento utilizando una clasificación o tipología funcional.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">caratterizza l'elemento utilizzando una classificazione o tipologia funzionale</desc>
             <datatype>
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="semi">
-               <valItem ident="spoken">
-                  <gloss xml:lang="en" versionDate="2016-11-25">spoken</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gesprochen</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of speech</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">대화의 표상</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示直接敘述，通常會標上引號。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">発話．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">notation du discours direct</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación del estilo directo, normalmente
-            marcado mediante comillas.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del discorso diretto, di solito
-            segnalato dalle virgolette.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe gesprochener Sprache</desc>
-               </valItem>
-               <valItem ident="thought">
-                  <gloss xml:lang="en" versionDate="2016-11-25">thought</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gedacht</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of thought, e.g. internal monologue</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">사고의 표상, 예를 들어, 내적 독백</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示思考內容，例如內心獨白。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">思考．例えば，内的独白．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">représentation de la pensée, par exemple un
-            monologue intérieur.</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación de un pensamiento o reflexión,
-            p.ej. un monólogo interno.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del pensiero, ad esempio il
-            monologo interiore.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe von Gedanken, z. B. eines inneren Monologes</desc>
-               </valItem>
-               <valItem ident="written">
-                  <gloss xml:lang="en" versionDate="2016-11-25">written</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">geschrieben</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">quotation from a written source</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">문어 원본으로부터 인용</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">引用自一份書面來源文件。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">書かれた資料の引用．</desc>
-                  <desc versionDate="2007-06-12" xml:lang="fr">citation d'une source écrite</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">cita de una fuente escrita.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">citazione da una fonte scritta.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Zitat aus einer schriftlichen Quelle</desc>
-               </valItem>
-               <valItem ident="soCalled">
-                  <gloss xml:lang="en" versionDate="2020-12-20">so called</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">sogenannt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">authorial distance</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">작가의 거리두기</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">distancia autorial</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">著者による区別．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">distance prise par rapport à l'auteur</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">distanza dell'autore</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Distanzierung des Autors</desc>
-               </valItem>
-               <valItem ident="foreign">
-                  <gloss xml:lang="en" versionDate="2016-11-25">foreign</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">fremdartig</gloss>
-                  <desc versionDate="2008-04-06" xml:lang="es">palabras extranjeras</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">mots étrangers</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">parole straniere</desc>
-               </valItem>
-               <valItem ident="distinct">
-                  <gloss xml:lang="en" versionDate="2016-11-25">distinct</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">distinkt</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">linguistically distinct</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">lingüisticamente distinto</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">linguistiquement distinct</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">linguisticamente distinto</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">linguistisch hervorgehoben</desc>
-               </valItem>
-               <valItem ident="term">
-                  <desc versionDate="2013-03-18" xml:lang="en">technical term</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">término técnico</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">terme technique</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">termine tecnico</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Fachbegriff</desc>
-               </valItem>
-               <valItem ident="emph">
-                  <gloss xml:lang="en" versionDate="2016-11-25">emph</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">betont</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">rhetorically emphasized</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">énfasis retórico</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">mis en valeur par un procédé rhétorique.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">retoricamente marcato</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">rhetorische Emphase</desc>
-               </valItem>
-               <valItem ident="mentioned">
-                  <gloss xml:lang="en" versionDate="2016-11-25">mentioned</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">erwähnt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">refering to itself, not its normal referent</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">일반적인 지시체가 아니라 그 자체를 가리킴</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">se refiere a sí mismo, no a su referente habitual</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">一般的な指示対象ではないもの．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">métalinguistic, i.e. faisant référence à lui-même et non à son
-            référent habituel.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">che si riferisce a se stesso e non al suo
-            referente abituale</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">bezieht sich auf sich selbst, 
-            nicht auf den üblichen Bezugspunkt</desc>
-               </valItem>
-            </valList>
-         </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <valList type="closed" mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="ru"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
-            </valList>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples"
+                      source="#NZETC01"
+                      xml:lang="en">
+                  <div type="verse">
+                     <head>Night in Tarras</head>
+                     <lg type="stanza">
+                        <l>At evening tramping on the hot white road</l>
+                        <l>…</l>
+                     </lg>
+                     <lg type="stanza">
+                        <l>A wind sprang up from nowhere as the sky</l>
+                        <l>…</l>
+                     </lg>
+                  </div>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2012-04-21" xml:lang="en">
+               <p>The <att>type</att> attribute is present on a number of
+	elements, not all of which are members of <ident type="class">att.typed</ident>, usually because these elements
+	restrict the possible values for the attribute in a specific way.</p>
+            </remarks>
          </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
          <child/>
       </childElements>
-   </q>
+   </quote>
    <persName ident="persName"
              elementName="persName"
-             elementLabel="Person"
+             elementLabel="Author"
              minOccur=""
              maxOccur=""
-             path="/*:accMat/*:persName"
-             currentLevel="2"
-             popup="2"
+             path="/*:list/*:item/*:persName"
+             currentLevel="3"
+             popup="3"
              teiElement="&lt;persName/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
@@ -231,68 +306,12 @@
                             person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
                             when you link a record to this element.)</desc>
       <availableAtts elementName="persName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="replace"
-                 usage="opt">
-            <valList type="closed">
-               <valItem ident="main">
-                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>the normalized transcription of the name in fidal or
-                                        another script</desc>
-               </valItem>
-               <valItem ident="given">
-                  <desc>name received later in life, different from the other
-                                        specified types of names</desc>
-               </valItem>
-               <valItem ident="birth">
-                  <desc>name given at birth</desc>
-               </valItem>
-               <valItem ident="baptismal">
-                  <desc>name given at baptism</desc>
-               </valItem>
-               <valItem ident="regnal">
-                  <desc>name given on coronation (kings and queens but also
-                                        patriarchs)</desc>
-               </valItem>
-               <valItem ident="monastic">
-                  <desc>name given on entering monastic life </desc>
-               </valItem>
-               <valItem ident="horse">
-                  <desc>the name of the battle horse of kings and rulers</desc>
-               </valItem>
-               <valItem ident="nick">
-                  <desc>a name given to a person associated to his occupation or
-                                        other deeds</desc>
-               </valItem>
-               <valItem ident="war">
-                  <desc>nom de guerre (if different from horse name, e.g.
-                                        Malas)</desc>
-               </valItem>
-               <valItem ident="hypocoristic">
-                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
-                                        Takla Māryām)</desc>
-               </valItem>
-               <valItem ident="patronymic">
-                  <desc>father's name, esp. for eventual Russian names, but could
-                                        be also highlighted in others</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>alternative name</desc>
-               </valItem>
-               <valItem ident="tabot">
-                  <desc>the saint to whom the tābot is dedicated</desc>
-               </valItem>
+                 ident="role"
+                 mode="change">
+            <valList type="closed" mode="change">
+               <valItem mode="add" ident="author"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -301,4 +320,21 @@
          <child/>
       </childElements>
    </persName>
+   <p ident="p"
+      elementName="p"
+      elementLabel="Free text box"
+      minOccur=""
+      maxOccur=""
+      path="/*:list/*:item/*:p"
+      currentLevel="3"
+      popup="3"
+      teiElement="&lt;p/&gt;">
+      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
+                            coherent descriptive text.</desc>
+      <availableAtts elementName="p"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </p>
 </TEI>

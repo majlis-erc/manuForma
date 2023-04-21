@@ -945,7 +945,7 @@ and that a single TEI document may contain texts in many languages.</p>
          <child>
             <element ident="date" label="Date"/>
             <element ident="p" label="Free text box"/>
-            <element ident="q" label="Transcription"/>
+            <element ident="quote" label="Transcription"/>
             <element ident="locus" label="Folios"/>
             <element ident="persName" label="Person name"/>
             <element ident="signatures" label="signatures"/>
@@ -1354,142 +1354,134 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </p>
-   <q ident="q"
-      elementName="q"
-      elementLabel="Transcription"
-      minOccur=""
-      maxOccur=""
-      path="/*:history/*:provenance/*:q"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;q/&gt;">
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription"
+          minOccur=""
+          maxOccur=""
+          path="/*:history/*:provenance/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
       <desc>Quotation from the manuscript. Use the "xml:lang" attribute to specify the
                             language.</desc>
-      <availableAtts elementName="q">
+      <availableAtts elementName="quote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="defective"
+                 usage="opt">
+            <desc versionDate="2007-03-05" xml:lang="en">indicates whether the passage being quoted is defective,
+      i.e. incomplete through loss or damage.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">인용 어구의 결합 여부를 표시한다. 즉, 손실 또는 손상을 통한 불완전성</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所引用的段落是否不完全，例如因遺失或損毀而不完全。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">
+      当該部分に問題があるかどうかを示す．例えば，欠損や損傷による不完
+      全さなど．
+</desc>
+            <desc versionDate="2009-05-28" xml:lang="fr">indique si le passage décrit est fautif, i.e. incomplet en raison d'une lacune ou d'une détérioration.</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica se il brano citato sia o meno incompleto a causa di perdite o danni</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica si el pasaje que se describe es completo o no, p.ej. si ha sufrido pérdidas o daños.</desc>
+            <datatype>
+               <dataRef key="teidata.xTruthValue"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="notation"
+                 usage="opt">
+            <desc versionDate="2012-03-26" xml:lang="en">names the notation used for the content of the element.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">요소 내용으로 사용되어 앞서 정의된 표기법 이름을 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供先前已定義過、適用於該元素內容的記號名稱。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の内容にある既定表記法の名前を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">précise le nom d'une notation définie précédemment,
+        utilisée dans le contenu de l'élément.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el nombre de una anotación definida
+        previamente y usada para el contenido de un elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">fornisce il nome di un'annotazione definita
+        precedentemente utilizzata come contenuto dell'elemento.</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="subtype"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
+            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
+            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
+          c'est nécessaire.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <remarks versionDate="2013-01-13" xml:lang="en">
+               <p>The <att>subtype</att> attribute may be used to provide any
+sub-classification for the element additional to that provided by its
+<att>type</att> attribute.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
+                        sous-classification pour cet élément, en plus de celle fournie par son
+                        propre attribut <att>type</att>.</p>
+            </remarks>
+            <remarks xml:lang="es" versionDate="2008-04-06">
+               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
+<att>type</att> (tipo) de atributo.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p>
+	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
+    素の下位分類を示すために使われる．
+    </p>
+            </remarks>
+         </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
-            <gloss xml:lang="en" versionDate="2016-11-25">type</gloss>
-            <gloss versionDate="2016-11-25" xml:lang="de">Typ</gloss>
-            <desc versionDate="2007-07-18" xml:lang="en">may be used to indicate whether the offset passage is spoken or thought, or to
-        characterize it more finely.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표시된 단락이 대화인지 사고인지를 나타내거나, 더 자세하게 규정하는 데 사용될 수 있다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">可用來指出引文內容為言詞或思想，或者做更詳細的引文描述。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該部分が，発話されたものか，思考されたものかを示すため，または
-        より詳細に性質を示すために使われるかもしれない．</desc>
-            <desc versionDate="2008-12-09" xml:lang="fr">peut être utilisé pour indiquer si le passage cité
-        correspond à une parole ou à une pensée ou encore pour le caractériser plus finement.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">Puede usarse para indicar si el material citado es
-        hablado o pensado, o para caracterizarlo con más precisión.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">può essere usato per indicare se il brano citato è
-        parlato o pensato, oppure per caratterizzarlo con maggior precisione.</desc>
-            <desc versionDate="2016-11-25" xml:lang="de">kann verwendet werden, um anzuzeigen, ob die abgesetzte 
-        Textpassage gesprochen oder gedacht wird, oder um sie auf andere Weise detaillierter zu beschreiben.</desc>
+            <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
+ classification scheme or typology.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用合適的分類標準或類型來描述該元素。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の分類を示す．</desc>
+            <desc versionDate="2009-05-29" xml:lang="fr">caractérise l'élément en utilisant n'importe quel système ou typologie de classification approprié.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">caracteriza el elemento utilizando una clasificación o tipología funcional.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">caratterizza l'elemento utilizzando una classificazione o tipologia funzionale</desc>
             <datatype>
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="semi">
-               <valItem ident="spoken">
-                  <gloss xml:lang="en" versionDate="2016-11-25">spoken</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gesprochen</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of speech</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">대화의 표상</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示直接敘述，通常會標上引號。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">発話．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">notation du discours direct</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación del estilo directo, normalmente
-            marcado mediante comillas.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del discorso diretto, di solito
-            segnalato dalle virgolette.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe gesprochener Sprache</desc>
-               </valItem>
-               <valItem ident="thought">
-                  <gloss xml:lang="en" versionDate="2016-11-25">thought</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gedacht</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of thought, e.g. internal monologue</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">사고의 표상, 예를 들어, 내적 독백</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示思考內容，例如內心獨白。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">思考．例えば，内的独白．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">représentation de la pensée, par exemple un
-            monologue intérieur.</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación de un pensamiento o reflexión,
-            p.ej. un monólogo interno.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del pensiero, ad esempio il
-            monologo interiore.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe von Gedanken, z. B. eines inneren Monologes</desc>
-               </valItem>
-               <valItem ident="written">
-                  <gloss xml:lang="en" versionDate="2016-11-25">written</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">geschrieben</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">quotation from a written source</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">문어 원본으로부터 인용</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">引用自一份書面來源文件。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">書かれた資料の引用．</desc>
-                  <desc versionDate="2007-06-12" xml:lang="fr">citation d'une source écrite</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">cita de una fuente escrita.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">citazione da una fonte scritta.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Zitat aus einer schriftlichen Quelle</desc>
-               </valItem>
-               <valItem ident="soCalled">
-                  <gloss xml:lang="en" versionDate="2020-12-20">so called</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">sogenannt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">authorial distance</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">작가의 거리두기</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">distancia autorial</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">著者による区別．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">distance prise par rapport à l'auteur</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">distanza dell'autore</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Distanzierung des Autors</desc>
-               </valItem>
-               <valItem ident="foreign">
-                  <gloss xml:lang="en" versionDate="2016-11-25">foreign</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">fremdartig</gloss>
-                  <desc versionDate="2008-04-06" xml:lang="es">palabras extranjeras</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">mots étrangers</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">parole straniere</desc>
-               </valItem>
-               <valItem ident="distinct">
-                  <gloss xml:lang="en" versionDate="2016-11-25">distinct</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">distinkt</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">linguistically distinct</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">lingüisticamente distinto</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">linguistiquement distinct</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">linguisticamente distinto</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">linguistisch hervorgehoben</desc>
-               </valItem>
-               <valItem ident="term">
-                  <desc versionDate="2013-03-18" xml:lang="en">technical term</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">término técnico</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">terme technique</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">termine tecnico</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Fachbegriff</desc>
-               </valItem>
-               <valItem ident="emph">
-                  <gloss xml:lang="en" versionDate="2016-11-25">emph</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">betont</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">rhetorically emphasized</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">énfasis retórico</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">mis en valeur par un procédé rhétorique.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">retoricamente marcato</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">rhetorische Emphase</desc>
-               </valItem>
-               <valItem ident="mentioned">
-                  <gloss xml:lang="en" versionDate="2016-11-25">mentioned</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">erwähnt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">refering to itself, not its normal referent</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">일반적인 지시체가 아니라 그 자체를 가리킴</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">se refiere a sí mismo, no a su referente habitual</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">一般的な指示対象ではないもの．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">métalinguistic, i.e. faisant référence à lui-même et non à son
-            référent habituel.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">che si riferisce a se stesso e non al suo
-            referente abituale</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">bezieht sich auf sich selbst, 
-            nicht auf den üblichen Bezugspunkt</desc>
-               </valItem>
-            </valList>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples"
+                      source="#NZETC01"
+                      xml:lang="en">
+                  <div type="verse">
+                     <head>Night in Tarras</head>
+                     <lg type="stanza">
+                        <l>At evening tramping on the hot white road</l>
+                        <l>…</l>
+                     </lg>
+                     <lg type="stanza">
+                        <l>A wind sprang up from nowhere as the sky</l>
+                        <l>…</l>
+                     </lg>
+                  </div>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2012-04-21" xml:lang="en">
+               <p>The <att>type</att> attribute is present on a number of
+	elements, not all of which are members of <ident type="class">att.typed</ident>, usually because these elements
+	restrict the possible values for the attribute in a specific way.</p>
+            </remarks>
          </attDef>
          <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1509,7 +1501,7 @@ and that a single TEI document may contain texts in many languages.</p>
          <textNode type="input"/>
          <child/>
       </childElements>
-   </q>
+   </quote>
    <locus ident="locus"
           elementName="locus"
           elementLabel="Folios"
@@ -2852,7 +2844,7 @@ and that a single TEI document may contain texts in many languages.</p>
             <element ident="p" label="Free text box"/>
             <element ident="persName" label="Person name"/>
             <element ident="locus" label="Folios"/>
-            <element ident="q" label="Transcription"/>
+            <element ident="quote" label="Transcription"/>
          </child>
       </childElements>
    </acquisition>
@@ -4577,142 +4569,134 @@ and that a single TEI document may contain texts in many languages.</p>
          <child/>
       </childElements>
    </locus>
-   <q ident="q"
-      elementName="q"
-      elementLabel="Transcription"
-      minOccur=""
-      maxOccur=""
-      path="/*:history/*:acquisition/*:q"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;q/&gt;">
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription"
+          minOccur=""
+          maxOccur=""
+          path="/*:history/*:acquisition/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
       <desc>Quotation from the manuscript. Use the "xml:lang" attribute to specify the
                             language.</desc>
-      <availableAtts elementName="q">
+      <availableAtts elementName="quote">
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="defective"
+                 usage="opt">
+            <desc versionDate="2007-03-05" xml:lang="en">indicates whether the passage being quoted is defective,
+      i.e. incomplete through loss or damage.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">인용 어구의 결합 여부를 표시한다. 즉, 손실 또는 손상을 통한 불완전성</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所引用的段落是否不完全，例如因遺失或損毀而不完全。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">
+      当該部分に問題があるかどうかを示す．例えば，欠損や損傷による不完
+      全さなど．
+</desc>
+            <desc versionDate="2009-05-28" xml:lang="fr">indique si le passage décrit est fautif, i.e. incomplet en raison d'une lacune ou d'une détérioration.</desc>
+            <desc versionDate="2007-11-06" xml:lang="it">indica se il brano citato sia o meno incompleto a causa di perdite o danni</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica si el pasaje que se describe es completo o no, p.ej. si ha sufrido pérdidas o daños.</desc>
+            <datatype>
+               <dataRef key="teidata.xTruthValue"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="notation"
+                 usage="opt">
+            <desc versionDate="2012-03-26" xml:lang="en">names the notation used for the content of the element.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">요소 내용으로 사용되어 앞서 정의된 표기법 이름을 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供先前已定義過、適用於該元素內容的記號名稱。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の内容にある既定表記法の名前を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">précise le nom d'une notation définie précédemment,
+        utilisée dans le contenu de l'élément.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">indica el nombre de una anotación definida
+        previamente y usada para el contenido de un elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">fornisce il nome di un'annotazione definita
+        precedentemente utilizzata come contenuto dell'elemento.</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+         </attDef>
+         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 ident="subtype"
+                 usage="opt">
+            <gloss xml:lang="en" versionDate="2009-05-29">subtype</gloss>
+            <gloss versionDate="2009-05-29" xml:lang="fr">sous-type</gloss>
+            <desc versionDate="2005-10-10" xml:lang="en">provides a sub-categorization of the element, if needed</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
+            <desc versionDate="2007-06-12" xml:lang="fr">fournit une sous-catégorisation de l'élément, si
+          c'est nécessaire.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
+            <datatype>
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <remarks versionDate="2013-01-13" xml:lang="en">
+               <p>The <att>subtype</att> attribute may be used to provide any
+sub-classification for the element additional to that provided by its
+<att>type</att> attribute.</p>
+            </remarks>
+            <remarks xml:lang="fr" versionDate="2007-06-12">
+               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
+                        sous-classification pour cet élément, en plus de celle fournie par son
+                        propre attribut <att>type</att>.</p>
+            </remarks>
+            <remarks xml:lang="es" versionDate="2008-04-06">
+               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
+<att>type</att> (tipo) de atributo.</p>
+            </remarks>
+            <remarks xml:lang="ja" versionDate="2008-04-05">
+               <p>
+	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
+    素の下位分類を示すために使われる．
+    </p>
+            </remarks>
+         </attDef>
          <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  ident="type"
                  usage="opt">
-            <gloss xml:lang="en" versionDate="2016-11-25">type</gloss>
-            <gloss versionDate="2016-11-25" xml:lang="de">Typ</gloss>
-            <desc versionDate="2007-07-18" xml:lang="en">may be used to indicate whether the offset passage is spoken or thought, or to
-        characterize it more finely.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표시된 단락이 대화인지 사고인지를 나타내거나, 더 자세하게 규정하는 데 사용될 수 있다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">可用來指出引文內容為言詞或思想，或者做更詳細的引文描述。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該部分が，発話されたものか，思考されたものかを示すため，または
-        より詳細に性質を示すために使われるかもしれない．</desc>
-            <desc versionDate="2008-12-09" xml:lang="fr">peut être utilisé pour indiquer si le passage cité
-        correspond à une parole ou à une pensée ou encore pour le caractériser plus finement.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">Puede usarse para indicar si el material citado es
-        hablado o pensado, o para caracterizarlo con más precisión.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">può essere usato per indicare se il brano citato è
-        parlato o pensato, oppure per caratterizzarlo con maggior precisione.</desc>
-            <desc versionDate="2016-11-25" xml:lang="de">kann verwendet werden, um anzuzeigen, ob die abgesetzte 
-        Textpassage gesprochen oder gedacht wird, oder um sie auf andere Weise detaillierter zu beschreiben.</desc>
+            <desc versionDate="2005-10-10" xml:lang="en">characterizes the element in some sense, using any convenient
+ classification scheme or typology.</desc>
+            <desc versionDate="2007-12-20" xml:lang="ko">다양한 분류 스키마 또는 유형을 사용해서 요소의 특성을 기술한다.</desc>
+            <desc versionDate="2007-05-02" xml:lang="zh-TW">用合適的分類標準或類型來描述該元素。</desc>
+            <desc versionDate="2008-04-05" xml:lang="ja">当該要素の分類を示す．</desc>
+            <desc versionDate="2009-05-29" xml:lang="fr">caractérise l'élément en utilisant n'importe quel système ou typologie de classification approprié.</desc>
+            <desc versionDate="2007-05-04" xml:lang="es">caracteriza el elemento utilizando una clasificación o tipología funcional.</desc>
+            <desc versionDate="2007-01-21" xml:lang="it">caratterizza l'elemento utilizzando una classificazione o tipologia funzionale</desc>
             <datatype>
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="semi">
-               <valItem ident="spoken">
-                  <gloss xml:lang="en" versionDate="2016-11-25">spoken</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gesprochen</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of speech</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">대화의 표상</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示直接敘述，通常會標上引號。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">発話．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">notation du discours direct</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación del estilo directo, normalmente
-            marcado mediante comillas.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del discorso diretto, di solito
-            segnalato dalle virgolette.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe gesprochener Sprache</desc>
-               </valItem>
-               <valItem ident="thought">
-                  <gloss xml:lang="en" versionDate="2016-11-25">thought</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">gedacht</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">representation of thought, e.g. internal monologue</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">사고의 표상, 예를 들어, 내적 독백</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">表示思考內容，例如內心獨白。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">思考．例えば，内的独白．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">représentation de la pensée, par exemple un
-            monologue intérieur.</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">representación de un pensamiento o reflexión,
-            p.ej. un monólogo interno.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">rappresentazione del pensiero, ad esempio il
-            monologo interiore.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Wiedergabe von Gedanken, z. B. eines inneren Monologes</desc>
-               </valItem>
-               <valItem ident="written">
-                  <gloss xml:lang="en" versionDate="2016-11-25">written</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">geschrieben</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">quotation from a written source</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">문어 원본으로부터 인용</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">引用自一份書面來源文件。</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">書かれた資料の引用．</desc>
-                  <desc versionDate="2007-06-12" xml:lang="fr">citation d'une source écrite</desc>
-                  <desc versionDate="2007-05-04" xml:lang="es">cita de una fuente escrita.</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">citazione da una fonte scritta.</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Zitat aus einer schriftlichen Quelle</desc>
-               </valItem>
-               <valItem ident="soCalled">
-                  <gloss xml:lang="en" versionDate="2020-12-20">so called</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">sogenannt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">authorial distance</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">작가의 거리두기</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">distancia autorial</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">著者による区別．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">distance prise par rapport à l'auteur</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">distanza dell'autore</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Distanzierung des Autors</desc>
-               </valItem>
-               <valItem ident="foreign">
-                  <gloss xml:lang="en" versionDate="2016-11-25">foreign</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">fremdartig</gloss>
-                  <desc versionDate="2008-04-06" xml:lang="es">palabras extranjeras</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">mots étrangers</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">parole straniere</desc>
-               </valItem>
-               <valItem ident="distinct">
-                  <gloss xml:lang="en" versionDate="2016-11-25">distinct</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">distinkt</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">linguistically distinct</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">lingüisticamente distinto</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">linguistiquement distinct</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">linguisticamente distinto</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">linguistisch hervorgehoben</desc>
-               </valItem>
-               <valItem ident="term">
-                  <desc versionDate="2013-03-18" xml:lang="en">technical term</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">término técnico</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">terme technique</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">termine tecnico</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">Fachbegriff</desc>
-               </valItem>
-               <valItem ident="emph">
-                  <gloss xml:lang="en" versionDate="2016-11-25">emph</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">betont</gloss>
-                  <desc versionDate="2013-03-18" xml:lang="en">rhetorically emphasized</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">énfasis retórico</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">mis en valeur par un procédé rhétorique.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">retoricamente marcato</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">rhetorische Emphase</desc>
-               </valItem>
-               <valItem ident="mentioned">
-                  <gloss xml:lang="en" versionDate="2016-11-25">mentioned</gloss>
-                  <gloss versionDate="2016-11-25" xml:lang="de">erwähnt</gloss>
-                  <desc versionDate="2007-07-18" xml:lang="en">refering to itself, not its normal referent</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">일반적인 지시체가 아니라 그 자체를 가리킴</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">se refiere a sí mismo, no a su referente habitual</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">一般的な指示対象ではないもの．</desc>
-                  <desc versionDate="2008-12-09" xml:lang="fr">métalinguistic, i.e. faisant référence à lui-même et non à son
-            référent habituel.</desc>
-                  <desc versionDate="2007-11-06" xml:lang="it">che si riferisce a se stesso e non al suo
-            referente abituale</desc>
-                  <desc versionDate="2016-11-25" xml:lang="de">bezieht sich auf sich selbst, 
-            nicht auf den üblichen Bezugspunkt</desc>
-               </valItem>
-            </valList>
+            <exemplum xml:lang="en">
+               <egXML xmlns="http://www.tei-c.org/ns/Examples"
+                      source="#NZETC01"
+                      xml:lang="en">
+                  <div type="verse">
+                     <head>Night in Tarras</head>
+                     <lg type="stanza">
+                        <l>At evening tramping on the hot white road</l>
+                        <l>…</l>
+                     </lg>
+                     <lg type="stanza">
+                        <l>A wind sprang up from nowhere as the sky</l>
+                        <l>…</l>
+                     </lg>
+                  </div>
+               </egXML>
+            </exemplum>
+            <remarks versionDate="2012-04-21" xml:lang="en">
+               <p>The <att>type</att> attribute is present on a number of
+	elements, not all of which are members of <ident type="class">att.typed</ident>, usually because these elements
+	restrict the possible values for the attribute in a specific way.</p>
+            </remarks>
          </attDef>
          <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -4732,5 +4716,5 @@ and that a single TEI document may contain texts in many languages.</p>
          <textNode type="input"/>
          <child/>
       </childElements>
-   </q>
+   </quote>
 </TEI>
