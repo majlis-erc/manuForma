@@ -420,16 +420,14 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat" formName="accMat" formLabel="Heritage data" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat/tei:list" formName="accMat" formLabel="Heritage data" repeat="no">
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
-                <group groupLabel="List the scholars involved (if known) and quote from the heritage material." groupNo="1">
-                    <element xpath="tei:p"/>
-                    <element xpath="tei:persName"/>
-                    <element xpath="tei:q"/>
+                <group groupLabel="List the scholars involved (if known) and quote from the heritage material." groupNo="1" repeatable="yes">
+                    <element xpath="tei:item"/>
                 </group>
             </elementGroups>
         </subform> 

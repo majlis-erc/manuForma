@@ -278,8 +278,10 @@ End license statement: do not remove -->
                         <gloss>Add your content descriptions</gloss>
                         <gloss type="tei">&lt;msContents/&gt;</gloss>
                         <content>
-                            <elementRef key="summary"/>
-                            <elementRef key="msItem"/>
+                            <sequence>
+                                <elementRef key="summary" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="msItem" minOccurs="1" maxOccurs="unbounded"/>
+                            </sequence>
                         </content>
                     </elementSpec>
                     <elementSpec ident="msItem" mode="change">
@@ -292,16 +294,18 @@ End license statement: do not remove -->
                             <memberOf key="att.msExcerpt" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="title"/>
-                            <elementRef key="author"/>
-                            <elementRef key="docDate"/>
-                            <elementRef key="textLang"/>
-                            <elementRef key="rubric"/>
-                            <elementRef key="incipit"/>
-                            <elementRef key="explicit"/>
-                            <elementRef key="finalRubric"/>
-                            <elementRef key="note"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="1" maxOccurs="unbounded"/>
+                                <elementRef key="title" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
+                                <elementRef key="docDate" minOccurs="0" maxOccurs="unbounded"/>
+                                <elementRef key="textLang" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="rubric" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="incipit" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="explicit" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="finalRubric" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="class" mode="change">
@@ -344,7 +348,7 @@ End license statement: do not remove -->
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="p" minOccurs="1" maxOccurs="1"/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
@@ -369,10 +373,11 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="surname"/>
-                            <elementRef key="addName"/>
-                            <textNode/>
+                            <sequence>
+                                <elementRef key="forename" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="surname" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
@@ -381,7 +386,7 @@ End license statement: do not remove -->
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="docDate" mode="change">
                         <gloss>Date of composition</gloss>
                         <gloss type="tei">&lt;docDate/&gt;</gloss>
@@ -399,7 +404,7 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="rubric" mode="change">
                         <gloss>Rubric</gloss>
                         <gloss type="tei">&lt;rubric/&gt;</gloss>
@@ -412,8 +417,10 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="q"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="quote" minOccurs="0" maxOccurs="1"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="xml:lang" mode="change">
@@ -430,15 +437,27 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="q" mode="change">
-                        <gloss>Quotation</gloss>
-                        <gloss type="tei">&lt;q/&gt;</gloss>
+                    <elementSpec ident="quote" mode="change">
+                        <gloss>Transcription</gloss>
+                        <gloss type="tei">&lt;quote&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Quotation from the manuscript.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.ascribed.directed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
                         <content>
                             <textNode/>
                         </content>
+                        <attList>
+                            <attDef ident="who" mode="delete"/>
+                            <attList>
+                                <attDef ident="xml:lang" mode="delete"> </attDef>
+                            </attList>
+                        </attList>
                     </elementSpec>
-                    
-                    
+
+
                     <elementSpec ident="incipit" mode="change">
                         <gloss>Incipit</gloss>
                         <gloss type="tei">&lt;incipit/&gt;</gloss>
@@ -450,8 +469,10 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="q"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="xml:lang" mode="change">
@@ -477,8 +498,10 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="q"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="xml:lang" mode="change">
@@ -505,8 +528,10 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="q"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="xml:lang" mode="change">
@@ -521,7 +546,7 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="colophon" mode="change">
+                    <elementSpec ident="colophon" mode="delete">
                         <gloss>Colophon</gloss>
                         <gloss type="tei">&lt;colophon/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:id="colophon.desc" xml:lang="en">A statement providing information about the date, place,
@@ -531,8 +556,10 @@ End license statement: do not remove -->
                             <memberOf key="att.msExcerpt" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="locus"/>
-                            <elementRef key="q"/>
+                            <sequence>
+                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
+                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="xml:lang" mode="change">
