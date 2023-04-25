@@ -141,8 +141,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="level" mode="opt"/>
-                            <attDef ident="xml:lang" mode="delete">
-                            </attDef>
+                            <attDef ident="xml:lang" mode="delete"> </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="msContents" mode="delete"/>
@@ -150,6 +149,8 @@ End license statement: do not remove -->
                     <elementSpec ident="note" mode="delete"/>
                     <elementSpec ident="summary" mode="delete"/>
                     <elementSpec ident="persName" mode="change">
+                        <gloss>Person name</gloss>
+                        <gloss type="tei">&lt;persName&gt;</gloss>
                         <desc xml:lang="en">You can either create child elements for every component like ism, kunya, etc. OR you enter the full form
                             into the field.</desc>
                         <classes mode="change">
@@ -162,8 +163,6 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="forename"/>
                             <elementRef key="addName"/>
-                            <elementRef key="addName"/>
-                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
@@ -216,21 +215,26 @@ End license statement: do not remove -->
                             <elementRef key="person"/>
                         </content>
                     </elementSpec>
+                    
                     <elementSpec ident="person" mode="change">
+                        <gloss>Person entry</gloss>
+                        <gloss type="tei">&lt;person&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="persName"/>
-                            <elementRef key="birth"/>
-                            <elementRef key="death"/>
-                            <elementRef key="floruit"/>
-                            <elementRef key="sex"/>
-                            <elementRef key="faith"/>
-                            <elementRef key="occupation"/>
-                            <elementRef key="residence"/>
-                            <elementRef key="bibl"/>
-                            <elementRef key="idno"/>
+                            <sequence>
+                                <elementRef key="persName"/>
+                                <elementRef key="birth"/>
+                                <elementRef key="death"/>
+                                <elementRef key="floruit"/>
+                                <elementRef key="sex"/>
+                                <elementRef key="faith"/>
+                                <elementRef key="occupation"/>
+                                <elementRef key="residence"/>
+                                <elementRef key="bibl"/>
+                                <elementRef key="idno"/>
+                            </sequence>
                         </content>
                         <attList>
                             <attDef ident="role" mode="change">
@@ -244,6 +248,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="addName" mode="change">
+                        <gloss>Additional name</gloss>
+                        <gloss type="tei">&lt;addName&gt;</gloss>
                         <desc xml:lang="en">Name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the type
                             of name from the attribute list.</desc>
                         <classes mode="change">
@@ -280,6 +286,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="forename" mode="change">
+                        <gloss>Forename</gloss>
+                        <gloss type="tei">&lt;forename&gt;</gloss>
                         <desc xml:lang="en">A person's given name.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -296,6 +304,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="bibl" mode="change">
+                        <gloss>Bibliographic reference</gloss>
+                        <gloss type="tei">&lt;bibl&gt;</gloss>
                         <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
@@ -304,28 +314,21 @@ End license statement: do not remove -->
                             <memberOf key="att.sortable" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
-                        <content>
-                            <elementRef key="author"/>
+                        <content><sequence>
                             <elementRef key="title"/>
-                            <elementRef key="editor"/>
-                            <elementRef key="date"/>
-                            <elementRef key="pubPlace"/>
-                            <elementRef key="publisher"/>
-                            <elementRef key="series"/>
-                            <elementRef key="biblScope"/>
-                            <elementRef key="citedRange"/>
                             <elementRef key="ptr"/>
+                            <elementRef key="citedRange"/></sequence>
                         </content>
                         <attList>
                             <attRef name="xml:id" class="att.global"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="series" mode="change">
+                    <elementSpec ident="series" mode="delete">
                         <content>
                             <textNode/>
                         </content>
                     </elementSpec>
-                    <elementSpec ident="publisher" mode="change">
+                    <elementSpec ident="publisher" mode="delete">
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                         </classes>
@@ -333,12 +336,14 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                     </elementSpec>
-                    <elementSpec ident="biblScope" mode="change">
+                    <elementSpec ident="biblScope" mode="delete">
                         <content>
                             <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="birth" mode="change">
+                        <gloss>Birth</gloss>
+                        <gloss type="tei">&lt;birth&gt;</gloss>
                         <desc xml:lang="en">Provide the date and place of birth in the respective child elements.</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -405,6 +410,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="death" mode="change">
+                        <gloss>Death</gloss>
+                        <gloss type="tei">&lt;death&gt;</gloss>
                         <desc xml:lang="en">Provide the date and place of death in the respective child elements.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
@@ -434,6 +441,8 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="faith" mode="change">
+                        <gloss>Religious affiliation</gloss>
+                        <gloss type="tei">&lt;faith&gt;</gloss>
                         <desc xml:lang="en">Specify the religion of the person.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
@@ -457,6 +466,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="floruit" mode="change">
+                        <gloss>Period of activity</gloss>
+                        <gloss type="tei">&lt;floruit&gt;</gloss>
                         <desc xml:lang="en">Specify the period of intellectual activity. Fill in the date in the agreed-upon calendrical system. Use
                             the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter "and "notBefore"
                             attributes together.</desc>
@@ -484,6 +495,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="idno" mode="change">
+                        <gloss>Linked Open Data resources</gloss>
+                        <gloss type="tei">&lt;idno&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -508,7 +521,7 @@ End license statement: do not remove -->
                             <attRef name="resp" class="att.global.responsibility"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="listRelation" mode="change">
+                    <elementSpec ident="listRelation" mode="delete">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.sortable" mode="delete"/>
@@ -519,6 +532,8 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="occupation" mode="change">
+                        <gloss>Profession</gloss>
+                        <gloss type="tei">&lt;occupation&gt;</gloss>
                         <desc xml:lang="en">Describe the person's profession. This is NOT the role the person played with regard to the
                             manuscripts.</desc>
                         <classes mode="change">
@@ -546,7 +561,7 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="editor" mode="change">
+                    <elementSpec ident="editor" mode="delete">
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.naming" mode="delete"/>
@@ -560,7 +575,7 @@ End license statement: do not remove -->
                             <attDef ident="ref" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="surname" mode="change">
+                    <elementSpec ident="surname" mode="delete">
                         <classes mode="change">
                             <memberOf key="att.personal" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -575,7 +590,7 @@ End license statement: do not remove -->
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="pubPlace" mode="change">
+                    <elementSpec ident="pubPlace" mode="delete">
                         <classes mode="change">
                             <memberOf key="att.naming" mode="delete"/>
                         </classes>
@@ -588,6 +603,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="placeName" mode="change">
+                        <gloss>Place</gloss>
+                        <gloss type="tei">&lt;placeName&gt;</gloss>
                         <desc xml:lang="en">Look up the place records in the database to specify a settlement or town. Try different spellings in
                             different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
                             when you link a place record to this element.)</desc>
@@ -615,7 +632,7 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="relation" mode="change">
+                    <elementSpec ident="relation" mode="delete">
                         <desc xml:lang="en">Specify the relationship between the person and another person or object. Choose the kind of relation from
                             the list provided in the "name" attributea and add the URIs of the respective records.</desc>
                         <classes mode="change">
@@ -970,6 +987,8 @@ End license statement: do not remove -->
 
                     </elementSpec>
                     <elementSpec ident="residence" mode="change">
+                        <gloss>Place of residence</gloss>
+                        <gloss type="tei">&lt;residence&gt;</gloss>
                         <desc xml:lang="en">Where did the person live?</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
@@ -988,6 +1007,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="sex" mode="change">
+                        <gloss>Gender</gloss>
+                        <gloss type="tei">&lt;sex&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -1010,6 +1031,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="citedRange" mode="change">
+                        <gloss>Referenced page(s)</gloss>
+                        <gloss type="tei">&lt;citedRange&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -1022,6 +1045,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="ptr" mode="change">
+                        <gloss>Link to Zotero record</gloss>
+                        <gloss type="tei">&lt;ptr&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
