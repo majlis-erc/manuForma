@@ -802,7 +802,7 @@
                                             </xsl:if>
                                             -->
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
-                                                <xf:label> Download XML (Chrome Only)</xf:label>
+                                                <xf:label> Download XML (Chrome only)</xf:label>
                                             </xf:submit>
                                             <!--
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal">
@@ -827,7 +827,7 @@
                                                     data-bs-target="#collapseProjectMetadata" 
                                                     aria-expanded="false" 
                                                     aria-controls="collapseProjectMetadata">
-                                                    Assign Project Metadata
+                                                    Assign project metadata
                                                 </button>
                                             </h2>
                                             <div id="collapseProjectMetadata" 
@@ -845,7 +845,7 @@
                                                             </xf:itemset>
                                                         </xf:select1>
                                                         <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                                            <xf:label>Load Project Metadata</xf:label> 
+                                                            <xf:label>Load project metadata</xf:label> 
                                                             <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}"/>
                                                             <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
                                                             <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
@@ -891,7 +891,7 @@
                                                                 </xf:itemset>
                                                             </xf:select1>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
-                                                                <xf:label> Load Selected Record </xf:label>
+                                                                <xf:label> Load selected record </xf:label>
                                                             </xf:submit>
                                                         </div>
                                                     </div>
@@ -905,7 +905,7 @@
                                                     data-bs-target="#collapseNewRecord" 
                                                     aria-expanded="false" 
                                                     aria-controls="collapseNewRecord">
-                                                    New Record
+                                                    New record / Upload record
                                                 </button>
                                             </h2>
                                             <div id="collapseNewRecord" 
@@ -914,14 +914,14 @@
                                                 data-bs-parent="#loadRecords">
                                                 <div class="accordion-body">
                                                     <div class="fileLoading">
-                                                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
+                                                        <h4 class="h6">Upload record <small class="text-muted">(from your computer)</small></h4>
                                                         <div class="input-group mb-3">
                                                             <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
                                                                 <xf:label/>
                                                             </xf:upload>
                                                             <!-- WS:Note add upload graphic, make inline with above? -->
                                                             <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
-                                                                <xf:label>Load Record</xf:label>
+                                                                <xf:label>Load record</xf:label>
                                                             </xf:submit>
                                                         </div>
                                                     </div>  
@@ -935,7 +935,7 @@
                                                                 </xf:itemset>
                                                             </xf:select1>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
-                                                                <xf:label> Load Template File </xf:label>    
+                                                                <xf:label> Load template file </xf:label>    
                                                             </xf:submit>
                                                         </div>
                                                     </div>
