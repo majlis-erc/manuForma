@@ -163,6 +163,8 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="forename"/>
                             <elementRef key="addName"/>
+                            <elementRef key="name"/>
+                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
@@ -215,7 +217,7 @@ End license statement: do not remove -->
                             <elementRef key="person"/>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="person" mode="change">
                         <gloss>Person entry</gloss>
                         <gloss type="tei">&lt;person&gt;</gloss>
@@ -279,9 +281,10 @@ End license statement: do not remove -->
                                     <valItem ident="patronym"/>
                                     <valItem ident="epithet"/>
                                     <valItem ident="acronym"/>
+                                    <valItem ident="fullname"/>
                                 </valList>
                             </attDef>
-                            <attRef name="xml:id" class="att.global"/>
+                            <attRef name="xml:id" mode="delete"/>
                             <attRef name="ref" class="att.canonical"/>
                         </attList>
                     </elementSpec>
@@ -303,6 +306,39 @@ End license statement: do not remove -->
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
+                    
+                    <elementSpec ident="name" mode="change">
+                        <gloss>Fullname</gloss>
+                        <gloss type="tei">&lt;name&gt;</gloss>
+                        <desc xml:lang="en">The full form of a person's name.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytics" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.datable.w3c" mode="delete"/>
+                            <memberOf key="att.datable.iso" mode="delete"/>
+                            <memberOf key="att.datable.custom" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="delete"/>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
@@ -314,10 +350,10 @@ End license statement: do not remove -->
                             <memberOf key="att.sortable" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
-                        <content><sequence>
-                            <elementRef key="title"/>
-                            <elementRef key="ptr"/>
-                            <elementRef key="citedRange"/></sequence>
+                        <content>
+                                <elementRef key="title"/>
+                                <elementRef key="ptr"/>
+                                <elementRef key="citedRange"/>
                         </content>
                         <attList>
                             <attRef name="xml:id" class="att.global"/>
@@ -360,6 +396,9 @@ End license statement: do not remove -->
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
                             <attDef ident="calendar" mode="delete"/>
+                            <attDef ident="dur" mode="delete"/>
+                            <attDef ident="dur-iso" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="period" mode="delete"/>
                             <attDef ident="when-custom" mode="delete"/>
                             <attDef ident="notBefore-custom" mode="delete"/>
@@ -382,6 +421,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="date" mode="change">
+                        <gloss>Date</gloss>
+                        <gloss type="tei">&lt;date&gt;</gloss>
                         <desc xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
                             case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
                         <classes mode="change">
@@ -495,7 +536,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="idno" mode="change">
-                        <gloss>Linked Open Data resources</gloss>
+                        <gloss>Link</gloss>
                         <gloss type="tei">&lt;idno&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
@@ -619,6 +660,7 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attRef name="ref" class="att.canonical"/>

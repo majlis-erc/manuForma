@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World Record title information Person information." />
+      <meta name="description" content="Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World Record title information  " />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -244,7 +244,7 @@
                            </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-html" appearance="minimal"><xf:label> Preview HTML</xf:label></xf:submit>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
@@ -256,7 +256,7 @@
                      <div class="accordion" id="loadRecords">
                         <div class="accordion-item">
                            <h2 class="accordion-header" id="headingProjectMetadata"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectMetadata" aria-expanded="false" aria-controls="collapseProjectMetadata">
-                                 Assign Project Metadata
+                                 Assign project metadata
                                  </button></h2>
                            <div id="collapseProjectMetadata" class="accordion-collapse collapse" aria-labelledby="headingProjectMetadata" data-bs-parent="#loadRecords">
                               <div class="accordion-body">
@@ -266,7 +266,7 @@
                                     <xf:itemset ref="instance('i-projectSpecificData')//*:option"><xf:label ref="@name"></xf:label><xf:value ref="@name"></xf:value>
                                     </xf:itemset>
                                  </xf:select1>
-                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label>Load Project Metadata</xf:label><xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label>Load project metadata</xf:label><xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:editionStmt"></xf:delete>
                                     <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:editionStmt" position="after"></xf:insert>
                                     <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
                                  </xf:trigger>
@@ -288,7 +288,7 @@
                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
                                           </xf:itemset>
                                        </xf:select1>
-                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load selected record </xf:label></xf:submit>
                                     </div>
                                  </div>
                               </div>
@@ -296,15 +296,15 @@
                         </div>
                         <div class="accordion-item">
                            <h2 class="accordion-header" id="headingNewRecord"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewRecord" aria-expanded="false" aria-controls="collapseNewRecord">
-                                 New Record
+                                 New record / Upload record
                                  </button></h2>
                            <div id="collapseNewRecord" class="accordion-collapse collapse" aria-labelledby="headingNewRecord" data-bs-parent="#loadRecords">
                               <div class="accordion-body">
                                  <div class="fileLoading">
-                                    <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
+                                    <h4 class="h6">Upload record <small class="text-muted">(from your computer)</small></h4>
                                     <div class="input-group mb-3">
                                        <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal"><xf:label></xf:label></xf:upload>
-                                       <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal"><xf:label>Load Record</xf:label></xf:submit>
+                                       <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal"><xf:label>Load record</xf:label></xf:submit>
                                     </div>
                                  </div>
                                  <div class="fileLoading">
@@ -312,7 +312,7 @@
                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" class="form-control" ref="instance('i-selected')"><xf:label></xf:label><xf:itemset ref="instance('i-selectTemplate')//*:template"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
                                           </xf:itemset>
                                        </xf:select1>
-                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal"><xf:label> Load Template File </xf:label></xf:submit>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal"><xf:label> Load template file </xf:label></xf:submit>
                                     </div>
                                  </div>
                               </div>
