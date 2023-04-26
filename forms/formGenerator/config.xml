@@ -28,7 +28,7 @@
         </retrieveOptions>
     </recordManagement>
     <blankTemplates>
-        <template name="Generic Persons Template" src="/forms/templates/persons-template.xml"/>
+        <template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"/>
     </blankTemplates>
     <lookups>
         <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
@@ -54,13 +54,13 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Persons">
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
             <formDesc> </formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
-                <group groupLabel="Names." groupNo="1" repeatable="yes">
+                <group groupLabel="Name." groupNo="1" repeatable="yes">
                     <element xpath="tei:persName"/>
                 </group>
                 <group groupLabel="Biographical data." groupNo="2" repeatable="no">
@@ -75,7 +75,7 @@
                 <group groupLabel="Research literature." groupNo="3" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
-                <group groupLabel="Linked Open Data reference." groupNo="4" repeatable="yes">
+                <group groupLabel="Linked Open Data reference." groupNo="4" repeatable="no">
                     <element xpath="tei:idno"/>
                 </group>
             </elementGroups>

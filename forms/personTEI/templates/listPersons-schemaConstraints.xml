@@ -30,13 +30,13 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="persName" label="Person name"/>
+            <element ident="persName" label="Name of the person"/>
             <element ident="birth" label="Birth"/>
             <element ident="death" label="Death"/>
             <element ident="floruit" label="Period of activity"/>
             <element ident="sex" label="Gender"/>
-            <element ident="faith" label="Religious affiliation"/>
-            <element ident="occupation" label="Profession"/>
+            <element ident="faith" label="Denomination"/>
+            <element ident="occupation" label="Professional activity"/>
             <element ident="residence" label="Place of residence"/>
             <element ident="bibl" label="Bibliographic reference"/>
             <element ident="idno" label="Link"/>
@@ -45,15 +45,15 @@
    </person>
    <persName ident="persName"
              elementName="persName"
-             elementLabel="Person name"
+             elementLabel="Name of the person"
              minOccur=""
              maxOccur=""
              path="/*:person/*:persName"
              currentLevel="2"
              popup="2"
              teiElement="&lt;persName/&gt;">
-      <desc>You can either create child elements for every component like ism, kunya, etc. OR you enter the full form
-                            into the field.</desc>
+      <desc>You can either create child elements for every component like ism, kunya, etc. into the Additional Name OR
+                            you enter the full form into the Fullname field.</desc>
       <availableAtts elementName="persName">
          <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -86,6 +86,7 @@
                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                  ident="xml:lang"
                  mode="change">
+            <gloss>Language</gloss>
             <valList type="closed" mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
@@ -231,7 +232,6 @@ one initial.</desc>
                <valItem ident="patronym"/>
                <valItem ident="epithet"/>
                <valItem ident="acronym"/>
-               <valItem ident="fullname"/>
             </valList>
          </attDef>
          <attDef ident="xml:id"/>
@@ -747,14 +747,14 @@ one initial.</desc>
    </sex>
    <faith ident="faith"
           elementName="faith"
-          elementLabel="Religious affiliation"
+          elementLabel="Denomination"
           minOccur=""
           maxOccur=""
           path="/*:person/*:faith"
           currentLevel="2"
           popup="2"
           teiElement="&lt;faith/&gt;">
-      <desc>Specify the religion of the person.</desc>
+      <desc>Specify the denomination of the person.</desc>
       <availableAtts elementName="faith">
          <attDef ident="cert"/>
          <attDef ident="source"/>
@@ -776,7 +776,7 @@ one initial.</desc>
    </faith>
    <occupation ident="occupation"
                elementName="occupation"
-               elementLabel="Profession"
+               elementLabel="Professional activity"
                minOccur=""
                maxOccur=""
                path="/*:person/*:occupation"
@@ -917,7 +917,7 @@ one initial.</desc>
       <childElements>
          <textNode type="input"/>
          <child>
-            <element ident="title" label="Title"/>
+            <element ident="title" label="Title of publication"/>
             <element ident="ptr" label="Link to Zotero record"/>
             <element ident="citedRange" label="Referenced page(s)"/>
          </child>
@@ -925,7 +925,7 @@ one initial.</desc>
    </bibl>
    <title ident="title"
           elementName="title"
-          elementLabel="Title"
+          elementLabel="Title of publication"
           minOccur=""
           maxOccur=""
           path="/*:person/*:bibl/*:title"
