@@ -1258,7 +1258,7 @@
             <body>
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <h2 class="h3 mainElement"><xsl:value-of select="$lookup/@lookupLabel"/></h2>
-                    <p>Search controlled vocabulary  <xf:output value="local-name(current())"/></p>
+                    <p>Search the database entries  <xf:output value="local-name(current())"/></p>
                     <xsl:choose>
                         <xsl:when test="$lookup/@elementName='bibl'">
                             <div class="input-group">
