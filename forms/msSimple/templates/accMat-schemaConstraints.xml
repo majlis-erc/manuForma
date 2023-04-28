@@ -303,7 +303,7 @@
          <child>
             <element ident="title" label="Title of publication"/>
             <element ident="ptr" label="Link to Zotero record"/>
-            <element ident="citedRange" label="Referenced page(s)"/>
+            <element ident="citedRange" label="Referenced section(s)"/>
          </child>
       </childElements>
    </bibl>
@@ -348,15 +348,19 @@
         currentLevel="4"
         popup="4"
         teiElement="&lt;ptr/&gt;">
-      <availableAtts elementName="ptr"/>
+      <availableAtts elementName="ptr">
+         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                 ident="target"
+                 mode="change"/>
+      </availableAtts>
       <childElements>
-         <textNode type="input"/>
          <child/>
       </childElements>
    </ptr>
    <citedRange ident="citedRange"
                elementName="citedRange"
-               elementLabel="Referenced page(s)"
+               elementLabel="Referenced section(s)"
                minOccur=""
                maxOccur=""
                path="/*:list/*:item/*:bibl/*:citedRange"
