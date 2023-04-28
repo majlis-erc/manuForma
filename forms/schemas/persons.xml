@@ -79,79 +79,11 @@ End license statement: do not remove -->
                 -->
 
                     <moduleRef key="core"
-                        except="list abbr add addrLine address analytic biblScope biblStruct binaryObject cb choice cit corr del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode pubPlace publisher quote rb reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term time unclear unit author note p q ref textLang title"/>
-
-                    <moduleRef key="tei"/>
-
-                    <elementSpec ident="locus" module="msdescription" mode="delete"/>
-                    <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
-                    <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
-                    <elementSpec ident="TEI" module="textstructure" mode="delete"/>
-                    <elementSpec ident="msDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="catchwords" module="msdescription" mode="delete"/>
-                    <elementSpec ident="collation" module="msdescription" mode="delete"/>
-                    <elementSpec ident="condition" module="msdescription" mode="delete"/>
-                    <elementSpec ident="dim" module="msdescription" mode="delete"/>
-                    <elementSpec ident="foliation" module="msdescription" mode="delete"/>
-                    <elementSpec ident="material" module="msdescription" mode="delete"/>
-                    <elementSpec ident="objectDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="origDate" module="msdescription" mode="delete"/>
-                    <elementSpec ident="origPlace" module="msdescription" mode="delete"/>
-                    <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
-                    <elementSpec ident="watermark" module="msdescription" mode="delete"/>
-                    <elementSpec ident="p" module="core" mode="delete"/>
-                    <elementSpec ident="depth" module="msdescription" mode="delete"/>
-                    <elementSpec ident="height" module="msdescription" mode="delete"/>
-                    <elementSpec ident="width" module="msdescription" mode="delete"/>
-                    <elementSpec ident="item" module="core" mode="delete"/>
-                    <elementSpec ident="list" module="core" mode="delete"/>
-                    <elementSpec ident="measure" module="core" mode="delete"/>
-
-
-                    <elementSpec ident="dimensions" mode="delete"/>
-                    <elementSpec ident="supportDesc" mode="delete"/>
-                    <elementSpec ident="support" mode="delete"/>
-                    <elementSpec ident="extent" mode="delete"/>
-                    <elementSpec ident="formula" mode="delete"/>
+                        include="bible citedRange ptr title"/>
                     <moduleRef key="namesdates"
                         include="persName listPerson person addName forename birth placeName death floruit sex faith occupation residence"/>
-                    <elementSpec ident="author" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="surname"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="textLang" mode="delete"/>
-
-                    <elementSpec ident="title" mode="change">
-                        <gloss>Title of publication</gloss>
-                        <gloss type="tei">&lt;title&gt;</gloss>
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="level" mode="opt"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-
-                    <elementSpec ident="msContents" mode="delete"/>
-                    <elementSpec ident="msItem" mode="delete"/>
-                    <elementSpec ident="note" mode="delete"/>
-                    <elementSpec ident="summary" mode="delete"/>
+                    <moduleRef key="header" include="idno"/>
+                    
                     <elementSpec ident="persName" mode="change">
                         <gloss>Name of the person</gloss>
                         <gloss type="tei">&lt;persName&gt;</gloss>
@@ -214,13 +146,7 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="rubric" mode="delete"/>
-                    <elementSpec ident="incipit" mode="delete"/>
-                    <elementSpec ident="explicit" mode="delete"/>
-                    <elementSpec ident="finalRubric" mode="delete"/>
-                    <elementSpec ident="colophon" mode="delete"/>
-                    <elementSpec ident="q" mode="delete"/>
-                    <moduleRef key="header" include="idno"/>
+                    
                     <elementSpec ident="listPerson" mode="change">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -356,48 +282,12 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
 
-                    <elementSpec ident="bibl" mode="change">
-                        <gloss>Bibliographic reference</gloss>
-                        <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.declarable" mode="delete"/>
-                            <memberOf key="att.docStatus" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <sequence>
-                                <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
-                                <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
-                                <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
-                            </sequence>
-                        </content>
-                        <attList>
-                            <attRef name="xml:id" class="att.global"/>
-                        </attList>
-                    </elementSpec>
+                    
 
-                    <elementSpec ident="series" mode="delete">
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
+                    
 
-                    <elementSpec ident="publisher" mode="delete">
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <elementSpec ident="biblScope" mode="delete">
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
+                    
+                    
 
                     <elementSpec ident="birth" mode="change">
                         <gloss>Birth</gloss>
@@ -496,15 +386,7 @@ End license statement: do not remove -->
                             <attRef name="source" class="att.global.source"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="desc" mode="change">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
+                    
                     <elementSpec ident="faith" mode="change">
                         <gloss>Denomination</gloss>
                         <gloss type="tei">&lt;faith&gt;</gloss>
@@ -588,16 +470,7 @@ End license statement: do not remove -->
                             <attRef name="resp" class="att.global.responsibility"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="listRelation" mode="delete">
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="relation"/>
-                        </content>
-                    </elementSpec>
+                    
                     <elementSpec ident="occupation" mode="change">
                         <gloss>Professional activity</gloss>
                         <gloss type="tei">&lt;occupation&gt;</gloss>
@@ -629,47 +502,9 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="editor" mode="delete">
-                        <classes mode="change">
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <elementRef key="forename"/>
-                            <elementRef key="surname"/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="surname" mode="delete">
-                        <classes mode="change">
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="pubPlace" mode="delete">
-                        <classes mode="change">
-                            <memberOf key="att.naming" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
-                        </attList>
-                    </elementSpec>
+                    
+                    
+                    
                     <elementSpec ident="placeName" mode="change">
                         <gloss>Place</gloss>
                         <gloss type="tei">&lt;placeName&gt;</gloss>
@@ -1101,8 +936,107 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
+                    
+                    
+                    <elementSpec ident="bibl" mode="change">
+                        <gloss>Bibliographic reference</gloss>
+                        <gloss type="tei">&lt;bibl&gt;</gloss>
+                        <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.docStatus" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
+                        </content>
+                        <!--<attList>
+                            <attRef name="xml:id" mode="delete"/>
+                            <attRef name="type" mode="delete"/>
+                        </attList>-->
+                    </elementSpec>
+                    
+                    <elementSpec ident="title" mode="change">
+                        <gloss>Title of publication</gloss>
+                        <gloss type="tei">&lt;title&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="level" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="evidence" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
+                    <elementSpec ident="ptr" mode="change">
+                        <gloss>Link to Zotero record</gloss>
+                        <gloss type="tei">&lt;ptr&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.internetMedia" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <empty/>
+                        </content>
+                        <attList>
+                            <attDef ident="target" mode="change"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
                     <elementSpec ident="citedRange" mode="change">
-                        <gloss>Referenced page(s)</gloss>
+                        <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -1113,19 +1047,9 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="ptr" mode="change">
-                        <gloss>Link to Zotero record</gloss>
-                        <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <attList>
-                            <attDef ident="cRef" mode="delete"/>
-                            <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
                         </attList>
                     </elementSpec>
                 </schemaSpec>
