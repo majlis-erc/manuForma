@@ -172,7 +172,7 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI//tei:physDesc" formName="objectDesc" formLabel="Codicological definition" repeat="no">
+        <!--<subform xpath="/tei:TEI//tei:physDesc" formName="objectDesc" formLabel="Codicological definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
@@ -182,7 +182,7 @@
                     <element xpath="."/>
                 </group>
             </elementGroups>
-        </subform>
+        </subform>-->
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
@@ -203,7 +203,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="Define the writing material of the manuscript." groupNo="1">
+                <group groupLabel="Define the type and the writing material of the manuscript." groupNo="1">
                     <element xpath="tei:support"/>
                 </group>
                 <group groupLabel="Measurements of the page (number of folios, height and width)." groupNo="2">
@@ -216,6 +216,13 @@
                 </group>
             </elementGroups>
             <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Single manuscript"/>
+                        <valItem ident="Composite manuscript"/>
+                        <valItem ident="Multiple text manuscript"/>
+                    </valList>
+                </element>
                 <element ident="catchwords">
                     <valList type="closed">
                         <valItem ident="No marking "/>

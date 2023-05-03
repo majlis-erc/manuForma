@@ -980,7 +980,7 @@
                                     <div class="input-group mb-3">
                                         <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
-                                            <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
+                                            <xf:alert>* Use the following URI pattern: https://jalit.org/COLLECTION/UNIQUE_ID/tei</xf:alert>
                                         </xf:input>
                                     </div>
                                 </xf:case>
