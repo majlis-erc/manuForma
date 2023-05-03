@@ -55,9 +55,21 @@
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-fulltemplate.xml"/>
+            <elementGroups>
+                <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:sponsor"/>
+                    <element xpath="tei:funder"/>
+                </group>
+                <group groupLabel="Project team." groupNo="2" repeatable="no">
+                    <element xpath="tei:principal"/>
+                    <element xpath="tei:editor"/>
+                    <element xpath="tei:respStmt"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
-            <formDesc> </formDesc>
+            <formDesc>Add names in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
@@ -74,7 +86,7 @@
                     <element xpath="tei:occupation"/>
                     <element xpath="tei:residence"/>
                 </group>
-                <group groupLabel="Bibliography." groupNo="3" repeatable="yes">
+                <group groupLabel="Bibliographic reference." groupNo="3" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
                 <group groupLabel="Linked Open Data reference." groupNo="4" repeatable="no">
