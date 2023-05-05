@@ -79,18 +79,19 @@ End license statement: do not remove -->
                 -->
 
 
-                    <moduleRef key="msdescription" include="objectDesc physDesc"/>
+                    <moduleRef key="msdescription" include="physDesc"/>
+                    <moduleRef key="linking" include="ab"/>
                     <moduleRef key="tei"/>
 
                     <elementSpec ident="physDesc" module="msdescription" mode="change">
                         <content>
-                            <elementRef key="objectDesc"/>
+                            <elementRef key="ab"/>
                         </content>
                     </elementSpec>
 
-                    <elementSpec ident="objectDesc" module="msdescription" mode="change">
+                    <elementSpec ident="ab" module="linking" mode="change">
                         <gloss>Choose the type of manuscript</gloss>
-                        <gloss type="tei">&lt;objectDesc&gt;</gloss>
+                        <gloss type="tei">&lt;ab&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Contains descriptions of the manuscript's physical components. Use the "form"
                             attribute to indicate if the manuscript was created as a single unit, a composite, or a multiple text manuscript.</desc>
                         <attList>
@@ -99,9 +100,12 @@ End license statement: do not remove -->
                             <attDef ident="change" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="form" mode="change">
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="subtype" mode="change">
+                                <gloss>Type of manuscript</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="single">
                                         <desc xml:lang="en">Single manuscript: a volume consisting of one codicological unit and containing only one
@@ -119,9 +123,11 @@ End license statement: do not remove -->
                             </attDef>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="change">
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="rend" mode="change">
+                                <gloss>Format</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="square"> </valItem>
                                     <valItem mode="add" ident="horizontalRectangle"> </valItem>
@@ -136,6 +142,7 @@ End license statement: do not remove -->
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="change">
+                                <gloss>Shape</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="codex"> </valItem>
                                     <valItem mode="add" ident="scroll"> </valItem>
@@ -143,11 +150,19 @@ End license statement: do not remove -->
                                 </valList>
                             </attDef>
                             <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="codicologicalDefinition"> </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
+                        <content>
+                            <empty/>
+                        </content>
                     </elementSpec>
                 </schemaSpec>
             </div>
