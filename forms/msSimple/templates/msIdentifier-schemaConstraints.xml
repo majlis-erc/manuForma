@@ -22,17 +22,80 @@
       <availableAtts elementName="msIdentifier"/>
       <childElements>
          <child>
+            <element ident="country" label="*Country of location"/>
+            <element ident="settlement" label="*Place"/>
             <element ident="repository" label="*Institution"/>
             <element ident="collection" label="*Collection"/>
             <element ident="idno" label="*Shelfmark"/>
             <element ident="msName" label="Name by which manuscript is generally known"/>
-            <element ident="altIdentifier" label="Add alternate identifier"/>
             <element ident="objectName" label="msIdentifier"/>
-            <element ident="country" label="*Country of location"/>
-            <element ident="settlement" label="*Place"/>
+            <element ident="altIdentifier" label="Add alternate identifier"/>
          </child>
       </childElements>
    </msIdentifier>
+   <country ident="country"
+            elementName="country"
+            elementLabel="*Country of location"
+            minOccur=""
+            maxOccur=""
+            path="/*:msIdentifier/*:country"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;country/&gt;">
+      <desc>Specify the country where the holding institution is situated.</desc>
+      <availableAtts elementName="country"/>
+      <controlledValues>
+         <element xmlns="" ident="country">
+            <valList type="closed">
+               <valItem ident="Russia"/>
+               <valItem ident="USA"/>
+               <valItem ident="Great Britain"/>
+               <valItem ident="Israel"/>
+               <valItem ident="Hungary"/>
+               <valItem ident="France"/>
+               <valItem ident="Egypt"/>
+               <valItem ident="Germany"/>
+               <valItem ident="Ukraine"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </country>
+   <settlement ident="settlement"
+               elementName="settlement"
+               elementLabel="*Place"
+               minOccur=""
+               maxOccur=""
+               path="/*:msIdentifier/*:settlement"
+               currentLevel="2"
+               popup="2"
+               teiElement="&lt;settlement/&gt;">
+      <desc>The city or town where the holding institution is based.</desc>
+      <availableAtts elementName="settlement"/>
+      <controlledValues>
+         <element xmlns="" ident="settlement">
+            <valList type="closed">
+               <valItem ident="St Petersburg"/>
+               <valItem ident="London"/>
+               <valItem ident="Jerusalem"/>
+               <valItem ident="Budapest"/>
+               <valItem ident="Cambridge"/>
+               <valItem ident="Paris"/>
+               <valItem ident="New York"/>
+               <valItem ident="Cairo"/>
+               <valItem ident="Leipzig"/>
+               <valItem ident="Kyiv"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <textNode type="input"/>
+         <child/>
+      </childElements>
+   </settlement>
    <repository ident="repository"
                elementName="repository"
                elementLabel="*Institution"
@@ -146,6 +209,20 @@
          <child/>
       </childElements>
    </msName>
+   <objectName ident="objectName"
+               elementName="objectName"
+               elementLabel="objectName"
+               minOccur=""
+               maxOccur=""
+               path="/*:msIdentifier/*:objectName"
+               currentLevel="2"
+               popup="2"
+               teiElement="&lt;objectName/&gt;">
+      <availableAtts elementName="objectName"/>
+      <childElements>
+         <child/>
+      </childElements>
+   </objectName>
    <altIdentifier ident="altIdentifier"
                   elementName="altIdentifier"
                   elementLabel="Add alternate identifier"
@@ -195,81 +272,4 @@
          <child/>
       </childElements>
    </idno>
-   <objectName ident="objectName"
-               elementName="objectName"
-               elementLabel="objectName"
-               minOccur=""
-               maxOccur=""
-               path="/*:msIdentifier/*:objectName"
-               currentLevel="2"
-               popup="2"
-               teiElement="&lt;objectName/&gt;">
-      <availableAtts elementName="objectName"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </objectName>
-   <country ident="country"
-            elementName="country"
-            elementLabel="*Country of location"
-            minOccur=""
-            maxOccur=""
-            path="/*:msIdentifier/*:country"
-            currentLevel="2"
-            popup="2"
-            teiElement="&lt;country/&gt;">
-      <desc>Specify the country where the holding institution is situated.</desc>
-      <availableAtts elementName="country"/>
-      <controlledValues>
-         <element xmlns="" ident="country">
-            <valList type="closed">
-               <valItem ident="Russia"/>
-               <valItem ident="USA"/>
-               <valItem ident="Great Britain"/>
-               <valItem ident="Israel"/>
-               <valItem ident="Hungary"/>
-               <valItem ident="France"/>
-               <valItem ident="Egypt"/>
-               <valItem ident="Germany"/>
-               <valItem ident="Ukraine"/>
-            </valList>
-         </element>
-      </controlledValues>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </country>
-   <settlement ident="settlement"
-               elementName="settlement"
-               elementLabel="*Place"
-               minOccur=""
-               maxOccur=""
-               path="/*:msIdentifier/*:settlement"
-               currentLevel="2"
-               popup="2"
-               teiElement="&lt;settlement/&gt;">
-      <desc>The city or town where the holding institution is based.</desc>
-      <availableAtts elementName="settlement"/>
-      <controlledValues>
-         <element xmlns="" ident="settlement">
-            <valList type="closed">
-               <valItem ident="St Petersburg"/>
-               <valItem ident="London"/>
-               <valItem ident="Jerusalem"/>
-               <valItem ident="Budapest"/>
-               <valItem ident="Cambridge"/>
-               <valItem ident="Paris"/>
-               <valItem ident="New York"/>
-               <valItem ident="Cairo"/>
-               <valItem ident="Leipzig"/>
-               <valItem ident="Kyiv"/>
-            </valList>
-         </element>
-      </controlledValues>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </settlement>
 </TEI>
