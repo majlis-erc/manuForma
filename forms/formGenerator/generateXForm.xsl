@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.07 Beta
+        Version: 1.09 Beta
         
 
         NOTES: 
@@ -693,13 +693,20 @@
                                     </li>
                                     -->
                                     <xsl:for-each select="$configDoc//subforms/subform[not(@formLabel = 'Header')]">
-                                        <xsl:variable name="subformPath" select="@xpath"/>
+                                        <xsl:variable name="subformPath" select="replace(replace(@xpath,'descendant-or-self::','/'),'descendant::','/')"/>
                                         <xsl:variable name="elementName" select="substring-after(tokenize(@xpath,'/')[last()],':')"/>
                                         <xsl:variable name="path" select="replace(replace(replace(replace(replace($subformPath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//'),'tei:','*:')"/>
                                         <xsl:variable name="repeatIndexId" select="concat('navRepeat',@formName)"/>
                                         <li class="nav-item">
                                             <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = '{string(@formName)}']" class="nav-link">
                                                 <xf:label><xsl:value-of select="string(@formLabel)"/>  </xf:label>
+                                                <!--
+                                                <xf:action
+                                                    ev:event="xforms-insert"
+                                                    if="not(instance('i-rec'){$path})">
+                                                    <xf:insert origin="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]" context="instance('i-rec'){$path}/parent::*[1]"/>
+                                                </xf:action>
+                                                -->
                                                 <xf:action ev:event="DOMActivate">
                                                     <xf:toggle case="view-data-entry"/>
                                                     <xf:unload targetid="subform"/>
@@ -713,7 +720,7 @@
                                                 </xf:action>
                                             </xf:trigger>
                                         </li>
-                                        <xf:repeat ref="instance('i-rec'){$path}[position() &gt; 1]" id="{$repeatIndexId}">
+                                        <xf:repeat ref="instance('i-rec'){replace($path,'///','//')}[position() &gt; 1]" id="{$repeatIndexId}">
                                             <li class="nav-item">
                                                 <xf:trigger appearance="minimal" class="nav-link">
                                                     <xf:label><xsl:value-of select="string(@formLabel)"/>  [<xf:output value="position() + 1"/>]</xf:label>
@@ -802,7 +809,7 @@
                                             </xsl:if>
                                             -->
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
-                                                <xf:label> Download XML (Chrome only)</xf:label>
+                                                <xf:label> Download XML (Chrome Only)</xf:label>
                                             </xf:submit>
                                             <!--
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal">
@@ -827,7 +834,7 @@
                                                     data-bs-target="#collapseProjectMetadata" 
                                                     aria-expanded="false" 
                                                     aria-controls="collapseProjectMetadata">
-                                                    Assign project metadata
+                                                    Assign Project Metadata
                                                 </button>
                                             </h2>
                                             <div id="collapseProjectMetadata" 
@@ -845,9 +852,9 @@
                                                             </xf:itemset>
                                                         </xf:select1>
                                                         <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                                            <xf:label>Load project metadata</xf:label> 
+                                                            <xf:label>Load Project Metadata</xf:label> 
                                                             <xf:delete ev:event="DOMActivate" ref="instance('i-rec')//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}"/>
-                                                            <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]/descendant-or-self::*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
+                                                            <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt" at="." origin="instance('i-projectSpecificData')//*:option[@name = instance('i-projectSpecificDataSelected')//*:selected]//*:{$configDoc//*:projectSpecificData/*:xmlPath/@element}" position="after"/>
                                                             <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
                                                         </xf:trigger>
                                                         <hr/>
@@ -891,7 +898,7 @@
                                                                 </xf:itemset>
                                                             </xf:select1>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
-                                                                <xf:label> Load selected record </xf:label>
+                                                                <xf:label> Load Selected Record </xf:label>
                                                             </xf:submit>
                                                         </div>
                                                     </div>
@@ -905,7 +912,7 @@
                                                     data-bs-target="#collapseNewRecord" 
                                                     aria-expanded="false" 
                                                     aria-controls="collapseNewRecord">
-                                                    New record / Upload record
+                                                    New Record
                                                 </button>
                                             </h2>
                                             <div id="collapseNewRecord" 
@@ -914,14 +921,14 @@
                                                 data-bs-parent="#loadRecords">
                                                 <div class="accordion-body">
                                                     <div class="fileLoading">
-                                                        <h4 class="h6">Upload record <small class="text-muted">(from your computer)</small></h4>
+                                                        <h4 class="h6">Upload Record <small class="text-muted">(From Your Computer)</small></h4>
                                                         <div class="input-group mb-3">
                                                             <xf:upload class="form-control" ref="instance('i-upload')" appearance="minimal">
                                                                 <xf:label/>
                                                             </xf:upload>
                                                             <!-- WS:Note add upload graphic, make inline with above? -->
                                                             <xf:submit submission="s-post-to-update" class="btn btn-outline-secondary" appearance="minimal">
-                                                                <xf:label>Load record</xf:label>
+                                                                <xf:label>Load Record</xf:label>
                                                             </xf:submit>
                                                         </div>
                                                     </div>  
@@ -935,7 +942,7 @@
                                                                 </xf:itemset>
                                                             </xf:select1>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template" appearance="minimal">
-                                                                <xf:label> Load template file </xf:label>    
+                                                                <xf:label> Load Template File </xf:label>    
                                                             </xf:submit>
                                                         </div>
                                                     </div>
@@ -943,16 +950,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                     <!--                                 
-                                    <div class="card preview">
-                                        <div class="card-header">Preview XML</div>
-                                        <xf:group>
-                                            <xf:output value="serialize(instance('i-rec'))"/>
-                                            <xf:setvalue ref="instance('i-rec')" ev:event="DOMActivate" value="transform(instance('i-rec'),serialize(instance('i-prettyPrint')),true())"/>
-                                        </xf:group>
-                                    </div>
-                                    -->
                                 </xf:case>
                                 <xf:case id="view-admin">
                                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
@@ -980,7 +977,7 @@
                                     <div class="input-group mb-3">
                                         <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
-                                            <xf:alert>* Use the following URI pattern: https://jalit.org/COLLECTION/UNIQUE_ID/tei</xf:alert>
+                                            <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
                                         </xf:input>
                                     </div>
                                 </xf:case>
@@ -1015,7 +1012,7 @@
                 <xsl:otherwise>i-repeatIndex</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="xpath" select="string($subform/@xpath)"/>
+        <xsl:variable name="xpath" select="replace(replace(string($subform/@xpath),'descendant-or-self::','/'),'descendant::','/')"/>
         <xsl:variable name="path" select="replace(replace(replace(replace(replace($xpath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//'),'tei:','*:')"/>
         <!-- 
         <xsl:variable name="subsequence">
@@ -1081,23 +1078,13 @@
                     </xsl:choose>
                 </xsl:variable>
                 <h2 class="h3 mainElement">
-                    <!--
-                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                        <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
-                        <xf:delete ev:event="DOMActivate" ref="{$path}[position() = instance('{$repeatIndex}')/index]"/>
-                    </xf:trigger>
-                    <xf:trigger class="btn controls add" appearance="minimal">
-                        <xf:label><i class="bi bi-plus-circle"/></xf:label>
-                        <xf:insert ev:event="DOMActivate" context="{$parentXPath}" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{$elementName}']" position="after"/>
-                    </xf:trigger> 
-                    -->
                     <xsl:value-of select="$subform/@formLabel"/>
                     <xsl:if test="$subform/subform"> [<xf:output value="instance('i-repeatIndex')/index"/>]</xsl:if>
                 </h2>
                 <xsl:if test="$subform/formDesc">
                     <p class="alert alert-light hint"><xsl:value-of select="$subform/formDesc"/></p>    
-                </xsl:if> 
-                <xf:group namespace="http://www.w3.org/2002/xforms" ref="{$path}[position() = instance('{$repeatIndex}')/index]" id="{$elementName}-root">
+                </xsl:if>
+                <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec'){replace($path,'///','//')}[position() = instance('{$repeatIndex}')/index]" id="{$elementName}-root">
                     <xsl:choose>
                         <xsl:when test="$subform/subform">
                             <div class="container-fluid">
@@ -1145,50 +1132,6 @@
                                 </div>
                             </div>
                         </xsl:when>
-                        <!--
-                        <xsl:when test="$subform/elementGroups">
-                            <div class="accordion" id="elementGroup">
-                                <xsl:for-each select="$subform/elementGroups/group">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{@groupNo}">
-                                                <button class="accordion-button collapsed" 
-                                                    type="button" data-bs-toggle="collapse" 
-                                                    data-bs-target="#collapse{@groupNo}" 
-                                                    aria-expanded="false" 
-                                                    aria-controls="collapse{@groupNo}">
-                                                    <xsl:value-of select="@groupLabel"/>
-                                                </button>
-                                            </h2>
-                                            <div id="collapse{@groupNo}" 
-                                                class="accordion-collapse collapse" 
-                                                aria-labelledby="heading{@groupNo}" 
-                                                data-bs-parent="#elementGroup">
-                                                <div class="accordion-body">
-                                                    <xsl:for-each select="element">
-                                                        <xsl:variable name="groupElement" select="replace(@xpath, 'tei:', '*:')"/>
-                                                        <xsl:variable name="groupElementPath" select="concat($path,'/',$groupElement)"/>
-                                                        <xf:repeat namespace="http://www.w3.org/2002/xforms" 
-                                                            ref="{$groupElement}[position() = instance('{$repeatIndex}')/index]" 
-                                                            id="{$groupElement}-group">
-                                                            <div>
-                                                                    <xsl:call-template name="xformElementUI">
-                                                                        <xsl:with-param name="subform" select="$subform"/>
-                                                                        <xsl:with-param name="xpath" select="$groupElement"/>
-                                                                        <xsl:with-param name="xpathIndex"><xsl:value-of select="$path"/>[position() = instance('{$repeatIndex}')/index]<xsl:value-of select="$groupElement"/>[position() = instance('i-repeatIndex')/index]</xsl:with-param>
-                                                                        <xsl:with-param name="currentLevel">2</xsl:with-param>
-                                                                        <xsl:with-param name="maxLevel" select="$maxLevel"/>
-                                                                        <xsl:with-param name="repeatID"/>
-                                                                    </xsl:call-template>
-                                                            </div>
-                                                        </xf:repeat>
-                                                    </xsl:for-each>
-                                                </div>
-                                            </div>
-                                        </div>  
-                                </xsl:for-each>   
-                            </div>
-                        </xsl:when>
-                        -->
                         <xsl:otherwise>
                             <xsl:call-template name="xformElementUI">
                                 <xsl:with-param name="subform" select="$subform"/>
@@ -1258,7 +1201,7 @@
             <body>
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <h2 class="h3 mainElement"><xsl:value-of select="$lookup/@lookupLabel"/></h2>
-                    <p>Search the database entries  <xf:output value="local-name(current())"/></p>
+                    <p>Search controlled vocabulary  <xf:output value="local-name(current())"/></p>
                     <xsl:choose>
                         <xsl:when test="$lookup/@elementName='bibl'">
                             <div class="input-group">
@@ -1408,16 +1351,19 @@
                                             </xf:repeat>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:call-template name="groupElementDisplayRepeatable">
-                                                <xsl:with-param name="subform" select="$subform"/>
-                                                <xsl:with-param name="xpath" select="$xpath"/>
-                                                <xsl:with-param name="xpathIndex" select="$xpathIndex"/>
-                                                <xsl:with-param name="currentLevel" select="$currentLevel"/>
-                                                <xsl:with-param name="maxLevel" select="$maxLevel"/>
-                                                <xsl:with-param name="repeatID" select="$repeatID"/>
-                                                <xsl:with-param name="grpRepeatID" select="$grpRepeatID"/>
-                                                <xsl:with-param name="groupElements" select="$groupElements"/>
-                                            </xsl:call-template> 
+                                            <xf:repeat id="{$grpRepeatID}" ref="./*[{$groupElements}]">
+                                                <xsl:call-template name="groupElementDisplayRepeatable">
+                                                    <xsl:with-param name="subform" select="$subform"/>
+                                                    <xsl:with-param name="xpath" select="$xpath"/>
+                                                    <xsl:with-param name="xpathIndex" select="$xpathIndex"/>
+                                                    <xsl:with-param name="currentLevel" select="$currentLevel"/>
+                                                    <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                                                    <xsl:with-param name="repeatID" select="$repeatID"/>
+                                                    <xsl:with-param name="grpRepeatID" select="$grpRepeatID"/>
+                                                    <xsl:with-param name="groupElements" select="$groupElements"/>
+                                                    <xsl:with-param name="elementName" select="$elementName"/>
+                                                </xsl:call-template> 
+                                            </xf:repeat>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -1429,7 +1375,17 @@
                                                 data-bs-target="#collapse{@groupNo}" 
                                                 aria-expanded="false" 
                                                 aria-controls="collapse{@groupNo}">
-                                                <xsl:value-of select="@groupLabel"/>
+                                                <xsl:choose>
+                                                    <xsl:when test="@groupLabelXPath != ''">
+                                                        <xf:group ref=".[{@groupLabelConditionalElement} != '']">
+                                                            <xf:output value="{@groupLabelXPath}"/>
+                                                        </xf:group>
+                                                        <xf:group ref=".[{@groupLabelConditionalElement} = '']">
+                                                            <xf:output value="'{@groupLabel}'"/>
+                                                        </xf:group>
+                                                    </xsl:when>
+                                                    <xsl:otherwise><xsl:value-of select="@groupLabel"/></xsl:otherwise>
+                                                </xsl:choose>
                                             </button>
                                         </h2>
                                         <div id="collapse{@groupNo}" 
@@ -1584,25 +1540,50 @@
                 <xsl:otherwise><xsl:value-of select="$xpathIndex"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-            <xf:switch class="accordion-item">
+        <div class="accordion-item" xmlns="http://www.w3.org/1999/xhtml">
+            <xf:switch xmlns="http://www.w3.org/2002/xforms">
                 <xf:case id="closed{$grpRepeatID}">
                     <xf:trigger appearance="minimal" class="accordion-header">
-                        <xf:label class="accordion-button collapsed" > <xsl:value-of select="@groupLabel"/></xf:label>
+                        <xf:label class="accordion-button collapsed" > 
+                            <xsl:choose>
+                                <xsl:when test="@groupLabelXPath != ''">
+                                    <xf:group ref=".[{@groupLabelConditionalElement} != '']">
+                                        <xf:output value="{@groupLabelXPath}"/>
+                                    </xf:group>
+                                    <xf:group ref=".[{@groupLabelConditionalElement} = '']">
+                                        <xf:output value="'{@groupLabel}'"/>
+                                    </xf:group>
+                                </xsl:when>
+                                <xsl:otherwise><xsl:value-of select="@groupLabel"/></xsl:otherwise>
+                            </xsl:choose>
+                        </xf:label>
                         <xf:toggle case="open{$grpRepeatID}" ev:event="DOMActivate"/>
                     </xf:trigger>
                 </xf:case>
                 <xf:case id="open{$grpRepeatID}">
                     <xf:trigger appearance="minimal" class="accordion-header">
-                        <xf:label class="accordion-button"><xsl:value-of select="@groupLabel"/></xf:label>
+                        <xf:label class="accordion-button">
+                            <xsl:choose>
+                                <xsl:when test="@groupLabelXPath != ''">
+                                    <xf:group ref=".[{@groupLabelConditionalElement} != '']">
+                                        <xf:output value="{@groupLabelXPath}"/>
+                                    </xf:group>
+                                    <xf:group ref=".[{@groupLabelConditionalElement} = '']">
+                                        <xf:output value="'{@groupLabel}'"/>
+                                    </xf:group>
+                                </xsl:when>
+                                <xsl:otherwise><xsl:value-of select="@groupLabel"/></xsl:otherwise>
+                            </xsl:choose>
+                        </xf:label>
                         <xf:toggle case="closed{$grpRepeatID}" ev:event="DOMActivate"/>
                     </xf:trigger>
-                    <div class="accordion-collapse" >
+                    <div class="accordion-collapse" xmlns="http://www.w3.org/1999/xhtml">
                         <div class="accordion-body">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group" style="width:100%; border-bottom:1px solid #ccc;">
                                 <div class="input-group mb-3 float-end">
                                     <xf:trigger class="btn controls add" appearance="minimal">
                                         <xf:label><i class="bi bi-plus-circle"/></xf:label>
-                                        <xf:insert ev:event="DOMActivate" context="../" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
+                                        <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
                                     </xf:trigger> 
                                     <xsl:value-of select="@groupLabel"/>    
                                 </div>
@@ -1653,20 +1634,20 @@
                                     <!-- Element input for textbox style input -->
                                     <xf:textarea class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
                                     <!-- Element attributes -->
-                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*"> 
+                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
                                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                             <div class="input-group">
                                                 <!-- Attribute value -->
-                                                <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
+                                                <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
                                                 <!-- If controlled attribute values in schemaConstraints file -->
-                                                <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                                                    <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
+                                                <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
+                                                    <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                                         <xf:label ref="@ident"/>
                                                         <xf:value ref="@ident"/>
                                                     </xf:itemset>
                                                 </xf:select1>
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="local-name(current())"/></xf:label>
+                                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
                                                     <xf:delete ev:event="DOMActivate" ref="."/>    
                                                 </xf:trigger>
                                             </div>    
@@ -1694,7 +1675,8 @@
                         </div>
                     </div>
                 </xf:case>
-            </xf:switch>
+            </xf:switch> 
+        </div>    
     </xsl:template>
     <xsl:template name="groupElementDisplay">
         <xsl:param name="subform"/>
@@ -1733,20 +1715,20 @@
             <!-- Element input for textbox style input -->
             <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
             <!-- Element attributes -->
-            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*"> 
+            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
                 <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                     <div class="input-group">
                         <!-- Attribute value -->
-                        <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
+                        <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
                         <!-- If controlled attribute values in schemaConstraints file -->
-                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
+                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                 <xf:label ref="@ident"/>
                                 <xf:value ref="@ident"/>
                             </xf:itemset>
                         </xf:select1>
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="local-name(current())"/></xf:label>
+                            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
                             <xf:delete ev:event="DOMActivate" ref="."/>    
                         </xf:trigger>
                     </div>    
@@ -1782,9 +1764,9 @@
         <xsl:param name="groupElements"/>
         <xsl:variable name="subformName" select="string($subform/@formName)"/>
         <xsl:variable name="elementPath" select="replace(replace(replace(replace($subform/@xpath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//')"/>
-        <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
+        <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar" xmlns="http://www.w3.org/1999/xhtml">
             <div class="btn-group" role="group">
-                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
+                <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline" ref=".[count(preceding-sibling::*[{$groupElements}]) != 0]">
                     <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
                     <xf:delete ev:event="DOMActivate" ref="."/>
                 </xf:trigger>
@@ -1838,29 +1820,33 @@
                     <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/>
                 </span>
                 <div class="input-group float-end">
-                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
+                    <!--
+                    <xf:var name="atts" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident"/>
+                    <xf:var name="currentNode" value="."/>
+                    -->
+                    <xf:group ref=".[not(count(@*[local-name()=instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident]) = count(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident))]">
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]">
+                            <xf:label/>
+                            <!--                             <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef[not(@ident = (current()/@*/local-name()))]"> -->
+                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef">
+                                <xf:label ref="@attLabel"/>
+                                <xf:value ref="@ident"/>
+                            </xf:itemset>
+                            <xf:action ev:event="xforms-value-changed">
+                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
+                            </xf:action>
+                        </xf:select1>
+                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
+                            <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
+                            <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                            <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
+                        </xf:trigger>
+                    </xf:group>
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element]">
                         <xf:label/>
-                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                            <xf:label ref="@ident"/>
-                            <xf:value ref="@ident"/>
-                        </xf:itemset>
-                        <xf:action ev:event="xforms-value-changed">
-                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
-                        </xf:action>
-                    </xf:select1>
-                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
-                        <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
-                        <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
-                        <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
-                    </xf:trigger> 
-                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                        <xf:label/>
-                        <xf:item>
-                            <xf:label> - select - </xf:label>
-                            <xf:value/>
-                        </xf:item>
-                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
+                        <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element[count(@ident[. = $currentNode/child::*/local-name()]) &lt; instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element/@maxOccurs]"> -->
+                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element">
                             <xf:label ref="@label"/>
                             <xf:value ref="@ident"/>
                         </xf:itemset>
@@ -1868,7 +1854,7 @@
                             <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
                         </xf:action>
                     </xf:select1>
-                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
+                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]">
                         <xf:label><i class="bi bi-plus-circle"/> Add </xf:label>
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
@@ -1877,8 +1863,8 @@
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
+                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
                         </xf:action>
@@ -1892,15 +1878,15 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;"/>
-                        <xf:case id="{$grpRepeatID}LookupUnHide">
+                        <xf:case id="{$repeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$repeatID}LookupUnHide">
                             <div class="lookupDisplay">
-                                <xf:group id="{$grpRepeatID}subformLookup"/>
+                                <xf:group id="{$repeatID}subformLookup"/>
                                 <div class="text-right">
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x-circle"/> Close</xf:label>
-                                        <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$grpRepeatID}subformLookup"/>
+                                        <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
+                                        <xf:unload targetid="{$repeatID}subformLookup"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -1976,29 +1962,34 @@
                     <xf:output ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:desc/text()" class="elementTooltip"/>
                 </span>
                 <div class="input-group float-end">
-                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]">
+                    <!--
+                    <xf:var name="atts" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident"/>
+                    <xf:var name="currentNode" value="."/>
+                    -->
+                    <xf:group ref=".[not(count(@*[local-name()=instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident]) = count(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident))]">
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]">
+                            <xf:label/>
+                            <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef[not(@ident = (current()/@*/local-name()))]"> -->
+                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef">
+                                <xf:label ref="@attLabel"/>
+                                <xf:value ref="@ident"/>
+                            </xf:itemset>
+                            <xf:action ev:event="xforms-value-changed">
+                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
+                            </xf:action>
+                        </xf:select1>
+                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
+                            <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
+                            <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                            <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
+                        </xf:trigger>
+                    </xf:group>
+                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element]">
                         <xf:label/>
-                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef">
-                            <xf:label ref="@ident"/>
-                            <xf:value ref="@ident"/>
-                        </xf:itemset>
-                        <xf:action ev:event="xforms-value-changed">
-                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
-                        </xf:action>
-                    </xf:select1>
-                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/descendant-or-self::*:attDef]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
-                        <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
-                        <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
-                        <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
-                    </xf:trigger> 
-                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element]">
-                        <xf:label/>
-                        <xf:item>
-                            <xf:label> - select - </xf:label>
-                            <xf:value/>
-                        </xf:item>
-                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/*:child/*:element">
+                        <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element[count(@ident[. = $currentNode/child::*/local-name()]) &lt; instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element/@maxOccurs]"> -->
+                        <!-- [count(@ident[. = $currentNode/child::*/local-name()]) &lt; @maxOccur] -->
+                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element">
                             <xf:label ref="@label"/>
                             <xf:value ref="@ident"/>
                         </xf:itemset>
@@ -2073,20 +2064,21 @@
                 <!-- Element input for textbox style input -->
                 <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
                 <!-- Element attributes -->
-                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*"> 
-                    <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
+                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                         <div class="input-group">
                             <!-- Attribute value -->
-                            <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList)]" class="attVal"/>
+                            <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
                             <!-- If controlled attribute values in schemaConstraints file -->
-                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList]" class="attVal">
-                                <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]/descendant-or-self::*:availableAtts/*:attDef[@ident = name(current())]/descendant-or-self::*:valList/*:valItem" class="attVal">
+                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
+                                <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                     <xf:label ref="@ident"/>
                                     <xf:value ref="@ident"/>
                                 </xf:itemset>
                             </xf:select1>
                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="local-name(current())"/></xf:label>
+                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
                                 <xf:delete ev:event="DOMActivate" ref="."/>    
                             </xf:trigger>
                         </div>    
@@ -2411,24 +2403,47 @@
         </xsl:variable>
         <xsl:variable name="maxOccur">
             <xsl:choose>
+                <xsl:when test="$max != 'unbounded'">100</xsl:when>
                 <xsl:when test="$max != ''">
-                    <xsl:value-of select="$max"/>
+                    <xsl:choose>
+                        <xsl:when test="$max castable as xs:integer"><xsl:value-of select="$max"/></xsl:when>
+                        <xsl:otherwise>100</xsl:otherwise>
+                    </xsl:choose>    
                 </xsl:when>
                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@maxOccur]">
-                    <xsl:value-of select="string($parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur)"/>
+                    <xsl:choose>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded'">100</xsl:when>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != ''">
+                            <xsl:choose>
+                                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
+                                    <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
+                                </xsl:when>
+                                <xsl:otherwise>100</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
-                <xsl:otherwise/>
+                <xsl:otherwise>100</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="minOccur">
             <xsl:choose>
+                <xsl:when test="$min != 'unbounded'">0</xsl:when>
                 <xsl:when test="$min != ''">
-                    <xsl:value-of select="$min"/>
+                    <xsl:choose>
+                        <xsl:when test="$min castable as xs:integer"><xsl:value-of select="$min"/></xsl:when>
+                        <xsl:otherwise>0</xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur]">
-                    <xsl:value-of select="string($parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur)"/>
+                    <xsl:choose>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
+                            <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
+                        </xsl:when>
+                        <xsl:otherwise>0</xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
-                <xsl:otherwise/>
+                <xsl:otherwise>0</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="xformsElement">
@@ -2505,7 +2520,33 @@
                     </xsl:choose>
                 </desc>
             </xsl:if>
-            <xsl:copy-of select="$allAttributes"/>
+            <availableAtts elementName="{$elementName}" xmlns="http://www.tei-c.org/ns/1.0">
+                <xsl:for-each-group select="$allAttributes/descendant-or-self::*:attDef" group-by="@ident">
+                    <attDef ident="{@ident}" xmlns="http://www.tei-c.org/ns/1.0">
+                        <xsl:attribute name="attLabel">
+                            <xsl:choose>
+                                <xsl:when test="$formLang != ''">
+                                    <xsl:choose>
+                                        <xsl:when test="*:gloss[@xml:lang = $formLang]">
+                                            <xsl:value-of select="*:gloss[@xml:lang = $formLang][1]"/>
+                                        </xsl:when>
+                                        <xsl:when test="*:gloss[@xml:lang = 'en']">
+                                            <xsl:value-of select="*:gloss[@xml:lang = 'en'][1]"/>
+                                        </xsl:when>
+                                        <xsl:when test="*:gloss[. != '']"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                        <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                        <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                                <xsl:when test="*:gloss/text()"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <xsl:copy-of select="child::*"></xsl:copy-of>
+                    </attDef>
+                </xsl:for-each-group>
+            </availableAtts>
             <xsl:if test="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]">
                 <controlledValues xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:copy-of select="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]" copy-namespaces="true"/>    
@@ -2554,7 +2595,54 @@
                                     </xsl:otherwise>
                                 </xsl:choose> 
                             </xsl:variable>
-                            <element ident="{$childName}" label="{$childLabel}"/>
+                            <xsl:variable name="max" select="@maxOccurs"/>
+                            <xsl:variable name="min" select="@minOccurs"/>
+                            <xsl:variable name="maxOccur">
+                                <xsl:choose>
+                                    <xsl:when test="$max != 'unbounded'">100</xsl:when>
+                                    <xsl:when test="$max != ''">
+                                        <xsl:choose>
+                                            <xsl:when test="$max castable as xs:integer"><xsl:value-of select="$max"/></xsl:when>
+                                            <xsl:otherwise>100</xsl:otherwise>
+                                        </xsl:choose>    
+                                    </xsl:when>
+                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@maxOccur]">
+                                        <xsl:choose>
+                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded'">100</xsl:when>
+                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != ''">
+                                                <xsl:choose>
+                                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
+                                                        <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>100</xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:otherwise>100</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <xsl:variable name="minOccur">
+                                <xsl:choose>
+                                    <xsl:when test="$min != 'unbounded'">0</xsl:when>
+                                    <xsl:when test="$min != ''">
+                                        <xsl:choose>
+                                            <xsl:when test="$min castable as xs:integer"><xsl:value-of select="$min"/></xsl:when>
+                                            <xsl:otherwise>0</xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur]">
+                                        <xsl:choose>
+                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
+                                                <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>0</xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:otherwise>0</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <element ident="{$childName}" label="{$childLabel}" minOccurs="{$minOccur}" maxOccurs="{$maxOccur}"/>
                         </xsl:for-each>
                     </child>
                 </xsl:if>
