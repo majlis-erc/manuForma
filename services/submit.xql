@@ -222,10 +222,6 @@ declare function local:transform($nodes as node()*) as item()* {
         default return local:transform($node/node())
 };
 
-(: 
-add change element? revisionDesc/change 
-ex: <change n="1.0" when="2018-03-21-04:00" who="#TGM">CREATED: record</change>
-:)
 (: Recurse through child nodes :)
 declare function local:passthru($node as node()*) as item()* { 
     element {local-name($node)} {($node/@*[. != ''], local:transform($node/node()))}
@@ -280,11 +276,10 @@ return
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
                  (:response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml):)
                  $post-processed-xml
-                 (:<div>Hello? View XML here</div>:)
                  )
         else if(request:get-parameter('type', '') = 'previewHTML') then 
-                  (response:set-header("Content-Type", "text/html; charset=utf-8"),
-                        <html xmlns="http://www.w3.org/1999/xhtml">
+                let $response := 
+                    <html xmlns="http://www.w3.org/1999/xhtml">
                             <head>
                                 <title>Preview TEI Record</title>
                                  <link rel="stylesheet" type="text/css" href="/exist/rest/apps/majlis/resources/bootstrap/css/bootstrap.min.css"/>
@@ -310,7 +305,7 @@ return
                                 <script type="text/javascript" src="/exist/rest/apps/majlis/resources/jquery-ui/jquery-ui.min.js">&#160;</script>
                                 <script type="text/javascript" src="/exist/rest/apps/majlis/resources/bootstrap/js/bootstrap.min.js">&#160;</script>
                         </html>
-                        )
+                return response:stream($response, 'method=html media-type=text/html')        
         else if(request:get-parameter('type', '') = 'upload') then 
               (: (response:set-header("Content-Type", "text/xml; charset=utf-8"),
                 response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)
