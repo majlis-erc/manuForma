@@ -158,7 +158,7 @@
                 </element>
             </controlledValuesElements>
             <elementGroups>
-                <group groupLabel="Identification via location, institution, collection, shelfmark" groupLabelConditionalElement="./*:idno" groupLabelXPath="concat(./*:country,' ',./*:settlement,' ',./*:repository,', ',./*:idno,' ',./*:institution,' ',./*:collection,' ')" groupNo="1">
+                <group groupLabel="Identification via location, institution, collection, shelfmark" groupLabelConditionalElement="./*:idno" groupLabelXPath="concat('Identification: ',./*:country,', ',./*:settlement,', ',./*:repository,' ',./*:institution,' ',./*:collection', ',./*:idno)" groupNo="1">
                     <element xpath="tei:country"/>
                     <element xpath="tei:settlement"/>
                     <element xpath="tei:repository"/>
@@ -370,7 +370,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('Fols. ', ./*:locus, ': ', ./*:objectType)" groupNo="1" repeatable="yes">
+                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ', ./*:locus, ': ', ./*:objectType)" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -457,7 +457,7 @@
                 <!--<group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
                     <element xpath="tei:origin"/>
                 </group>-->
-                <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner:', ./*:persName)" groupNo="2"  repeatable="yes">
+                <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:provenance"/>
                 </group>
                 <group groupLabel="Give an account how the manuscript came into the present holding institution (date, place, folios, person, quotation, stamp)." groupNo="3">

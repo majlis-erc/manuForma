@@ -101,67 +101,10 @@
                             the number of columns and lines in the correct attributes.</desc>
       <availableAtts elementName="layout">
          <attDef ident="columns" attLabel="columns">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">columns</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">colonnes</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2005-01-14"
-                  xml:lang="en">specifies the number of columns per page</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">페이지 당 열의 수를 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">說明每頁的欄數</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">ページ中の段数を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">spécifie le nombre de colonnes présentes sur une
-          page</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el número de columnas por página.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica il numero di colonne per pagina</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      minOccurs="1"
-                      maxOccurs="2">
-               <dataRef key="teidata.count"/>
-            </datatype>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xml:lang="en"
-                     versionDate="2017-07-09">
-               <p>If a single number is given, all pages referenced have this number of columns. If two numbers are given, the number of columns per page varies between the values supplied. Where <att>columns</att> is omitted the number is assumed to be <val>1</val>.</p>
-               <p>Columns may be independent of page orientation or reading direction, and a single textual <att>stream</att> may have one or more columns.</p>
-            </remarks>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Number of columns</gloss>
+            </valList>
          </attDef>
          <attDef ident="writtenLines" attLabel="written lines">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -3062,10 +3005,19 @@ sub-classification for the element additional to that provided by its
             </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <valItem ident="intercolumn"/>
+               <valItem ident="intercolumn">
+                  <valList>
+                     <gloss>Type</gloss>
+                  </valList>
+               </valItem>
             </valList>
          </attDef>
-         <attDef ident="unit" attLabel="unit"/>
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Unit</gloss>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3083,7 +3035,12 @@ sub-classification for the element additional to that provided by its
           teiElement="&lt;width/&gt;">
       <desc>The width of the text space, measured in millimeters.</desc>
       <availableAtts elementName="width">
-         <attDef ident="unit" attLabel="unit"/>
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Unit</gloss>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3102,7 +3059,12 @@ sub-classification for the element additional to that provided by its
       <desc>The height of the text space, measured in
                             millimeters.</desc>
       <availableAtts elementName="height">
-         <attDef ident="unit" attLabel="unit"/>
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Unit</gloss>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3125,6 +3087,7 @@ sub-classification for the element additional to that provided by its
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      mode="change">
+               <gloss>Pick type</gloss>
                <valItem mode="add" ident="ruling"/>
                <valItem mode="add" ident="pricking"/>
             </valList>

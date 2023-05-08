@@ -360,6 +360,7 @@
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
+               <gloss>Medium</gloss>
                <valItem ident="brown"/>
                <valItem ident="black"/>
                <valItem ident="pigments"/>
@@ -512,7 +513,12 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
                             when you link a record to this element.)</desc>
       <availableAtts elementName="persName">
-         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="ref" attLabel="ref">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Role</gloss>
+            </valList>
+         </attDef>
          <attDef ident="role" attLabel="role">
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
@@ -524,62 +530,6 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <valItem ident="scribe"/>
                <valItem ident="vocalizer"/>
                <valItem ident="masorator"/>
-            </valList>
-         </attDef>
-         <attDef ident="type" attLabel="type">
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="closed">
-               <valItem ident="main">
-                  <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
-               </valItem>
-               <valItem ident="normalized">
-                  <desc>the normalized transcription of the name in fidal or
-                                        another script</desc>
-               </valItem>
-               <valItem ident="given">
-                  <desc>name received later in life, different from the other
-                                        specified types of names</desc>
-               </valItem>
-               <valItem ident="birth">
-                  <desc>name given at birth</desc>
-               </valItem>
-               <valItem ident="baptismal">
-                  <desc>name given at baptism</desc>
-               </valItem>
-               <valItem ident="regnal">
-                  <desc>name given on coronation (kings and queens but also
-                                        patriarchs)</desc>
-               </valItem>
-               <valItem ident="monastic">
-                  <desc>name given on entering monastic life </desc>
-               </valItem>
-               <valItem ident="horse">
-                  <desc>the name of the battle horse of kings and rulers</desc>
-               </valItem>
-               <valItem ident="nick">
-                  <desc>a name given to a person associated to his occupation or
-                                        other deeds</desc>
-               </valItem>
-               <valItem ident="war">
-                  <desc>nom de guerre (if different from horse name, e.g.
-                                        Malas)</desc>
-               </valItem>
-               <valItem ident="hypocoristic">
-                  <desc>short form (diminutive or abbreviated, e.g. Taklo for
-                                        Takla Māryām)</desc>
-               </valItem>
-               <valItem ident="patronymic">
-                  <desc>father's name, esp. for eventual Russian names, but could
-                                        be also highlighted in others</desc>
-               </valItem>
-               <valItem ident="alt">
-                  <desc>alternative name</desc>
-               </valItem>
-               <valItem ident="tabot">
-                  <desc>the saint to whom the tābot is dedicated</desc>
-               </valItem>
             </valList>
          </attDef>
       </availableAtts>
@@ -612,7 +562,12 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be
                             filled out automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="ref" attLabel="ref">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+               <gloss>Place identifier</gloss>
+            </valList>
+         </attDef>
          <attDef ident="type" attLabel="type">
             <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -646,6 +601,7 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
+               <gloss>Pick type</gloss>
                <valItem mode="add" ident="vocalization"/>
                <valItem mode="add" ident="recitation"/>
             </valList>
@@ -891,6 +847,7 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
+               <gloss>Script quality</gloss>
                <valItem ident="unidentified"/>
                <valItem ident="untrained"/>
                <valItem ident="careless"/>
@@ -969,6 +926,7 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
+               <gloss>Script type</gloss>
                <valItem ident="oriental"/>
                <valItem ident="yemenite"/>
                <valItem ident="sephardi"/>
@@ -1010,6 +968,7 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
+               <gloss>Script mode</gloss>
                <valItem ident="square"/>
                <valItem ident="nonSquare"/>
                <valItem ident="cursive"/>

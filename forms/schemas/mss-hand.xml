@@ -273,6 +273,7 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="function" mode="change">
                                 <valList type="closed" mode="change">
+                                    <gloss>Pick type</gloss>
                                     <valItem mode="add" ident="vocalization"/>
                                     <valItem mode="add" ident="recitation"/>
                                 </valList>
@@ -326,7 +327,6 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-
                             <attDef ident="role" usage="opt">
                                 <datatype>
                                     <dataRef key="teidata.enumerated"/>
@@ -338,6 +338,12 @@ End license statement: do not remove -->
                                 </valList>
                             </attDef>
                             <attDef ident="role" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="ref">
+                                <valList>
+                                    <gloss>Role</gloss>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="placeName" mode="change">
@@ -361,6 +367,11 @@ End license statement: do not remove -->
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="ref">
+                                <valList>
+                                    <gloss>Place identifier</gloss>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="handNote" mode="change">
@@ -383,11 +394,20 @@ End license statement: do not remove -->
                             <elementRef key="locus"/>
                         </content>
                         <attList>
-                            <attRef name="xml:id" class="att.global"/>
-                            <attRef name="scope" class="att.dimensions"/>
+                            <attRef name="xml:id" class="att.global">
+                                <valList type="open">
+                                    <gloss>Hand identifier</gloss>
+                                </valList>
+                            </attRef>
+                            <attRef name="scope" class="att.dimensions">
+                                <valList type="closed">
+                                    <gloss>Scope</gloss>
+                            </valList>
+                            </attRef>
                             <attDef ident="script" mode="delete"/>
                             <attDef ident="medium" mode="change">
                                 <valList type="closed">
+                                    <gloss>Medium</gloss>
                                     <valItem ident="brown"/>
                                     <valItem ident="black"/>
                                     <valItem ident="pigments"/>
@@ -416,9 +436,11 @@ End license statement: do not remove -->
                             <elementRef key="p"/>
                         </content>
                         <attList>
-                            <attRef name="xml:id" class="att.global"/>
+                            <attRef name="xml:id" mode="delete">
+                            </attRef>
                             <attRef name="xml:lang" class="att.global">
                                 <valList type="closed">
+                                    <gloss>Graphic system</gloss>
                                     <valItem ident="hebrew"/>
                                     <valItem ident="arabic"/>
                                     <valItem ident="latin"/>
@@ -433,6 +455,7 @@ End license statement: do not remove -->
                                     <dataRef key="teidata.name"/>
                                 </datatype>
                                 <valList type="closed">
+                                    <gloss>Script type</gloss>
                                     <valItem ident="oriental"/>
                                     <valItem ident="yemenite"/>
                                     <valItem ident="sephardi"/>
@@ -451,6 +474,7 @@ End license statement: do not remove -->
                                     <dataRef name="string"/>
                                 </datatype>
                                 <valList type="closed">
+                                    <gloss>Script mode</gloss>
                                     <valItem ident="square"/>
                                     <valItem ident="nonSquare"/>
                                     <valItem ident="cursive"/>
@@ -462,6 +486,7 @@ End license statement: do not remove -->
                                     <dataRef name="string"/>
                                 </datatype>
                                 <valList type="closed">
+                                    <gloss>Script quality</gloss>
                                     <valItem ident="unidentified"/>
                                     <valItem ident="untrained"/>
                                     <valItem ident="careless"/>
