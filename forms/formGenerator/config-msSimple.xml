@@ -183,27 +183,23 @@
                 </group>
             </elementGroups>
         </subform>
-        <!--<subform xpath="/tei:TEI//tei:physDesc" formName="objectDesc" formLabel="Codicological definition" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Specify the type of manuscript (single / composite / multiple text).</formDesc>
-            <elementGroups>
-                <group groupLabel="Manuscript type" groupNo="1">
-                    <element xpath="."/>
-                </group>
-            </elementGroups>
-        </subform>-->
+            <formDesc>Specify the type of manuscript, the format, and the book form.</formDesc>
+        </subform>
+        
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of contents" groupNo="1">
+                <group groupLabel="Summary of contents" groupNo="1">-->
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupNo="2" repeatable="yes">
+                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:locus, ': ', ./*:title,' ', ./*:author)" groupNo="2" repeatable="yes">
                     <element xpath="tei:msItem"/>
                 </group>
             </elementGroups>
@@ -214,7 +210,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="Define the type and the writing material of the manuscript." groupNo="1">
+                <group groupLabel="Define the writing material of the manuscript." groupNo="1">
                     <element xpath="tei:support"/>
                 </group>
                 <group groupLabel="Measurements of the page (number of folios, height and width)." groupNo="2">
@@ -374,7 +370,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and transcribe the incodicated document." groupNo="1" repeatable="yes">
+                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ', ./*:locus, ': ', ./*:objectType)" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -461,7 +457,7 @@
                 <!--<group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
                     <element xpath="tei:origin"/>
                 </group>-->
-                <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupNo="2"  repeatable="yes">
+                <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:provenance"/>
                 </group>
                 <group groupLabel="Give an account how the manuscript came into the present holding institution (date, place, folios, person, quotation, stamp)." groupNo="3">
@@ -475,7 +471,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
             <elementGroups>
-                <group groupLabel="Bibliographic reference." groupNo="1"  repeatable="yes">
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:title, ', ',./*:citedRange)" groupNo="1"  repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>

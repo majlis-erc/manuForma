@@ -11,43 +11,61 @@
    <person ident="person"
            elementName="person"
            elementLabel="Person entry"
-           minOccur=""
-           maxOccur=""
+           minOccur="0"
+           maxOccur="100"
            path="/*:person"
            currentLevel="1"
            popup="1"
            teiElement="&lt;person/&gt;">
       <availableAtts elementName="person">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="role"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="role" attLabel="role">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="author"/>
             </valList>
          </attDef>
-         <attDef ident="xml:id"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="persName" label="Name of the person"/>
-            <element ident="birth" label="Birth"/>
-            <element ident="death" label="Death"/>
-            <element ident="floruit" label="Period of activity"/>
-            <element ident="sex" label="Gender"/>
-            <element ident="faith" label="Denomination"/>
-            <element ident="occupation" label="Professional activity"/>
-            <element ident="residence" label="Place of residence"/>
-            <element ident="bibl" label="Bibliographic reference"/>
-            <element ident="idno" label="Link"/>
+            <element ident="persName"
+                     label="Name of the person"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="birth" label="Birth" minOccurs="0" maxOccurs="100"/>
+            <element ident="death" label="Death" minOccurs="0" maxOccurs="100"/>
+            <element ident="floruit"
+                     label="Period of activity"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="sex" label="Gender" minOccurs="0" maxOccurs="100"/>
+            <element ident="faith"
+                     label="Denomination"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="occupation"
+                     label="Professional activity"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="residence"
+                     label="Place of residence"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="idno" label="Link" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </person>
    <persName ident="persName"
              elementName="persName"
              elementLabel="Name of the person"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:person/*:persName"
              currentLevel="2"
              popup="2"
@@ -55,39 +73,36 @@
       <desc>You can either create child elements for every component like ism, kunya, etc. into the Additional Name OR
                             you enter the full form into the Fullname field.</desc>
       <availableAtts elementName="persName">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 mode="opt"/>
-         <attDef ident="resp"/>
-         <attDef ident="source"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="srophe-tags">
-            <datatype>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="resp" attLabel="resp"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="srophe-tags" attLabel="srophe-tags">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef name="string"/>
             </datatype>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 usage="opt">
-            <datatype>
+         <attDef ident="type" attLabel="type">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="attested"/>
                <valItem ident="alternate"/>
                <valItem ident="canon"/>
             </valList>
          </attDef>
-         <attDef ident="xml:id"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <gloss>Language</gloss>
-            <valList type="closed" mode="change">
+         <attDef ident="xml:id" attLabel="id"/>
+         <attDef ident="xml:lang" attLabel="Language">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -100,42 +115,76 @@
       <childElements>
          <textNode type="input"/>
          <child>
-            <element ident="forename" label="Forename"/>
-            <element ident="addName" label="Additional name"/>
-            <element ident="name" label="Fullname"/>
+            <element ident="forename" label="Forename" minOccurs="0" maxOccurs="100"/>
+            <element ident="addName"
+                     label="Additional name"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="name" label="Fullname" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </persName>
    <forename ident="forename"
              elementName="forename"
              elementLabel="Forename"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:person/*:persName/*:forename"
              currentLevel="3"
              popup="3"
              teiElement="&lt;forename/&gt;">
       <desc>A person's given name.</desc>
       <availableAtts elementName="forename">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="full"
-                 usage="opt">
-            <desc versionDate="2005-10-10" xml:lang="en">indicates whether the name component is given in full, as an
+         <attDef ident="full" attLabel="full">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2005-10-10"
+                  xml:lang="en">indicates whether the name component is given in full, as an
 abbreviation or simply as an initial.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">축약 또는 이니셜로 간단하게 이름 성분이 완전히 제시된 것인지의 여부를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出所提供的名稱元件是否完整，為一縮寫或僅為一字首字母。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該名前要素は省略がないか，省略形か，イニシャルのような簡単なも
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">축약 또는 이니셜로 간단하게 이름 성분이 완전히 제시된 것인지의 여부를 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指出所提供的名稱元件是否完整，為一縮寫或僅為一字首字母。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">当該名前要素は省略がないか，省略形か，イニシャルのような簡単なも
     のか示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique si la composante du nom est donnée en intégralité, sous forme d'abréviation ou simplement d'initiale.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica si el componente del nombre aparece por completo, como una abreviatura o como una inicial.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica se la componente del nome compare per esteso, come abbreviazione o come iniziale</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">indique si la composante du nom est donnée en intégralité, sous forme d'abréviation ou simplement d'initiale.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica si el componente del nombre aparece por completo, como una abreviatura o como una inicial.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">indica se la componente del nome compare per esteso, come abbreviazione o come iniziale</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <defaultVal>yes</defaultVal>
-            <valList type="closed">
+            <defaultVal xmlns:teix="http://www.tei-c.org/ns/Examples"
+                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:rng="http://relaxng.org/ns/structure/1.0">yes</defaultVal>
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="yes">
                   <gloss xml:lang="en" versionDate="2009-05-28">yes</gloss>
                   <gloss versionDate="2009-05-28" xml:lang="fr">complet</gloss>
@@ -178,21 +227,55 @@ one initial.</desc>
                </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="sort"
-                 usage="opt">
-            <gloss xml:lang="en" versionDate="2009-05-28">sort</gloss>
-            <gloss versionDate="2009-05-28" xml:lang="fr">ordre</gloss>
-            <desc versionDate="2012-10-24" xml:lang="en">specifies the sort order of the name component in relation to others within the name.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">사람 이름 내에 다른 것과 관련된 이름 성분의 정렬 순서를 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明個人名稱中該名稱元件與其他元件之間的排列順序。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">個人名間で並び替えをする際の順番を示す．</desc>
-            <desc versionDate="2009-05-28" xml:lang="fr">précise dans quel ordre est placé la composante par rapport aux autres dans le nom d'une personne.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">especifica la posición del componente al interno del nombre propio de persona en relación con los otros componentes.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica la posizione della componente all'interno del nome proprio di persona in relazione alle altre componenti</desc>
-            <datatype>
+         <attDef ident="sort" attLabel="sort">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2009-05-28">sort</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-28"
+                   xml:lang="fr">ordre</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2012-10-24"
+                  xml:lang="en">specifies the sort order of the name component in relation to others within the name.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">사람 이름 내에 다른 것과 관련된 이름 성분의 정렬 순서를 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指明個人名稱中該名稱元件與其他元件之間的排列順序。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">個人名間で並び替えをする際の順番を示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-05-28"
+                  xml:lang="fr">précise dans quel ordre est placé la composante par rapport aux autres dans le nom d'une personne.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">especifica la posición del componente al interno del nombre propio de persona en relación con los otros componentes.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica la posizione della componente all'interno del nome proprio di persona in relazione alle altre componenti</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.count"/>
             </datatype>
          </attDef>
@@ -205,8 +288,8 @@ one initial.</desc>
    <addName ident="addName"
             elementName="addName"
             elementLabel="Additional name"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:person/*:persName/*:addName"
             currentLevel="3"
             popup="3"
@@ -214,15 +297,15 @@ one initial.</desc>
       <desc>Name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the type
                             of name from the attribute list.</desc>
       <availableAtts elementName="addName">
-         <attDef ident="ref"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 usage="opt">
-            <datatype>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="type" attLabel="type">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="shuhra"/>
                <valItem ident="ism"/>
                <valItem ident="nasab"/>
@@ -234,7 +317,7 @@ one initial.</desc>
                <valItem ident="acronym"/>
             </valList>
          </attDef>
-         <attDef ident="xml:id"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -244,8 +327,8 @@ one initial.</desc>
    <name ident="name"
          elementName="name"
          elementLabel="Fullname"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:person/*:persName/*:name"
          currentLevel="3"
          popup="3"
@@ -260,28 +343,28 @@ one initial.</desc>
    <birth ident="birth"
           elementName="birth"
           elementLabel="Birth"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:person/*:birth"
           currentLevel="2"
           popup="2"
           teiElement="&lt;birth/&gt;">
       <desc>Provide the date and place of birth in the respective child elements.</desc>
       <availableAtts elementName="birth">
-         <attDef ident="source"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="date" label="Date"/>
-            <element ident="placeName" label="Place"/>
+            <element ident="date" label="Date" minOccurs="0" maxOccurs="100"/>
+            <element ident="placeName" label="Place" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </birth>
    <date ident="date"
          elementName="date"
          elementLabel="Date"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:person/*:birth/*:date"
          currentLevel="3"
          popup="3"
@@ -289,13 +372,11 @@ one initial.</desc>
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
                             case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
       <availableAtts elementName="date">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="calendar"
-                 usage="opt"
-                 mode="replace">
-            <valList type="closed">
+         <attDef ident="calendar" attLabel="calendar">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="hebrew">
                   <desc>Hebrew calendar</desc>
                </valItem>
@@ -310,70 +391,179 @@ one initial.</desc>
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="cert"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="dur"
-                 usage="opt">
-            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">지속</gloss>
-            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">durée</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
-            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
-            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
-            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明此元素的時間長度。
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="dur" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-04-09"
+                  xml:lang="en">indicates the length of this element in time.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指明此元素的時間長度。
 </desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">
       時間幅を示す．
 </desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la longueur de cet élément dans le
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">indique la longueur de cet élément dans le
         temps</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo di tale elemento</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-11-06"
+                  xml:lang="it">indica la durata nel tempo di tale elemento</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.duration.w3c"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="dur-iso"
-                 usage="opt">
-            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">지속 기간</gloss>
-            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
-            <gloss versionDate="2008-12-09" xml:lang="fr">durée</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
-            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
-            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
-            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出此元素的時間長度。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該時間の長さを示す．</desc>
-            <desc versionDate="2008-12-09" xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo dell'elemento</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
-            <datatype>
+         <attDef ident="dur-iso" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속 기간</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-12-09"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-04-09"
+                  xml:lang="en">indicates the length of this element in time.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指出此元素的時間長度。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">当該時間の長さを示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-12-09"
+                  xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-11-06"
+                  xml:lang="it">indica la durata nel tempo dell'elemento</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.duration.iso"/>
             </datatype>
          </attDef>
-         <attDef ident="notAfter"/>
-         <attDef ident="notBefore"/>
-         <attDef ident="source"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 usage="opt"
-                 mode="change">
-            <datatype maxOccurs="3">
+         <attDef ident="notAfter" attLabel="notAfter"/>
+         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="3">
                <dataRef key="teidata.word"/>
             </datatype>
-            <valList type="open">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="open">
                <valItem ident="age">
                   <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
@@ -430,7 +620,7 @@ one initial.</desc>
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="when"/>
+         <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -440,8 +630,8 @@ one initial.</desc>
    <placeName ident="placeName"
               elementName="placeName"
               elementLabel="Place"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:person/*:birth/*:placeName"
               currentLevel="3"
               popup="3"
@@ -461,14 +651,9 @@ one initial.</desc>
                             different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
                             when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="cert"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef ident="source"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -478,28 +663,28 @@ one initial.</desc>
    <death ident="death"
           elementName="death"
           elementLabel="Death"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:person/*:death"
           currentLevel="2"
           popup="2"
           teiElement="&lt;death/&gt;">
       <desc>Provide the date and place of death in the respective child elements.</desc>
       <availableAtts elementName="death">
-         <attDef ident="source"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="date" label="Date"/>
-            <element ident="placeName" label="Place"/>
+            <element ident="date" label="Date" minOccurs="0" maxOccurs="100"/>
+            <element ident="placeName" label="Place" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </death>
    <date ident="date"
          elementName="date"
          elementLabel="Date"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:person/*:death/*:date"
          currentLevel="3"
          popup="3"
@@ -507,13 +692,11 @@ one initial.</desc>
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
                             case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
       <availableAtts elementName="date">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="calendar"
-                 usage="opt"
-                 mode="replace">
-            <valList type="closed">
+         <attDef ident="calendar" attLabel="calendar">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="hebrew">
                   <desc>Hebrew calendar</desc>
                </valItem>
@@ -528,70 +711,179 @@ one initial.</desc>
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="cert"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="dur"
-                 usage="opt">
-            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">지속</gloss>
-            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">durée</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
-            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
-            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
-            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指明此元素的時間長度。
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="dur" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-04-09"
+                  xml:lang="en">indicates the length of this element in time.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">시간선상에서 이 요소의 길이를 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指明此元素的時間長度。
 </desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">
       時間幅を示す．
 </desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la longueur de cet élément dans le
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">indique la longueur de cet élément dans le
         temps</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo di tale elemento</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-11-06"
+                  xml:lang="it">indica la durata nel tempo di tale elemento</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.duration.w3c"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="dur-iso"
-                 usage="opt">
-            <gloss versionDate="2007-04-09" xml:lang="en">duration</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">지속 기간</gloss>
-            <gloss versionDate="2007-05-02" xml:lang="zh-TW">時間長度</gloss>
-            <gloss versionDate="2008-12-09" xml:lang="fr">durée</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">durata</gloss>
-            <gloss versionDate="2007-05-04" xml:lang="es">duración</gloss>
-            <gloss xml:lang="ja" versionDate="2019-05-20">時間幅</gloss>
-            <desc versionDate="2007-04-09" xml:lang="en">indicates the length of this element in time.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出此元素的時間長度。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該時間の長さを示す．</desc>
-            <desc versionDate="2008-12-09" xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
-            <desc versionDate="2007-11-06" xml:lang="it">indica la durata nel tempo dell'elemento</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
-            <datatype>
+         <attDef ident="dur-iso" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속 기간</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-12-09"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-04-09"
+                  xml:lang="en">indicates the length of this element in time.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">시간에서 이 요소의 길이를 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指出此元素的時間長度。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">当該時間の長さを示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-12-09"
+                  xml:lang="fr">indique la longueur de cet élément dans le temps</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-11-06"
+                  xml:lang="it">indica la durata nel tempo dell'elemento</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica la longitud de este elemento en el tiempo.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.duration.iso"/>
             </datatype>
          </attDef>
-         <attDef ident="notAfter"/>
-         <attDef ident="notBefore"/>
-         <attDef ident="source"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 usage="opt"
-                 mode="change">
-            <datatype maxOccurs="3">
+         <attDef ident="notAfter" attLabel="notAfter"/>
+         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="3">
                <dataRef key="teidata.word"/>
             </datatype>
-            <valList type="open">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="open">
                <valItem ident="age">
                   <desc>Age, the value should be given in a @dur attribute according to <ref target="https://www.w3.org/TR/xmlschema-2/#duration">W3C datatypes</ref>
                   </desc>
@@ -648,7 +940,7 @@ one initial.</desc>
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="when"/>
+         <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -658,8 +950,8 @@ one initial.</desc>
    <placeName ident="placeName"
               elementName="placeName"
               elementLabel="Place"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:person/*:death/*:placeName"
               currentLevel="3"
               popup="3"
@@ -679,14 +971,9 @@ one initial.</desc>
                             different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
                             when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="cert"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef ident="source"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -696,8 +983,8 @@ one initial.</desc>
    <floruit ident="floruit"
             elementName="floruit"
             elementLabel="Period of activity"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:person/*:floruit"
             currentLevel="2"
             popup="2"
@@ -706,11 +993,11 @@ one initial.</desc>
                             the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter "and "notBefore"
                             attributes together.</desc>
       <availableAtts elementName="floruit">
-         <attDef ident="cert"/>
-         <attDef ident="from"/>
-         <attDef ident="notAfter"/>
-         <attDef ident="notBefore"/>
-         <attDef ident="to"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="notAfter" attLabel="notAfter"/>
+         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -720,16 +1007,16 @@ one initial.</desc>
    <sex ident="sex"
         elementName="sex"
         elementLabel="Gender"
-        minOccur=""
-        maxOccur=""
+        minOccur="0"
+        maxOccur="100"
         path="/*:person/*:sex"
         currentLevel="2"
         popup="2"
         teiElement="&lt;sex/&gt;">
       <availableAtts elementName="sex">
-         <attDef ident="cert"/>
-         <attDef ident="source"/>
-         <attDef ident="value"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="value" attLabel="value"/>
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="sex">
@@ -748,16 +1035,16 @@ one initial.</desc>
    <faith ident="faith"
           elementName="faith"
           elementLabel="Denomination"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:person/*:faith"
           currentLevel="2"
           popup="2"
           teiElement="&lt;faith/&gt;">
       <desc>Specify the denomination of the person.</desc>
       <availableAtts elementName="faith">
-         <attDef ident="cert"/>
-         <attDef ident="source"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="faith">
@@ -777,8 +1064,8 @@ one initial.</desc>
    <occupation ident="occupation"
                elementName="occupation"
                elementLabel="Professional activity"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:person/*:occupation"
                currentLevel="2"
                popup="2"
@@ -786,9 +1073,9 @@ one initial.</desc>
       <desc>Describe the person's profession. This is NOT the role the person played with regard to the
                             manuscripts.</desc>
       <availableAtts elementName="occupation">
-         <attDef ident="cert"/>
-         <attDef ident="source"/>
-         <attDef ident="type"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -798,27 +1085,27 @@ one initial.</desc>
    <residence ident="residence"
               elementName="residence"
               elementLabel="Place of residence"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:person/*:residence"
               currentLevel="2"
               popup="2"
               teiElement="&lt;residence/&gt;">
       <desc>Where did the person live?</desc>
       <availableAtts elementName="residence">
-         <attDef ident="source"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="placeName" label="Place"/>
+            <element ident="placeName" label="Place" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </residence>
    <placeName ident="placeName"
               elementName="placeName"
               elementLabel="Place"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:person/*:residence/*:placeName"
               currentLevel="3"
               popup="3"
@@ -838,14 +1125,9 @@ one initial.</desc>
                             different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
                             when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="cert"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef ident="source"/>
+         <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="source" attLabel="source"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -855,8 +1137,8 @@ one initial.</desc>
    <bibl ident="bibl"
          elementName="bibl"
          elementLabel="Bibliographic reference"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:person/*:bibl"
          currentLevel="2"
          popup="2"
@@ -869,12 +1151,12 @@ one initial.</desc>
               lookupLabel="Look up bibliographic record"/>
       <desc>A bibliographic item, like a monograph, journal article, or manuscript.</desc>
       <availableAtts elementName="bibl">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="change">
-            <valList mode="replace" type="semi">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     mode="replace"
+                     type="semi">
                <valItem ident="MS">
                   <desc>The reference is to a manuscript</desc>
                </valItem>
@@ -916,17 +1198,26 @@ one initial.</desc>
       <childElements>
          <textNode type="input"/>
          <child>
-            <element ident="title" label="Title of publication"/>
-            <element ident="ptr" label="Link to Zotero record"/>
-            <element ident="citedRange" label="Referenced section(s)"/>
+            <element ident="title"
+                     label="Title of publication"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </bibl>
    <title ident="title"
           elementName="title"
           elementLabel="Title of publication"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:person/*:bibl/*:title"
           currentLevel="3"
           popup="3"
@@ -941,17 +1232,14 @@ one initial.</desc>
    <ptr ident="ptr"
         elementName="ptr"
         elementLabel="Link to Zotero record"
-        minOccur=""
-        maxOccur=""
+        minOccur="0"
+        maxOccur="100"
         path="/*:person/*:bibl/*:ptr"
         currentLevel="3"
         popup="3"
         teiElement="&lt;ptr/&gt;">
       <availableAtts elementName="ptr">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="target"
-                 mode="change"/>
+         <attDef ident="target" attLabel="target"/>
       </availableAtts>
       <childElements>
          <child/>
@@ -960,20 +1248,19 @@ one initial.</desc>
    <citedRange ident="citedRange"
                elementName="citedRange"
                elementLabel="Referenced section(s)"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:person/*:bibl/*:citedRange"
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
       <desc>defines the range of cited content, often represented by pages or other units</desc>
       <availableAtts elementName="citedRange">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="unit"
-                 mode="replace">
-            <valList type="open">
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="open">
                <valItem ident="page">
                   <desc>page</desc>
                </valItem>
@@ -1015,8 +1302,8 @@ one initial.</desc>
    <idno ident="idno"
          elementName="idno"
          elementLabel="Link"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:person/*:idno"
          currentLevel="2"
          popup="2"
@@ -1025,12 +1312,12 @@ one initial.</desc>
   such as a bibliographic item, a person, a title, an organization,
   etc. in a standardized way.</desc>
       <availableAtts elementName="idno">
-         <attDef ident="resp"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="subtype"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="resp" attLabel="resp"/>
+         <attDef ident="subtype" attLabel="subtype">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="isni"/>
                <valItem mode="add" ident="viaf"/>
                <valItem mode="add" ident="wiki"/>
@@ -1041,28 +1328,61 @@ one initial.</desc>
                <valItem mode="add" ident="ktiv"/>
             </valList>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 usage="opt"
-                 mode="change">
-            <desc versionDate="2010-04-30" xml:lang="en">categorizes the identifier, for example as an ISBN, Social
+         <attDef ident="type" attLabel="type">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-04-30"
+                  xml:lang="en">categorizes the identifier, for example as an ISBN, Social
       Security number, etc.</desc>
-            <desc versionDate="2009-01-05" xml:lang="fr">classe un numéro dans une catégorie, par exemple
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-01-05"
+                  xml:lang="fr">classe un numéro dans une catégorie, par exemple
         comme étant un numéro ISBN ou comme appartenant une autre série normalisée.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">예를 들어 ISBN 또는 기타 표준 일련번호로, 숫자를 범주화한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">表明編碼的種類，例如國際標準書號 (ISBN) 或其他標準系列編碼。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該数値の分類を示す．例えば，ISBNなど．</desc>
-            <desc versionDate="2016-11-17" xml:lang="de">bestimmt die Art des Identifikators (z. B. ISBN, Sozialversicherungsnummer, URI)</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">clasifica el número, por ejemplo como un ISBN o
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">예를 들어 ISBN 또는 기타 표준 일련번호로, 숫자를 범주화한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">表明編碼的種類，例如國際標準書號 (ISBN) 或其他標準系列編碼。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">当該数値の分類を示す．例えば，ISBNなど．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2016-11-17"
+                  xml:lang="de">bestimmt die Art des Identifikators (z. B. ISBN, Sozialversicherungsnummer, URI)</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">clasifica el número, por ejemplo como un ISBN o
         cualquier otro número estándard.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">classifica l'identificatore, ad esempio come codice
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">classifica l'identificatore, ad esempio come codice
         ISBN o altri generi di identificatori standard.</desc>
-            <datatype>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="semi" mode="add">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="semi"
+                     mode="add">
                <valItem ident="ISBN">
                   <desc versionDate="2016-07-02" xml:lang="en">International Standard Book Number: a 13- or (if assigned prior to 2007) 10-digit identifying number assigned by the publishing industry to a published book or similar item, registered with the <ref target="https://www.isbn-international.org"> International ISBN Agency.</ref>
                   </desc>
