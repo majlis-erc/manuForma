@@ -11,21 +11,19 @@
    <listBibl ident="listBibl"
              elementName="listBibl"
              elementLabel="citation list"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:listBibl"
              currentLevel="1"
              popup="1"
              teiElement="&lt;listBibl/&gt;">
       <desc>A list of bibliographic items.</desc>
       <availableAtts elementName="listBibl">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="replace"
-                 usage="req">
-            <valList type="closed">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="catalogue">
                   <desc>Descriptions in manuscript catalogues of the subject of
                                         the record. This only makes sense if you are editing a manuscript record. </desc>
@@ -53,15 +51,18 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="bibl" label="Bibliographic reference"/>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </listBibl>
    <bibl ident="bibl"
          elementName="bibl"
          elementLabel="Bibliographic reference"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:listBibl/*:bibl"
          currentLevel="2"
          popup="2"
@@ -74,12 +75,12 @@
               lookupLabel="Look up bibliographic record"/>
       <desc>A bibliographic item, like a monograph, journal article, or manuscript.</desc>
       <availableAtts elementName="bibl">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="change">
-            <valList mode="replace" type="semi">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     mode="replace"
+                     type="semi">
                <valItem ident="MS">
                   <desc>The reference is to a manuscript</desc>
                </valItem>
@@ -121,17 +122,26 @@
       <childElements>
          <textNode type="input"/>
          <child>
-            <element ident="title" label="Title of publication"/>
-            <element ident="ptr" label="Link to Zotero record"/>
-            <element ident="citedRange" label="Referenced section(s)"/>
+            <element ident="title"
+                     label="Title of publication"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </bibl>
    <title ident="title"
           elementName="title"
           elementLabel="Title of publication"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:listBibl/*:bibl/*:title"
           currentLevel="3"
           popup="3"
@@ -157,17 +167,14 @@
    <ptr ident="ptr"
         elementName="ptr"
         elementLabel="Link to Zotero record"
-        minOccur=""
-        maxOccur=""
+        minOccur="0"
+        maxOccur="100"
         path="/*:listBibl/*:bibl/*:ptr"
         currentLevel="3"
         popup="3"
         teiElement="&lt;ptr/&gt;">
       <availableAtts elementName="ptr">
-         <attDef xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="target"
-                 mode="change"/>
+         <attDef ident="target" attLabel="target"/>
       </availableAtts>
       <childElements>
          <child/>
@@ -176,20 +183,19 @@
    <citedRange ident="citedRange"
                elementName="citedRange"
                elementLabel="Referenced section(s)"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:listBibl/*:bibl/*:citedRange"
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
       <desc>defines the range of cited content, often represented by pages or other units</desc>
       <availableAtts elementName="citedRange">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="unit"
-                 mode="replace">
-            <valList type="open">
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="open">
                <valItem ident="page">
                   <desc>page</desc>
                </valItem>

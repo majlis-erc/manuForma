@@ -11,8 +11,8 @@
    <msContents ident="msContents"
                elementName="msContents"
                elementLabel="Add your content descriptions"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:msContents"
                currentLevel="1"
                popup="1"
@@ -20,16 +20,19 @@
       <availableAtts elementName="msContents"/>
       <childElements>
          <child>
-            <element ident="summary" label="Content summary"/>
-            <element ident="msItem" label="*Text unit"/>
+            <element ident="summary"
+                     label="Content summary"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="msItem" label="*Text unit" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </msContents>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Content summary"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msContents/*:summary"
             currentLevel="2"
             popup="2"
@@ -44,8 +47,8 @@
    <msItem ident="msItem"
            elementName="msItem"
            elementLabel="*Text unit"
-           minOccur=""
-           maxOccur=""
+           minOccur="0"
+           maxOccur="100"
            path="/*:msContents/*:msItem"
            currentLevel="2"
            popup="2"
@@ -53,11 +56,11 @@
       <desc>Describe the individual textual unit found in the manuscript or manuscript part.
                             Assign a "class"-attribute value from the list that best approximates the text's genre.</desc>
       <availableAtts elementName="msItem">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="class"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="class" attLabel="class">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="bible"/>
                <valItem mode="add" ident="bibleCommentary"/>
                <valItem mode="add" ident="mishna"/>
@@ -79,31 +82,37 @@
                <valItem mode="add" ident="tafsir"/>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:id"
-                 mode="change"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="title" label="*Title"/>
-            <element ident="author" label="Author"/>
-            <element ident="docDate" label="Date of composition"/>
-            <element ident="textLang" label="Text language"/>
-            <element ident="rubric" label="Rubric"/>
-            <element ident="incipit" label="Incipit"/>
-            <element ident="explicit" label="Explicit"/>
-            <element ident="finalRubric" label="Final rubric"/>
-            <element ident="note" label="Note"/>
+            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="title" label="*Title" minOccurs="0" maxOccurs="100"/>
+            <element ident="author" label="Author" minOccurs="0" maxOccurs="100"/>
+            <element ident="docDate"
+                     label="Date of composition"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="textLang"
+                     label="Text language"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="rubric" label="Rubric" minOccurs="0" maxOccurs="100"/>
+            <element ident="incipit" label="Incipit" minOccurs="0" maxOccurs="100"/>
+            <element ident="explicit" label="Explicit" minOccurs="0" maxOccurs="100"/>
+            <element ident="finalRubric"
+                     label="Final rubric"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="note" label="Note" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </msItem>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:locus"
           currentLevel="3"
           popup="3"
@@ -112,14 +121,8 @@
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -129,8 +132,8 @@
    <title ident="title"
           elementName="title"
           elementLabel="*Title"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:title"
           currentLevel="3"
           popup="3"
@@ -147,12 +150,12 @@
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <availableAtts elementName="title">
-         <attDef ident="ref"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="xml:lang" attLabel="lang">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -170,8 +173,8 @@
    <author ident="author"
            elementName="author"
            elementLabel="Author"
-           minOccur=""
-           maxOccur=""
+           minOccur="0"
+           maxOccur="100"
            path="/*:msContents/*:msItem/*:author"
            currentLevel="3"
            popup="3"
@@ -180,19 +183,22 @@
                             the database to specify an author. Try different spellings in different languages! If no suitable record exists, create a
                             new one. (The "ref" attribute will be filled out automatically when you link a person record to this element.)</desc>
       <availableAtts elementName="author">
-         <attDef ident="ref"/>
+         <attDef ident="ref" attLabel="ref"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="persName" label="*Author name"/>
+            <element ident="persName"
+                     label="*Author name"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </author>
    <persName ident="persName"
              elementName="persName"
              elementLabel="*Author name"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:msContents/*:msItem/*:author/*:persName"
              currentLevel="4"
              popup="4"
@@ -211,17 +217,17 @@
       <availableAtts elementName="persName"/>
       <childElements>
          <child>
-            <element ident="forename" label="persName"/>
-            <element ident="surname" label="persName"/>
-            <element ident="addName" label="persName"/>
+            <element ident="forename" label="persName" minOccurs="0" maxOccurs="100"/>
+            <element ident="surname" label="persName" minOccurs="0" maxOccurs="100"/>
+            <element ident="addName" label="persName" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </persName>
    <forename ident="forename"
              elementName="forename"
              elementLabel="forename"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:msContents/*:msItem/*:author/*:persName/*:forename"
              currentLevel="5"
              popup="5"
@@ -234,8 +240,8 @@
    <surname ident="surname"
             elementName="surname"
             elementLabel="surname"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msContents/*:msItem/*:author/*:persName/*:surname"
             currentLevel="5"
             popup="5"
@@ -248,8 +254,8 @@
    <addName ident="addName"
             elementName="addName"
             elementLabel="addName"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msContents/*:msItem/*:author/*:persName/*:addName"
             currentLevel="5"
             popup="5"
@@ -262,8 +268,8 @@
    <docDate ident="docDate"
             elementName="docDate"
             elementLabel="Date of composition"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msContents/*:msItem/*:docDate"
             currentLevel="3"
             popup="3"
@@ -278,8 +284,8 @@
    <textLang ident="textLang"
              elementName="textLang"
              elementLabel="Text language"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:msContents/*:msItem/*:textLang"
              currentLevel="3"
              popup="3"
@@ -290,21 +296,21 @@
                             language other than the one marked in mainLang, you must mark the language of the quote using the xml:lang attribute. If
                             the appropriate code is not listed consult https://r12a.github.io/app-subtags/</desc>
       <availableAtts elementName="textLang">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="mainLang"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="mainLang" attLabel="mainLang">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="otherLangs"
-                 mode="change">
-            <valList type="open" mode="change">
+         <attDef ident="otherLangs" attLabel="otherLangs">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -319,8 +325,8 @@
    <rubric ident="rubric"
            elementName="rubric"
            elementLabel="Rubric"
-           minOccur=""
-           maxOccur=""
+           minOccur="0"
+           maxOccur="100"
            path="/*:msContents/*:msItem/*:rubric"
            currentLevel="3"
            popup="3"
@@ -329,11 +335,11 @@
                             of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape or
                             character size.</desc>
       <availableAtts elementName="rubric">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <attDef ident="xml:lang" mode="change">
+         <attDef ident="xml:lang" attLabel="lang">
+            <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                    ident="xml:lang"
+                    mode="change">
                <valList type="closed" mode="change">
                   <valItem mode="add" ident="ar"/>
                   <valItem mode="add" ident="en"/>
@@ -347,16 +353,19 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="quote" label="Transcription"/>
+            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </rubric>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:rubric/*:locus"
           currentLevel="4"
           popup="4"
@@ -365,14 +374,8 @@
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -382,8 +385,8 @@
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:rubric/*:quote"
           currentLevel="4"
           popup="4"
@@ -398,8 +401,8 @@
    <incipit ident="incipit"
             elementName="incipit"
             elementLabel="Incipit"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msContents/*:msItem/*:incipit"
             currentLevel="3"
             popup="3"
@@ -407,11 +410,11 @@
       <desc>The opening words of the text proper of sufficient length
                             to identify the work with confidence.</desc>
       <availableAtts elementName="incipit">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="xml:lang" attLabel="lang">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -423,16 +426,19 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="quote" label="Transcription"/>
+            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </incipit>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:incipit/*:locus"
           currentLevel="4"
           popup="4"
@@ -441,14 +447,8 @@
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -458,8 +458,8 @@
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:incipit/*:quote"
           currentLevel="4"
           popup="4"
@@ -474,8 +474,8 @@
    <explicit ident="explicit"
              elementName="explicit"
              elementLabel="Explicit"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:msContents/*:msItem/*:explicit"
              currentLevel="3"
              popup="3"
@@ -483,11 +483,11 @@
       <desc>The closing words of the text proper, exclusive of any
                             rubric or colophon which might follow it.</desc>
       <availableAtts elementName="explicit">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="xml:lang" attLabel="lang">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -499,16 +499,19 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="quote" label="Transcription"/>
+            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </explicit>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:explicit/*:locus"
           currentLevel="4"
           popup="4"
@@ -517,14 +520,8 @@
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -534,8 +531,8 @@
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:explicit/*:quote"
           currentLevel="4"
           popup="4"
@@ -550,8 +547,8 @@
    <finalRubric ident="finalRubric"
                 elementName="finalRubric"
                 elementLabel="Final rubric"
-                minOccur=""
-                maxOccur=""
+                minOccur="0"
+                maxOccur="100"
                 path="/*:msContents/*:msItem/*:finalRubric"
                 currentLevel="3"
                 popup="3"
@@ -560,11 +557,11 @@
                             end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
                             device.</desc>
       <availableAtts elementName="finalRubric">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:lang"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="xml:lang" attLabel="lang">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="ar"/>
                <valItem mode="add" ident="en"/>
                <valItem mode="add" ident="he"/>
@@ -576,16 +573,19 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios"/>
-            <element ident="quote" label="Transcription"/>
+            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </finalRubric>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:finalRubric/*:locus"
           currentLevel="4"
           popup="4"
@@ -594,14 +594,8 @@
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="from"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="to"
-                 mode="change"/>
+         <attDef ident="from" attLabel="from"/>
+         <attDef ident="to" attLabel="to"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -611,8 +605,8 @@
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:msContents/*:msItem/*:finalRubric/*:quote"
           currentLevel="4"
           popup="4"
@@ -627,8 +621,8 @@
    <note ident="note"
          elementName="note"
          elementLabel="Note"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:msContents/*:msItem/*:note"
          currentLevel="3"
          popup="3"
@@ -638,15 +632,15 @@
       <availableAtts elementName="note"/>
       <childElements>
          <child>
-            <element ident="p" label="Free text box"/>
+            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </note>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur=""
-      maxOccur=""
+      minOccur="0"
+      maxOccur="100"
       path="/*:msContents/*:msItem/*:note/*:p"
       currentLevel="4"
       popup="4"

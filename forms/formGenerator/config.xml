@@ -196,12 +196,10 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
-                <!-- Example of title constructed by child elements. groupLabelConditionalElement, indicates which element must have content to trigger the display, if empty it defaults to the groupLabel, otherwise you have an empty label.  -->
-                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat('fols. ', ./*:locus, ' : ', ./*:title)" groupNo="2" repeatable="yes">
-<!--                <group groupLabel="Summary of contents" groupNo="1">-->
+                <group groupLabel="Summary of contents" groupNo="1">-->
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupNo="2" repeatable="yes">
+                <group groupLabel="Detailed description of text unit(s): title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat('fols. ', ./*:locus, ' : ', ./*:title)" groupNo="2" repeatable="yes">
                     <element xpath="tei:msItem"/>
                 </group>
             </elementGroups>
@@ -372,7 +370,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and transcribe the incodicated document." groupNo="1" repeatable="yes">
+                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ', ./*:locus, ' : ', ./*:title)" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>

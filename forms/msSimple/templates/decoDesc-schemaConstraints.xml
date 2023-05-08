@@ -11,8 +11,8 @@
    <decoDesc ident="decoDesc"
              elementName="decoDesc"
              elementLabel="decoration description"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:decoDesc"
              currentLevel="1"
              popup="1"
@@ -21,16 +21,22 @@
       <availableAtts elementName="decoDesc"/>
       <childElements>
          <child>
-            <element ident="summary" label="Text layout summary"/>
-            <element ident="decoNote" label="Text Layout"/>
+            <element ident="summary"
+                     label="Text layout summary"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="decoNote"
+                     label="Text Layout"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </decoDesc>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Text layout summary"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:decoDesc/*:summary"
             currentLevel="2"
             popup="2"
@@ -45,28 +51,26 @@
    <decoNote ident="decoNote"
              elementName="decoNote"
              elementLabel="Text Layout"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:decoDesc/*:decoNote"
              currentLevel="2"
              popup="2"
              teiElement="&lt;decoNote/&gt;">
       <desc>Describe the text layout.</desc>
       <availableAtts elementName="decoNote">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="color"
-                 usage="opt"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="pastedown"
-                 usage="opt">
-            <datatype maxOccurs="3">
+         <attDef ident="color" attLabel="color"/>
+         <attDef ident="pastedown" attLabel="pastedown">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="3">
                <dataRef key="teidata.word"/>
             </datatype>
-            <valList type="semi">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="semi">
                <valItem ident="UTI">
                   <desc>Under the turn-ins. The pastedown is pasted under the
                                         turn-ins.</desc>
@@ -83,15 +87,17 @@
                </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="repaired"
-                 usage="opt">
-            <datatype maxOccurs="1">
+         <attDef ident="repaired" attLabel="repaired">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="1">
                <dataRef key="teidata.word"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="Y"/>
                <valItem ident="N"/>
             </valList>
@@ -99,16 +105,19 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="desc" label="Text layout description"/>
-            <element ident="p" label="Free text box"/>
+            <element ident="desc"
+                     label="Text layout description"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </decoNote>
    <desc ident="desc"
          elementName="desc"
          elementLabel="Text layout description"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:decoDesc/*:decoNote/*:desc"
          currentLevel="3"
          popup="3"
@@ -142,8 +151,8 @@
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur=""
-      maxOccur=""
+      minOccur="0"
+      maxOccur="100"
       path="/*:decoDesc/*:decoNote/*:p"
       currentLevel="3"
       popup="3"

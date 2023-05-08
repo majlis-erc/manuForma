@@ -11,8 +11,8 @@
    <physDesc ident="physDesc"
              elementName="physDesc"
              elementLabel="physical description"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc"
              currentLevel="1"
              popup="1"
@@ -20,76 +20,198 @@
       <desc>This element contains descriptions of the codicological
                             and paleographic features of a manuscript. </desc>
       <availableAtts elementName="physDesc">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="n"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">number</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">수</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">número</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">nombre</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">numero</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">数値</gloss>
-            <desc versionDate="2005-10-10" xml:lang="en">gives a number (or other label) for an element, which is not necessarily unique within
+         <attDef ident="n" attLabel="number">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">number</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">수</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">número</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">nombre</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">numero</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">数値</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2005-10-10"
+                  xml:lang="en">gives a number (or other label) for an element, which is not necessarily unique within
         the document.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">요소의 번호(또는 다른 표지)를 제시하며, 문서 내에서 반드시 고유값일 필요는 없다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">將元素標上一個數字 (或其他標號)，該標號在文件中未必是獨特的。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">要素に数値やラベルを与える．これは当該文書中でユニークである必要 はない．</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">donne un nombre (ou une autre étiquette) pour un
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">요소의 번호(또는 다른 표지)를 제시하며, 문서 내에서 반드시 고유값일 필요는 없다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">將元素標上一個數字 (或其他標號)，該標號在文件中未必是獨特的。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">要素に数値やラベルを与える．これは当該文書中でユニークである必要 はない．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-05-25"
+                  xml:lang="fr">donne un nombre (ou une autre étiquette) pour un
         élément, qui n'est pas nécessairement unique dans le document TEI.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">proporciona un número (u otra etiqueta) a un elemento
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">proporciona un número (u otra etiqueta) a un elemento
         que no es necesariamente único en el documento.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">assegna un numero (o altra etichetta) a un elemento
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">assegna un numero (o altra etichetta) a un elemento
         che non è necessariamente unico all'interno del documento</desc>
-            <datatype maxOccurs="1">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="1">
                <dataRef key="teidata.text"/>
             </datatype>
-            <remarks versionDate="2013-12-06" xml:lang="en">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     versionDate="2013-12-06"
+                     xml:lang="en">
                <p>The value of this attribute is always understood to be a single token, even if it contains space or other punctuation characters, and need not be composed of numbers only. It is typically used to specify the numbering of chapters, sections,
           list items, etc.; it may also be used in the specification of a standard reference system
           for the text.</p>
             </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xml:lang="fr"
+                     versionDate="2007-06-12">
                <p>L'attribut <att>n</att> peut être employé pour indiquer la numérotation de chapitres,
           sections, items de liste, etc. ; il peut également être employé dans les spécifications
           d'un système standard de référence pour le texte. </p>
             </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xml:lang="es"
+                     versionDate="2008-04-06">
                <p>El atributo <att>n</att> se puede utilizar para especificar la enumeración de los
           capítulos, de las secciones, de los items de una lista, etc.; puede también ser utilizado
           en la especificación de un sistema de referencia estándar para el texto.</p>
             </remarks>
-            <remarks xml:lang="ja" versionDate="2019-06-08">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xml:lang="ja"
+                     versionDate="2019-06-08">
                <p>この属性の値は，もし空白やその他の区切り符号があったとしても、つねにひとまとまりのトークンとして解釈され、また数字のみで構成される必要はない。この属性は典型的には章や節，リスト等の構成要素の付番に用いられる。テキストの標準的な参照体系の仕様に含めることができる。</p>
             </remarks>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="resp"
-                 usage="opt">
-            <gloss versionDate="2009-11-02" xml:lang="en">responsible party</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">책임 당사자</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">parte responsable</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">responsable</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">responsabile</gloss>
-            <gloss versionDate="2019-09-16" xml:lang="ja">責任者</gloss>
-            <desc versionDate="2009-11-02" xml:lang="en">indicates the agency responsible for the intervention or interpretation, for example an
+         <attDef ident="resp" attLabel="responsible party">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-11-02"
+                   xml:lang="en">responsible party</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">책임 당사자</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">parte responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">responsabile</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-09-16"
+                   xml:lang="ja">責任者</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-11-02"
+                  xml:lang="en">indicates the agency responsible for the intervention or interpretation, for example an
         editor or transcriber.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">편집자 또는 전사자와 같이 또는 해석에 대한 책임이 있는 대리인을 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出負責該更動或詮釋的代理者，例如編輯或轉錄者。</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">介入や解釈の責任者を示す．例えば，編集者，翻刻者など。</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique l'agent responsable de l'intervention ou de
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">편집자 또는 전사자와 같이 또는 해석에 대한 책임이 있는 대리인을 나타낸다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">指出負責該更動或詮釋的代理者，例如編輯或轉錄者。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">介入や解釈の責任者を示す．例えば，編集者，翻刻者など。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">indique l'agent responsable de l'intervention ou de
         l'interprétation, par exemple un éditeur ou un transcripteur.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el agente responsable de la intervención o la
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica el agente responsable de la intervención o la
         interpretación, p.ej. un editor o un transcriptor.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica il responsabile dell'intervento o
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">indica il responsabile dell'intervento o
         interpretazione, per esempio un curatore o trascrittore</desc>
-            <datatype maxOccurs="unbounded">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
-            <remarks versionDate="2014-12-10" xml:lang="en">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     versionDate="2014-12-10"
+                     xml:lang="en">
                <p>To reduce the ambiguity of a <att>resp</att> pointing directly to a person or 
           organization, we 
           recommend that <att>resp</att> be used to point not to an agent 
@@ -100,7 +222,11 @@
           clearly each of the roles played in part of a TEI file (creating, 
           transcribing, encoding, editing, proofing etc.).</p>
             </remarks>
-            <remarks versionDate="2019-09-16" xml:lang="ja">
+            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     versionDate="2019-09-16"
+                     xml:lang="ja">
                <p>
                   <att>resp</att> が直接個人や組織を指した場合のあいまいさを減らすため，<att>resp</att> は行為者 (<gi>person</gi> or <gi>org</gi>) ではなく <gi>respStmt</gi>, <gi>author</gi>, <gi>editor</gi> などその行為者の正確な役割を明示するエレメントを指して用いることを推奨する．エンコード者は <gi>respStmt</gi> にTEI文書内の役割分担を明確に記述できる（作成・翻刻・エンコード・編集・校正など）。</p>
             </remarks>
@@ -108,16 +234,22 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="handDesc" label="description of hands"/>
-            <element ident="scriptDesc" label="physDesc"/>
+            <element ident="handDesc"
+                     label="description of hands"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="scriptDesc"
+                     label="physDesc"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </physDesc>
    <handDesc ident="handDesc"
              elementName="handDesc"
              elementLabel="description of hands"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc/*:handDesc"
              currentLevel="2"
              popup="2"
@@ -125,37 +257,78 @@
       <desc>Describe the hands found in this manuscript, or part of the
                             manuscript. Indicate the number of hands in the attribute.</desc>
       <availableAtts elementName="handDesc">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="hands">
-            <gloss xml:lang="en" versionDate="2007-06-12">hands</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">mains</gloss>
-            <desc versionDate="2005-01-14" xml:lang="en">specifies the number of distinct hands identified within the manuscript</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">원고 내에서 식별되는 필적 수를 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">說明在手稿中可清楚識別的書寫者人數。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該手書き資料中で特定可能な筆致の数を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">spécifie le nombre de mains différentes qui ont
+         <attDef ident="hands" attLabel="hands">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2007-06-12">hands</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">mains</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2005-01-14"
+                  xml:lang="en">specifies the number of distinct hands identified within the manuscript</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">원고 내에서 식별되는 필적 수를 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">說明在手稿中可清楚識別的書寫者人數。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">当該手書き資料中で特定可能な筆致の数を示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">spécifie le nombre de mains différentes qui ont
           pu être identifiées dans le manuscrit</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">especifica el número de manos distintas identificadas al interno de un manuscrito.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica il numero delle diverse mani identificate all'interno del manoscritto</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">especifica el número de manos distintas identificadas al interno de un manuscrito.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica il numero delle diverse mani identificate all'interno del manoscritto</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.count"/>
             </datatype>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="summary" label="Paleography summary"/>
-            <element ident="handNote" label="*Description of scribal hand"/>
+            <element ident="summary"
+                     label="Paleography summary"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="handNote"
+                     label="*Description of scribal hand"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </handDesc>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Paleography summary"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:physDesc/*:handDesc/*:summary"
             currentLevel="3"
             popup="3"
@@ -171,8 +344,8 @@
    <handNote ident="handNote"
              elementName="handNote"
              elementLabel="*Description of scribal hand"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc/*:handDesc/*:handNote"
              currentLevel="3"
              popup="3"
@@ -183,11 +356,10 @@
                             and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
                             using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="handNote">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="medium"
-                 mode="change">
-            <valList type="closed">
+         <attDef ident="medium" attLabel="medium">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="brown"/>
                <valItem ident="black"/>
                <valItem ident="pigments"/>
@@ -196,71 +368,113 @@
                <valItem ident="unidentified"/>
             </valList>
          </attDef>
-         <attDef ident="scope"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scribe">
-            <desc versionDate="2010-09-28" xml:lang="en">gives a name or other identifier for the scribe
+         <attDef ident="scope" attLabel="scope"/>
+         <attDef ident="scribe" attLabel="scribe">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">gives a name or other identifier for the scribe
 believed to be responsible for this hand.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">
         当該筆致に対応すると考えられる筆写者の名前またはその他の識別子を示す。
 </desc>
-            <desc versionDate="2009-05-27" xml:lang="fr">donne un nom normalisé ou un autre
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-05-27"
+                  xml:lang="fr">donne un nom normalisé ou un autre
 identifiant pour le scribe reconnu comme responsable de cette main.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">assegna un nome o altro identificatore standard al trascrittore che si ritiene corrisponda alla mano in questione</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">asigna un nombre u otro identificador estándard para el transcriptor que se identifica con la mano en cuestión.</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">assegna un nome o altro identificatore standard al trascrittore che si ritiene corrisponda alla mano in questione</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">asigna un nombre u otro identificador estándard para el transcriptor que se identifica con la mano en cuestión.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.name"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scribeRef">
-            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
+         <attDef ident="scribeRef" attLabel="scribeRef">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
       elsewhere in the description.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      minOccurs="1"
+                      maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scriptRef">
-            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the script or writing style used by
+         <attDef ident="scriptRef" attLabel="scriptRef">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">points to a full description of the script or writing style used by
 this hand, typically supplied by a <gi>scriptNote</gi> element
       elsewhere in the description.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆体や書記スタイルについての詳細な記述へポイントする。典型的には記述のどこかで<gi>scriptNote</gi>要素によって補われる。</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">問題の筆体や書記スタイルについての詳細な記述へポイントする。典型的には記述のどこかで<gi>scriptNote</gi>要素によって補われる。</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      minOccurs="1"
+                      maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="xml:id"
-                 mode="change"
-                 usage="req"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p" label="Free text box"/>
-            <element ident="persName" label="Person"/>
-            <element ident="placeName" label="Place"/>
-            <element ident="metamark" label="Special graphic signs"/>
-            <element ident="origDate" label="Date of origin"/>
-            <element ident="locus" label="Folios"/>
+            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
+            <element ident="persName" label="Person" minOccurs="0" maxOccurs="100"/>
+            <element ident="placeName" label="Place" minOccurs="0" maxOccurs="100"/>
+            <element ident="metamark"
+                     label="Special graphic signs"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="origDate"
+                     label="Date of origin"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="locus" label="Folios" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </handNote>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur=""
-      maxOccur=""
+      minOccur="0"
+      maxOccur="100"
       path="/*:physDesc/*:handDesc/*:handNote/*:p"
       currentLevel="4"
       popup="4"
@@ -276,8 +490,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <persName ident="persName"
              elementName="persName"
              elementLabel="Person"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc/*:handDesc/*:handNote/*:persName"
              currentLevel="4"
              popup="4"
@@ -298,32 +512,25 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
                             when you link a record to this element.)</desc>
       <availableAtts elementName="persName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="role"
-                 usage="opt">
-            <datatype>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="role" attLabel="role">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.enumerated"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="scribe"/>
                <valItem ident="vocalizer"/>
                <valItem ident="masorator"/>
             </valList>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="replace"
-                 usage="opt">
-            <valList type="closed">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
                <valItem ident="main">
                   <desc>to be used only in person records, to idenfity a preferred option among the names provided.</desc>
                </valItem>
@@ -384,8 +591,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <placeName ident="placeName"
               elementName="placeName"
               elementLabel="Place"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:physDesc/*:handDesc/*:handNote/*:placeName"
               currentLevel="4"
               popup="4"
@@ -405,18 +612,11 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be
                             filled out automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 mode="change"
-                 usage="rec"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="change">
-            <valList>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <valItem ident="normalized"/>
                <valItem ident="library"/>
                <valItem ident="academicInstitution"/>
@@ -432,8 +632,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <metamark ident="metamark"
              elementName="metamark"
              elementLabel="Special graphic signs"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc/*:handDesc/*:handNote/*:metamark"
              currentLevel="4"
              popup="4"
@@ -441,11 +641,11 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
       <desc>Describes the use of complementary characters like vocalization or recitation in
                             prose and choose the appropriate "function" from the attribute list.</desc>
       <availableAtts elementName="metamark">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="function"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="function" attLabel="function">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="vocalization"/>
                <valItem mode="add" ident="recitation"/>
             </valList>
@@ -459,8 +659,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <origDate ident="origDate"
              elementName="origDate"
              elementLabel="Date of origin"
-             minOccur=""
-             maxOccur=""
+             minOccur="0"
+             maxOccur="100"
              path="/*:physDesc/*:handDesc/*:handNote/*:origDate"
              currentLevel="4"
              popup="4"
@@ -469,16 +669,17 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
                             attributes together.</desc>
       <availableAtts elementName="origDate">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="evidence"
-                 mode="replace"
-                 usage="opt">
-            <datatype maxOccurs="6">
+         <attDef ident="evidence" attLabel="evidence">
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      maxOccurs="6">
                <dataRef key="teidata.word"/>
             </datatype>
-            <valList type="semi">
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="semi">
                <valItem ident="lettering">
                   <desc>Text dated palaeographically</desc>
                </valItem>
@@ -504,9 +705,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="notAfter"/>
-         <attDef ident="notBefore"/>
-         <attDef ident="when"/>
+         <attDef ident="notAfter" attLabel="notAfter"/>
+         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -516,8 +717,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <locus ident="locus"
           elementName="locus"
           elementLabel="Folios"
-          minOccur=""
-          maxOccur=""
+          minOccur="0"
+          maxOccur="100"
           path="/*:physDesc/*:handDesc/*:handNote/*:locus"
           currentLevel="4"
           popup="4"
@@ -526,47 +727,117 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="from">
-            <gloss xml:lang="en" versionDate="2007-06-12">from</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">depuis</gloss>
-            <desc versionDate="2013-12-21" xml:lang="en">specifies the
+         <attDef ident="from" attLabel="from">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2007-06-12">from</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">depuis</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2013-12-21"
+                  xml:lang="en">specifies the
       starting point of the location in a normalized form, typically a
       page number.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
-            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, le point de
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-06"
+                  xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">Spécifie, sous une forme normalisée, le point de
         départ de la localisation.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el punto de inicio de una localización en una
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica el punto de inicio de una localización en una
         forma estándard.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica l'inizio della posizione in forma
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica l'inizio della posizione in forma
         normalizzata</desc>
-            <datatype>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.word"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="to">
-            <gloss xml:lang="en" versionDate="2007-06-12">to</gloss>
-            <gloss versionDate="2007-06-12" xml:lang="fr">jusqu'à</gloss>
-            <desc versionDate="2013-12-21" xml:lang="en">specifies the
+         <attDef ident="to" attLabel="to">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2007-06-12">to</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">jusqu'à</gloss>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2013-12-21"
+                  xml:lang="en">specifies the
       end-point of the location in a normalized form, typically as a
       page number.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
-            <desc versionDate="2008-04-06" xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-02"
+                  xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-06"
+                  xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-06-12"
+                  xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
         pour la localisation.</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el punto final de una localización en una
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">indica el punto final de una localización en una
         forma estándard.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">specifica il termine della posizione in forma
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica il termine della posizione in forma
         normalizzata</desc>
-            <datatype>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.word"/>
             </datatype>
          </attDef>
@@ -579,8 +850,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
    <scriptDesc ident="scriptDesc"
                elementName="scriptDesc"
                elementLabel="scriptDesc"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:physDesc/*:scriptDesc"
                currentLevel="2"
                popup="2"
@@ -589,15 +860,18 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
       <availableAtts elementName="scriptDesc"/>
       <childElements>
          <child>
-            <element ident="scriptNote" label="*Description of script"/>
+            <element ident="scriptNote"
+                     label="*Description of script"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </scriptDesc>
    <scriptNote ident="scriptNote"
                elementName="scriptNote"
                elementLabel="*Description of script"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:physDesc/*:scriptDesc/*:scriptNote"
                currentLevel="3"
                popup="3"
@@ -608,16 +882,15 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
                             using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="scriptNote">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="medium"> </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="rend">
-            <datatype>
+         <attDef ident="medium" attLabel="medium"/>
+         <attDef ident="rend" attLabel="rend">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef name="string"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="unidentified"/>
                <valItem ident="untrained"/>
                <valItem ident="careless"/>
@@ -626,43 +899,76 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <valItem ident="monumental"/>
             </valList>
          </attDef>
-         <attDef ident="scope"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scribe">
-            <desc versionDate="2010-09-28" xml:lang="en">gives a name or other identifier for the scribe
+         <attDef ident="scope" attLabel="scope"/>
+         <attDef ident="scribe" attLabel="scribe">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">gives a name or other identifier for the scribe
 believed to be responsible for this hand.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">이 필적에 대한 책임이 있다고 간주되는 필기사에 대한 표준명 또는 다른 확인소를 제시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">
         当該筆致に対応すると考えられる筆写者の名前またはその他の識別子を示す。
 </desc>
-            <desc versionDate="2009-05-27" xml:lang="fr">donne un nom normalisé ou un autre
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2009-05-27"
+                  xml:lang="fr">donne un nom normalisé ou un autre
 identifiant pour le scribe reconnu comme responsable de cette main.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">assegna un nome o altro identificatore standard al trascrittore che si ritiene corrisponda alla mano in questione</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">asigna un nombre u otro identificador estándard para el transcriptor que se identifica con la mano en cuestión.</desc>
-            <datatype>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">assegna un nome o altro identificatore standard al trascrittore che si ritiene corrisponda alla mano in questione</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">asigna un nombre u otro identificador estándard para el transcriptor que se identifica con la mano en cuestión.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
                <dataRef key="teidata.name"/>
             </datatype>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scribeRef">
-            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
+         <attDef ident="scribeRef" attLabel="scribeRef">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">points to a full description of the scribe concerned, typically supplied by a <gi>person</gi> element
       elsewhere in the description.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">問題の筆写者についての詳細な記述へポイントする。典型的には記述のどこかで<gi>person</gi>要素によって補われる。</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      minOccurs="1"
+                      maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="script">
-            <datatype>
+         <attDef ident="script" attLabel="script">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.name"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="oriental"/>
                <valItem ident="yemenite"/>
                <valItem ident="sephardi"/>
@@ -675,45 +981,55 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
                <valItem ident="naskh"/>
             </valList>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="scriptRef">
-            <desc versionDate="2010-09-28" xml:lang="en">points to a full description of the script or writing style used by
+         <attDef ident="scriptRef" attLabel="scriptRef">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2010-09-28"
+                  xml:lang="en">points to a full description of the script or writing style used by
 this hand, typically supplied by a <gi>scriptNote</gi> element
       elsewhere in the description.</desc>
-            <desc versionDate="2019-09-16" xml:lang="ja">問題の筆体や書記スタイルについての詳細な記述へポイントする。典型的には記述のどこかで<gi>scriptNote</gi>要素によって補われる。</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2019-09-16"
+                  xml:lang="ja">問題の筆体や書記スタイルについての詳細な記述へポイントする。典型的には記述のどこかで<gi>scriptNote</gi>要素によって補われる。</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      minOccurs="1"
+                      maxOccurs="unbounded">
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="style">
-            <datatype>
+         <attDef ident="style" attLabel="style">
+            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef name="string"/>
             </datatype>
-            <valList type="closed">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="square"/>
                <valItem ident="nonSquare"/>
                <valItem ident="cursive"/>
                <valItem ident="unidentified"/>
             </valList>
          </attDef>
-         <attDef ident="xml:id"/>
-         <attDef ident="xml:lang"/>
+         <attDef ident="xml:id" attLabel="id"/>
+         <attDef ident="xml:lang" attLabel="lang"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p" label="Free text box"/>
+            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </scriptNote>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur=""
-      maxOccur=""
+      minOccur="0"
+      maxOccur="100"
       path="/*:physDesc/*:scriptDesc/*:scriptNote/*:p"
       currentLevel="4"
       popup="4"

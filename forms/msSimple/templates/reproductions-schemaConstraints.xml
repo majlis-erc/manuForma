@@ -11,8 +11,8 @@
    <facsimile ident="facsimile"
               elementName="facsimile"
               elementLabel="Reproductions"
-              minOccur=""
-              maxOccur=""
+              minOccur="0"
+              maxOccur="100"
               path="/*:facsimile"
               currentLevel="1"
               popup="1"
@@ -21,15 +21,18 @@
       <availableAtts elementName="facsimile"/>
       <childElements>
          <child>
-            <element ident="graphic" label="Reproduction link"/>
+            <element ident="graphic"
+                     label="Reproduction link"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </facsimile>
    <graphic ident="graphic"
             elementName="graphic"
             elementLabel="Reproduction link"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:facsimile/*:graphic"
             currentLevel="2"
             popup="2"
@@ -37,13 +40,12 @@
       <desc>Contains the link to one reproduction in source. Select the type from the
                             dropdown list.</desc>
       <availableAtts elementName="graphic">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="source"
-                 mode="replace"
-                 usage="opt">
-            <gloss>Source of reproduction</gloss>
-            <valList type="closed">
+         <attDef ident="source" attLabel="Source of reproduction">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source of reproduction</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed">
                <valItem ident="Ktiv">
                   <gloss>Ktiv</gloss>
                </valItem>
@@ -52,10 +54,7 @@
                </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change"/>
+         <attDef ident="type" attLabel="type"/>
       </availableAtts>
       <childElements>
          <child/>

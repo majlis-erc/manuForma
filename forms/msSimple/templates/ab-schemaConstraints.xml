@@ -11,8 +11,8 @@
    <ab ident="ab"
        elementName="ab"
        elementLabel="Choose the type of manuscript"
-       minOccur=""
-       maxOccur=""
+       minOccur="0"
+       maxOccur="100"
        path="/*:ab"
        currentLevel="1"
        popup="1"
@@ -20,12 +20,13 @@
       <desc>Contains descriptions of the manuscript's physical components. Use the "form"
                             attribute to indicate if the manuscript was created as a single unit, a composite, or a multiple text manuscript.</desc>
       <availableAtts elementName="ab">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="rend"
-                 mode="change">
-            <gloss>Format</gloss>
-            <valList type="closed" mode="change">
+         <attDef ident="rend" attLabel="Format">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Format</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="square"> </valItem>
                <valItem mode="add" ident="horizontalRectangle"> </valItem>
                <valItem mode="add" ident="verticalRectangle"> </valItem>
@@ -34,23 +35,25 @@
                <valItem mode="add" ident="other"> </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="style"
-                 mode="change">
-            <gloss>Book form</gloss>
-            <valList type="closed" mode="change">
+         <attDef ident="style" attLabel="Book form">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Book form</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="codex"> </valItem>
                <valItem mode="add" ident="scroll"> </valItem>
                <valItem mode="add" ident="uncertain"> </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="subtype"
-                 mode="change">
-            <gloss>Type of manuscript</gloss>
-            <valList type="closed" mode="change">
+         <attDef ident="subtype" attLabel="Type of manuscript">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type of manuscript</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="single">
                   <desc xml:lang="en">Single manuscript: a volume consisting of one codicological unit and containing only one
                                             text</desc>
@@ -65,11 +68,11 @@
                </valItem>
             </valList>
          </attDef>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change">
-            <valList type="closed" mode="change">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem mode="add" ident="codicologicalDefinition"> </valItem>
             </valList>
          </attDef>

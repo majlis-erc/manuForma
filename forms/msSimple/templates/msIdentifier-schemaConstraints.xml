@@ -11,8 +11,8 @@
    <msIdentifier ident="msIdentifier"
                  elementName="msIdentifier"
                  elementLabel="Add elements to identification"
-                 minOccur=""
-                 maxOccur=""
+                 minOccur="0"
+                 maxOccur="100"
                  path="/*:msIdentifier"
                  currentLevel="1"
                  popup="1"
@@ -22,22 +22,40 @@
       <availableAtts elementName="msIdentifier"/>
       <childElements>
          <child>
-            <element ident="country" label="*Country of location"/>
-            <element ident="settlement" label="*Place"/>
-            <element ident="repository" label="*Institution"/>
-            <element ident="collection" label="*Collection"/>
-            <element ident="idno" label="*Shelfmark"/>
-            <element ident="msName" label="Name by which manuscript is generally known"/>
-            <element ident="objectName" label="msIdentifier"/>
-            <element ident="altIdentifier" label="Add alternate identifier"/>
+            <element ident="country"
+                     label="*Country of location"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="settlement" label="*Place" minOccurs="0" maxOccurs="100"/>
+            <element ident="repository"
+                     label="*Institution"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="collection"
+                     label="*Collection"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="idno" label="*Shelfmark" minOccurs="0" maxOccurs="100"/>
+            <element ident="msName"
+                     label="Name by which manuscript is generally known"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="objectName"
+                     label="msIdentifier"
+                     minOccurs="0"
+                     maxOccurs="100"/>
+            <element ident="altIdentifier"
+                     label="Add alternate identifier"
+                     minOccurs="0"
+                     maxOccurs="100"/>
          </child>
       </childElements>
    </msIdentifier>
    <country ident="country"
             elementName="country"
             elementLabel="*Country of location"
-            minOccur=""
-            maxOccur=""
+            minOccur="0"
+            maxOccur="100"
             path="/*:msIdentifier/*:country"
             currentLevel="2"
             popup="2"
@@ -67,8 +85,8 @@
    <settlement ident="settlement"
                elementName="settlement"
                elementLabel="*Place"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:msIdentifier/*:settlement"
                currentLevel="2"
                popup="2"
@@ -99,8 +117,8 @@
    <repository ident="repository"
                elementName="repository"
                elementLabel="*Institution"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:msIdentifier/*:repository"
                currentLevel="2"
                popup="2"
@@ -134,8 +152,8 @@
    <collection ident="collection"
                elementName="collection"
                elementLabel="*Collection"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:msIdentifier/*:collection"
                currentLevel="2"
                popup="2"
@@ -179,8 +197,8 @@
    <idno ident="idno"
          elementName="idno"
          elementLabel="*Shelfmark"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:msIdentifier/*:idno"
          currentLevel="2"
          popup="2"
@@ -196,8 +214,8 @@
    <msName ident="msName"
            elementName="msName"
            elementLabel="Name by which manuscript is generally known"
-           minOccur=""
-           maxOccur=""
+           minOccur="0"
+           maxOccur="100"
            path="/*:msIdentifier/*:msName"
            currentLevel="2"
            popup="2"
@@ -212,8 +230,8 @@
    <objectName ident="objectName"
                elementName="objectName"
                elementLabel="objectName"
-               minOccur=""
-               maxOccur=""
+               minOccur="0"
+               maxOccur="100"
                path="/*:msIdentifier/*:objectName"
                currentLevel="2"
                popup="2"
@@ -226,8 +244,8 @@
    <altIdentifier ident="altIdentifier"
                   elementName="altIdentifier"
                   elementLabel="Add alternate identifier"
-                  minOccur=""
-                  maxOccur=""
+                  minOccur="0"
+                  maxOccur="100"
                   path="/*:msIdentifier/*:altIdentifier"
                   currentLevel="2"
                   popup="2"
@@ -235,11 +253,11 @@
       <desc>Alternate Identifiers. This can be older shelf marks and identifiers in databases
                             like IMHM, SfarData, Ktiv, FGP and old (identifiers). Specify where this identifier is used in the "type" attribute.</desc>
       <availableAtts elementName="altIdentifier">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change">
-            <valList type="open" mode="change">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="change">
                <valItem mode="add" ident="IMHM"/>
                <valItem mode="add" ident="SfarData"/>
                <valItem mode="add" ident="Ktiv"/>
@@ -251,15 +269,15 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="idno" label="*Shelfmark"/>
+            <element ident="idno" label="*Shelfmark" minOccurs="0" maxOccurs="100"/>
          </child>
       </childElements>
    </altIdentifier>
    <idno ident="idno"
          elementName="idno"
          elementLabel="*Shelfmark"
-         minOccur=""
-         maxOccur=""
+         minOccur="0"
+         maxOccur="100"
          path="/*:msIdentifier/*:altIdentifier/*:idno"
          currentLevel="3"
          popup="3"
