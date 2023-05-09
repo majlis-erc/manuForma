@@ -100,76 +100,13 @@
       <desc>Provide the typology of the layout and describe it. Specify
                             the number of columns and lines in the correct attributes.</desc>
       <availableAtts elementName="layout">
-         <attDef ident="columns" attLabel="columns">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Number of columns</gloss>
-            </valList>
+         <attDef ident="columns" attLabel="Number of columns">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Number of columns</gloss>
          </attDef>
-         <attDef ident="writtenLines" attLabel="written lines">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2020-12-20">written lines</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">lignes d'écriture</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2009-07-11"
-                  xml:lang="en">specifies the number of written lines per
-      column</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">열 당 쓰인 행의 수를 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">說明每欄的書寫行數</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">1段中の行数を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">spécifie le nombre de lignes écrites par colonne</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">especifica el número de líneas escritas por columna.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica il numero di righe scritte per colonna</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      minOccurs="1"
-                      maxOccurs="2">
-               <dataRef key="teidata.count"/>
-            </datatype>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xml:lang="en"
-                     versionDate="2013-12-21">
-               <p>If a single
-      number is given, all columns have this number of written lines. If two
-      numbers are given, the number of written lines per column varies between
-      the values supplied.</p>
-            </remarks>
+         <attDef ident="writtenLines" attLabel="Number of written lines">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Number of written lines</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -2998,7 +2935,9 @@ sub-classification for the element additional to that provided by its
         teiElement="&lt;dim/&gt;">
       <desc>Specify the amount of space between two columns of text in millimeters.</desc>
       <availableAtts elementName="dim">
-         <attDef ident="type" attLabel="type">
+         <attDef ident="type" attLabel="Type">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.enumerated"/>
@@ -3006,17 +2945,12 @@ sub-classification for the element additional to that provided by its
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <valItem ident="intercolumn">
-                  <valList>
-                     <gloss>Type</gloss>
-                  </valList>
-               </valItem>
+                                    </valItem>
             </valList>
          </attDef>
-         <attDef ident="unit" attLabel="unit">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Unit</gloss>
-            </valList>
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -3035,11 +2969,9 @@ sub-classification for the element additional to that provided by its
           teiElement="&lt;width/&gt;">
       <desc>The width of the text space, measured in millimeters.</desc>
       <availableAtts elementName="width">
-         <attDef ident="unit" attLabel="unit">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Unit</gloss>
-            </valList>
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -3059,11 +2991,9 @@ sub-classification for the element additional to that provided by its
       <desc>The height of the text space, measured in
                             millimeters.</desc>
       <availableAtts elementName="height">
-         <attDef ident="unit" attLabel="unit">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Unit</gloss>
-            </valList>
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -3083,11 +3013,12 @@ sub-classification for the element additional to that provided by its
       <desc>Describe pricking and ruling of the page layout and choose appropriate values for
                             the "type" attribute.</desc>
       <availableAtts elementName="ab">
-         <attDef ident="type" attLabel="type">
+         <attDef ident="type" attLabel="Pick type">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Pick type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      mode="change">
-               <gloss>Pick type</gloss>
                <valItem mode="add" ident="ruling"/>
                <valItem mode="add" ident="pricking"/>
             </valList>
@@ -3151,62 +3082,9 @@ sub-classification for the element additional to that provided by its
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="from">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">from</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">depuis</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2013-12-21"
-                  xml:lang="en">specifies the
-      starting point of the location in a normalized form, typically a
-      page number.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-06"
-                  xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">Spécifie, sous une forme normalisée, le point de
-        départ de la localisation.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto de inicio de una localización en una
-        forma estándard.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica l'inizio della posizione in forma
-        normalizzata</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.word"/>
-            </datatype>
+         <attDef ident="from" attLabel="From">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
          </attDef>
          <attDef ident="target" attLabel="target">
             <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -3275,62 +3153,9 @@ sub-classification for the element additional to that provided by its
         <code>TEI%20Consortium</code>.</p>
             </remarks>
          </attDef>
-         <attDef ident="to" attLabel="to">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">to</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">jusqu'à</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2013-12-21"
-                  xml:lang="en">specifies the
-      end-point of the location in a normalized form, typically as a
-      page number.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-06"
-                  xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
-        pour la localisation.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto final de una localización en una
-        forma estándard.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica il termine della posizione in forma
-        normalizzata</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.word"/>
-            </datatype>
+         <attDef ident="to" attLabel="To">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
          </attDef>
       </availableAtts>
       <childElements>

@@ -965,7 +965,7 @@
                                         </div>
                                         <div class="input-group mb-3">
                                             <xf:input ref="@ref" class="form-control">
-                                                <xf:label>Your abbreviation (e.g. #msteinschneider): </xf:label>
+                                                <xf:label>Your identifier (e.g. #msteinschneider): </xf:label>
                                             </xf:input>
                                         </div>
                                         <hr/>
