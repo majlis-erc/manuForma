@@ -173,7 +173,7 @@
                      label="Type of incodicated document"
                      minOccurs="0"
                      maxOccurs="100"/>
-            <element ident="locus" label="Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus" label="Folio" minOccurs="0" maxOccurs="100"/>
             <element ident="quote"
                      label="Transcription"
                      minOccurs="0"
@@ -250,7 +250,7 @@
    </objectType>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="Folios"
+          elementLabel="Folio"
           minOccur="0"
           maxOccur="100"
           path="/*:list/*:item/*:locus"
@@ -318,72 +318,9 @@
                <dataRef key="teidata.word"/>
             </datatype>
          </attDef>
-         <attDef ident="target" attLabel="target">
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2010-05-02"
-                  xml:lang="en">specifies the destination of the reference by supplying one or more URI References</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">하나 혹은 다수의 URI 참조를 제시하여 참조의 목적지를 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">用一個或多個統一資源識別符參照 (URI References) 來說明參照所指位置。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">ひとつ以上のURIで，参照先を特定する．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2009-01-06"
-                  xml:lang="fr">précise la cible de la référence en donnant une ou
-        plusieurs références URI</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">especifica la destinación de una referencia
-        proporcionando una o más referencias URI.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica la destinazione di un riferimento, fornendo
-        uno o più riferimenti URI</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     versionDate="2007-01-21"
-                     xml:lang="en">
-               <p>One or more syntactically valid URI references, separated by whitespace. Because
-        whitespace is used to separate URIs, no whitespace is permitted inside a single URI. If a
-        whitespace character is required in a URI, it should be escaped with the normal mechanism,
-        e.g. <code>TEI%20Consortium</code>.</p>
-            </remarks>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     versionDate="2007-01-21"
-                     xml:lang="fr">
-               <p>Une ou plusieurs références URI syntaxiquement valables, séparée par
-        un espace. Puisqu'un espace  est employé pour séparer des URIs, aucun espace
-        n’est autorisé à l'intérieur d'un URI. Si un espace est requis dans un URI, il
-        faut le représenter avec une séquence d'échappement, comme par exemple 
-        <code>TEI%20Consortium</code>.</p>
-            </remarks>
+         <attDef ident="target" attLabel="Folio page">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Folio page</gloss>
          </attDef>
          <attDef ident="to" attLabel="to">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -459,7 +396,9 @@
           teiElement="&lt;quote/&gt;">
       <desc>Transcribe the incodicated document in full or in part.</desc>
       <availableAtts elementName="quote">
-         <attDef ident="xml:lang" attLabel="lang">
+         <attDef ident="xml:lang" attLabel="Language">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
             <valList xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      type="closed"

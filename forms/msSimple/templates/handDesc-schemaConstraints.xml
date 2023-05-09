@@ -356,11 +356,12 @@
                             and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
                             using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="handNote">
-         <attDef ident="medium" attLabel="medium">
+         <attDef ident="medium" attLabel="Medium">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Medium</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <gloss>Medium</gloss>
                <valItem ident="brown"/>
                <valItem ident="black"/>
                <valItem ident="pigments"/>
@@ -562,11 +563,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be
                             filled out automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="ref" attLabel="ref">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Place identifier</gloss>
-            </valList>
+         <attDef ident="ref" attLabel="Place identifier">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
          </attDef>
          <attDef ident="type" attLabel="type">
             <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -596,12 +595,13 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
       <desc>Describes the use of complementary characters like vocalization or recitation in
                             prose and choose the appropriate "function" from the attribute list.</desc>
       <availableAtts elementName="metamark">
-         <attDef ident="function" attLabel="function">
+         <attDef ident="function" attLabel="Pick type">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Pick type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <gloss>Pick type</gloss>
                <valItem mode="add" ident="vocalization"/>
                <valItem mode="add" ident="recitation"/>
             </valList>
@@ -661,8 +661,14 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                </valItem>
             </valList>
          </attDef>
-         <attDef ident="notAfter" attLabel="notAfter"/>
-         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="notAfter" attLabel="Not after">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not after</gloss>
+         </attDef>
+         <attDef ident="notBefore" attLabel="Not before">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not before</gloss>
+         </attDef>
          <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
@@ -683,119 +689,13 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
                             a range of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="from">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">from</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">depuis</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2013-12-21"
-                  xml:lang="en">specifies the
-      starting point of the location in a normalized form, typically a
-      page number.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준화된 형식의 위치에서 시작 지점을 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">用正規格式指明該位置的起始點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-06"
-                  xml:lang="ja">正規化された形で，当該場所の始点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">Spécifie, sous une forme normalisée, le point de
-        départ de la localisation.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto de inicio de una localización en una
-        forma estándard.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica l'inizio della posizione in forma
-        normalizzata</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.word"/>
-            </datatype>
+         <attDef ident="from" attLabel="From">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
          </attDef>
-         <attDef ident="to" attLabel="to">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">to</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">jusqu'à</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2013-12-21"
-                  xml:lang="en">specifies the
-      end-point of the location in a normalized form, typically as a
-      page number.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준화된 형식으로 종료 지점을 명시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">用正規格式指明該位置的結束點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-06"
-                  xml:lang="ja">正規化された形で，当該場所の終点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">Spécifie, sous une forme normalisée, la borne de fin
-        pour la localisation.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto final de una localización en una
-        forma estándard.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">specifica il termine della posizione in forma
-        normalizzata</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.word"/>
-            </datatype>
+         <attDef ident="to" attLabel="To">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -839,7 +739,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                             using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="scriptNote">
          <attDef ident="medium" attLabel="medium"/>
-         <attDef ident="rend" attLabel="rend">
+         <attDef ident="rend" attLabel="Script quality">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script quality</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef name="string"/>
@@ -847,7 +749,6 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <gloss>Script quality</gloss>
                <valItem ident="unidentified"/>
                <valItem ident="untrained"/>
                <valItem ident="careless"/>
@@ -918,7 +819,9 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef ident="script" attLabel="script">
+         <attDef ident="script" attLabel="Script type">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script type</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.name"/>
@@ -926,7 +829,6 @@ identifiant pour le scribe reconnu comme responsable de cette main.</desc>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <gloss>Script type</gloss>
                <valItem ident="oriental"/>
                <valItem ident="yemenite"/>
                <valItem ident="sephardi"/>
@@ -960,7 +862,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <dataRef key="teidata.pointer"/>
             </datatype>
          </attDef>
-         <attDef ident="style" attLabel="style">
+         <attDef ident="style" attLabel="Script mode">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script mode</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef name="string"/>
@@ -968,7 +872,6 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <gloss>Script mode</gloss>
                <valItem ident="square"/>
                <valItem ident="nonSquare"/>
                <valItem ident="cursive"/>

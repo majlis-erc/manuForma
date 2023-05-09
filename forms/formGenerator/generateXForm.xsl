@@ -793,9 +793,9 @@
                                                 </xf:action>
                                             </xf:trigger>
                                             -->
-                                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-html" appearance="minimal">
+                                            <!--<xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-html" appearance="minimal">
                                                 <xf:label> Preview HTML</xf:label>
-                                            </xf:submit>
+                                            </xf:submit>-->
                                             <xsl:if test="$configDoc//saveOptions/option[@name='github'][@enable='true']">
                                                 <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
                                                     <xf:label> Submit to GitHub </xf:label>
@@ -955,7 +955,7 @@
                                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
                                         <div class="input-group mb-3">
                                             <xf:input ref="." class="form-control">
-                                                <xf:label>Creator: </xf:label>
+                                                <xf:label>Your full name: </xf:label>
                                                 <xf:alert>Add your name</xf:alert>
                                             </xf:input>
                                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
@@ -965,13 +965,13 @@
                                         </div>
                                         <div class="input-group mb-3">
                                             <xf:input ref="@ref" class="form-control">
-                                                <xf:label>Ref: </xf:label>
+                                                <xf:label>Your abbreviation (e.g. #msteinschneider): </xf:label>
                                             </xf:input>
                                         </div>
                                         <hr/>
                                     </xf:repeat>
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                        <xf:label><i class="bi bi-plus-circle"/> Add Creator</xf:label>
+                                        <xf:label><i class="bi bi-plus-circle"/> Add team member</xf:label>
                                         <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                                     </xf:trigger><br/>
                                     <div class="input-group mb-3">
@@ -1410,7 +1410,7 @@
                                                             </xf:action>
                                                         </xf:select1>
                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal">
-                                                            <xf:label><i class="bi bi-plus-circle"/> Add</xf:label>
+                                                            <xf:label><i class="bi bi-plus-circle"/> Add field</xf:label>
                                                             <!-- Add conditions here -->
                                                             <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                                                             <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
@@ -1837,7 +1837,7 @@
                             </xf:action>
                         </xf:select1>
                         <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
-                            <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
+                            <xf:label><i class="bi bi-plus-circle"/> Add attribute</xf:label>
                             <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
                             <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
@@ -1855,7 +1855,7 @@
                         </xf:action>
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Add </xf:label>
+                        <xf:label><i class="bi bi-plus-circle"/> Add element </xf:label>
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
@@ -1979,7 +1979,7 @@
                             </xf:action>
                         </xf:select1>
                         <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
-                            <xf:label><i class="bi bi-plus-circle"/> Attribute</xf:label>
+                            <xf:label><i class="bi bi-plus-circle"/> Add attribute</xf:label>
                             <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
                             <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
@@ -1998,7 +1998,7 @@
                         </xf:action>
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                        <xf:label><i class="bi bi-plus-circle"/> Add </xf:label>
+                        <xf:label><i class="bi bi-plus-circle"/> Add element </xf:label>
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>

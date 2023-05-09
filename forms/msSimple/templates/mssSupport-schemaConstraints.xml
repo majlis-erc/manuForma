@@ -2050,28 +2050,27 @@ and that a single TEI document may contain texts in many languages.</p>
              teiElement="&lt;material/&gt;">
       <desc>Describe the writing material. Choose from the list
                             supplied for the "key" attribute what kind of material is used in the manuscript/this codicological unit.</desc>
-      <availableAtts elementName="material">
-         <attDef ident="key" attLabel="key">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="wood"/>
-               <valItem ident="papyrus"/>
-               <valItem ident="cardboard"/>
-               <valItem ident="leather"/>
-               <valItem ident="metal"/>
-               <valItem ident="paper"/>
-               <valItem ident="textile"/>
-               <valItem ident="other"/>
-               <valItem ident="parchment"/>
-               <valItem ident="silk"/>
-               <valItem ident="stone"/>
-               <valItem ident="bronze"/>
-               <valItem ident="alabaster"/>
-               <valItem ident="cotton"/>
+      <availableAtts elementName="material"/>
+      <controlledValues>
+         <element xmlns="" ident="material">
+            <valList type="closed">
+               <valItem ident="Wood"/>
+               <valItem ident="Papyrus"/>
+               <valItem ident="Cardboard"/>
+               <valItem ident="Leather"/>
+               <valItem ident="Metal"/>
+               <valItem ident="Paper"/>
+               <valItem ident="Textile"/>
+               <valItem ident="Other"/>
+               <valItem ident="Parchment"/>
+               <valItem ident="Silk"/>
+               <valItem ident="Stone"/>
+               <valItem ident="Bronze"/>
+               <valItem ident="Alabaster"/>
+               <valItem ident="Cotton"/>
             </valList>
-         </attDef>
-      </availableAtts>
+         </element>
+      </controlledValues>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -4829,12 +4828,13 @@ and that a single TEI document may contain texts in many languages.</p>
             teiElement="&lt;measure/&gt;">
       <desc>How many folios does the manuscript/this codicological unit contain?</desc>
       <availableAtts elementName="measure">
-         <attDef ident="unit" attLabel="unit">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <gloss>Unit</gloss>
                <valItem mode="add" ident="leaf">
                   <desc xml:lang="en">used for leafs.</desc>
                </valItem>
@@ -4926,11 +4926,12 @@ and that a single TEI document may contain texts in many languages.</p>
       <desc>Describe how the folios or pages in the manuscript are
                             numbered (Arabic numerals, Hebrew letters etc.), if there are multiple such devices and their range.</desc>
       <availableAtts elementName="foliation">
-         <attDef ident="rendition" attLabel="rendition">
+         <attDef ident="rendition" attLabel="Original or modern?">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Original or modern?</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <gloss>Original or modern?</gloss>
                <valItem ident="original"/>
                <valItem ident="modern"/>
             </valList>
@@ -5112,17 +5113,20 @@ and that a single TEI document may contain texts in many languages.</p>
        teiElement="&lt;ab/&gt;">
       <desc>Describe the ink and so forth.</desc>
       <availableAtts elementName="ab">
-         <attDef ident="rend" attLabel="rend">
+         <attDef ident="rend" attLabel="Characterization">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Characterization</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      mode="change">
-               <gloss>Characterization</gloss>
                <valItem mode="add" ident="visible"/>
                <valItem mode="add" ident="illegible"/>
                <valItem mode="add" ident="erased"/>
             </valList>
          </attDef>
-         <attDef ident="type" attLabel="type">
+         <attDef ident="type" attLabel="Type">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      mode="change">

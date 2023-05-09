@@ -527,7 +527,6 @@
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
                            </xf:trigger>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-html" appearance="minimal"><xf:label> Preview HTML</xf:label></xf:submit>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
@@ -606,13 +605,13 @@
                   </xf:case>
                   <xf:case id="view-admin">
                      <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
-                        <div class="input-group mb-3"><xf:input ref="." class="form-control"><xf:label>Creator: </xf:label><xf:alert>Add your name</xf:alert></xf:input><xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                        <div class="input-group mb-3"><xf:input ref="." class="form-control"><xf:label>Your full name: </xf:label><xf:alert>Add your name</xf:alert></xf:input><xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                            </xf:trigger>
                         </div>
-                        <div class="input-group mb-3"><xf:input ref="@ref" class="form-control"><xf:label>Ref: </xf:label></xf:input></div>
+                        <div class="input-group mb-3"><xf:input ref="@ref" class="form-control"><xf:label>Your abbreviation (e.g. #msteinschneider): </xf:label></xf:input></div>
                         <hr />
                      </xf:repeat>
-                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add Creator</xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add team member</xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
                      </xf:trigger><br /><div class="input-group mb-3"><xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
                   </xf:case>
                   <xf:case id="view-data-entry">

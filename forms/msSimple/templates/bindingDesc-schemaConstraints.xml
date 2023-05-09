@@ -66,7 +66,9 @@
                             present state of fragment; damages. Choose from the list a generic description that fits best your overall
                             impression.</desc>
       <availableAtts elementName="condition">
-         <attDef ident="key" attLabel="key">
+         <attDef ident="key" attLabel="Description">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Description</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.text"/>
@@ -276,26 +278,6 @@
 	<val>chimney</val> for architecture.</p>
             </remarks>
          </attDef>
-         <attDef ident="key" attLabel="key">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem mode="add" ident="paper"/>
-               <valItem mode="add" ident="parchment"/>
-               <valItem mode="add" ident="papyrus"/>
-               <valItem mode="add" ident="cardboard"/>
-               <valItem mode="add" ident="leather"/>
-               <valItem mode="add" ident="metal"/>
-               <valItem mode="add" ident="textile"/>
-               <valItem mode="add" ident="other"/>
-               <valItem mode="add" ident="silk"/>
-               <valItem mode="add" ident="stone"/>
-               <valItem mode="add" ident="bronze"/>
-               <valItem mode="add" ident="alabaster"/>
-               <valItem mode="add" ident="cotton"/>
-            </valList>
-         </attDef>
          <attDef ident="ref" attLabel="reference">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -381,6 +363,26 @@
             </datatype>
          </attDef>
       </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="material">
+            <valList type="closed">
+               <valItem ident="Wood"/>
+               <valItem ident="Papyrus"/>
+               <valItem ident="Cardboard"/>
+               <valItem ident="Leather"/>
+               <valItem ident="Metal"/>
+               <valItem ident="Paper"/>
+               <valItem ident="Textile"/>
+               <valItem ident="Other"/>
+               <valItem ident="Parchment"/>
+               <valItem ident="Silk"/>
+               <valItem ident="Stone"/>
+               <valItem ident="Bronze"/>
+               <valItem ident="Alabaster"/>
+               <valItem ident="Cotton"/>
+            </valList>
+         </element>
+      </controlledValues>
       <childElements>
          <child/>
       </childElements>
