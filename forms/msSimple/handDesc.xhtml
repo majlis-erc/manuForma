@@ -500,11 +500,15 @@
                   <div xmlns="http://www.w3.org/1999/xhtml" class="accordion-item">
                      <xf:switch xmlns="http://www.w3.org/2002/xforms">
                         <xf:case id="closedhandDescGrpRepeatLevel21">
-                           <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">Script definition.</xf:label><xf:toggle case="openhandDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
+                           <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">
+                                 <xf:group ref=".[. != '']"><xf:output value="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)"></xf:output></xf:group>
+                                 <xf:group ref=".[. = '']"><xf:output value="'Script definition.'"></xf:output></xf:group></xf:label><xf:toggle case="openhandDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                            </xf:trigger>
                         </xf:case>
                         <xf:case id="openhandDescGrpRepeatLevel21">
-                           <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">Script definition.</xf:label><xf:toggle case="closedhandDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
+                           <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">
+                                 <xf:group ref=".[. != '']"><xf:output value="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)"></xf:output></xf:group>
+                                 <xf:group ref=".[. = '']"><xf:output value="'Script definition.'"></xf:output></xf:group></xf:label><xf:toggle case="closedhandDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                            </xf:trigger>
                            <div xmlns="http://www.w3.org/1999/xhtml" class="accordion-collapse">
                               <div class="accordion-body">
