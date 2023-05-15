@@ -217,7 +217,9 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attRef name="ref" class="att.canonical"/>
+                            <attDef name="ref" mode="change">
+                                <gloss>Person identifier</gloss>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="textLang" mode="change">
@@ -236,6 +238,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="mainLang" mode="change">
+                                <gloss>Main language</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
@@ -243,6 +246,7 @@ End license statement: do not remove -->
                                 </valList>
                             </attDef>
                             <attDef ident="otherLangs" mode="change">
+                                <gloss>Other language(s)</gloss>
                                 <valList type="open" mode="change">
                                     <valItem mode="add" ident="ar"/>
                                     <valItem mode="add" ident="en"/>
@@ -276,9 +280,9 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ar-Hebr"/>
                                 </valList>
                             </attDef>
-                            <attRef name="ref" mode="change">
+                            <attDef name="ref" mode="change">
                                 <gloss>Text identifier</gloss>
-                            </attRef>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="msContents" mode="change">
@@ -305,7 +309,6 @@ End license statement: do not remove -->
                                 <elementRef key="locus" minOccurs="1" maxOccurs="unbounded"/>
                                 <elementRef key="title" minOccurs="1" maxOccurs="1"/>
                                 <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
-                                <elementRef key="docDate" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="textLang" minOccurs="1" maxOccurs="1"/>
                                 <elementRef key="rubric" minOccurs="0" maxOccurs="1"/>
                                 <elementRef key="incipit" minOccurs="0" maxOccurs="1"/>
@@ -397,23 +400,7 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
 
-                    <elementSpec ident="docDate" mode="change">
-                        <gloss>Date of composition</gloss>
-                        <gloss type="tei">&lt;docDate/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">The date of the text's original composition.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.global.rendition" mode="delete"/>
-                            <memberOf key="att.global.linking" mode="delete"/>
-                            <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/>
-                            <memberOf key="att.global.responsibility" mode="delete"/>
-                            <memberOf key="att.global.source" mode="delete"/>
-                        </classes>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
+                    
 
                     <elementSpec ident="rubric" mode="change">
                         <gloss>Rubric</gloss>
@@ -433,7 +420,6 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                         <attList>
-                            <attDef ident="xml:lang" mode="change">
                                 <attDef ident="xml:lang" mode="change">
                                     <gloss>Language</gloss>
                                     <valList type="closed" mode="change">
@@ -445,7 +431,6 @@ End license statement: do not remove -->
                                         <valItem mode="add" ident="ar-Hebr"/>
                                     </valList>
                                 </attDef>
-                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="quote" mode="change">

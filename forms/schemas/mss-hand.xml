@@ -218,7 +218,7 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="physDesc" module="msdescription" mode="change">
                         <desc versionDate="2022-05-27" xml:id="physdesc.desc" xml:lang="en">This element contains descriptions of the codicological
                             and paleographic features of a manuscript. </desc>
@@ -302,7 +302,6 @@ End license statement: do not remove -->
                         </classes>
                         <content>
                             <textNode/>
-                            <textNode/>
                         </content>
                         <attList>
                             <attDef name="when" usage="change">
@@ -311,6 +310,7 @@ End license statement: do not remove -->
                             <attDef name="notAfter" usage="opt"/>
                             <attDef name="notBefore" usage="opt"/>
                             <attDef name="when" class="att.datable.w3c"/>
+                            <attDef ident="evidence" mode="delete"/>
                             <attDef ident="notBefore" mode="change">
                                 <gloss>Not before</gloss>
                             </attDef>
@@ -380,7 +380,7 @@ End license statement: do not remove -->
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="ref">
-                                    <gloss>Place identifier</gloss>
+                                <gloss>Place identifier</gloss>
                             </attDef>
                         </attList>
                     </elementSpec>
@@ -404,11 +404,11 @@ End license statement: do not remove -->
                             <elementRef key="locus"/>
                         </content>
                         <attList>
-                            <attDef name="id" mode="change">
-                                    <gloss>Hand identifier</gloss>
+                            <attDef name="xml:id" mode="change">
+                                <gloss>Hand identifier</gloss>
                             </attDef>
                             <attDef name="scope" mode="change">
-                                    <gloss>Scope</gloss>
+                                <gloss>Scope</gloss>
                             </attDef>
                             <attDef ident="script" mode="delete"/>
                             <attDef ident="medium" mode="change">
@@ -442,10 +442,10 @@ End license statement: do not remove -->
                             <elementRef key="p"/>
                         </content>
                         <attList>
-                            <attDef name="id" mode="delete">
+                            <attDef name="xml:id" mode="delete">
                                 <gloss>Identifier</gloss>
                             </attDef>
-                            <attDef name="lang" class="att.global">
+                            <attDef name="xml:lang" mode="change">
                                 <gloss>Graphic system</gloss>
                                 <valList type="closed">
                                     <valItem ident="hebrew"/>
@@ -456,8 +456,11 @@ End license statement: do not remove -->
                                     <valItem ident="other"/>
                                 </valList>
                             </attDef>
-                            <attDef name="scope" class="att.dimensions"/>
-                            <attDef ident="script">
+                            <attDef name="scope" mode="delete"/>
+                            <attDef name="scribe" mode="delete"/>
+                            <attDef name="scribeRef" mode="delete"/>
+                            <attDef name="scriptRef" mode="delete"/>
+                            <attDef ident="script" mode="change">
                                 <gloss>Script type</gloss>
                                 <datatype>
                                     <dataRef key="teidata.name"/>
@@ -475,7 +478,7 @@ End license statement: do not remove -->
                                     <valItem ident="naskh"/>
                                 </valList>
                             </attDef>
-                            <attDef ident="medium"> </attDef>
+                            <attDef ident="medium" mode="delete"> </attDef>
                             <attDef ident="style">
                                 <gloss>Script mode</gloss>
                                 <datatype>

@@ -94,10 +94,6 @@
             <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
             <element ident="title" label="*Title" minOccurs="0" maxOccurs="100"/>
             <element ident="author" label="Author" minOccurs="0" maxOccurs="100"/>
-            <element ident="docDate"
-                     label="Date of composition"
-                     minOccurs="0"
-                     maxOccurs="100"/>
             <element ident="textLang"
                      label="Text language"
                      minOccurs="0"
@@ -161,7 +157,6 @@
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <availableAtts elementName="title">
-         <attDef ident="ref" attLabel="ref"/>
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
@@ -195,9 +190,7 @@
       <desc>The author, editor, or compiler of a primary work. Look up the person records in
                             the database to specify an author. Try different spellings in different languages! If no suitable record exists, create a
                             new one. (The "ref" attribute will be filled out automatically when you link a person record to this element.)</desc>
-      <availableAtts elementName="author">
-         <attDef ident="ref" attLabel="ref"/>
-      </availableAtts>
+      <availableAtts elementName="author"/>
       <childElements>
          <child>
             <element ident="persName"
@@ -278,22 +271,6 @@
          <child/>
       </childElements>
    </addName>
-   <docDate ident="docDate"
-            elementName="docDate"
-            elementLabel="Date of composition"
-            minOccur="0"
-            maxOccur="100"
-            path="/*:msContents/*:msItem/*:docDate"
-            currentLevel="3"
-            popup="3"
-            teiElement="&lt;docDate/&gt;">
-      <desc>The date of the text's original composition.</desc>
-      <availableAtts elementName="docDate"/>
-      <childElements>
-         <textNode type="input"/>
-         <child/>
-      </childElements>
-   </docDate>
    <textLang ident="textLang"
              elementName="textLang"
              elementLabel="Text language"
@@ -309,7 +286,9 @@
                             language other than the one marked in mainLang, you must mark the language of the quote using the xml:lang attribute. If
                             the appropriate code is not listed consult https://r12a.github.io/app-subtags/</desc>
       <availableAtts elementName="textLang">
-         <attDef ident="mainLang" attLabel="mainLang">
+         <attDef ident="mainLang" attLabel="Main language">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Main language</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -319,7 +298,9 @@
                <valItem mode="add" ident="he"/>
             </valList>
          </attDef>
-         <attDef ident="otherLangs" attLabel="otherLangs">
+         <attDef ident="otherLangs" attLabel="Other language(s)">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Other language(s)</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
@@ -348,21 +329,20 @@
                             of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape or
                             character size.</desc>
       <availableAtts elementName="rubric">
-         <attDef ident="xml:lang" attLabel="lang">
-            <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                    ident="xml:lang"
-                    mode="change">
-               <gloss>Language</gloss>
-               <valList type="closed" mode="change">
-                  <valItem mode="add" ident="ar"/>
-                  <valItem mode="add" ident="en"/>
-                  <valItem mode="add" ident="he"/>
-                  <valItem mode="add" ident="he-Latn"/>
-                  <valItem mode="add" ident="ar-Latn"/>
-                  <valItem mode="add" ident="ar-Hebr"/>
-               </valList>
-            </attDef>
+         <attDef ident="xml:lang" attLabel="Language">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem mode="add" ident="ar"/>
+               <valItem mode="add" ident="en"/>
+               <valItem mode="add" ident="he"/>
+               <valItem mode="add" ident="he-Latn"/>
+               <valItem mode="add" ident="ar-Latn"/>
+               <valItem mode="add" ident="ar-Hebr"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>
