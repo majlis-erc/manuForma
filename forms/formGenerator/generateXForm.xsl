@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.09 Beta
+        Version: 1.10 Beta
         
 
         NOTES: 
@@ -23,10 +23,7 @@
             
            measure: macro.phraseSeq 
     -->
-    <!-- 
-        WS:Note better error handling, check to make sure all referenced schemas and templates are available
-        create graceful fail and error reporting
-    -->
+    
     <!-- Default config file. Use config prameter at run time to change.  -->
     <xsl:param name="config" select="'config.xml'"/>
     
@@ -63,16 +60,22 @@
         <xsl:variable name="localSchemaDoc" select="document($configDoc//subform[@formName = $subform]/localSchema/@src)"/>
         <xsl:variable name="globalSchemaDoc" select="document($configDoc//subform[@formName = $subform]/globalSchema/@src)"/>
         <rules xmlns="http://www.tei-c.org/ns/1.0">
-            <local>
-                <xsl:for-each select="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
-                    <xsl:copy-of select="."/>
-                </xsl:for-each>
-            </local>
-            <global>
-                <xsl:for-each select="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
-                    <xsl:copy-of select="."/>
-                </xsl:for-each>
-            </global>
+            <xsl:choose>
+                <xsl:when test="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                    <local>
+                        <xsl:for-each select="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
+                    </local> 
+                </xsl:when>
+                <xsl:when test="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                    <global>
+                        <xsl:for-each select="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
+                    </global>
+                </xsl:when>
+            </xsl:choose>
         </rules>
     </xsl:function>
     
@@ -99,7 +102,7 @@
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:variable>
-            <xsl:for-each-group select="$rules/descendant-or-self::tei:content/descendant-or-self::*[@key] | $rules/descendant-or-self::tei:alternate/descendant-or-self::*[@key] " group-by="@key">
+            <xsl:for-each-group select="$rules/descendant-or-self::tei:content/descendant-or-self::*[@key]" group-by="@key">
                     <xsl:choose>
                         <xsl:when test="(current-grouping-key() = ('macro.specialPara','model.pLike')) or (contains(current-grouping-key(),'macro.specialPara') or contains(current-grouping-key(),'model.pLike'))">
                             <element xmlns="http://www.tei-c.org/ns/1.0" ident="p"/>
@@ -116,7 +119,7 @@
                             </xsl:choose>
                         </xsl:when>
                         <xsl:otherwise>
-                            <element xmlns="http://www.tei-c.org/ns/1.0" ident="{current-grouping-key()}"/>
+                            <element xmlns="http://www.tei-c.org/ns/1.0" ident="{current-grouping-key()}" minOccur="{if(@minOccurrence) then @minOccurrence else if(@minOccurr) then @minOccurrence else()}" maxOccur="{if(@maxOccurrence) then @maxOccurrence else if(@maxOccurr) then @maxOccurr else()}"/>
                         </xsl:otherwise>
                     </xsl:choose>
             </xsl:for-each-group>    
@@ -184,7 +187,7 @@
                         </xsl:choose>
                     </xsl:when>
                     <xsl:otherwise>
-                        <element xmlns="http://www.tei-c.org/ns/1.0" ident="{current-grouping-key()}"/>
+                        <element xmlns="http://www.tei-c.org/ns/1.0" ident="{current-grouping-key()}" minOccur="{if(@minOccurrence) then @minOccurrence else if(@minOccurr) then @minOccurrence else()}" maxOccur="{if(@maxOccurrence) then @maxOccurrence else if(@maxOccurr) then @maxOccurr else()}"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each-group>    
@@ -434,6 +437,7 @@
             <xsl:result-document href="../{concat($mainFormName,'/',$formName)}.xhtml" format="xform">
                 <xsl:call-template name="xform">
                     <xsl:with-param name="subform" select="."/>
+                    <xsl:with-param name="schemaConstraints" select="$schemaInstanceDoc"/>
                 </xsl:call-template>
             </xsl:result-document>
             <xsl:for-each select="subform">
@@ -441,6 +445,7 @@
                 <xsl:result-document href="../{concat($mainFormName,'/',$formName,'/',$subFormName)}.xhtml" format="xform">
                     <xsl:call-template name="xform">
                         <xsl:with-param name="subform" select="."/>
+                        <xsl:with-param name="schemaConstraints" select="$schemaInstanceDoc"/>
                     </xsl:call-template>
                 </xsl:result-document>
             </xsl:for-each>
@@ -1002,6 +1007,7 @@
     <!-- XForm for each subform listed in the config file -->
     <xsl:template name="xform">
         <xsl:param name="subform"/>
+        <xsl:param name="schemaConstraints"/>
         <xsl:variable name="mainFormName" select="$configDoc//formName"/>
         <xsl:variable name="subformName" select="$subform/@formName"/>
         <xsl:variable name="template" select="document($subform/xmlTemplate/@src)"/>
@@ -1019,6 +1025,31 @@
             <xsl:evaluate xpath="$xpath" context-item="$template"/>
         </xsl:variable>
         -->
+        <!-- Path to root element for the current subform -->
+        <xsl:variable name="elementPath" select="replace(replace(replace(replace($xpath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//')"/>
+        <!-- Current element name -->
+        <xsl:variable name="elementName" select="substring-after(tokenize($xpath,'/')[last()],':')"/>
+        <xsl:variable name="parentXPath" select="substring-before($path,concat('*:',$elementName))"/>
+        <!-- Number of children, maximum repeats, prevents endless looping in creating the form.  -->
+        <xsl:variable name="maxLevel">
+            <xsl:variable name="schemaInstanceDoc">
+                <xsl:call-template name="generateSchemaInstance">
+                    <xsl:with-param name="subform" select="$subform"/>
+                </xsl:call-template>
+            </xsl:variable>
+            <xsl:variable name="levels">
+                <xsl:for-each select="$schemaInstanceDoc//@currentLevel">
+                    <xsl:sort select="xs:integer(.)" order="descending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:copy-of select="string(.)"/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$levels castable as xs:integer"><xsl:value-of select="xs:integer($levels)"/></xsl:when>
+                <xsl:otherwise>1</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
         <html>
             <head>
@@ -1049,34 +1080,19 @@
                             <index>1</index>
                         </data>
                     </xf:instance>
+                    <!-- Element binds specifically for min/max occurrence  -->
+                    <!-- Does not work due to the way elements are referenced in the form (not named) -->
+                    <xsl:call-template name="elementBinds">
+                        <xsl:with-param name="subform" select="$subform"/>
+                        <xsl:with-param name="xpath" select="$elementPath"/>
+                        <xsl:with-param name="xpathIndex"><xsl:value-of select="$elementPath"/>[position() = instance('i-repeatIndex')/index]</xsl:with-param>
+                        <xsl:with-param name="currentLevel">1</xsl:with-param>
+                        <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                        <xsl:with-param name="schemaConstraints" select="$schemaConstraints"/>
+                    </xsl:call-template>
                 </xf:model>
             </head>
             <body>
-                <!-- Path to root element for the current subform -->
-                <xsl:variable name="elementPath" select="replace(replace(replace(replace($xpath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//')"/>
-                <!-- Current element name -->
-                <xsl:variable name="elementName" select="substring-after(tokenize($xpath,'/')[last()],':')"/>
-                <xsl:variable name="parentXPath" select="substring-before($path,concat('*:',$elementName))"/>
-                <!-- Number of children, maximum repeats, prevents endless looping in creating the form.  -->
-                <xsl:variable name="maxLevel">
-                    <xsl:variable name="schemaInstanceDoc">
-                        <xsl:call-template name="generateSchemaInstance">
-                            <xsl:with-param name="subform" select="$subform"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="levels">
-                        <xsl:for-each select="$schemaInstanceDoc//@currentLevel">
-                            <xsl:sort select="xs:integer(.)" order="descending"/>
-                            <xsl:if test="position() = 1">
-                                <xsl:copy-of select="string(.)"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:choose>
-                        <xsl:when test="$levels castable as xs:integer"><xsl:value-of select="xs:integer($levels)"/></xsl:when>
-                        <xsl:otherwise>1</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
                 <h2 class="h3 mainElement">
                     <xsl:value-of select="$subform/@formLabel"/>
                     <xsl:if test="$subform/subform"> [<xf:output value="instance('i-repeatIndex')/index"/>]</xsl:if>
@@ -1619,7 +1635,7 @@
                                 <xsl:with-param name="grpRepeatID" select="$grpRepeatID"/>
                                 <xsl:with-param name="groupElements" select="$groupElements"/>
                             </xsl:call-template>
-                            <div class="element">   
+                            <div class="element">  
                                 <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
                                     <!-- If controlled element values in schemaConstraints file -->
                                     <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
@@ -1654,6 +1670,7 @@
                                         </div>
                                     </xf:repeat>
                                 </div>
+                                
                                 <xsl:if test="$currentLevel &lt;= $maxLevel">
                                     <xsl:variable name="childRepeatID">
                                         <xsl:value-of select="concat($grpRepeatID,'GrpRepeatLevel',if(string($currentLevel) != '') then string($currentLevel) else '1')"/>
@@ -1707,13 +1724,18 @@
                         <xf:label ref="@ident"/>
                         <xf:value ref="@ident"/>
                     </xf:itemset>
+                    <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
                 </xf:select1>
             </div>
             <!-- Element input -->
-            <xf:input xmlns="http://www.w3.org/2002/xforms" class="elementInput" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"/>
+            <xf:input xmlns="http://www.w3.org/2002/xforms" class="elementInput" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]">
+                <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
+            </xf:input>
             <!--<xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>-->
             <!-- Element input for textbox style input -->
-            <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
+            <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
+                <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
+            </xf:textarea>    
             <!-- Element attributes -->
             <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
                 <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
@@ -1734,7 +1756,8 @@
                     </div>    
                 </div>
             </xf:repeat>
-            <xsl:if test="$currentLevel &lt;= $maxLevel">
+            
+                <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
                     <xsl:value-of select="concat($grpRepeatID,'GrpRepeatLevel',if(string($currentLevel) != '') then string($currentLevel) else '1')"/>
                 </xsl:variable>
@@ -2051,40 +2074,47 @@
         <xsl:variable name="elementPath" select="replace(replace(replace(replace($subform/@xpath, 'Q\{http://www.tei-c.org/ns/1.0\}', '*:'), 'tei:TEI', '/'), '\[[0-9]+\]', ''), '///', '//')"/>
         <div xmlns="http://www.w3.org/1999/xhtml" class="element">   
             <div class="inlineDisplay btn-toolbar justify-content-between" role="toolbar">
-                <!-- If controlled element values in schemaConstraints file -->
-                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
-                    <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem">
-                        <xf:label ref="@ident"/>
-                        <xf:value ref="@ident"/>
-                    </xf:itemset>
-                </xf:select1>
-                <!-- Element input -->
-                <xf:input xmlns="http://www.w3.org/2002/xforms" class="elementInput" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]"/>
-                <!--<xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>-->
-                <!-- Element input for textbox style input -->
-                <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
-                <!-- Element attributes -->
-                <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
-                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
-                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                        <div class="input-group">
-                            <!-- Attribute value -->
-                            <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
-                            <!-- If controlled attribute values in schemaConstraints file -->
-                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
-                                <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                    <xf:label ref="@ident"/>
-                                    <xf:value ref="@ident"/>
-                                </xf:itemset>
-                            </xf:select1>
-                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
-                                <xf:delete ev:event="DOMActivate" ref="."/>    
-                            </xf:trigger>
-                        </div>    
-                    </div>
-                </xf:repeat>
-            </div>
+                    <!-- If controlled element values in schemaConstraints file -->
+                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem]" class="elementSelect">
+                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem">
+                            <xf:label ref="@ident"/>
+                            <xf:value ref="@ident"/>
+                        </xf:itemset>
+                        <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
+                    </xf:select1>
+                    <!-- Element input -->
+                    <xf:input xmlns="http://www.w3.org/2002/xforms" 
+                        class="elementInput" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues) and instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']]">
+                        <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
+                    </xf:input>
+                    <!--<xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>-->
+                    <!-- Element input for textbox style input -->
+                    <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
+                        <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
+                    </xf:textarea>    
+                    <!-- Element attributes -->
+                    <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
+                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                            <div class="input-group">
+                                <!-- Attribute value -->
+                                <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
+                                <!-- If controlled attribute values in schemaConstraints file -->
+                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
+                                    <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
+                                        <xf:label ref="@ident"/>
+                                        <xf:value ref="@ident"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
+                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
+                                    <xf:delete ev:event="DOMActivate" ref="."/>    
+                                </xf:trigger>
+                            </div>    
+                        </div>
+                    </xf:repeat>
+                
+                </div>
             <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
                     <xsl:choose>
@@ -2126,6 +2156,49 @@
                 </xf:repeat>
             </xsl:if>
         </div>
+    </xsl:template>
+    
+    <!-- Element Bind rules -->
+    <xsl:template name="elementBinds">
+        <xsl:param name="subform"/>
+        <xsl:param name="xpath"/>
+        <xsl:param name="xpathIndex"/>
+        <xsl:param name="currentLevel"/>
+        <xsl:param name="maxLevel"/>
+        <xsl:param name="schemaConstraints"/>
+        <xsl:param name="elementName"/>
+        <xsl:for-each select="$schemaConstraints/child::*/child::*">
+                <!--
+                <xsl:if test="$minOccur castable as xs:integer">
+                    <xsl:if test="xs:integer($minOccur) &gt; 0">
+                        <xsl:attribute name="required" select="'true()'"/>
+                    </xsl:if>
+                </xsl:if>
+                <xsl:for-each select="$allAttributes//*[@usage='req']">
+                    <xf:bind nodeset="@{@ident}" required="true()"/>
+                </xsl:for-each>
+                -->
+                <!-- get other child elements -->
+                <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
+                    <xsl:for-each-group select=".//*:childElements//*:element[not(@classRef = 'true')]" group-by="@ident">
+                        <xsl:variable name="elementPath" select="concat(replace(replace($xpath,'tei:','*:'),'///','//'),'//*:',@ident)"/>
+                            <xsl:choose>
+                                <xsl:when test="@minOccurs != '' and @maxOccurs != ''">
+                                    <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        constraint="(count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}) and (count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}) "/>
+                                </xsl:when>
+                                <xsl:when test="@minOccurs != '' and (not(@maxOccurs) or @maxOccurs='')">
+                                    <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        constraint="count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}"/>
+                                </xsl:when>
+                                <xsl:when test="@maxOccurs != '' and (not(@minOccurs) or @minOccurs='')">
+                                    <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        constraint="count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}"/>
+                                </xsl:when>
+                            </xsl:choose>
+                    </xsl:for-each-group>
+                </xsl:if>
+        </xsl:for-each>
     </xsl:template>
     
     <!-- Shared navbar -->
@@ -2265,84 +2338,6 @@
             </xsl:for-each-group>
         </TEI>
     </xsl:template>
-
-    <!-- Create XForms bind rules based on schema constraints -->
-    <xsl:template name="xformElementBind">
-        <xsl:param name="elementName"/>
-        <xsl:param name="subform"/>
-        <xsl:param name="path"/>
-        <xsl:param name="min"/>
-        <xsl:param name="max"/>
-        <xsl:param name="level"/>
-        <xsl:variable name="elementRules" select="local:elementRules($elementName,$subform)"/>
-        <xsl:variable name="allAttributes" select="local:allAttributes($elementName,$subform)"/>
-        <xsl:variable name="childElements" select="local:childElements($elementName,$subform)"/>
-        <xsl:variable name="path" select="concat($path, '/tei:', $elementName)"/>
-        <xsl:variable name="id" select="replace(replace(concat(replace($path,'/',''),generate-id(.)),' ',''),'tei:','')"/>
-        <xsl:variable name="maxOccur">
-            <xsl:choose>
-                <xsl:when test="$max != ''">
-                    <xsl:value-of select="$max"/>
-                </xsl:when>
-                <xsl:when test="$elementRules/tei:content/tei:sequence[@maxOccur]">
-                    <xsl:value-of select="string($elementRules/tei:content/tei:sequence/@maxOccur)"/>
-                </xsl:when>
-                <xsl:otherwise/>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="minOccur">
-            <xsl:choose>
-                <xsl:when test="$min != ''">
-                    <xsl:value-of select="$min"/>
-                </xsl:when>
-                <xsl:when test="$elementRules/tei:content/tei:sequence[@minOccur]">
-                    <xsl:value-of select="string($elementRules/tei:content/tei:sequence/@minOccur)"/>
-                </xsl:when>
-                <xsl:otherwise/>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="xformsElement">
-            <xsl:choose>
-                <xsl:when test="$maxOccur = 'unbounded' or $maxOccur = ''">repeat</xsl:when>
-                <xsl:otherwise>group</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="elementRef">
-            <xsl:choose>
-                <xsl:when test="$level = 1">instance('i-rec')/<xsl:value-of select="$path"/></xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat('tei:', $elementName)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xf:bind nodeset="{$elementRef}">
-            <!-- Test if element is required, if minOccur is greater than 0 -->
-            <xsl:if test="$minOccur castable as xs:integer">
-                <xsl:if test="xs:integer($minOccur) &gt; 0">
-                    <xsl:attribute name="required" select="'true()'"/>
-                </xsl:if>
-            </xsl:if>
-            <!-- Get required attributes -->
-            <xsl:for-each select="$allAttributes//*[@usage='req']">
-                <xf:bind nodeset="@{@ident}" required="true()"/>
-            </xsl:for-each>
-            <!-- get other child elements -->
-            <xsl:if test="$childElements/descendant-or-self::*:element[not(@classRef = 'true')] and $elementName != 'p'">
-                <xsl:for-each-group select="$childElements/descendant-or-self::*:element[not(@classRef = 'true')]" group-by="@ident">
-                    <xsl:if test="$elementName != current-grouping-key() and not(contains($path,'current-grouping-key()'))">
-                        <xsl:call-template name="xformElementBind">
-                            <xsl:with-param name="elementName" select="current-grouping-key()"/>
-                            <xsl:with-param name="subform" select="$subform"/>
-                            <xsl:with-param name="path" select="$path"/>
-                            <xsl:with-param name="min" select="@minOccurs"/>
-                            <xsl:with-param name="max" select="@maxOccurs"/>
-                            <xsl:with-param name="level" select="xs:integer($level) + 1"/>
-                        </xsl:call-template>
-                    </xsl:if>
-                </xsl:for-each-group>
-            </xsl:if>
-        </xf:bind>        
-    </xsl:template>
    
     <!-- Full list of schema rules -->
     <xsl:template name="generateSchemaInstance">
@@ -2412,11 +2407,14 @@
                 </xsl:when>
                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@maxOccur]">
                     <xsl:choose>
-                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded'">100</xsl:when>
-                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != ''">
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence = 'unbounded'">100</xsl:when>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != '' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence != ''">
                             <xsl:choose>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
+                                </xsl:when>
+                                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
+                                    <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
                                 </xsl:when>
                                 <xsl:otherwise>100</xsl:otherwise>
                             </xsl:choose>
@@ -2435,10 +2433,16 @@
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
-                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur]">
+                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur] or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccurrence]">
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
                             <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
+                        </xsl:when>
+                        <xsl:otherwise>0</xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence castable as xs:integer">
+                            <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence"/>
                         </xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
@@ -2479,8 +2483,10 @@
             <xsl:attribute name="ident" select="$elementName"/>
             <xsl:attribute name="elementName" select="$elementName"/>
             <xsl:attribute name="elementLabel" select="$elementLabel"/>
+            <!--
             <xsl:attribute name="minOccur" select="$minOccur"/>
             <xsl:attribute name="maxOccur" select="$maxOccur"/>
+            -->
             <xsl:attribute name="path" select="$path"/>
             <xsl:attribute name="currentLevel" select="$currentLevel"/>
             <xsl:attribute name="popup" select="$currentLevel"/>
@@ -2553,18 +2559,16 @@
                 </controlledValues>
             </xsl:if>
             <childElements xmlns="http://www.tei-c.org/ns/1.0">
-                <xsl:choose>
-                    <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
+                    <xsl:if test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
                         <xsl:choose>
                             <xsl:when test="$elementName = ('p','desc','note','summary')">
                                 <textNode type="textarea"/>
                             </xsl:when>
-                            <xsl:otherwise>
-                                <textNode type="input"/>
-                            </xsl:otherwise>
+                            <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
+                                <textNode type="input" class="{$elementName}"/>
+                            </xsl:when>
                         </xsl:choose>
-                    </xsl:when>
-                </xsl:choose>
+                    </xsl:if>
                 <xsl:if test="$childElements">
                     <child>
                         <xsl:for-each select="$childElements/child::*">
@@ -2595,54 +2599,57 @@
                                     </xsl:otherwise>
                                 </xsl:choose> 
                             </xsl:variable>
-                            <xsl:variable name="max" select="@maxOccurs"/>
-                            <xsl:variable name="min" select="@minOccurs"/>
                             <xsl:variable name="maxOccur">
                                 <xsl:choose>
-                                    <xsl:when test="$max != 'unbounded'">100</xsl:when>
-                                    <xsl:when test="$max != ''">
+                                    <xsl:when test="@maxOccur">
                                         <xsl:choose>
-                                            <xsl:when test="$max castable as xs:integer"><xsl:value-of select="$max"/></xsl:when>
-                                            <xsl:otherwise>100</xsl:otherwise>
-                                        </xsl:choose>    
-                                    </xsl:when>
-                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@maxOccur]">
-                                        <xsl:choose>
-                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded'">100</xsl:when>
-                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != ''">
+                                            <xsl:when test="@maxOccur = 'unbounded' or @maxOccurrence = 'unbounded'">100</xsl:when>
+                                            <xsl:when test="@maxOccur != '' or @maxOccurrence != ''">
                                                 <xsl:choose>
-                                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
-                                                        <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
+                                                    <xsl:when test="@maxOccur castable as xs:integer">
+                                                        <xsl:value-of select="@maxOccur"/>
                                                     </xsl:when>
-                                                    <xsl:otherwise>100</xsl:otherwise>
+                                                    <xsl:when test="@maxOccurrence castable as xs:integer">
+                                                        <xsl:value-of select="@maxOccurrence"/>
+                                                    </xsl:when>
+                                                    <xsl:otherwise></xsl:otherwise>
                                                 </xsl:choose>
                                             </xsl:when>
                                         </xsl:choose>
                                     </xsl:when>
-                                    <xsl:otherwise>100</xsl:otherwise>
+                                    <xsl:otherwise></xsl:otherwise>
                                 </xsl:choose>
                             </xsl:variable>
                             <xsl:variable name="minOccur">
                                 <xsl:choose>
-                                    <xsl:when test="$min != 'unbounded'">0</xsl:when>
-                                    <xsl:when test="$min != ''">
+                                   <xsl:when test="@minOccur or @minOccurrence">
                                         <xsl:choose>
-                                            <xsl:when test="$min castable as xs:integer"><xsl:value-of select="$min"/></xsl:when>
-                                            <xsl:otherwise>0</xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:when>
-                                    <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur]">
-                                        <xsl:choose>
-                                            <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
-                                                <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
+                                            <xsl:when test="@minOccur castable as xs:integer">
+                                                <xsl:value-of select="@minOccur"/>
                                             </xsl:when>
-                                            <xsl:otherwise>0</xsl:otherwise>
+                                            <xsl:when test="@minOccurrence castable as xs:integer">
+                                                <xsl:value-of select="@minOccurrence"/>
+                                            </xsl:when>
+                                            <xsl:otherwise></xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:when>
-                                    <xsl:otherwise>0</xsl:otherwise>
+                                    <xsl:otherwise></xsl:otherwise>
                                 </xsl:choose>
                             </xsl:variable>
-                            <element ident="{$childName}" label="{$childLabel}" minOccurs="{$minOccur}" maxOccurs="{$maxOccur}"/>
+                            <xsl:variable name="errorMessage">
+                                <xsl:choose>
+                                    <xsl:when test="$minOccur !='' and $maxOccur != ''">
+                                        Element must occur at least <xsl:value-of select="$minOccur"/> time(s) and no more than <xsl:value-of select="$maxOccur"/> time(s).
+                                    </xsl:when>
+                                    <xsl:when test="$minOccur !=''">
+                                        Element must occur at least <xsl:value-of select="$minOccur"/> time(s).
+                                    </xsl:when>
+                                    <xsl:when test="$maxOccur != ''">
+                                        Element no more than <xsl:value-of select="$maxOccur"/> time(s).
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <element ident="{$childName}" label="{$childLabel}" minOccurs="{$minOccur}" maxOccurs="{$maxOccur}" errorMessage="{$errorMessage}"/>
                         </xsl:for-each>
                     </child>
                 </xsl:if>
