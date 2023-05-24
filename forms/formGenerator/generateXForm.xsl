@@ -1022,12 +1022,14 @@
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-admin">
+
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
                                         <xf:label><i class="bi bi-plus-circle"/> Add change </xf:label>
-                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()"
-                                            origin="instance('i-admin')//*:editor" position="after"/>
+                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()"
+                                            origin="instance('i-admin')//*:change" position="after"/>
                                     </xf:trigger>
                                     <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
+
                                         <div class="input-group mb-3">
                                             <xf:input ref="." class="form-control">
                                                 <xf:label>What did you change? Be concise! </xf:label>
