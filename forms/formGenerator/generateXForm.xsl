@@ -952,7 +952,16 @@
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-admin">
+<<<<<<< Updated upstream
                                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
+=======
+                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                                        <xf:label><i class="bi bi-plus-circle"/> Add change </xf:label>
+                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()"
+                                            origin="instance('i-admin')//*:change" position="after"/>
+                                    </xf:trigger>
+                                    <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
+>>>>>>> Stashed changes
                                         <div class="input-group mb-3">
                                             <xf:input ref="." class="form-control">
                                                 <xf:label>Your full name: </xf:label>
