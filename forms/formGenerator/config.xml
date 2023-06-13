@@ -16,6 +16,7 @@
     
     <!-- Saving and managing created TEI files -->
     <recordManagement>
+        <baseURI>https://jalit.org/manuscript/</baseURI>
         <saveOptions>
             <option name="github" enable="true">
                 <parameter name="githubRepoName">majlis-data</parameter>
@@ -178,7 +179,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add information on existing reproductions, such as scans, microfilms, or digital images?</formDesc>
             <elementGroups>
-                <group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
+                <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
                     <element xpath="tei:graphic"/>
                 </group>
             </elementGroups>
@@ -374,7 +375,10 @@
                 <group groupLabel="Summary of script." groupNo="1">
                     <element xpath="tei:handDesc/tei:summary"/>
                 </group>
-                <group groupLabel="Script definition." groupLabelConditionalElement="." groupLabelXPath="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)" groupNo="2"  repeatable="yes">
+                <!--<group groupLabel="Script definition." groupLabelConditionalElement="." groupLabelXPath="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)" groupNo="2"  repeatable="yes">
+                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
+                </group>-->
+                <group groupLabel="Script definition." groupNo="2"  repeatable="yes">
                     <element xpath="tei:scriptDesc/tei:scriptNote"/>
                 </group>
                 <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="./*:locus" groupLabelXPath="concat('Scribal hand: fols. ',./*:locus)" groupNo="3" repeatable="yes">
@@ -388,7 +392,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,' (fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
+                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,'(fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
