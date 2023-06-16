@@ -10,33 +10,30 @@
      xmlns:local="http://syriaca.org/ns">
    <decoDesc ident="decoDesc"
              elementName="decoDesc"
-             elementLabel="decoration description"
-             minOccur="0"
-             maxOccur="100"
+             elementLabel="decoDesc"
              path="/*:decoDesc"
              currentLevel="1"
              popup="1"
              teiElement="&lt;decoDesc/&gt;">
-      <desc>contains a description of the decoration of a manuscript or other object, either as in paragraphs, or as one or more decoNote elements.</desc>
       <availableAtts elementName="decoDesc"/>
       <childElements>
          <child>
             <element ident="summary"
                      label="Text layout summary"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="decoNote"
                      label="Text Layout"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </decoDesc>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Text layout summary"
-            minOccur="0"
-            maxOccur="100"
             path="/*:decoDesc/*:summary"
             currentLevel="2"
             popup="2"
@@ -51,73 +48,30 @@
    <decoNote ident="decoNote"
              elementName="decoNote"
              elementLabel="Text Layout"
-             minOccur="0"
-             maxOccur="100"
              path="/*:decoDesc/*:decoNote"
              currentLevel="2"
              popup="2"
              teiElement="&lt;decoNote/&gt;">
       <desc>Describe the text layout.</desc>
-      <availableAtts elementName="decoNote">
-         <attDef ident="color" attLabel="color"/>
-         <attDef ident="pastedown" attLabel="pastedown">
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      maxOccurs="3">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="semi">
-               <valItem ident="UTI">
-                  <desc>Under the turn-ins. The pastedown is pasted under the
-                                        turn-ins.</desc>
-               </valItem>
-               <valItem ident="OTI">
-                  <desc>Over the turn-ins. The pastedown is pasted over the
-                                        turn-ins.</desc>
-               </valItem>
-               <valItem ident="L">
-                  <desc>Left pastedown, on the upper board.</desc>
-               </valItem>
-               <valItem ident="R">
-                  <desc>Right pastedown, on the lower board.</desc>
-               </valItem>
-            </valList>
-         </attDef>
-         <attDef ident="repaired" attLabel="repaired">
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      maxOccurs="1">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="closed">
-               <valItem ident="Y"/>
-               <valItem ident="N"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="decoNote"/>
       <childElements>
          <child>
             <element ident="desc"
                      label="Text layout description"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="p"
+                     label="Free text box"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </decoNote>
    <desc ident="desc"
          elementName="desc"
          elementLabel="Text layout description"
-         minOccur="0"
-         maxOccur="100"
          path="/*:decoDesc/*:decoNote/*:desc"
          currentLevel="3"
          popup="3"
@@ -151,8 +105,6 @@
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur="0"
-      maxOccur="100"
       path="/*:decoDesc/*:decoNote/*:p"
       currentLevel="3"
       popup="3"

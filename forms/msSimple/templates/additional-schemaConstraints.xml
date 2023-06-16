@@ -10,59 +10,26 @@
      xmlns:local="http://syriaca.org/ns">
    <listBibl ident="listBibl"
              elementName="listBibl"
-             elementLabel="citation list"
-             minOccur="0"
-             maxOccur="100"
+             elementLabel="listBibl"
              path="/*:listBibl"
              currentLevel="1"
              popup="1"
              teiElement="&lt;listBibl/&gt;">
       <desc>A list of bibliographic items.</desc>
-      <availableAtts elementName="listBibl">
-         <attDef ident="type" attLabel="type">
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="closed">
-               <valItem ident="catalogue">
-                  <desc>Descriptions in manuscript catalogues of the subject of
-                                        the record. This only makes sense if you are editing a manuscript record. </desc>
-               </valItem>
-               <valItem ident="editions">
-                  <desc>Editions of the Textual Unit (Work). This only makes sense if you are editing a Textual Unit.</desc>
-               </valItem>
-               <valItem ident="text">
-                  <desc>Bibliography about the Textual Unit (Work), which is not an edition. This could also find its place in secondary bibliography.</desc>
-               </valItem>
-               <valItem ident="otherLanguages">
-                  <desc>About the same textual unit in a different literary tradition.</desc>
-               </valItem>
-               <valItem ident="clavis">
-                  <desc>ID of the work in other clavis (CC, CPG etc.) </desc>
-               </valItem>
-               <valItem ident="translation">
-                  <desc>Modern translations of the work </desc>
-               </valItem>
-               <valItem ident="secondary">
-                  <desc>Secondary bibliography on the subject of the record. </desc>
-               </valItem>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="listBibl"/>
       <childElements>
          <child>
             <element ident="bibl"
                      label="Bibliographic reference"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </listBibl>
    <bibl ident="bibl"
          elementName="bibl"
          elementLabel="Bibliographic reference"
-         minOccur="0"
-         maxOccur="100"
          path="/*:listBibl/*:bibl"
          currentLevel="2"
          popup="2"
@@ -74,74 +41,30 @@
               formName="bibl"
               lookupLabel="Look up bibliographic record"/>
       <desc>Add a bibliographic item, like a monograph, journal article, or manuscript.</desc>
-      <availableAtts elementName="bibl">
-         <attDef ident="type" attLabel="type">
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     mode="replace"
-                     type="semi">
-               <valItem ident="MS">
-                  <desc>The reference is to a manuscript</desc>
-               </valItem>
-               <valItem ident="QUARTO">
-                  <desc>The reference is to the Bodleian Quarto
-                                        Catalogues</desc>
-               </valItem>
-               <valItem ident="SC">
-                  <desc>The reference is to the Bodleian Summary
-                                        Catalogue</desc>
-               </valItem>
-               <valItem ident="OC">
-                  <desc>The reference is to the Bodleian Old Catalogue</desc>
-               </valItem>
-               <valItem ident="bible">
-                  <desc>The reference is to the bible</desc>
-               </valItem>
-               <valItem ident="commentary">
-                  <desc>The reference is to a commentary</desc>
-               </valItem>
-               <valItem ident="edition">
-                  <desc>The reference is to an edition</desc>
-               </valItem>
-               <valItem ident="extract">
-                  <desc>The reference is to an extract</desc>
-               </valItem>
-               <valItem ident="related">
-                  <desc>The reference is to a related item</desc>
-               </valItem>
-               <valItem ident="text-relations">
-                  <desc>The reference is to a textually-related item</desc>
-               </valItem>
-               <valItem ident="translation">
-                  <desc>The reference is to a translation</desc>
-               </valItem>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="bibl"/>
       <childElements>
-         <textNode type="input"/>
          <child>
             <element ident="title"
                      label="Title of publication"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 1 time(s).&#xA;                                    "/>
             <element ident="ptr"
                      label="Link to Zotero record"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 1 time(s).&#xA;                                    "/>
             <element ident="citedRange"
                      label="Referenced section(s)"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs="1"
+                     maxOccurs="100"
+                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 100 time(s).&#xA;                                    "/>
          </child>
       </childElements>
    </bibl>
    <title ident="title"
           elementName="title"
           elementLabel="Title of publication"
-          minOccur="0"
-          maxOccur="100"
           path="/*:listBibl/*:bibl/*:title"
           currentLevel="3"
           popup="3"
@@ -157,18 +80,16 @@
              elementName="title"
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
-      <desc>contains a title for any kind of work.</desc>
+      <desc>The title to the Zotero should be filled out automatically.</desc>
       <availableAtts elementName="title"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="title"/>
          <child/>
       </childElements>
    </title>
    <ptr ident="ptr"
         elementName="ptr"
         elementLabel="Link to Zotero record"
-        minOccur="0"
-        maxOccur="100"
         path="/*:listBibl/*:bibl/*:ptr"
         currentLevel="3"
         popup="3"
@@ -187,13 +108,11 @@
    <citedRange ident="citedRange"
                elementName="citedRange"
                elementLabel="Referenced section(s)"
-               minOccur="0"
-               maxOccur="100"
                path="/*:listBibl/*:bibl/*:citedRange"
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
-      <desc>defines the range of cited content, often represented by pages or other units</desc>
+      <desc>Specify which pages, columns, etc. you are refering to.</desc>
       <availableAtts elementName="citedRange">
          <attDef ident="unit" attLabel="Unit">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -201,7 +120,7 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="citedRange"/>
          <child/>
       </childElements>
    </citedRange>

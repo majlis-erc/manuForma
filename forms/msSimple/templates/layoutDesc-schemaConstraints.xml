@@ -11,8 +11,6 @@
    <layoutDesc ident="layoutDesc"
                elementName="layoutDesc"
                elementLabel="*Page layout"
-               minOccur="0"
-               maxOccur="100"
                path="/*:layoutDesc"
                currentLevel="1"
                popup="1"
@@ -23,20 +21,20 @@
          <child>
             <element ident="summary"
                      label="Page layout summary"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="layout"
                      label="*Detailed description of page layout"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </layoutDesc>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Page layout summary"
-            minOccur="0"
-            maxOccur="100"
             path="/*:layoutDesc/*:summary"
             currentLevel="2"
             popup="2"
@@ -48,16 +46,15 @@
          <child>
             <element ident="desc"
                      label="Page layout description"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </summary>
    <desc ident="desc"
          elementName="desc"
          elementLabel="Page layout description"
-         minOccur="0"
-         maxOccur="100"
          path="/*:layoutDesc/*:summary/*:desc"
          currentLevel="3"
          popup="3"
@@ -91,8 +88,6 @@
    <layout ident="layout"
            elementName="layout"
            elementLabel="*Detailed description of page layout"
-           minOccur="0"
-           maxOccur="100"
            path="/*:layoutDesc/*:layout"
            currentLevel="2"
            popup="2"
@@ -111,32 +106,42 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="note" label="note" minOccurs="0" maxOccurs="100"/>
+            <element ident="note"
+                     label="note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="dimensions"
                      label="*Text block"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="ab"
                      label="Pricking/Ruling"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="p"
+                     label="Free text box"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="locus"
                      label="Specific range of folios for this layout"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="metamark"
                      label="Justification"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </layout>
    <note ident="note"
          elementName="note"
          elementLabel="note"
-         minOccur="0"
-         maxOccur="100"
          path="/*:layoutDesc/*:layout/*:note"
          currentLevel="3"
          popup="3"
@@ -2701,15 +2706,17 @@ and that a single TEI document may contain texts in many languages.</p>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
+            <element ident="p"
+                     label="Free text box"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </note>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur="0"
-      maxOccur="100"
       path="/*:layoutDesc/*:layout/*:note/*:p"
       currentLevel="4"
       popup="4"
@@ -2725,210 +2732,35 @@ and that a single TEI document may contain texts in many languages.</p>
    <dimensions ident="dimensions"
                elementName="dimensions"
                elementLabel="*Text block"
-               minOccur="0"
-               maxOccur="100"
                path="/*:layoutDesc/*:layout/*:dimensions"
                currentLevel="3"
                popup="3"
                teiElement="&lt;dimensions/&gt;">
       <desc>Measure the text space.</desc>
-      <availableAtts elementName="dimensions">
-         <attDef ident="rend" attLabel="rend">
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="semi">
-               <valItem ident="pricked"/>
-               <valItem ident="ruled"/>
-            </valList>
-         </attDef>
-         <attDef ident="subtype" attLabel="subtype">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2009-05-29">subtype</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-05-29"
-                   xml:lang="fr">sous-type</gloss>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2005-10-10"
-                  xml:lang="en">provides a sub-categorization of the element, if needed</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">필요하다면 요소의 하위범주를 제시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">若有需要，提供該元素的次要分類</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">必要であれば，当該要素の下位分類を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">fournit une sous-catégorisation de l'élément, si
-          c'est nécessaire.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">proporciona, si es necesario, una subcategorización del elemento.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">stabilisce, se necessario, una sottocategorizzazione dell'elemento</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     versionDate="2013-01-13"
-                     xml:lang="en">
-               <p>The <att>subtype</att> attribute may be used to provide any
-sub-classification for the element additional to that provided by its
-<att>type</att> attribute.</p>
-            </remarks>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xml:lang="fr"
-                     versionDate="2007-06-12">
-               <p>L'attribut <att>subtype</att> peut être employé pour fournir une
-                        sous-classification pour cet élément, en plus de celle fournie par son
-                        propre attribut <att>type</att>.</p>
-            </remarks>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xml:lang="es"
-                     versionDate="2008-04-06">
-               <p>El atributo <att>subtype</att> (subtipo) se puede utilizar para proporcionar cualquier subclasificación para el elemento, adicional a ésa proporcionada por su
-<att>type</att> (tipo) de atributo.</p>
-            </remarks>
-            <remarks xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xml:lang="ja"
-                     versionDate="2008-04-05">
-               <p>
-	属性<att>subtype</att>は，属性<att>type</att>に加えて，当該要
-    素の下位分類を示すために使われる．
-    </p>
-            </remarks>
-         </attDef>
-         <attDef ident="type" attLabel="type">
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2005-01-14"
-                  xml:lang="en">indicates which aspect of the object is being measured.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">대상의 어떤 측면이 측정되고 있는지를 나타낸다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">指出物件被測量的部分。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">当該計測対象を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-03-30"
-                  xml:lang="fr">indique quel aspect de l'objet est mesuré.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica que aspecto del objeto se mide.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-01-21"
-                  xml:lang="it">indica quale aspetto dell'oggetto viene misurato</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="semi">
-               <valItem ident="binding">
-                  <desc>The dimensions concerns the binding(s)</desc>
-               </valItem>
-               <valItem ident="folia">
-                  <desc>The dimensions concerns the folia as a whole</desc>
-               </valItem>
-               <valItem ident="leaf">
-                  <desc>The dimensions concerns the leaf</desc>
-               </valItem>
-               <valItem ident="line-height">
-                  <desc>The dimensions concerns the line-height</desc>
-               </valItem>
-               <valItem ident="ruled">
-                  <desc>The dimensions concerns the ruling</desc>
-               </valItem>
-               <valItem ident="written">
-                  <desc>The dimensions concerns the written area</desc>
-               </valItem>
-               <valItem ident="other">
-                  <desc>The dimensions concerns other/unspecified aspects (you
-                                        may also provide a custom value)</desc>
-               </valItem>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="dimensions"/>
       <childElements>
          <child>
             <element ident="dim"
                      label="Space between columns"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="width"
                      label="*Width of written area"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="height"
                      label="*Height of written area"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </dimensions>
    <dim ident="dim"
         elementName="dim"
         elementLabel="Space between columns"
-        minOccur="0"
-        maxOccur="100"
         path="/*:layoutDesc/*:layout/*:dimensions/*:dim"
         currentLevel="4"
         popup="4"
@@ -2953,15 +2785,13 @@ sub-classification for the element additional to that provided by its
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="dim"/>
          <child/>
       </childElements>
    </dim>
    <width ident="width"
           elementName="width"
           elementLabel="*Width of written area"
-          minOccur="0"
-          maxOccur="100"
           path="/*:layoutDesc/*:layout/*:dimensions/*:width"
           currentLevel="4"
           popup="4"
@@ -2974,15 +2804,13 @@ sub-classification for the element additional to that provided by its
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="width"/>
          <child/>
       </childElements>
    </width>
    <height ident="height"
            elementName="height"
            elementLabel="*Height of written area"
-           minOccur="0"
-           maxOccur="100"
            path="/*:layoutDesc/*:layout/*:dimensions/*:height"
            currentLevel="4"
            popup="4"
@@ -2995,15 +2823,13 @@ sub-classification for the element additional to that provided by its
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="height"/>
          <child/>
       </childElements>
    </height>
    <ab ident="ab"
        elementName="ab"
        elementLabel="Pricking/Ruling"
-       minOccur="0"
-       maxOccur="100"
        path="/*:layoutDesc/*:layout/*:ab"
        currentLevel="3"
        popup="3"
@@ -3046,15 +2872,13 @@ sub-classification for the element additional to that provided by its
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="ab"/>
          <child/>
       </childElements>
    </ab>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur="0"
-      maxOccur="100"
       path="/*:layoutDesc/*:layout/*:p"
       currentLevel="3"
       popup="3"
@@ -3070,8 +2894,6 @@ sub-classification for the element additional to that provided by its
    <locus ident="locus"
           elementName="locus"
           elementLabel="Specific range of folios for this layout"
-          minOccur="0"
-          maxOccur="100"
           path="/*:layoutDesc/*:layout/*:locus"
           currentLevel="3"
           popup="3"
@@ -3157,15 +2979,13 @@ sub-classification for the element additional to that provided by its
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <metamark ident="metamark"
              elementName="metamark"
              elementLabel="Justification"
-             minOccur="0"
-             maxOccur="100"
              path="/*:layoutDesc/*:layout/*:metamark"
              currentLevel="3"
              popup="3"
@@ -3202,7 +3022,7 @@ sub-classification for the element additional to that provided by its
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="metamark"/>
          <child/>
       </childElements>
    </metamark>
