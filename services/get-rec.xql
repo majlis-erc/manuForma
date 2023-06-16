@@ -33,15 +33,17 @@ let $data :=
             <data>{
                 for $r in collection(request:get-parameter('eXistCollection',''))//tei:TEI
                 let $title := string($r/descendant::tei:title[1])
+                let $idno := string($r/descendant::tei:publicationStmt[1]/tei:idno[@type='URI'][1])
                 order by $title
-                return <record src="{document-uri(root($r))}" name="{$title}"/>
+                return <record src="{document-uri(root($r))}" name="{$title}" idno="{concat('[',$idno,']')}"/>
             }</data>
         else if(request:get-parameter('q','') != '') then
             <data>{
                 for $r in collection(request:get-parameter('eXistCollection',''))//tei:TEI[descendant::tei:teiHeader[ft:query(.,request:get-parameter('q',''))] or descendant::tei:body[ft:query(.,request:get-parameter('q',''))]]
-                let $title := string($r/descendant::tei:title[1])
+               let $title := string($r/descendant::tei:title[1])
+                let $idno := string($r/descendant::tei:publicationStmt[1]/tei:idno[@type='URI'][1])
                 order by $title
-                return <record src="{document-uri(root($r))}" name="{$title}"/>
+                return <record src="{document-uri(root($r))}" name="{$title}" idno="{concat('[',$idno,']')}"/>
             }</data> 
         else ()    
     else if(request:get-parameter('search','') = 'true') then
@@ -49,15 +51,17 @@ let $data :=
             <data>{
                 for $r in collection($config:app-root || '/data')//tei:TEI
                 let $title := string($r/descendant::tei:title[1])
+                let $idno := string($r/descendant::tei:publicationStmt[1]/tei:idno[@type='URI'][1])
                 order by $title
-                return <record src="{document-uri(root($r))}" name="{$title}"/>
+                return <record src="{document-uri(root($r))}" name="{$title}" idno="{concat('[',$idno,']')}"/>
             }</data>
         else if(request:get-parameter('q','') != '') then
             <data>{
                 for $r in collection($config:app-root || '/data')//tei:TEI[descendant::tei:teiHeader[ft:query(.,request:get-parameter('q',''))]]
                 let $title := string($r/descendant::tei:title[1])
+                let $idno := string($r/descendant::tei:publicationStmt[1]/tei:idno[@type='URI'][1])
                 order by $title
-                return <record src="{document-uri(root($r))}" name="{$title}"/>
+                return <record src="{document-uri(root($r))}" name="{$title}" idno="{concat('[',$idno,']')}"/>
             }</data>
         else ()
     else if(request:get-parameter('github','') = 'browse') then
