@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.12 Beta
+        Version: 1.13 Beta
 
         
 
@@ -519,6 +519,7 @@
                     </xf:instance>
                     <xf:instance id="i-admin">
                         <TEI xmlns="http://www.tei-c.org/ns/1.0">
+                            <change who="#" when=""/>
                             <editor role="creator" ref=""/>
                             <idno type="URI"/>
                         </TEI>
@@ -549,11 +550,9 @@
                     </xf:instance>
                     <xf:instance id="i-search">
                         <data><q/></data>
-
                     </xf:instance>
                     <xf:instance id="i-search-id">
                         <data><q/></data>
-
                     </xf:instance>
                     <xf:instance id="i-search-results">
                         <data/>
@@ -622,10 +621,9 @@
                             <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
-                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="after"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]" value="concat('Record created by manuForma, editor: ', instance('i-user')//*:fullName)"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]/@who" value="concat('#',instance('i-user')//*:user)"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]/@when" value="getXMLDate()"/>
+                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="before"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
                         </xf:action>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
@@ -640,7 +638,6 @@
                         <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
-
 
                     <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
@@ -980,28 +977,43 @@
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-admin">
-                                    <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
+
+                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                                        <xf:label><i class="bi bi-plus-circle"/> Add change</xf:label>
+                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change" position="before"/>
+                                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
+                                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
+                                    </xf:trigger>
+                                    <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
+                                        <!-- <change who="#" when=""/> -->
                                         <div class="input-group mb-3">
-                                            <xf:input ref="." class="form-control">
-                                                <xf:label>Your full name: </xf:label>
-                                                <xf:alert>Add your name</xf:alert>
-                                            </xf:input>
+
                                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
                                                 <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
                                                 <xf:delete ev:event="DOMActivate" ref="."/>
                                             </xf:trigger>
+                                            <xf:input ref="." class="form-control">
+                                                <xf:label>What did you change? be concise </xf:label>
+                                            </xf:input>
                                         </div>
-                                        <div class="input-group mb-3">
-                                            <xf:input ref="@ref" class="form-control">
+                                        <div class="input-group mb-3 indent">    
+                                            <xf:input ref="@who" class="form-control">
+                                                <xf:label>Add your identifier (e.g. #msteinschneider). Check if you are listed under "Project team" in der "Header" menu.</xf:label>
+                                            </xf:input>
+                                        </div>                                        
+                                        <div class="input-group mb-3 indent">
+                                            <xf:input ref="@when" class="form-control small">
+                                                <xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label>
+                                            </xf:input>
+                                        </div>
+                                        <div class="input-group mb-3 indent">
+                                            <xf:input ref="@ref" class="form-control small">
                                                 <xf:label>Your identifier (e.g. #msteinschneider): </xf:label>
                                             </xf:input>
                                         </div>
                                         <hr/>
                                     </xf:repeat>
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                        <xf:label><i class="bi bi-plus-circle"/> Add team member</xf:label>
-                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
-                                    </xf:trigger><br/>
+
                                     <div class="input-group mb-3">
                                         <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
@@ -2102,6 +2114,9 @@
                         <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem">
                             <xf:label ref="@ident"/>
                             <xf:value ref="@ident"/>
+
+<!--                            <xf:hint>TEST</xf:hint>-->
+
                         </xf:itemset>
                         <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
                     </xf:select1>
@@ -2181,6 +2196,7 @@
         </div>
     </xsl:template>
 
+  
     <!-- Element Bind rules -->
     <xsl:template name="elementBinds">
         <xsl:param name="subform"/>
@@ -2459,7 +2475,6 @@
                     </xsl:choose>
                 </xsl:when>
                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur] or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccurrence]">
-
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
                             <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
