@@ -11,8 +11,6 @@
    <msContents ident="msContents"
                elementName="msContents"
                elementLabel="Add your content descriptions"
-               minOccur="0"
-               maxOccur="100"
                path="/*:msContents"
                currentLevel="1"
                popup="1"
@@ -22,17 +20,20 @@
          <child>
             <element ident="summary"
                      label="Content summary"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="msItem" label="*Text unit" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="msItem"
+                     label="*Text unit"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </msContents>
    <summary ident="summary"
             elementName="summary"
             elementLabel="Content summary"
-            minOccur="0"
-            maxOccur="100"
             path="/*:msContents/*:summary"
             currentLevel="2"
             popup="2"
@@ -47,8 +48,6 @@
    <msItem ident="msItem"
            elementName="msItem"
            elementLabel="*Text unit"
-           minOccur="0"
-           maxOccur="100"
            path="/*:msContents/*:msItem"
            currentLevel="2"
            popup="2"
@@ -91,29 +90,57 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
-            <element ident="title" label="*Title" minOccurs="0" maxOccurs="100"/>
-            <element ident="author" label="Author" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus"
+                     label="*Folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="title"
+                     label="*Title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="author"
+                     label="Author"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="textLang"
                      label="Text language"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="rubric" label="Rubric" minOccurs="0" maxOccurs="100"/>
-            <element ident="incipit" label="Incipit" minOccurs="0" maxOccurs="100"/>
-            <element ident="explicit" label="Explicit" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="rubric"
+                     label="Rubric"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="incipit"
+                     label="Incipit"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="explicit"
+                     label="Explicit"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="finalRubric"
                      label="Final rubric"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="note" label="Note" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </msItem>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:locus"
           currentLevel="3"
           popup="3"
@@ -132,15 +159,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <title ident="title"
           elementName="title"
           elementLabel="*Title"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:title"
           currentLevel="3"
           popup="3"
@@ -174,15 +199,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="title"/>
          <child/>
       </childElements>
    </title>
    <author ident="author"
            elementName="author"
            elementLabel="Author"
-           minOccur="0"
-           maxOccur="100"
            path="/*:msContents/*:msItem/*:author"
            currentLevel="3"
            popup="3"
@@ -196,16 +219,15 @@
          <child>
             <element ident="persName"
                      label="*Author name"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </author>
    <persName ident="persName"
              elementName="persName"
              elementLabel="*Author name"
-             minOccur="0"
-             maxOccur="100"
              path="/*:msContents/*:msItem/*:author/*:persName"
              currentLevel="4"
              popup="4"
@@ -224,17 +246,27 @@
       <availableAtts elementName="persName"/>
       <childElements>
          <child>
-            <element ident="forename" label="persName" minOccurs="0" maxOccurs="100"/>
-            <element ident="surname" label="persName" minOccurs="0" maxOccurs="100"/>
-            <element ident="addName" label="persName" minOccurs="0" maxOccurs="100"/>
+            <element ident="forename"
+                     label="persName"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="surname"
+                     label="persName"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="addName"
+                     label="persName"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </persName>
    <forename ident="forename"
              elementName="forename"
              elementLabel="forename"
-             minOccur="0"
-             maxOccur="100"
              path="/*:msContents/*:msItem/*:author/*:persName/*:forename"
              currentLevel="5"
              popup="5"
@@ -247,8 +279,6 @@
    <surname ident="surname"
             elementName="surname"
             elementLabel="surname"
-            minOccur="0"
-            maxOccur="100"
             path="/*:msContents/*:msItem/*:author/*:persName/*:surname"
             currentLevel="5"
             popup="5"
@@ -261,8 +291,6 @@
    <addName ident="addName"
             elementName="addName"
             elementLabel="addName"
-            minOccur="0"
-            maxOccur="100"
             path="/*:msContents/*:msItem/*:author/*:persName/*:addName"
             currentLevel="5"
             popup="5"
@@ -275,8 +303,6 @@
    <textLang ident="textLang"
              elementName="textLang"
              elementLabel="Text language"
-             minOccur="0"
-             maxOccur="100"
              path="/*:msContents/*:msItem/*:textLang"
              currentLevel="3"
              popup="3"
@@ -313,15 +339,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="textLang"/>
          <child/>
       </childElements>
    </textLang>
    <rubric ident="rubric"
            elementName="rubric"
            elementLabel="Rubric"
-           minOccur="0"
-           maxOccur="100"
            path="/*:msContents/*:msItem/*:rubric"
            currentLevel="3"
            popup="3"
@@ -346,19 +370,22 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus"
+                     label="*Folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </rubric>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:rubric/*:locus"
           currentLevel="4"
           popup="4"
@@ -377,15 +404,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:rubric/*:quote"
           currentLevel="4"
           popup="4"
@@ -393,15 +418,13 @@
       <desc>Quotation from the manuscript.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="quote"/>
          <child/>
       </childElements>
    </quote>
    <incipit ident="incipit"
             elementName="incipit"
             elementLabel="Incipit"
-            minOccur="0"
-            maxOccur="100"
             path="/*:msContents/*:msItem/*:incipit"
             currentLevel="3"
             popup="3"
@@ -426,19 +449,22 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus"
+                     label="*Folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </incipit>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:incipit/*:locus"
           currentLevel="4"
           popup="4"
@@ -457,15 +483,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:incipit/*:quote"
           currentLevel="4"
           popup="4"
@@ -473,15 +497,13 @@
       <desc>Quotation from the manuscript.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="quote"/>
          <child/>
       </childElements>
    </quote>
    <explicit ident="explicit"
              elementName="explicit"
              elementLabel="Explicit"
-             minOccur="0"
-             maxOccur="100"
              path="/*:msContents/*:msItem/*:explicit"
              currentLevel="3"
              popup="3"
@@ -506,19 +528,22 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus"
+                     label="*Folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </explicit>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:explicit/*:locus"
           currentLevel="4"
           popup="4"
@@ -537,15 +562,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:explicit/*:quote"
           currentLevel="4"
           popup="4"
@@ -553,15 +576,13 @@
       <desc>Quotation from the manuscript.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="quote"/>
          <child/>
       </childElements>
    </quote>
    <finalRubric ident="finalRubric"
                 elementName="finalRubric"
                 elementLabel="Final rubric"
-                minOccur="0"
-                maxOccur="100"
                 path="/*:msContents/*:msItem/*:finalRubric"
                 currentLevel="3"
                 popup="3"
@@ -586,19 +607,22 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="locus" label="*Folios" minOccurs="0" maxOccurs="100"/>
+            <element ident="locus"
+                     label="*Folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </finalRubric>
    <locus ident="locus"
           elementName="locus"
           elementLabel="*Folios"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:finalRubric/*:locus"
           currentLevel="4"
           popup="4"
@@ -617,15 +641,13 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
-          minOccur="0"
-          maxOccur="100"
           path="/*:msContents/*:msItem/*:finalRubric/*:quote"
           currentLevel="4"
           popup="4"
@@ -633,15 +655,13 @@
       <desc>Quotation from the manuscript.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="quote"/>
          <child/>
       </childElements>
    </quote>
    <note ident="note"
          elementName="note"
          elementLabel="Note"
-         minOccur="0"
-         maxOccur="100"
          path="/*:msContents/*:msItem/*:note"
          currentLevel="3"
          popup="3"
@@ -651,15 +671,17 @@
       <availableAtts elementName="note"/>
       <childElements>
          <child>
-            <element ident="p" label="Free text box" minOccurs="0" maxOccurs="100"/>
+            <element ident="p"
+                     label="Free text box"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </note>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
-      minOccur="0"
-      maxOccur="100"
       path="/*:msContents/*:msItem/*:note/*:p"
       currentLevel="4"
       popup="4"

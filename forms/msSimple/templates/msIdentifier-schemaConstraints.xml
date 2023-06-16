@@ -11,8 +11,6 @@
    <msIdentifier ident="msIdentifier"
                  elementName="msIdentifier"
                  elementLabel="Add elements to identification"
-                 minOccur="0"
-                 maxOccur="100"
                  path="/*:msIdentifier"
                  currentLevel="1"
                  popup="1"
@@ -23,38 +21,50 @@
          <child>
             <element ident="country"
                      label="*Country of location"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="settlement" label="*Place" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="settlement"
+                     label="*Place"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="repository"
                      label="*Institution"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="collection"
                      label="*Collection"
-                     minOccurs="0"
-                     maxOccurs="100"/>
-            <element ident="idno" label="*Shelfmark" minOccurs="0" maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="idno"
+                     label="*Shelfmark"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="msName"
                      label="Name by which manuscript is generally known"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="objectName"
                      label="msIdentifier"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="altIdentifier"
                      label="Add alternate identifier"
-                     minOccurs="0"
-                     maxOccurs="100"/>
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </msIdentifier>
    <country ident="country"
             elementName="country"
             elementLabel="*Country of location"
-            minOccur="0"
-            maxOccur="100"
             path="/*:msIdentifier/*:country"
             currentLevel="2"
             popup="2"
@@ -77,15 +87,13 @@
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="country"/>
          <child/>
       </childElements>
    </country>
    <settlement ident="settlement"
                elementName="settlement"
                elementLabel="*Place"
-               minOccur="0"
-               maxOccur="100"
                path="/*:msIdentifier/*:settlement"
                currentLevel="2"
                popup="2"
@@ -109,15 +117,13 @@
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="settlement"/>
          <child/>
       </childElements>
    </settlement>
    <repository ident="repository"
                elementName="repository"
                elementLabel="*Institution"
-               minOccur="0"
-               maxOccur="100"
                path="/*:msIdentifier/*:repository"
                currentLevel="2"
                popup="2"
@@ -144,15 +150,13 @@
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="repository"/>
          <child/>
       </childElements>
    </repository>
    <collection ident="collection"
                elementName="collection"
                elementLabel="*Collection"
-               minOccur="0"
-               maxOccur="100"
                path="/*:msIdentifier/*:collection"
                currentLevel="2"
                popup="2"
@@ -188,15 +192,13 @@
          </element>
       </controlledValues>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="collection"/>
          <child/>
       </childElements>
    </collection>
    <idno ident="idno"
          elementName="idno"
          elementLabel="*Shelfmark"
-         minOccur="0"
-         maxOccur="100"
          path="/*:msIdentifier/*:idno"
          currentLevel="2"
          popup="2"
@@ -204,15 +206,13 @@
       <desc>Specify the shelfmark of a manuscript, used within the holding institution or by external authorities, which provide alternate identifiers.</desc>
       <availableAtts elementName="idno"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="idno"/>
          <child/>
       </childElements>
    </idno>
    <msName ident="msName"
            elementName="msName"
            elementLabel="Name by which manuscript is generally known"
-           minOccur="0"
-           maxOccur="100"
            path="/*:msIdentifier/*:msName"
            currentLevel="2"
            popup="2"
@@ -220,15 +220,13 @@
       <desc>Name used to call the manuscript by scholars.</desc>
       <availableAtts elementName="msName"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="msName"/>
          <child/>
       </childElements>
    </msName>
    <objectName ident="objectName"
                elementName="objectName"
                elementLabel="objectName"
-               minOccur="0"
-               maxOccur="100"
                path="/*:msIdentifier/*:objectName"
                currentLevel="2"
                popup="2"
@@ -241,8 +239,6 @@
    <altIdentifier ident="altIdentifier"
                   elementName="altIdentifier"
                   elementLabel="Add alternate identifier"
-                  minOccur="0"
-                  maxOccur="100"
                   path="/*:msIdentifier/*:altIdentifier"
                   currentLevel="2"
                   popup="2"
@@ -267,15 +263,17 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="idno" label="*Shelfmark" minOccurs="0" maxOccurs="100"/>
+            <element ident="idno"
+                     label="*Shelfmark"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </altIdentifier>
    <idno ident="idno"
          elementName="idno"
          elementLabel="*Shelfmark"
-         minOccur="0"
-         maxOccur="100"
          path="/*:msIdentifier/*:altIdentifier/*:idno"
          currentLevel="3"
          popup="3"
@@ -283,7 +281,7 @@
       <desc>Specify the shelfmark of a manuscript, used within the holding institution or by external authorities, which provide alternate identifiers.</desc>
       <availableAtts elementName="idno"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="idno"/>
          <child/>
       </childElements>
    </idno>
