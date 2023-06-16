@@ -14,7 +14,8 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.11 Beta
+        Version: 1.12 Beta
+
         
 
         NOTES: 
@@ -548,6 +549,11 @@
                     </xf:instance>
                     <xf:instance id="i-search">
                         <data><q/></data>
+
+                    </xf:instance>
+                    <xf:instance id="i-search-id">
+                        <data><q/></data>
+
                     </xf:instance>
                     <xf:instance id="i-search-results">
                         <data/>
@@ -632,6 +638,12 @@
                     
                     <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
+                        <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
+                    </xf:submission>
+
+
+                    <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
@@ -893,6 +905,16 @@
                                                             </xf:submit>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
                                                                 <xf:label> Browse </xf:label>
+                                                            </xf:submit>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fileLoading">
+                                                        <div class="input-group mb-3">
+                                                            <xf:input class="form-control" ref="instance('i-search-id')" incremental="true">
+                                                                <xf:label/>
+                                                            </xf:input>
+                                                            <xf:submit class="btn btn-outline-secondary" submission="s-search-id" appearance="minimal">
+                                                                <xf:label> Search by ID </xf:label>
                                                             </xf:submit>
                                                         </div>
                                                         <div class="input-group mb-3">
@@ -2202,7 +2224,6 @@
         </xsl:for-each>
     </xsl:template>
     
-
     <!-- Shared navbar -->
     <xsl:template name="navbar">
         <xsl:variable name="home" select="$app-root"/>
@@ -2341,7 +2362,6 @@
         </TEI>
     </xsl:template>
    
-
     <!-- Full list of schema rules -->
     <xsl:template name="generateSchemaInstance">
         <xsl:param name="subform"/>
@@ -2419,9 +2439,7 @@
                                 </xsl:when>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
-                                </xsl:when>
-                                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
-                                    <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
+
                                 </xsl:when>
                                 <xsl:otherwise>100</xsl:otherwise>
                             </xsl:choose>
@@ -2441,15 +2459,11 @@
                     </xsl:choose>
                 </xsl:when>
                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccur] or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]][@minOccurrence]">
+
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
                             <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
-                        </xsl:when>
-                        <xsl:otherwise>0</xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence castable as xs:integer">
-                            <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence"/>
+
                         </xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
