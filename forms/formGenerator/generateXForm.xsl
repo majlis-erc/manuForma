@@ -2158,7 +2158,7 @@
             </xsl:if>
         </div>
     </xsl:template>
-    
+
     <!-- Element Bind rules -->
     <xsl:template name="elementBinds">
         <xsl:param name="subform"/>
@@ -2202,6 +2202,7 @@
         </xsl:for-each>
     </xsl:template>
     
+
     <!-- Shared navbar -->
     <xsl:template name="navbar">
         <xsl:variable name="home" select="$app-root"/>
@@ -2340,6 +2341,7 @@
         </TEI>
     </xsl:template>
    
+
     <!-- Full list of schema rules -->
     <xsl:template name="generateSchemaInstance">
         <xsl:param name="subform"/>
@@ -2410,9 +2412,13 @@
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence = 'unbounded'">100</xsl:when>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != '' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence != ''">
+
                             <xsl:choose>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
+                                </xsl:when>
+                                <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
+                                    <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
                                 </xsl:when>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
@@ -2438,6 +2444,12 @@
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
                             <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
+                        </xsl:when>
+                        <xsl:otherwise>0</xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence castable as xs:integer">
+                            <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccurrence"/>
                         </xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>

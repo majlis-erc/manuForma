@@ -84,7 +84,7 @@
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Add shelfmark and information on the holding institution and alternate references to existing cataloging data.</formDesc>
+            <formDesc>Add shelfmark and information on the holding institution , as well as alternate references to existing cataloging data.</formDesc>
             <controlledValuesElements>
                 <element ident="country">
                     <valList type="closed">
@@ -158,7 +158,7 @@
                 </element>
             </controlledValuesElements>
             <elementGroups>
-                <group groupLabel="Identification via location, institution, collection, shelfmark" groupNo="1">
+                <group groupLabel="Identification via location, place, institution, collection, shelfmark" groupNo="1">
                     <element xpath="tei:country"/>
                     <element xpath="tei:settlement"/>
                     <element xpath="tei:repository"/>
@@ -176,18 +176,21 @@
             <localSchema src="../schemas/mss-reproductions.xml"/>
             <globalSchema src="../schemas/mss-reproductions.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Add information on existing reproductions, such as scans, microfilms, or digital images?</formDesc>
+            <formDesc>Add information on existing reproductions, such as scans, microfilms, or digital images.</formDesc>
             <elementGroups>
-                <group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
+                <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
                     <element xpath="tei:graphic"/>
                 </group>
+                <!--<group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
+                    <element xpath="tei:graphic"/>
+                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Specify the type of manuscript, the format, and the book form.</formDesc>
+            <formDesc>Give a basic codicological definition of the book and specify the type and form.</formDesc>
         </subform>
         
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
@@ -210,7 +213,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="Define the writing material of the manuscript." groupLabelConditionalElement="./*:material" groupLabelXPath="concat('Writing material of the manuscript: ',./*:material)" groupNo="1">
+                <group groupLabel="Writing material of the manuscript." groupLabelConditionalElement="./*:material" groupLabelXPath="concat('Writing material of the manuscript: ',./*:material)" groupNo="1">
                     <element xpath="tei:support"/>
                 </group>
                 <group groupLabel="Measurements of the page (number of folios, height and width)." groupNo="2">
@@ -388,7 +391,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe and transcribe the incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,' (fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,' (fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -433,12 +436,12 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
             <elementGroups>
-                <group groupLabel="Describe the binding's origin and give the bindings dimensions and provide information on the material." groupNo="1">
+                <group groupLabel="Binding's origin, dimensions, and information on the material." groupNo="1">
                     <element xpath="tei:decoNote"/>
                 </group>
             </elementGroups>
             <elementGroups>
-                <group groupLabel="Characterize the state of conservation of the binding." groupNo="2">
+                <group groupLabel="State of conservation of the binding." groupNo="2">
                     <element xpath="tei:condition"/>
                 </group>
             </elementGroups>
@@ -476,7 +479,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
-                <group groupLabel="List the scholars involved (if known) and quote from the heritage material." groupNo="1" repeatable="yes">
+                <group groupLabel="Quotation from and information about the heritage material." groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -487,16 +490,16 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library.</formDesc>
             <elementGroups>
-                <group groupLabel="Summarize the history of the manuscript." groupNo="1">
+                <group groupLabel="Summary of the history of the manuscript." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
                 <!--<group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
                     <element xpath="tei:origin"/>
                 </group>-->
-                <group groupLabel="Describe the traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
+                <group groupLabel="Traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:provenance"/>
                 </group>
-                <group groupLabel="Give an account how the manuscript came into the present holding institution (date, place, folios, person, quotation, stamp)." groupNo="3">
+                <group groupLabel="Traces left by the present holding institution (date, place, folios, person, quotation, stamp)." groupNo="3">
                     <element xpath="tei:acquisition"/>
                 </group>
             </elementGroups>
