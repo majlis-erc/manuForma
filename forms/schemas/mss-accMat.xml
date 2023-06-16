@@ -81,7 +81,7 @@ End license statement: do not remove -->
                     <moduleRef key="core" include="bibl citedRange item list p ptr quote title"/>
                     <moduleRef key="namesdates" include="persName"/>
                     <moduleRef key="msdescription" include="accMat"/>
-                    
+
                     <elementSpec ident="p" module="core" mode="change">
                         <gloss>Free text box</gloss>
                         <gloss type="tei">&lt;p/&gt;</gloss>
@@ -118,11 +118,11 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
+                        <desc xml:lang="en">Add bibliographic item, like a monograph, journal article, or manuscript.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -138,19 +138,20 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                                <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
-                                <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
-                                <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
+                            <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
                         </content>
                         <!--<attList>
                             <attRef name="xml:id" mode="delete"/>
                             <attRef name="type" mode="delete"/>
                         </attList>-->
                     </elementSpec>
-                    
+
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
+                        <desc>The title to the Zotero should be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -188,10 +189,11 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
+                        <desc>The link to the Zotero should be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -210,15 +212,18 @@ End license statement: do not remove -->
                             <empty/>
                         </content>
                         <attList>
-                            <attDef ident="target" mode="change"/>
+                            <attDef ident="target" mode="change">
+                                <gloss>Zotero link</gloss>
+                            </attDef>
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
+                        <desc>Specify which pages, columns, etc. you are refering to.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -231,9 +236,12 @@ End license statement: do not remove -->
                             <attDef ident="evaluate" mode="delete"/>
                             <attDef ident="target" mode="delete"/>
                             <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="unit" mode="change">
+                                <gloss>Unit</gloss>
+                            </attDef>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="item" module="core" mode="change">
                         <gloss>Document</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Describe the document and give a transcription.</desc>
@@ -257,7 +265,7 @@ End license statement: do not remove -->
                             <attDef ident="rend" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
                             <attDef ident="resp" mode="change">
-                                <gloss>Responsible scholar</gloss>
+                                <gloss>Responsible team member</gloss>
                                 <valList type="open">
                                     <valItem ident="rvollandt">
                                         <gloss>Ronny Vollandt</gloss>
@@ -322,8 +330,7 @@ End license statement: do not remove -->
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote/&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Quotation from the manuscript. Use the "xml:lang" attribute to specify the
-                            language.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Quote from the document.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.ascribed.directed" mode="delete"/>
@@ -338,15 +345,15 @@ End license statement: do not remove -->
                             <attDef ident="notation" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"></attDef>
+                            <attDef ident="xml:lang" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
                         <gloss>Author</gloss>
                         <gloss type="tei">&lt;persName/&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" attribute to specify the
-                            person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
+                            spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
+                            person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
                             when you link a record to this element.)</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical"/>

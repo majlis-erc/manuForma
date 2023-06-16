@@ -62,8 +62,8 @@
               currentLevel="2"
               popup="2"
               teiElement="&lt;condition/&gt;">
-      <desc>Preservation, conservation and restoration history;
-                            present state of fragment; damages. Choose from the list a generic description that fits best your overall
+      <desc>Describe the preservation, conservation and restoration
+                            history; present state of fragment; damages. Choose from the list a generic description that fits best your overall
                             impression.</desc>
       <availableAtts elementName="condition">
          <attDef ident="key" attLabel="Description">
@@ -147,8 +147,7 @@
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed">
-               <valItem ident="binding">
-                                    </valItem>
+               <valItem ident="binding"> </valItem>
             </valList>
          </attDef>
       </availableAtts>
@@ -396,7 +395,7 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;dimensions/&gt;">
-      <desc>The measurements of the binding.</desc>
+      <desc>Measure the binding.</desc>
       <availableAtts elementName="dimensions">
          <attDef ident="type" attLabel="type">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -2762,8 +2761,12 @@ and that a single TEI document may contain texts in many languages.</p>
            currentLevel="4"
            popup="4"
            teiElement="&lt;height/&gt;">
-      <desc>The height of the binding, measured in millimeters.</desc>
+      <desc>Measure the height with a precision of 5 millimeters.</desc>
       <availableAtts elementName="height">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+         </attDef>
          <attDef ident="xml:space" attLabel="space">
             <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2842,8 +2845,13 @@ and that a single TEI document may contain texts in many languages.</p>
           currentLevel="4"
           popup="4"
           teiElement="&lt;depth/&gt;">
-      <desc>The depth of the binding, measured in millimeters.</desc>
-      <availableAtts elementName="depth"/>
+      <desc>Measure the depth with a precision of 5 millimeters.</desc>
+      <availableAtts elementName="depth">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -2858,8 +2866,13 @@ and that a single TEI document may contain texts in many languages.</p>
           currentLevel="4"
           popup="4"
           teiElement="&lt;width/&gt;">
-      <desc>The width of the binding, measured in millimeters.</desc>
-      <availableAtts elementName="width"/>
+      <desc>Measure the width with a precision of 5 millimeters.</desc>
+      <availableAtts elementName="width">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input"/>
          <child/>
@@ -2891,10 +2904,9 @@ and that a single TEI document may contain texts in many languages.</p>
               currentLevel="2"
               popup="2"
               teiElement="&lt;origPlace/&gt;">
-      <desc>Look up the place records in the database to specify the
-                            location where the manuscript or manuscript part was produced. Try different spellings in different languages! If no
-                            suitable record exists, create a new one. (The "ref" attribute will be filled out automatically when you link a place
-                            record to this element.)</desc>
+      <desc>Look up the place records in the database to specify a
+                            settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The
+                            "reference" field will be filled out automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="origPlace">
          <attDef ident="evidence" attLabel="evidence">
             <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -2985,6 +2997,10 @@ and that a single TEI document may contain texts in many languages.</p>
                </valItem>
             </valList>
          </attDef>
+         <attDef ident="ref" attLabel="Place identifier">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -3001,213 +3017,20 @@ and that a single TEI document may contain texts in many languages.</p>
              popup="2"
              teiElement="&lt;origDate/&gt;">
       <desc>Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
-                            attributes together.</desc>
+                            Use the "when" field for precise values. In case the date can only be approximated, use the "not After "and "not Before"
+                            fields together.</desc>
       <availableAtts elementName="origDate">
-         <attDef ident="from" attLabel="from">
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-02-10"
-                  xml:lang="en">indicates the starting point of the period in standard form, e.g. yyyy-mm-dd.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준 형식으로 기간의 시작 지점을 표시한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">以標準格式表示該段時間的起始點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">標準形で当該時間幅の始点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">indique le point de départ d'une période sous une
-        forme normalisée, par ex. aaaa-mm-jj</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-11-06"
-                  xml:lang="it">indica l'inizio del periodo nel formato standard</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto de inicio del período en el formato estándard.</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.temporal.w3c"/>
-            </datatype>
+         <attDef ident="from" attLabel="From">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
          </attDef>
-         <attDef ident="to" attLabel="to">
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-02-10"
-                  xml:lang="en">indicates the ending point of the period in standard
-        form, e.g. yyyy-mm-dd.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준 형식으로 기간의 종료 지점을 나타낸다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-02"
-                  xml:lang="zh-TW">以標準格式表示該段時間的結束點。</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-04-05"
-                  xml:lang="ja">標準形で当該時間幅の終点を示す．</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">indique le terme de la période sous une forme
-        normalisée, par ex. aaaa-mm-jj</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-11-06"
-                  xml:lang="it">indica la fine del periodo nel formato standard</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">indica el punto final de un periodo en formato estándard.</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.temporal.w3c"/>
-            </datatype>
+         <attDef ident="to" attLabel="To">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
          </attDef>
-         <attDef ident="when" attLabel="when">
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2008-07-23"
-                  xml:lang="en">supplies the value of the date or time in a standard form,
-        e.g. yyyy-mm-dd.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-12-20"
-                  xml:lang="ko">표준형식으로 날짜 또는 시간의 값을 제공한다.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2019-03-28"
-                  xml:lang="ja">標準形式での日付や時刻を提供する．たとえば、yyyy-mm-dd</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-06-12"
-                  xml:lang="fr">spécifie une date exacte pour un événement sous
-        une forme normalisée, par ex. aaaa-mm-jj.</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-11-06"
-                  xml:lang="it">indica il valore di una data o di un orario in un formato standard</desc>
-            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
-                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  versionDate="2007-05-04"
-                  xml:lang="es">proporciona el valor de una fecha o una hora en un formato estandard.</desc>
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
-               <dataRef key="teidata.temporal.w3c"/>
-            </datatype>
-            <exemplum xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xml:lang="en">
-               <p>Examples of W3C date, time, and date &amp; time formats.</p>
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#NONE">
-                  <p>
-                     <date when="1945-10-24">24 Oct 45</date>
-                     <date when="1996-09-24T07:25:00Z">September 24th, 1996 at 3:25 in the morning</date>
-                     <time when="1999-01-04T20:42:00-05:00">Jan 4 1999 at 8 pm</time>
-                     <time when="14:12:38">fourteen twelve and 38 seconds</time>
-                     <date when="1962-10">October of 1962</date>
-                     <date when="--06-12">June 12th</date>
-                     <date when="---01">the first of the month</date>
-                     <date when="--08">August</date>
-                     <date when="2006">MMVI</date>
-                     <date when="0056">AD 56</date>
-                     <date when="-0056">56 BC</date>
-                  </p>
-               </egXML>
-            </exemplum>
-            <exemplum xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      versionDate="2008-04-06"
-                      xml:lang="fr">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#NONE">
-                  <p>
-                     <date when="1945-10-24">24 Oct 45</date>
-                     <date when="1996-09-24T07:25:00Z">24 septembre 1996 à 3h 25 du matin</date>
-                     <time when="1999-01-04T20:42:00-05:00">4 janvier 1999 à 8h de l'après-midi.</time>
-                     <time when="14:12:38">14 h 12 minutes et 38 secondes</time>
-                     <date when="1962-10">octobre 1962</date>
-                     <date when="--06-12">12 juin</date>
-                     <date when="---01">premier du mois</date>
-                     <date when="--08">Août</date>
-                     <date when="2006">MMVI</date>
-                     <date when="0056">56 ap. J.-C.</date>
-                     <date when="-0056">56 av. J.-C.</date>
-                  </p>
-               </egXML>
-            </exemplum>
-            <exemplum xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      versionDate="2016-03-28"
-                      xml:lang="fr">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Ormesson-douane">Shakespeare meurt dix jours plus tard, à Stratford-on-Avon,
-	  Warwickshire, dans l'Angleterre protestante et dans le
-	  calendrier julien, le
-	  <date calendar="#julian" when="--05-03">mardi 23 avril ancien style</date>,
-	  c'est-à-dire le
-	  <date calendar="#gregorian" when="--05-03">3 mai</date> dans
-	  le calendrier grégorien.</egXML>
-            </exemplum>
-            <exemplum xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">This list begins in
-          the year 1632, more precisely on Trinity Sunday, i.e. the Sunday after
-          Pentecost, in that year the
-	  <date calendar="#julian" when="1632-06-06">27th of May (old style)</date>.</egXML>
-            </exemplum>
-            <exemplum xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <opener>
-                     <dateline>
-                        <placeName>Dorchester, Village,</placeName>
-                        <date when="1828-03-02">March 2d.  1828.</date>
-                     </dateline>
-                     <salute>To
-            Mrs. Cornell,</salute> Sunday <time when="12:00:00">noon.</time>
-                  </opener>
-               </egXML>
-            </exemplum>
+         <attDef ident="when" attLabel="When">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">When</gloss>
          </attDef>
       </availableAtts>
       <childElements>

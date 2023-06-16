@@ -255,7 +255,7 @@
              popup="2"
              teiElement="&lt;handDesc/&gt;">
       <desc>Describe the hands found in this manuscript, or part of the
-                            manuscript. Indicate the number of hands in the attribute.</desc>
+                            manuscript. Indicate the number of hands in the field.</desc>
       <availableAtts elementName="handDesc">
          <attDef ident="hands" attLabel="hands">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -350,11 +350,10 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;handNote/&gt;">
-      <desc>Describe the script used by the hand. Use the attribute values to describe the
-                            "script" (Oriental, Sefardic …), "mode" (square, non-square …), "quality" (careless, trained …), "medium" (brown, black …)
-                            and "scope". If there is more than one hand used in the manuscript or manuscript part, create multiple handNote elements
-                            and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
-                            using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+      <desc>Describe the hand. Use the sub fields to describe the "Medium" (brown, black …)
+                            and "Scope". If there is more than one hand used in the manuscript or manuscript part, create multiple Description of
+                            scribal hand records and indicate where the hand changes occur by using the locus elements. Give your assessment how much
+                            a hand contributed using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="handNote">
          <attDef ident="medium" attLabel="Medium">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -370,7 +369,84 @@
                <valItem ident="unidentified"/>
             </valList>
          </attDef>
-         <attDef ident="scope" attLabel="scope"/>
+         <attDef ident="scope" attLabel="scope">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-09-27"
+                  xml:lang="en">specifies how widely this  hand is used in the manuscript.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">이 필적이 원고에서 사용된 범위를 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">
+      当該筆致が，当該手書き資料中で，どの程度出現しているかを示す．
+</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-03-30"
+                  xml:lang="fr">Spécifie la fréquence d'apparition de cette
+main dans le manuscrit.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica in quale misura è utilizzata la mano in questione nel manoscritto</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">especifica en qué medida es utilizada la mano en el manuscrito.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
+               <valItem ident="sole">
+                  <desc versionDate="2007-09-27" xml:lang="en">only this hand is used throughout the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적만이 원고 전체에 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致だけで全てが書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">il n'y a que cette main dans le
+manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">unica mano utilizzata nel manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">al interno del manuscrito se utiliza sólo esta mano.</desc>
+               </valItem>
+               <valItem ident="major">
+                  <desc versionDate="2007-09-27" xml:lang="en">this hand is used through most of the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적이 원고 대부분에서 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致で，殆どが書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">cette main est utilisée dans la
+majeure partie du manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">mano utilizzata nella maggior parte del manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">esta es la mano que se utiliza en la mayor parte del manuscrito.</desc>
+               </valItem>
+               <valItem ident="minor">
+                  <desc versionDate="2007-09-27" xml:lang="en">this hand is used occasionally in the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적이 원고에서 가끔 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致で，所々が書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">cette main est utilisée
+occasionnellement dans le manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">mano utilizzata solo di rado nel manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">esta mano se usa sólo ocasionalmente en el manuscrito.</desc>
+               </valItem>
+            </valList>
+         </attDef>
          <attDef ident="scribe" attLabel="scribe">
             <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -510,17 +586,14 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              label="New Persons"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
       <desc>Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" attribute to specify the
-                            person's function to the manuscript (e.g., "owner") from the list. (The "ref" attribute will be filled out automatically
-                            when you link a record to this element.)</desc>
+                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" field to specify the
+                            person's function to the manuscript (e.g., "owner") from the list. (The "reference" field will be filled out automatically
+                            when you link a record to this field.)</desc>
       <availableAtts elementName="persName">
-         <attDef ident="ref" attLabel="ref">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <gloss>Role</gloss>
-            </valList>
-         </attDef>
-         <attDef ident="role" attLabel="role">
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="role" attLabel="Role">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Role</gloss>
             <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron">
                <dataRef key="teidata.enumerated"/>
@@ -560,8 +633,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
       <desc>Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "ref" attribute will be
-                            filled out automatically when you link a place record to this element.)</desc>
+                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
+                            filled out automatically when you link a place record to this field.)</desc>
       <availableAtts elementName="placeName">
          <attDef ident="ref" attLabel="Place identifier">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -592,8 +665,8 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              currentLevel="4"
              popup="4"
              teiElement="&lt;metamark/&gt;">
-      <desc>Describes the use of complementary characters like vocalization or recitation in
-                            prose and choose the appropriate "function" from the attribute list.</desc>
+      <desc>Describe the use of complementary characters like vocalization or recitation in
+                            prose and choose the appropriate "function" from the list.</desc>
       <availableAtts elementName="metamark">
          <attDef ident="function" attLabel="Pick type">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -622,45 +695,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
              popup="4"
              teiElement="&lt;origDate/&gt;">
       <desc>Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter"and "notBefore"
-                            attributes together.</desc>
+                            Use the "When" field for precise values. In case the date can only be approximated, use the "Not after"and "Not before"
+                            fields together.</desc>
       <availableAtts elementName="origDate">
-         <attDef ident="evidence" attLabel="evidence">
-            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      maxOccurs="6">
-               <dataRef key="teidata.word"/>
-            </datatype>
-            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     type="semi">
-               <valItem ident="lettering">
-                  <desc>Text dated palaeographically</desc>
-               </valItem>
-               <valItem ident="nomenclature">
-                  <desc>Text dated by nomenclature or onomastics</desc>
-               </valItem>
-               <valItem ident="prosopography">
-                  <desc>Text dated by known persons named or implied within
-                                        it</desc>
-               </valItem>
-               <valItem ident="reign">
-                  <desc>Text dated by the reign of a ruler</desc>
-               </valItem>
-               <valItem ident="titulature">
-                  <desc>Text dated by the use of official titles</desc>
-               </valItem>
-               <valItem ident="internal-date">
-                  <desc>Text dated by explicit internal date</desc>
-               </valItem>
-               <valItem ident="context">
-                  <desc>Archaeological, epigraphic, iconographic or other context
-                                        of the text support</desc>
-               </valItem>
-            </valList>
-         </attDef>
          <attDef ident="notAfter" attLabel="Not after">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not after</gloss>
@@ -669,7 +706,6 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not before</gloss>
          </attDef>
-         <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
          <textNode type="input"/>
@@ -685,9 +721,9 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
           currentLevel="4"
           popup="4"
           teiElement="&lt;locus/&gt;">
-      <desc>The location of a text or another feature within the
-                            manuscript. The "target" attribute is used for single folio. The "from" and "to" attributes are used together to describe
-                            a range of folios.</desc>
+      <desc>Specify the location of a text or another feature within the
+                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
+                            of folios.</desc>
       <availableAtts elementName="locus">
          <attDef ident="from" attLabel="From">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -732,13 +768,11 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                currentLevel="3"
                popup="3"
                teiElement="&lt;scriptNote/&gt;">
-      <desc>Describe the script used by the hand. Use the attribute values to describe the
-                            "script" (Oriental, Sefardic …), "mode" (square, non-square …), "quality" (careless, trained …), "medium" (brown, black …)
-                            and "scope". If there is more than one hand used in the manuscript or manuscript part, create multiple handNote elements
-                            and indicate where the hand changes occur by using the locus elements. Give your assessment how much a hand contributed
-                            using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+      <desc>Describe the script used by the hand. Use the lists to describe the "Script"
+                            (Oriental, Sefardic …), "Mode" (square, non-square …), "Quality" (careless, trained …). If there is more than one hand
+                            used in the manuscript or manuscript part, create multiple Description of script records and indicate where the hand
+                            changes occur by using the Folio field. In case you want to reference this script, choose a unique identifier.</desc>
       <availableAtts elementName="scriptNote">
-         <attDef ident="medium" attLabel="medium"/>
          <attDef ident="rend" attLabel="Script quality">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script quality</gloss>
@@ -757,7 +791,84 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <valItem ident="monumental"/>
             </valList>
          </attDef>
-         <attDef ident="scope" attLabel="scope"/>
+         <attDef ident="scope" attLabel="scope">
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-09-27"
+                  xml:lang="en">specifies how widely this  hand is used in the manuscript.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-12-20"
+                  xml:lang="ko">이 필적이 원고에서 사용된 범위를 명시한다.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-04-05"
+                  xml:lang="ja">
+      当該筆致が，当該手書き資料中で，どの程度出現しているかを示す．
+</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2008-03-30"
+                  xml:lang="fr">Spécifie la fréquence d'apparition de cette
+main dans le manuscrit.</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-01-21"
+                  xml:lang="it">specifica in quale misura è utilizzata la mano in questione nel manoscritto</desc>
+            <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
+                  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  versionDate="2007-05-04"
+                  xml:lang="es">especifica en qué medida es utilizada la mano en el manuscrito.</desc>
+            <datatype xmlns:teix="http://www.tei-c.org/ns/Examples"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0">
+               <dataRef key="teidata.enumerated"/>
+            </datatype>
+            <valList xmlns:teix="http://www.tei-c.org/ns/Examples"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     type="closed">
+               <valItem ident="sole">
+                  <desc versionDate="2007-09-27" xml:lang="en">only this hand is used throughout the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적만이 원고 전체에 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致だけで全てが書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">il n'y a que cette main dans le
+manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">unica mano utilizzata nel manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">al interno del manuscrito se utiliza sólo esta mano.</desc>
+               </valItem>
+               <valItem ident="major">
+                  <desc versionDate="2007-09-27" xml:lang="en">this hand is used through most of the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적이 원고 대부분에서 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致で，殆どが書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">cette main est utilisée dans la
+majeure partie du manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">mano utilizzata nella maggior parte del manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">esta es la mano que se utiliza en la mayor parte del manuscrito.</desc>
+               </valItem>
+               <valItem ident="minor">
+                  <desc versionDate="2007-09-27" xml:lang="en">this hand is used occasionally in the manuscript</desc>
+                  <desc versionDate="2007-12-20" xml:lang="ko">이 필적이 원고에서 가끔 사용되었다.</desc>
+                  <desc versionDate="2008-04-05" xml:lang="ja">
+          当該筆致で，所々が書かれている．
+</desc>
+                  <desc versionDate="2008-03-30" xml:lang="fr">cette main est utilisée
+occasionnellement dans le manuscrit.</desc>
+                  <desc versionDate="2007-11-06" xml:lang="it">mano utilizzata solo di rado nel manoscritto</desc>
+                  <desc versionDate="2007-05-04" xml:lang="es">esta mano se usa sólo ocasionalmente en el manuscrito.</desc>
+               </valItem>
+            </valList>
+         </attDef>
          <attDef ident="scribe" attLabel="scribe">
             <desc xmlns:teix="http://www.tei-c.org/ns/Examples"
                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -878,8 +989,6 @@ this hand, typically supplied by a <gi>scriptNote</gi> element
                <valItem ident="unidentified"/>
             </valList>
          </attDef>
-         <attDef ident="xml:id" attLabel="id"/>
-         <attDef ident="xml:lang" attLabel="lang"/>
       </availableAtts>
       <childElements>
          <child>
