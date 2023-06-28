@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World Record information pertaining the institutions and people behind the project. Add names in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
+      <meta name="description" content="Create and edit person records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -22,6 +22,7 @@
                <password></password></data></xf:instance>
          <xf:instance id="i-admin">
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
+               <change who="#" when=""></change>
                <editor role="creator" ref=""></editor>
                <idno type="URI"></idno>
             </TEI>
@@ -36,6 +37,7 @@
             <xml-base64 xsi:type="xs:base64Binary"></xml-base64>
          </xf:instance>
          <xf:instance id="i-search"><data><q></q></data></xf:instance>
+         <xf:instance id="i-search-id"><data><q></q></data></xf:instance>
          <xf:instance id="i-search-results"><data></data></xf:instance>
          <xf:instance id="i-selected-search"><data></data></xf:instance>
          <xf:instance id="i-selected"><data></data></xf:instance>
@@ -104,10 +106,9 @@
                <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
                <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"></xf:setvalue>
                <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"></xf:setvalue>
-               <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="after"></xf:insert>
-               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]" value="concat('Record created by manuForma, editor: ', instance('i-user')//*:fullName)"></xf:setvalue>
-               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
-               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[last()]/@when" value="getXMLDate()"></xf:setvalue>
+               <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
+               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
+               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
             </xf:action>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
@@ -118,6 +119,10 @@
          </xf:submission>
          <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
             <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
+            <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
+         </xf:submission>
+         <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"></xf:resource>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-browse-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
@@ -210,7 +215,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                   <h1 class="h2">
-                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[@level='a']" class="elementLabel"></xf:output></h1>
+                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"></xf:output></h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
@@ -268,8 +273,12 @@
                                     <div class="input-group mb-3"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
                                        <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
                                     </div>
+                                 </div>
+                                 <div class="fileLoading">
+                                    <div class="input-group mb-3"><xf:input class="form-control" ref="instance('i-search-id')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-id" appearance="minimal"><xf:label> Search by ID </xf:label></xf:submit>
+                                    </div>
                                     <div class="input-group mb-3">
-                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label ref="@name"></xf:label><xf:value ref="@src"></xf:value>
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label value="concat(@name, ' ', @idno)"></xf:label><xf:value ref="@src"></xf:value>
                                           </xf:itemset>
                                        </xf:select1>
                                        <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
@@ -305,15 +314,21 @@
                      </div>
                   </xf:case>
                   <xf:case id="view-admin">
-                     <xf:repeat ref="instance('i-rec')//*:titleStmt/*:editor[@role='creator']">
-                        <div class="input-group mb-3"><xf:input ref="." class="form-control"><xf:label>Your full name: </xf:label><xf:alert>Add your name</xf:alert></xf:input><xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                           </xf:trigger>
-                        </div>
-                        <div class="input-group mb-3"><xf:input ref="@ref" class="form-control"><xf:label>Your identifier (e.g. #msteinschneider): </xf:label></xf:input></div>
+                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add change</xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change" position="before"></xf:insert>
+                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
+                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
+                     </xf:trigger>
+                     <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
+                        <div class="input-group mb-3">
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                           </xf:trigger><xf:input ref="." class="form-control"><xf:label>What did you change? be concise </xf:label></xf:input></div>
+                        <div class="input-group mb-3 indent"><xf:input ref="@who" class="form-control"><xf:label>Add your identifier (e.g. #msteinschneider). Check if you are listed under "Project
+                                 team" in der "Header" menu.</xf:label></xf:input></div>
+                        <div class="input-group mb-3 indent"><xf:input ref="@when" class="form-control small"><xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label></xf:input></div>
+                        <div class="input-group mb-3 indent"><xf:input ref="@ref" class="form-control small"><xf:label>Your identifier (e.g. #msteinschneider): </xf:label></xf:input></div>
                         <hr />
                      </xf:repeat>
-                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add team member</xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
-                     </xf:trigger><br /><div class="input-group mb-3"><xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
+                     <div class="input-group mb-3"><xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
                   </xf:case>
                   <xf:case id="view-data-entry">
                      <xf:group ref="instance('i-rec')">

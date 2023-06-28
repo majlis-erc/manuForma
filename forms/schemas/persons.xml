@@ -78,17 +78,16 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core"
-                        include="bible citedRange ptr title"/>
+                    <moduleRef key="core" include="bible citedRange ptr title"/>
                     <moduleRef key="namesdates"
                         include="persName listPerson person addName forename birth placeName death floruit sex faith occupation residence"/>
                     <moduleRef key="header" include="idno"/>
-                    
+
                     <elementSpec ident="persName" mode="change">
                         <gloss>Name of the person</gloss>
                         <gloss type="tei">&lt;persName&gt;</gloss>
-                        <desc xml:lang="en">You can either create child elements for every component like ism, kunya, etc. into the Additional Name OR
-                            you enter the full form into the Fullname field.</desc>
+                        <desc xml:lang="en">You have two options: 1) Create Additional name fields for every name component, like ism, kunya, etc.,
+                             OR 2) you enter the full name form into the Full name field.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -149,7 +148,7 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="listPerson" mode="change">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -195,8 +194,8 @@ End license statement: do not remove -->
                     <elementSpec ident="addName" mode="change">
                         <gloss>Additional name</gloss>
                         <gloss type="tei">&lt;addName&gt;</gloss>
-                        <desc xml:lang="en">Name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the type
-                            of name from the attribute list.</desc>
+                        <desc xml:lang="en">Enter name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the
+                            type of name from the list on the right side.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -257,9 +256,9 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="name" mode="change">
-                        <gloss>Fullname</gloss>
+                        <gloss>Full name</gloss>
                         <gloss type="tei">&lt;name&gt;</gloss>
-                        <desc xml:lang="en">The full form of a person's name.</desc>
+                        <desc xml:lang="en">Write out the full form of a person's name.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -292,17 +291,17 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
 
-                    
 
-                    
 
-                    
-                    
+
+
+
+
 
                     <elementSpec ident="birth" mode="change">
                         <gloss>Birth</gloss>
                         <gloss type="tei">&lt;birth&gt;</gloss>
-                        <desc xml:lang="en">Provide the date and place of birth in the respective child elements.</desc>
+                        <desc xml:lang="en">Provide the date and place of birth in the fields below.</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -346,8 +345,8 @@ End license statement: do not remove -->
                     <elementSpec ident="date" mode="change">
                         <gloss>Date</gloss>
                         <gloss type="tei">&lt;date&gt;</gloss>
-                        <desc xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "when" attribute for precise values. In
-                            case the date can only be approximated, use the "notAfter "and "notBefore" attributes together.</desc>
+                        <desc xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "When" field for precise values. In case
+                            the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -377,7 +376,7 @@ End license statement: do not remove -->
                     <elementSpec ident="death" mode="change">
                         <gloss>Death</gloss>
                         <gloss type="tei">&lt;death&gt;</gloss>
-                        <desc xml:lang="en">Provide the date and place of death in the respective child elements.</desc>
+                        <desc xml:lang="en">Provide the date and place of death in the fields below.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -396,7 +395,7 @@ End license statement: do not remove -->
                             <attRef name="source" class="att.global.source"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="faith" mode="change">
                         <gloss>Denomination</gloss>
                         <gloss type="tei">&lt;faith&gt;</gloss>
@@ -426,9 +425,8 @@ End license statement: do not remove -->
                     <elementSpec ident="floruit" mode="change">
                         <gloss>Period of activity</gloss>
                         <gloss type="tei">&lt;floruit&gt;</gloss>
-                        <desc xml:lang="en">Specify the period of intellectual activity. Fill in the date in the agreed-upon calendrical system. Use
-                            the "when" attribute for precise values. In case the date can only be approximated, use the "notAfter "and "notBefore"
-                            attributes together.</desc>
+                        <desc xml:lang="en">Fill in the date of the period of intellectual activity. Use the "When" field for precise values. In case
+                            the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -456,6 +454,7 @@ End license statement: do not remove -->
                     <elementSpec ident="idno" mode="change">
                         <gloss>Link</gloss>
                         <gloss type="tei">&lt;idno&gt;</gloss>
+                        <desc>Enter persistent identifiers of external projects for the same person.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -466,7 +465,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="subtype" mode="change">
-                                <valList type="closed" mode="change">
+                                <valList type="ope " mode="change">
                                     <valItem mode="add" ident="isni"/>
                                     <valItem mode="add" ident="viaf"/>
                                     <valItem mode="add" ident="wiki"/>
@@ -480,12 +479,12 @@ End license statement: do not remove -->
                             <attRef name="resp" class="att.global.responsibility"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="occupation" mode="change">
                         <gloss>Professional activity</gloss>
                         <gloss type="tei">&lt;occupation&gt;</gloss>
-                        <desc xml:lang="en">Describe the person's profession. This is NOT the role the person played with regard to the
-                            manuscripts.</desc>
+                        <desc xml:lang="en">Describe the person's profession, i.e. what job did they perform to earn a living? This is NOT the role
+                            the person played with regard to the manuscripts.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -512,15 +511,15 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    
-                    
-                    
+
+
+
                     <elementSpec ident="placeName" mode="change">
                         <gloss>Place</gloss>
                         <gloss type="tei">&lt;placeName&gt;</gloss>
                         <desc xml:lang="en">Look up the place records in the database to specify a settlement or town. Try different spellings in
-                            different languages! If no suitable record exists, create a new one. (The "ref" attribute will be filled out automatically
-                            when you link a place record to this element.)</desc>
+                            different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out
+                            automatically when you link a place record to this element.)</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -547,364 +546,11 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="relation" mode="delete">
-                        <desc xml:lang="en">Specify the relationship between the person and another person or object. Choose the kind of relation from
-                            the list provided in the "name" attributea and add the URIs of the respective records.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <attList>
-                            <attDef ident="mutual" mode="delete"/>
-                            <attDef ident="active" mode="change" usage="opt"/>
-                            <attDef ident="passive" mode="change" usage="opt"/>
-                            <attDef ident="source" mode="change" usage="opt"/>
-                            <attDef ident="name" mode="replace" usage="req">
-                                <valList type="closed">
-                                    <valItem ident="saws:isAttributedToAuthor">
-                                        <desc>@active: Work, @passive: Person. http://purl.org/saws/ontology#isAttributedToAuthor <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AisAttributedToAuthor+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
 
-                                    <valItem ident="dcterms:creator">
-                                        <desc>@active: Work, @passive: Person. http://purl.org/dc/terms/creator <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+dcterms:%3Acreator+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-                                    <valItem ident="syriaca:commemorated">
-                                        <desc>@active: Work, @passive: Person. <ref
-                                                target="http://syriaca.org/documentation/relations.html#commemorated">definition in syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Acommemorated+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:wifeOf">
-                                        <desc>@active: Person, @passive: Person. Is the wife of ... <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AwifeOf+%3Fy%7D+LIMIT+25">Beta
-                                                maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:husbandOf">
-                                        <desc>@active: Person, @passive: Person. Is the husband of.. <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AhusbandOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:motherInLawOf">
-                                        <desc>@active: Person, @passive: Person. Is the mother of the legally conjugated partner. <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AmotherInLawOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:fatherInLawOf">
-                                        <desc>@active: Person, @passive: Person. Is the father of the legally conjugated partner. <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AfatherInLawOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:sonInLawOf">
-                                        <desc>@active: Person, @passive: Person. Is the husband of the daughter. <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AsonInLawOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:daugtherInLawOf">
-                                        <desc>@active: Person, @passive: Person. Is the wife of the son. <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AdaugtherInLawOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:isSuccessorOf">
-                                        <desc>@active: Person, @passive: Person. The subject of the relation is the successor of... <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AisSuccessorOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="betmas:isPredecessorOf">
-                                        <desc>@active: Person, @passive: Person. The subject of the relation is the predecessor of... <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+bm%3AisPredecessorOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="rel:enemyOf">
-                                        <desc>@active: Person, @passive: Person. http://purl.org/vocab/relationship/enemyOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+rel%3AenemyOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="snap:DaughterOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap# <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ADaughterOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="snap:BrotherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#BrotherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ABrotherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="snap:AllianceWith">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#AllianceWith <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AAllianceWith+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="snap:FriendshipFor">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#FriendshipFor <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AFriendshipFor+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:Group">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#Group <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGroup+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:IntimateRelationshipWith">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#IntimateRelationshipWith <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AIntimateRelationshipWith+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:KinOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#KinOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AKinOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:AncestorOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#AncestorOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AAncestorOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:CousinOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#CousinOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ACousinOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:ClaimedFamilyRelationship">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#ClaimedFamilyRelationship <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AClaimedFamilyRelationship+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:FamilyOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#FamilyOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AFamilyOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:FatherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#FatherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AFatherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:GrandchildOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GrandchildOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGrandchildOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:GranddaughterOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GranddaughterOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGranddaughterOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:GrandfatherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GrandfatherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGrandfatherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:GrandmotherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GrandmotherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGrandmotherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-                                    <valItem ident="snap:GrandsonOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GrandsonOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGrandsonOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:GreatGrandfatherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#GreatGrandfatherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AGreatGrandfatherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:HouseholdOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#HouseholdOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AHouseholdOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:InLawFamilyRelationship">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#InLawFamilyRelationship <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AInLawFamilyRelationship+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-
-
-
-
-
-
-
-
-
-
-                                    <valItem ident="snap:MotherOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#MotherOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AMotherOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:NephewOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#NephewOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ANephewOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:NieceOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#NieceOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ANieceOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:ProfessionalRelationship">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#ProfessionalRelationship <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AProfessionalRelationship+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:SisterOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#SisterOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ASisterOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:SonOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#SonOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ASonOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:StepFamilyRelationship">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#StepFamilyRelationship <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AStepFamilyRelationship+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:SiblingOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#SiblingOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3ASiblingOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:StepFamilyRelationship">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#StepFamilyRelationship <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AStepFamilyRelationship+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="snap:UncleOf">
-                                        <desc>@active: Person, @passive: Person. http://data.snapdrgn.net/ontology/snap#UncleOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+snap%3AUncleOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-                                    <valItem ident="saws:hasOwned">
-                                        <desc>@active: Person, @passive: Manuscript. If you can, edit the manuscript record with
-                                            persName[@role='owner'] instead. http://purl.org/saws/ontology#hasOwned <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AhasOwned+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-                                    <valItem ident="saws:isCopierOf">
-                                        <desc>@active: Person, @passive: Manuscript. If you can, edit the manuscript record with
-                                            persName[@role='scribe'] instead. http://purl.org/saws/ontology#isCopierOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AisCopierOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="saws:hasWritten">
-                                        <desc>@active: Person, @passive: Manuscript Part. This is used to state the authorship of a marginal note for
-                                            example. http://purl.org/saws/ontology#hasWritten <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AhasWritten+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-
-                                    <valItem ident="ecrm:P129i_is_subject_of">
-                                        <desc>@active: Person, @passive: Work. http://erlangen-crm.org/current/P129i_is_subject_of <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+ecrm%3AP129i_is_subject_of+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-
-                                    <valItem ident="saws:isAttributedAuthorOf">
-                                        <desc>@active: Person, @passive: Work. http://purl.org/saws/ontology#isAttributedAuthorOf <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+saws%3AisAttributedAuthorOf+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref>
-                                        </desc>
-                                    </valItem>
-                                    <valItem ident="syriaca:share-a-name">
-                                        <desc>@active: Place, @passive: Place. <ref
-                                                target="http://syriaca.org/documentation/relations.html#share-a-name">definition in syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Ashare-a-name+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-
-                                    <valItem ident="syriaca:has-relation-to-place">
-                                        <desc>@active: Person, @passive: Place. <ref
-                                                target="http://syriaca.org/documentation/relations.html#has-relation-to-place">definition in
-                                                syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Ahas-relation-to-place+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="syriaca:has-literary-connection-to-place">
-                                        <desc> @active: Person, @passive: Place. But note the literary specification. <ref
-                                                target="http://syriaca.org/documentation/relations.html#has-literary-connection-to-place">definition
-                                                in syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Ahas-literary-connection-to-place+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="syriaca:born-at">
-                                        <desc>@active: Person, @passive: Place. <ref target="http://syriaca.org/documentation/relations.html#born-at"
-                                                >definition in syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Aborn-at+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                    <valItem ident="syriaca:died-at">
-                                        <desc>@active: Person, @passive: Place. <ref target="http://syriaca.org/documentation/relations.html#died-at"
-                                                >definition in syriaca.org</ref>
-                                            <ref
-                                                target="https://betamasaheft.eu/sparql?query=SELECT+*+WHERE+%7B%3Fx+syriaca%3Adied-at+%3Fy%7D+LIMIT+25"
-                                                >Beta maṣāḥǝft SPARQL query for examples.</ref></desc>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                        </attList>
-
-
-                    </elementSpec>
                     <elementSpec ident="residence" mode="change">
                         <gloss>Place of residence</gloss>
                         <gloss type="tei">&lt;residence&gt;</gloss>
-                        <desc xml:lang="en">Where did the person live?</desc>
+                        <desc xml:lang="en">Enter the information where the person lived in the field below.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -921,10 +567,11 @@ End license statement: do not remove -->
                             <attRef name="source" class="att.global.source"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="sex" mode="change">
                         <gloss>Gender</gloss>
                         <gloss type="tei">&lt;sex&gt;</gloss>
+                        <desc>Choose the gender of the person from the list.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -947,11 +594,11 @@ End license statement: do not remove -->
                             </attRef>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">A bibliographic item, like a monograph, journal article, or manuscript.</desc>
+                        <desc xml:lang="en">Add a bibliographic item, like a monograph, journal article, or manuscript.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -972,10 +619,11 @@ End license statement: do not remove -->
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
+                        <desc>The title to the Zotero should be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -1013,10 +661,11 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
+                        <desc>The link to the Zotero should be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -1040,10 +689,11 @@ End license statement: do not remove -->
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
+                        <desc>Specify which pages, columns, etc. you are refering to.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
