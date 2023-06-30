@@ -51,7 +51,7 @@
     -->
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
-            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
+            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-fulltemplate.xml"/>
@@ -69,12 +69,12 @@
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
-            <formDesc>Add names in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
+            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
-                <group groupLabel="Name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
+                <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
                     <element xpath="tei:persName"/>
                 </group>
                 <group groupLabel="Biographical data." groupNo="2" repeatable="no">
@@ -86,7 +86,7 @@
                     <element xpath="tei:occupation"/>
                     <element xpath="tei:residence"/>
                 </group>
-                <group groupLabel="Enter bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="concat('Bibliographic reference: ',./*:title, ', ',./*:citedRange)" groupNo="3" repeatable="yes">
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="concat('Bibliographic reference: ',./*:title, ', ',./*:citedRange)" groupNo="3" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
                 <group groupLabel="Linked Open Data references." groupNo="4" repeatable="no">
