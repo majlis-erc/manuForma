@@ -25,7 +25,9 @@ End license statement: do not remove --><!--requirements:
     FIRHIST compatibility
     
 
---><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -76,7 +78,7 @@ End license statement: do not remove --><!--requirements:
                 -->
 
                     <moduleRef key="core" include="bibl citedRange listBibl ptr title"/>
-                    
+
                     <elementSpec ident="listBibl" mode="change">
                         <desc xml:lang="en">A list of bibliographic items.</desc>
                         <classes mode="change">
@@ -115,16 +117,41 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="title" minOccurrence="0" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
-                            <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
+                            <elementRef key="citedRange" minOccurrence="0" maxOccurrence="unbounded"/>
+                            <elementRef key="idno" minOccurrence="0" maxOccurrence="unbounded"/>
                         </content>
                     </elementSpec>
-                    
+
+                    <elementSpec ident="idno" mode="change">
+                        <gloss>Sibling manuscript shelfmark</gloss>
+                        <gloss type="tei">&lt;idno/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Specify the shelfmark of a manuscript part that has been bound into the same shelfmark, but is a distinct codicological unit.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="change">
+                                <gloss>Entry type</gloss>
+                                <valList type="closed">
+                                    <valItem ident="sibling-manuscript"/>
+                                </valList>
+                            </attDef>
+                        </attList>
+                        <content>
+                            <textNode/>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
-                        <desc>The title to the Zotero should be filled out automatically.</desc>
+                        <desc>The title to the Zotero record or the sibling manuscript should be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -162,7 +189,7 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
@@ -192,7 +219,7 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
