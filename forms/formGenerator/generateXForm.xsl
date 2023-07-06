@@ -15,7 +15,6 @@
             - eXist-db 
             
         Version: 1.13 Beta
-
         
 
         NOTES: 
@@ -671,7 +670,7 @@
                     
                     <!-- Save record to github -->
                     <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
-                        <xf:resource value="concat('services/submit.xql?type=github&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"/>
+                        <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"/>
                        <xf:action ev:event="xforms-submit-done">
                             <xf:message ref="instance('i-submission')//*:message"/>
                         </xf:action>
@@ -977,7 +976,6 @@
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-admin">
-
                                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
                                         <xf:label><i class="bi bi-plus-circle"/> Add change</xf:label>
                                         <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change" position="before"/>
@@ -987,7 +985,6 @@
                                     <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
                                         <!-- <change who="#" when=""/> -->
                                         <div class="input-group mb-3">
-
                                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
                                                 <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"/></xf:label>
                                                 <xf:delete ev:event="DOMActivate" ref="."/>
@@ -1013,7 +1010,6 @@
                                         </div>
                                         <hr/>
                                     </xf:repeat>
-
                                     <div class="input-group mb-3">
                                         <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
@@ -2114,9 +2110,7 @@
                         <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:controlledValues/*:element/*:valList/*:valItem">
                             <xf:label ref="@ident"/>
                             <xf:value ref="@ident"/>
-
 <!--                            <xf:hint>TEST</xf:hint>-->
-
                         </xf:itemset>
                         <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
                     </xf:select1>
@@ -2195,8 +2189,7 @@
             </xsl:if>
         </div>
     </xsl:template>
-
-  
+    
     <!-- Element Bind rules -->
     <xsl:template name="elementBinds">
         <xsl:param name="subform"/>
@@ -2448,14 +2441,12 @@
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur = 'unbounded' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence = 'unbounded'">100</xsl:when>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur != '' or $parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence != ''">
-
                             <xsl:choose>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccur"/>
                                 </xsl:when>
                                 <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence castable as xs:integer">
                                     <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@maxOccurrence"/>
-
                                 </xsl:when>
                                 <xsl:otherwise>100</xsl:otherwise>
                             </xsl:choose>
@@ -2478,7 +2469,6 @@
                     <xsl:choose>
                         <xsl:when test="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur castable as xs:integer">
                             <xsl:value-of select="$parentElementRules/tei:content/tei:sequence[child::*[@key=$elementName]]/@minOccur"/>
-
                         </xsl:when>
                         <xsl:otherwise>0</xsl:otherwise>
                     </xsl:choose>
