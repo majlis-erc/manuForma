@@ -79,9 +79,95 @@ End license statement: do not remove -->
                 -->
 
 
-                    <moduleRef key="msdescription" include="physDesc"/>
+                    <moduleRef key="msdescription" include="physDesc objectType"/>
                     <moduleRef key="linking" include="ab"/>
-                    <moduleRef key="tei"/>
+                    <moduleRef key="header" include="idno"/>
+                    <moduleRef key="core" include="bibl citedRange listBibl ptr"/>
+
+                    <elementSpec ident="listBibl" mode="change">
+                        <desc xml:lang="en">A list of manuscript joins.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="bibl"/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="bibl" mode="change">
+                        <gloss>Manuscript join</gloss>
+                        <gloss type="tei">&lt;bibl&gt;</gloss>
+                        <desc xml:lang="en">Add a manuscript join.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.docStatus" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="citedRange" minOccurrence="0" maxOccurrence="unbounded"/>
+                            <elementRef key="idno" minOccurrence="1" maxOccurrence="1"/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="idno" mode="change">
+                        <gloss>Manuscript join shelfmark</gloss>
+                        <gloss type="tei">&lt;idno/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Specify the shelfmark of a manuscript section that is part of the same
+                            codicological unit, but has different shelfmark.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="citedRange" mode="change">
+                        <gloss>Referenced section(s)</gloss>
+                        <gloss type="tei">&lt;citedRange&gt;</gloss>
+                        <desc>Specify which folios you are refering to.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="from" mode="delete"/>
+                            <attDef ident="to" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="unit" mode="change">
+                                <gloss>Unit</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem>fols.</valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
 
                     <elementSpec ident="physDesc" module="msdescription" mode="change">
                         <content>
@@ -90,10 +176,6 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="ab" module="linking" mode="change">
-                        <gloss>Choose the type of manuscript</gloss>
-                        <gloss type="tei">&lt;ab&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Add a description of the manuscript's basic codicological definition. Specify,
-                            whether the manuscript was created as a single unit, a composite, or a multiple text manuscript.</desc>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -104,7 +186,7 @@ End license statement: do not remove -->
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
                             <attDef ident="hand" mode="delete"/>
-                            <attDef ident="subtype" mode="change">
+                            <attDef ident="subtype" mode="delete">
                                 <gloss>Type of manuscript</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="single">
@@ -127,7 +209,7 @@ End license statement: do not remove -->
                             <attDef ident="part" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="rend" mode="change">
+                            <attDef ident="rend" mode="delete">
                                 <gloss>Format</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="square">
@@ -151,7 +233,7 @@ End license statement: do not remove -->
                             <attDef ident="sameAs" mode="delete"/>
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="change">
+                            <attDef ident="style" mode="delete">
                                 <gloss>Book form</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="codex">
@@ -169,7 +251,7 @@ End license statement: do not remove -->
                                 </valList>
                             </attDef>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="type" mode="change">
+                            <attDef ident="type" mode="delete">
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="codicologicalDefinition">
                                         <gloss>Codicological definition</gloss>
@@ -182,7 +264,77 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                         <content>
-                            <empty/>
+                            <elementRef key="objectType"/>
+                            <elementRef key="listBibl"/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="objectType" module="msdescription" mode="change">
+                        <gloss>Choose the type of manuscript</gloss>
+                        <gloss type="tei">&lt;objectType&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add a description of the manuscript's basic codicological definition. Specify,
+                            whether the manuscript was created as a single unit, a composite, or a multiple text manuscript.</desc>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="rend" mode="change">
+                                <gloss>Format</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="Square">
+                                        <gloss>Square</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Horizontal rectangle">
+                                        <gloss>Horizontal rectangle</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Vertical rectangle">
+                                        <gloss>Vertical rectangle</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Irregular">
+                                        <gloss>Irregular</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Other">
+                                        <gloss>Other</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="change">
+                                <gloss>Book form</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="Codex">
+                                        <gloss>Codex</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Scroll">
+                                        <gloss>Scroll</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Rotulus">
+                                        <gloss>Rotulus</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Uncertain">
+                                        <gloss>Uncertain</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                        <content>
+                            <textNode/>
                         </content>
                     </elementSpec>
                 </schemaSpec>
