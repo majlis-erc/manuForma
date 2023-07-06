@@ -191,7 +191,24 @@
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Give a basic codicological definition of the book and specify the type and form.</formDesc>
+            <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
+            <elementGroups>
+                <group groupLabel="Codicological definition." groupNo="1" repeatable="no">
+                    <element xpath="tei:objectType"/>
+                </group>
+                <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
+                    <element xpath="tei:listBibl"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Single manuscript"/>
+                        <valItem ident="Composite manuscript"/>
+                        <valItem ident="Multiple text manuscript"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
         
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
@@ -200,7 +217,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of contents" groupNo="1">-->
+                <group groupLabel="Summary of contents" groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
                 <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus,')')" groupNo="2" repeatable="yes">
@@ -227,13 +244,6 @@
                 </group>
             </elementGroups>
             <controlledValuesElements>
-                <element ident="objectType">
-                    <valList type="closed">
-                        <valItem ident="Single manuscript"/>
-                        <valItem ident="Composite manuscript"/>
-                        <valItem ident="Multiple text manuscript"/>
-                    </valList>
-                </element>
                 <element ident="catchwords">
                     <valList type="closed">
                         <valItem ident="No marking "/>

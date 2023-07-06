@@ -59,11 +59,6 @@
       <availableAtts elementName="support"/>
       <childElements>
          <child>
-            <element ident="objectType"
-                     label="Codicological definition"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="p"
                      label="Free text box"
                      minOccurs=""
@@ -92,54 +87,6 @@
          </child>
       </childElements>
    </support>
-   <objectType ident="objectType"
-               elementName="objectType"
-               elementLabel="Codicological definition"
-               path="/*:supportDesc/*:support/*:objectType"
-               currentLevel="3"
-               popup="3"
-               teiElement="&lt;objectType/&gt;">
-      <desc>Specify the type of manuscript (single / composite / multiple text), the format,
-                            and the type of manuscript.</desc>
-      <availableAtts elementName="objectType">
-         <attDef ident="rend" attLabel="rend">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem mode="add" ident="square"> </valItem>
-               <valItem mode="add" ident="horizontalRectangle"> </valItem>
-               <valItem mode="add" ident="verticalRectangle"> </valItem>
-               <valItem mode="add" ident="safina"> </valItem>
-               <valItem mode="add" ident="irregular"> </valItem>
-               <valItem mode="add" ident="other"> </valItem>
-            </valList>
-         </attDef>
-         <attDef ident="style" attLabel="style">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem mode="add" ident="codex"> </valItem>
-               <valItem mode="add" ident="scroll"> </valItem>
-               <valItem mode="add" ident="uncertain"> </valItem>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <controlledValues>
-         <element xmlns="" ident="objectType">
-            <valList type="closed">
-               <valItem ident="Single manuscript"/>
-               <valItem ident="Composite manuscript"/>
-               <valItem ident="Multiple text manuscript"/>
-            </valList>
-         </element>
-      </controlledValues>
-      <childElements>
-         <textNode type="input" class="objectType"/>
-         <child/>
-      </childElements>
-   </objectType>
    <p ident="p"
       elementName="p"
       elementLabel="Free text box"
