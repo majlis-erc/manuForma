@@ -4,7 +4,7 @@ xquery version "3.1";
  : @param $type options view (view xml in new window), download (download xml without saving), 
  : save (save to db, only available to logged in users)
 :)
-import module namespace config="http://localhost/manuForma/config" at "../modules/config.xqm";
+import module namespace config="http://localhost:8080/manuForma/config" at "../modules/config.xqm";
 import module namespace gitcommit="http://syriaca.org/srophe/gitcommit" at "git-commit.xql";
 import module namespace http="http://expath.org/ns/http-client";
 
@@ -238,7 +238,7 @@ let $id := tokenize($uri,'/')[last()]
 let $file-name := 
         if($id != '') then 
             concat($id, '.xml') 
-        else 'form.xml'
+        else 'form.xml'        
 let $eXistCollection := if(request:get-parameter('eXistCollection','') != '') then request:get-parameter('eXistCollection','') else concat($config:app-root,'/data')
 let $github-path := if(request:get-parameter('githubPath','') != '') then request:get-parameter('githubPath','') else 'data/tei/'
 let $github-repo := if(request:get-parameter('githubRepo','') != '') then request:get-parameter('githubRepo','') else 'blogs'
@@ -258,7 +258,10 @@ return
             }
          else if(request:get-parameter('type', '') = 'github') then
             try {
-                let $save := gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name))
+                let $save := 
+                    (gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name)),
+                    xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)
+                    )
                 return
                  <response status="okay" code="200">
                     <message>Record saved to the {$github-repo} GitHub. Thank you for your contribution. {$save}</message>
