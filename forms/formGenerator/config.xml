@@ -182,6 +182,9 @@
                 <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
                     <element xpath="tei:graphic"/>
                 </group>
+                <!--<group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
+                    <element xpath="tei:graphic"/>
+                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
@@ -193,8 +196,8 @@
                 <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*)" groupNo="1" repeatable="no">
                     <element xpath="tei:objectType"/>
                 </group>
-                <group groupLabel="Manuscript join." groupLabelConditionalElement="./*:idno" groupLabelXPath="./*:idno" groupNo="2" repeatable="yes">
-                    <element xpath="tei:listBibl/tei:bibl"/>
+                <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
+                    <element xpath="tei:listBibl"/>
                 </group>
             </elementGroups>
             <controlledValuesElements>
