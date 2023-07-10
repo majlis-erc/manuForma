@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.13 Beta
+        Version: 1.14 Beta
         
 
         NOTES: 
@@ -1180,13 +1180,16 @@
                             </div>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:variable name="repeatID">
+                                <xsl:value-of select="generate-id(.)"/>
+                            </xsl:variable>
                             <xsl:call-template name="xformElementUI">
                                 <xsl:with-param name="subform" select="$subform"/>
                                 <xsl:with-param name="xpath" select="$elementPath"/>
                                 <xsl:with-param name="xpathIndex"><xsl:value-of select="$elementPath"/>[position() = instance('i-repeatIndex')/index]</xsl:with-param>
                                 <xsl:with-param name="currentLevel">1</xsl:with-param>
                                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
-                                <xsl:with-param name="repeatID"/>
+                                <xsl:with-param name="repeatID" select="$repeatID"/>
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>  
