@@ -181,6 +181,9 @@
              elementName="title"
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
+      <desc>Look up the title records in the database to identify the title. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled out automatically
+                            when you link a record to this element.)</desc>
       <availableAtts elementName="title">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -189,12 +192,24 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
+               <valItem mode="add" ident="ar">
+                  <gloss>Arabic</gloss>
+               </valItem>
+               <valItem mode="add" ident="en">
+                  <gloss>English</gloss>
+               </valItem>
+               <valItem mode="add" ident="he">
+                  <gloss>Hebrew</gloss>
+               </valItem>
+               <valItem mode="add" ident="he-Latn">
+                  <gloss>Hebrew in Latin characters</gloss>
+               </valItem>
+               <valItem mode="add" ident="ar-Latn">
+                  <gloss>Arabic in Latin characters</gloss>
+               </valItem>
+               <valItem mode="add" ident="ar-Hebr">
+                  <gloss>Arabic in Latin Hebrew</gloss>
+               </valItem>
             </valList>
          </attDef>
       </availableAtts>
@@ -211,8 +226,7 @@
            popup="3"
            teiElement="&lt;author/&gt;">
       <desc>Look up the person records in the database to identify the author. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
-                            person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
+                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled out automatically
                             when you link a record to this element.)</desc>
       <availableAtts elementName="author"/>
       <childElements>
@@ -245,61 +259,10 @@
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
       <availableAtts elementName="persName"/>
       <childElements>
-         <child>
-            <element ident="forename"
-                     label="persName"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="surname"
-                     label="persName"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="addName"
-                     label="persName"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
+         <textNode type="input" class="persName"/>
+         <child/>
       </childElements>
    </persName>
-   <forename ident="forename"
-             elementName="forename"
-             elementLabel="forename"
-             path="/*:msContents/*:msItem/*:author/*:persName/*:forename"
-             currentLevel="5"
-             popup="5"
-             teiElement="&lt;forename/&gt;">
-      <availableAtts elementName="forename"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </forename>
-   <surname ident="surname"
-            elementName="surname"
-            elementLabel="surname"
-            path="/*:msContents/*:msItem/*:author/*:persName/*:surname"
-            currentLevel="5"
-            popup="5"
-            teiElement="&lt;surname/&gt;">
-      <availableAtts elementName="surname"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </surname>
-   <addName ident="addName"
-            elementName="addName"
-            elementLabel="addName"
-            path="/*:msContents/*:msItem/*:author/*:persName/*:addName"
-            currentLevel="5"
-            popup="5"
-            teiElement="&lt;addName/&gt;">
-      <availableAtts elementName="addName"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </addName>
    <textLang ident="textLang"
              elementName="textLang"
              elementLabel="Text language"
@@ -350,7 +313,9 @@
            currentLevel="3"
            popup="3"
            teiElement="&lt;rubric/&gt;">
-      <desc>Add the words through which a manuscript signals the beginning of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape, or character size.</desc>
+      <desc>Add the words through which a manuscript signals the
+                            beginning of a text. This formula often mentions the author and title and it is set off from the text itself through
+                            color, shape, or character size.</desc>
       <availableAtts elementName="rubric">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -429,7 +394,8 @@
             currentLevel="3"
             popup="3"
             teiElement="&lt;incipit/&gt;">
-      <desc>Add the opening words of the text proper of sufficient length to identify the work with confidence.</desc>
+      <desc>Add the opening words of the text proper of sufficient
+                            length to identify the work with confidence.</desc>
       <availableAtts elementName="incipit">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -508,7 +474,8 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;explicit/&gt;">
-      <desc>Add the closing words of the text proper, exclusive of any rubric or colophon which might follow it.</desc>
+      <desc>Add the closing words of the text proper, exclusive of any
+                            rubric or colophon which might follow it.</desc>
       <availableAtts elementName="explicit">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -587,7 +554,9 @@
                 currentLevel="3"
                 popup="3"
                 teiElement="&lt;finalRubric/&gt;">
-      <desc>Add the statement through which a manuscript signals the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual device.</desc>
+      <desc>Add the statement through which a manuscript signals
+                            the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
+                            device.</desc>
       <availableAtts elementName="finalRubric">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"

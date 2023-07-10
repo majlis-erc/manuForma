@@ -205,8 +205,7 @@ End license statement: do not remove -->
                         <gloss>Author</gloss>
                         <gloss type="tei">&lt;author/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the author. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
-                            person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
+                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled out automatically
                             when you link a record to this element.)</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
@@ -259,6 +258,9 @@ End license statement: do not remove -->
                     <elementSpec ident="title" mode="change">
                         <gloss>*Title</gloss>
                         <gloss type="tei">&lt;title/&gt;</gloss>
+                        <desc>Look up the title records in the database to identify the title. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled out automatically
+                            when you link a record to this element.)</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -273,12 +275,12 @@ End license statement: do not remove -->
                             <attDef ident="xml:lang" mode="change">
                                 <gloss>Language</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"/>
-                                    <valItem mode="add" ident="en"/>
-                                    <valItem mode="add" ident="he"/>
-                                    <valItem mode="add" ident="he-Latn"/>
-                                    <valItem mode="add" ident="ar-Latn"/>
-                                    <valItem mode="add" ident="ar-Hebr"/>
+                                    <valItem mode="add" ident="ar"><gloss>Arabic</gloss></valItem>
+                                    <valItem mode="add" ident="en"><gloss>English</gloss></valItem>
+                                    <valItem mode="add" ident="he"><gloss>Hebrew</gloss></valItem>
+                                    <valItem mode="add" ident="he-Latn"><gloss>Hebrew in Latin characters</gloss></valItem>
+                                    <valItem mode="add" ident="ar-Latn"><gloss>Arabic in Latin characters</gloss></valItem>
+                                    <valItem mode="add" ident="ar-Hebr"><gloss>Arabic in Latin Hebrew</gloss></valItem>
                                 </valList>
                             </attDef>
                             <attDef name="ref" mode="change">
@@ -387,11 +389,7 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <sequence>
-                                <elementRef key="forename" minOccurs="0" maxOccurs="1"/>
-                                <elementRef key="surname" minOccurs="0" maxOccurs="1"/>
-                                <elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/>
-                            </sequence>
+                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
@@ -406,7 +404,9 @@ End license statement: do not remove -->
                     <elementSpec ident="rubric" mode="change">
                         <gloss>Rubric</gloss>
                         <gloss type="tei">&lt;rubric/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="rubric.desc" xml:lang="en">Add the words through which a manuscript signals the beginning of a text. This formula often mentions the author and title and it is set off from the text itself through color, shape, or character size.</desc>
+                        <desc versionDate="2022-05-27" xml:id="rubric.desc" xml:lang="en">Add the words through which a manuscript signals the
+                            beginning of a text. This formula often mentions the author and title and it is set off from the text itself through
+                            color, shape, or character size.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -456,7 +456,8 @@ End license statement: do not remove -->
                     <elementSpec ident="incipit" mode="change">
                         <gloss>Incipit</gloss>
                         <gloss type="tei">&lt;incipit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">Add the opening words of the text proper of sufficient length to identify the work with confidence.</desc>
+                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">Add the opening words of the text proper of sufficient
+                            length to identify the work with confidence.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -485,7 +486,8 @@ End license statement: do not remove -->
                     <elementSpec ident="explicit" mode="change">
                         <gloss>Explicit</gloss>
                         <gloss type="tei">&lt;explicit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">Add the closing words of the text proper, exclusive of any rubric or colophon which might follow it.</desc>
+                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">Add the closing words of the text proper, exclusive of any
+                            rubric or colophon which might follow it.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -514,7 +516,9 @@ End license statement: do not remove -->
                     <elementSpec ident="finalRubric" mode="change">
                         <gloss>Final rubric</gloss>
                         <gloss type="tei">&lt;finalRubric/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="finalrubric.desc" xml:lang="en">Add the statement through which a manuscript signals the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual device.</desc>
+                        <desc versionDate="2022-05-27" xml:id="finalrubric.desc" xml:lang="en">Add the statement through which a manuscript signals
+                            the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
+                            device.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
