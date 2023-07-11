@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.15 Beta
+        Version: 1.16 Beta
         
 
         NOTES: 
@@ -2220,14 +2220,17 @@
                             <xsl:choose>
                                 <xsl:when test="@minOccurs != '' and @maxOccurs != ''">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="(count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}) and (count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}) "/>
                                 </xsl:when>
                                 <xsl:when test="@minOccurs != '' and (not(@maxOccurs) or @maxOccurs='')">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}"/>
                                 </xsl:when>
                                 <xsl:when test="@maxOccurs != '' and (not(@minOccurs) or @minOccurs='')">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
+                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}"/>
                                 </xsl:when>
                             </xsl:choose>
