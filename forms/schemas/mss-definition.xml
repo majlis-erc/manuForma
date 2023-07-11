@@ -123,9 +123,9 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="unbounded"/>
                             <elementRef key="citedRange" minOccurrence="0" maxOccurrence="unbounded"/>
-                            <elementRef key="idno" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="idno" minOccurrence="1" maxOccurrence="unbounded"/>
                         </content>
                     </elementSpec>
 
@@ -143,6 +143,36 @@ End license statement: do not remove -->
                         <content>
                             <textNode/>
                         </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="ptr" mode="change">
+                        <gloss>Link to manuscript record</gloss>
+                        <gloss type="tei">&lt;ptr&gt;</gloss>
+                        <desc>The link to the manuscript should be filled out automatically.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.internetMedia" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <empty/>
+                        </content>
+                        <attList>
+                            <attDef ident="target" mode="change">
+                                <gloss>Link</gloss>
+                            </attDef>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                        </attList>
                     </elementSpec>
 
                     <elementSpec ident="citedRange" mode="change">

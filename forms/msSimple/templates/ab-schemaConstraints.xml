@@ -139,10 +139,10 @@
       <childElements>
          <child>
             <element ident="ptr"
-                     label="bibl"
+                     label="Link to manuscript record"
                      minOccurs="1"
-                     maxOccurs="1"
-                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 1 time(s).&#xA;                                    "/>
+                     maxOccurs="100"
+                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 100 time(s).&#xA;                                    "/>
             <element ident="citedRange"
                      label="Referenced section(s)"
                      minOccurs="0"
@@ -151,19 +151,25 @@
             <element ident="idno"
                      label="Manuscript join shelfmark"
                      minOccurs="1"
-                     maxOccurs="1"
-                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 1 time(s).&#xA;                                    "/>
+                     maxOccurs="100"
+                     errorMessage="&#xA;                                        Element must occur at least 1 time(s) and no more than 100 time(s).&#xA;                                    "/>
          </child>
       </childElements>
    </bibl>
    <ptr ident="ptr"
         elementName="ptr"
-        elementLabel="ptr"
+        elementLabel="Link to manuscript record"
         path="/*:ab/*:listBibl/*:bibl/*:ptr"
         currentLevel="4"
         popup="4"
         teiElement="&lt;ptr/&gt;">
-      <availableAtts elementName="ptr"/>
+      <desc>The link to the manuscript should be filled out automatically.</desc>
+      <availableAtts elementName="ptr">
+         <attDef ident="target" attLabel="Link">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Link</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child/>
       </childElements>
