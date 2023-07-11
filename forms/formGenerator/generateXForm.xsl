@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.14 Beta
+        Version: 1.15 Beta
         
 
         NOTES: 
@@ -1935,15 +1935,15 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$repeatID}LookupHide" style="display:none;"/>
-                        <xf:case id="{$repeatID}LookupUnHide">
+                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$grpRepeatID}LookupUnHide">
                             <div class="lookupDisplay">
-                                <xf:group id="{$repeatID}subformLookup"/>
+                                <xf:group id="{$grpRepeatID}subformLookup"/>
                                 <div class="text-right">
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x-circle"/> Close</xf:label>
-                                        <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$repeatID}subformLookup"/>
+                                        <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
+                                        <xf:unload targetid="{$grpRepeatID}subformLookup"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
