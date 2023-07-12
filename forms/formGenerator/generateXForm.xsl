@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.16 Beta
+        Version: 1.17 Beta
         
 
         NOTES: 
@@ -2214,23 +2214,21 @@
                 </xsl:for-each>
                 -->
                 <!-- get other child elements -->
+                <!-- relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"   causes issues see: https://github.com/majlis-erc/manuForma/issues/179 -->
                 <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
                     <xsl:for-each-group select=".//*:childElements//*:element[not(@classRef = 'true')]" group-by="@ident">
                         <xsl:variable name="elementPath" select="concat(replace(replace($xpath,'tei:','*:'),'///','//'),'//*:',@ident)"/>
                             <xsl:choose>
                                 <xsl:when test="@minOccurs != '' and @maxOccurs != ''">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
-                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="(count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}) and (count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}) "/>
                                 </xsl:when>
                                 <xsl:when test="@minOccurs != '' and (not(@maxOccurs) or @maxOccurs='')">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
-                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="count(instance('i-rec'){$elementPath}) &gt;= {@minOccurs}"/>
                                 </xsl:when>
                                 <xsl:when test="@maxOccurs != '' and (not(@minOccurs) or @minOccurs='')">
                                     <xf:bind id="elementRules{@ident}" nodeset="instance('i-rec'){$elementPath}" 
-                                        relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"
                                         constraint="count(instance('i-rec'){$elementPath}) &lt;= {@maxOccurs}"/>
                                 </xsl:when>
                             </xsl:choose>
