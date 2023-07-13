@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.18 Beta
+        Version: 1.19 Beta
         
 
         NOTES: 
@@ -1918,8 +1918,8 @@
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
+                            <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
                         </xf:action>
