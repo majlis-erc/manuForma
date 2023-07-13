@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.17 Beta
+        Version: 1.20 Beta
         
 
         NOTES: 
@@ -60,22 +60,20 @@
         <xsl:variable name="localSchemaDoc" select="document($configDoc//subform[@formName = $subform]/localSchema/@src)"/>
         <xsl:variable name="globalSchemaDoc" select="document($configDoc//subform[@formName = $subform]/globalSchema/@src)"/>
         <rules xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:choose>
-                <xsl:when test="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                <xsl:if test="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                     <local>
                         <xsl:for-each select="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                             <xsl:copy-of select="."/>
                         </xsl:for-each>
                     </local> 
-                </xsl:when>
-                <xsl:when test="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                </xsl:if>
+                <xsl:if test="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                     <global>
                         <xsl:for-each select="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                             <xsl:copy-of select="."/>
                         </xsl:for-each>
                     </global>
-                </xsl:when>
-            </xsl:choose>
+                </xsl:if>
         </rules>
     </xsl:function>
     
@@ -759,7 +757,7 @@
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
                                    Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"/>
-                                    <xf:output value="concat('URI: [',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
+                                    <xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
                                 </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
@@ -1779,7 +1777,7 @@
                         <!-- If controlled attribute values in schemaConstraints file -->
                         <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                             <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                <xf:label ref="@ident"/>
+                                <xf:label ref="@attLabel"/>
                                 <xf:value ref="@ident"/>
                             </xf:itemset>
                         </xf:select1>
@@ -1920,8 +1918,8 @@
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
+                            <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
                         </xf:action>
@@ -2137,7 +2135,7 @@
                                 <!-- If controlled attribute values in schemaConstraints file -->
                                 <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                     <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                        <xf:label ref="@ident"/>
+                                        <xf:label ref="@attLabel"/>
                                         <xf:value ref="@ident"/>
                                     </xf:itemset>
                                 </xf:select1>
@@ -2202,7 +2200,8 @@
         <xsl:param name="maxLevel"/>
         <xsl:param name="schemaConstraints"/>
         <xsl:param name="elementName"/>
-        <xsl:for-each select="$schemaConstraints/child::*/child::*">
+<!--        <xsl:for-each select="$schemaConstraints/child::*/child::*">-->
+            
                 <!--
                 <xsl:if test="$minOccur castable as xs:integer">
                     <xsl:if test="xs:integer($minOccur) &gt; 0">
@@ -2215,7 +2214,8 @@
                 -->
                 <!-- get other child elements -->
                 <!-- relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"   causes issues see: https://github.com/majlis-erc/manuForma/issues/179 -->
-                <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
+            <!--    
+            <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
                     <xsl:for-each-group select=".//*:childElements//*:element[not(@classRef = 'true')]" group-by="@ident">
                         <xsl:variable name="elementPath" select="concat(replace(replace($xpath,'tei:','*:'),'///','//'),'//*:',@ident)"/>
                             <xsl:choose>
@@ -2234,7 +2234,8 @@
                             </xsl:choose>
                     </xsl:for-each-group>
                 </xsl:if>
-        </xsl:for-each>
+                -->
+        <!--</xsl:for-each>-->
     </xsl:template>
     
     <!-- Shared navbar -->
@@ -2585,7 +2586,39 @@
                                 <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
-                        <xsl:copy-of select="child::*"></xsl:copy-of>
+                        <xsl:copy-of select="*:gloss"/>
+                        <xsl:if test="*:valList">
+                            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                                type="{*:valList/@type}"
+                                mode="{*:valList/@mode}">
+                                <xsl:for-each select="descendant::*:valItem">
+                                    <valItem ident="{@ident}" xmlns="http://www.tei-c.org/ns/1.0">
+                                        <xsl:attribute name="attLabel">
+                                            <xsl:choose>
+                                                <xsl:when test="$formLang != ''">
+                                                    <xsl:choose>
+                                                        <xsl:when test="*:gloss[@xml:lang = $formLang]">
+                                                            <xsl:value-of select="*:gloss[@xml:lang = $formLang][1]"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="*:gloss[@xml:lang = 'en']">
+                                                            <xsl:value-of select="*:gloss[@xml:lang = 'en'][1]"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="*:gloss[. != '']"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                                        <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                                        <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:when>
+                                                <xsl:when test="*:gloss/text()"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                                <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                                <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:attribute>
+                                    </valItem>
+                                </xsl:for-each>
+                            </valList>
+                        </xsl:if>
+<!--                        <xsl:copy-of select="child::*"></xsl:copy-of>-->
                     </attDef>
                 </xsl:for-each-group>
             </availableAtts>
