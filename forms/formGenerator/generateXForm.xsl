@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.17 Beta
+        Version: 1.18 Beta
         
 
         NOTES: 
@@ -60,22 +60,20 @@
         <xsl:variable name="localSchemaDoc" select="document($configDoc//subform[@formName = $subform]/localSchema/@src)"/>
         <xsl:variable name="globalSchemaDoc" select="document($configDoc//subform[@formName = $subform]/globalSchema/@src)"/>
         <rules xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:choose>
-                <xsl:when test="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                <xsl:if test="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                     <local>
                         <xsl:for-each select="$localSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                             <xsl:copy-of select="."/>
                         </xsl:for-each>
                     </local> 
-                </xsl:when>
-                <xsl:when test="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
+                </xsl:if>
+                <xsl:if test="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                     <global>
                         <xsl:for-each select="$globalSchemaDoc//descendant-or-self::tei:elementSpec[@ident = $elementName]">
                             <xsl:copy-of select="."/>
                         </xsl:for-each>
                     </global>
-                </xsl:when>
-            </xsl:choose>
+                </xsl:if>
         </rules>
     </xsl:function>
     
@@ -759,7 +757,7 @@
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
                                    Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"/>
-                                    <xf:output value="concat('URI: [',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
+                                    <xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
                                 </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
