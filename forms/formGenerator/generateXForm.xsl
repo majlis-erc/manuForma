@@ -2200,7 +2200,8 @@
         <xsl:param name="maxLevel"/>
         <xsl:param name="schemaConstraints"/>
         <xsl:param name="elementName"/>
-        <xsl:for-each select="$schemaConstraints/child::*/child::*">
+<!--        <xsl:for-each select="$schemaConstraints/child::*/child::*">-->
+            
                 <!--
                 <xsl:if test="$minOccur castable as xs:integer">
                     <xsl:if test="xs:integer($minOccur) &gt; 0">
@@ -2234,7 +2235,7 @@
                     </xsl:for-each-group>
                 </xsl:if>
                 -->
-        </xsl:for-each>
+        <!--</xsl:for-each>-->
     </xsl:template>
     
     <!-- Shared navbar -->
