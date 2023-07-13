@@ -2213,7 +2213,8 @@
                 -->
                 <!-- get other child elements -->
                 <!-- relevant="instance('i-subforms')/subform[@formName='{$subform/@formName}'] = 'true'"   causes issues see: https://github.com/majlis-erc/manuForma/issues/179 -->
-                <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
+            <!--    
+            <xsl:if test=".//*:childElements//*:element[not(@classRef = 'true')]">
                     <xsl:for-each-group select=".//*:childElements//*:element[not(@classRef = 'true')]" group-by="@ident">
                         <xsl:variable name="elementPath" select="concat(replace(replace($xpath,'tei:','*:'),'///','//'),'//*:',@ident)"/>
                             <xsl:choose>
@@ -2232,6 +2233,7 @@
                             </xsl:choose>
                     </xsl:for-each-group>
                 </xsl:if>
+                -->
         </xsl:for-each>
     </xsl:template>
     
