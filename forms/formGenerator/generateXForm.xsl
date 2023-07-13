@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.19 Beta
+        Version: 1.20 Beta
         
 
         NOTES: 
@@ -1777,7 +1777,7 @@
                         <!-- If controlled attribute values in schemaConstraints file -->
                         <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                             <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                <xf:label ref="@ident"/>
+                                <xf:label ref="@attLabel"/>
                                 <xf:value ref="@ident"/>
                             </xf:itemset>
                         </xf:select1>
@@ -2135,7 +2135,7 @@
                                 <!-- If controlled attribute values in schemaConstraints file -->
                                 <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                     <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                        <xf:label ref="@ident"/>
+                                        <xf:label ref="@attLabel"/>
                                         <xf:value ref="@ident"/>
                                     </xf:itemset>
                                 </xf:select1>
@@ -2586,7 +2586,39 @@
                                 <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
-                        <xsl:copy-of select="child::*"></xsl:copy-of>
+                        <xsl:copy-of select="*:gloss"/>
+                        <xsl:if test="*:valList">
+                            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                                type="{*:valList/@type}"
+                                mode="{*:valList/@mode}">
+                                <xsl:for-each select="descendant::*:valItem">
+                                    <valItem ident="{@ident}" xmlns="http://www.tei-c.org/ns/1.0">
+                                        <xsl:attribute name="attLabel">
+                                            <xsl:choose>
+                                                <xsl:when test="$formLang != ''">
+                                                    <xsl:choose>
+                                                        <xsl:when test="*:gloss[@xml:lang = $formLang]">
+                                                            <xsl:value-of select="*:gloss[@xml:lang = $formLang][1]"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="*:gloss[@xml:lang = 'en']">
+                                                            <xsl:value-of select="*:gloss[@xml:lang = 'en'][1]"/>
+                                                        </xsl:when>
+                                                        <xsl:when test="*:gloss[. != '']"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                                        <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                                        <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:when>
+                                                <xsl:when test="*:gloss/text()"><xsl:value-of select="*:gloss[1]"/></xsl:when>
+                                                <xsl:when test="contains(@ident,':')"><xsl:value-of select="substring-after(@ident,':')"/></xsl:when>
+                                                <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:attribute>
+                                    </valItem>
+                                </xsl:for-each>
+                            </valList>
+                        </xsl:if>
+<!--                        <xsl:copy-of select="child::*"></xsl:copy-of>-->
                     </attDef>
                 </xsl:for-each-group>
             </availableAtts>
