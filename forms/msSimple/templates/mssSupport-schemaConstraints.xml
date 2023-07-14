@@ -148,13 +148,27 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
                      mode="">
-               <valItem ident="perg" attLabel="perg"/>
-               <valItem ident="chart" attLabel="chart"/>
-               <valItem ident="papyrus" attLabel="papyrus"/>
-               <valItem ident="palm" attLabel="palm"/>
-               <valItem ident="mixed" attLabel="mixed"/>
-               <valItem ident="other" attLabel="other"/>
-               <valItem ident="unknown" attLabel="unknown"/>
+               <valItem ident="perg"
+                        attLabel="perg"
+                        desc="The object is composed of parchment or vellum"/>
+               <valItem ident="chart"
+                        attLabel="chart"
+                        desc="The object is composed of any kind of paper. Give more details, &#xA;                                        if any, in a child support element."/>
+               <valItem ident="papyrus"
+                        attLabel="papyrus"
+                        desc="The object is composed of papyrus."/>
+               <valItem ident="palm"
+                        attLabel="palm"
+                        desc="The object is composed of palm leaves."/>
+               <valItem ident="mixed"
+                        attLabel="mixed"
+                        desc="The object is composed of a combination of paper and&#xA;                                        parchment. The nature of the combination should be&#xA;                                        specified in the support element."/>
+               <valItem ident="other"
+                        attLabel="other"
+                        desc="The object is composed of another material (e.g.&#xA;                                        wood)."/>
+               <valItem ident="unknown"
+                        attLabel="unknown"
+                        desc="The material of which is object is composed is not&#xA;                                        known."/>
             </valList>
          </attDef>
          <attDef ident="n" attLabel="number">
@@ -393,8 +407,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="default" attLabel="default"/>
-               <valItem ident="preserve" attLabel="preserve"/>
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -496,19 +514,13 @@
       <controlledValues>
          <element xmlns="" ident="material">
             <valList type="closed">
-               <valItem ident="Wood"/>
+               <valItem ident="Paper"/>
+               <valItem ident="Parchment"/>
                <valItem ident="Papyrus"/>
                <valItem ident="Cardboard"/>
                <valItem ident="Leather"/>
-               <valItem ident="Metal"/>
-               <valItem ident="Paper"/>
                <valItem ident="Textile"/>
                <valItem ident="Other"/>
-               <valItem ident="Parchment"/>
-               <valItem ident="Silk"/>
-               <valItem ident="Stone"/>
-               <valItem ident="Bronze"/>
-               <valItem ident="Alabaster"/>
                <valItem ident="Cotton"/>
             </valList>
          </element>
@@ -890,8 +902,12 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="default" attLabel="default"/>
-               <valItem ident="preserve" attLabel="preserve"/>
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -947,9 +963,15 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
                      mode="">
-               <valItem ident="internal" attLabel="internal"/>
-               <valItem ident="external" attLabel="external"/>
-               <valItem ident="conjecture" attLabel="conjecture"/>
+               <valItem ident="internal"
+                        attLabel="internal"
+                        desc="there is internal evidence to support the intervention. 간섭을 지지하는 내부 증거가 있다. 有內部證明得以支持 当該調整を判断する内部証拠を示す． l'intervention est justifiée par une preuve&#xA;            interne existen pruebas internas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
+               <valItem ident="external"
+                        attLabel="external"
+                        desc="there is external evidence to support the intervention. 간섭을 지지하는 외부 증거가 있다. 有外部證明得以支持 当該調整を判断する外部証拠を示す． l'intervention est justifiée par une preuve&#xA;            externe existen pruebas externas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
+               <valItem ident="conjecture"
+                        attLabel="conjecture"
+                        desc="the intervention or interpretation has been made by the editor, cataloguer, or&#xA;            scholar on the basis of their expertise. 간섭 또는 해석이 편집자, 또는 전문성에 근거한 학자에 의해 수행되었다. 編輯、編目者或學者根據自身的專業來執行該更動或詮釋。 編集者，カタログ作成者，研究者による解釈や調整． l'intervention ou l'interprétation a été faite&#xA;            par le rédacteur, le catalogueur, ou le chercheur sur la base de leur expertise. la intervención o interpretación ha sido hecho&#xA;            por el editor, catalogador o crítico en base a su experiencia. l'intervento o interpretazione è stata effettuata&#xA;            dal curatore, catalogatore o critico in base alla loro esperienza"/>
             </valList>
          </attDef>
          <attDef ident="from-custom" attLabel="from-custom"/>
@@ -1081,7 +1103,6 @@ watermark or similar device.</desc>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="origDate"/>
          <child/>
       </childElements>
    </origDate>
@@ -1126,7 +1147,7 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="leaf" attLabel="leaf"/>
+               <valItem ident="leaf" attLabel="leaf" desc="used for leafs."/>
             </valList>
          </attDef>
       </availableAtts>

@@ -757,7 +757,7 @@
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
                                    Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"/>
-                                    <xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
+                                    <xf:output value="concat('URI: [',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"/>
                                 </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
@@ -988,7 +988,7 @@
                                                 <xf:delete ev:event="DOMActivate" ref="."/>
                                             </xf:trigger>
                                             <xf:input ref="." class="form-control">
-                                                <xf:label>What did you change? be concise </xf:label>
+                                                <xf:label>What did you change? Be concise </xf:label>
                                             </xf:input>
                                         </div>
                                         <div class="input-group mb-3 indent">    
