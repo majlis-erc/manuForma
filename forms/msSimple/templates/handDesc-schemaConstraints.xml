@@ -10,14 +10,79 @@
      xmlns:local="http://syriaca.org/ns">
    <physDesc ident="physDesc"
              elementName="physDesc"
-             elementLabel="physDesc"
+             elementLabel="physical description"
              path="/*:physDesc"
              currentLevel="1"
              popup="1"
              teiElement="&lt;physDesc/&gt;">
       <desc>This element contains descriptions of the codicological
                             and paleographic features of a manuscript. </desc>
-      <availableAtts elementName="physDesc"/>
+      <availableAtts elementName="physDesc">
+         <attDef ident="n" attLabel="number">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">number</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">수</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">número</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">nombre</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">numero</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">数値</gloss>
+         </attDef>
+         <attDef ident="resp" attLabel="responsible party">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-11-02"
+                   xml:lang="en">responsible party</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">책임 당사자</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">parte responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">responsabile</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-09-16"
+                   xml:lang="ja">責任者</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="handDesc"
@@ -41,7 +106,20 @@
              popup="2"
              teiElement="&lt;handDesc/&gt;">
       <desc>For every script you encounter, create a distinct entry hand to describe it.</desc>
-      <availableAtts elementName="handDesc"/>
+      <availableAtts elementName="handDesc">
+         <attDef ident="hands" attLabel="hands">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2007-06-12">hands</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">mains</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="summary"
@@ -89,15 +167,30 @@
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Medium</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="brown"/>
-               <valItem ident="black"/>
-               <valItem ident="pigments"/>
-               <valItem ident="mixed"/>
-               <valItem ident="plantBased"/>
-               <valItem ident="unidentified"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="brown" attLabel="brown"/>
+               <valItem ident="black" attLabel="black"/>
+               <valItem ident="pigments" attLabel="pigments"/>
+               <valItem ident="mixed" attLabel="mixed"/>
+               <valItem ident="plantBased" attLabel="plantBased"/>
+               <valItem ident="unidentified" attLabel="unidentified"/>
             </valList>
          </attDef>
+         <attDef ident="scope" attLabel="scope">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="sole" attLabel="sole"/>
+               <valItem ident="major" attLabel="major"/>
+               <valItem ident="minor" attLabel="minor"/>
+            </valList>
+         </attDef>
+         <attDef ident="scribe" attLabel="scribe"/>
+         <attDef ident="scribeRef" attLabel="scribeRef"/>
+         <attDef ident="scriptRef" attLabel="scriptRef"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
@@ -179,16 +272,13 @@
          <attDef ident="role" attLabel="Role">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Role</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="scribe"/>
-               <valItem ident="vocalizer"/>
-               <valItem ident="masorator"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="scribe" attLabel="scribe"/>
+               <valItem ident="vocalizer" attLabel="vocalizer"/>
+               <valItem ident="masorator" attLabel="masorator"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -223,6 +313,17 @@
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
          </attDef>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="">
+               <valItem ident="normalized" attLabel="normalized"/>
+               <valItem ident="library" attLabel="library"/>
+               <valItem ident="academicInstitution" attLabel="academicInstitution"/>
+               <valItem ident="museum" attLabel="museum"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="placeName"/>
@@ -246,8 +347,8 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="vocalization"/>
-               <valItem mode="add" ident="recitation"/>
+               <valItem ident="vocalization" attLabel="vocalization"/>
+               <valItem ident="recitation" attLabel="recitation"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -340,57 +441,61 @@
          <attDef ident="rend" attLabel="Script quality">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script quality</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef name="string"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="unidentified"/>
-               <valItem ident="untrained"/>
-               <valItem ident="careless"/>
-               <valItem ident="current"/>
-               <valItem ident="calligraphic"/>
-               <valItem ident="monumental"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="unidentified" attLabel="unidentified"/>
+               <valItem ident="untrained" attLabel="untrained"/>
+               <valItem ident="careless" attLabel="careless"/>
+               <valItem ident="current" attLabel="current"/>
+               <valItem ident="calligraphic" attLabel="calligraphic"/>
+               <valItem ident="monumental" attLabel="monumental"/>
             </valList>
          </attDef>
+         <attDef ident="scope" attLabel="scope">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="sole" attLabel="sole"/>
+               <valItem ident="major" attLabel="major"/>
+               <valItem ident="minor" attLabel="minor"/>
+            </valList>
+         </attDef>
+         <attDef ident="scribe" attLabel="scribe"/>
+         <attDef ident="scribeRef" attLabel="scribeRef"/>
          <attDef ident="script" attLabel="Script type">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script type</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef key="teidata.name"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="oriental"/>
-               <valItem ident="yemenite"/>
-               <valItem ident="sephardi"/>
-               <valItem ident="byzantine"/>
-               <valItem ident="italian"/>
-               <valItem ident="ashkenazi"/>
-               <valItem ident="unidentified"/>
-               <valItem ident="abbasidBookHand"/>
-               <valItem ident="newStyle"/>
-               <valItem ident="naskh"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="oriental" attLabel="oriental"/>
+               <valItem ident="yemenite" attLabel="yemenite"/>
+               <valItem ident="sephardi" attLabel="sephardi"/>
+               <valItem ident="byzantine" attLabel="byzantine"/>
+               <valItem ident="italian" attLabel="italian"/>
+               <valItem ident="ashkenazi" attLabel="ashkenazi"/>
+               <valItem ident="unidentified" attLabel="unidentified"/>
+               <valItem ident="abbasidBookHand" attLabel="abbasidBookHand"/>
+               <valItem ident="newStyle" attLabel="newStyle"/>
+               <valItem ident="naskh" attLabel="naskh"/>
             </valList>
          </attDef>
+         <attDef ident="scriptRef" attLabel="scriptRef"/>
          <attDef ident="style" attLabel="Script mode">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script mode</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef name="string"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="square"/>
-               <valItem ident="nonSquare"/>
-               <valItem ident="cursive"/>
-               <valItem ident="unidentified"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="square" attLabel="square"/>
+               <valItem ident="nonSquare" attLabel="nonSquare"/>
+               <valItem ident="cursive" attLabel="cursive"/>
+               <valItem ident="unidentified" attLabel="unidentified"/>
             </valList>
          </attDef>
       </availableAtts>

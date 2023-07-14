@@ -16,7 +16,30 @@
          popup="1"
          teiElement="&lt;list/&gt;">
       <desc>A sequence of bullet points ("item") organized as a list.</desc>
-      <availableAtts elementName="list"/>
+      <availableAtts elementName="list">
+         <attDef ident="type" attLabel="type">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2017-06-25">type</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2017-06-25"
+                   xml:lang="de">Typ</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="gloss" attLabel="gloss"/>
+               <valItem ident="index" attLabel="index"/>
+               <valItem ident="instructions" attLabel="instructions"/>
+               <valItem ident="litany" attLabel="litany"/>
+               <valItem ident="syllogism" attLabel="syllogism"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="item"
@@ -41,19 +64,12 @@
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Responsible team member</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open">
-               <valItem ident="rvollandt">
-                  <gloss>Ronny Vollandt</gloss>
-               </valItem>
-               <valItem ident="gschwarb">
-                  <gloss>Gregor Schwarb</gloss>
-               </valItem>
-               <valItem ident="lgzella">
-                  <gloss>Lea Gzella</gloss>
-               </valItem>
-               <valItem ident="mmoliere">
-                  <gloss>Maximilian de Molière</gloss>
-               </valItem>
+                     type="open"
+                     mode="">
+               <valItem ident="rvollandt" attLabel="Ronny Vollandt"/>
+               <valItem ident="gschwarb" attLabel="Gregor Schwarb"/>
+               <valItem ident="lgzella" attLabel="Lea Gzella"/>
+               <valItem ident="mmoliere" attLabel="Maximilian de Molière"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -126,7 +142,7 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="author"/>
+               <valItem ident="author" attLabel="author"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -164,8 +180,28 @@
               formName="bibl"
               lookupLabel="Look up bibliographic record"/>
       <desc>Add bibliographic item, like a monograph, journal article, or manuscript.</desc>
-      <availableAtts elementName="bibl"/>
+      <availableAtts elementName="bibl">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="replace">
+               <valItem ident="MS" attLabel="MS"/>
+               <valItem ident="QUARTO" attLabel="QUARTO"/>
+               <valItem ident="SC" attLabel="SC"/>
+               <valItem ident="OC" attLabel="OC"/>
+               <valItem ident="bible" attLabel="bible"/>
+               <valItem ident="commentary" attLabel="commentary"/>
+               <valItem ident="edition" attLabel="edition"/>
+               <valItem ident="extract" attLabel="extract"/>
+               <valItem ident="related" attLabel="related"/>
+               <valItem ident="text-relations" attLabel="text-relations"/>
+               <valItem ident="translation" attLabel="translation"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
+         <textNode type="input" class="bibl"/>
          <child>
             <element ident="title"
                      label="Title of publication"
@@ -203,7 +239,7 @@
              elementName="title"
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
-      <desc>The title to the Zotero should be filled out automatically.</desc>
+      <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title"/>
       <childElements>
          <textNode type="input" class="title"/>
@@ -235,7 +271,7 @@
                currentLevel="4"
                popup="4"
                teiElement="&lt;citedRange/&gt;">
-      <desc>Specify which pages, columns, etc. you are refering to.</desc>
+      <desc>defines the range of cited content, often represented by pages or other units</desc>
       <availableAtts elementName="citedRange">
          <attDef ident="unit" attLabel="Unit">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
