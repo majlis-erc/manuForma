@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.20 Beta
+        Version: 1.21 Beta
         
 
         NOTES: 
@@ -1129,6 +1129,21 @@
                 <xsl:if test="$subform/formDesc">
                     <p class="alert alert-light hint"><xsl:value-of select="$subform/formDesc"/></p>    
                 </xsl:if>
+                <!-- will need to find parent to insert element into, is a problem if the parent does not exist. 
+                 <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(//*:facsimile)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full">
+                    <xf:label><i class="bi bi-plus-circle"/> Add element 
+                    </xf:label>
+                    <xf:insert ev:event="DOMActivate" context="instance('i-rec')/descendant-or-self::*:TEI" at="." origin="instance('i-reproductions-elementTemplate')/*[local-name() = 'facsimile'][1]" position="after"/>
+                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = 'facsimile'][instance('i-reproductions-schemaConstraints')/*[local-name() = 'facsimile']/*:childElements[1]/*:child/*:element]"/>
+                 </xf:trigger>
+                -->
+                <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not({$path})]" class="btn btn-outline-secondary btn-sm controls add" appearance="full" >
+                    <xf:label><i class="bi bi-plus-circle"/> Add element </xf:label>
+                    <xf:insert ev:event="DOMActivate" context="instance('i-rec'){replace($path,'///','//')}[position() = instance('{$repeatIndex}')/index]/parent::*[1]" at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
+                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                    <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = $elementName][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
+                </xf:trigger>
                 <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec'){replace($path,'///','//')}[position() = instance('{$repeatIndex}')/index]" id="{$elementName}-root">
                     <xsl:choose>
                         <xsl:when test="$subform/subform">
@@ -1779,6 +1794,7 @@
                             <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                 <xf:label ref="@attLabel"/>
                                 <xf:value ref="@ident"/>
+                                <xf:hint ref="@desc"/>
                             </xf:itemset>
                         </xf:select1>
                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
@@ -2137,6 +2153,7 @@
                                     <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                         <xf:label ref="@attLabel"/>
                                         <xf:value ref="@ident"/>
+                                        <xf:hint ref="@desc"/>
                                     </xf:itemset>
                                 </xf:select1>
                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
@@ -2614,6 +2631,11 @@
                                                 <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
                                             </xsl:choose>
                                         </xsl:attribute>
+                                        <xsl:if test="*:desc">
+                                            <xsl:attribute name="desc">
+                                                <xsl:value-of select="*:desc"/>
+                                            </xsl:attribute>
+                                        </xsl:if>
                                     </valItem>
                                 </xsl:for-each>
                             </valList>
@@ -2632,6 +2654,14 @@
                         <xsl:choose>
                             <xsl:when test="$elementName = ('p','desc','note','summary')">
                                 <textNode type="textarea"/>
+                            </xsl:when>
+                            <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
+                                <xsl:choose>
+                                    <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:classRef or $elementRules/descendant-or-self::*:content/descendant-or-self::elementRef"/>
+                                    <xsl:otherwise>
+                                        <textNode type="input" class="{$elementName}"/>                                        
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
                                 <textNode type="input" class="{$elementName}"/>
