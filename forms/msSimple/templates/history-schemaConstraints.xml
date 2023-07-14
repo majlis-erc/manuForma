@@ -381,8 +381,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="default" attLabel="default"/>
-               <valItem ident="preserve" attLabel="preserve"/>
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -494,10 +498,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="hebrew" attLabel="hebrew"/>
-               <valItem ident="alexander" attLabel="alexander"/>
-               <valItem ident="islamic" attLabel="islamic"/>
-               <valItem ident="julian" attLabel="julian"/>
+               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
+               <valItem ident="alexander"
+                        attLabel="alexander"
+                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
+               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
+               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
             </valList>
          </attDef>
          <attDef ident="confidence" attLabel="confidence"/>
@@ -602,9 +608,15 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
                      mode="">
-               <valItem ident="all" attLabel="all"/>
-               <valItem ident="most" attLabel="most"/>
-               <valItem ident="range" attLabel="range"/>
+               <valItem ident="all"
+                        attLabel="all"
+                        desc="measurement applies to all instances. 측정은 모두 사례에 적용된다. 度量可應用於所有實例。 la medida se aplica a todos los casos. 全インスタンスに当てはまる単位。 la mesure s'applique à tous les cas. la misurazione fa riferimento a tutti i&#xA;          casi"/>
+               <valItem ident="most"
+                        attLabel="most"
+                        desc="measurement applies to most of the instances inspected. 측정은 대부분의 사례에 적용된다. 度量可應用於大部分實例。 la medida se aplica a la mayoría de los casos&#xA;            examinados. 計測インスタンスの殆どに当てはまる単位。 la mesure s'applique à la plupart des cas&#xA;            examinés la misurazione fa riferimento alla maggior parte&#xA;            dei casi esaminati"/>
+               <valItem ident="range"
+                        attLabel="range"
+                        desc="measurement applies to only the specified range of instances. 측정이 사례의 명시적 범위에 한정하여 적용된다. 度量僅應用於特定範圍的實例。 la medida se aplica solamente a los casos&#xA;            especificados 特定インスタンスにのみ当てはまる単位。 la mesure s'applique seulement à l'ensemble des&#xA;            exemples indiqués. la misurazione fa riferimento solo ai casi&#xA;            specificati"/>
             </valList>
          </attDef>
          <attDef ident="type" attLabel="type">
@@ -612,22 +624,50 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
                      mode="">
-               <valItem ident="age" attLabel="age"/>
-               <valItem ident="reign" attLabel="reign"/>
-               <valItem ident="life" attLabel="life"/>
-               <valItem ident="marriage" attLabel="marriage"/>
-               <valItem ident="generic-duration" attLabel="generic-duration"/>
-               <valItem ident="foundation" attLabel="foundation"/>
-               <valItem ident="composition" attLabel="composition"/>
-               <valItem ident="translation" attLabel="translation"/>
-               <valItem ident="revision" attLabel="revision"/>
-               <valItem ident="recension" attLabel="recension"/>
-               <valItem ident="diesNatalis" attLabel="diesNatalis"/>
-               <valItem ident="birth" attLabel="birth"/>
-               <valItem ident="ascension" attLabel="ascension"/>
-               <valItem ident="death" attLabel="death"/>
-               <valItem ident="production" attLabel="production"/>
-               <valItem ident="repeated" attLabel="repeated"/>
+               <valItem ident="age"
+                        attLabel="age"
+                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="reign"
+                        attLabel="reign"
+                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="life"
+                        attLabel="life"
+                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="marriage"
+                        attLabel="marriage"
+                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="generic-duration"
+                        attLabel="generic-duration"
+                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
+               <valItem ident="composition"
+                        attLabel="composition"
+                        desc="Date of the composition of a work"/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="Date of the translation of a work"/>
+               <valItem ident="revision"
+                        attLabel="revision"
+                        desc="Date of the revision of a work"/>
+               <valItem ident="recension"
+                        attLabel="recension"
+                        desc="Date of the composition of a specific recension"/>
+               <valItem ident="diesNatalis"
+                        attLabel="diesNatalis"
+                        desc="Date of a saint’s martyrdom"/>
+               <valItem ident="birth"
+                        attLabel="birth"
+                        desc="Date of birth (do not use this in a person record, use element birth)"/>
+               <valItem ident="ascension"
+                        attLabel="ascension"
+                        desc="Date of a person’s ascension to power"/>
+               <valItem ident="death" attLabel="death" desc="Date of death"/>
+               <valItem ident="production"
+                        attLabel="production"
+                        desc="The date of production of the document (EMA)"/>
+               <valItem ident="repeated"
+                        attLabel="repeated"
+                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
             </valList>
          </attDef>
          <attDef ident="unit" attLabel="unit">
@@ -638,8 +678,12 @@
                <valItem ident="cm" attLabel="centimetres"/>
                <valItem ident="mm" attLabel="millimetres"/>
                <valItem ident="in" attLabel="inches"/>
-               <valItem ident="line" attLabel="line"/>
-               <valItem ident="char" attLabel="characters"/>
+               <valItem ident="line"
+                        attLabel="line"
+                        desc="lines of text 텍스트의 행 líneas de texto テキスト行 lignes de texte righe di testo"/>
+               <valItem ident="char"
+                        attLabel="characters"
+                        desc="characters of text 텍스트의 문자 caracteres del texto 文字列 caractères du texte caratteri di testo"/>
             </valList>
          </attDef>
          <attDef ident="when" attLabel="When">
@@ -802,7 +846,6 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
@@ -837,20 +880,42 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="main" attLabel="main"/>
-               <valItem ident="normalized" attLabel="normalized"/>
-               <valItem ident="given" attLabel="given"/>
-               <valItem ident="birth" attLabel="birth"/>
-               <valItem ident="baptismal" attLabel="baptismal"/>
-               <valItem ident="regnal" attLabel="regnal"/>
-               <valItem ident="monastic" attLabel="monastic"/>
-               <valItem ident="horse" attLabel="horse"/>
-               <valItem ident="nick" attLabel="nick"/>
-               <valItem ident="war" attLabel="war"/>
-               <valItem ident="hypocoristic" attLabel="hypocoristic"/>
-               <valItem ident="patronymic" attLabel="patronymic"/>
-               <valItem ident="alt" attLabel="alt"/>
-               <valItem ident="tabot" attLabel="tabot"/>
+               <valItem ident="main"
+                        attLabel="main"
+                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
+               <valItem ident="normalized"
+                        attLabel="normalized"
+                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
+               <valItem ident="given"
+                        attLabel="given"
+                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
+               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
+               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
+               <valItem ident="regnal"
+                        attLabel="regnal"
+                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
+               <valItem ident="monastic"
+                        attLabel="monastic"
+                        desc="name given on entering monastic life "/>
+               <valItem ident="horse"
+                        attLabel="horse"
+                        desc="the name of the battle horse of kings and rulers"/>
+               <valItem ident="nick"
+                        attLabel="nick"
+                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
+               <valItem ident="war"
+                        attLabel="war"
+                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
+               <valItem ident="hypocoristic"
+                        attLabel="hypocoristic"
+                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
+               <valItem ident="patronymic"
+                        attLabel="patronymic"
+                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
+               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
+               <valItem ident="tabot"
+                        attLabel="tabot"
+                        desc="the saint to whom the tābot is dedicated"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1243,8 +1308,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="default" attLabel="default"/>
-               <valItem ident="preserve" attLabel="preserve"/>
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1446,10 +1515,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="hebrew" attLabel="hebrew"/>
-               <valItem ident="alexander" attLabel="alexander"/>
-               <valItem ident="islamic" attLabel="islamic"/>
-               <valItem ident="julian" attLabel="julian"/>
+               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
+               <valItem ident="alexander"
+                        attLabel="alexander"
+                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
+               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
+               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
             </valList>
          </attDef>
          <attDef ident="confidence" attLabel="confidence"/>
@@ -1554,9 +1625,15 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
                      mode="">
-               <valItem ident="all" attLabel="all"/>
-               <valItem ident="most" attLabel="most"/>
-               <valItem ident="range" attLabel="range"/>
+               <valItem ident="all"
+                        attLabel="all"
+                        desc="measurement applies to all instances. 측정은 모두 사례에 적용된다. 度量可應用於所有實例。 la medida se aplica a todos los casos. 全インスタンスに当てはまる単位。 la mesure s'applique à tous les cas. la misurazione fa riferimento a tutti i&#xA;          casi"/>
+               <valItem ident="most"
+                        attLabel="most"
+                        desc="measurement applies to most of the instances inspected. 측정은 대부분의 사례에 적용된다. 度量可應用於大部分實例。 la medida se aplica a la mayoría de los casos&#xA;            examinados. 計測インスタンスの殆どに当てはまる単位。 la mesure s'applique à la plupart des cas&#xA;            examinés la misurazione fa riferimento alla maggior parte&#xA;            dei casi esaminati"/>
+               <valItem ident="range"
+                        attLabel="range"
+                        desc="measurement applies to only the specified range of instances. 측정이 사례의 명시적 범위에 한정하여 적용된다. 度量僅應用於特定範圍的實例。 la medida se aplica solamente a los casos&#xA;            especificados 特定インスタンスにのみ当てはまる単位。 la mesure s'applique seulement à l'ensemble des&#xA;            exemples indiqués. la misurazione fa riferimento solo ai casi&#xA;            specificati"/>
             </valList>
          </attDef>
          <attDef ident="type" attLabel="type">
@@ -1564,22 +1641,50 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
                      mode="">
-               <valItem ident="age" attLabel="age"/>
-               <valItem ident="reign" attLabel="reign"/>
-               <valItem ident="life" attLabel="life"/>
-               <valItem ident="marriage" attLabel="marriage"/>
-               <valItem ident="generic-duration" attLabel="generic-duration"/>
-               <valItem ident="foundation" attLabel="foundation"/>
-               <valItem ident="composition" attLabel="composition"/>
-               <valItem ident="translation" attLabel="translation"/>
-               <valItem ident="revision" attLabel="revision"/>
-               <valItem ident="recension" attLabel="recension"/>
-               <valItem ident="diesNatalis" attLabel="diesNatalis"/>
-               <valItem ident="birth" attLabel="birth"/>
-               <valItem ident="ascension" attLabel="ascension"/>
-               <valItem ident="death" attLabel="death"/>
-               <valItem ident="production" attLabel="production"/>
-               <valItem ident="repeated" attLabel="repeated"/>
+               <valItem ident="age"
+                        attLabel="age"
+                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="reign"
+                        attLabel="reign"
+                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="life"
+                        attLabel="life"
+                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="marriage"
+                        attLabel="marriage"
+                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="generic-duration"
+                        attLabel="generic-duration"
+                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
+               <valItem ident="composition"
+                        attLabel="composition"
+                        desc="Date of the composition of a work"/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="Date of the translation of a work"/>
+               <valItem ident="revision"
+                        attLabel="revision"
+                        desc="Date of the revision of a work"/>
+               <valItem ident="recension"
+                        attLabel="recension"
+                        desc="Date of the composition of a specific recension"/>
+               <valItem ident="diesNatalis"
+                        attLabel="diesNatalis"
+                        desc="Date of a saint’s martyrdom"/>
+               <valItem ident="birth"
+                        attLabel="birth"
+                        desc="Date of birth (do not use this in a person record, use element birth)"/>
+               <valItem ident="ascension"
+                        attLabel="ascension"
+                        desc="Date of a person’s ascension to power"/>
+               <valItem ident="death" attLabel="death" desc="Date of death"/>
+               <valItem ident="production"
+                        attLabel="production"
+                        desc="The date of production of the document (EMA)"/>
+               <valItem ident="repeated"
+                        attLabel="repeated"
+                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
             </valList>
          </attDef>
          <attDef ident="unit" attLabel="unit">
@@ -1590,8 +1695,12 @@
                <valItem ident="cm" attLabel="centimetres"/>
                <valItem ident="mm" attLabel="millimetres"/>
                <valItem ident="in" attLabel="inches"/>
-               <valItem ident="line" attLabel="line"/>
-               <valItem ident="char" attLabel="characters"/>
+               <valItem ident="line"
+                        attLabel="line"
+                        desc="lines of text 텍스트의 행 líneas de texto テキスト行 lignes de texte righe di testo"/>
+               <valItem ident="char"
+                        attLabel="characters"
+                        desc="characters of text 텍스트의 문자 caracteres del texto 文字列 caractères du texte caratteri di testo"/>
             </valList>
          </attDef>
          <attDef ident="when" attLabel="When">
@@ -2003,8 +2112,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="default" attLabel="default"/>
-               <valItem ident="preserve" attLabel="preserve"/>
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -2079,20 +2192,42 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="">
-               <valItem ident="main" attLabel="main"/>
-               <valItem ident="normalized" attLabel="normalized"/>
-               <valItem ident="given" attLabel="given"/>
-               <valItem ident="birth" attLabel="birth"/>
-               <valItem ident="baptismal" attLabel="baptismal"/>
-               <valItem ident="regnal" attLabel="regnal"/>
-               <valItem ident="monastic" attLabel="monastic"/>
-               <valItem ident="horse" attLabel="horse"/>
-               <valItem ident="nick" attLabel="nick"/>
-               <valItem ident="war" attLabel="war"/>
-               <valItem ident="hypocoristic" attLabel="hypocoristic"/>
-               <valItem ident="patronymic" attLabel="patronymic"/>
-               <valItem ident="alt" attLabel="alt"/>
-               <valItem ident="tabot" attLabel="tabot"/>
+               <valItem ident="main"
+                        attLabel="main"
+                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
+               <valItem ident="normalized"
+                        attLabel="normalized"
+                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
+               <valItem ident="given"
+                        attLabel="given"
+                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
+               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
+               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
+               <valItem ident="regnal"
+                        attLabel="regnal"
+                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
+               <valItem ident="monastic"
+                        attLabel="monastic"
+                        desc="name given on entering monastic life "/>
+               <valItem ident="horse"
+                        attLabel="horse"
+                        desc="the name of the battle horse of kings and rulers"/>
+               <valItem ident="nick"
+                        attLabel="nick"
+                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
+               <valItem ident="war"
+                        attLabel="war"
+                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
+               <valItem ident="hypocoristic"
+                        attLabel="hypocoristic"
+                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
+               <valItem ident="patronymic"
+                        attLabel="patronymic"
+                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
+               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
+               <valItem ident="tabot"
+                        attLabel="tabot"
+                        desc="the saint to whom the tābot is dedicated"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -2190,7 +2325,6 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>

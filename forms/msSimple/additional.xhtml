@@ -21,6 +21,10 @@
    <body>
       <h2 class="h3 mainElement">Bibliography</h2>
       <p class="alert alert-light hint">Add bibliographic references from the Zotero database.</p>
+      <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(///*:msDesc/*:additional/*:listBibl)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus-circle"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:msDesc/*:additional/*:listBibl[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-additional-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
+         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = $elementName][instance('i-additional-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
+      </xf:trigger>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:msDesc/*:additional/*:listBibl[position() = instance('i-repeatIndex')/index]" id="listBibl-root">
          <div class="accordion" id="elementGroup">
             <xf:repeat id="additionalGrpRepeatLevel11" ref="./*[self::*:bibl]">
@@ -28,13 +32,13 @@
                   <xf:switch xmlns="http://www.w3.org/2002/xforms">
                      <xf:case id="closedadditionalGrpRepeatLevel11">
                         <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">
-                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:title, ', ',./*:citedRange)"></xf:output></xf:group>
+                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:title)"></xf:output></xf:group>
                               <xf:group ref=".[./*:title = '']"><xf:output value="'Bibliographic reference.'"></xf:output></xf:group></xf:label><xf:toggle case="openadditionalGrpRepeatLevel11" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                      </xf:case>
                      <xf:case id="openadditionalGrpRepeatLevel11">
                         <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">
-                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:title, ', ',./*:citedRange)"></xf:output></xf:group>
+                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:title)"></xf:output></xf:group>
                               <xf:group ref=".[./*:title = '']"><xf:output value="'Bibliographic reference.'"></xf:output></xf:group></xf:label><xf:toggle case="closedadditionalGrpRepeatLevel11" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                         <div xmlns="http://www.w3.org/1999/xhtml" class="accordion-collapse">
@@ -209,6 +213,7 @@
                                                    <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                       <div class="input-group"><xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"></xf:input><xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                                             <xf:itemset ref="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal"><xf:label ref="@attLabel"></xf:label><xf:value ref="@ident"></xf:value>
+                                                               <xf:hint ref="@desc"></xf:hint>
                                                             </xf:itemset>
                                                          </xf:select1>
                                                          <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -298,6 +303,7 @@
                                                                <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                   <div class="input-group"><xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"></xf:input><xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                                                         <xf:itemset ref="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal"><xf:label ref="@attLabel"></xf:label><xf:value ref="@ident"></xf:value>
+                                                                           <xf:hint ref="@desc"></xf:hint>
                                                                         </xf:itemset>
                                                                      </xf:select1>
                                                                      <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -387,6 +393,7 @@
                                                                            <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                               <div class="input-group"><xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"></xf:input><xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                                                                     <xf:itemset ref="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal"><xf:label ref="@attLabel"></xf:label><xf:value ref="@ident"></xf:value>
+                                                                                       <xf:hint ref="@desc"></xf:hint>
                                                                                     </xf:itemset>
                                                                                  </xf:select1>
                                                                                  <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x-circle"></i><xf:output value="instance('i-additional-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
