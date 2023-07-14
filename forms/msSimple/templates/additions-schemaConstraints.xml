@@ -16,7 +16,30 @@
          popup="1"
          teiElement="&lt;list/&gt;">
       <desc>A sequence of bullet points ("item") organized as a list.</desc>
-      <availableAtts elementName="list"/>
+      <availableAtts elementName="list">
+         <attDef ident="type" attLabel="type">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2017-06-25">type</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2017-06-25"
+                   xml:lang="de">Typ</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="gloss" attLabel="gloss"/>
+               <valItem ident="index" attLabel="index"/>
+               <valItem ident="instructions" attLabel="instructions"/>
+               <valItem ident="litany" attLabel="litany"/>
+               <valItem ident="syllogism" attLabel="syllogism"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="item"
@@ -161,13 +184,13 @@
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
-            <valList xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
+               <valItem ident="ar" attLabel="ar"/>
+               <valItem ident="en" attLabel="en"/>
+               <valItem ident="he" attLabel="he"/>
             </valList>
          </attDef>
       </availableAtts>

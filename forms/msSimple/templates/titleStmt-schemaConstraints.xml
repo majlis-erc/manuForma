@@ -10,11 +10,12 @@
      xmlns:local="http://syriaca.org/ns">
    <titleStmt ident="titleStmt"
               elementName="titleStmt"
-              elementLabel="titleStmt"
+              elementLabel="title statement"
               path="/*:titleStmt"
               currentLevel="1"
               popup="1"
               teiElement="&lt;titleStmt/&gt;">
+      <desc>groups information about the title of a work and those responsible for its content.</desc>
       <availableAtts elementName="titleStmt"/>
       <childElements>
          <child>
@@ -58,7 +59,94 @@
           currentLevel="2"
           popup="2"
           teiElement="&lt;title/&gt;">
-      <availableAtts elementName="title"/>
+      <desc>contains a title for any kind of work.</desc>
+      <availableAtts elementName="title">
+         <attDef ident="evidence" attLabel="evidence"/>
+         <attDef ident="level" attLabel="level">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="a" attLabel="analytic"/>
+               <valItem ident="m" attLabel="monographic"/>
+               <valItem ident="j" attLabel="journal"/>
+               <valItem ident="s" attLabel="series"/>
+               <valItem ident="u" attLabel="unpublished"/>
+            </valList>
+         </attDef>
+         <attDef ident="subtype" attLabel="subtype">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="supplication" attLabel="supplication"/>
+               <valItem ident="expanded" attLabel="expanded"/>
+               <valItem ident="inscriptio" attLabel="inscriptio"/>
+               <valItem ident="subscriptio" attLabel="subscriptio"/>
+               <valItem ident="embedded" attLabel="embedded"/>
+               <valItem ident="translation" attLabel="translation"/>
+            </valList>
+         </attDef>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="altMain" attLabel="altMain"/>
+               <valItem ident="secondary" attLabel="secondary"/>
+               <valItem ident="altSecondary" attLabel="altSecondary"/>
+               <valItem ident="tertiary" attLabel="tertiary"/>
+               <valItem ident="altTertiary" attLabel="altTertiary"/>
+               <valItem ident="complete" attLabel="complete"/>
+               <valItem ident="incomplete" attLabel="incomplete"/>
+               <valItem ident="normalized" attLabel="normalized"/>
+               <valItem ident="supplied" attLabel="supplied"/>
+               <valItem ident="uniform" attLabel="uniform"/>
+               <valItem ident="main" attLabel="main"/>
+               <valItem ident="short" attLabel="short"/>
+               <valItem ident="D'usage" attLabel="D'usage"/>
+               <valItem ident="académique" attLabel="académique"/>
+               <valItem ident="Forgé" attLabel="Forgé"/>
+               <valItem ident="Original" attLabel="Original"/>
+               <valItem ident="sub" attLabel="sub"/>
+               <valItem ident="alt" attLabel="alt"/>
+               <valItem ident="desc" attLabel="desc"/>
+               <valItem ident="collection" attLabel="collection"/>
+            </valList>
+         </attDef>
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="title"/>
          <child/>
@@ -71,7 +159,26 @@
             currentLevel="2"
             popup="2"
             teiElement="&lt;sponsor/&gt;">
-      <availableAtts elementName="sponsor"/>
+      <desc>specifies the name of a sponsoring organization or institution.</desc>
+      <availableAtts elementName="sponsor">
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="orgName"
@@ -89,7 +196,41 @@
             currentLevel="3"
             popup="3"
             teiElement="&lt;orgName/&gt;">
-      <availableAtts elementName="orgName"/>
+      <desc>contains an organizational name.</desc>
+      <availableAtts elementName="orgName">
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="orgName"/>
          <child/>
@@ -102,7 +243,27 @@
            currentLevel="2"
            popup="2"
            teiElement="&lt;funder/&gt;">
-      <availableAtts elementName="funder"/>
+      <desc>specifies the name of an individual, institution, or organization responsible for the
+    funding of a project or text.</desc>
+      <availableAtts elementName="funder">
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="orgName"
@@ -120,7 +281,41 @@
             currentLevel="3"
             popup="3"
             teiElement="&lt;orgName/&gt;">
-      <availableAtts elementName="orgName"/>
+      <desc>contains an organizational name.</desc>
+      <availableAtts elementName="orgName">
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="orgName"/>
          <child/>
@@ -133,7 +328,27 @@
               currentLevel="2"
               popup="2"
               teiElement="&lt;principal/&gt;">
-      <availableAtts elementName="principal"/>
+      <desc>supplies the name of the principal researcher responsible for the
+creation of an electronic text.</desc>
+      <availableAtts elementName="principal">
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="principal"/>
          <child/>
@@ -146,7 +361,61 @@
            currentLevel="2"
            popup="2"
            teiElement="&lt;editor/&gt;">
-      <availableAtts elementName="editor"/>
+      <desc>contains a secondary statement of responsibility for a bibliographic item, for example the name of an
+    individual, institution or organization, (or of several such) acting as editor, compiler,
+    translator, etc.</desc>
+      <availableAtts elementName="editor">
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+         <attDef ident="role" attLabel="role"/>
+         <attDef ident="xml:id" attLabel="identifier">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">identifier</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">확인소</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">identificador</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">identifiant</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">identificatore</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">識別子</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="editor"/>
          <child/>
@@ -159,6 +428,10 @@
              currentLevel="2"
              popup="2"
              teiElement="&lt;respStmt/&gt;">
+      <desc>supplies a statement of responsibility for the intellectual content of a text, edition,
+    recording, or series, where the specialized elements for authors, editors, etc. do not suffice
+    or do not apply. May also be used to encode information about individuals or organizations 
+    which have played a role in the production or distribution of a bibliographic work.</desc>
       <availableAtts elementName="respStmt"/>
       <childElements>
          <child>
@@ -182,6 +455,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;resp/&gt;">
+      <desc>contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role 
+    in the production or distribution of a work.</desc>
       <availableAtts elementName="resp"/>
       <childElements>
          <textNode type="input" class="resp"/>
@@ -195,8 +470,21 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;name/&gt;">
+      <desc>contains a proper noun or noun phrase.</desc>
       <availableAtts elementName="name">
          <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="replace">
+               <valItem ident="person" attLabel="person"/>
+               <valItem ident="place" attLabel="place"/>
+               <valItem ident="org" attLabel="org"/>
+               <valItem ident="unknown" attLabel="unknown"/>
+               <valItem ident="other" attLabel="other"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="name"/>
