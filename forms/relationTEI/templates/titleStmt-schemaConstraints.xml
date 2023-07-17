@@ -11,910 +11,472 @@
    <titleStmt ident="titleStmt"
               elementName="titleStmt"
               elementLabel="title statement"
-              minOccur=""
-              maxOccur=""
               path="/*:titleStmt"
               currentLevel="1"
-              popup="1">
+              popup="1"
+              teiElement="&lt;titleStmt/&gt;">
       <desc>groups information about the title of a work and those responsible for its content.</desc>
       <availableAtts elementName="titleStmt"/>
       <childElements>
          <child>
-            <element ident="title"/>
-            <element ident="sponsor"/>
-            <element ident="funder"/>
-            <element ident="principal"/>
-            <element ident="editor"/>
-            <element ident="respStmt"/>
+            <element ident="title"
+                     label="Title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="sponsor"
+                     label="Sponsor"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="funder"
+                     label="Funding body"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="principal"
+                     label="Principal investigator"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="editor"
+                     label="Team member"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="respStmt"
+                     label="Statement of responsibility"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </titleStmt>
    <title ident="title"
           elementName="title"
-          elementLabel="title"
-          minOccur=""
-          maxOccur=""
+          elementLabel="Title"
           path="/*:titleStmt/*:title"
           currentLevel="2"
-          popup="2">
+          popup="2"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
+              formURL="form.xq?form=forms/relationTEI/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="Create New Work Record"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="evidence"
-                 usage="opt">
-                            <datatype maxOccurs="6">
-                                <dataRef key="teidata.word"/>
-                            </datatype>
-
-                        </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="level"
-                 usage="opt">
-            <desc versionDate="2005-03-05" xml:lang="en">indicates the bibliographic level for a title, that is, whether
-                                        it identifies an article, book, journal, series, or
-                                        unpublished material.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">제목에 대한 서지적 층위를 나타내어, 논문, 책,
-                                        학술지, 총서, 미간행의 여부를 식별한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">指出題名的書目層次，即該題名之所指可以是文章、書籍、期刊、叢書或未出版的項目。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">タイトルの書誌情報のレベルを示す．例えば，論文，書籍，雑誌，叢書， 非刊行物など．</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique le niveau
-                                        bibliographique d'un titre, c'est-à-dire si ce titre
-                                        identifie un article, un livre, une revue, une collection,
-                                        ou un document non publié</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica el tipo bibliográfico
-                                        para un título, si este se identifica como un artículo,
-                                        libro, revista, colección o material inédito.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica il livello
-                                        bibliografico di un titolo, ovvero se indentifica un
-                                        articolo, un libro, una rivista, una collana, o materiale
-                                        non pubblicato.</desc>
-            <desc versionDate="2017-06-04" xml:lang="de">gibt den bibliografischen Typ eines Titels an, d.h. ob er einen Artikel, ein Buch, eine
-        Zeitschrift, eine Reihe oder unpubliziertes Material bezeichnet.</desc>
-            <datatype>
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-            <valList type="closed">
-               <valItem ident="a">
-                  <gloss versionDate="2007-07-04" xml:lang="en">analytic</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">분석적</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">analytique</gloss>
-                  <gloss versionDate="2007-11-06" xml:lang="it">analitico</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">analítico</gloss>
-                  <gloss versionDate="2017-06-04" xml:lang="de">unselbständig</gloss>
-                  <desc versionDate="2013-04-29" xml:lang="en">the title applies to an analytic item, such as an
-	  article, poem, or other work published as part of a larger item.</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">분석적 제목(보다
-                                                  큰 항목의 일부로 출판된 논문, 시, 또는 기타 항목)</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">分析層題名
-                                                  (文章、詩、或其他隸屬於一個較大作品的項目)</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">título
-                                                  analítico (de artículo, de poema, o de
-                                                  otro elemento publicado como parte de un
-                                                  elemento más grande)</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">分析的タイトル(例えば，論文や詩など，大きめの刊行物の部分と なるもの)．</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">titre
-                                                  analytique (article, poème ou autre,
-                                                  publié comme partie d'un ensemble plus
-                                                  grand)</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">titolo
-                                                  analitico (articolo, poesia o altra
-                                                  unità bibliografica pubblicata come
-                                                  parte di un'unità più grande)</desc>
-                  <desc versionDate="2017-06-04" xml:lang="de">der Titel gehört zu einer unselbständigen Publikation, wie einem Artikel, Gedicht oder
-            einem anderen Werk, das als Teil einer umfangreicheren Einheit publiziert wurde.</desc>
-               </valItem>
-               <valItem ident="m">
-                  <gloss versionDate="2007-07-04" xml:lang="en">monographic</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">단행본</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">monographique</gloss>
-                  <gloss versionDate="2007-11-06" xml:lang="it">monografico</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">monográfico</gloss>
-                  <gloss versionDate="2017-06-04" xml:lang="de">Monografie</gloss>
-                  <desc versionDate="2013-04-29" xml:lang="en">the title applies to a monograph such as a book or
-          other item considered to be a distinct publication, including single
-          volumes of multi-volume works</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">단행본 제목(여러
-                                                  권 중 한 권으로 출판된 경우를 포함하여, 독립된 항목으로 출판된 책,
-                                                  모음집, 또는 기타 항목)</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">專題層題名
-                                                  (書、選集、或其他獨立出版的項目，包含多冊作品的其中一冊)</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">título
-                                                  monográfico (libro, colección, u otro
-                                                  elemento publicado como elemento
-                                                  distinto, incluído los volúmenes
-                                                  individuales de trabajos multivolúmenes)</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">単行物のタイトル(例えば，書籍や叢書など，複数の巻に別れる作
-                                                  品のうちのひとつや，独立してある出版物)．</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">titre de
-                                                  monographie (livre, ensemble ou autre,
-                                                  publié comme un document distinct, y
-                                                  compris les volumes isolés d'ouvrages en
-                                                  plusieurs volumes)</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">titolo
-                                                  della monografia (libro, raccolta o
-                                                  altra unità bibliografica pubblicata
-                                                  indipendentemente, inculso il singolo
-                                                  volume di opere a più volumi)</desc>
-                  <desc versionDate="2017-06-04" xml:lang="de">der Titel bezieht sich auf Monografien wie z.B. ein Bücher oder andere selbständige
-            Publikationen, also auch auf einzelne Bände in einem mehrbändigen Werk.</desc>
-               </valItem>
-               <valItem ident="j">
-                  <gloss versionDate="2007-07-04" xml:lang="en">journal</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">학술지</gloss>
-                  <gloss versionDate="2007-11-06" xml:lang="it">rivista</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">título
-                                                  de revista.</gloss>
-                  <gloss versionDate="2017-06-04" xml:lang="de">Zeitschrift</gloss>
-                  <desc versionDate="2013-04-29" xml:lang="en">the title applies to any serial or periodical
-	  publication such as a journal, magazine, or newspaper</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">학술지 제목</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">期刊層題名</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">título de
-                                                  diario, periódico o revista</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">雑誌のタイトル．</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">titre de
-                                                  revue</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">titolo di
-                                                  rivista</desc>
-                  <desc versionDate="2017-06-04" xml:lang="de">der Titel bezieht sich auf jede Art fortlaufender oder periodischer Veröffentlichungen wie
-            z. B. Zeitschriften, Magazine oder Zeitungen.</desc>
-               </valItem>
-               <valItem ident="s">
-                  <gloss versionDate="2007-07-04" xml:lang="en">series</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">연간물</gloss>
-                  <gloss versionDate="2007-06-12" xml:lang="fr">série</gloss>
-                  <gloss versionDate="2007-11-06" xml:lang="it">serie</gloss>
-                  <gloss versionDate="2007-05-04" xml:lang="es">series</gloss>
-                  <gloss versionDate="2017-06-04" xml:lang="de">Reihe</gloss>
-                  <desc versionDate="2013-04-29" xml:lang="en">the title applies to a series of otherwise distinct
-	  publications such as a collection</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">연간물 제목</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">叢書層題名</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">título de
-                                                  serie</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">叢書のタイトル．</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">titre de
-                                                  publication en série</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">titolo di
-                                                  collana</desc>
-                  <desc versionDate="2017-06-04" xml:lang="de">der Titel bezeichnet eine Reihe von ansonsten selbständig publizierten Veröffentlichungen,
-            wie z. B. eine Buchreihe.</desc>
-               </valItem>
-               <valItem ident="u">
-                  <gloss versionDate="2007-07-04" xml:lang="en">unpublished</gloss>
-                  <gloss versionDate="2017-06-04" xml:lang="de">unveröffentlicht</gloss>
-                  <gloss versionDate="2007-12-20" xml:lang="ko">미간행</gloss>
-                  <desc versionDate="2013-04-29" xml:lang="en">the title applies to any unpublished material (including
-                                                  theses and dissertations unless
-                                                  published by a commercial press)</desc>
-                  <desc versionDate="2007-12-20" xml:lang="ko">미간행물(출판사에서 출판되지 않은 석박사 논문을 포함하여)의 제목</desc>
-                  <desc versionDate="2007-05-02" xml:lang="zh-TW">未出版的項目題名 (包括未經商業刊物發表的專題論文)</desc>
-                  <desc versionDate="2008-04-06" xml:lang="es">título de
-                                                  un material inédito (incluidas tesis y
-                                                  disertaciones que no sean publicadas por
-                                                  una editorial comercial)</desc>
-                  <desc versionDate="2008-04-05" xml:lang="ja">非刊行物のタイトル(未刊の学位論文など)．</desc>
-                  <desc versionDate="2008-03-30" xml:lang="fr">titre de
-                                                  matéria non publié (thèses et
-                                                  dissertations comprises, à l'exception
-                                                  de leurs éditions commerciales)</desc>
-                  <desc versionDate="2007-01-21" xml:lang="it">titolo di
-                                                  materiale non pubblicato (incluse tesi
-                                                  non pubblicate da case editrici)</desc>
-                  <desc versionDate="2017-06-04" xml:lang="de">der Titel bezieht sich auf unveröffentliches Material (incl. universitäre
-            Qualifikationsarbeiten, soweit sie nicht von einem Verlag veröffentlicht worden sind).</desc>
-               </valItem>
+         <attDef ident="evidence" attLabel="evidence"/>
+         <attDef ident="level" attLabel="level">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="a"
+                        attLabel="analytic"
+                        desc="the title applies to an analytic item, such as an&#xA;&#x9;  article, poem, or other work published as part of a larger item. 분석적 제목(보다&#xA;                                                  큰 항목의 일부로 출판된 논문, 시, 또는 기타 항목) 分析層題名&#xA;                                                  (文章、詩、或其他隸屬於一個較大作品的項目) título&#xA;                                                  analítico (de artículo, de poema, o de&#xA;                                                  otro elemento publicado como parte de un&#xA;                                                  elemento más grande) 分析的タイトル(例えば，論文や詩など，大きめの刊行物の部分と なるもの)． titre&#xA;                                                  analytique (article, poème ou autre,&#xA;                                                  publié comme partie d'un ensemble plus&#xA;                                                  grand) titolo&#xA;                                                  analitico (articolo, poesia o altra&#xA;                                                  unità bibliografica pubblicata come&#xA;                                                  parte di un'unità più grande) der Titel gehört zu einer unselbständigen Publikation, wie einem Artikel, Gedicht oder&#xA;            einem anderen Werk, das als Teil einer umfangreicheren Einheit publiziert wurde."/>
+               <valItem ident="m"
+                        attLabel="monographic"
+                        desc="the title applies to a monograph such as a book or&#xA;          other item considered to be a distinct publication, including single&#xA;          volumes of multi-volume works 단행본 제목(여러&#xA;                                                  권 중 한 권으로 출판된 경우를 포함하여, 독립된 항목으로 출판된 책,&#xA;                                                  모음집, 또는 기타 항목) 專題層題名&#xA;                                                  (書、選集、或其他獨立出版的項目，包含多冊作品的其中一冊) título&#xA;                                                  monográfico (libro, colección, u otro&#xA;                                                  elemento publicado como elemento&#xA;                                                  distinto, incluído los volúmenes&#xA;                                                  individuales de trabajos multivolúmenes) 単行物のタイトル(例えば，書籍や叢書など，複数の巻に別れる作&#xA;                                                  品のうちのひとつや，独立してある出版物)． titre de&#xA;                                                  monographie (livre, ensemble ou autre,&#xA;                                                  publié comme un document distinct, y&#xA;                                                  compris les volumes isolés d'ouvrages en&#xA;                                                  plusieurs volumes) titolo&#xA;                                                  della monografia (libro, raccolta o&#xA;                                                  altra unità bibliografica pubblicata&#xA;                                                  indipendentemente, inculso il singolo&#xA;                                                  volume di opere a più volumi) der Titel bezieht sich auf Monografien wie z.B. ein Bücher oder andere selbständige&#xA;            Publikationen, also auch auf einzelne Bände in einem mehrbändigen Werk."/>
+               <valItem ident="j"
+                        attLabel="journal"
+                        desc="the title applies to any serial or periodical&#xA;&#x9;  publication such as a journal, magazine, or newspaper 학술지 제목 期刊層題名 título de&#xA;                                                  diario, periódico o revista 雑誌のタイトル． titre de&#xA;                                                  revue titolo di&#xA;                                                  rivista der Titel bezieht sich auf jede Art fortlaufender oder periodischer Veröffentlichungen wie&#xA;            z. B. Zeitschriften, Magazine oder Zeitungen."/>
+               <valItem ident="s"
+                        attLabel="series"
+                        desc="the title applies to a series of otherwise distinct&#xA;&#x9;  publications such as a collection 연간물 제목 叢書層題名 título de&#xA;                                                  serie 叢書のタイトル． titre de&#xA;                                                  publication en série titolo di&#xA;                                                  collana der Titel bezeichnet eine Reihe von ansonsten selbständig publizierten Veröffentlichungen,&#xA;            wie z. B. eine Buchreihe."/>
+               <valItem ident="u"
+                        attLabel="unpublished"
+                        desc="the title applies to any unpublished material (including&#xA;                                                  theses and dissertations unless&#xA;                                                  published by a commercial press) 미간행물(출판사에서 출판되지 않은 석박사 논문을 포함하여)의 제목 未出版的項目題名 (包括未經商業刊物發表的專題論文) título de&#xA;                                                  un material inédito (incluidas tesis y&#xA;                                                  disertaciones que no sean publicadas por&#xA;                                                  una editorial comercial) 非刊行物のタイトル(未刊の学位論文など)． titre de&#xA;                                                  matéria non publié (thèses et&#xA;                                                  dissertations comprises, à l'exception&#xA;                                                  de leurs éditions commerciales) titolo di&#xA;                                                  materiale non pubblicato (incluse tesi&#xA;                                                  non pubblicate da case editrici) der Titel bezieht sich auf unveröffentliches Material (incl. universitäre&#xA;            Qualifikationsarbeiten, soweit sie nicht von einem Verlag veröffentlicht worden sind)."/>
             </valList>
-            <remarks versionDate="2009-05-23" xml:lang="en">
-               <p>The level of a title is sometimes implied by its context:
-        for example, a title appearing directly within an
-        <gi>analytic</gi> element is <foreign>ipso facto</foreign> of
-        level <q>a</q>, and one appearing within a <gi>series</gi>
-        element of level <q>s</q>. For this reason, the
-        <att>level</att> attribute is not required in contexts where
-        its value can be unambiguously inferred. Where it is supplied
-	in such contexts,
-        its value should not contradict the value implied by its
-	parent element. 
-	<!--, the <att>level</att>, if given, must
-        be<q>a</q>; if it appears directly enclosed within a
-        <gi>monogr</gi> element, <att>level</att> must be <q>m</q>,
-        <q>j</q>, or <q>u</q>; when <gi>title</gi> is directly
-        enclosed by ,<att>level</att> must be . If it appears within a
-        <gi>msItem</gi>, the <att>level</att> attribute should not be
-        supplied.-->
-	</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p>Si le titre apparaît comme fils de l'élément
-<gi>analytic</gi>, l'attribut <att>level</att>,
-s'il est renseigné, doit avoir la valeur <q>a</q>
-; si le titre apparaît comme fils de l'élément
-<gi>monogr</gi>, l'attribut
-<att>level</att> doit avoir la valeur <q>m</q>,
-<q>j</q> ou <q>u</q> ; si le titre
-apparaît comme fils de l'élément <gi>series</gi>,
-l'attribut <att>level</att> doit avoir la valeur
-<q>s</q>. Si le titre apparaît dans
-l'élément <gi>msItem</gi>, l'attribut level ne
-doit pas être utilisé.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2008-04-05">
-               <p> タイトルが要素<gi>analytic</gi>中にある場合，属性
-<att>level</att>があれば，値は必ず<q>a</q>となる．
-タイトルが要素<gi>monogr</gi>中にある場合，属性
-<att>level</att>の値は，必ず<q>m</q>,
-<q>j</q>, <q>u</q>のいず
-れかになる．要素<gi>title</gi>が要素<gi>series</gi>中にある場
-合，属性<att>level</att>の値は必ず<q>s</q>となる．タイトルが要
-素<gi>msItem</gi>中にある場合，当該属性値は付与されない．
-                                        </p>
-            </remarks>
-            <remarks versionDate="2017-06-04" xml:lang="de">
-               <p>Der Typ eines Titels wird manchmal durch seinen Kontext bestimmt: wenn ein Titel z. B.
-          innerhalb des Elements <gi>analytic</gi> verwendet wird, ist es <foreign>ipso facto</foreign>
-          demnach Level <q>a</q>; ein Titel innerhalb eines <gi>series</gi>-Elements als Level <q>s</q>.
-          Daher ist das <att>level</att>-Attribut nicht zwingend notwendig, wenn die Position eindeutig
-          erschlossen werden kann. Wenn es in derartigen Kontexten dennoch gesetzt wird, sollte der
-          Attributwert dem impliziten Wert des Eltern-Elements nicht widersprechen. 
-        </p>
-            </remarks>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="subtype"
-                 mode="change"
-                 usage="opt">
-                            <datatype maxOccurs="6">
-                                <dataRef key="teidata.word"/>
-                            </datatype>
-                            <valList type="closed">
-                                <valItem ident="supplication"/>
-                                <valItem ident="expanded"/>
-                                <valItem ident="inscriptio"/>
-                                <valItem ident="subscriptio"/>
-                                <valItem ident="embedded"/>
-                                <valItem ident="translation"/>
-                            </valList>
-                        </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="replace"
-                 usage="opt">
-                            
-                            <valList type="closed">
-                                <valItem ident="altMain">
-                                    <desc>Alternative version of main title.</desc>
-                                </valItem>
-                                <valItem ident="secondary">
-                                    <desc>A secondary title.</desc>
-                                </valItem>
-                                <valItem ident="altSecondary">
-                                    <desc>Alternative version of secondary title.</desc>
-                                </valItem>
-                                <valItem ident="tertiary">
-                                    <desc>A tertiary title.</desc>
-                                </valItem>
-                                <valItem ident="altTertiary">
-                                    <desc>Alternative version of tertiary title.</desc>
-                                </valItem>
-                                <valItem ident="complete">
-                                    <desc>the work is contained completely in the manuscript</desc>
-                                </valItem>
-                                <valItem ident="incomplete">
-                                    <desc>the work is contained incompletely in the manuscript, i.e.
-                                        even only a small part is missing </desc>
-                                </valItem>
-                                <valItem ident="normalized">
-                                    <desc>Transliteration of the title</desc>
-                                </valItem>
-                                <valItem ident="supplied">
-                                    <desc>syriaca.org: an existing print catalogue provides a
-                                        descriptive title</desc>
-                                </valItem>
-                                <valItem ident="uniform">
-                                    <desc>syriaca.org: a title for such work established by the
-                                        editor or cataloguer</desc>
-                                </valItem>
-                                <valItem ident="main">
-                                    <desc>for titleStmt, specifies to which title to give priority
-                                        in output.</desc>
-                                </valItem>
-                                <valItem ident="short">
-                                    <desc>for titleStmt, contains an abbreviated form of the title,
-                                        typically citation forms like Sal. Mar. or Jn. or
-                                        Gen..</desc>
-                                </valItem>
-                                <valItem ident="D'usage">
-                                    <desc>EMA</desc>
-                                </valItem>
-                                <valItem ident="académique">
-                                    <desc>EMA</desc>
-                                </valItem>
-                                <valItem ident="Forgé">
-                                    <desc>EMA</desc>
-                                </valItem>
-                                <valItem ident="Original">
-                                    <desc>EMA</desc>
-                                </valItem>                               
-                                <valItem ident="sub">
-                                    <desc>The title is a subtitle or title of a part</desc>
-                                </valItem>
-                                <valItem ident="alt">
-                                    <desc>The title is an alternate title, translation, or
-                                        alias</desc>
-                                </valItem>
-                                <valItem ident="desc">
-                                    <desc>The title is a descriptive paraphrase of the work
-                                        functioning as a title</desc>
-                                </valItem>
-                                <valItem ident="collection">
-                                    <desc>The title is of a collection</desc>
-                                </valItem>
-                            </valList>
-                        </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="xml:lang"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">langue</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">lingua</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">言語</gloss>
-            <desc versionDate="2013-01-07" xml:lang="en">indicates the language of the element content using a <soCalled>tag</soCalled> generated
-        according to <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>에 따라 생성된
-        <soCalled>tag</soCalled>를 사용하는 요소 내용의 언어를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">使用<ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC3066</ref>的代碼，指出該元素內容的使用語言</desc>
-            <desc xml:lang="ja" versionDate="2019-06-08">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>に従って生成された<soCalled>タグ</soCalled>を用いて要素の内容の言語を示す。</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la langue du contenu de l'élément en
-        utilisant les codes du <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ref>
-            </desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la lengua del contenido del elemento
-        utilizando los códigos extraídos de <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-          3066</ref>
-            </desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica la lingua del contenuto dell'elemento
-        utilizzando i codici tratti da <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-        3066</ref>
-            </desc>
-            <datatype>
-               <dataRef key="teidata.language"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                  <p> … The consequences of
-	  this rapid depopulation were the loss of the last
-	  <foreign xml:lang="rap">ariki</foreign> or chief
-	  (Routledge 1920:205,210) and their connections to
-	  ancestral territorial organization.</p>
-               </egXML>
-            </exemplum>
-            <remarks versionDate="2019-11-14" xml:lang="en">
-               <p>The <att>xml:lang</att> value will be inherited from the immediately
-enclosing element, or from its parent, and so on up the document hierarchy.
-It is generally good practice to specify <att>xml:lang</att> at the highest
-appropriate level, noticing that a different default may be needed for the
-<gi>teiHeader</gi> from that needed for the associated resource element or elements,
-and that a single TEI document may contain texts in many languages.</p>
-               <p>The authoritative list of registered language subtags is maintained by IANA and 
-          is available at <ptr target="http://www.iana.org/assignments/language-subtag-registry"/>. 
-          For a good general overview of the construction of language tags, see 
-          <ptr target="http://www.w3.org/International/articles/language-tags/"/>, and for 
-          a practical step-by-step guide, see 
-          <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/>.</p>
-               <p>The value used must conform with BCP 47. If the value is a
-      private use code (i.e., starts with <val>x-</val> or contains
-      <val>-x-</val>), a <gi>language</gi> element with a matching
-      value for its <att>ident</att> attribute should be supplied in
-      the TEI header to document this value. Such documentation may
-      also optionally be supplied for non-private-use codes, though
-      these must remain consistent with their
-      <choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task
-      Force</expan>
-                  </choice> definitions.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p> Si aucune valeur n'est indiquée pour <att>xml:lang</att>, la valeur de
-            l'attribut<att>xml:lang</att> de l'élément immédiatement supérieur est héritée ; c'est
-          pour cette raison qu'une valeur devrait toujours être attribuée à l'élément du plus haut
-          niveau hiérarchique (<gi>TEI</gi>).</p>
-               <p>La valeur doit être conforme au BCP 47. Si la
-        valeur est un code d'usage privé (c'est-à-dire commence par <code>x-</code> ou contient
-      <code>-x-</code>),  il devrait correspondre à la valeur d'un attribut <att>ident</att> d'un élément <gi>language</gi> fourni dans l'en-tête TEI du document courant.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>Si no se especifica ningún valor para <att>xml:lang</att>, el valor de <att>xml:lang</att> para el elemento inmediatamente englobado, se hereda; por esta razón, un valor
-          se debe especificar siempre en el elemento exterior (<gi>TEI</gi>).</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2019-06-16">
-               <p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="http://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task Force</expan>
-                  </choice> による定義と整合していなければならない。</p>
-            </remarks>
+         <attDef ident="subtype" attLabel="subtype">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="supplication" attLabel="supplication"/>
+               <valItem ident="expanded" attLabel="expanded"/>
+               <valItem ident="inscriptio" attLabel="inscriptio"/>
+               <valItem ident="subscriptio" attLabel="subscriptio"/>
+               <valItem ident="embedded" attLabel="embedded"/>
+               <valItem ident="translation" attLabel="translation"/>
+            </valList>
+         </attDef>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="altMain"
+                        attLabel="altMain"
+                        desc="Alternative version of main title."/>
+               <valItem ident="secondary" attLabel="secondary" desc="A secondary title."/>
+               <valItem ident="altSecondary"
+                        attLabel="altSecondary"
+                        desc="Alternative version of secondary title."/>
+               <valItem ident="tertiary" attLabel="tertiary" desc="A tertiary title."/>
+               <valItem ident="altTertiary"
+                        attLabel="altTertiary"
+                        desc="Alternative version of tertiary title."/>
+               <valItem ident="complete"
+                        attLabel="complete"
+                        desc="the work is contained completely in the manuscript"/>
+               <valItem ident="incomplete"
+                        attLabel="incomplete"
+                        desc="the work is contained incompletely in the manuscript, i.e.&#xA;                                        even only a small part is missing "/>
+               <valItem ident="normalized"
+                        attLabel="normalized"
+                        desc="Transliteration of the title"/>
+               <valItem ident="supplied"
+                        attLabel="supplied"
+                        desc="syriaca.org: an existing print catalogue provides a&#xA;                                        descriptive title"/>
+               <valItem ident="uniform"
+                        attLabel="uniform"
+                        desc="syriaca.org: a title for such work established by the&#xA;                                        editor or cataloguer"/>
+               <valItem ident="main"
+                        attLabel="main"
+                        desc="for titleStmt, specifies to which title to give priority&#xA;                                        in output."/>
+               <valItem ident="short"
+                        attLabel="short"
+                        desc="for titleStmt, contains an abbreviated form of the title,&#xA;                                        typically citation forms like Sal. Mar. or Jn. or&#xA;                                        Gen.."/>
+               <valItem ident="D'usage" attLabel="D'usage" desc="EMA"/>
+               <valItem ident="académique" attLabel="académique" desc="EMA"/>
+               <valItem ident="Forgé" attLabel="Forgé" desc="EMA"/>
+               <valItem ident="Original" attLabel="Original" desc="EMA"/>
+               <valItem ident="sub"
+                        attLabel="sub"
+                        desc="The title is a subtitle or title of a part"/>
+               <valItem ident="alt"
+                        attLabel="alt"
+                        desc="The title is an alternate title, translation, or&#xA;                                        alias"/>
+               <valItem ident="desc"
+                        attLabel="desc"
+                        desc="The title is a descriptive paraphrase of the work&#xA;                                        functioning as a title"/>
+               <valItem ident="collection"
+                        attLabel="collection"
+                        desc="The title is of a collection"/>
+            </valList>
+         </attDef>
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="title"/>
          <child/>
       </childElements>
    </title>
    <sponsor ident="sponsor"
             elementName="sponsor"
-            elementLabel="sponsor"
-            minOccur=""
-            maxOccur=""
+            elementLabel="Sponsor"
             path="/*:titleStmt/*:sponsor"
             currentLevel="2"
-            popup="2">
+            popup="2"
+            teiElement="&lt;sponsor/&gt;">
       <desc>specifies the name of a sponsoring organization or institution.</desc>
       <availableAtts elementName="sponsor">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 usage="opt">
-            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
-            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
-            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
-            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
-        means of one or more URIs.</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
-            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
-                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
-               </egXML>
-            </exemplum>         
-            <remarks versionDate="2014-01-09" xml:lang="en">
-               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
-            </remarks>
-            <remarks versionDate="2009-05-25" xml:lang="fr">
-               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2018-12-31">
-               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
-            </remarks>
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="orgName"/>
+            <element ident="orgName"
+                     label="Organization name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </sponsor>
    <orgName ident="orgName"
             elementName="orgName"
-            elementLabel="organization name"
-            minOccur=""
-            maxOccur=""
+            elementLabel="Organization name"
             path="/*:titleStmt/*:sponsor/*:orgName"
             currentLevel="3"
-            popup="3">
+            popup="3"
+            teiElement="&lt;orgName/&gt;">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="xml:lang"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">langue</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">lingua</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">言語</gloss>
-            <desc versionDate="2013-01-07" xml:lang="en">indicates the language of the element content using a <soCalled>tag</soCalled> generated
-        according to <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>에 따라 생성된
-        <soCalled>tag</soCalled>를 사용하는 요소 내용의 언어를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">使用<ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC3066</ref>的代碼，指出該元素內容的使用語言</desc>
-            <desc xml:lang="ja" versionDate="2019-06-08">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>に従って生成された<soCalled>タグ</soCalled>を用いて要素の内容の言語を示す。</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la langue du contenu de l'élément en
-        utilisant les codes du <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ref>
-            </desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la lengua del contenido del elemento
-        utilizando los códigos extraídos de <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-          3066</ref>
-            </desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica la lingua del contenuto dell'elemento
-        utilizzando i codici tratti da <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-        3066</ref>
-            </desc>
-            <datatype>
-               <dataRef key="teidata.language"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                  <p> … The consequences of
-	  this rapid depopulation were the loss of the last
-	  <foreign xml:lang="rap">ariki</foreign> or chief
-	  (Routledge 1920:205,210) and their connections to
-	  ancestral territorial organization.</p>
-               </egXML>
-            </exemplum>
-            <remarks versionDate="2019-11-14" xml:lang="en">
-               <p>The <att>xml:lang</att> value will be inherited from the immediately
-enclosing element, or from its parent, and so on up the document hierarchy.
-It is generally good practice to specify <att>xml:lang</att> at the highest
-appropriate level, noticing that a different default may be needed for the
-<gi>teiHeader</gi> from that needed for the associated resource element or elements,
-and that a single TEI document may contain texts in many languages.</p>
-               <p>The authoritative list of registered language subtags is maintained by IANA and 
-          is available at <ptr target="http://www.iana.org/assignments/language-subtag-registry"/>. 
-          For a good general overview of the construction of language tags, see 
-          <ptr target="http://www.w3.org/International/articles/language-tags/"/>, and for 
-          a practical step-by-step guide, see 
-          <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/>.</p>
-               <p>The value used must conform with BCP 47. If the value is a
-      private use code (i.e., starts with <val>x-</val> or contains
-      <val>-x-</val>), a <gi>language</gi> element with a matching
-      value for its <att>ident</att> attribute should be supplied in
-      the TEI header to document this value. Such documentation may
-      also optionally be supplied for non-private-use codes, though
-      these must remain consistent with their
-      <choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task
-      Force</expan>
-                  </choice> definitions.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p> Si aucune valeur n'est indiquée pour <att>xml:lang</att>, la valeur de
-            l'attribut<att>xml:lang</att> de l'élément immédiatement supérieur est héritée ; c'est
-          pour cette raison qu'une valeur devrait toujours être attribuée à l'élément du plus haut
-          niveau hiérarchique (<gi>TEI</gi>).</p>
-               <p>La valeur doit être conforme au BCP 47. Si la
-        valeur est un code d'usage privé (c'est-à-dire commence par <code>x-</code> ou contient
-      <code>-x-</code>),  il devrait correspondre à la valeur d'un attribut <att>ident</att> d'un élément <gi>language</gi> fourni dans l'en-tête TEI du document courant.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>Si no se especifica ningún valor para <att>xml:lang</att>, el valor de <att>xml:lang</att> para el elemento inmediatamente englobado, se hereda; por esta razón, un valor
-          se debe especificar siempre en el elemento exterior (<gi>TEI</gi>).</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2019-06-16">
-               <p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="http://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task Force</expan>
-                  </choice> による定義と整合していなければならない。</p>
-            </remarks>
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="orgName"/>
          <child/>
       </childElements>
    </orgName>
    <funder ident="funder"
            elementName="funder"
-           elementLabel="funding body"
-           minOccur=""
-           maxOccur=""
+           elementLabel="Funding body"
            path="/*:titleStmt/*:funder"
            currentLevel="2"
-           popup="2">
+           popup="2"
+           teiElement="&lt;funder/&gt;">
       <desc>specifies the name of an individual, institution, or organization responsible for the
     funding of a project or text.</desc>
       <availableAtts elementName="funder">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 usage="opt">
-            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
-            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
-            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
-            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
-        means of one or more URIs.</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
-            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
-                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
-               </egXML>
-            </exemplum>         
-            <remarks versionDate="2014-01-09" xml:lang="en">
-               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
-            </remarks>
-            <remarks versionDate="2009-05-25" xml:lang="fr">
-               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2018-12-31">
-               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
-            </remarks>
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="orgName"/>
+            <element ident="orgName"
+                     label="Organization name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </funder>
    <orgName ident="orgName"
             elementName="orgName"
-            elementLabel="organization name"
-            minOccur=""
-            maxOccur=""
+            elementLabel="Organization name"
             path="/*:titleStmt/*:funder/*:orgName"
             currentLevel="3"
-            popup="3">
+            popup="3"
+            teiElement="&lt;orgName/&gt;">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="xml:lang"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">language</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">언어</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">lengua</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">langue</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">lingua</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">言語</gloss>
-            <desc versionDate="2013-01-07" xml:lang="en">indicates the language of the element content using a <soCalled>tag</soCalled> generated
-        according to <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>에 따라 생성된
-        <soCalled>tag</soCalled>를 사용하는 요소 내용의 언어를 나타낸다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">使用<ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC3066</ref>的代碼，指出該元素內容的使用語言</desc>
-            <desc xml:lang="ja" versionDate="2019-06-08">
-               <ref target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</ref>に従って生成された<soCalled>タグ</soCalled>を用いて要素の内容の言語を示す。</desc>
-            <desc versionDate="2007-06-12" xml:lang="fr">indique la langue du contenu de l'élément en
-        utilisant les codes du <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ref>
-            </desc>
-            <desc versionDate="2007-05-04" xml:lang="es">indica la lengua del contenido del elemento
-        utilizando los códigos extraídos de <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-          3066</ref>
-            </desc>
-            <desc versionDate="2007-01-21" xml:lang="it">indica la lingua del contenuto dell'elemento
-        utilizzando i codici tratti da <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
-        3066</ref>
-            </desc>
-            <datatype>
-               <dataRef key="teidata.language"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-                  <p> … The consequences of
-	  this rapid depopulation were the loss of the last
-	  <foreign xml:lang="rap">ariki</foreign> or chief
-	  (Routledge 1920:205,210) and their connections to
-	  ancestral territorial organization.</p>
-               </egXML>
-            </exemplum>
-            <remarks versionDate="2019-11-14" xml:lang="en">
-               <p>The <att>xml:lang</att> value will be inherited from the immediately
-enclosing element, or from its parent, and so on up the document hierarchy.
-It is generally good practice to specify <att>xml:lang</att> at the highest
-appropriate level, noticing that a different default may be needed for the
-<gi>teiHeader</gi> from that needed for the associated resource element or elements,
-and that a single TEI document may contain texts in many languages.</p>
-               <p>The authoritative list of registered language subtags is maintained by IANA and 
-          is available at <ptr target="http://www.iana.org/assignments/language-subtag-registry"/>. 
-          For a good general overview of the construction of language tags, see 
-          <ptr target="http://www.w3.org/International/articles/language-tags/"/>, and for 
-          a practical step-by-step guide, see 
-          <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/>.</p>
-               <p>The value used must conform with BCP 47. If the value is a
-      private use code (i.e., starts with <val>x-</val> or contains
-      <val>-x-</val>), a <gi>language</gi> element with a matching
-      value for its <att>ident</att> attribute should be supplied in
-      the TEI header to document this value. Such documentation may
-      also optionally be supplied for non-private-use codes, though
-      these must remain consistent with their
-      <choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task
-      Force</expan>
-                  </choice> definitions.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p> Si aucune valeur n'est indiquée pour <att>xml:lang</att>, la valeur de
-            l'attribut<att>xml:lang</att> de l'élément immédiatement supérieur est héritée ; c'est
-          pour cette raison qu'une valeur devrait toujours être attribuée à l'élément du plus haut
-          niveau hiérarchique (<gi>TEI</gi>).</p>
-               <p>La valeur doit être conforme au BCP 47. Si la
-        valeur est un code d'usage privé (c'est-à-dire commence par <code>x-</code> ou contient
-      <code>-x-</code>),  il devrait correspondre à la valeur d'un attribut <att>ident</att> d'un élément <gi>language</gi> fourni dans l'en-tête TEI du document courant.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>Si no se especifica ningún valor para <att>xml:lang</att>, el valor de <att>xml:lang</att> para el elemento inmediatamente englobado, se hereda; por esta razón, un valor
-          se debe especificar siempre en el elemento exterior (<gi>TEI</gi>).</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2019-06-16">
-               <p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="http://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice>
-                     <abbr>IETF</abbr>
-                     <expan>Internet Engineering Task Force</expan>
-                  </choice> による定義と整合していなければならない。</p>
-            </remarks>
+         <attDef ident="xml:lang" attLabel="language">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="orgName"/>
          <child/>
       </childElements>
    </orgName>
    <principal ident="principal"
               elementName="principal"
-              elementLabel="principal researcher"
-              minOccur=""
-              maxOccur=""
+              elementLabel="Principal investigator"
               path="/*:titleStmt/*:principal"
               currentLevel="2"
-              popup="2">
+              popup="2"
+              teiElement="&lt;principal/&gt;">
       <desc>supplies the name of the principal researcher responsible for the
 creation of an electronic text.</desc>
       <availableAtts elementName="principal">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 usage="opt">
-            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
-            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
-            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
-            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
-        means of one or more URIs.</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
-            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
-                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
-               </egXML>
-            </exemplum>         
-            <remarks versionDate="2014-01-09" xml:lang="en">
-               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
-            </remarks>
-            <remarks versionDate="2009-05-25" xml:lang="fr">
-               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2018-12-31">
-               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
-            </remarks>
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="principal"/>
          <child/>
       </childElements>
    </principal>
    <editor ident="editor"
            elementName="editor"
-           elementLabel="editor"
-           minOccur=""
-           maxOccur=""
+           elementLabel="Team member"
            path="/*:titleStmt/*:editor"
            currentLevel="2"
-           popup="2">
+           popup="2"
+           teiElement="&lt;editor/&gt;">
       <desc>contains a secondary statement of responsibility for a bibliographic item, for example the name of an
     individual, institution or organization, (or of several such) acting as editor, compiler,
     translator, etc.</desc>
       <availableAtts elementName="editor">
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="ref"
-                 usage="opt">
-            <gloss versionDate="2008-09-05" xml:lang="en">reference</gloss>
-            <gloss versionDate="2009-05-25" xml:lang="fr">référence</gloss>
-            <gloss xml:lang="ja" versionDate="2018-12-31">参照</gloss>
-            <desc versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
-        means of one or more URIs.</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc>
-            <desc xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて，名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する．</desc>
-            <datatype minOccurs="1" maxOccurs="unbounded">
-               <dataRef key="teidata.pointer"/>
-            </datatype>
-            <exemplum xml:lang="en">
-               <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
-                  <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
-               </egXML>
-            </exemplum>         
-            <remarks versionDate="2014-01-09" xml:lang="en">
-               <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
-            </remarks>
-            <remarks versionDate="2009-05-25" xml:lang="fr">
-               <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2018-12-31">
-               <p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p>
-            </remarks>
+         <attDef ident="ref" attLabel="reference">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
          </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="role"
-                 usage="opt">
-            <desc versionDate="2009-10-12" xml:lang="en">may be used to specify further information about the entity referenced by
-this name in the form of a set of whitespace-separated values, for example the occupation of a person, or the status of a place.</desc>
-            <datatype maxOccurs="unbounded">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
-         </attDef>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="xml:id"
-                 usage="opt">
-            <gloss versionDate="2007-07-02" xml:lang="en">identifier</gloss>
-            <gloss versionDate="2007-12-20" xml:lang="ko">확인소</gloss>
-            <gloss versionDate="2008-04-06" xml:lang="es">identificador</gloss>
-            <gloss versionDate="2008-03-30" xml:lang="fr">identifiant</gloss>
-            <gloss versionDate="2007-11-06" xml:lang="it">identificatore</gloss>
-            <gloss xml:lang="ja" versionDate="2019-06-08">識別子</gloss>
-            <desc versionDate="2005-10-10" xml:lang="en">provides a unique identifier for the element bearing the attribute.</desc>
-            <desc versionDate="2007-12-20" xml:lang="ko">속성을 포함하는 요소에 대한 고유한 확인소를 제공한다.</desc>
-            <desc versionDate="2007-05-02" xml:lang="zh-TW">提供一個獨特識別符碼，識別帶有該屬性的元素。</desc>
-            <desc versionDate="2008-04-05" xml:lang="ja">当該要素にユニークな識別子を示す．</desc>
-            <desc versionDate="2009-05-25" xml:lang="fr">fournit un identifiant unique pour l'élément qui
-        porte l'attribut</desc>
-            <desc versionDate="2007-05-04" xml:lang="es">proporciona un identificador único para el elemento
-        al cual se asocia el atributo.</desc>
-            <desc versionDate="2007-01-21" xml:lang="it">assegna un identificatore unico all'elemento a cui è
-        associato l'attributo</desc>
-            <datatype>
-               <dataRef name="ID"/>
-            </datatype>
-            <remarks versionDate="2005-10-10" xml:lang="en">
-               <p>The <att>xml:id</att> attribute may be used to specify a canonical reference for an
-          element; see section <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CORS">3.11. Reference Systems</ref>.</p>
-            </remarks>
-            <remarks xml:lang="fr" versionDate="2007-06-12">
-               <p>L'attribut <att>xml:id</att> peut être employé pour indiquer une référence canonique pour
-          un élément ; voir la section<ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CORS">3.11. Reference Systems</ref>.</p>
-            </remarks>
-            <remarks xml:lang="es" versionDate="2008-04-06">
-               <p>El atributo <att>xml:id</att> se puede utilizar para especificar una referencia canónica
-          para un elemento; ver la sección <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CORS">3.11. Reference Systems</ref>.</p>
-            </remarks>
-            <remarks xml:lang="ja" versionDate="2008-04-05">
-               <p> 当該属性<att>xml:id</att>は，属性の指示対象を示している．詳細 は<ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CORS">3.11. Reference Systems</ref>を参照のこと． </p>
-            </remarks>
+         <attDef ident="role" attLabel="role"/>
+         <attDef ident="xml:id" attLabel="identifier">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">identifier</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">확인소</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">identificador</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">identifiant</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">identificatore</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">識別子</gloss>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="editor"/>
          <child/>
       </childElements>
    </editor>
    <respStmt ident="respStmt"
              elementName="respStmt"
-             elementLabel="statement of responsibility"
-             minOccur=""
-             maxOccur=""
+             elementLabel="Statement of responsibility"
              path="/*:titleStmt/*:respStmt"
              currentLevel="2"
-             popup="2">
+             popup="2"
+             teiElement="&lt;respStmt/&gt;">
       <desc>supplies a statement of responsibility for the intellectual content of a text, edition,
     recording, or series, where the specialized elements for authors, editors, etc. do not suffice
     or do not apply. May also be used to encode information about individuals or organizations 
@@ -922,65 +484,63 @@ this name in the form of a set of whitespace-separated values, for example the o
       <availableAtts elementName="respStmt"/>
       <childElements>
          <child>
-            <element ident="resp"/>
-            <element ident="name"/>
+            <element ident="resp"
+                     label="Responsibility"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="name"
+                     label="Team member"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </respStmt>
    <resp ident="resp"
          elementName="resp"
-         elementLabel="responsibility"
-         minOccur=""
-         maxOccur=""
+         elementLabel="Responsibility"
          path="/*:titleStmt/*:respStmt/*:resp"
          currentLevel="3"
-         popup="3">
+         popup="3"
+         teiElement="&lt;resp/&gt;">
       <desc>contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role 
     in the production or distribution of a work.</desc>
       <availableAtts elementName="resp"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="resp"/>
          <child/>
       </childElements>
    </resp>
    <name ident="name"
          elementName="name"
-         elementLabel="name, proper noun"
-         minOccur=""
-         maxOccur=""
+         elementLabel="Team member"
          path="/*:titleStmt/*:respStmt/*:name"
          currentLevel="3"
-         popup="3">
+         popup="3"
+         teiElement="&lt;name/&gt;">
       <desc>contains a proper noun or noun phrase.</desc>
       <availableAtts elementName="name">
-         <attDef ident="ref"/>
-         <attDef xmlns:teix="http://www.tei-c.org/ns/Examples"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 ident="type"
-                 mode="change">
-                            <valList mode="replace" type="semi">
-                                <valItem ident="person">
-                                    <desc>The name is of a person</desc>
-                                </valItem>
-                                <valItem ident="place">
-                                    <desc>The name is of a place</desc>
-                                </valItem>
-                                <valItem ident="org">
-                                    <desc>The name is of an organisation</desc>
-                                </valItem>
-                                <valItem ident="unknown">
-                                    <desc>The type of name is unknown</desc>
-                                </valItem>
-                                <valItem ident="other">
-                                    <desc>The name is of another type (you may also provide a
-                                        custom value)</desc>
-                                </valItem>
-                            </valList>
-                        </attDef>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="replace">
+               <valItem ident="person" attLabel="person" desc="The name is of a person"/>
+               <valItem ident="place" attLabel="place" desc="The name is of a place"/>
+               <valItem ident="org" attLabel="org" desc="The name is of an organisation"/>
+               <valItem ident="unknown"
+                        attLabel="unknown"
+                        desc="The type of name is unknown"/>
+               <valItem ident="other"
+                        attLabel="other"
+                        desc="The name is of another type (you may also provide a&#xA;                                        custom value)"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="name"/>
          <child/>
       </childElements>
    </name>

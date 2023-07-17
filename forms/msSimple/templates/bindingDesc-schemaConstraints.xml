@@ -19,15 +19,13 @@
                             of the binding. Specify in the attribute if the binding is contemporary to the manuscript's production or not with the
                             values "true" or "false".</desc>
       <availableAtts elementName="binding">
-         <attDef ident="contemporary" attLabel="Original binding?">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Original binding?</gloss>
+         <attDef ident="contemporary" attLabel="contemporary">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="true" attLabel="Yes"/>
-               <valItem ident="false" attLabel="No"/>
+               <valItem ident="true" attLabel="true"/>
+               <valItem ident="false" attLabel="false"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -78,11 +76,11 @@
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="change">
-               <valItem ident="deficient" attLabel="Deficient state"/>
-               <valItem ident="good" attLabel="Good state"/>
-               <valItem ident="intact" attLabel="Intact state"/>
-               <valItem ident="other" attLabel="Other state"/>
+                     mode="">
+               <valItem ident="deficient" attLabel="deficient"/>
+               <valItem ident="good" attLabel="good"/>
+               <valItem ident="intact" attLabel="intact"/>
+               <valItem ident="other" attLabel="other"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -130,8 +128,8 @@
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="change">
-               <valItem ident="binding" attLabel="*Binding"/>
+                     mode="">
+               <valItem ident="binding" attLabel="binding"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -171,12 +169,12 @@
       <availableAtts elementName="objectType"/>
       <controlledValues>
          <element xmlns="" ident="objectType">
-            <valList type="closed">
-               <valItem ident="Unbound"/>
-               <valItem ident="Original"/>
-               <valItem ident="Later"/>
-            </valList>
-         </element>
+                    <valList type="closed">
+                        <valItem ident="Unbound"/> 
+                        <valItem ident="Original"/>
+                        <valItem ident="Later"/>
+                    </valList>
+                </element>
       </controlledValues>
       <childElements>
          <textNode type="input" class="objectType"/>
@@ -249,23 +247,23 @@
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="material">
-            <valList type="closed">
-               <valItem ident="Wood"/>
-               <valItem ident="Papyrus"/>
-               <valItem ident="Cardboard"/>
-               <valItem ident="Leather"/>
-               <valItem ident="Metal"/>
-               <valItem ident="Paper"/>
-               <valItem ident="Textile"/>
-               <valItem ident="Other"/>
-               <valItem ident="Parchment"/>
-               <valItem ident="Silk"/>
-               <valItem ident="Stone"/>
-               <valItem ident="Bronze"/>
-               <valItem ident="Alabaster"/>
-               <valItem ident="Cotton"/>
-            </valList>
-         </element>
+                    <valList type="closed">
+                        <valItem ident="Wood"/>
+                        <valItem ident="Papyrus"/>
+                        <valItem ident="Cardboard"/>
+                        <valItem ident="Leather"/>
+                        <valItem ident="Metal"/>
+                        <valItem ident="Paper"/>
+                        <valItem ident="Textile"/>
+                        <valItem ident="Other"/>
+                        <valItem ident="Parchment"/>
+                        <valItem ident="Silk"/>
+                        <valItem ident="Stone"/>
+                        <valItem ident="Bronze"/>
+                        <valItem ident="Alabaster"/>
+                        <valItem ident="Cotton"/>
+                    </valList>
+                </element>
       </controlledValues>
       <childElements>
          <child/>
@@ -285,7 +283,7 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="binding" attLabel="*Binding"/>
+               <valItem ident="binding" attLabel="binding"/>
             </valList>
          </attDef>
          <attDef ident="unit" attLabel="unit">

@@ -75,7 +75,7 @@
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="open"
-                     mode="change">
+                     mode="">
                <valItem ident="rvollandt" attLabel="Ronny Vollandt"/>
                <valItem ident="gschwarb" attLabel="Gregor Schwarb"/>
                <valItem ident="lgzella" attLabel="Lea Gzella"/>
@@ -116,23 +116,7 @@
           popup="3"
           teiElement="&lt;quote/&gt;">
       <desc>Quote from the document.</desc>
-      <availableAtts elementName="quote">
-         <attDef ident="xml:lang" attLabel="Language">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="ru" attLabel="Russian"/>
-               <valItem ident="fr" attLabel="French"/>
-               <valItem ident="ge" attLabel="German"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="quote"/>
       <childElements>
          <textNode type="input" class="quote"/>
          <child/>
@@ -160,7 +144,18 @@
                             spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
                             person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
                             when you link a record to this element.)</desc>
-      <availableAtts elementName="persName"/>
+      <availableAtts elementName="persName">
+         <attDef ident="role" attLabel="Role">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="author" attLabel="author"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="persName"/>
          <child/>
@@ -308,15 +303,6 @@
          <attDef ident="unit" attLabel="Unit">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="page" attLabel="Pages"/>
-               <valItem ident="folio" attLabel="Folios"/>
-               <valItem ident="cols" attLabel="Columns"/>
-               <valItem ident="section" attLabel="Sections"/>
-            </valList>
          </attDef>
       </availableAtts>
       <childElements>
