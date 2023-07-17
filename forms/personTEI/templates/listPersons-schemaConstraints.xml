@@ -21,7 +21,7 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="author"/>
+               <valItem ident="author" attLabel="author"/>
             </valList>
          </attDef>
          <attDef ident="xml:id" attLabel="id"/>
@@ -97,17 +97,14 @@
          <attDef ident="type" attLabel="Type">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="majlis-headword"/>
-               <valItem ident="attested"/>
-               <valItem ident="alternate"/>
-               <valItem ident="canon"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="majlis-headword" attLabel="majlis-headword"/>
+               <valItem ident="attested" attLabel="attested"/>
+               <valItem ident="alternate" attLabel="alternate"/>
+               <valItem ident="canon" attLabel="canon"/>
             </valList>
          </attDef>
          <attDef ident="xml:id" attLabel="id"/>
@@ -118,12 +115,12 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem mode="add" ident="ar"/>
-               <valItem mode="add" ident="en"/>
-               <valItem mode="add" ident="he"/>
-               <valItem mode="add" ident="he-Latn"/>
-               <valItem mode="add" ident="ar-Latn"/>
-               <valItem mode="add" ident="ar-Hebr"/>
+               <valItem ident="ar" attLabel="ar"/>
+               <valItem ident="en" attLabel="en"/>
+               <valItem ident="he" attLabel="he"/>
+               <valItem ident="he-Latn" attLabel="he-Latn"/>
+               <valItem ident="ar-Latn" attLabel="ar-Latn"/>
+               <valItem ident="ar-Hebr" attLabel="ar-Hebr"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -176,22 +173,19 @@
          <attDef ident="type" attLabel="Type">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
-            <datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-               <dataRef key="teidata.enumerated"/>
-            </datatype>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed">
-               <valItem ident="shuhra"/>
-               <valItem ident="ism"/>
-               <valItem ident="nasab"/>
-               <valItem ident="nisbah"/>
-               <valItem ident="kunya"/>
-               <valItem ident="laqab"/>
-               <valItem ident="patronym"/>
-               <valItem ident="epithet"/>
-               <valItem ident="acronym"/>
+                     type="closed"
+                     mode="">
+               <valItem ident="shuhra" attLabel="shuhra"/>
+               <valItem ident="ism" attLabel="ism"/>
+               <valItem ident="nasab" attLabel="nasab"/>
+               <valItem ident="nisbah" attLabel="nisbah"/>
+               <valItem ident="kunya" attLabel="kunya"/>
+               <valItem ident="laqab" attLabel="laqab"/>
+               <valItem ident="patronym" attLabel="patronym"/>
+               <valItem ident="epithet" attLabel="epithet"/>
+               <valItem ident="acronym" attLabel="acronym"/>
             </valList>
          </attDef>
          <attDef ident="xml:id" attLabel="id"/>
@@ -251,10 +245,148 @@
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "When" field for precise values. In case
                             the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
       <availableAtts elementName="date">
+         <attDef ident="calendar" attLabel="calendar">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
+               <valItem ident="alexander"
+                        attLabel="alexander"
+                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
+               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
+               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
+            </valList>
+         </attDef>
          <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="dur" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+         </attDef>
+         <attDef ident="dur-iso" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속 기간</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-12-09"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+         </attDef>
          <attDef ident="notAfter" attLabel="notAfter"/>
          <attDef ident="notBefore" attLabel="notBefore"/>
          <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="">
+               <valItem ident="age"
+                        attLabel="age"
+                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="reign"
+                        attLabel="reign"
+                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="life"
+                        attLabel="life"
+                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="marriage"
+                        attLabel="marriage"
+                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="generic-duration"
+                        attLabel="generic-duration"
+                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
+               <valItem ident="composition"
+                        attLabel="composition"
+                        desc="Date of the composition of a work"/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="Date of the translation of a work"/>
+               <valItem ident="revision"
+                        attLabel="revision"
+                        desc="Date of the revision of a work"/>
+               <valItem ident="recension"
+                        attLabel="recension"
+                        desc="Date of the composition of a specific recension"/>
+               <valItem ident="diesNatalis"
+                        attLabel="diesNatalis"
+                        desc="Date of a saint’s martyrdom"/>
+               <valItem ident="birth"
+                        attLabel="birth"
+                        desc="Date of birth (do not use this in a person record, use element birth)"/>
+               <valItem ident="ascension"
+                        attLabel="ascension"
+                        desc="Date of a person’s ascension to power"/>
+               <valItem ident="death" attLabel="death" desc="Date of death"/>
+               <valItem ident="production"
+                        attLabel="production"
+                        desc="The date of production of the document (EMA)"/>
+               <valItem ident="repeated"
+                        attLabel="repeated"
+                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
+            </valList>
+         </attDef>
          <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
@@ -329,10 +461,148 @@
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "When" field for precise values. In case
                             the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
       <availableAtts elementName="date">
+         <attDef ident="calendar" attLabel="calendar">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
+               <valItem ident="alexander"
+                        attLabel="alexander"
+                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
+               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
+               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
+            </valList>
+         </attDef>
          <attDef ident="cert" attLabel="cert"/>
+         <attDef ident="dur" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-06-12"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+         </attDef>
+         <attDef ident="dur-iso" attLabel="duration">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-04-09"
+                   xml:lang="en">duration</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">지속 기간</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-02"
+                   xml:lang="zh-TW">時間長度</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-12-09"
+                   xml:lang="fr">durée</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">durata</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-05-04"
+                   xml:lang="es">duración</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-05-20">時間幅</gloss>
+         </attDef>
          <attDef ident="notAfter" attLabel="notAfter"/>
          <attDef ident="notBefore" attLabel="notBefore"/>
          <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="">
+               <valItem ident="age"
+                        attLabel="age"
+                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="reign"
+                        attLabel="reign"
+                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="life"
+                        attLabel="life"
+                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="marriage"
+                        attLabel="marriage"
+                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="generic-duration"
+                        attLabel="generic-duration"
+                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
+               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
+               <valItem ident="composition"
+                        attLabel="composition"
+                        desc="Date of the composition of a work"/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="Date of the translation of a work"/>
+               <valItem ident="revision"
+                        attLabel="revision"
+                        desc="Date of the revision of a work"/>
+               <valItem ident="recension"
+                        attLabel="recension"
+                        desc="Date of the composition of a specific recension"/>
+               <valItem ident="diesNatalis"
+                        attLabel="diesNatalis"
+                        desc="Date of a saint’s martyrdom"/>
+               <valItem ident="birth"
+                        attLabel="birth"
+                        desc="Date of birth (do not use this in a person record, use element birth)"/>
+               <valItem ident="ascension"
+                        attLabel="ascension"
+                        desc="Date of a person’s ascension to power"/>
+               <valItem ident="death" attLabel="death" desc="Date of death"/>
+               <valItem ident="production"
+                        attLabel="production"
+                        desc="The date of production of the document (EMA)"/>
+               <valItem ident="repeated"
+                        attLabel="repeated"
+                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
+            </valList>
+         </attDef>
          <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
@@ -407,12 +677,12 @@
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="sex">
-            <valList type="closed">
-               <valItem ident="Unknown"/>
-               <valItem ident="Female"/>
-               <valItem ident="Male"/>
-            </valList>
-         </element>
+                    <valList type="closed">
+                        <valItem ident="Unknown"/>
+                        <valItem ident="Female"/>
+                        <valItem ident="Male"/>
+                    </valList>
+                </element>
       </controlledValues>
       <childElements>
          <textNode type="input" class="sex"/>
@@ -433,13 +703,13 @@
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="faith">
-            <valList type="closed">
-               <valItem ident="Karaite"/>
-               <valItem ident="Rabbanite"/>
-               <valItem ident="Muslim"/>
-               <valItem ident="Christian"/>
-            </valList>
-         </element>
+                    <valList type="closed">
+                        <valItem ident="Karaite"/>
+                        <valItem ident="Rabbanite"/>
+                        <valItem ident="Muslim"/>
+                        <valItem ident="Christian"/>
+                    </valList>
+                </element>
       </controlledValues>
       <childElements>
          <textNode type="input" class="faith"/>
@@ -531,7 +801,44 @@
               formName="bibl"
               lookupLabel="Look up bibliographic record"/>
       <desc>Add a bibliographic item, like a monograph, journal article, or manuscript.</desc>
-      <availableAtts elementName="bibl"/>
+      <availableAtts elementName="bibl">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="replace">
+               <valItem ident="MS" attLabel="MS" desc="The reference is to a manuscript"/>
+               <valItem ident="QUARTO"
+                        attLabel="QUARTO"
+                        desc="The reference is to the Bodleian Quarto&#xA;                                        Catalogues"/>
+               <valItem ident="SC"
+                        attLabel="SC"
+                        desc="The reference is to the Bodleian Summary&#xA;                                        Catalogue"/>
+               <valItem ident="OC"
+                        attLabel="OC"
+                        desc="The reference is to the Bodleian Old Catalogue"/>
+               <valItem ident="bible" attLabel="bible" desc="The reference is to the bible"/>
+               <valItem ident="commentary"
+                        attLabel="commentary"
+                        desc="The reference is to a commentary"/>
+               <valItem ident="edition"
+                        attLabel="edition"
+                        desc="The reference is to an edition"/>
+               <valItem ident="extract"
+                        attLabel="extract"
+                        desc="The reference is to an extract"/>
+               <valItem ident="related"
+                        attLabel="related"
+                        desc="The reference is to a related item"/>
+               <valItem ident="text-relations"
+                        attLabel="text-relations"
+                        desc="The reference is to a textually-related item"/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="The reference is to a translation"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="title"
@@ -559,7 +866,7 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;title/&gt;">
-      <desc>The title to the Zotero should be filled out automatically.</desc>
+      <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title"/>
       <childElements>
          <textNode type="input" class="title"/>
@@ -588,8 +895,28 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
-      <desc>Specify which pages, columns, etc. you are refering to.</desc>
-      <availableAtts elementName="citedRange"/>
+      <desc>defines the range of cited content, often represented by pages or other units</desc>
+      <availableAtts elementName="citedRange">
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="">
+               <valItem ident="page" attLabel="page" desc="page"/>
+               <valItem ident="chapter" attLabel="chapter" desc="chapter"/>
+               <valItem ident="column" attLabel="column" desc="column"/>
+               <valItem ident="issue" attLabel="issue" desc="issue"/>
+               <valItem ident="line" attLabel="line" desc="line"/>
+               <valItem ident="part" attLabel="part" desc="part"/>
+               <valItem ident="volume" attLabel="volume" desc="volume"/>
+               <valItem ident="item" attLabel="item" desc="item number"/>
+               <valItem ident="fol" attLabel="fol" desc="folio"/>
+               <valItem ident="note"
+                        attLabel="note"
+                        desc="numbered note (footnote, sidenote, endnote)"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="citedRange"/>
          <child/>
@@ -602,7 +929,9 @@
          currentLevel="2"
          popup="2"
          teiElement="&lt;idno/&gt;">
-      <desc>Enter persistent identifiers of external projects for the same person.</desc>
+      <desc>supplies any form of identifier used to identify some object,
+  such as a bibliographic item, a person, a title, an organization,
+  etc. in a standardized way.</desc>
       <availableAtts elementName="idno">
          <attDef ident="resp" attLabel="resp"/>
          <attDef ident="subtype" attLabel="subtype">
@@ -610,19 +939,46 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="ope "
                      mode="change">
-               <valItem mode="add" ident="isni"/>
-               <valItem mode="add" ident="viaf"/>
-               <valItem mode="add" ident="wiki"/>
-               <valItem mode="add" ident="gnd"/>
-               <valItem mode="add" ident="merhav"/>
-               <valItem mode="add" ident="rambi"/>
-               <valItem mode="add" ident="imhm"/>
-               <valItem mode="add" ident="ktiv"/>
+               <valItem ident="isni" attLabel="isni"/>
+               <valItem ident="viaf" attLabel="viaf"/>
+               <valItem ident="wiki" attLabel="wiki"/>
+               <valItem ident="gnd" attLabel="gnd"/>
+               <valItem ident="merhav" attLabel="merhav"/>
+               <valItem ident="rambi" attLabel="rambi"/>
+               <valItem ident="imhm" attLabel="imhm"/>
+               <valItem ident="ktiv" attLabel="ktiv"/>
+            </valList>
+         </attDef>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="ISBN"
+                        attLabel="ISBN"
+                        desc="International Standard Book Number: a 13- or (if assigned prior to 2007) 10-digit identifying number assigned by the publishing industry to a published book or similar item, registered with the  International ISBN Agency.&#xA;        "/>
+               <valItem ident="ISSN"
+                        attLabel="ISSN"
+                        desc="International Standard Serial Number: an eight-digit number to uniquely identify a serial publication."/>
+               <valItem ident="DOI"
+                        attLabel="DOI"
+                        desc="Digital Object Identifier: a unique string of letters and numbers assigned to an electronic document."/>
+               <valItem ident="URI"
+                        attLabel="URI"
+                        desc="Uniform Resource Identifier: a string of characters to uniquely identify a resource which usually contains indication of the means of accessing that resource, the name of its host, and its filepath."/>
+               <valItem ident="VIAF"
+                        attLabel="VIAF"
+                        desc="A data number in the Virtual Internet Authority File assigned to link different names in catalogs around the world for the same entity."/>
+               <valItem ident="ESTC"
+                        attLabel="ESTC"
+                        desc="English Short-Title Catalogue number: an identifying number assigned to a document in English printed in the British Isles or North America before 1801."/>
+               <valItem ident="OCLC"
+                        attLabel="OCLC"
+                        desc="OCLC control number (record number) for the union catalog record in WorldCat, a union catalog for member libraries in the Online Computer Library Center global cooperative."/>
             </valList>
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="idno"/>
          <child/>
       </childElements>
    </idno>

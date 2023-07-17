@@ -4,7 +4,7 @@ xquery version "3.1";
  : @param $type options view (view xml in new window), download (download xml without saving), 
  : save (save to db, only available to logged in users)
 :)
-import module namespace config="http://localhost:8080/manuForma/config" at "../modules/config.xqm";
+import module namespace config="http://localhost/manuForma/config" at "../modules/config.xqm";
 import module namespace gitcommit="http://syriaca.org/srophe/gitcommit" at "git-commit.xql";
 import module namespace http="http://expath.org/ns/http-client";
 

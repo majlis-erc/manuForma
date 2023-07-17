@@ -2,7 +2,7 @@ xquery version "3.1";
 
 module namespace app="http://localhost/manuForma/templates";
 
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating" ;
 import module namespace config="http://localhost/manuForma/config" at "config.xqm";
 
 declare variable $app:navbase {'/exist/apps/manuForma'};

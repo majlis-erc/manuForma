@@ -11,344 +11,341 @@
    <ab ident="ab"
        elementName="ab"
        elementLabel="*Relation Container (1/3) &lt;ab/&gt;"
-       minOccur=""
-       maxOccur=""
        path="/*:ab"
        currentLevel="1"
-       popup="1">
+       popup="1"
+       teiElement="&lt;ab/&gt;">
       <availableAtts elementName="ab">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="resp"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="subtype"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="xml:id"
-                 mode="change"/>
+         <attDef ident="resp" attLabel="resp"/>
+         <attDef ident="subtype" attLabel="subtype"/>
+         <attDef ident="type" attLabel="type"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="idno"/>
-            <element ident="listRelation"/>
-            <element ident="bibl"/>
+            <element ident="idno"
+                     label="*Number of Relation in this source &lt;idno/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="listRelation"
+                     label="*Relation Container (2/3) &lt;listRelation/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="bibl"
+                     label="*Reference &lt;bibl/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </ab>
    <idno ident="idno"
          elementName="idno"
          elementLabel="*Number of Relation in this source &lt;idno/&gt;"
-         minOccur=""
-         maxOccur=""
          path="/*:ab/*:idno"
          currentLevel="2"
-         popup="2">
+         popup="2"
+         teiElement="&lt;idno/&gt;">
       <availableAtts elementName="idno">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change"/>
+         <attDef ident="type" attLabel="type"/>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="idno"/>
          <child/>
       </childElements>
    </idno>
    <listRelation ident="listRelation"
                  elementName="listRelation"
                  elementLabel="*Relation Container (2/3) &lt;listRelation/&gt;"
-                 minOccur=""
-                 maxOccur=""
                  path="/*:ab/*:listRelation"
                  currentLevel="2"
-                 popup="2">
+                 popup="2"
+                 teiElement="&lt;listRelation/&gt;">
       <availableAtts elementName="listRelation"/>
       <childElements>
          <child>
-            <element ident="relation"/>
+            <element ident="relation"
+                     label="*Relation Container (3/3) &lt;relation/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </listRelation>
    <relation ident="relation"
              elementName="relation"
              elementLabel="*Relation Container (3/3) &lt;relation/&gt;"
-             minOccur=""
-             maxOccur=""
              path="/*:ab/*:listRelation/*:relation"
              currentLevel="3"
-             popup="3">
+             popup="3"
+             teiElement="&lt;relation/&gt;">
       <desc>Specify the relationship between the person and another person or object. Choose the kind of relation from
                             the list provided in the "name" attributea and add the URIs of the respective records.</desc>
       <availableAtts elementName="relation">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="active"
-                 mode="change"
-                 usage="opt"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="mutual"
-                 mode="change"
-                 usage="opt"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="passive"
-                 mode="change"
-                 usage="opt"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="source"
-                 mode="change"
-                 usage="opt"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="replace"
-                 usage="req">
-                                <valList type="closed">
-                                    <valItem ident="majlis:wifeOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:husbandOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:motherInLawOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:fatherInLawOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:sonInLawOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:daughterInLawOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:fatherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:grandchildOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:granddaughterOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:grandfatherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:grandmotherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:grandsonOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:greatgrandfatherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:sisterOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:sonOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:motherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:nephewOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:nieceOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:stepFamilyRelationship">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:siblingOf">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:uncleOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:daughterOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:brotherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:kinOf">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:ancestorOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:cousinOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:claimedFamilyRelationship">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:familyOf">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:disciplinaryAssociate">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:followerOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:studentOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:refuterOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:adresseeOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:citedNegatively">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:citedPositively">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:cited">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:correspondedWith">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:debatedWith">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:teacherOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:assistantOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:acquaintedWith">
-                  <desc>@mutual: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:patronOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:successorOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:predecessorOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:enemyOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:friendOf">
-                  <desc>@active: Person, @passive: Person.</desc>
-               </valItem>
-                                    <valItem ident="majlis:affiliatedWith">
-                  <desc>@active: Person, @passive: Place.</desc>
-               </valItem>
-                                    <valItem ident="majlis:bornAt">
-                  <desc>@active: Person, @passive: Place.</desc>
-               </valItem>
-                                    <valItem ident="majlis:diedAt">
-                  <desc>@active: Person, @passive: Place.</desc>
-               </valItem>
-                                    <valItem ident="majlis:relationWith">
-                  <desc>@active: Person, @passive: Place.</desc>
-               </valItem>
-                                    <valItem ident="majlis:literaryRelationWith">
-                  <desc>@active: Person, @passive: Place.</desc>
-               </valItem>
-                                    <valItem ident="majlis:attended">
-                  <desc>@active: Person,@ passive: ?.</desc>
-               </valItem>
-                                    <valItem ident="majlis:organized">
-                  <desc>@active: Person,@ passive: ?.</desc>
-               </valItem>
-                                    <valItem ident="majlis:dictated">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:refuted">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:commentatorOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:translatorOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:adapterOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:mulaḫḫiṣOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:muḫtaṣirOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:mujmilOf">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                    <valItem ident="majlis:mentionedIn">
-                  <desc>@active: Person, @passive: Text.</desc>
-               </valItem>
-                                </valList>
-                            </attDef>
+         <attDef ident="active" attLabel="active"/>
+         <attDef ident="mutual" attLabel="mutual"/>
+         <attDef ident="passive" attLabel="passive"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="majlis:wifeOf"
+                        attLabel="wifeOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:husbandOf"
+                        attLabel="husbandOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:motherInLawOf"
+                        attLabel="motherInLawOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:fatherInLawOf"
+                        attLabel="fatherInLawOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:sonInLawOf"
+                        attLabel="sonInLawOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:daughterInLawOf"
+                        attLabel="daughterInLawOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:fatherOf"
+                        attLabel="fatherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:grandchildOf"
+                        attLabel="grandchildOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:granddaughterOf"
+                        attLabel="granddaughterOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:grandfatherOf"
+                        attLabel="grandfatherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:grandmotherOf"
+                        attLabel="grandmotherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:grandsonOf"
+                        attLabel="grandsonOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:greatgrandfatherOf"
+                        attLabel="greatgrandfatherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:sisterOf"
+                        attLabel="sisterOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:sonOf"
+                        attLabel="sonOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:motherOf"
+                        attLabel="motherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:nephewOf"
+                        attLabel="nephewOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:nieceOf"
+                        attLabel="nieceOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:stepFamilyRelationship"
+                        attLabel="stepFamilyRelationship"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:siblingOf"
+                        attLabel="siblingOf"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:uncleOf"
+                        attLabel="uncleOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:daughterOf"
+                        attLabel="daughterOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:brotherOf"
+                        attLabel="brotherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:kinOf" attLabel="kinOf" desc="@mutual: Person."/>
+               <valItem ident="majlis:ancestorOf"
+                        attLabel="ancestorOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:cousinOf"
+                        attLabel="cousinOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:claimedFamilyRelationship"
+                        attLabel="claimedFamilyRelationship"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:familyOf" attLabel="familyOf" desc="@mutual: Person."/>
+               <valItem ident="majlis:disciplinaryAssociate"
+                        attLabel="disciplinaryAssociate"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:followerOf"
+                        attLabel="followerOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:studentOf"
+                        attLabel="studentOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:refuterOf"
+                        attLabel="refuterOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:adresseeOf"
+                        attLabel="adresseeOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:citedNegatively"
+                        attLabel="citedNegatively"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:citedPositively"
+                        attLabel="citedPositively"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:cited"
+                        attLabel="cited"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:correspondedWith"
+                        attLabel="correspondedWith"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:debatedWith"
+                        attLabel="debatedWith"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:teacherOf"
+                        attLabel="teacherOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:assistantOf"
+                        attLabel="assistantOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:acquaintedWith"
+                        attLabel="acquaintedWith"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:patronOf"
+                        attLabel="patronOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:successorOf"
+                        attLabel="successorOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:predecessorOf"
+                        attLabel="predecessorOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:enemyOf"
+                        attLabel="enemyOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:friendOf"
+                        attLabel="friendOf"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:affiliatedWith"
+                        attLabel="affiliatedWith"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:bornAt"
+                        attLabel="bornAt"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:diedAt"
+                        attLabel="diedAt"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:relationWith"
+                        attLabel="relationWith"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:literaryRelationWith"
+                        attLabel="literaryRelationWith"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:attended"
+                        attLabel="attended"
+                        desc="@active: Person,@ passive: ?."/>
+               <valItem ident="majlis:organized"
+                        attLabel="organized"
+                        desc="@active: Person,@ passive: ?."/>
+               <valItem ident="majlis:dictated"
+                        attLabel="dictated"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:refuted"
+                        attLabel="refuted"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:commentatorOf"
+                        attLabel="commentatorOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:translatorOf"
+                        attLabel="translatorOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:adapterOf"
+                        attLabel="adapterOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mulaḫḫiṣOf"
+                        attLabel="mulaḫḫiṣOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:muḫtaṣirOf"
+                        attLabel="muḫtaṣirOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mujmilOf"
+                        attLabel="mujmilOf"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mentionedIn"
+                        attLabel="mentionedIn"
+                        desc="@active: Person, @passive: Text."/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="desc"/>
+            <element ident="desc"
+                     label="*Relation Description &lt;desc/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </relation>
    <desc ident="desc"
          elementName="desc"
          elementLabel="*Relation Description &lt;desc/&gt;"
-         minOccur=""
-         maxOccur=""
          path="/*:ab/*:listRelation/*:relation/*:desc"
          currentLevel="4"
-         popup="4">
+         popup="4"
+         teiElement="&lt;desc/&gt;">
       <availableAtts elementName="desc"/>
       <childElements>
          <child>
-            <element ident="gloss"/>
-            <element ident="persName"/>
-            <element ident="placeName"/>
-            <element ident="date"/>
-            <element ident="objectName"/>
+            <element ident="gloss"
+                     label="*Text Block &lt;gloss/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="persName"
+                     label="Person &lt;persName/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="placeName"
+                     label="Place &lt;placeName/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="date"
+                     label="Date &lt;date/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="objectName"
+                     label="Manuscript or Text &lt;objectName/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </desc>
    <gloss ident="gloss"
           elementName="gloss"
           elementLabel="*Text Block &lt;gloss/&gt;"
-          minOccur=""
-          maxOccur=""
           path="/*:ab/*:listRelation/*:relation/*:desc/*:gloss"
           currentLevel="5"
-          popup="5">
+          popup="5"
+          teiElement="&lt;gloss/&gt;">
       <availableAtts elementName="gloss"/>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="gloss"/>
          <child/>
       </childElements>
    </gloss>
    <persName ident="persName"
              elementName="persName"
              elementLabel="Person &lt;persName/&gt;"
-             minOccur=""
-             maxOccur=""
              path="/*:ab/*:listRelation/*:relation/*:desc/*:persName"
              currentLevel="5"
-             popup="5">
+             popup="5"
+             teiElement="&lt;persName/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
               formURL="form.xq?form=forms/relationTEI/lookup/persName.xhtml"
@@ -361,24 +358,20 @@
              label="Create New Person Record"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
       <availableAtts elementName="persName">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 mode="change"/>
+         <attDef ident="ref" attLabel="ref"/>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="persName"/>
          <child/>
       </childElements>
    </persName>
    <placeName ident="placeName"
               elementName="placeName"
               elementLabel="Place &lt;placeName/&gt;"
-              minOccur=""
-              maxOccur=""
               path="/*:ab/*:listRelation/*:relation/*:desc/*:placeName"
               currentLevel="5"
-              popup="5">
+              popup="5"
+              teiElement="&lt;placeName/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
               formURL="form.xq?form=forms/relationTEI/lookup/placeName.xhtml"
@@ -391,71 +384,62 @@
              label="Create New Place Record"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
       <availableAtts elementName="placeName">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 mode="change"/>
+         <attDef ident="ref" attLabel="ref"/>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="placeName"/>
          <child/>
       </childElements>
    </placeName>
    <date ident="date"
          elementName="date"
          elementLabel="Date &lt;date/&gt;"
-         minOccur=""
-         maxOccur=""
          path="/*:ab/*:listRelation/*:relation/*:desc/*:date"
          currentLevel="5"
-         popup="5">
+         popup="5"
+         teiElement="&lt;date/&gt;">
       <availableAtts elementName="date">
-         <attDef ident="notAfter"/>
-         <attDef ident="notBefore"/>
-         <attDef ident="source"/>
-         <attDef ident="when"/>
+         <attDef ident="notAfter" attLabel="notAfter"/>
+         <attDef ident="notBefore" attLabel="notBefore"/>
+         <attDef ident="source" attLabel="source"/>
+         <attDef ident="when" attLabel="when"/>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="date"/>
          <child/>
       </childElements>
    </date>
    <objectName ident="objectName"
                elementName="objectName"
                elementLabel="Manuscript or Text &lt;objectName/&gt;"
-               minOccur=""
-               maxOccur=""
                path="/*:ab/*:listRelation/*:relation/*:desc/*:objectName"
                currentLevel="5"
-               popup="5">
+               popup="5"
+               teiElement="&lt;objectName/&gt;">
       <availableAtts elementName="objectName">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="ref"
-                 mode="change"/>
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="type"
-                 mode="change">
-                                <valList type="closed">
-                                    <valItem ident="manuscript"/>
-                                    <valItem ident="text"/>
-                                </valList>
-                            </attDef>
+         <attDef ident="ref" attLabel="ref"/>
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="manuscript" attLabel="manuscript"/>
+               <valItem ident="text" attLabel="text"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="objectName"/>
          <child/>
       </childElements>
    </objectName>
    <bibl ident="bibl"
          elementName="bibl"
          elementLabel="*Reference &lt;bibl/&gt;"
-         minOccur=""
-         maxOccur=""
          path="/*:ab/*:bibl"
          currentLevel="2"
-         popup="2">
+         popup="2"
+         teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
               formURL="form.xq?form=forms/relationTEI/lookup/bibl.xhtml"
@@ -463,49 +447,55 @@
               formName="bibl"
               lookupLabel="Look up Zotero record"/>
       <availableAtts elementName="bibl">
-         <attDef ident="type"/>
-         <attDef ident="xml:id"/>
+         <attDef ident="type" attLabel="type"/>
+         <attDef ident="xml:id" attLabel="id"/>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="citedRange"/>
-            <element ident="ptr"/>
+            <element ident="citedRange"
+                     label="*Pages, Folios, or Columns &lt;citedRange/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="ptr"
+                     label="*Source Identifier &lt;ptr/&gt;"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </bibl>
    <citedRange ident="citedRange"
                elementName="citedRange"
                elementLabel="*Pages, Folios, or Columns &lt;citedRange/&gt;"
-               minOccur=""
-               maxOccur=""
                path="/*:ab/*:bibl/*:citedRange"
                currentLevel="3"
-               popup="3">
+               popup="3"
+               teiElement="&lt;citedRange/&gt;">
       <availableAtts elementName="citedRange">
-         <attDef xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                 ident="unit"
-                 mode="change">
-                                <valList type="closed">
-                                <valItem ident="p"/>
-                                <valItem ident="fol"/>
-                                <valItem ident="col"/>
-                            </valList>
-                            </attDef>
+         <attDef ident="unit" attLabel="unit">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="p" attLabel="p"/>
+               <valItem ident="fol" attLabel="fol"/>
+               <valItem ident="col" attLabel="col"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input"/>
+         <textNode type="input" class="citedRange"/>
          <child/>
       </childElements>
    </citedRange>
    <ptr ident="ptr"
         elementName="ptr"
         elementLabel="*Source Identifier &lt;ptr/&gt;"
-        minOccur=""
-        maxOccur=""
         path="/*:ab/*:bibl/*:ptr"
         currentLevel="3"
-        popup="3">
+        popup="3"
+        teiElement="&lt;ptr/&gt;">
       <availableAtts elementName="ptr"/>
       <childElements>
          <child/>
