@@ -10,25 +10,12 @@
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
       <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-lookup">
-         <xf:instance id="i-rec">
-            <data></data>
-         </xf:instance>
-         <xf:instance id="i-lookup-query">
-            <data xmlns="">
-               <q></q>
-            </data>
-         </xf:instance>
-         <xf:instance id="i-lookup-results">
-            <data xmlns=""></data>
-         </xf:instance>
-         <xf:instance id="i-lookup-selected">
-            <data xmlns="">
-               <selected></selected>
-            </data>
-         </xf:instance>
-         <xf:instance id="i-lookup-add">
-            <data xmlns=""></data>
-         </xf:instance>
+         <xf:instance id="i-rec"><data></data></xf:instance>
+         <xf:instance id="i-lookup-query"><data xmlns=""><q></q></data></xf:instance>
+         <xf:instance id="i-lookup-results"><data xmlns=""></data></xf:instance>
+         <xf:instance id="i-lookup-selected"><data xmlns="">
+               <selected></selected></data></xf:instance>
+         <xf:instance id="i-lookup-add"><data xmlns=""></data></xf:instance>
          <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
             <xf:resource value="concat('/exist/apps/majlis/api/search/title?format=xml&amp;q=', instance('i-lookup-query')//q),"></xf:resource>
          </xf:submission>
@@ -37,31 +24,17 @@
    <body>
       <div class="d-flex flex-column justify-content-center align-items-center">
          <h2 class="h3 mainElement">Look up title</h2>
-         <p>Search controlled vocabulary  
-            <xf:output value="local-name(current())"></xf:output>
-         </p>
-         <div class="input-group">
-            <xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true">
-               <xf:label></xf:label>
-               <xf:toggle ev:event="DOMFocusIn" case="show-autocompletion"></xf:toggle>
-            </xf:input>
-            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-lookup" appearance="minimal">
-               <xf:label><i class="bi bi-search"></i></xf:label>
-            </xf:submit>
+         <p>Search controlled vocabulary  <xf:output value="local-name(current())"></xf:output></p>
+         <div class="input-group"><xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true"><xf:label></xf:label><xf:toggle ev:event="DOMFocusIn" case="show-autocompletion"></xf:toggle></xf:input><xf:submit class="btn btn-outline-secondary btn-sm" submission="s-lookup" appearance="minimal"><xf:label><i class="bi bi-search"></i></xf:label></xf:submit>
          </div>
          <xf:select1 ref="instance('i-lookup-selected')/child::*" appearance="full" class="checkbox select-group">
-            <xf:itemset ref="instance('i-lookup-results')//*:title/child::*[1]">
-               <xf:label ref="."></xf:label>
-               <xf:value ref="."></xf:value>
+            <xf:itemset ref="instance('i-lookup-results')//*:title/child::*[1]"><xf:label ref="."></xf:label><xf:value ref="."></xf:value>
             </xf:itemset>
             <xf:action ev:event="xforms-value-changed">
                <xf:insert ev:event="DOMActivate" ref="instance('i-lookup-add')/child::*" origin="instance('i-lookup-results')//*:title/child::*[1][. = instance('i-lookup-selected')//selected]"></xf:insert>
             </xf:action>
          </xf:select1>
-         <xf:trigger class="btn btn-outline-secondary btn-sm" appearance="full" ref=".">
-            <xf:label><i class="bi bi-plus"></i> Add to Record
-            </xf:label>
-            <xf:insert ev:event="DOMActivate" ref="." at="." origin="instance('i-lookup-selected')/selected/child::*" position="after"></xf:insert>
+         <xf:trigger class="btn btn-outline-secondary btn-sm" appearance="full" ref="."><xf:label><i class="bi bi-plus"></i> Add to Record</xf:label><xf:insert ev:event="DOMActivate" ref="." at="." origin="instance('i-lookup-selected')/selected/child::*" position="after"></xf:insert>
             <xf:delete ev:event="DOMActivate" ref="."></xf:delete>
             <xf:setvalue ref="instance('i-lookup-query')/q" value="''"></xf:setvalue>
             <xf:delete ref="instance('i-lookup-results')//child::*"></xf:delete>
