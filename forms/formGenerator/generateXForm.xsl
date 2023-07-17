@@ -1000,9 +1000,21 @@
                                             </xf:input>
                                         </div>
                                         <div class="input-group mb-3 indent">    
-                                            <xf:input ref="@who" class="form-control">
-                                                <xf:label>Add your identifier (e.g. #msteinschneider). Check if you are listed under "Project team" in der "Header" menu.</xf:label>
-                                            </xf:input>
+                                            <xf:select ref="@who" class="form-control">
+                                                <xf:label>Select your name.</xf:label>
+                                                <xf:item>
+                                                    <xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
+                                                </xf:item>
+                                                <xf:item>
+                                                    <xf:label>Gregor Schwarb</xf:label><xf:value>#gschwarb</xf:value>
+                                                </xf:item>
+                                                <xf:item>
+                                                    <xf:label>Maximilian de Molière</xf:label><xf:value>#mmoliere</xf:value>
+                                                </xf:item>
+                                                <xf:item>
+                                                    <xf:label>Nadine Urbiczek</xf:label><xf:value>#nurbiczek</xf:value>
+                                                </xf:item>
+                                            </xf:select>
                                         </div>                                        
                                         <div class="input-group mb-3 indent">
                                             <xf:input ref="@when" class="form-control small">
