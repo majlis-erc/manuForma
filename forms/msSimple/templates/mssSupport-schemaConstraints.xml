@@ -513,23 +513,17 @@
       <availableAtts elementName="material"/>
       <controlledValues>
          <element xmlns="" ident="material">
-                    <valList type="closed">
-                        <valItem ident="Wood"/>
-                        <valItem ident="Papyrus"/>
-                        <valItem ident="Cardboard"/>
-                        <valItem ident="Leather"/>
-                        <valItem ident="Metal"/>
-                        <valItem ident="Paper"/>
-                        <valItem ident="Textile"/>
-                        <valItem ident="Other"/>
-                        <valItem ident="Parchment"/>
-                        <valItem ident="Silk"/>
-                        <valItem ident="Stone"/>
-                        <valItem ident="Bronze"/>
-                        <valItem ident="Alabaster"/>
-                        <valItem ident="Cotton"/>
-                    </valList>
-                </element>
+            <valList type="closed">
+               <valItem ident="Paper"/>
+               <valItem ident="Parchment"/>
+               <valItem ident="Papyrus"/>
+               <valItem ident="Cardboard"/>
+               <valItem ident="Leather"/>
+               <valItem ident="Textile"/>
+               <valItem ident="Other"/>
+               <valItem ident="Cotton"/>
+            </valList>
+         </element>
       </controlledValues>
       <childElements>
          <textNode type="input" class="material"/>
@@ -1174,9 +1168,9 @@ watermark or similar device.</desc>
          <attDef ident="type" attLabel="type">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="">
-               <valItem ident="leaves" attLabel="leaves"/>
+                     type="closed"
+                     mode="change">
+               <valItem ident="leaves" attLabel="Leaves"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1239,9 +1233,9 @@ watermark or similar device.</desc>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="">
-               <valItem ident="original" attLabel="original"/>
-               <valItem ident="modern" attLabel="modern"/>
+                     mode="change">
+               <valItem ident="original" attLabel="Original Foliation"/>
+               <valItem ident="modern" attLabel="Modern Foliation"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1331,16 +1325,16 @@ watermark or similar device.</desc>
       <availableAtts elementName="catchwords"/>
       <controlledValues>
          <element xmlns="" ident="catchwords">
-                    <valList type="closed">
-                        <valItem ident="No marking "/>
-                        <valItem ident="Catchwords at the end of quires, "/>
-                        <valItem ident="Catchwords at the end of folios, "/>
-                        <valItem ident="Catchwords at the end of pages, "/>
-                        <valItem ident="Middle markings, "/>
-                        <valItem ident="Signatures at the end of quires, "/>
-                        <valItem ident="Signatures at the beginning of quires, "/>
-                    </valList>
-                </element>
+            <valList type="closed">
+               <valItem ident="No marking "/>
+               <valItem ident="Catchwords at the end of quires, "/>
+               <valItem ident="Catchwords at the end of folios, "/>
+               <valItem ident="Catchwords at the end of pages, "/>
+               <valItem ident="Middle markings, "/>
+               <valItem ident="Signatures at the end of quires, "/>
+               <valItem ident="Signatures at the beginning of quires, "/>
+            </valList>
+         </element>
       </controlledValues>
       <childElements>
          <textNode type="input" class="catchwords"/>
@@ -1376,11 +1370,11 @@ watermark or similar device.</desc>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="">
-               <valItem ident="complete" attLabel="complete"/>
-               <valItem ident="partOfCodex" attLabel="partOfCodex"/>
-               <valItem ident="fragment" attLabel="fragment"/>
-               <valItem ident="unidentified" attLabel="unidentified"/>
+                     mode="change">
+               <valItem ident="complete" attLabel="Complete manuscript"/>
+               <valItem ident="partOfCodex" attLabel="Part of codex"/>
+               <valItem ident="fragment" attLabel="Fragment"/>
+               <valItem ident="unidentified" attLabel="Unidentified"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1430,9 +1424,9 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
-               <valItem ident="visible" attLabel="visible"/>
-               <valItem ident="illegible" attLabel="illegible"/>
-               <valItem ident="erased" attLabel="erased"/>
+               <valItem ident="visible" attLabel="Writing visible"/>
+               <valItem ident="illegible" attLabel="Writing illegible"/>
+               <valItem ident="erased" attLabel="Writing erased"/>
             </valList>
          </attDef>
          <attDef ident="type" attLabel="Type">
@@ -1442,7 +1436,7 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
-               <valItem ident="writing" attLabel="writing"/>
+               <valItem ident="writing" attLabel="Writing"/>
             </valList>
          </attDef>
       </availableAtts>
