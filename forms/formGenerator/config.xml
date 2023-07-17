@@ -182,9 +182,6 @@
                 <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
                     <element xpath="tei:graphic"/>
                 </group>
-                <!--<group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
-                    <element xpath="tei:graphic"/>
-                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
@@ -350,7 +347,7 @@
                 <group groupLabel="Summary of text layout." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text layout." groupNo="2">
+                <group groupLabel="Detailed description(s) of text layout." groupNo="2">
                     <element xpath="tei:decoNote"/>
                 </group>
             </elementGroups>
@@ -385,7 +382,7 @@
                 <group groupLabel="Script definition(s)." groupNo="1"  repeatable="no">
                     <element xpath="tei:scriptDesc"/>
                 </group>
-                <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="./*:locus" groupLabelXPath="concat('Scribal hand: fols. ',./*:locus)" groupNo="2" repeatable="no">
+                <group groupLabel="Scribal hand(s)." groupNo="2" repeatable="no">
                     <element xpath="tei:handDesc"/>
                 </group>
             </elementGroups>
@@ -396,7 +393,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,'(fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat./*:objectType" groupNo="1" repeatable="yes">
 
                     <element xpath="tei:item"/>
                 </group>
