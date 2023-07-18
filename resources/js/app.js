@@ -132,12 +132,10 @@ function manuforma_adaptmorehtml()
 	$("img[src='resources/images/TEI-175.jpg']").attr("src","resources/images/hn/Text_Encoding_InitiativeTEI_Logo.svg");
 	 */ 
 	 
-	 /* Hides all elements in the toolbar */
-    $(".btn-toolbar .input-group").each(function(){
-        if($(this).find('.xforms-enabled').length !== 0) { console.log('enabled1'); }
-        else { $(this).hide(); }
-/*		if ($(this).children("span").length <= $(this).children(".xforms-disabled").length) $(this).hide();*/
-	});
+    /* Hide empty buttons.  */
+       $(".btn-toolbar .input-group").each(function() {
+            if ($(this).find(".xforms-group-content").children(".xforms-disabled").length > 0) $(this).hide();
+      })
 	 
 	$(".xforms-alert-icon").addClass("nobackground").html($('<i class="bi bi-x-circle"></i> Cancel'));
 	$("#edit .elementControls .justify-content-between").removeClass("justify-content-between");
