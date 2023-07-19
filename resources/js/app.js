@@ -8,7 +8,7 @@ function manuforma_changecolorsvg(domsvg, mycolor)
 }
 
 function manuforma_adapthtml()
-{
+{  
 	var logobutton = $(".navbar .navbar-brand");
 	logobutton.html('<object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo_manuforma.svg" type="image/svg+xml"></object>');
 	logobutton.find("object").click(function(){
@@ -44,8 +44,8 @@ function manuforma_adapthtml()
 		$("#edit").prepend(newheader);
 	}
 	
-	$("#sidebarMenu").removeClass("bg-light").addClass("bg-dark");
-	$("main").addClass("bg-dark");
+/*	$("#sidebarMenu").removeClass("bg-light").addClass("bg-dark");*/
+/*	$("main").addClass("bg-dark");*/
 	
 	$("input[type=file]:not(.withlabel)").each(function(){
 		var finalId = $(this).attr("id");
@@ -132,11 +132,17 @@ function manuforma_adaptmorehtml()
 	$("img[src='resources/images/TEI-175.jpg']").attr("src","resources/images/hn/Text_Encoding_InitiativeTEI_Logo.svg");
 	 */ 
 	 
-    /* Hide empty buttons.  */
+	 /* Hide empty buttons.  */
+	 /* 
        $(".btn-toolbar .input-group").each(function() {
             if ($(this).find(".xforms-group-content").children(".xforms-disabled").length > 0) $(this).hide();
       })
-	 
+       */ 
+/* 
+    $(".btn-toolbar .input-group").each(function(){
+		if ($(this).children("span").length <= $(this).children(".xforms-disabled").length) $(this).hide();
+	});
+*/	 
 	$(".xforms-alert-icon").addClass("nobackground").html($('<i class="bi bi-x-circle"></i> Cancel'));
 	$("#edit .elementControls .justify-content-between").removeClass("justify-content-between");
 }
