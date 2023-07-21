@@ -85,7 +85,7 @@
             <localSchema src="../schemas/mss-msidentifier.xml"/>
             <globalSchema src="../schemas/mss-msidentifier.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Add shelfmark and information on the holding institution , as well as alternate references to existing cataloging data.</formDesc>
+            <formDesc>Add shelfmark and information on the holding institution, as well as alternate references to existing cataloging data.</formDesc>
             <controlledValuesElements>
                 <element ident="country">
                     <valList type="closed">
@@ -159,7 +159,7 @@
                 </element>
             </controlledValuesElements>
             <elementGroups>
-                <group groupLabel="Identification via location, place, institution, collection, shelfmark" groupNo="1">
+                <group groupLabel="Identification via location, place, institution, collection, shelfmark." groupNo="1" repeatable="no">
                     <element xpath="tei:country"/>
                     <element xpath="tei:settlement"/>
                     <element xpath="tei:repository"/>
@@ -167,7 +167,7 @@
                     <element xpath="tei:institution"/>
                     <element xpath="tei:collection"/>
                 </group>
-                <group groupLabel="Identification via old shelfmark or via catalogues and databases" groupNo="2">
+                <group groupLabel="Identification via old shelfmark or via catalogues and databases. Joins with other manuscript records." groupNo="2" repeatable="no">
                     <element xpath="tei:altIdentifier"/>
                     <element xpath="tei:msName"/>
                 </group>
@@ -182,16 +182,30 @@
                 <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
                     <element xpath="tei:graphic"/>
                 </group>
-                <!--<group groupLabel="Reproduction" groupNo="1" groupLabelConditionalElement="." groupLabelXPath="concat('Reproduction available at ',./@source" repeatable="yes">
-                    <element xpath="tei:graphic"/>
-                </group>-->
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Give a basic codicological definition of the book and specify the type and form.</formDesc>
+            <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
+            <elementGroups>
+                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*)" groupNo="1" repeatable="no">
+                    <element xpath="tei:objectType"/>
+                </group>
+                <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
+                    <element xpath="tei:listBibl"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Single manuscript"/>
+                        <valItem ident="Composite manuscript"/>
+                        <valItem ident="Multiple text manuscript"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
         
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
@@ -200,7 +214,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of contents" groupNo="1">-->
+                <group groupLabel="Summary of contents" groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
                 <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus,')')" groupNo="2" repeatable="yes">
@@ -227,13 +241,6 @@
                 </group>
             </elementGroups>
             <controlledValuesElements>
-                <element ident="objectType">
-                    <valList type="closed">
-                        <valItem ident="Single manuscript"/>
-                        <valItem ident="Composite manuscript"/>
-                        <valItem ident="Multiple text manuscript"/>
-                    </valList>
-                </element>
                 <element ident="catchwords">
                     <valList type="closed">
                         <valItem ident="No marking "/>
@@ -247,19 +254,13 @@
                 </element>
                 <element ident="material">
                     <valList type="closed">
-                        <valItem ident="Wood"/>
+                        <valItem ident="Paper"/>
+                        <valItem ident="Parchment"/>
                         <valItem ident="Papyrus"/>
                         <valItem ident="Cardboard"/>
                         <valItem ident="Leather"/>
-                        <valItem ident="Metal"/>
-                        <valItem ident="Paper"/>
                         <valItem ident="Textile"/>
                         <valItem ident="Other"/>
-                        <valItem ident="Parchment"/>
-                        <valItem ident="Silk"/>
-                        <valItem ident="Stone"/>
-                        <valItem ident="Bronze"/>
-                        <valItem ident="Alabaster"/>
                         <valItem ident="Cotton"/>
                     </valList>
                 </element>
@@ -346,7 +347,7 @@
                 <group groupLabel="Summary of text layout." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text layout." groupNo="2">
+                <group groupLabel="Detailed description(s) of text layout." groupNo="2">
                     <element xpath="tei:decoNote"/>
                 </group>
             </elementGroups>
@@ -375,17 +376,14 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the scribal hands of the manuscript. If there are multiple hands, use separate description containers.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of script." groupNo="1">
-                    <element xpath="tei:handDesc/tei:summary"/>
-                </group>
                 <!--<group groupLabel="Script definition." groupLabelConditionalElement="." groupLabelXPath="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:scriptDesc/tei:scriptNote"/>
                 </group>-->
-                <group groupLabel="Script definition." groupNo="2"  repeatable="yes">
-                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
+                <group groupLabel="Script definition(s)." groupNo="1"  repeatable="no">
+                    <element xpath="tei:scriptDesc"/>
                 </group>
-                <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="./*:locus" groupLabelXPath="concat('Scribal hand: fols. ',./*:locus)" groupNo="3" repeatable="yes">
-                    <element xpath="tei:handDesc/tei:handNote"/>
+                <group groupLabel="Scribal hand(s)." groupNo="2" repeatable="no">
+                    <element xpath="tei:handDesc"/>
                 </group>
             </elementGroups>
         </subform>
@@ -395,7 +393,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents.</formDesc>
             <elementGroups>
-                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat(./*:objectType,'(fols. ',./*:locus,')')" groupNo="1" repeatable="yes">
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="./*:objectType" groupNo="1" repeatable="yes">
 
                     <element xpath="tei:item"/>
                 </group>
@@ -498,9 +496,6 @@
                 <group groupLabel="Summary of the history of the manuscript." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <!--<group groupLabel="Give an account of the manuscript's production (date of origin, place of origin, folios, person (scribe, patron), quotation)." groupNo="2">
-                    <element xpath="tei:origin"/>
-                </group>-->
                 <group groupLabel="Traces left by later owners of the manuscript (date, place, folios, person, quotation, stamp)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:provenance"/>
                 </group>
@@ -515,62 +510,10 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
             <elementGroups>
-                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:title, ', ',./*:citedRange)" groupNo="1"  repeatable="yes">
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>
         </subform>        
-        <!--<subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msPart" formName="msPart" formLabel="MS Part" repeat="yes">
-            <xmlTemplate src="../templates/ms-part-example.xml"/>
-            <subform xpath="tei:msIdentifier" formName="msIdentifier" formLabel="MS Identifier">
-                <localSchema src="../schemas/mss-msidentifier.xml"/>
-                <globalSchema src="../schemas/mss-msidentifier.xml"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>The identifier is the major reference unit of a codicological unit where Information can be added on the holding institution and references to existing cataloging data.</formDesc>
-            </subform>
-            <subform xpath="tei:msContents" formName="msContents" formLabel="Content Description">
-                <localSchema src="../schemas/mss-msitem.xml"/>
-                <globalSchema src="../schemas/mss-msitem.xml"/>
-                <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the textual contents in detail or in general terms.</formDesc>
-            </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport" formLabel="Support">
-                <localSchema src="../schemas/mss-support.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>Describe the writing material of the codicological unit.</formDesc>
-            </subform>
-            <subform xpath="tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Page Layout" repeat="no">
-                <localSchema src="../schemas/mss-layout.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the page layout of the codicological unit. If necessary, you can define multiple page layouts.</formDesc>
-            </subform>
-            <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:decoDesc" formName="decoDesc" formLabel="Text Layout"
-                repeat="no">
-                <localSchema src="../schemas/mss-layout.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the graphical signs of the manuscript.</formDesc>
-            </subform>
-            <subform xpath="tei:physDesc/tei:handDesc" formName="handDesc" formLabel="Hand Description" repeat="no">
-                <localSchema src="../schemas/mss-hand.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/ms-part-example.xml"/>
-                <formDesc>Describe the scribal hands of the codicological unit. If there are multiple hands, use separate description containers.</formDesc>
-            </subform>
-            <subform xpath="tei:physDesc/tei:additions" formName="additions" formLabel="Additions" repeat="no">
-                <localSchema src="../schemas/mss-additions.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe any additions to the codicological unit that were made after its original production.</formDesc>
-            </subform>       
-            <subform xpath="tei:history" formName="history" formLabel="History" repeat="no">
-                <localSchema src="../schemas/mss-history.xml"/>
-                <globalSchema src="../schemas/mss-compiled.odd"/>
-                <xmlTemplate src="../templates/full-mss-template.xml"/>
-                <formDesc>Describe the production of the codicological unit, traces left by previous owners, and how it was acquired by its present library.</formDesc>
-            </subform>
-        </subform>-->
     </subforms>
 </config>
