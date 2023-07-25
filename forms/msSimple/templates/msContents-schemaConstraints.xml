@@ -19,12 +19,12 @@
       <childElements>
          <child>
             <element ident="summary"
-                     label="Content summary"
+                     label="*Content summary"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="msItem"
-                     label="*Text unit"
+                     label="*Description of text unit"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -33,7 +33,7 @@
    </msContents>
    <summary ident="summary"
             elementName="summary"
-            elementLabel="Content summary"
+            elementLabel="*Content summary"
             path="/*:msContents/*:summary"
             currentLevel="2"
             popup="2"
@@ -47,14 +47,12 @@
    </summary>
    <msItem ident="msItem"
            elementName="msItem"
-           elementLabel="*Text unit"
+           elementLabel="*Description of text unit"
            path="/*:msContents/*:msItem"
            currentLevel="2"
            popup="2"
            teiElement="&lt;msItem/&gt;">
-      <desc>Describe the individual textual unit found in the manuscript or manuscript part.
-                            Assign a text genre from the list that best approximates the text's genre. Define a Text unit identifier that consists of
-                            the record URI-number, an underscore and the number of the text within the manuscript. e.g. "54-02".</desc>
+      <desc>Before supplying information on range of folios, title, author, etc., create additional fields as required and specify the genre of this text unit.</desc>
       <availableAtts elementName="msItem">
          <attDef ident="class" attLabel="Text genre">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -92,27 +90,22 @@
       <childElements>
          <child>
             <element ident="locus"
-                     label="*Folios"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="title"
-                     label="*Title"
+                     label="*Canonical title"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="author"
-                     label="Author"
+                     label="*Canonical author name"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="textLang"
                      label="Text language"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="rubric"
-                     label="Rubric"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -126,13 +119,8 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="finalRubric"
-                     label="Final rubric"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="note"
-                     label="Note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -141,14 +129,12 @@
    </msItem>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="*Folios"
+          elementLabel="*Range of folios"
           path="/*:msContents/*:msItem/*:locus"
           currentLevel="3"
           popup="3"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the manuscript.</desc>
       <availableAtts elementName="locus">
          <attDef ident="from" attLabel="From">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -160,13 +146,12 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
    <title ident="title"
           elementName="title"
-          elementLabel="*Title"
+          elementLabel="*Canonical title"
           path="/*:msContents/*:msItem/*:title"
           currentLevel="3"
           popup="3"
@@ -182,9 +167,7 @@
              elementName="title"
              label="New Work"
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
-      <desc>Look up the title records in the database to identify the title. Try different spellings in different languages! If no
-                            suitable record exists, create a new one. (The "Reference" field will be filled out automatically when you link a record
-                            to this element.)</desc>
+      <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record! If title is not recorded at all, create a new one.  </desc>
       <availableAtts elementName="title">
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -209,49 +192,18 @@
    </title>
    <author ident="author"
            elementName="author"
-           elementLabel="Author"
+           elementLabel="*Canonical author name"
            path="/*:msContents/*:msItem/*:author"
            currentLevel="3"
            popup="3"
            teiElement="&lt;author/&gt;">
-      <desc>Look up the person records in the database to identify the author. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled
-                            out automatically when you link a record to this element.)</desc>
+      <desc>Look up the person records in the database to identify the canonical author. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional authors as required.</desc>
       <availableAtts elementName="author"/>
       <childElements>
-         <child>
-            <element ident="persName"
-                     label="*Author name"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </author>
-   <persName ident="persName"
-             elementName="persName"
-             elementLabel="*Author name"
-             path="/*:msContents/*:msItem/*:author/*:persName"
-             currentLevel="4"
-             popup="4"
-             teiElement="&lt;persName/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up persons"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="personTEI"
-             elementName="persName"
-             label="New Persons"
-             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <availableAtts elementName="persName"/>
-      <childElements>
-         <textNode type="input" class="persName"/>
+         <textNode type="input" class="author"/>
          <child/>
       </childElements>
-   </persName>
+   </author>
    <textLang ident="textLang"
              elementName="textLang"
              elementLabel="Text language"
@@ -259,11 +211,7 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;textLang/&gt;">
-      <desc>Choose a language code for the primary language used in
-                            the text in the field Main language. The most relevant codes are: "ar": Arabic, "he": Hebrew, and "en" English. If the
-                            text contains passages in other languages, enter them in the field Other languages. If you quote from the manuscript in a
-                            language other than the one marked in Main language, you must mark the language of the quote using the Language
-                            field.</desc>
+      <desc>Choose a primary language. If the text contains passages in other languages, enter them in the field Other languages. </desc>
       <availableAtts elementName="textLang">
          <attDef ident="mainLang" attLabel="Main language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -291,91 +239,9 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="textLang"/>
          <child/>
       </childElements>
    </textLang>
-   <rubric ident="rubric"
-           elementName="rubric"
-           elementLabel="Rubric"
-           path="/*:msContents/*:msItem/*:rubric"
-           currentLevel="3"
-           popup="3"
-           teiElement="&lt;rubric/&gt;">
-      <desc>Add the words through which a manuscript signals the
-                            beginning of a text. This formula often mentions the author and title and it is set off from the text itself through
-                            color, shape, or character size.</desc>
-      <availableAtts elementName="rubric">
-         <attDef ident="xml:lang" attLabel="Language">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
-               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
-               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <child>
-            <element ident="locus"
-                     label="*Folios"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="quote"
-                     label="Transcription"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </rubric>
-   <locus ident="locus"
-          elementName="locus"
-          elementLabel="*Folios"
-          path="/*:msContents/*:msItem/*:rubric/*:locus"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
-      <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="From">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
-         </attDef>
-         <attDef ident="to" attLabel="To">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="locus"/>
-         <child/>
-      </childElements>
-   </locus>
-   <quote ident="quote"
-          elementName="quote"
-          elementLabel="Transcription"
-          path="/*:msContents/*:msItem/*:rubric/*:quote"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;quote/&gt;">
-      <desc>Quotation from the manuscript.</desc>
-      <availableAtts elementName="quote"/>
-      <childElements>
-         <textNode type="input" class="quote"/>
-         <child/>
-      </childElements>
-   </quote>
    <incipit ident="incipit"
             elementName="incipit"
             elementLabel="Incipit"
@@ -383,29 +249,12 @@
             currentLevel="3"
             popup="3"
             teiElement="&lt;incipit/&gt;">
-      <desc>Add the opening words of the text proper of sufficient
-                            length to identify the work with confidence.</desc>
-      <availableAtts elementName="incipit">
-         <attDef ident="xml:lang" attLabel="Language">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
-               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
-               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <desc>Transcribe the opening words of the text unit of sufficient length to identify the work with confidence.</desc>
+      <availableAtts elementName="incipit"/>
       <childElements>
          <child>
             <element ident="locus"
-                     label="*Folios"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -419,14 +268,12 @@
    </incipit>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="*Folios"
+          elementLabel="*Range of folios"
           path="/*:msContents/*:msItem/*:incipit/*:locus"
           currentLevel="4"
           popup="4"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the manuscript.</desc>
       <availableAtts elementName="locus">
          <attDef ident="from" attLabel="From">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -438,7 +285,6 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
@@ -449,7 +295,7 @@
           currentLevel="4"
           popup="4"
           teiElement="&lt;quote/&gt;">
-      <desc>Quotation from the manuscript.</desc>
+      <desc>Transcribe relevant portion of the text.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
          <textNode type="input" class="quote"/>
@@ -463,29 +309,12 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;explicit/&gt;">
-      <desc>Add the closing words of the text proper, exclusive of any
-                            rubric or colophon which might follow it.</desc>
-      <availableAtts elementName="explicit">
-         <attDef ident="xml:lang" attLabel="Language">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
-               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
-               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <desc>Transcribe the closing words of the text unit, exclusive of any rubric or colophon which might follow.</desc>
+      <availableAtts elementName="explicit"/>
       <childElements>
          <child>
             <element ident="locus"
-                     label="*Folios"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -499,14 +328,12 @@
    </explicit>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="*Folios"
+          elementLabel="*Range of folios"
           path="/*:msContents/*:msItem/*:explicit/*:locus"
           currentLevel="4"
           popup="4"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the manuscript.</desc>
       <availableAtts elementName="locus">
          <attDef ident="from" attLabel="From">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -518,7 +345,6 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="locus"/>
          <child/>
       </childElements>
    </locus>
@@ -529,88 +355,7 @@
           currentLevel="4"
           popup="4"
           teiElement="&lt;quote/&gt;">
-      <desc>Quotation from the manuscript.</desc>
-      <availableAtts elementName="quote"/>
-      <childElements>
-         <textNode type="input" class="quote"/>
-         <child/>
-      </childElements>
-   </quote>
-   <finalRubric ident="finalRubric"
-                elementName="finalRubric"
-                elementLabel="Final rubric"
-                path="/*:msContents/*:msItem/*:finalRubric"
-                currentLevel="3"
-                popup="3"
-                teiElement="&lt;finalRubric/&gt;">
-      <desc>Add the statement through which a manuscript signals
-                            the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
-                            device.</desc>
-      <availableAtts elementName="finalRubric">
-         <attDef ident="xml:lang" attLabel="Language">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
-               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
-               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <child>
-            <element ident="locus"
-                     label="*Folios"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="quote"
-                     label="Transcription"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </finalRubric>
-   <locus ident="locus"
-          elementName="locus"
-          elementLabel="*Folios"
-          path="/*:msContents/*:msItem/*:finalRubric/*:locus"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
-      <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="From">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
-         </attDef>
-         <attDef ident="to" attLabel="To">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="locus"/>
-         <child/>
-      </childElements>
-   </locus>
-   <quote ident="quote"
-          elementName="quote"
-          elementLabel="Transcription"
-          path="/*:msContents/*:msItem/*:finalRubric/*:quote"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;quote/&gt;">
-      <desc>Quotation from the manuscript.</desc>
+      <desc>Transcribe relevant portion of the text.</desc>
       <availableAtts elementName="quote"/>
       <childElements>
          <textNode type="input" class="quote"/>
@@ -619,37 +364,16 @@
    </quote>
    <note ident="note"
          elementName="note"
-         elementLabel="Note"
+         elementLabel="Notes"
          path="/*:msContents/*:msItem/*:note"
          currentLevel="3"
          popup="3"
          teiElement="&lt;note/&gt;">
-      <desc>This is the place to remark on points that don't fit the mold of the other
-                            elements or more extensive observations.</desc>
+      <desc>Add observations on fields mentioned above.</desc>
       <availableAtts elementName="note"/>
-      <childElements>
-         <child>
-            <element ident="p"
-                     label="Free text box"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </note>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:msContents/*:msItem/*:note/*:p"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
 </TEI>

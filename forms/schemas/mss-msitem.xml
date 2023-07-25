@@ -80,15 +80,13 @@ End license statement: do not remove -->
 
                     <moduleRef key="core"
                         except="list abbr add addrLine address analytic bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q rb reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term time unclear unit q"/>
-                    <moduleRef key="msdescription" include="msItem summary rubric incipit explicit finalRubric"/>
+                    <moduleRef key="msdescription" include="msItem summary incipit explicit"/>
                     <moduleRef key="tei"/>
 
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <gloss>*Folios</gloss>
+                        <gloss>*Range of folios</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -98,7 +96,7 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
+                            <empty/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -151,42 +149,7 @@ End license statement: do not remove -->
                     <elementSpec ident="origPlace" module="msdescription" mode="delete"/>
                     <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="watermark" module="msdescription" mode="delete"/>
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
-                        <content>
-                            <textNode/>
-                        </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
-                    </elementSpec>
+                    
                     <elementSpec ident="depth" module="msdescription" mode="delete"/>
                     <elementSpec ident="height" module="msdescription" mode="delete"/>
                     <elementSpec ident="width" module="msdescription" mode="delete"/>
@@ -202,39 +165,47 @@ End license statement: do not remove -->
                     <elementSpec ident="formula" mode="delete"/>
                     <moduleRef key="namesdates" include="persName"/>
                     <elementSpec ident="author" mode="change">
-                        <gloss>Author</gloss>
+                        <gloss>*Canonical author name</gloss>
                         <gloss type="tei">&lt;author/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the author. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. (The "Reference" field will be filled
-                            out automatically when you link a record to this element.)</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the canonical author. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional authors as required.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.naming" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="persName"/>
+                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef name="ref" mode="change">
                                 <gloss>Person identifier</gloss>
                             </attDef>
+                            <attDef name="cert" mode="change">
+                                <gloss>Degree of certainty</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="high">
+                                        <gloss>High</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="medium">
+                                        <gloss>Medium</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="low">
+                                        <gloss>Low</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="textLang" mode="change">
                         <gloss>Text language</gloss>
                         <gloss type="tei">&lt;textLang/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a language code for the primary language used in
-                            the text in the field Main language. The most relevant codes are: "ar": Arabic, "he": Hebrew, and "en" English. If the
-                            text contains passages in other languages, enter them in the field Other languages. If you quote from the manuscript in a
-                            language other than the one marked in Main language, you must mark the language of the quote using the Language
-                            field.</desc>
+                        <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a primary language. If the text contains passages in other languages, enter them in the field Other languages. </desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
+                            <empty/>
                         </content>
                         <attList>
                             <attDef ident="mainLang" mode="change">
@@ -268,11 +239,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="title" mode="change">
-                        <gloss>*Title</gloss>
+                        <gloss>*Canonical title</gloss>
                         <gloss type="tei">&lt;title/&gt;</gloss>
-                        <desc>Look up the title records in the database to identify the title. Try different spellings in different languages! If no
-                            suitable record exists, create a new one. (The "Reference" field will be filled out automatically when you link a record
-                            to this element.)</desc>
+                        <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record! If title is not recorded at all, create a new one.  </desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -310,6 +279,20 @@ End license statement: do not remove -->
                             <attDef name="ref" mode="change">
                                 <gloss>Text identifier</gloss>
                             </attDef>
+                            <attDef name="cert" mode="change">
+                                <gloss>Degree of certainty</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="high">
+                                        <gloss>High</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="medium">
+                                        <gloss>Medium</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="low">
+                                        <gloss>Low</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="msContents" mode="change">
@@ -323,11 +306,9 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
                     <elementSpec ident="msItem" mode="change">
-                        <gloss>*Text unit</gloss>
+                        <gloss>*Description of text unit</gloss>
                         <gloss type="tei">&lt;msItem/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the individual textual unit found in the manuscript or manuscript part.
-                            Assign a text genre from the list that best approximates the text's genre. Define a Text unit identifier that consists of
-                            the record URI-number, an underscore and the number of the text within the manuscript. e.g. "54-02".</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Before supplying information on range of folios, title, author, etc., create additional fields as required and specify the genre of this text unit.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -338,10 +319,8 @@ End license statement: do not remove -->
                                 <elementRef key="title" minOccurs="1" maxOccurs="1"/>
                                 <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="textLang" minOccurs="1" maxOccurs="1"/>
-                                <elementRef key="rubric" minOccurs="0" maxOccurs="1"/>
                                 <elementRef key="incipit" minOccurs="0" maxOccurs="1"/>
                                 <elementRef key="explicit" minOccurs="0" maxOccurs="1"/>
-                                <elementRef key="finalRubric" minOccurs="0" maxOccurs="1"/>
                                 <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
                             </sequence>
                         </content>
@@ -414,10 +393,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="note" mode="change">
-                        <gloss>Note</gloss>
+                        <gloss>Notes</gloss>
                         <gloss type="tei">&lt;note/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">This is the place to remark on points that don't fit the mold of the other
-                            elements or more extensive observations.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations on fields mentioned above.</desc>
                         <classes mode="change">
                             <memberOf key="att.anchoring" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -427,11 +405,11 @@ End license statement: do not remove -->
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="p" minOccurs="1" maxOccurs="1"/>
+                            <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
-                        <gloss>Content summary</gloss>
+                        <gloss>*Content summary</gloss>
                         <gloss type="tei">&lt;summary/&gt;</gloss>
                         <desc xml:lang="en">Add a short summary of contents in one sentence. There is space for a detailed description below.</desc>
                         <classes mode="change">
@@ -464,53 +442,11 @@ End license statement: do not remove -->
 
 
 
-                    <elementSpec ident="rubric" mode="change">
-                        <gloss>Rubric</gloss>
-                        <gloss type="tei">&lt;rubric/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="rubric.desc" xml:lang="en">Add the words through which a manuscript signals the
-                            beginning of a text. This formula often mentions the author and title and it is set off from the text itself through
-                            color, shape, or character size.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.msExcerpt" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <sequence>
-                                <elementRef key="locus" minOccurs="0" maxOccurs="1"/>
-                                <elementRef key="quote" minOccurs="0" maxOccurs="1"/>
-                            </sequence>
-                        </content>
-                        <attList>
-                            <attDef ident="xml:lang" mode="change">
-                                <gloss>Language</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar">
-                                        <gloss>Arabic</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="en">
-                                        <gloss>English</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he">
-                                        <gloss>Hebrew</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he-Latn">
-                                        <gloss>Hebrew in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Latn">
-                                        <gloss>Arabic in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Hebr">
-                                        <gloss>Arabic in Hebrew characters</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                        </attList>
-                    </elementSpec>
+                    
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Quotation from the manuscript.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.ascribed.directed" mode="delete"/>
@@ -522,7 +458,7 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="who" mode="delete"/>
                             <attList>
-                                <attDef ident="xml:lang" mode="delete"> </attDef>
+                                <attDef ident="xml:lang" mode="delete"></attDef>
                             </attList>
                         </attList>
                     </elementSpec>
@@ -531,8 +467,7 @@ End license statement: do not remove -->
                     <elementSpec ident="incipit" mode="change">
                         <gloss>Incipit</gloss>
                         <gloss type="tei">&lt;incipit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">Add the opening words of the text proper of sufficient
-                            length to identify the work with confidence.</desc>
+                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">Transcribe the opening words of the text unit of sufficient length to identify the work with confidence.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -545,36 +480,14 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                         <attList>
-                            <attDef ident="xml:lang" mode="change">
-                                <gloss>Language</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar">
-                                        <gloss>Arabic</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="en">
-                                        <gloss>English</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he">
-                                        <gloss>Hebrew</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he-Latn">
-                                        <gloss>Hebrew in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Latn">
-                                        <gloss>Arabic in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Hebr">
-                                        <gloss>Arabic in Hebrew characters</gloss>
-                                    </valItem>
-                                </valList>
+                            <attDef ident="xml:lang" mode="delete">
                             </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="explicit" mode="change">
                         <gloss>Explicit</gloss>
                         <gloss type="tei">&lt;explicit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">Add the closing words of the text proper, exclusive of any
-                            rubric or colophon which might follow it.</desc>
+                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">Transcribe the closing words of the text unit, exclusive of any rubric or colophon which might follow.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -587,115 +500,12 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                         <attList>
-                            <attDef ident="xml:lang" mode="change">
-                                <gloss>Language</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar">
-                                        <gloss>Arabic</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="en">
-                                        <gloss>English</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he">
-                                        <gloss>Hebrew</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he-Latn">
-                                        <gloss>Hebrew in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Latn">
-                                        <gloss>Arabic in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Hebr">
-                                        <gloss>Arabic in Hebrew characters</gloss>
-                                    </valItem>
-                                </valList>
+                            <attDef ident="xml:lang" mode="delete">
                             </attDef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="finalRubric" mode="change">
-                        <gloss>Final rubric</gloss>
-                        <gloss type="tei">&lt;finalRubric/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="finalrubric.desc" xml:lang="en">Add the statement through which a manuscript signals
-                            the end of a text division, often with an assertion as to its author and title, set off from the text itself with a visual
-                            device.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.msExcerpt" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <content>
-                            <sequence>
-                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
-                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
-                            </sequence>
-                        </content>
-                        <attList>
-                            <attDef ident="xml:lang" mode="change">
-                                <gloss>Language</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar">
-                                        <gloss>Arabic</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="en">
-                                        <gloss>English</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he">
-                                        <gloss>Hebrew</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he-Latn">
-                                        <gloss>Hebrew in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Latn">
-                                        <gloss>Arabic in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Hebr">
-                                        <gloss>Arabic in Hebrew characters</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                        </attList>
-                    </elementSpec>
-                    <elementSpec ident="colophon" mode="delete">
-                        <gloss>Colophon</gloss>
-                        <gloss type="tei">&lt;colophon/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="colophon.desc" xml:lang="en">A statement providing information about the date, place,
-                            agency, or reason for production of the manuscript.</desc>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.msExcerpt" mode="delete"/>
-                        </classes>
-                        <content>
-                            <sequence>
-                                <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
-                                <elementRef key="quote" minOccurs="1" maxOccurs="1"/>
-                            </sequence>
-                        </content>
-                        <attList>
-                            <attDef ident="xml:lang" mode="change">
-                                <gloss>Language</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar">
-                                        <gloss>Arabic</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="en">
-                                        <gloss>English</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he">
-                                        <gloss>Hebrew</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="he-Latn">
-                                        <gloss>Hebrew in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Latn">
-                                        <gloss>Arabic in Latin characters</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="ar-Hebr">
-                                        <gloss>Arabic in Hebrew characters</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                        </attList>
-                    </elementSpec>
+                    
+                    
                 </schemaSpec>
             </div>
         </body>
