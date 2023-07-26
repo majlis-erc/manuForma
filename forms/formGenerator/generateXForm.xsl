@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.23 Beta 
+        Version: 1.24 Beta 
             -1.22 marks a major redesign
         
 
@@ -1665,7 +1665,7 @@
                             <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                 <div class="input-group mb-3 float-end btn-no-border">
                                     <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
-                                        <xf:label><i class="bi bi-plus"/> <xsl:value-of select="@groupLabel"/></xf:label>
+                                        <xf:label><i class="bi bi-plus"/> Add "<xsl:value-of select="@groupLabel"/>"</xf:label>
                                         <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
                                     </xf:trigger>   
                                 </div>
