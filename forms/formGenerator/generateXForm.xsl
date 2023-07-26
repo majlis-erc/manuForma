@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.22 Beta 
+        Version: 1.23 Beta 
             -1.22 marks a major redesign
         
 
@@ -686,7 +686,7 @@
                 <xsl:call-template name="navbar"/>
                 <div class="container-fluid">
                     <div class="row">
-                        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                             <div class="position-sticky pt-3">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -757,7 +757,7 @@
                                 </ul>
                             </div>
                         </nav>
-                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-dark">
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
                                    Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"/>
@@ -1000,7 +1000,7 @@
                                             </xf:input>
                                         </div>
                                         <div class="input-group mb-3 indent">    
-                                            <xf:select ref="@who" class="form-control">
+                                            <xf:select1  xmlns="http://www.w3.org/2002/xforms" ref="@who" class="form-control">
                                                 <xf:label>Select your name.</xf:label>
                                                 <xf:item>
                                                     <xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
@@ -1014,22 +1014,22 @@
                                                 <xf:item>
                                                     <xf:label>Nadine Urbiczek</xf:label><xf:value>#nurbiczek</xf:value>
                                                 </xf:item>
-                                            </xf:select>
-                                        </div>                                        
+                                            </xf:select1>
+                                        </div>                                         
                                         <div class="input-group mb-3 indent">
-                                            <xf:input ref="@when" class="form-control small">
+                                            <xf:input  xmlns="http://www.w3.org/2002/xforms" ref="@when" class="form-control small">
                                                 <xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label>
                                             </xf:input>
                                         </div>
                                         <div class="input-group mb-3 indent">
-                                            <xf:input ref="@ref" class="form-control small">
+                                            <xf:input  xmlns="http://www.w3.org/2002/xforms" ref="@ref" class="form-control small">
                                                 <xf:label>Your identifier (e.g. #msteinschneider): </xf:label>
                                             </xf:input>
                                         </div>
                                         <hr/>
                                     </xf:repeat>
                                     <div class="input-group mb-3">
-                                        <xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
+                                        <xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
                                             <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
                                         </xf:input>
@@ -1169,7 +1169,7 @@
                         <xsl:when test="$subform/subform">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                                         <div class="position-sticky pt-3">
                                             <ul class="nav flex-column">
                                                 <xsl:for-each select="subform">
@@ -1199,7 +1199,7 @@
                                             </ul>
                                         </div>
                                     </nav>
-                                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-dark">
                                         <xf:switch id="{$subformName}LoadSubforms" class="mainContent panel">
                                             <xf:case id="{$subformName}SubformMain" selected="true()">
                                                 <h4>Select section to edit</h4>
@@ -2281,7 +2281,7 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$app-root}">
-                        <xsl:value-of select="$configDoc//appTitle"/></a>
+                       <xsl:value-of select="$configDoc//appTitle"/></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
                         aria-expanded="false" aria-label="Toggle navigation"><span
@@ -2678,12 +2678,13 @@
             <childElements xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:if test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
                         <xsl:choose>
+                            <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]"/>
                             <xsl:when test="$elementName = ('p','desc','note','summary')">
                                 <textNode type="textarea"/>
                             </xsl:when>
-                            <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
+                            <xsl:when test="$elementRules/descendant-or-self::*:textNode">
                                 <xsl:choose>
-                                    <xsl:when test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:classRef or $elementRules/descendant-or-self::*:content/descendant-or-self::elementRef"/>
+                                    <xsl:when test="$elementRules/descendant-or-self::*:classRef or $elementRules/descendant-or-self::elementRef"/>
                                     <xsl:otherwise>
                                         <textNode type="input" class="{$elementName}"/>                                        
                                     </xsl:otherwise>
