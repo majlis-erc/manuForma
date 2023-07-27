@@ -169,6 +169,22 @@
              formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record! If title is not recorded at all, create a new one.  </desc>
       <availableAtts elementName="title">
+         <attDef ident="cert" attLabel="Degree of certainty">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef ident="ref" attLabel="Text identifier">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Text identifier</gloss>
+         </attDef>
          <attDef ident="xml:lang" attLabel="Language">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
@@ -177,8 +193,8 @@
                      type="closed"
                      mode="change">
                <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
                <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
                <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
                <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
                <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
@@ -198,7 +214,24 @@
            popup="3"
            teiElement="&lt;author/&gt;">
       <desc>Look up the person records in the database to identify the canonical author. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional authors as required.</desc>
-      <availableAtts elementName="author"/>
+      <availableAtts elementName="author">
+         <attDef ident="cert" attLabel="Degree of certainty">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef ident="ref" attLabel="Person identifier">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="author"/>
          <child/>
@@ -221,8 +254,8 @@
                      type="closed"
                      mode="change">
                <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
                <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
             </valList>
          </attDef>
          <attDef ident="otherLangs" attLabel="Other language">
@@ -233,8 +266,8 @@
                      type="open"
                      mode="change">
                <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
                <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
             </valList>
          </attDef>
       </availableAtts>
