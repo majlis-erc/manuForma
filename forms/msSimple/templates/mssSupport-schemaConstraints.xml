@@ -15,7 +15,7 @@
                 currentLevel="1"
                 popup="1"
                 teiElement="&lt;supportDesc/&gt;">
-      <desc>Describe the writing material in detail using the appropriate fields.</desc>
+      <desc>Describe the writing material in detail using the provided fields.</desc>
       <availableAtts elementName="supportDesc">
          <attDef ident="ana" attLabel="analysis">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -424,12 +424,12 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="extent"
-                     label="Measurements of book block"
+                     label="Measurements"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="foliation"
-                     label="Foliation"
+                     label="*Foliation/Pagination"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -458,13 +458,13 @@
       <availableAtts elementName="support"/>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="material"
-                     label="Writing material"
+                     label="*Writing material"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -486,30 +486,41 @@
          </child>
       </childElements>
    </support>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:supportDesc/*:support/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         path="/*:supportDesc/*:support/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned above.</desc>
+      <availableAtts elementName="note">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="commemoration" attLabel="commemoration"/>
+               <valItem ident="liturgical" attLabel="liturgical"/>
+               <valItem ident="résumé" attLabel="résumé"/>
+               <valItem ident="scientifique" attLabel="scientifique"/>
+               <valItem ident="transcription" attLabel="transcription"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
    <material ident="material"
              elementName="material"
-             elementLabel="Writing material"
+             elementLabel="*Writing material"
              path="/*:supportDesc/*:support/*:material"
              currentLevel="3"
              popup="3"
              teiElement="&lt;material/&gt;">
-      <desc>Describe the writing material. Choose from the list
-                            supplied what kind of material is used in the manuscript/this codicological unit.</desc>
+      <desc>Choose from the list.</desc>
       <availableAtts elementName="material"/>
       <controlledValues>
          <element xmlns="" ident="material">
@@ -520,8 +531,8 @@
                <valItem ident="Cardboard"/>
                <valItem ident="Leather"/>
                <valItem ident="Textile"/>
-               <valItem ident="Other"/>
                <valItem ident="Cotton"/>
+               <valItem ident="Other"/>
             </valList>
          </element>
       </controlledValues>
@@ -921,9 +932,9 @@ watermark or similar device.</desc>
               currentLevel="3"
               popup="3"
               teiElement="&lt;origPlace/&gt;">
-      <desc>Look up the place records in the database to specify a
-                            settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The
-                            "reference" field will be filled out automatically when you link a place record to this element.)</desc>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The place given here refers to the writing material
+                            (and not the production of the copy).</desc>
       <availableAtts elementName="origPlace">
          <attDef ident="cert" attLabel="certainty">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -957,24 +968,6 @@ watermark or similar device.</desc>
                    versionDate="2019-09-16"
                    xml:lang="ja">確実性</gloss>
          </attDef>
-         <attDef ident="evidence" attLabel="evidence">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="internal"
-                        attLabel="internal"
-                        desc="there is internal evidence to support the intervention. 간섭을 지지하는 내부 증거가 있다. 有內部證明得以支持 当該調整を判断する内部証拠を示す． l'intervention est justifiée par une preuve&#xA;            interne existen pruebas internas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
-               <valItem ident="external"
-                        attLabel="external"
-                        desc="there is external evidence to support the intervention. 간섭을 지지하는 외부 증거가 있다. 有外部證明得以支持 当該調整を判断する外部証拠を示す． l'intervention est justifiée par une preuve&#xA;            externe existen pruebas externas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
-               <valItem ident="conjecture"
-                        attLabel="conjecture"
-                        desc="the intervention or interpretation has been made by the editor, cataloguer, or&#xA;            scholar on the basis of their expertise. 간섭 또는 해석이 편집자, 또는 전문성에 근거한 학자에 의해 수행되었다. 編輯、編目者或學者根據自身的專業來執行該更動或詮釋。 編集者，カタログ作成者，研究者による解釈や調整． l'intervention ou l'interprétation a été faite&#xA;            par le rédacteur, le catalogueur, ou le chercheur sur la base de leur expertise. la intervención o interpretación ha sido hecho&#xA;            por el editor, catalogador o crítico en base a su experiencia. l'intervento o interpretazione è stata effettuata&#xA;            dal curatore, catalogatore o critico in base alla loro esperienza"/>
-            </valList>
-         </attDef>
-         <attDef ident="from-custom" attLabel="from-custom"/>
-         <attDef ident="key" attLabel="key"/>
          <attDef ident="n" attLabel="number">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1024,11 +1017,9 @@ watermark or similar device.</desc>
              currentLevel="3"
              popup="3"
              teiElement="&lt;origDate/&gt;">
-      <desc>Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" field for precise values. In case the date can only be approximated, use the "not After "and "not Before"
-                            fields together.</desc>
+      <desc>Fill in the date in CE. The date given here refers to the
+                            writing material (and not the production of the copy).</desc>
       <availableAtts elementName="origDate">
-         <attDef ident="calendar" attLabel="calendar"/>
          <attDef ident="cert" attLabel="certainty">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1061,7 +1052,6 @@ watermark or similar device.</desc>
                    versionDate="2019-09-16"
                    xml:lang="ja">確実性</gloss>
          </attDef>
-         <attDef ident="from" attLabel="from"/>
          <attDef ident="n" attLabel="number">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1094,11 +1084,9 @@ watermark or similar device.</desc>
                    xml:lang="ja"
                    versionDate="2019-06-08">数値</gloss>
          </attDef>
-         <attDef ident="period" attLabel="period"/>
-         <attDef ident="to" attLabel="to"/>
-         <attDef ident="when" attLabel="When">
+         <attDef ident="when" attLabel="Date">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">When</gloss>
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Date</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -1107,22 +1095,23 @@ watermark or similar device.</desc>
    </origDate>
    <extent ident="extent"
            elementName="extent"
-           elementLabel="Measurements of book block"
+           elementLabel="Measurements"
            path="/*:supportDesc/*:extent"
            currentLevel="2"
            popup="2"
            teiElement="&lt;extent/&gt;">
-      <desc>Give the total number of folios for the call mark or manuscript part.</desc>
+      <desc>Provide total number of folios and measurements. Base your observations on folios
+                            and not pages or bifolios.</desc>
       <availableAtts elementName="extent"/>
       <childElements>
          <child>
             <element ident="measure"
-                     label="Total number of folios"
+                     label="*Total number of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="dimensions"
-                     label="Dimensions of the page"
+                     label="*Dimensions of the page"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -1131,13 +1120,12 @@ watermark or similar device.</desc>
    </extent>
    <measure ident="measure"
             elementName="measure"
-            elementLabel="Total number of folios"
+            elementLabel="*Total number of folios"
             path="/*:supportDesc/*:extent/*:measure"
             currentLevel="3"
             popup="3"
             teiElement="&lt;measure/&gt;">
-      <desc>Specify how many folios does the manuscript/this codicological unit
-                            contain?</desc>
+      <desc>Specify total number of folios.</desc>
       <availableAtts elementName="measure">
          <attDef ident="unit" attLabel="Unit">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1146,7 +1134,7 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="leaf" attLabel="leaf" desc="used for leafs."/>
+               <valItem ident="folio" attLabel="Folio"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1157,12 +1145,12 @@ watermark or similar device.</desc>
    </measure>
    <dimensions ident="dimensions"
                elementName="dimensions"
-               elementLabel="Dimensions of the page"
+               elementLabel="*Dimensions of the page"
                path="/*:supportDesc/*:extent/*:dimensions"
                currentLevel="3"
                popup="3"
                teiElement="&lt;dimensions/&gt;">
-      <desc>Measure the leaves.</desc>
+      <desc>Provide measurements of the folio.</desc>
       <availableAtts elementName="dimensions">
          <attDef ident="type" attLabel="type">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1176,12 +1164,12 @@ watermark or similar device.</desc>
       <childElements>
          <child>
             <element ident="height"
-                     label="Height of writing material"
+                     label="*Height of writing material"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="width"
-                     label="Width of writing material"
+                     label="*Width of writing material"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -1190,13 +1178,24 @@ watermark or similar device.</desc>
    </dimensions>
    <height ident="height"
            elementName="height"
-           elementLabel="Height of writing material"
+           elementLabel="*Height of writing material"
            path="/*:supportDesc/*:extent/*:dimensions/*:height"
            currentLevel="4"
            popup="4"
            teiElement="&lt;height/&gt;">
-      <desc>Measure the height with a precision of 5 millimeters.</desc>
-      <availableAtts elementName="height"/>
+      <desc>Measure the height in millimeters.</desc>
+      <availableAtts elementName="height">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="mm"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="height"/>
          <child/>
@@ -1204,13 +1203,24 @@ watermark or similar device.</desc>
    </height>
    <width ident="width"
           elementName="width"
-          elementLabel="Width of writing material"
+          elementLabel="*Width of writing material"
           path="/*:supportDesc/*:extent/*:dimensions/*:width"
           currentLevel="4"
           popup="4"
           teiElement="&lt;width/&gt;">
-      <desc>Measure the width with a precision of 5 millimeters.</desc>
-      <availableAtts elementName="width"/>
+      <desc>Measure the width in millimeters.</desc>
+      <availableAtts elementName="width">
+         <attDef ident="unit" attLabel="Unit">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="mm"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="width"/>
          <child/>
@@ -1218,13 +1228,14 @@ watermark or similar device.</desc>
    </width>
    <foliation ident="foliation"
               elementName="foliation"
-              elementLabel="Foliation"
+              elementLabel="*Foliation/Pagination"
               path="/*:supportDesc/*:foliation"
               currentLevel="2"
               popup="2"
               teiElement="&lt;foliation/&gt;">
-      <desc>Describe how the folios or pages in the manuscript are
-                            numbered (Arabic numerals, Hebrew letters etc.), if there are multiple such devices and their range.</desc>
+      <desc>Distinguish between foliation and pagination. Describe
+                            the numbering system (Arabic numerals, Hebrew letters etc.). If necessary create multiple fields for different numbering
+                            systems exhibited.</desc>
       <availableAtts elementName="foliation">
          <attDef ident="rendition" attLabel="Original or modern?">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -1235,6 +1246,17 @@ watermark or similar device.</desc>
                      mode="change">
                <valItem ident="original" attLabel="Original Foliation"/>
                <valItem ident="modern" attLabel="Modern Foliation"/>
+            </valList>
+         </attDef>
+         <attDef ident="style" attLabel="Foliation or Pagination?">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Foliation or Pagination?</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="foliation" attLabel="Foliation"/>
+               <valItem ident="pagination" attLabel="Pagination"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1250,88 +1272,109 @@ watermark or similar device.</desc>
               currentLevel="2"
               popup="2"
               teiElement="&lt;collation/&gt;">
-      <desc>Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
-                            supplied for the descriptor field a generic description that best fits your overall impression.</desc>
+      <desc>Supply information on quiring and catchwords. For
+                            additional observations use the free text box.</desc>
       <availableAtts elementName="collation"/>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="formula"
-                     label="Quire formula"
+                     label="*Number of bifolia per quire"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="catchwords"
-                     label="Catchwords"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="unit"
-                     label="collation"
+                     label="*Ordering of the quires"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </collation>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:supportDesc/*:collation/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         path="/*:supportDesc/*:collation/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned above.</desc>
+      <availableAtts elementName="note">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="commemoration" attLabel="commemoration"/>
+               <valItem ident="liturgical" attLabel="liturgical"/>
+               <valItem ident="résumé" attLabel="résumé"/>
+               <valItem ident="scientifique" attLabel="scientifique"/>
+               <valItem ident="transcription" attLabel="transcription"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
    <formula ident="formula"
             elementName="formula"
-            elementLabel="Quire formula"
+            elementLabel="*Number of bifolia per quire"
             path="/*:supportDesc/*:collation/*:formula"
             currentLevel="3"
             popup="3"
             teiElement="&lt;formula/&gt;">
-      <desc>Describe the manuscript's quiring using some formalized system. (Differentiate
-                            between quaternions, quinions, etc. and provide the number and position of extant (bi)folios within the quire.) You can
-                            link to an external platform that describes the quire structure visually using the reference field.</desc>
+      <desc>Specify the number of bifolia per quire. Describe deviations from the general
+                            quiring model (shortened or enlarged quires) in the free text box. You can link to VizColl for detailed description and
+                            visualisation of quire structure.</desc>
       <availableAtts elementName="formula">
          <attDef ident="ref" attLabel="ref"/>
       </availableAtts>
+      <controlledValues>
+         <element xmlns="" ident="formula">
+            <valList type="closed">
+               <valItem ident="1"/>
+               <valItem ident="2"/>
+               <valItem ident="3"/>
+               <valItem ident="4"/>
+               <valItem ident="5"/>
+               <valItem ident="6"/>
+               <valItem ident="7"/>
+               <valItem ident="8"/>
+               <valItem ident="9"/>
+               <valItem ident="10"/>
+            </valList>
+         </element>
+      </controlledValues>
       <childElements>
-         <textNode type="input" class="formula"/>
          <child/>
       </childElements>
    </formula>
    <catchwords ident="catchwords"
                elementName="catchwords"
-               elementLabel="Catchwords"
+               elementLabel="*Ordering of the quires"
                path="/*:supportDesc/*:collation/*:catchwords"
                currentLevel="3"
                popup="3"
                teiElement="&lt;catchwords/&gt;">
-      <desc>Describe how the correct ordering of the quires is
-                            ensured in the manuscript.</desc>
+      <desc>Describe the means used to ensure the order of
+                            quires.</desc>
       <availableAtts elementName="catchwords"/>
       <controlledValues>
          <element xmlns="" ident="catchwords">
             <valList type="closed">
-               <valItem ident="No marking "/>
-               <valItem ident="Catchwords at the end of quires, "/>
-               <valItem ident="Catchwords at the end of folios, "/>
-               <valItem ident="Catchwords at the end of pages, "/>
-               <valItem ident="Middle markings, "/>
-               <valItem ident="Signatures at the end of quires, "/>
-               <valItem ident="Signatures at the beginning of quires, "/>
+               <valItem ident="No marking"/>
+               <valItem ident="Catchwords at the end of quires"/>
+               <valItem ident="Catchwords at the end of folios"/>
+               <valItem ident="Catchwords at the end of pages"/>
+               <valItem ident="Middle markings"/>
+               <valItem ident="Signatures at the end of quires"/>
+               <valItem ident="Signatures at the beginning of quires"/>
             </valList>
          </element>
       </controlledValues>
@@ -1339,18 +1382,6 @@ watermark or similar device.</desc>
          <child/>
       </childElements>
    </catchwords>
-   <unit ident="unit"
-         elementName="unit"
-         elementLabel="unit"
-         path="/*:supportDesc/*:collation/*:unit"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;unit/&gt;">
-      <availableAtts elementName="unit"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </unit>
    <condition ident="condition"
               elementName="condition"
               elementLabel="State of conservation"
@@ -1358,62 +1389,59 @@ watermark or similar device.</desc>
               currentLevel="2"
               popup="2"
               teiElement="&lt;condition/&gt;">
-      <desc>Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
-                            supplied for the descriptor field a generic description that best fits your overall impression.</desc>
-      <availableAtts elementName="condition">
-         <attDef ident="key" attLabel="Descriptor">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Descriptor</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="complete" attLabel="Complete manuscript"/>
-               <valItem ident="partOfCodex" attLabel="Part of codex"/>
-               <valItem ident="fragment" attLabel="Fragment"/>
-               <valItem ident="unidentified" attLabel="Unidentified"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <desc>Describe the general state of conservation.</desc>
+      <availableAtts elementName="condition"/>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="ab"
-                     label="State of writing"
+                     label="State of the writing"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </condition>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:supportDesc/*:condition/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         path="/*:supportDesc/*:condition/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned above.</desc>
+      <availableAtts elementName="note">
+         <attDef ident="type" attLabel="type">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="commemoration" attLabel="commemoration"/>
+               <valItem ident="liturgical" attLabel="liturgical"/>
+               <valItem ident="résumé" attLabel="résumé"/>
+               <valItem ident="scientifique" attLabel="scientifique"/>
+               <valItem ident="transcription" attLabel="transcription"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
    <ab ident="ab"
        elementName="ab"
-       elementLabel="State of writing"
+       elementLabel="State of the writing"
        path="/*:supportDesc/*:condition/*:ab"
        currentLevel="3"
        popup="3"
        teiElement="&lt;ab/&gt;">
-      <desc>Describe the ink and so forth.</desc>
+      <desc>Describe the general state of legibility or conservation of the writing / ink. If
+                            only particular areas are damaged, specify so in the note field.</desc>
       <availableAtts elementName="ab">
          <attDef ident="rend" attLabel="Characterization">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"

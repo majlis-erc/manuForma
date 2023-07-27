@@ -79,17 +79,16 @@ End license statement: do not remove -->
                 -->
 
                     <moduleRef key="core"
-                        except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp note noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear"/>
+                        except="list abbr add biblScope binaryObject ellipsis emph expan foreign gap graphic imprint item measureGrp p noteGrp orig teiCorpus textLang addrLine address analytic author bibl biblStruct cb choice cit citedRange corr date del desc distinct divGen editor email gb gloss head headItem headLabel hi index l label lb lg listBibl media meeting mentioned milestone monogr name num pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street term time title unclear"/>
                     <moduleRef key="msdescription"
                         include="catchwords collation condition dimensions foliation height locus material objectDesc origDate origPlace"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <gloss>Folios</gloss>
+                        <gloss>*Range of folios</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the
+                            manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -134,12 +133,11 @@ End license statement: do not remove -->
                     <elementSpec ident="TEI" module="textstructure" mode="delete"/>
                     <elementSpec ident="msDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="catchwords" module="msdescription" mode="change">
-                        <gloss>Catchwords</gloss>
+                        <gloss>*Ordering of the quires</gloss>
                         <gloss type="tei">&lt;catchwords/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="catchwords.desc" xml:lang="en">Describe how the correct ordering of the quires is
-                            ensured in the manuscript.</desc>
+                        <desc versionDate="2022-05-27" xml:id="catchwords.desc" xml:lang="en">Describe the means used to ensure the order of
+                            quires.</desc>
                         <content>
-                            <textNode/>
                             <textNode/>
                         </content>
                         <attList>
@@ -170,14 +168,12 @@ End license statement: do not remove -->
                     <elementSpec ident="collation" module="msdescription" mode="change">
                         <gloss>Composition of quires</gloss>
                         <gloss type="tei">&lt;collation/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="collation.desc" xml:lang="en">Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
-                            supplied for the descriptor field a generic description that best fits your overall impression.</desc>
+                        <desc versionDate="2022-05-27" xml:id="collation.desc" xml:lang="en">Supply information on quiring and catchwords. For
+                            additional observations use the free text box.</desc>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                             <elementRef key="formula"/>
                             <elementRef key="catchwords"/>
-                            <elementRef key="unit"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -209,11 +205,9 @@ End license statement: do not remove -->
                     <elementSpec ident="condition" module="msdescription" mode="change">
                         <gloss>State of conservation</gloss>
                         <gloss type="tei">&lt;condition/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages; record whether the manuscript has become less readable. Choose from the list
-                            supplied for the descriptor field a generic description that best fits your overall impression.</desc>
+                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe the general state of conservation.</desc>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                             <elementRef key="ab"/>
                         </content>
                         <attList>
@@ -224,15 +218,7 @@ End license statement: do not remove -->
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="key" mode="replace" usage="req">
-                                <gloss>Descriptor</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="complete"><gloss>Complete manuscript</gloss></valItem>
-                                    <valItem mode="add" ident="partOfCodex"><gloss>Part of codex</gloss></valItem>
-                                    <valItem mode="add" ident="fragment"><gloss>Fragment</gloss></valItem>
-                                    <valItem mode="add" ident="unidentified"><gloss>Unidentified</gloss></valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="key" mode="delete"> </attDef>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
@@ -252,10 +238,11 @@ End license statement: do not remove -->
                     </elementSpec>
                     <elementSpec ident="dim" module="msdescription" mode="delete"/>
                     <elementSpec ident="foliation" module="msdescription" mode="change">
-                        <gloss>Foliation</gloss>
+                        <gloss>*Foliation/Pagination</gloss>
                         <gloss type="tei">&lt;foliation/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="foliation.desc" xml:lang="en">Describe how the folios or pages in the manuscript are
-                            numbered (Arabic numerals, Hebrew letters etc.), if there are multiple such devices and their range.</desc>
+                        <desc versionDate="2022-05-27" xml:id="foliation.desc" xml:lang="en">Distinguish between foliation and pagination. Describe
+                            the numbering system (Arabic numerals, Hebrew letters etc.). If necessary create multiple fields for different numbering
+                            systems exhibited.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -272,15 +259,29 @@ End license statement: do not remove -->
                             <attDef ident="rendition" mode="replace" usage="req">
                                 <gloss>Original or modern?</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="original"><gloss>Original Foliation</gloss></valItem>
-                                    <valItem mode="add" ident="modern"><gloss>Modern Foliation</gloss></valItem>
+                                    <valItem mode="add" ident="original">
+                                        <gloss>Original Foliation</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="modern">
+                                        <gloss>Modern Foliation</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="resp" mode="delete"/>
                             <attDef ident="sameAs" mode="delete"/>
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="style" mode="change">
+                                <gloss>Foliation or Pagination?</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="foliation">
+                                        <gloss>Foliation</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="pagination">
+                                        <gloss>Pagination</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="synch" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -310,10 +311,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="material" module="msdescription" mode="change">
-                        <gloss>Writing material</gloss>
+                        <gloss>*Writing material</gloss>
                         <gloss type="tei">&lt;material/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="material.desc" xml:lang="en">Describe the writing material. Choose from the list
-                            supplied what kind of material is used in the manuscript/this codicological unit.</desc>
+                        <desc versionDate="2022-05-27" xml:id="material.desc" xml:lang="en">Choose from the list.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -364,8 +364,7 @@ End license statement: do not remove -->
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="form" mode="delete">
-                            </attDef>
+                            <attDef ident="form" mode="delete"> </attDef>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
@@ -386,9 +385,8 @@ End license statement: do not remove -->
                     <elementSpec ident="origDate" module="msdescription" mode="delete">
                         <gloss>Date of origin</gloss>
                         <gloss type="tei">&lt;origDate/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" field for precise values. In case the date can only be approximated, use the "not After "and "not Before"
-                            fields together.</desc>
+                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date in CE. The date given here refers to the
+                            writing material (and not the production of the copy).</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -396,7 +394,9 @@ End license statement: do not remove -->
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="atLeast" mode="delete"/>
                             <attDef ident="atMost" mode="delete"/>
+                            <attDef ident="calendar" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
+                            <attDef ident="certainty" mode="delete"/>
                             <attDef ident="confidence" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
@@ -405,7 +405,9 @@ End license statement: do not remove -->
                             <attDef ident="evidence" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="extent" mode="delete"/>
+                            <attDef ident="evidence" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
+                            <attDef ident="from" mode="delete"/>
                             <attDef ident="from-custom" mode="delete"/>
                             <attDef ident="from-iso" mode="delete"/>
                             <attDef ident="instant" mode="delete"/>
@@ -418,6 +420,8 @@ End license statement: do not remove -->
                             <attDef ident="notBefore" mode="delete"/>
                             <attDef ident="notBefore-custom" mode="delete"/>
                             <attDef ident="notBefore-iso" mode="delete"/>
+                            <attDef ident="number" mode="delete"/>
+                            <attDef ident="period" mode="delete"/>
                             <attDef ident="precision" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="quantity" mode="delete"/>
@@ -431,6 +435,7 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
+                            <attDef ident="to" mode="delete"/>
                             <attDef ident="to-custom" mode="delete"/>
                             <attDef ident="to-iso" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
@@ -438,7 +443,7 @@ End license statement: do not remove -->
                             <attDef ident="when-custom" mode="delete"/>
                             <attDef ident="when-iso" mode="delete"/>
                             <attDef ident="when" mode="change">
-                                <gloss>When</gloss>
+                                <gloss>Date</gloss>
                             </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -449,9 +454,9 @@ End license statement: do not remove -->
                     <elementSpec ident="origPlace" module="msdescription" mode="delete">
                         <gloss>Place of origin</gloss>
                         <gloss type="tei">&lt;origPlace/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="origplace.desc" xml:lang="en">Look up the place records in the database to specify a
-                            settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The
-                            "reference" field will be filled out automatically when you link a place record to this element.)</desc>
+                        <desc versionDate="2022-05-27" xml:id="origplace.desc" xml:lang="en">Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The place given here refers to the writing material
+                            (and not the production of the copy).</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -461,13 +466,17 @@ End license statement: do not remove -->
                             <attDef ident="change" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="certainty" mode="delete"/>
+                            <attDef ident="evidence" mode="delete"/>
                             <attDef ident="datingMethod" mode="delete"/>
                             <attDef ident="datingPoint" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
                             <attDef ident="from" mode="delete"/>
+                            <attDef ident="from-custom" mode="delete"/>
                             <attDef ident="from-iso" mode="delete"/>
                             <attDef ident="instant" mode="delete"/>
+                            <attDef ident="key" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="notAfter" mode="delete"/>
                             <attDef ident="notAfter-custom" mode="delete"/>
@@ -475,6 +484,7 @@ End license statement: do not remove -->
                             <attDef ident="notBefore" mode="delete"/>
                             <attDef ident="notBefore-custom" mode="delete"/>
                             <attDef ident="notBefore-iso" mode="delete"/>
+                            <attDef ident="number" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="period" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
@@ -537,47 +547,27 @@ End license statement: do not remove -->
                     </elementSpec>
                     <elementSpec ident="watermark" module="msdescription" mode="delete"/>
 
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Notes</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations on fields mentioned above.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
 
                     <elementSpec ident="height" module="msdescription" mode="change">
-                        <gloss>Height of writing material</gloss>
+                        <gloss>*Height of writing material</gloss>
                         <gloss type="tei">&lt;height/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="height.desc" xml:lang="en">Measure the height with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:id="height.desc" xml:lang="en">Measure the height in millimeters.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -609,7 +599,14 @@ End license statement: do not remove -->
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
+                            <attDef ident="unit" mode="change" style="restricted">
+                                <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="mm">
+                                        <gloss>mm</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -617,9 +614,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="width" module="msdescription" mode="change">
-                        <gloss>Width of writing material</gloss>
+                        <gloss>*Width of writing material</gloss>
                         <gloss type="tei">&lt;width/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">Measure the width with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">Measure the width in millimeters.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -651,7 +648,14 @@ End license statement: do not remove -->
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
+                            <attDef ident="unit" mode="change" style="restricted">
+                                <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="mm">
+                                        <gloss>mm</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -661,10 +665,9 @@ End license statement: do not remove -->
                     <elementSpec ident="item" module="core" mode="delete"/>
                     <elementSpec ident="list" module="core" mode="delete"/>
                     <elementSpec ident="measure" module="core" mode="change">
-                        <gloss>Total number of folios</gloss>
+                        <gloss>*Total number of folios</gloss>
                         <gloss type="tei">&lt;measure/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Specify how many folios does the manuscript/this codicological unit
-                            contain?</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Specify total number of folios.</desc>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -688,11 +691,11 @@ End license statement: do not remove -->
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="unit" mode="change">
+                            <attDef ident="unit" mode="change" style="restricted">
                                 <gloss>Unit</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="leaf">
-                                        <desc xml:lang="en">used for leafs.</desc>
+                                    <valItem mode="add" ident="folio">
+                                        <gloss>Folio</gloss>
                                     </valItem>
                                 </valList>
                             </attDef>
@@ -709,9 +712,9 @@ End license statement: do not remove -->
                     <moduleRef key="header" include="extent"/>
                     <moduleRef key="figures" include="formula"/>
                     <elementSpec ident="dimensions" mode="change">
-                        <gloss>Dimensions of the page</gloss>
+                        <gloss>*Dimensions of the page</gloss>
                         <gloss type="tei">&lt;dimensions/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="dimensions.desc" xml:lang="en">Measure the leaves.</desc>
+                        <desc versionDate="2022-05-27" xml:id="dimensions.desc" xml:lang="en">Provide measurements of the folio.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -747,7 +750,9 @@ End license statement: do not remove -->
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
                                 <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="leaves"><gloss>Leaves</gloss></valItem>
+                                    <valItem mode="add" ident="leaves">
+                                        <gloss>Leaves</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
@@ -755,7 +760,7 @@ End license statement: do not remove -->
                     <elementSpec ident="supportDesc" mode="change">
                         <gloss>Writing material description</gloss>
                         <gloss type="tei">&lt;supportDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the writing material in detail using the appropriate fields.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the writing material in detail using the provided fields.</desc>
                         <content>
                             <elementRef key="support"/>
                             <elementRef key="extent"/>
@@ -770,7 +775,7 @@ End license statement: do not remove -->
                         <desc versionDate="2022-06-01" xml:lang="en">This element contains descriptions of the writing material in various child
                             elements.</desc>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                             <elementRef key="material"/>
                             <elementRef key="watermark"/>
                             <elementRef key="origPlace"/>
@@ -787,9 +792,10 @@ End license statement: do not remove -->
                         </classes>
                     </elementSpec>
                     <elementSpec ident="extent" mode="change">
-                        <gloss>Measurements of book block</gloss>
+                        <gloss>Measurements</gloss>
                         <gloss type="tei">&lt;extent/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Give the total number of folios for the call mark or manuscript part.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Provide total number of folios and measurements. Base your observations on folios
+                            and not pages or bifolios.</desc>
                         <content>
                             <elementRef key="measure"/>
                             <elementRef key="dimensions"/>
@@ -820,11 +826,11 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="formula" mode="change">
-                        <gloss>Quire formula</gloss>
+                        <gloss>*Number of bifolia per quire</gloss>
                         <gloss type="tei">&lt;formula/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the manuscript's quiring using some formalized system. (Differentiate
-                            between quaternions, quinions, etc. and provide the number and position of extant (bi)folios within the quire.) You can
-                            link to an external platform that describes the quire structure visually using the reference field.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Specify the number of bifolia per quire. Describe deviations from the general
+                            quiring model (shortened or enlarged quires) in the free text box. You can link to VizColl for detailed description and
+                            visualisation of quire structure.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.notated" mode="delete"/>
@@ -834,14 +840,17 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="ref" class="att.canonical"/>
+                            <attRef name="ref" mode="change">
+                                <gloss>VizColl</gloss>
+                            </attRef>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="ab" mode="change">
-                        <gloss>State of writing</gloss>
+                        <gloss>State of the writing</gloss>
                         <gloss type="tei">&lt;ab&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the ink and so forth.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the general state of legibility or conservation of the writing / ink. If
+                            only particular areas are damaged, specify so in the note field.</desc>
                         <classes mode="change">
                             <memberOf key="att.declaring" mode="delete"/>
                             <memberOf key="att.fragmentable" mode="delete"/>
@@ -853,24 +862,32 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="subtype" mode="delete"/>
-                            <attDef ident="type" mode="change">
+                            <attDef ident="type" mode="change" style="restricted">
                                 <gloss>Type</gloss>
                                 <valList mode="change">
-                                    <valItem mode="add" ident="writing"><gloss>Writing</gloss></valItem>
+                                    <valItem mode="add" ident="writing">
+                                        <gloss>Writing</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="rend" mode="change">
                                 <gloss>Characterization</gloss>
                                 <valList mode="change">
-                                    <valItem mode="add" ident="visible"><gloss>Writing visible</gloss></valItem>
-                                    <valItem mode="add" ident="illegible"><gloss>Writing illegible</gloss></valItem>
-                                    <valItem mode="add" ident="erased"><gloss>Writing erased</gloss></valItem>
+                                    <valItem mode="add" ident="visible">
+                                        <gloss>Writing visible</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="illegible">
+                                        <gloss>Writing illegible</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="erased">
+                                        <gloss>Writing erased</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
 
-                    
+
                 </schemaSpec>
             </div>
         </body>
