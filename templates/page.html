@@ -5,7 +5,7 @@
         <title data-template="config:app-title">App Title</title>
         <meta data-template="config:app-meta"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <!-- Force MSIE not to use compatibility mode -->
-<!--        <link rel="shortcut icon" href="$shared/resources/images/exist_icon_16x16.ico"/>-->
+        <link rel="shortcut icon" href="$nav-base/resources/images/hn/favicon-16.png"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/style.css"/>
@@ -19,16 +19,16 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$nav-base}">
-						<object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo_manuforma.svg" type="image/svg+xml"></object>
-					</a>
+                    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.html">
+                        <object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo_manuForma-white.svg" type="image/svg+xml"></object>
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"/>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{$nav-base}">Home</a>
+                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">About</a>
@@ -55,7 +55,7 @@
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                        
+                    
                     <form method="POST" action="$nav-base/login" class="form-horizontal" id="loginForm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -89,39 +89,39 @@
         <div class="modal fade" id="newUserModal" tabindex="-1" aria-labelledby="newUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form method="POST" action="$nav-base/modules/userManager.xql" class="form-horizontal" id="newUserForm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newUserModalLabel">Create an Account</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="newUserModalLabel">Create an Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+                        </div>
+                        <div class="modal-body">
+                            <div id="formBody"> 
+                                <div class="mb-3">
+                                    <label for="user" class="form-label">User name</label>
+                                    <input type="text" class="form-control" name="user" required="required"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full name</label>
+                                    <input type="text" class="form-control" name="fullName"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" required="required"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordConfirm" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="passwordConfirm" required="required"/>
+                                </div>
+                            </div>                        
+                            <div id="responseBody">
+                                
+                            </div>                        
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Create Account</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div id="formBody"> 
-                            <div class="mb-3">
-                                <label for="user" class="form-label">User name</label>
-                                <input type="text" class="form-control" name="user" required="required"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="fullName" class="form-label">Full name</label>
-                                <input type="text" class="form-control" name="fullName"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" required="required"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="passwordConfirm" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" name="passwordConfirm" required="required"/>
-                            </div>
-                        </div>                        
-                        <div id="responseBody">
-
-                        </div>                        
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Create Account</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
                     
                 </form>
             </div>

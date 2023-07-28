@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.24 Beta 
+        Version: 1.26 Beta 
             -1.22 marks a major redesign
         
 
@@ -487,6 +487,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title>
                     <xsl:value-of select="$configDoc//formTitle"/>
                 </title>
@@ -1106,6 +1107,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title><xsl:value-of select="$configDoc//formTitle"/></title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
                 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
@@ -1243,6 +1245,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title>Controlled Vocabulary Form for <xsl:value-of select="$configDoc//formTitle"/></title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
                 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
@@ -1914,6 +1917,23 @@
                     <xf:var name="atts" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident"/>
                     <xf:var name="currentNode" value="."/>
                     -->
+                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element]">
+                        <xf:label/>
+                        <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element[count(@ident[. = $currentNode/child::*/local-name()]) &lt; instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element/@maxOccurs]"> -->
+                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element">
+                            <xf:label ref="@label"/>
+                            <xf:value ref="@ident"/>
+                        </xf:itemset>
+                        <xf:action ev:event="xforms-value-changed">                            
+                            <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
+                        </xf:action>
+                    </xf:select1>
+                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]">
+                        <xf:label><i class="bi bi-plus"/> Add elements </xf:label>
+                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
+                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
+                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
+                    </xf:trigger>
                     <xf:group ref=".[not(count(@*[local-name()=instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident]) = count(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident))]">
                         <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]">
                             <xf:label/>
@@ -1927,29 +1947,13 @@
                             </xf:action>
                         </xf:select1>
                         <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
-                            <xf:label><i class="bi bi-plus"/> Add field</xf:label>
+                            <xf:label><i class="bi bi-plus"/> Add features</xf:label>
                             <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
                             <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                         </xf:trigger>
                     </xf:group>
-                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element]">
-                        <xf:label/>
-                        <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element[count(@ident[. = $currentNode/child::*/local-name()]) &lt; instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element/@maxOccurs]"> -->
-                        <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element">
-                            <xf:label ref="@label"/>
-                            <xf:value ref="@ident"/>
-                        </xf:itemset>
-                        <xf:action ev:event="xforms-value-changed">                            
-                            <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
-                        </xf:action>
-                    </xf:select1>
-                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]">
-                        <xf:label><i class="bi bi-plus"/> Add field </xf:label>
-                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
-                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
-                        <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
-                    </xf:trigger>
+                        
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
@@ -2056,25 +2060,6 @@
                     <xf:var name="atts" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident"/>
                     <xf:var name="currentNode" value="."/>
                     -->
-                    <xf:group ref=".[not(count(@*[local-name()=instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident]) = count(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident))]">
-                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]">
-                            <xf:label/>
-                            <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef[not(@ident = (current()/@*/local-name()))]"> -->
-                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef">
-                                <xf:label ref="@attLabel"/>
-                                <xf:value ref="@ident"/>
-                            </xf:itemset>
-                            <xf:action ev:event="xforms-value-changed">
-                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
-                            </xf:action>
-                        </xf:select1>
-                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
-                            <xf:label><i class="bi bi-plus"/> Add field</xf:label>
-                            <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
-                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
-                            <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
-                        </xf:trigger>
-                    </xf:group>
                     <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]/descendant-or-self::*:element]">
                         <xf:label/>
                         <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element[count(@ident[. = $currentNode/child::*/local-name()]) &lt; instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements[1]//*:element/@maxOccurs]"> -->
@@ -2088,11 +2073,30 @@
                         </xf:action>
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
-                        <xf:label><i class="bi bi-plus"/> Add element </xf:label>
+                        <xf:label><i class="bi bi-plus"/> Add elements </xf:label>
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"/>
                     </xf:trigger>
+                    <xf:group ref=".[not(count(@*[local-name()=instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident]) = count(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef/@ident))]">
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]">
+                            <xf:label/>
+                            <!-- <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef[not(@ident = (current()/@*/local-name()))]"> -->
+                            <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts/*:attDef">
+                                <xf:label ref="@attLabel"/>
+                                <xf:value ref="@ident"/>
+                            </xf:itemset>
+                            <xf:action ev:event="xforms-value-changed">
+                                <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="instance('i-availableElements')/*[local-name() = local-name(current())]"/>
+                            </xf:action>
+                        </xf:select1>
+                        <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:availableAtts//*:attDef]]">
+                            <xf:label><i class="bi bi-plus"/> Add features</xf:label>
+                            <xf:insert ev:event="DOMActivate" context=".[not(name(@*) = instance('i-insert-attributes')//*:attribute)]" origin="instance('i-attributeTemplate')//@*[name(.) = instance('i-insert-attributes')//*:attribute]" position="after"/>
+                            <xf:setvalue ref="instance('i-insert-attributes')//*:attribute" value="''"/>
+                            <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
+                        </xf:trigger>
+                    </xf:group>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
@@ -2281,7 +2285,8 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$app-root}">
-                       <xsl:value-of select="$configDoc//appTitle"/></a>
+                        <object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo-manuForma-white.svg" type="image/svg+xml"></object>
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
                         aria-expanded="false" aria-label="Toggle navigation"><span
@@ -2608,7 +2613,7 @@
             </xsl:if>
             <availableAtts elementName="{$elementName}" xmlns="http://www.tei-c.org/ns/1.0">
                 <xsl:for-each-group select="$allAttributes/descendant-or-self::*:attDef" group-by="@ident">
-                    <attDef ident="{@ident}" xmlns="http://www.tei-c.org/ns/1.0">
+                    <attDef xmlns="http://www.tei-c.org/ns/1.0">
                         <xsl:attribute name="attLabel">
                             <xsl:choose>
                                 <xsl:when test="$formLang != ''">
@@ -2629,6 +2634,9 @@
                                 <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
+                        <xsl:for-each select="@*">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
                         <xsl:copy-of select="*:gloss"/>
                         <xsl:if test="*:valList">
                             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
