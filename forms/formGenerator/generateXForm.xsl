@@ -15,6 +15,7 @@
             - eXist-db 
             
         Version: 1.26 Beta 
+
             -1.22 marks a major redesign
         
 
