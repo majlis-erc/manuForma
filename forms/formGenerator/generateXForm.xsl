@@ -14,7 +14,8 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.25 Beta 
+        Version: 1.26 Beta 
+
             -1.22 marks a major redesign
         
 
@@ -487,6 +488,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title>
                     <xsl:value-of select="$configDoc//formTitle"/>
                 </title>
@@ -1106,6 +1108,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title><xsl:value-of select="$configDoc//formTitle"/></title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
                 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
@@ -1243,6 +1246,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 <meta name="author" content="{$configDoc//formAuthor}"/>
                 <meta name="description" content="{$configDoc//formDesc}"/>
+                <link rel="shortcut icon" href="resources/images/hn/favicon-16.png"/>
                 <title>Controlled Vocabulary Form for <xsl:value-of select="$configDoc//formTitle"/></title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
                 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
@@ -2282,7 +2286,8 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{$app-root}">
-                       <xsl:value-of select="$configDoc//appTitle"/></a>
+                        <object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo-manuForma-white.svg" type="image/svg+xml"></object>
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
                         aria-expanded="false" aria-label="Toggle navigation"><span
@@ -2609,7 +2614,7 @@
             </xsl:if>
             <availableAtts elementName="{$elementName}" xmlns="http://www.tei-c.org/ns/1.0">
                 <xsl:for-each-group select="$allAttributes/descendant-or-self::*:attDef" group-by="@ident">
-                    <attDef ident="{@ident}" xmlns="http://www.tei-c.org/ns/1.0">
+                    <attDef xmlns="http://www.tei-c.org/ns/1.0">
                         <xsl:attribute name="attLabel">
                             <xsl:choose>
                                 <xsl:when test="$formLang != ''">
@@ -2630,6 +2635,9 @@
                                 <xsl:otherwise><xsl:value-of select="@ident"/></xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
+                        <xsl:for-each select="@*">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
                         <xsl:copy-of select="*:gloss"/>
                         <xsl:if test="*:valList">
                             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
