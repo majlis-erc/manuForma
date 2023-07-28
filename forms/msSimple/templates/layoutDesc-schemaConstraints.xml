@@ -94,15 +94,17 @@
       <desc>Provide the typology of the layout and describe it. Specify
                             the number of columns and lines in the correct fields.</desc>
       <availableAtts elementName="layout">
-         <attDef ident="columns" attLabel="Number of columns">
+         <attDef attLabel="Number of columns" ident="columns" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Number of columns</gloss>
          </attDef>
-         <attDef ident="writtenLines" attLabel="Number of written lines">
+         <attDef attLabel="Number of written lines"
+                 ident="writtenLines"
+                 mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Number of written lines</gloss>
          </attDef>
-         <attDef ident="xml:id" attLabel="Layout identifier">
+         <attDef attLabel="Layout identifier" ident="xml:id" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Layout identifier</gloss>
          </attDef>
@@ -151,7 +153,7 @@
          teiElement="&lt;note/&gt;">
       <desc>contains a note or annotation.</desc>
       <availableAtts elementName="note">
-         <attDef ident="ana" attLabel="analysis">
+         <attDef attLabel="analysis" ident="ana" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -183,7 +185,7 @@
                    xml:lang="ja"
                    versionDate="2019-06-08">分析</gloss>
          </attDef>
-         <attDef ident="anchored" attLabel="anchored">
+         <attDef attLabel="anchored" ident="anchored" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -195,7 +197,7 @@
                    versionDate="2017-06-25"
                    xml:lang="de">verankert</gloss>
          </attDef>
-         <attDef ident="cert" attLabel="certainty">
+         <attDef attLabel="certainty" ident="cert" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -227,9 +229,9 @@
                    versionDate="2019-09-16"
                    xml:lang="ja">確実性</gloss>
          </attDef>
-         <attDef ident="change" attLabel="change"/>
-         <attDef ident="copyOf" attLabel="copyOf"/>
-         <attDef ident="corresp" attLabel="corresponds">
+         <attDef attLabel="change" ident="change"/>
+         <attDef attLabel="copyOf" ident="copyOf" usage="opt"/>
+         <attDef attLabel="corresponds" ident="corresp" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -261,7 +263,7 @@
                    versionDate="2019-07-21"
                    xml:lang="ja">対応</gloss>
          </attDef>
-         <attDef ident="evaluate" attLabel="evaluate">
+         <attDef attLabel="evaluate" ident="evaluate" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -287,8 +289,8 @@
                         desc="no further evaluation of targets is carried out&#xA;&#x9;  beyond that needed to find the element specified in the&#xA;&#x9;  pointer's target. 포인터의 대상에서 명시된 요소를 발견할 필요가 없을 때 더 이상의 대상에 대한 평가는 수행되지 않는다. 尋找指標的目標元素時，未對目標進行不必要的延伸評估。 no se realiza ninguna otra evaluación de los targets más allá de la necesaria para encontrar el elemento especificado en el target del puntero. &#x9;  当該ポインターの参照先から先にあるリンクへの展開は行わない．&#xA;&#x9; aucune évaluation ultérieure des cibles n'est menée au-delà de la recherche de l'élément désigné dans la cible du pointeur. non viene condotta altra valutazione delle destinazioni se non quella necessaria a rintracciare l'elemento specificato nella destinazione del puntatore"/>
             </valList>
          </attDef>
-         <attDef ident="exclude" attLabel="exclude"/>
-         <attDef ident="facs" attLabel="facsimile">
+         <attDef attLabel="exclude" ident="exclude" usage="opt"/>
+         <attDef attLabel="facsimile" ident="facs" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -315,8 +317,8 @@
                    xml:lang="ja"
                    versionDate="2019-07-21">ファクシミリ</gloss>
          </attDef>
-         <attDef ident="hand" attLabel="hand"/>
-         <attDef ident="n" attLabel="number">
+         <attDef attLabel="hand" ident="hand" usage="opt"/>
+         <attDef attLabel="number" ident="n" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -348,8 +350,8 @@
                    xml:lang="ja"
                    versionDate="2019-06-08">数値</gloss>
          </attDef>
-         <attDef ident="next" attLabel="next"/>
-         <attDef ident="place" attLabel="place">
+         <attDef attLabel="next" ident="next" usage="opt"/>
+         <attDef attLabel="place" ident="place" usage="rec">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
@@ -392,7 +394,7 @@
                         desc=" in a predefined space, for example left by an earlier scribe. dans un espace prédéfini, par exemple à gauche d'un scripteur précédent"/>
             </valList>
          </attDef>
-         <attDef ident="prev" attLabel="previous">
+         <attDef attLabel="previous" ident="prev" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -424,7 +426,7 @@
                    versionDate="2019-07-21"
                    xml:lang="ja">前の</gloss>
          </attDef>
-         <attDef ident="rend" attLabel="rendition">
+         <attDef attLabel="rendition" ident="rend" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -456,8 +458,8 @@
                    versionDate="2019-07-21"
                    xml:lang="ja">見た目の表示</gloss>
          </attDef>
-         <attDef ident="rendition" attLabel="rendition"/>
-         <attDef ident="resp" attLabel="responsible party">
+         <attDef attLabel="rendition" ident="rendition" usage="opt"/>
+         <attDef attLabel="responsible party" ident="resp" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -489,11 +491,11 @@
                    versionDate="2019-09-16"
                    xml:lang="ja">責任者</gloss>
          </attDef>
-         <attDef ident="sameAs" attLabel="sameAs"/>
-         <attDef ident="select" attLabel="select"/>
-         <attDef ident="source" attLabel="source"/>
-         <attDef ident="style" attLabel="style"/>
-         <attDef ident="subtype" attLabel="subtype">
+         <attDef attLabel="sameAs" ident="sameAs" usage="opt"/>
+         <attDef attLabel="select" ident="select" usage="opt"/>
+         <attDef attLabel="source" ident="source" usage="opt"/>
+         <attDef attLabel="style" ident="style" usage="opt"/>
+         <attDef attLabel="subtype" ident="subtype" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -505,7 +507,7 @@
                    versionDate="2009-05-29"
                    xml:lang="fr">sous-type</gloss>
          </attDef>
-         <attDef ident="synch" attLabel="synchronous">
+         <attDef attLabel="synchronous" ident="synch" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -537,8 +539,8 @@
                    versionDate="2019-07-21"
                    xml:lang="ja">連動</gloss>
          </attDef>
-         <attDef ident="target" attLabel="target"/>
-         <attDef ident="targetEnd" attLabel="target end">
+         <attDef attLabel="target" ident="target" usage="opt"/>
+         <attDef attLabel="target end" ident="targetEnd" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -550,8 +552,8 @@
                    versionDate="2017-06-25"
                    xml:lang="de">Bereichsende</gloss>
          </attDef>
-         <attDef ident="targetLang" attLabel="targetLang"/>
-         <attDef ident="type" attLabel="type">
+         <attDef attLabel="targetLang" ident="targetLang" usage="opt"/>
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -563,8 +565,8 @@
                <valItem ident="transcription" attLabel="transcription"/>
             </valList>
          </attDef>
-         <attDef ident="xml:base" attLabel="base"/>
-         <attDef ident="xml:id" attLabel="identifier">
+         <attDef attLabel="base" ident="xml:base" usage="opt"/>
+         <attDef attLabel="identifier" ident="xml:id" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -596,7 +598,7 @@
                    xml:lang="ja"
                    versionDate="2019-06-08">識別子</gloss>
          </attDef>
-         <attDef ident="xml:lang" attLabel="language">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -628,7 +630,7 @@
                    xml:lang="ja"
                    versionDate="2019-06-08">言語</gloss>
          </attDef>
-         <attDef ident="xml:space" attLabel="space">
+         <attDef attLabel="space" ident="xml:space" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -676,7 +678,7 @@
                teiElement="&lt;dimensions/&gt;">
       <desc>Measure the text space.</desc>
       <availableAtts elementName="dimensions">
-         <attDef ident="rend" attLabel="rend">
+         <attDef attLabel="rend" ident="rend" mode="replace" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
@@ -685,7 +687,7 @@
                <valItem ident="ruled" attLabel="ruled"/>
             </valList>
          </attDef>
-         <attDef ident="subtype" attLabel="subtype">
+         <attDef attLabel="subtype" ident="subtype" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -697,7 +699,7 @@
                    versionDate="2009-05-29"
                    xml:lang="fr">sous-type</gloss>
          </attDef>
-         <attDef ident="type" attLabel="type">
+         <attDef attLabel="type" ident="type" mode="change" rend="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
@@ -755,7 +757,7 @@
         teiElement="&lt;dim/&gt;">
       <desc>Specify the amount of space between two columns of text in millimeters.</desc>
       <availableAtts elementName="dim">
-         <attDef ident="type" attLabel="Type">
+         <attDef attLabel="Type" ident="type" usage="opt">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -765,7 +767,7 @@
                <valItem ident="intercolumn" attLabel="Intercolumn space"/>
             </valList>
          </attDef>
-         <attDef ident="unit" attLabel="Unit">
+         <attDef attLabel="Unit" ident="unit" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
@@ -784,7 +786,7 @@
           teiElement="&lt;width/&gt;">
       <desc>Measure the width with a precision of 5 millimeters.</desc>
       <availableAtts elementName="width">
-         <attDef ident="unit" attLabel="Unit">
+         <attDef attLabel="Unit" ident="unit" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
@@ -803,7 +805,7 @@
            teiElement="&lt;height/&gt;">
       <desc>Measure the height with a precision of 5 millimeters.</desc>
       <availableAtts elementName="height">
-         <attDef ident="unit" attLabel="Unit">
+         <attDef attLabel="Unit" ident="unit" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
          </attDef>
@@ -823,7 +825,7 @@
       <desc>Describe pricking and ruling of the page layout and choose appropriate values for
                             the "type" field.</desc>
       <availableAtts elementName="ab">
-         <attDef ident="type" attLabel="Pick type">
+         <attDef attLabel="Pick type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Pick type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -888,12 +890,12 @@
                             manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
                             of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="From">
+         <attDef attLabel="From" ident="from" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
          </attDef>
-         <attDef ident="target" attLabel="target"/>
-         <attDef ident="to" attLabel="To">
+         <attDef attLabel="target" ident="target" usage="opt"/>
+         <attDef attLabel="To" ident="to" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
          </attDef>
@@ -911,7 +913,7 @@
              teiElement="&lt;metamark/&gt;">
       <desc/>
       <availableAtts elementName="metamark">
-         <attDef ident="function" attLabel="function">
+         <attDef attLabel="function" ident="function" mode="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"

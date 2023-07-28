@@ -18,7 +18,7 @@
       <desc>This element contains descriptions of the codicological
                             and paleographic features of a manuscript. </desc>
       <availableAtts elementName="physDesc">
-         <attDef ident="n" attLabel="number">
+         <attDef attLabel="number" ident="n" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -50,7 +50,7 @@
                    xml:lang="ja"
                    versionDate="2019-06-08">数値</gloss>
          </attDef>
-         <attDef ident="resp" attLabel="responsible party">
+         <attDef attLabel="responsible party" ident="resp" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -107,7 +107,7 @@
              teiElement="&lt;handDesc/&gt;">
       <desc>For every script you encounter, create a distinct entry hand to describe it.</desc>
       <availableAtts elementName="handDesc">
-         <attDef ident="hands" attLabel="hands">
+         <attDef attLabel="hands" ident="hands">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -162,7 +162,7 @@
                             scribal hand records and indicate where the hand changes occur by using the locus elements. Give your assessment how much
                             a hand contributed using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
       <availableAtts elementName="handNote">
-         <attDef ident="medium" attLabel="Medium">
+         <attDef attLabel="Medium" ident="medium" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Medium</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -177,7 +177,7 @@
                <valItem ident="unidentified" attLabel="Unidentified ink"/>
             </valList>
          </attDef>
-         <attDef ident="scope" attLabel="scope">
+         <attDef attLabel="scope" ident="scope">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -193,10 +193,10 @@
                         desc="this hand is used occasionally in the manuscript 이 필적이 원고에서 가끔 사용되었다. &#xA;          当該筆致で，所々が書かれている．&#xA; cette main est utilisée&#xA;occasionnellement dans le manuscrit. mano utilizzata solo di rado nel manoscritto esta mano se usa sólo ocasionalmente en el manuscrito."/>
             </valList>
          </attDef>
-         <attDef ident="scribe" attLabel="scribe"/>
-         <attDef ident="scribeRef" attLabel="scribeRef"/>
-         <attDef ident="scriptRef" attLabel="scriptRef"/>
-         <attDef ident="xml:id" attLabel="id"/>
+         <attDef attLabel="scribe" ident="scribe"/>
+         <attDef attLabel="scribeRef" ident="scribeRef"/>
+         <attDef attLabel="scriptRef" ident="scriptRef"/>
+         <attDef attLabel="id" ident="xml:id" mode="change" usage="req"/>
       </availableAtts>
       <childElements>
          <child>
@@ -271,11 +271,11 @@
                             person's function to the manuscript (e.g., "owner") from the list. (The "reference" field will be filled out automatically
                             when you link a record to this field.)</desc>
       <availableAtts elementName="persName">
-         <attDef ident="ref" attLabel="Person identifier">
+         <attDef attLabel="Person identifier" ident="ref">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
          </attDef>
-         <attDef ident="role" attLabel="Role">
+         <attDef attLabel="Role" ident="role" usage="opt">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Role</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -315,11 +315,11 @@
                             different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
                             filled out automatically when you link a place record to this field.)</desc>
       <availableAtts elementName="placeName">
-         <attDef ident="ref" attLabel="Place identifier">
+         <attDef attLabel="Place identifier" ident="ref">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
          </attDef>
-         <attDef ident="type" attLabel="type">
+         <attDef attLabel="type" ident="type" mode="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
@@ -346,7 +346,7 @@
       <desc>Describe the use of complementary characters like vocalization or recitation in
                             prose and choose the appropriate "function" from the list.</desc>
       <availableAtts elementName="metamark">
-         <attDef ident="function" attLabel="Pick type">
+         <attDef attLabel="Pick type" ident="function" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Pick type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -374,11 +374,11 @@
                             Use the "When" field for precise values. In case the date can only be approximated, use the "Not after"and "Not before"
                             fields together.</desc>
       <availableAtts elementName="origDate">
-         <attDef ident="notAfter" attLabel="Not after">
+         <attDef attLabel="Not after" ident="notAfter" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not after</gloss>
          </attDef>
-         <attDef ident="notBefore" attLabel="Not before">
+         <attDef attLabel="Not before" ident="notBefore" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not before</gloss>
          </attDef>
@@ -398,11 +398,11 @@
                             manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
                             of folios.</desc>
       <availableAtts elementName="locus">
-         <attDef ident="from" attLabel="From">
+         <attDef attLabel="From" ident="from" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
          </attDef>
-         <attDef ident="to" attLabel="To">
+         <attDef attLabel="To" ident="to" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
          </attDef>
@@ -442,7 +442,7 @@
                             used in the manuscript or manuscript part, create multiple Description of script records and indicate where the hand
                             changes occur by using the Folio field. In case you want to reference this script, choose a unique identifier.</desc>
       <availableAtts elementName="scriptNote">
-         <attDef ident="rend" attLabel="Script quality">
+         <attDef attLabel="Script quality" ident="rend">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script quality</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -457,7 +457,7 @@
                <valItem ident="monumental" attLabel="Monumental"/>
             </valList>
          </attDef>
-         <attDef ident="scope" attLabel="scope">
+         <attDef attLabel="scope" ident="scope">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -473,9 +473,9 @@
                         desc="this hand is used occasionally in the manuscript 이 필적이 원고에서 가끔 사용되었다. &#xA;          当該筆致で，所々が書かれている．&#xA; cette main est utilisée&#xA;occasionnellement dans le manuscrit. mano utilizzata solo di rado nel manoscritto esta mano se usa sólo ocasionalmente en el manuscrito."/>
             </valList>
          </attDef>
-         <attDef ident="scribe" attLabel="scribe"/>
-         <attDef ident="scribeRef" attLabel="scribeRef"/>
-         <attDef ident="script" attLabel="Script type">
+         <attDef attLabel="scribe" ident="scribe"/>
+         <attDef attLabel="scribeRef" ident="scribeRef"/>
+         <attDef attLabel="Script type" ident="script" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -494,8 +494,8 @@
                <valItem ident="naskh" attLabel="Naskh"/>
             </valList>
          </attDef>
-         <attDef ident="scriptRef" attLabel="scriptRef"/>
-         <attDef ident="style" attLabel="Script mode">
+         <attDef attLabel="scriptRef" ident="scriptRef"/>
+         <attDef attLabel="Script mode" ident="style">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script mode</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
