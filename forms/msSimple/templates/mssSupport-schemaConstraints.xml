@@ -458,11 +458,6 @@
       <availableAtts elementName="support"/>
       <childElements>
          <child>
-            <element ident="note"
-                     label="Notes"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="material"
                      label="*Writing material"
                      minOccurs=""
@@ -483,23 +478,14 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </support>
-   <note ident="note"
-         elementName="note"
-         elementLabel="Notes"
-         path="/*:supportDesc/*:support/*:note"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;note/&gt;">
-      <desc>Add observations on fields mentioned above.</desc>
-      <availableAtts elementName="note"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </note>
    <material ident="material"
              elementName="material"
              elementLabel="*Writing material"
@@ -1080,6 +1066,20 @@ watermark or similar device.</desc>
          <child/>
       </childElements>
    </origDate>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:supportDesc/*:support/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned above.</desc>
+      <availableAtts elementName="note"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
    <extent ident="extent"
            elementName="extent"
            elementLabel="Measurements"
@@ -1138,16 +1138,7 @@ watermark or similar device.</desc>
                popup="3"
                teiElement="&lt;dimensions/&gt;">
       <desc>Provide measurements of the folio.</desc>
-      <availableAtts elementName="dimensions">
-         <attDef attLabel="type" ident="type" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="leaves" attLabel="Leaves"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="dimensions"/>
       <childElements>
          <child>
             <element ident="height"
@@ -1179,7 +1170,7 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
-               <valItem ident="mm" attLabel="mm"/>
+               <valItem ident="mm" attLabel="Millimeters"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1204,7 +1195,7 @@ watermark or similar device.</desc>
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
-               <valItem ident="mm" attLabel="mm"/>
+               <valItem ident="mm" attLabel="Millimeters"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -1268,7 +1259,7 @@ watermark or similar device.</desc>
       <childElements>
          <child>
             <element ident="note"
-                     label="Notes"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -1287,7 +1278,7 @@ watermark or similar device.</desc>
    </collation>
    <note ident="note"
          elementName="note"
-         elementLabel="Notes"
+         elementLabel="Note"
          path="/*:supportDesc/*:collation/*:note"
          currentLevel="3"
          popup="3"
@@ -1374,7 +1365,7 @@ watermark or similar device.</desc>
       <childElements>
          <child>
             <element ident="note"
-                     label="Notes"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -1388,7 +1379,7 @@ watermark or similar device.</desc>
    </condition>
    <note ident="note"
          elementName="note"
-         elementLabel="Notes"
+         elementLabel="Note"
          path="/*:supportDesc/*:condition/*:note"
          currentLevel="3"
          popup="3"
