@@ -69,37 +69,9 @@
          teiElement="&lt;item/&gt;">
       <desc>Describe the incodicated document.</desc>
       <availableAtts elementName="item">
-         <attDef attLabel="identifier" ident="xml:id" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">identifier</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확인소</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">identificador</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">identifiant</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">identificatore</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">識別子</gloss>
+         <attDef attLabel="Document identifier" ident="xml:id" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Document identifier</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -234,8 +206,10 @@
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="change"/>
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>
