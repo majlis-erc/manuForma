@@ -173,14 +173,14 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/tei:facsimile" formName="reproductions" formLabel="Reproductions" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:ab" formName="reproductions" formLabel="Reproductions" repeat="no">
             <localSchema src="../schemas/mss-reproductions.xml"/>
             <globalSchema src="../schemas/mss-reproductions.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <formDesc>Add information on existing reproductions, such as scans, microfilms, or digital images.</formDesc>
+            <formDesc>Add information on reproductions, such as digital images, microfilms or other types.</formDesc>
             <elementGroups>
-                <group groupLabel="Reproduction" groupNo="1" repeatable="yes">
-                    <element xpath="tei:graphic"/>
+                <group groupLabel="Reproduction(s)" groupNo="1" repeatable="no">
+                    <element xpath="tei:listBibl"/>
                 </group>
             </elementGroups>
         </subform>

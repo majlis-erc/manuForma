@@ -49,11 +49,11 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="Square" attLabel="Square"/>
-               <valItem ident="Horizontal rectangle" attLabel="Horizontal rectangle"/>
-               <valItem ident="Vertical rectangle" attLabel="Vertical rectangle"/>
-               <valItem ident="Irregular" attLabel="Irregular"/>
-               <valItem ident="Other" attLabel="Other"/>
+               <valItem ident="square" attLabel="Square"/>
+               <valItem ident="horizontalRectangle" attLabel="Horizontal rectangle"/>
+               <valItem ident="verticalRectangle" attLabel="Vertical rectangle"/>
+               <valItem ident="irregular" attLabel="Irregular"/>
+               <valItem ident="other" attLabel="Other"/>
             </valList>
          </attDef>
          <attDef attLabel="Book form" ident="style" mode="change">
@@ -63,10 +63,10 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="Codex" attLabel="Codex"/>
-               <valItem ident="Scroll" attLabel="Scroll"/>
-               <valItem ident="Rotulus" attLabel="Rotulus"/>
-               <valItem ident="Uncertain" attLabel="Uncertain"/>
+               <valItem ident="codex" attLabel="Codex"/>
+               <valItem ident="scroll" attLabel="Scroll"/>
+               <valItem ident="rotulus" attLabel="Rotulus"/>
+               <valItem ident="uncertain" attLabel="Uncertain"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -189,7 +189,20 @@
          teiElement="&lt;idno/&gt;">
       <desc>Specify the shelfmark of a manuscript section that is part of the same
                             codicological unit, but has different shelfmark.</desc>
-      <availableAtts elementName="idno"/>
+      <availableAtts elementName="idno">
+         <attDef attLabel="Type"
+                 ident="type"
+                 mode="change"
+                 type="closed"
+                 style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="add"/>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="idno"/>
          <child/>

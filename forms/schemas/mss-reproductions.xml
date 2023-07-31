@@ -77,84 +77,50 @@ End license statement: do not remove -->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-                    <moduleRef key="transcr" include="facsimile"/>
-                    <moduleRef key="core" include="graphic"/>
+                    <moduleRef key="core" include="bibl listBibl ptr"/>
 
-                    <elementSpec ident="facsimile" module="transcr" mode="change">
-                        <gloss>Reproductions</gloss>
-                        <gloss type="tei">&lt;facsimile&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Add information where reproductions of the manuscript can be found.</desc>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
+                    <elementSpec ident="listBibl" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
                         <content>
-                            <elementRef key="graphic"/>
+                            <elementRef key="bibl"/>
                         </content>
                     </elementSpec>
 
-                    <elementSpec ident="graphic" module="core" mode="change">
-                        <gloss>Reproduction link</gloss>
-                        <gloss type="tei">&lt;graphic&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Add the link to one reproduction in the "Source of of reproduction' field. Select
-                            the type from the dropdown list.</desc>
+                    <elementSpec ident="bibl" mode="change">
+                        <gloss>Reproduction</gloss>
+                        <gloss type="tei">&lt;bibl&gt;</gloss>
+                        <desc xml:lang="en">Specify the reproduction type. Distinguish between restricted (consultation on premises only) and
+                            unrestricted access. Other types may include: microfilms, microfiche, photostats/photocopies, or photographs. For
+                            non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
+                        <classes mode="change">
+                            <memberOf key="att.declarable" mode="delete"/>
+                            <memberOf key="att.docStatus" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
                         <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="replace" usage="opt">
-                                <gloss>Source of reproduction</gloss>
-                                <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="Ktiv">
-                                        <gloss>Ktiv</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="holdingInstitution">
-                                        <gloss>Holding institution</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                            <attDef ident="width" mode="delete"/>
-                            <attDef ident="height" mode="delete"/>
-                            <attDef ident="scale" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="mimeType" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
                             <attDef ident="type" mode="replace" usage="opt">
-                                <gloss>Reproduction type</gloss>
+                                <gloss>Type of reproduction</gloss>
                                 <valList mode="change" type="closed">
                                     <valItem mode="add" ident="microfilm">
                                         <gloss>Microfilm</gloss>
@@ -173,16 +139,54 @@ End license statement: do not remove -->
                                     </valItem>
                                 </valList>
                             </attDef>
-                            <attDef ident="subtype" mode="delete"/>
-                            <attDef ident="url" mode="change">
-                                <gloss>URL</gloss>
+                            <attDef ident="source" mode="replace" usage="opt">
+                                <gloss>Source of reproduction</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem mode="add" ident="nli">
+                                        <gloss>National Library of Israel</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="bl">
+                                        <gloss>British Library</gloss>
+                                    </valItem>
+                                </valList>
                             </attDef>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                        <content>
+                            <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="ptr" mode="change">
+                        <gloss>Link / Reference</gloss>
+                        <gloss type="tei">&lt;ptr&gt;</gloss>
+                        <desc>For digital images, insert the permalink to the resource. For non-digital images, give basic reference as to the
+                            shelfmark, etc.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.internetMedia" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <empty/>
+                        </content>
+                        <attList>
+                            <attDef ident="target" mode="change">
+                                <gloss>Insert here</gloss>
+                            </attDef>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
+
                 </schemaSpec>
             </div>
         </body>
