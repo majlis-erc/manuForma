@@ -105,7 +105,8 @@
              currentLevel="2"
              popup="2"
              teiElement="&lt;handDesc/&gt;">
-      <desc>For every script you encounter, create a distinct entry hand to describe it.</desc>
+      <desc>For every script you encounter, create a distinct entry hand
+                            to describe it.</desc>
       <availableAtts elementName="handDesc">
          <attDef attLabel="hands" ident="hands">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
@@ -123,7 +124,7 @@
       <childElements>
          <child>
             <element ident="summary"
-                     label="Summary of script"
+                     label="Summary of hand"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -137,7 +138,7 @@
    </handDesc>
    <summary ident="summary"
             elementName="summary"
-            elementLabel="Summary of script"
+            elementLabel="Summary of hand"
             path="/*:physDesc/*:handDesc/*:summary"
             currentLevel="3"
             popup="3"
@@ -200,8 +201,8 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="locus"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -225,29 +226,36 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="locus"
-                     label="Folios"
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </handNote>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:physDesc/*:handDesc/*:handNote/*:p"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="*Range of folios"
+          path="/*:physDesc/*:handDesc/*:handNote/*:locus"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;locus/&gt;">
+      <desc>Specify range of folios of a text within the manuscript. </desc>
+      <availableAtts elementName="locus">
+         <attDef attLabel="From" ident="from" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
+         </attDef>
+         <attDef attLabel="To" ident="to" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
-         <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </locus>
    <persName ident="persName"
              elementName="persName"
              elementLabel="Person"
@@ -387,30 +395,20 @@
          <child/>
       </childElements>
    </origDate>
-   <locus ident="locus"
-          elementName="locus"
-          elementLabel="Folios"
-          path="/*:physDesc/*:handDesc/*:handNote/*:locus"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
-      <availableAtts elementName="locus">
-         <attDef attLabel="From" ident="from" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
-         </attDef>
-         <attDef attLabel="To" ident="to" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
-         </attDef>
-      </availableAtts>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:physDesc/*:handDesc/*:handNote/*:note"
+         currentLevel="4"
+         popup="4"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
+         <textNode type="textarea"/>
          <child/>
       </childElements>
-   </locus>
+   </note>
    <scriptDesc ident="scriptDesc"
                elementName="scriptDesc"
                elementLabel="Script definition entries"
@@ -418,7 +416,7 @@
                currentLevel="2"
                popup="2"
                teiElement="&lt;scriptDesc/&gt;">
-      <desc>For every script you encounter, create a distinct script definition.</desc>
+      <desc>If there are multiple scripts, create additional fields through menu.</desc>
       <availableAtts elementName="scriptDesc"/>
       <childElements>
          <child>
@@ -437,10 +435,9 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;scriptNote/&gt;">
-      <desc>Describe the script used by the hand. Use the lists to describe the "Script"
-                            (Oriental, Sefardic …), "Mode" (square, non-square …), "Quality" (careless, trained …). If there is more than one hand
-                            used in the manuscript or manuscript part, create multiple Description of script records and indicate where the hand
-                            changes occur by using the Folio field. In case you want to reference this script, choose a unique identifier.</desc>
+      <desc>Specify script according to the following criteria: "Script type" (Oriental,
+                            Sefardic …), "Script mode" (square, non-square …), "Script quality" (careless, trained …). Indicate the range of folios.
+                            If necessary, add detailed observations in the Note field.</desc>
       <availableAtts elementName="scriptNote">
          <attDef attLabel="Script quality" ident="rend">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -511,27 +508,53 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="locus"
+                     label="*Range of folios"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </scriptNote>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:physDesc/*:scriptDesc/*:scriptNote/*:p"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="*Range of folios"
+          path="/*:physDesc/*:scriptDesc/*:scriptNote/*:locus"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;locus/&gt;">
+      <desc>Specify range of folios of a text within the manuscript. </desc>
+      <availableAtts elementName="locus">
+         <attDef attLabel="From" ident="from" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
+         </attDef>
+         <attDef attLabel="To" ident="to" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </locus>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:physDesc/*:scriptDesc/*:scriptNote/*:note"
+         currentLevel="4"
+         popup="4"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
 </TEI>
