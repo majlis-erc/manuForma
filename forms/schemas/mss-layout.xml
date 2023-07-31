@@ -105,9 +105,9 @@ End license statement: do not remove -->
 
 
                     <elementSpec ident="desc" module="core" mode="change">
-                        <gloss>Page layout description</gloss>
+                        <gloss>Main features of page layout</gloss>
                         <gloss type="tei">&lt;desc&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list those descriptions which match what you can see in the
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose one or more features from the list which match what you can see in the
                             manuscript.</desc>
                         <content>
                             <textNode/>
@@ -143,42 +143,26 @@ End license statement: do not remove -->
                     </elementSpec>
 
 
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific fields and form a
-                            coherent descriptive text.</desc>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Notes</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations on fields.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
+
                     <elementSpec ident="acquisition" mode="delete"/>
                     <elementSpec ident="origin" mode="delete"/>
                     <elementSpec ident="provenance" mode="delete"/>
@@ -187,7 +171,8 @@ End license statement: do not remove -->
                     <elementSpec ident="dim" mode="change">
                         <gloss>Space between columns</gloss>
                         <gloss type="tei">&lt;dim&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Specify the amount of space between two columns of text in millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Measure the space between columns in millimeters. Multiple features can be added
+                            through the Text block menu.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -211,7 +196,9 @@ End license statement: do not remove -->
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
                                 <valList>
-                                    <valItem mode="add" ident="intercolumn"><gloss>Intercolumn space</gloss></valItem>
+                                    <valItem mode="add" ident="intercolumn">
+                                        <gloss>Intercolumn space</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="unit" mode="change">
@@ -220,9 +207,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="height" mode="change">
-                        <gloss>*Height of written area</gloss>
+                        <gloss>*Height of writing area</gloss>
                         <gloss type="tei">&lt;height&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">Measure the height with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">Measure the height in millimeters.</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -237,9 +224,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="width" mode="change">
-                        <gloss>*Width of written area</gloss>
+                        <gloss>*Width of writing area</gloss>
                         <gloss type="tei">&lt;width&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">Measure the width with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:id="width.desc" xml:lang="en">Measure the width in millimeters.</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -256,8 +243,8 @@ End license statement: do not remove -->
                     <elementSpec ident="ab" mode="change">
                         <gloss>Pricking/Ruling</gloss>
                         <gloss type="tei">&lt;ab&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe pricking and ruling of the page layout and choose appropriate values for
-                            the "type" field.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Define whether you describe pricking or ruling through the menu. Choose type of
+                            pricking or ruling. Multiple types can be added by creating fields in the Detailed description of page layout menu.</desc>
                         <classes mode="change">
                             <memberOf key="att.declaring" mode="delete"/>
                             <memberOf key="att.fragmentable" mode="delete"/>
@@ -270,10 +257,14 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="type" mode="change">
-                                <gloss>Pick type</gloss>
+                                <gloss>Specify</gloss>
                                 <valList mode="change">
-                                    <valItem mode="add" ident="ruling"><gloss>Ruling</gloss></valItem>
-                                    <valItem mode="add" ident="pricking"><gloss>Pricking</gloss></valItem>
+                                    <valItem mode="add" ident="ruling">
+                                        <gloss>Ruling</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="pricking">
+                                        <gloss>Pricking</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
@@ -281,7 +272,7 @@ End license statement: do not remove -->
                     <elementSpec ident="dimensions" mode="change">
                         <gloss>*Text block</gloss>
                         <gloss type="tei">&lt;dimensions&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">Measure the text space.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">Provide measurements for the text block.</desc>
                         <content>
                             <alternate maxOccurs="unbounded" minOccurs="0">
                                 <elementRef key="dim"/>
@@ -301,15 +292,16 @@ End license statement: do not remove -->
                             <memberOf key="att.dimensions" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef key="type" mode="change">
-                                <gloss>Type</gloss>
-                            </attDef>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef key="type" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="metamark" mode="change">
                         <gloss>Justification</gloss>
                         <gloss type="tei">&lt;metamark/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en"/>
+                        <desc versionDate="2022-05-27" xml:lang="en">Specify the different features used to ensure an even left margin. Multiple
+                            features can be added through the Detailed description of page layout menu.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.placement" mode="delete"/>
@@ -321,7 +313,9 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="function" mode="change">
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="justification"><gloss>Justification</gloss></valItem>
+                                    <valItem mode="add" ident="justification">
+                                        <gloss>Justification</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="target" mode="delete"/>
@@ -331,15 +325,14 @@ End license statement: do not remove -->
                     <elementSpec ident="layout" mode="change">
                         <gloss>*Detailed description of page layout</gloss>
                         <gloss type="tei">&lt;layout&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="layout.desc">Provide the typology of the layout and describe it. Specify
-                            the number of columns and lines in the correct fields.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="layout.desc">Describe the page layout in specifying the number of lines
+                            and columns. If necessary add field: Space between columns via the menu. Provide information on dimensions of text block,
+                            pricking, ruling, and justification.</desc>
                         <content>
-                            <elementRef key="note"/>
-                            <elementRef key="dimensions"/>
-                            <elementRef key="ab"/>
-                            <elementRef key="p"/>
                             <elementRef key="locus"/>
+                            <elementRef key="dimensions"/>
                             <elementRef key="metamark"/>
+                            <elementRef key="ab"/>
                         </content>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -352,11 +345,11 @@ End license statement: do not remove -->
                             <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="columns" mode="change">
-                                <gloss>Number of columns</gloss>
-                            </attDef>
                             <attDef ident="writtenLines" mode="change">
                                 <gloss>Number of written lines</gloss>
+                            </attDef>
+                            <attDef ident="columns" mode="change">
+                                <gloss>Number of columns</gloss>
                             </attDef>
                             <attDef ident="streams" mode="delete"/>
                             <attDef ident="ruledLines" mode="delete"/>
@@ -364,18 +357,17 @@ End license statement: do not remove -->
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="topLine" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="xml:id" mode="change">
-                                <gloss>Layout identifier</gloss>
-                            </attDef>
+                            <attDef ident="xml:id" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="summary" mode="change">
-                        <gloss>Page layout summary</gloss>
+                        <gloss>Summary of page layout</gloss>
                         <gloss type="tei">&lt;summary&gt;</gloss>
                         <desc versionDate="2022-06-01" xml:lang="en" xml:id="summary.desc">Outline your observations of the main features in this
                             context.</desc>
                         <content>
                             <elementRef key="desc"/>
+                            <elementRef key="note"/>
                         </content>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -388,6 +380,7 @@ End license statement: do not remove -->
                             <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                     </elementSpec>
+
                     <elementSpec ident="layoutDesc" mode="change">
                         <gloss>*Page layout</gloss>
                         <gloss type="tei">&lt;layoutDesc&gt;</gloss>
@@ -407,12 +400,11 @@ End license statement: do not remove -->
                             <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                     </elementSpec>
+
                     <elementSpec ident="locus" module="msdescription" mode="change">
                         <gloss>Specific range of folios for this layout</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of layout within the manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -446,6 +438,7 @@ End license statement: do not remove -->
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
                             <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
                             <attDef ident="to" mode="change">
                                 <gloss>To</gloss>
