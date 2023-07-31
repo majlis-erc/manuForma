@@ -104,8 +104,8 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -115,7 +115,7 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="locus"
-                     label="Folio"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -124,24 +124,28 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="persName"
+                     label="Person mentioned"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </item>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:list/*:item/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         path="/*:list/*:item/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
    <objectType ident="objectType"
                elementName="objectType"
                elementLabel="Type of incodicated document"
@@ -149,7 +153,7 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;objectType/&gt;">
-      <desc>Choose from the list.</desc>
+      <desc>Choose the type of document from the list.</desc>
       <availableAtts elementName="objectType"/>
       <controlledValues>
          <element xmlns="" ident="objectType">
@@ -191,14 +195,12 @@
    </objectType>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="Folio"
+          elementLabel="*Range of folios"
           path="/*:list/*:item/*:locus"
           currentLevel="3"
           popup="3"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the manuscript.</desc>
       <availableAtts elementName="locus">
          <attDef attLabel="From" ident="from" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -220,8 +222,19 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Transcribe the incodicated document.</desc>
+      <desc>Transcribe relevant portion of the text. Specify language and script of the document via the dropdown menus.</desc>
       <availableAtts elementName="quote">
+         <attDef attLabel="Script" ident="rend" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Script</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="Arab" attLabel="Arabic"/>
+               <valItem ident="Hebr" attLabel="Hebrew"/>
+            </valList>
+         </attDef>
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
@@ -230,8 +243,9 @@
                      type="closed"
                      mode="change">
                <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
                <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="pe" attLabel="Persian"/>
+               <valItem ident="en" attLabel="English"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -240,4 +254,89 @@
          <child/>
       </childElements>
    </quote>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person mentioned"
+             path="/*:list/*:item/*:persName"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New Persons"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
+      <desc>Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="add"/>
+         </attDef>
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="main"
+                        attLabel="main"
+                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
+               <valItem ident="normalized"
+                        attLabel="normalized"
+                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
+               <valItem ident="given"
+                        attLabel="given"
+                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
+               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
+               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
+               <valItem ident="regnal"
+                        attLabel="regnal"
+                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
+               <valItem ident="monastic"
+                        attLabel="monastic"
+                        desc="name given on entering monastic life "/>
+               <valItem ident="horse"
+                        attLabel="horse"
+                        desc="the name of the battle horse of kings and rulers"/>
+               <valItem ident="nick"
+                        attLabel="nick"
+                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
+               <valItem ident="war"
+                        attLabel="war"
+                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
+               <valItem ident="hypocoristic"
+                        attLabel="hypocoristic"
+                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
+               <valItem ident="patronymic"
+                        attLabel="patronymic"
+                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
+               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
+               <valItem ident="tabot"
+                        attLabel="tabot"
+                        desc="the saint to whom the tābot is dedicated"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
 </TEI>
