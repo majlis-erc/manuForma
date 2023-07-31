@@ -104,11 +104,6 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="note"
-                     label="Notes"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="objectType"
                      label="Type of incodicated document"
                      minOccurs=""
@@ -119,33 +114,24 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="persName"
+                     label="Person mentioned"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="persName"
-                     label="Person mentioned"
+            <element ident="note"
+                     label="Notes"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </item>
-   <note ident="note"
-         elementName="note"
-         elementLabel="Notes"
-         path="/*:list/*:item/*:note"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;note/&gt;">
-      <desc>Add observations on fields mentioned.</desc>
-      <availableAtts elementName="note"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </note>
    <objectType ident="objectType"
                elementName="objectType"
                elementLabel="Type of incodicated document"
@@ -215,6 +201,48 @@
          <child/>
       </childElements>
    </locus>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person mentioned"
+             path="/*:list/*:item/*:persName"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up persons"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New Persons"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
+      <desc>Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="add"/>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
@@ -254,89 +282,18 @@
          <child/>
       </childElements>
    </quote>
-   <persName ident="persName"
-             elementName="persName"
-             elementLabel="Person mentioned"
-             path="/*:list/*:item/*:persName"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;persName/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up persons"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="personTEI"
-             elementName="persName"
-             label="New Persons"
-             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <desc>Look up the person records in the database. Try different spellings in different
-                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
-      <availableAtts elementName="persName">
-         <attDef attLabel="Person identifier"
-                 ident="ref"
-                 mode="change"
-                 style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
-         </attDef>
-         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="add"/>
-         </attDef>
-         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="main"
-                        attLabel="main"
-                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
-               <valItem ident="normalized"
-                        attLabel="normalized"
-                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
-               <valItem ident="given"
-                        attLabel="given"
-                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
-               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
-               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
-               <valItem ident="regnal"
-                        attLabel="regnal"
-                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
-               <valItem ident="monastic"
-                        attLabel="monastic"
-                        desc="name given on entering monastic life "/>
-               <valItem ident="horse"
-                        attLabel="horse"
-                        desc="the name of the battle horse of kings and rulers"/>
-               <valItem ident="nick"
-                        attLabel="nick"
-                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
-               <valItem ident="war"
-                        attLabel="war"
-                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
-               <valItem ident="hypocoristic"
-                        attLabel="hypocoristic"
-                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
-               <valItem ident="patronymic"
-                        attLabel="patronymic"
-                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
-               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
-               <valItem ident="tabot"
-                        attLabel="tabot"
-                        desc="the saint to whom the tābot is dedicated"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         path="/*:list/*:item/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
-         <textNode type="input" class="persName"/>
+         <textNode type="textarea"/>
          <child/>
       </childElements>
-   </persName>
+   </note>
 </TEI>
