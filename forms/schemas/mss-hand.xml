@@ -84,10 +84,8 @@ End license statement: do not remove -->
                     <moduleRef key="transcr" include="metamark"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
-                        <gloss>Folios</gloss>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the manuscript. </desc>
+                        <gloss>*Range of folios</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
@@ -138,7 +136,7 @@ End license statement: do not remove -->
                     <elementSpec ident="summary" module="msdescription" mode="change">
                         <desc versionDate="2022-05-27" xml:id="summary.desc" xml:lang="en">Outline your observations of the main features of the
                             script.</desc>
-                        <gloss>Summary of script</gloss>
+                        <gloss>Summary of hand</gloss>
                         <gloss type="tei">&lt;summary/&gt;</gloss>
                         <content>
                             <textNode/>
@@ -168,47 +166,31 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="p" module="core" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p/&gt;</gloss>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
                     <moduleRef key="header" include="handNote"/>
                     <elementSpec ident="handDesc" mode="change">
                         <gloss>Scribal hand entries</gloss>
                         <gloss type="tei">&lt;handDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">For every script you encounter, create a distinct entry hand to describe it.</desc>
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">For every script you encounter, create a distinct entry hand
+                            to describe it.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -255,7 +237,7 @@ End license statement: do not remove -->
                     <elementSpec ident="scriptDesc" mode="change">
                         <gloss>Script definition entries</gloss>
                         <gloss type="tei">&lt;scriptDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">For every script you encounter, create a distinct script definition.</desc>
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">If there are multiple scripts, create additional fields through menu.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -283,8 +265,12 @@ End license statement: do not remove -->
                             <attDef ident="function" mode="change">
                                 <gloss>Pick type</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="vocalization"><gloss>Vocalization</gloss></valItem>
-                                    <valItem mode="add" ident="recitation"><gloss>Recitation</gloss></valItem>
+                                    <valItem mode="add" ident="vocalization">
+                                        <gloss>Vocalization</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="recitation">
+                                        <gloss>Recitation</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="target" mode="delete"/>
@@ -348,14 +334,22 @@ End license statement: do not remove -->
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="scribe"><gloss>Scribe</gloss></valItem>
-                                    <valItem mode="add" ident="vocalizer"><gloss>Vocalizer</gloss></valItem>
-                                    <valItem mode="add" ident="masorator"><gloss>Masorator</gloss></valItem>
+                                    <valItem mode="add" ident="scribe">
+                                        <gloss>Scribe</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="vocalizer">
+                                        <gloss>Vocalizer</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="masorator">
+                                        <gloss>Masorator</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="ref"><gloss>Person identifier</gloss></attDef>
+                            <attDef ident="ref">
+                                <gloss>Person identifier</gloss>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="placeName" mode="change">
@@ -395,12 +389,12 @@ End license statement: do not remove -->
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="locus"/>
                             <elementRef key="persName"/>
                             <elementRef key="placeName"/>
                             <elementRef key="metamark"/>
                             <elementRef key="origDate"/>
-                            <elementRef key="locus"/>
+                            <elementRef key="note"/>
                         </content>
                         <attList>
                             <attDef name="xml:id" mode="change">
@@ -413,12 +407,24 @@ End license statement: do not remove -->
                             <attDef ident="medium" mode="change">
                                 <gloss>Medium</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="brown"><gloss>Brown ink</gloss></valItem>
-                                    <valItem mode="add" ident="black"><gloss>Black ink</gloss></valItem>
-                                    <valItem mode="add" ident="pigments"><gloss>Pigments</gloss></valItem>
-                                    <valItem mode="add" ident="mixed"><gloss>Mixed ink</gloss></valItem>
-                                    <valItem mode="add" ident="plantBased"><gloss>Plant based ink</gloss></valItem>
-                                    <valItem mode="add" ident="unidentified"><gloss>Unidentified ink</gloss></valItem>
+                                    <valItem mode="add" ident="brown">
+                                        <gloss>Brown ink</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="black">
+                                        <gloss>Black ink</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="pigments">
+                                        <gloss>Pigments</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="mixed">
+                                        <gloss>Mixed ink</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="plantBased">
+                                        <gloss>Plant based ink</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="unidentified">
+                                        <gloss>Unidentified ink</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="style" mode="delete"/>
@@ -427,66 +433,101 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="scriptNote" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the script used by the hand. Use the lists to describe the "Script"
-                            (Oriental, Sefardic …), "Mode" (square, non-square …), "Quality" (careless, trained …). If there is more than one hand
-                            used in the manuscript or manuscript part, create multiple Description of script records and indicate where the hand
-                            changes occur by using the Folio field. In case you want to reference this script, choose a unique identifier.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Specify script according to the following criteria: "Script type" (Oriental,
+                            Sefardic …), "Script mode" (square, non-square …), "Script quality" (careless, trained …). Indicate the range of folios.
+                            If necessary, add detailed observations in the Note field.</desc>
                         <gloss>*Description of script</gloss>
                         <gloss type="tei">&lt;scriptNote/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="locus"/>
+                            <elementRef key="note"/>
                         </content>
                         <attList>
-                            <attDef name="xml:id" mode="change">
-                                <gloss>Identifier</gloss>
-                            </attDef>
+                            <attDef name="xml:id" mode="delete"/>
                             <attDef name="xml:lang" mode="change">
                                 <gloss>Graphic system</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="hebrew"><gloss>Hebrew</gloss></valItem>
-                                    <valItem mode="add" ident="arabic"><gloss>Arabic</gloss></valItem>
-                                    <valItem mode="add" ident="latin"><gloss>Latin</gloss></valItem>
-                                    <valItem mode="add" ident="greek"><gloss>Greek</gloss></valItem>
-                                    <valItem mode="add" ident="syriac"><gloss>Syriac</gloss></valItem>
-                                    <valItem mode="add" ident="other"><gloss>Other</gloss></valItem>
+                                    <valItem mode="add" ident="hebrew">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="arabic">
+                                        <gloss>Arabic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="latin">
+                                        <gloss>Latin</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="greek">
+                                        <gloss>Greek</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="syriac">
+                                        <gloss>Syriac</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="other">
+                                        <gloss>Other</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
-                            <attDef name="scope" mode="delete"/>
-                            <attDef name="scribe" mode="delete"/>
-                            <attDef name="scribeRef" mode="delete"/>
-                            <attDef name="scriptRef" mode="delete"/>
                             <attDef ident="script" mode="change">
                                 <gloss>Script type</gloss>
                                 <datatype>
                                     <dataRef key="teidata.name"/>
                                 </datatype>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="oriental"><gloss>Oriental</gloss></valItem>
-                                    <valItem mode="add" ident="yemenite"><gloss>Yemenite</gloss></valItem>
-                                    <valItem mode="add" ident="sephardi"><gloss>Sephardi</gloss></valItem>
-                                    <valItem mode="add" ident="byzantine"><gloss>Byzantine</gloss></valItem>
-                                    <valItem mode="add" ident="italian"><gloss>Italian</gloss></valItem>
-                                    <valItem mode="add" ident="ashkenazi"><gloss>Ashkenazi</gloss></valItem>
-                                    <valItem mode="add" ident="unidentified"><gloss>Unidentified</gloss></valItem>
-                                    <valItem mode="add" ident="abbasidBookHand"><gloss>Abbasid book hand</gloss></valItem>
-                                    <valItem mode="add" ident="newStyle"><gloss>New Style</gloss></valItem>
-                                    <valItem mode="add" ident="naskh"><gloss>Naskh</gloss></valItem>
+                                    <valItem mode="add" ident="oriental">
+                                        <gloss>Oriental</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="yemenite">
+                                        <gloss>Yemenite</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="sephardi">
+                                        <gloss>Sephardi</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="byzantine">
+                                        <gloss>Byzantine</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="italian">
+                                        <gloss>Italian</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="ashkenazi">
+                                        <gloss>Ashkenazi</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="unidentified">
+                                        <gloss>Unidentified</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="abbasidBookHand">
+                                        <gloss>Abbasid book hand</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="newStyle">
+                                        <gloss>New Style</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="naskh">
+                                        <gloss>Naskh</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
-                            <attDef ident="medium" mode="delete"> </attDef>
+                            <attDef ident="medium" mode="delete"/>
                             <attDef ident="style">
                                 <gloss>Script mode</gloss>
                                 <datatype>
                                     <dataRef name="string"/>
                                 </datatype>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="square"><gloss>Square</gloss></valItem>
-                                    <valItem mode="add" ident="nonSquare"><gloss>Non square</gloss></valItem>
-                                    <valItem mode="add" ident="cursive"><gloss>Cursive</gloss></valItem>
-                                    <valItem mode="add" ident="unidentified"><gloss>Unidentified</gloss></valItem>
+                                    <valItem mode="add" ident="square">
+                                        <gloss>Square</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="nonSquare">
+                                        <gloss>Non square</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="cursive">
+                                        <gloss>Cursive</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="unidentified">
+                                        <gloss>Unidentified</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                             <attDef ident="rend">
@@ -495,14 +536,83 @@ End license statement: do not remove -->
                                     <dataRef name="string"/>
                                 </datatype>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="unidentified"><gloss>Unidentified</gloss></valItem>
-                                    <valItem mode="add" ident="untrained"><gloss>Untrained</gloss></valItem>
-                                    <valItem mode="add" ident="careless"><gloss>Careless</gloss></valItem>
-                                    <valItem mode="add" ident="current"><gloss>Current</gloss></valItem>
-                                    <valItem mode="add" ident="calligraphic"><gloss>Calligraphic</gloss></valItem>
-                                    <valItem mode="add" ident="monumental"><gloss>Monumental</gloss></valItem>
+                                    <valItem mode="add" ident="unidentified">
+                                        <gloss>Unidentified</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="untrained">
+                                        <gloss>Untrained</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="careless">
+                                        <gloss>Careless</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="current">
+                                        <gloss>Current</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="calligraphic">
+                                        <gloss>Calligraphic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="monumental">
+                                        <gloss>Monumental</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
+                            <attDef name="scope" mode="delete"/>
+                            <attDef name="scribe" mode="delete"/>
+                            <attDef name="scribeRef" mode="delete"/>
+                            <attDef name="scriptRef" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="locus" module="msdescription" mode="change">
+                        <gloss>Specific range of folios for this layout</gloss>
+                        <gloss type="tei">&lt;locus/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of layout within the
+                            manuscript.</desc>
+                        <classes mode="replace">
+                            <memberOf key="model.pPart.msdesc"/>
+                            <memberOf key="att.pointing"/>
+                            <memberOf key="att.global"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="evaluate" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="from" mode="change">
+                                <gloss>From</gloss>
+                            </attDef>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="to" mode="change">
+                                <gloss>To</gloss>
+                            </attDef>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="scheme" mode="delete"/>
                         </attList>
                     </elementSpec>
                 </schemaSpec>
