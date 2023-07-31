@@ -78,17 +78,14 @@ End license statement: do not remove --><!--requirements:
                 -->
 
                     <moduleRef key="core"
-                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name note noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription"
                         except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
                     <moduleRef key="tei"/>
-                    <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <gloss>Folio</gloss>
+                        <gloss>*Range of folios</gloss>
                         <gloss type="tei">&lt;locus&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -96,7 +93,7 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
+                            <empty/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -169,10 +166,11 @@ End license statement: do not remove --><!--requirements:
                         <gloss>Document</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Describe the incodicated document.</desc>
                         <content>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                             <elementRef key="objectType"/>
                             <elementRef key="locus"/>
                             <elementRef key="quote"/>
+                            <elementRef key="persName"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -251,7 +249,8 @@ End license statement: do not remove --><!--requirements:
                     </elementSpec>
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Transcribe the incodicated document.</desc>
+                        <gloss type="tei">&lt;quote&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Transcribe relevant portion of the text. Specify language and script of the document via the dropdown menus.</desc>
                         <classes mode="change">
                             <memberOf key="att.ascribed.directed" mode="delete"/>
                         </classes>
@@ -274,7 +273,17 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="select" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rend" mode="change">
+                                <gloss>Script</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="Arab">
+                                        <gloss>Arabic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="Hebr">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
@@ -289,23 +298,37 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="xml:lang" mode="change">
                                 <gloss>Language</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="ar"><gloss>Arabic</gloss></valItem>
-                                    <valItem mode="add" ident="en"><gloss>English</gloss></valItem>
-                                    <valItem mode="add" ident="he"><gloss>Hebrew</gloss></valItem>
+                                    <valItem mode="add" ident="ar">
+                                        <gloss>Arabic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="he">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="pe">
+                                        <gloss>Persian</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="en">
+                                        <gloss>English</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
-                    <elementSpec ident="p" mode="change">
-                        <gloss>Free text box</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Notes</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations on fields mentioned.</desc>
                         <classes mode="change">
-                            <memberOf key="att.declaring" mode="delete"/>
-                            <memberOf key="att.fragmentable" mode="delete"/>
+                            <memberOf key="att.anchoring" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
@@ -313,7 +336,7 @@ End license statement: do not remove --><!--requirements:
 
                     <elementSpec ident="objectType" mode="change">
                         <gloss>Type of incodicated document</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose the type of document from the list.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -331,6 +354,36 @@ End license statement: do not remove --><!--requirements:
                         <content>
                             <textNode/>
                         </content>
+                    </elementSpec>
+                    <elementSpec ident="persName" mode="change">
+                        <gloss>Person mentioned</gloss>
+                        <gloss type="tei">&lt;persName&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="role" mode="change" style="restricted">
+                                <gloss>Role</gloss>
+                                <valList mode="add" ident="mentioned">
+                                    <gloss>Mentioned</gloss>
+                                </valList>
+                            </attDef>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="change" style="restricted">
+                                <gloss>Person identifier</gloss>
+                            </attDef>
+                        </attList>
                     </elementSpec>
                 </schemaSpec>
             </div>
