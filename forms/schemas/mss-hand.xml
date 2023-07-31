@@ -200,6 +200,9 @@ End license statement: do not remove -->
                                 <elementRef key="handNote"/>
                             </sequence>
                         </content>
+                        <attList>
+                            <attDef ident="hands" mode="delete"/>
+                        </attList>
                     </elementSpec>
 
                     <elementSpec ident="physDesc" module="msdescription" mode="change">
@@ -237,7 +240,8 @@ End license statement: do not remove -->
                     <elementSpec ident="scriptDesc" mode="change">
                         <gloss>Script definition entries</gloss>
                         <gloss type="tei">&lt;scriptDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">If there are multiple scripts, create additional fields through menu.</desc>
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">If there are multiple scripts, create additional fields
+                            through menu.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -251,8 +255,8 @@ End license statement: do not remove -->
                     <elementSpec ident="metamark" mode="change">
                         <gloss>Special graphic signs</gloss>
                         <gloss type="tei">&lt;metamark/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the use of complementary characters like vocalization or recitation in
-                            prose and choose the appropriate "function" from the list.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the use of vocalization or recitation and choose the appropriate
+                            "Function" from the dropdown list.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.placement" mode="delete"/>
@@ -279,9 +283,7 @@ End license statement: do not remove -->
                     <elementSpec ident="origDate" mode="change">
                         <gloss>Date of origin</gloss>
                         <gloss type="tei">&lt;origDate/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date in the agreed-upon calendrical system.
-                            Use the "When" field for precise values. In case the date can only be approximated, use the "Not after"and "Not before"
-                            fields together.</desc>
+                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date of origin in CE.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -290,31 +292,25 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
+                            <empty/>
                         </content>
                         <attList>
-                            <attDef name="when" usage="change">
+                            <attDef ident="when" usage="change">
                                 <gloss>When</gloss>
                             </attDef>
-                            <attDef name="notAfter" usage="opt"/>
-                            <attDef name="notBefore" usage="opt"/>
-                            <attDef name="when" class="att.datable.w3c"/>
+                            <attDef ident="notAfter" usage="opt"/>
+                            <attDef ident="notBefore" usage="opt"/>
                             <attDef ident="evidence" mode="delete"/>
-                            <attDef ident="notBefore" mode="change">
-                                <gloss>Not before</gloss>
-                            </attDef>
-                            <attDef ident="notAfter" mode="change">
-                                <gloss>Not after</gloss>
-                            </attDef>
+                            <attDef ident="notBefore" mode="delete"> </attDef>
+                            <attDef ident="notAfter" mode="delete"> </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
                         <gloss>Person</gloss>
                         <gloss type="tei">&lt;persName/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" field to specify the
-                            person's function to the manuscript (e.g., "owner") from the list. (The "reference" field will be filled out automatically
-                            when you link a record to this field.)</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the scribe, vocalizer, or
+                            masorator. Try different spellings in different languages! If no suitable record exists, create a new one. Select which
+                            role the person played in the production from the dropdown list. Add additional fields as required. </desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -323,7 +319,6 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <textNode/>
                             <textNode/>
                         </content>
                         <attList>
@@ -353,11 +348,10 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="placeName" mode="change">
-                        <gloss>Place</gloss>
+                        <gloss>Place of origin</gloss>
                         <gloss type="tei">&lt;placeName/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
-                            filled out automatically when you link a place record to this field.)</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the place records in the database to specify a location. Try different
+                            spellings in different languages! If no suitable record exists, create a new one.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -367,10 +361,10 @@ End license statement: do not remove -->
                         </classes>
                         <content>
                             <textNode/>
-                            <textNode/>
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="ref">
@@ -379,14 +373,14 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="handNote" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the hand. Use the sub fields to describe the "Medium" (Brown, Black …)
-                            and "Scope". If there is more than one hand used in the manuscript or manuscript part, create multiple Description of
-                            scribal hand records and indicate where the hand changes occur by using the locus elements. Give your assessment how much
-                            a hand contributed using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the hand according to the following criteria: "Medium" (brown, black …),
+                            Range of folios, Persons (scribes etc.), Date of origin, Place of origin, and Special graphic signs. Add your observations
+                            in the Note field. In case there are multiple hands, create additional fields through menu.</desc>
                         <gloss>*Description of scribal hand</gloss>
                         <gloss type="tei">&lt;handNote/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
                         </classes>
                         <content>
                             <elementRef key="locus"/>
@@ -397,12 +391,7 @@ End license statement: do not remove -->
                             <elementRef key="note"/>
                         </content>
                         <attList>
-                            <attDef name="xml:id" mode="change">
-                                <gloss>Hand identifier</gloss>
-                            </attDef>
-                            <attDef name="scope" mode="change">
-                                <gloss>Scope</gloss>
-                            </attDef>
+                            <attDef ident="scope" mode="delete"> </attDef>
                             <attDef ident="script" mode="delete"/>
                             <attDef ident="medium" mode="change">
                                 <gloss>Medium</gloss>
@@ -430,6 +419,11 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
                         </attList>
+                        <attDef ident="scope" mode="delete"/>
+                        <attDef ident="scribe" mode="delete"/>
+                        <attDef ident="scribeRef" mode="delete"/>
+                        <attDef ident="scriptRef" mode="delete"/>
+                        <attDef ident="xml:id" mode="delete"/>
                     </elementSpec>
 
                     <elementSpec ident="scriptNote" mode="change">
@@ -559,7 +553,7 @@ End license statement: do not remove -->
                             <attDef ident="scriptRef" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                 </schemaSpec>
             </div>
         </body>

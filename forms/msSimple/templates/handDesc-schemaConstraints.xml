@@ -107,20 +107,7 @@
              teiElement="&lt;handDesc/&gt;">
       <desc>For every script you encounter, create a distinct entry hand
                             to describe it.</desc>
-      <availableAtts elementName="handDesc">
-         <attDef attLabel="hands" ident="hands">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2007-06-12">hands</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-06-12"
-                   xml:lang="fr">mains</gloss>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="handDesc"/>
       <childElements>
          <child>
             <element ident="summary"
@@ -158,10 +145,9 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;handNote/&gt;">
-      <desc>Describe the hand. Use the sub fields to describe the "Medium" (Brown, Black …)
-                            and "Scope". If there is more than one hand used in the manuscript or manuscript part, create multiple Description of
-                            scribal hand records and indicate where the hand changes occur by using the locus elements. Give your assessment how much
-                            a hand contributed using the scope attribute. In case you want to reference this hand, choose a unique identifier.</desc>
+      <desc>Describe the hand according to the following criteria: "Medium" (brown, black …),
+                            Range of folios, Persons (scribes etc.), Date of origin, Place of origin, and Special graphic signs. Add your observations
+                            in the Note field. In case there are multiple hands, create additional fields through menu.</desc>
       <availableAtts elementName="handNote">
          <attDef attLabel="Medium" ident="medium" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -176,22 +162,6 @@
                <valItem ident="mixed" attLabel="Mixed ink"/>
                <valItem ident="plantBased" attLabel="Plant based ink"/>
                <valItem ident="unidentified" attLabel="Unidentified ink"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="scope" ident="scope">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="sole"
-                        attLabel="sole"
-                        desc="only this hand is used throughout the manuscript 이 필적만이 원고 전체에 사용되었다. &#xA;          当該筆致だけで全てが書かれている．&#xA; il n'y a que cette main dans le&#xA;manuscrit. unica mano utilizzata nel manoscritto al interno del manuscrito se utiliza sólo esta mano."/>
-               <valItem ident="major"
-                        attLabel="major"
-                        desc="this hand is used through most of the manuscript 이 필적이 원고 대부분에서 사용되었다. &#xA;          当該筆致で，殆どが書かれている．&#xA; cette main est utilisée dans la&#xA;majeure partie du manuscrit. mano utilizzata nella maggior parte del manoscritto esta es la mano que se utiliza en la mayor parte del manuscrito."/>
-               <valItem ident="minor"
-                        attLabel="minor"
-                        desc="this hand is used occasionally in the manuscript 이 필적이 원고에서 가끔 사용되었다. &#xA;          当該筆致で，所々が書かれている．&#xA; cette main est utilisée&#xA;occasionnellement dans le manuscrit. mano utilizzata solo di rado nel manoscritto esta mano se usa sólo ocasionalmente en el manuscrito."/>
             </valList>
          </attDef>
          <attDef attLabel="scribe" ident="scribe"/>
@@ -212,7 +182,7 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="placeName"
-                     label="Place"
+                     label="Place of origin"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -274,10 +244,9 @@
              elementName="persName"
              label="New Persons"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <desc>Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "role" field to specify the
-                            person's function to the manuscript (e.g., "owner") from the list. (The "reference" field will be filled out automatically
-                            when you link a record to this field.)</desc>
+      <desc>Look up the person records in the database to identify the scribe, vocalizer, or
+                            masorator. Try different spellings in different languages! If no suitable record exists, create a new one. Select which
+                            role the person played in the production from the dropdown list. Add additional fields as required. </desc>
       <availableAtts elementName="persName">
          <attDef attLabel="Person identifier" ident="ref">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -303,7 +272,7 @@
    </persName>
    <placeName ident="placeName"
               elementName="placeName"
-              elementLabel="Place"
+              elementLabel="Place of origin"
               path="/*:physDesc/*:handDesc/*:handNote/*:placeName"
               currentLevel="4"
               popup="4"
@@ -319,24 +288,12 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
-                            filled out automatically when you link a place record to this field.)</desc>
+      <desc>Look up the place records in the database to specify a location. Try different
+                            spellings in different languages! If no suitable record exists, create a new one.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Place identifier" ident="ref">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="">
-               <valItem ident="normalized" attLabel="normalized"/>
-               <valItem ident="library" attLabel="library"/>
-               <valItem ident="academicInstitution" attLabel="academicInstitution"/>
-               <valItem ident="museum" attLabel="museum"/>
-            </valList>
          </attDef>
       </availableAtts>
       <childElements>
@@ -351,8 +308,8 @@
              currentLevel="4"
              popup="4"
              teiElement="&lt;metamark/&gt;">
-      <desc>Describe the use of complementary characters like vocalization or recitation in
-                            prose and choose the appropriate "function" from the list.</desc>
+      <desc>Describe the use of vocalization or recitation and choose the appropriate
+                            "Function" from the dropdown list.</desc>
       <availableAtts elementName="metamark">
          <attDef attLabel="Pick type" ident="function" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -378,17 +335,13 @@
              currentLevel="4"
              popup="4"
              teiElement="&lt;origDate/&gt;">
-      <desc>Fill in the date in the agreed-upon calendrical system.
-                            Use the "When" field for precise values. In case the date can only be approximated, use the "Not after"and "Not before"
-                            fields together.</desc>
+      <desc>Fill in the date of origin in CE.</desc>
       <availableAtts elementName="origDate">
-         <attDef attLabel="Not after" ident="notAfter" mode="change">
+         <attDef attLabel="notAfter" ident="notAfter" usage="opt"/>
+         <attDef attLabel="notBefore" ident="notBefore" usage="opt"/>
+         <attDef attLabel="When" ident="when" usage="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not after</gloss>
-         </attDef>
-         <attDef attLabel="Not before" ident="notBefore" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Not before</gloss>
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">When</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -416,7 +369,8 @@
                currentLevel="2"
                popup="2"
                teiElement="&lt;scriptDesc/&gt;">
-      <desc>If there are multiple scripts, create additional fields through menu.</desc>
+      <desc>If there are multiple scripts, create additional fields
+                            through menu.</desc>
       <availableAtts elementName="scriptDesc"/>
       <childElements>
          <child>
