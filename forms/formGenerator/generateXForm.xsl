@@ -14,8 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.26 Beta 
-
+        Version: 1.27 Beta 
             -1.22 marks a major redesign
         
 
@@ -814,10 +813,24 @@
                                             <!--<xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-html" appearance="minimal">
                                                 <xf:label> Preview HTML</xf:label>
                                             </xf:submit>-->
+                                            
                                             <xsl:if test="$configDoc//saveOptions/option[@name='github'][@enable='true']">
+                                                <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm">
+                                                    <xf:label> Submit to GitHub </xf:label>
+                                                    <xf:action ev:event="DOMActivate">
+                                                        <xf:toggle case="changeElementUnHide"/>
+                                                        <!--
+                                                        <xf:load show="embed" targetid="{$repeatID}subformLookup">
+                                                            <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
+                                                        </xf:load>
+                                                        -->
+                                                    </xf:action>
+                                                </xf:trigger>
+                                                <!--
                                                 <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal">
                                                     <xf:label> Submit to GitHub </xf:label>
                                                 </xf:submit>
+                                                -->
                                             </xsl:if>
                                             <!--
                                             <xsl:if test="$configDoc//saveOptions/option[@name='exist-db'][@enable='true']">
@@ -1048,7 +1061,55 @@
                                     </div>
                                 </xf:case>
                             </xf:switch>
+                            <!--
+                            <xf:dialog id="adminChange" class="lookupDisplay">
+                                <h4>What did you change?</h4>
+                                <xf:textarea class="elementTextArea" id="changeElement" ref="instance('i-rec')//*:revisionDesc/*:change[1]"/>
+                                <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
+                                    <xf:label>Save</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:hide dialog="adminChange"/>
+                                        <xf:send submission="s-github"/>
+                                    </xf:action>
+                                </xf:trigger>
+                                <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
+                                    <xf:label>Cancel</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:hide dialog="adminChange"/>
+                                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"/>
+                                    </xf:action>
+                                </xf:trigger>
+                            </xf:dialog> -->
                         </main>
+                        <xf:switch class="lookupSwitch" style="width:.5em;">
+                            <xf:case id="changeElementHide" style="display:none;"/>
+                            <xf:case id="changeElementUnHide">
+                                <div class="lookupDisplay changeElement">
+                                    <div class="fileLoading">
+                                        <h4 class="h6">What did you change?</h4>
+                                        <div class="input-group mb-3 full-width">
+                                            <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
+                                                <xf:label> Save</xf:label>
+                                                <xf:action ev:event="DOMActivate">
+                                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"/>
+                                                    <xf:send submission="s-github"/>
+                                                </xf:action>
+                                            </xf:trigger>
+                                            <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
+                                                <xf:label> Cancel</xf:label>
+                                                <xf:action ev:event="DOMActivate">
+                                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"/>
+                                                    <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"/>
+                                                </xf:action>
+                                            </xf:trigger>   
+                                        </div>
+                                    </div> 
+                                </div>
+                            </xf:case>
+                        </xf:switch>
                     </div>
                 </div>
             </body>
@@ -1356,7 +1417,6 @@
         </html>
     </xsl:template>
     
-     <!-- Build repeating XForms element -->
     <!-- Build repeating XForms element -->
     <xsl:template name="xformElementUI">
         <xsl:param name="subform"/>
