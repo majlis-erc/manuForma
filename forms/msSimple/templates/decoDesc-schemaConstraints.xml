@@ -20,12 +20,12 @@
       <childElements>
          <child>
             <element ident="summary"
-                     label="Text layout summary"
+                     label="Summary of text layout"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="decoNote"
-                     label="Text Layout"
+                     label="Main features of text layout"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -34,12 +34,12 @@
    </decoDesc>
    <summary ident="summary"
             elementName="summary"
-            elementLabel="Text layout summary"
+            elementLabel="Summary of text layout"
             path="/*:decoDesc/*:summary"
             currentLevel="2"
             popup="2"
             teiElement="&lt;summary/&gt;">
-      <desc>Outline your observations of the text layout in general terms.</desc>
+      <desc>Provide a summary description of the text layout.</desc>
       <availableAtts elementName="summary"/>
       <childElements>
          <textNode type="textarea"/>
@@ -48,48 +48,22 @@
    </summary>
    <decoNote ident="decoNote"
              elementName="decoNote"
-             elementLabel="Text Layout"
+             elementLabel="Main features of text layout"
              path="/*:decoDesc/*:decoNote"
              currentLevel="2"
              popup="2"
              teiElement="&lt;decoNote/&gt;">
-      <desc>Describe the text layout.</desc>
-      <availableAtts elementName="decoNote">
-         <attDef attLabel="color" ident="color" usage="opt"/>
-         <attDef attLabel="pastedown" ident="pastedown" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="UTI"
-                        attLabel="UTI"
-                        desc="Under the turn-ins. The pastedown is pasted under the&#xA;                                        turn-ins."/>
-               <valItem ident="OTI"
-                        attLabel="OTI"
-                        desc="Over the turn-ins. The pastedown is pasted over the&#xA;                                        turn-ins."/>
-               <valItem ident="L" attLabel="L" desc="Left pastedown, on the upper board."/>
-               <valItem ident="R" attLabel="R" desc="Right pastedown, on the lower board."/>
-            </valList>
-         </attDef>
-         <attDef attLabel="repaired" ident="repaired" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="Y" attLabel="Y"/>
-               <valItem ident="N" attLabel="N"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <desc>Describe the text layout. Multiple text layout features can be added through the menu. Specify additional observations in the note.</desc>
+      <availableAtts elementName="decoNote"/>
       <childElements>
          <child>
             <element ident="desc"
-                     label="Text layout description"
+                     label="Text layout"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -98,13 +72,12 @@
    </decoNote>
    <desc ident="desc"
          elementName="desc"
-         elementLabel="Text layout description"
+         elementLabel="Text layout"
          path="/*:decoDesc/*:decoNote/*:desc"
          currentLevel="3"
          popup="3"
          teiElement="&lt;desc/&gt;">
-      <desc>Choose from the list those descriptions which match what you can see in the
-                            manurscript.</desc>
+      <desc>Choose one or more features from the list which match what you can see in the manuscript.</desc>
       <availableAtts elementName="desc"/>
       <controlledValues>
          <element xmlns="" ident="desc">
@@ -128,18 +101,18 @@
          <child/>
       </childElements>
    </desc>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:decoDesc/*:decoNote/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific fields and form a coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:decoDesc/*:decoNote/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
 </TEI>

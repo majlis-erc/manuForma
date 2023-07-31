@@ -79,48 +79,33 @@ End license statement: do not remove -->
                 -->
                     <moduleRef key="core"
                         except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
-                    <moduleRef key="msdescription" include="decoDesc decoNote p summary"/>
+                    <moduleRef key="msdescription" include="decoDesc decoNote summary"/>
+                    
                     <moduleRef key="tei"/>
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific fields and form a coherent descriptive text.</desc>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
 
                     <elementSpec ident="summary" module="msdescription" mode="change">
-                        <gloss>Text layout summary</gloss>
+                        <gloss>Summary of text layout</gloss>
                         <gloss type="tei">&lt;summary&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Outline your observations of the text layout in general terms.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Provide a summary description of the text layout.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -181,10 +166,9 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="desc" module="core" mode="change">
-                        <gloss>Text layout description</gloss>
+                        <gloss>Text layout</gloss>
                         <gloss type="tei">&lt;desc&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Choose from the list those descriptions which match what you can see in the
-                            manurscript.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Choose one or more features from the list which match what you can see in the manuscript.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -219,14 +203,17 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="decoNote" module="msdescription" mode="change">
-                        <gloss>Text Layout</gloss>
+                        <gloss>Main features of text layout</gloss>
                         <gloss type="tei">&lt;decoNote&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the text layout.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the text layout. Multiple text layout features can be added through the menu. Specify additional observations in the note.</desc>
                         <content>
                             <elementRef key="desc"/>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                         </content>
                         <attList>
+                            <attDef ident="color" mode="delete"/>
+                            <attDef ident="pastedown" mode="delete"/>
+                            <attDef ident="repaired" mode="delete"/>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
                             <attDef ident="change" mode="delete"/>

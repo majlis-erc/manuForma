@@ -50,7 +50,7 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="note"
-                     label="Notes"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -91,7 +91,7 @@
    </desc>
    <note ident="note"
          elementName="note"
-         elementLabel="Notes"
+         elementLabel="Note"
          path="/*:layoutDesc/*:summary/*:note"
          currentLevel="3"
          popup="3"
@@ -212,8 +212,8 @@
       </availableAtts>
       <childElements>
          <child>
-            <element ident="dim"
-                     label="Space between columns"
+            <element ident="height"
+                     label="*Height of writing area"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -222,14 +222,64 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="height"
-                     label="*Height of writing area"
+            <element ident="dim"
+                     label="Space between columns"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </dimensions>
+   <height ident="height"
+           elementName="height"
+           elementLabel="*Height of writing area"
+           path="/*:layoutDesc/*:layout/*:dimensions/*:height"
+           currentLevel="4"
+           popup="4"
+           teiElement="&lt;height/&gt;">
+      <desc>Measure the height in millimeters.</desc>
+      <availableAtts elementName="height">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="height"/>
+         <child/>
+      </childElements>
+   </height>
+   <width ident="width"
+          elementName="width"
+          elementLabel="*Width of writing area"
+          path="/*:layoutDesc/*:layout/*:dimensions/*:width"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;width/&gt;">
+      <desc>Measure the width in millimeters.</desc>
+      <availableAtts elementName="width">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="width"/>
+         <child/>
+      </childElements>
+   </width>
    <dim ident="dim"
         elementName="dim"
         elementLabel="Space between columns"
@@ -250,9 +300,15 @@
                <valItem ident="intercolumn" attLabel="Intercolumn space"/>
             </valList>
          </attDef>
-         <attDef attLabel="Unit" ident="unit" mode="change">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>
@@ -260,44 +316,6 @@
          <child/>
       </childElements>
    </dim>
-   <width ident="width"
-          elementName="width"
-          elementLabel="*Width of writing area"
-          path="/*:layoutDesc/*:layout/*:dimensions/*:width"
-          currentLevel="4"
-          popup="4"
-          teiElement="&lt;width/&gt;">
-      <desc>Measure the width in millimeters.</desc>
-      <availableAtts elementName="width">
-         <attDef attLabel="Unit" ident="unit" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="width"/>
-         <child/>
-      </childElements>
-   </width>
-   <height ident="height"
-           elementName="height"
-           elementLabel="*Height of writing area"
-           path="/*:layoutDesc/*:layout/*:dimensions/*:height"
-           currentLevel="4"
-           popup="4"
-           teiElement="&lt;height/&gt;">
-      <desc>Measure the height in millimeters.</desc>
-      <availableAtts elementName="height">
-         <attDef attLabel="Unit" ident="unit" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="height"/>
-         <child/>
-      </childElements>
-   </height>
    <metamark ident="metamark"
              elementName="metamark"
              elementLabel="Justification"
@@ -308,7 +326,10 @@
       <desc>Specify the different features used to ensure an even left margin. Multiple
                             features can be added through the Detailed description of page layout menu.</desc>
       <availableAtts elementName="metamark">
-         <attDef attLabel="function" ident="function" mode="change">
+         <attDef attLabel="function"
+                 ident="function"
+                 mode="change"
+                 style="restricted">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
