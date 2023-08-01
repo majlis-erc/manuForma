@@ -18,79 +18,22 @@
       <desc>Description of the material, dimensions, and preservation
                             of the binding. Specify in the attribute if the binding is contemporary to the manuscript's production or not with the
                             values "true" or "false".</desc>
-      <availableAtts elementName="binding">
-         <attDef attLabel="Original binding?" ident="contemporary" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Original binding?</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="true" attLabel="Yes"/>
-               <valItem ident="false" attLabel="No"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="binding"/>
       <childElements>
          <child>
-            <element ident="condition"
-                     label="State of the binding"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="decoNote"
                      label="Detailed description of binding"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="origPlace"
-                     label="Place of origin"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="origDate"
-                     label="Date of origin"
+            <element ident="condition"
+                     label="State of the binding"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
          </child>
       </childElements>
    </binding>
-   <condition ident="condition"
-              elementName="condition"
-              elementLabel="State of the binding"
-              path="/*:binding/*:condition"
-              currentLevel="2"
-              popup="2"
-              teiElement="&lt;condition/&gt;">
-      <desc>Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages. Choose from the list a generic description that fits best your overall
-                            impression.</desc>
-      <availableAtts elementName="condition">
-         <attDef attLabel="Description" ident="key" usage="opt">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Description</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="deficient" attLabel="Deficient state"/>
-               <valItem ident="good" attLabel="Good state"/>
-               <valItem ident="intact" attLabel="Intact state"/>
-               <valItem ident="other" attLabel="Other state"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="condition"/>
-         <child/>
-      </childElements>
-   </condition>
    <decoNote ident="decoNote"
              elementName="decoNote"
              elementLabel="Detailed description of binding"
@@ -98,52 +41,13 @@
              currentLevel="2"
              popup="2"
              teiElement="&lt;decoNote/&gt;">
-      <desc>Describe the manuscript’s decoration. Choose the "type"
-                            from the list.</desc>
-      <availableAtts elementName="decoNote">
-         <attDef attLabel="color" ident="color" usage="opt"/>
-         <attDef attLabel="pastedown" ident="pastedown" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="UTI"
-                        attLabel="UTI"
-                        desc="Under the turn-ins. The pastedown is pasted under the&#xA;                                        turn-ins."/>
-               <valItem ident="OTI"
-                        attLabel="OTI"
-                        desc="Over the turn-ins. The pastedown is pasted over the&#xA;                                        turn-ins."/>
-               <valItem ident="L" attLabel="L" desc="Left pastedown, on the upper board."/>
-               <valItem ident="R" attLabel="R" desc="Right pastedown, on the lower board."/>
-            </valList>
-         </attDef>
-         <attDef attLabel="repaired" ident="repaired" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="Y" attLabel="Y"/>
-               <valItem ident="N" attLabel="N"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="binding" attLabel="*Binding"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <desc>Describe the binding according to its type, material,
+                            origins, and dimensions.</desc>
+      <availableAtts elementName="decoNote"/>
       <childElements>
          <child>
             <element ident="objectType"
                      label="Binding type"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -152,8 +56,23 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="origDate"
+                     label="Date of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="origPlace"
+                     label="Place of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="dimensions"
-                     label="Binding dimensions"
+                     label="*Binding dimensions"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -172,9 +91,9 @@
       <controlledValues>
          <element xmlns="" ident="objectType">
             <valList type="closed">
+               <valItem ident="Original binding"/>
+               <valItem ident="Later binding"/>
                <valItem ident="Unbound"/>
-               <valItem ident="Original"/>
-               <valItem ident="Later"/>
             </valList>
          </element>
       </controlledValues>
@@ -182,21 +101,6 @@
          <child/>
       </childElements>
    </objectType>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:binding/*:decoNote/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
    <material ident="material"
              elementName="material"
              elementLabel="Binding material"
@@ -204,8 +108,7 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;material/&gt;">
-      <desc>Describe the writing material. Choose from the list what
-                            kind of material is used in the manuscript/this codicological unit.</desc>
+      <desc>Choose from the list.</desc>
       <availableAtts elementName="material">
          <attDef attLabel="function" ident="function">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -250,19 +153,16 @@
          <element xmlns="" ident="material">
             <valList type="closed">
                <valItem ident="Wood"/>
-               <valItem ident="Papyrus"/>
                <valItem ident="Cardboard"/>
                <valItem ident="Leather"/>
+               <valItem ident="Parchment"/>
+               <valItem ident="Papyrus"/>
                <valItem ident="Metal"/>
                <valItem ident="Paper"/>
                <valItem ident="Textile"/>
-               <valItem ident="Other"/>
-               <valItem ident="Parchment"/>
                <valItem ident="Silk"/>
-               <valItem ident="Stone"/>
-               <valItem ident="Bronze"/>
-               <valItem ident="Alabaster"/>
                <valItem ident="Cotton"/>
+               <valItem ident="Other"/>
             </valList>
          </element>
       </controlledValues>
@@ -270,23 +170,68 @@
          <child/>
       </childElements>
    </material>
+   <origDate ident="origDate"
+             elementName="origDate"
+             elementLabel="Date of origin"
+             path="/*:binding/*:decoNote/*:origDate"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;origDate/&gt;">
+      <desc>Fill in the date in CE. The date given here refers to the
+                            binding material (and not the production of the copy).</desc>
+      <availableAtts elementName="origDate">
+         <attDef attLabel="to" ident="to" mode="change"/>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </origDate>
+   <origPlace ident="origPlace"
+              elementName="origPlace"
+              elementLabel="Place of origin"
+              path="/*:binding/*:decoNote/*:origPlace"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;origPlace/&gt;">
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The place given here refers to the writing material
+                            (and not the production of the copy).</desc>
+      <availableAtts elementName="origPlace">
+         <attDef attLabel="evidence" ident="evidence" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="">
+               <valItem ident="internal"
+                        attLabel="internal"
+                        desc="there is internal evidence to support the intervention. 간섭을 지지하는 내부 증거가 있다. 有內部證明得以支持 当該調整を判断する内部証拠を示す． l'intervention est justifiée par une preuve&#xA;            interne existen pruebas internas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
+               <valItem ident="external"
+                        attLabel="external"
+                        desc="there is external evidence to support the intervention. 간섭을 지지하는 외부 증거가 있다. 有外部證明得以支持 当該調整を判断する外部証拠を示す． l'intervention est justifiée par une preuve&#xA;            externe existen pruebas externas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
+               <valItem ident="conjecture"
+                        attLabel="conjecture"
+                        desc="the intervention or interpretation has been made by the editor, cataloguer, or&#xA;            scholar on the basis of their expertise. 간섭 또는 해석이 편집자, 또는 전문성에 근거한 학자에 의해 수행되었다. 編輯、編目者或學者根據自身的專業來執行該更動或詮釋。 編集者，カタログ作成者，研究者による解釈や調整． l'intervention ou l'interprétation a été faite&#xA;            par le rédacteur, le catalogueur, ou le chercheur sur la base de leur expertise. la intervención o interpretación ha sido hecho&#xA;            por el editor, catalogador o crítico en base a su experiencia. l'intervento o interpretazione è stata effettuata&#xA;            dal curatore, catalogatore o critico in base alla loro esperienza"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Place identifier" ident="ref" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="origPlace"/>
+         <child/>
+      </childElements>
+   </origPlace>
    <dimensions ident="dimensions"
                elementName="dimensions"
-               elementLabel="Binding dimensions"
+               elementLabel="*Binding dimensions"
                path="/*:binding/*:decoNote/*:dimensions"
                currentLevel="3"
                popup="3"
                teiElement="&lt;dimensions/&gt;">
-      <desc>Measure the binding.</desc>
+      <desc>Provide measurements of the binding.</desc>
       <availableAtts elementName="dimensions">
-         <attDef attLabel="type" ident="type" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="binding" attLabel="*Binding"/>
-            </valList>
-         </attDef>
          <attDef attLabel="unit" ident="unit" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -791,11 +736,17 @@ specification of some sort.</desc>
            currentLevel="4"
            popup="4"
            teiElement="&lt;height/&gt;">
-      <desc>Measure the height with a precision of 5 millimeters.</desc>
+      <desc>Measure the height in millimeters.</desc>
       <availableAtts elementName="height">
-         <attDef attLabel="Unit" ident="unit" mode="change">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
          </attDef>
          <attDef attLabel="space" ident="xml:space" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -842,11 +793,17 @@ specification of some sort.</desc>
           currentLevel="4"
           popup="4"
           teiElement="&lt;width/&gt;">
-      <desc>Measure the width with a precision of 5 millimeters.</desc>
+      <desc>Measure the width in millimeters.</desc>
       <availableAtts elementName="width">
-         <attDef attLabel="Unit" ident="unit" mode="change">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
          </attDef>
       </availableAtts>
       <childElements>
@@ -854,84 +811,47 @@ specification of some sort.</desc>
          <child/>
       </childElements>
    </width>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:binding/*:p"
-      currentLevel="2"
-      popup="2"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:binding/*:decoNote/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
-   <origPlace ident="origPlace"
-              elementName="origPlace"
-              elementLabel="Place of origin"
-              path="/*:binding/*:origPlace"
+   </note>
+   <condition ident="condition"
+              elementName="condition"
+              elementLabel="State of the binding"
+              path="/*:binding/*:condition"
               currentLevel="2"
               popup="2"
-              teiElement="&lt;origPlace/&gt;">
-      <desc>Look up the place records in the database to specify a
-                            settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The
-                            "reference" field will be filled out automatically when you link a place record to this element.)</desc>
-      <availableAtts elementName="origPlace">
-         <attDef attLabel="evidence" ident="evidence" usage="opt">
+              teiElement="&lt;condition/&gt;">
+      <desc>Describe preservation, conservation history; damages.
+                            Choose a generic description from the list.</desc>
+      <availableAtts elementName="condition">
+         <attDef attLabel="Description" ident="key" usage="opt">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Description</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="internal"
-                        attLabel="internal"
-                        desc="there is internal evidence to support the intervention. 간섭을 지지하는 내부 증거가 있다. 有內部證明得以支持 当該調整を判断する内部証拠を示す． l'intervention est justifiée par une preuve&#xA;            interne existen pruebas internas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
-               <valItem ident="external"
-                        attLabel="external"
-                        desc="there is external evidence to support the intervention. 간섭을 지지하는 외부 증거가 있다. 有外部證明得以支持 当該調整を判断する外部証拠を示す． l'intervention est justifiée par une preuve&#xA;            externe existen pruebas externas que sostienen la&#xA;            intervención. esistono prove interne a sostegno&#xA;          dell'intervento"/>
-               <valItem ident="conjecture"
-                        attLabel="conjecture"
-                        desc="the intervention or interpretation has been made by the editor, cataloguer, or&#xA;            scholar on the basis of their expertise. 간섭 또는 해석이 편집자, 또는 전문성에 근거한 학자에 의해 수행되었다. 編輯、編目者或學者根據自身的專業來執行該更動或詮釋。 編集者，カタログ作成者，研究者による解釈や調整． l'intervention ou l'interprétation a été faite&#xA;            par le rédacteur, le catalogueur, ou le chercheur sur la base de leur expertise. la intervención o interpretación ha sido hecho&#xA;            por el editor, catalogador o crítico en base a su experiencia. l'intervento o interpretazione è stata effettuata&#xA;            dal curatore, catalogatore o critico in base alla loro esperienza"/>
+                     type="closed"
+                     mode="change">
+               <valItem ident="deficient" attLabel="Deficient state"/>
+               <valItem ident="good" attLabel="Good state"/>
+               <valItem ident="intact" attLabel="Intact state"/>
+               <valItem ident="other" attLabel="Other state"/>
             </valList>
          </attDef>
-         <attDef attLabel="Place identifier" ident="ref" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
-         </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="origPlace"/>
+         <textNode type="input" class="condition"/>
          <child/>
       </childElements>
-   </origPlace>
-   <origDate ident="origDate"
-             elementName="origDate"
-             elementLabel="Date of origin"
-             path="/*:binding/*:origDate"
-             currentLevel="2"
-             popup="2"
-             teiElement="&lt;origDate/&gt;">
-      <desc>Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" field for precise values. In case the date can only be approximated, use the "not After "and "not Before"
-                            fields together.</desc>
-      <availableAtts elementName="origDate">
-         <attDef attLabel="From" ident="from" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
-         </attDef>
-         <attDef attLabel="To" ident="to" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
-         </attDef>
-         <attDef attLabel="When" ident="when" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">When</gloss>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <child/>
-      </childElements>
-   </origDate>
+   </condition>
 </TEI>

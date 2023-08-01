@@ -82,7 +82,6 @@ End license statement: do not remove -->
                         except="abbr add addrLine address analytic author bibl biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index item l label lb lg list listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher q quote rb ref reg relatedItem resp respStmt rs rt ruby said series sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription" except="physDesc"/>
                     <moduleRef key="tei"/>
-                    <elementSpec ident="note" module="core" mode="delete"/>
                     <elementSpec ident="locus" module="msdescription" mode="delete"/>
                     <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
                     <elementSpec ident="msFrag" module="msdescription" mode="delete"/>
@@ -93,9 +92,8 @@ End license statement: do not remove -->
                     <elementSpec ident="condition" module="msdescription" mode="change">
                         <gloss>State of the binding</gloss>
                         <gloss type="tei">&lt;condition&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe the preservation, conservation and restoration
-                            history; present state of fragment; damages. Choose from the list a generic description that fits best your overall
-                            impression.</desc>
+                        <desc versionDate="2022-05-27" xml:id="condition.desc" xml:lang="en">Describe preservation, conservation history; damages.
+                            Choose a generic description from the list.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -128,10 +126,18 @@ End license statement: do not remove -->
                                     <dataRef key="teidata.text"/>
                                 </datatype>
                                 <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="deficient"><gloss>Deficient state</gloss></valItem>
-                                    <valItem mode="add" ident="good"><gloss>Good state</gloss></valItem>
-                                    <valItem mode="add" ident="intact"><gloss>Intact state</gloss></valItem>
-                                    <valItem mode="add" ident="other"><gloss>Other state</gloss></valItem>
+                                    <valItem mode="add" ident="deficient">
+                                        <gloss>Deficient state</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="good">
+                                        <gloss>Good state</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="intact">
+                                        <gloss>Intact state</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="other">
+                                        <gloss>Other state</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
@@ -141,8 +147,7 @@ End license statement: do not remove -->
                     <elementSpec ident="material" module="msdescription" mode="change">
                         <gloss>Binding material</gloss>
                         <gloss type="tei">&lt;material&gt;</gloss>
-                        <desc versionDate="2022-06-01" xml:lang="en" xml:id="material.desc">Describe the writing material. Choose from the list what
-                            kind of material is used in the manuscript/this codicological unit.</desc>
+                        <desc versionDate="2022-06-01" xml:lang="en" xml:id="material.desc">Choose from the list.</desc>
                         <attList>
                             <attDef ident="key" mode="delete"> </attDef>
                         </attList>
@@ -161,9 +166,8 @@ End license statement: do not remove -->
                     <elementSpec ident="origDate" module="msdescription" mode="delete">
                         <gloss>Date of origin</gloss>
                         <gloss type="tei">&lt;origDate&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="origdate.desc">Fill in the date in the agreed-upon calendrical system.
-                            Use the "when" field for precise values. In case the date can only be approximated, use the "not After "and "not Before"
-                            fields together.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="origdate.desc">Fill in the date in CE. The date given here refers to the
+                            binding material (and not the production of the copy).</desc>
                         <classes mode="change">
                             <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -224,23 +228,19 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                             <attDef ident="period" mode="delete"/>
                             <attDef ident="calendar" mode="delete"/>
-                            <attDef ident="when" mode="change">
+                            <attDef ident="when" mode="delete">
                                 <gloss>When</gloss>
                             </attDef>
-                            <attDef ident="from" mode="change">
-                                <gloss>From</gloss>
-                            </attDef>
-                            <attDef ident="to" mode="change">
-                                <gloss>To</gloss>
-                            </attDef>
+                            <attDef ident="from" mode="delete"/>
+                            <attDef ident="to" mode="change"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="origPlace" module="msdescription" mode="delete">
                         <gloss>Place of origin</gloss>
                         <gloss type="tei">&lt;origPlace&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="origplace.desc">Look up the place records in the database to specify a
-                            settlement or town. Try different spellings in different languages! If no suitable record exists, create a new one. (The
-                            "reference" field will be filled out automatically when you link a place record to this element.)</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="origplace.desc">Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The place given here refers to the writing material
+                            (and not the production of the copy).</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -300,9 +300,9 @@ End license statement: do not remove -->
                     <elementSpec ident="physDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="layoutDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="dimensions" module="msdescription" mode="change">
-                        <gloss>Binding dimensions</gloss>
+                        <gloss>*Binding dimensions</gloss>
                         <gloss type="tei">&lt;dimensions&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">Measure the binding.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="dimensions.desc">Provide measurements of the binding.</desc>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="atLeast" mode="delete"/>
@@ -332,11 +332,7 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="type" mode="change">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="binding"><gloss>*Binding</gloss></valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -348,7 +344,7 @@ End license statement: do not remove -->
                     <elementSpec ident="height" module="msdescription" mode="change">
                         <gloss>Height of the binding</gloss>
                         <gloss type="tei">&lt;height&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">Measure the height with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="height.desc">Measure the height in millimeters.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -380,8 +376,13 @@ End license statement: do not remove -->
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="unit" mode="change">
+                            <attDef ident="unit" mode="change" style="restricted">
                                 <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="mm">
+                                        <gloss>Millimeters</gloss>
+                                    </valItem>
+                                </valList>
                             </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -391,7 +392,7 @@ End license statement: do not remove -->
                     <elementSpec ident="width" module="msdescription" mode="change">
                         <gloss>Width of the binding</gloss>
                         <gloss type="tei">&lt;width&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="width.desc">Measure the width with a precision of 5 millimeters.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="width.desc">Measure the width in millimeters.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -423,8 +424,13 @@ End license statement: do not remove -->
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="unit" mode="change">
+                            <attDef ident="unit" mode="change" style="restricted">
                                 <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="mm">
+                                        <gloss>Millimeters</gloss>
+                                    </valItem>
+                                </valList>
                             </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -434,42 +440,27 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="ab" module="linking" mode="delete"/>
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
+
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
+
                     <elementSpec ident="binding" module="msdescription" mode="change">
                         <gloss>*Binding Description Container (2/2)</gloss>
                         <gloss type="tei">&lt;binding&gt;</gloss>
@@ -478,11 +469,8 @@ End license statement: do not remove -->
                             values "true" or "false".</desc>
                         <content>
                             <alternate maxOccurs="unbounded" minOccurs="1">
-                                <elementRef key="condition"/>
                                 <elementRef key="decoNote"/>
-                                <elementRef key="p"/>
-                                <elementRef key="origPlace"/>
-                                <elementRef key="origDate"/>
+                                <elementRef key="condition"/>
                             </alternate>
                         </content>
                         <attList>
@@ -490,13 +478,7 @@ End license statement: do not remove -->
                             <attDef ident="calendar" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
-                            <attDef ident="contemporary" mode="change">
-                                <gloss>Original binding?</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="true"><gloss>Yes</gloss></valItem>
-                                    <valItem mode="add" ident="false"><gloss>No</gloss></valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="contemporary" mode="delete"> </attDef>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="datingMethod" mode="delete"/>
@@ -566,17 +548,22 @@ End license statement: do not remove -->
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
+                        <content>
+                            <elementRef key="binding"/>
+                        </content>
                     </elementSpec>
                     <elementSpec ident="decoNote" module="msdescription" mode="change">
                         <gloss>Detailed description of binding</gloss>
                         <gloss type="tei">&lt;decoNote&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the manuscript’s decoration. Choose the "type"
-                            from the list.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="deconote.desc">Describe the binding according to its type, material,
+                            origins, and dimensions.</desc>
                         <content>
                             <elementRef key="objectType"/>
-                            <elementRef key="p"/>
                             <elementRef key="material"/>
+                            <elementRef key="origDate"/>
+                            <elementRef key="origPlace"/>
                             <elementRef key="dimensions"/>
+                            <elementRef key="note"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -598,15 +585,14 @@ End license statement: do not remove -->
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="type" mode="replace" usage="opt">
-                                <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="binding"><gloss>*Binding</gloss></valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="color" mode="delete"/>
+                            <attDef ident="pastedown" mode="delete"/>
+                            <attDef ident="repaired" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="depth" module="msdescription" mode="change">
