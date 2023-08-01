@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.27 Beta 
+        Version: 1.29 Beta 
             -1.22 marks a major redesign
         
 
@@ -2640,16 +2640,26 @@
                 <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
             </xsl:attribute>
             <xsl:if test="$configDoc/descendant::*:lookup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
-                <lookup>
-                    <xsl:copy-of select="$configDoc/descendant::*:lookup[@elementName = $elementName]/@*"/>
-                    <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',$elementName,'.xhtml')"/>
-                </lookup>
+                <xsl:choose>
+                    <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
+                    <xsl:otherwise>
+                        <lookup>
+                            <xsl:copy-of select="$configDoc/descendant::*:lookup[@elementName = $elementName]/@*"/>
+                            <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',$elementName,'.xhtml')"/>
+                        </lookup>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>      
             <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
-                <popup>
-                    <xsl:copy-of select="$configDoc/descendant::*:popup[@elementName = $elementName]/@*"/>
-                    <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
-                </popup>
+                <xsl:choose>
+                    <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
+                    <xsl:otherwise>
+                     <popup>
+                         <xsl:copy-of select="$configDoc/descendant::*:popup[@elementName = $elementName]/@*"/>
+                         <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
+                     </popup>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>  
             <xsl:if test="$elementRules/descendant::tei:desc">
                 <desc xmlns="http://www.tei-c.org/ns/1.0">
