@@ -68,21 +68,7 @@
          popup="2"
          teiElement="&lt;item/&gt;">
       <desc>Describe the document and give a transcription.</desc>
-      <availableAtts elementName="item">
-         <attDef attLabel="Responsible team member" ident="resp" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Responsible team member</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open"
-                     mode="change">
-               <valItem ident="rvollandt" attLabel="Ronny Vollandt"/>
-               <valItem ident="gschwarb" attLabel="Gregor Schwarb"/>
-               <valItem ident="lgzella" attLabel="Lea Gzella"/>
-               <valItem ident="mmoliere" attLabel="Maximilian de Molière"/>
-            </valList>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="item"/>
       <childElements>
          <child>
             <element ident="quote"
@@ -95,8 +81,8 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -115,7 +101,7 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Quote from the document.</desc>
+      <desc>Transcribe relevant portion of the text.</desc>
       <availableAtts elementName="quote">
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -156,31 +142,37 @@
              elementName="persName"
              label="New Persons"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <desc>Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
-                            person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
-                            when you link a record to this element.)</desc>
-      <availableAtts elementName="persName"/>
+      <desc>Look up the person records in the database to identify the author. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. Add additional authors as
+                            required.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="persName"/>
          <child/>
       </childElements>
    </persName>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:list/*:item/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:list/*:item/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
       <childElements>
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </p>
+   </note>
    <bibl ident="bibl"
          elementName="bibl"
          elementLabel="Bibliographic reference"
@@ -194,7 +186,7 @@
               elementName="bibl"
               formName="bibl"
               lookupLabel="Look up bibliographic record"/>
-      <desc>Add bibliographic item, like a monograph, journal article, or manuscript.</desc>
+      <desc>Reference the quotation by adding an entry from the Zotero database.</desc>
       <availableAtts elementName="bibl">
          <attDef attLabel="type" ident="type" mode="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -232,6 +224,7 @@
                         desc="The reference is to a translation"/>
             </valList>
          </attDef>
+         <attDef attLabel="id" ident="xml:id"/>
       </availableAtts>
       <childElements>
          <child>
@@ -285,11 +278,11 @@
         currentLevel="4"
         popup="4"
         teiElement="&lt;ptr/&gt;">
-      <desc>The link to the Zotero should be filled out automatically.</desc>
+      <desc>The link to the Zotero will be filled out automatically.</desc>
       <availableAtts elementName="ptr">
-         <attDef attLabel="Zotero link" ident="target" mode="change">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Zotero link</gloss>
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Link</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -310,7 +303,7 @@
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
+                     type=""
                      mode="change">
                <valItem ident="page" attLabel="Pages"/>
                <valItem ident="folio" attLabel="Folios"/>

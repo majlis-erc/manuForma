@@ -82,47 +82,31 @@ End license statement: do not remove -->
                     <moduleRef key="namesdates" include="persName"/>
                     <moduleRef key="msdescription" include="accMat"/>
 
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p/&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
+
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
 
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">Add bibliographic item, like a monograph, journal article, or manuscript.</desc>
+                        <desc xml:lang="en">Reference the quotation by adding an entry from the Zotero database.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -142,16 +126,17 @@ End license statement: do not remove -->
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
                         </content>
-                        <!--<attList>
+                        <attList>
                             <attRef name="xml:id" mode="delete"/>
                             <attRef name="type" mode="delete"/>
-                        </attList>-->
+                        </attList>
                     </elementSpec>
 
+                    
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
-                        <desc>The title to the Zotero should be filled out automatically.</desc>
+                        <desc>The title to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -189,11 +174,11 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-
+                    
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <desc>The link to the Zotero should be filled out automatically.</desc>
+                        <desc>The link to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -212,14 +197,14 @@ End license statement: do not remove -->
                             <empty/>
                         </content>
                         <attList>
-                            <attDef ident="target" mode="change">
-                                <gloss>Zotero link</gloss>
+                            <attDef ident="target" mode="change" style="restricted">
+                                <gloss>Link</gloss>
                             </attDef>
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-
+                    
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
@@ -238,15 +223,26 @@ End license statement: do not remove -->
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="unit" mode="change">
                                 <gloss>Unit</gloss>
-                                <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="page"><gloss>Pages</gloss></valItem>
-                                    <valItem mode="add" ident="folio"><gloss>Folios</gloss></valItem>
-                                    <valItem mode="add" ident="cols"><gloss>Columns</gloss></valItem>
-                                    <valItem mode="add" ident="section"><gloss>Sections</gloss></valItem>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="page">
+                                        <gloss>Pages</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="folio">
+                                        <gloss>Folios</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="cols">
+                                        <gloss>Columns</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="section">
+                                        <gloss>Sections</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
+                    
+
+                    
 
                     <elementSpec ident="item" module="core" mode="change">
                         <gloss>Document</gloss>
@@ -254,7 +250,7 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="quote"/>
                             <elementRef key="persName"/>
-                            <elementRef key="p"/>
+                            <elementRef key="note"/>
                             <elementRef key="bibl"/>
                         </content>
                         <attList>
@@ -270,23 +266,7 @@ End license statement: do not remove -->
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="rend" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="change">
-                                <gloss>Responsible team member</gloss>
-                                <valList type="open" mode="change">
-                                    <valItem mode="add" ident="rvollandt">
-                                        <gloss>Ronny Vollandt</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="gschwarb">
-                                        <gloss>Gregor Schwarb</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="lgzella">
-                                        <gloss>Lea Gzella</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="mmoliere">
-                                        <gloss>Maximilian de Molière</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="resp" mode="delete"/>
                             <attDef ident="sameAs" mode="delete"/>
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="sortKey" mode="delete"/>
@@ -336,7 +316,7 @@ End license statement: do not remove -->
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote/&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Quote from the document.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.ascribed.directed" mode="delete"/>
@@ -379,10 +359,9 @@ End license statement: do not remove -->
                     <elementSpec ident="persName" mode="change">
                         <gloss>Author</gloss>
                         <gloss type="tei">&lt;persName/&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. Use the "Role" field to specify the
-                            person's function to the manuscript (e.g., "Owner") from the list. (The "Reference" field will be filled out automatically
-                            when you link a record to this element.)</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database to identify the author. Try different
+                            spellings in different languages! If no suitable record exists, create a new one. Add additional authors as
+                            required.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -395,11 +374,12 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attDef ident="role" mode="delete">
-                            </attDef>
+                            <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="delete"/>
+                            <attDef ident="ref" mode="change" style="restricted">
+                                <gloss>Person identifier</gloss>
+                            </attDef>
                             <attDef ident="type" mode="delete"/>
                         </attList>
                     </elementSpec>
