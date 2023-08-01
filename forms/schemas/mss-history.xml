@@ -82,11 +82,10 @@ End license statement: do not remove --><!--requirements:
                     <moduleRef key="namesdates" include="persName placeName"/>
                     <moduleRef key="tei"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <gloss>Folios</gloss>
-                        <gloss type="tei">&lt;locus&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+                        <gloss>*Range of folios</gloss>
+                        <gloss type="tei">&lt;locus/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the
+                            manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -96,47 +95,45 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <alternate maxOccurs="unbounded" minOccurs="0">
-                                <textNode/>
-                            </alternate>
+                            <empty/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
-                            <attDef ident="certainty" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="from" mode="change">
-                                <gloss>From</gloss>
-                            </attDef>
                             <attDef ident="next" mode="delete"/>
-                            <attDef ident="number" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="rend" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
                             <attDef ident="resp" mode="delete"/>
                             <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="scheme" mode="delete"/>
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="synch" mode="delete"/>
-                            <attDef ident="target" mode="change">
-                                <gloss>Target</gloss>
-                            </attDef>
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="to" mode="change">
-                                <gloss>To</gloss>
-                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
                             <attDef ident="xml:space" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="scheme" mode="delete"/>
+                            <attDef ident="from" mode="delete"/>
+                            <attDef ident="number" mode="delete"/>
+                            <attDef ident="target" mode="delete"/>
+                            <attDef ident="certainty" mode="change">
+                                <gloss>From</gloss>
+                            </attDef>
+                            <attDef ident="to" mode="change">
+                                <gloss>To</gloss>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="locusGrp" module="msdescription" mode="delete"/>
@@ -192,47 +189,31 @@ End license statement: do not remove --><!--requirements:
 
                     <elementSpec ident="ab" module="linking" mode="delete"/>
 
-                    <elementSpec ident="p" module="core" mode="change">
-                        <gloss>Free text box</gloss>
-                        <gloss type="tei">&lt;p&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add observations.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <textNode/>
                         </content>
-                        <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="cert" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                        </attList>
                     </elementSpec>
+
                     <elementSpec ident="acquisition" mode="change">
                         <gloss>Acquisition</gloss>
                         <gloss type="tei">&lt;acquisition&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:id="acquisn.desc" xml:lang="en">Give an account of how the manuscript came into the
-                            collection where it is now held. Use the available fields to tag relevant persons, dates, etc.</desc>
+                            collection where it is now held according to the following criteria relevant persons, dates, etc.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -241,11 +222,10 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="placeName"/>
                             <elementRef key="date"/>
                             <elementRef key="stamp"/>
-                            <elementRef key="signatures"/>
-                            <elementRef key="p"/>
                             <elementRef key="persName"/>
                             <elementRef key="locus"/>
                             <elementRef key="quote"/>
+                            <elementRef key="note"/>
                         </content>
                     </elementSpec>
 
@@ -253,8 +233,7 @@ End license statement: do not remove --><!--requirements:
                         <gloss>Previous owner</gloss>
                         <gloss type="tei">&lt;provenance&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:id="prov.desc" xml:lang="en">Give an account of how the manuscript passed into the hands of
-                            later owners using vestiges they left inside the manuscript or some external records. Use the appropriate fields to
-                            describe relevant persons, dates, etc.</desc>
+                            later owners according to the following criteria relevant persons, dates, etc.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -262,20 +241,18 @@ End license statement: do not remove --><!--requirements:
                         </classes>
                         <content>
                             <elementRef key="date"/>
-                            <elementRef key="p"/>
                             <elementRef key="quote"/>
                             <elementRef key="locus"/>
                             <elementRef key="persName"/>
-                            <elementRef key="signatures"/>
                             <elementRef key="stamp"/>
                             <elementRef key="placeName"/>
+                            <elementRef key="note"/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Quote from the manuscript. Use the "Language" field to specify the
-                            language.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.ascribed.directed" mode="delete"/>
@@ -287,6 +264,10 @@ End license statement: do not remove --><!--requirements:
                         <attList>
                             <attDef ident="who" mode="delete"/>
                             <attList>
+                                <attDef ident="defective" mode="delete"/>
+                                <attDef ident="subtype" mode="delete"/>
+                                <attDef ident="type" mode="delete"/>
+                                <attDef ident="notation" mode="delete"/>
                                 <attDef ident="xml:lang" mode="change">
                                     <gloss>Language</gloss>
                                     <valList type="closed" mode="change">
@@ -316,9 +297,9 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="placeName" mode="change">
                         <gloss>Place name</gloss>
                         <gloss type="tei">&lt;placeName&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
-                            filled out automatically when you link a place record to this element.)</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the place records. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. The place given here refers to the writing material (and not the production of
+                            the copy).</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -331,19 +312,19 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change">
+                            <attDef ident="ref" mode="change" style="restricted">
                                 <gloss>Place identifier</gloss>
                             </attDef>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="date" mode="change">
                         <gloss>Date</gloss>
                         <gloss type="tei">&lt;date&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in the agreed-upon calendrical system. Use the "when" field for
-                            precise values. In case the date can only be approximated, use the "not After "and "not Before" fields together.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in CE.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -352,28 +333,34 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
-                            <alternate maxOccurs="unbounded" minOccurs="0">
-                                <textNode/>
-                            </alternate>
+                            <empty/>
                         </content>
                         <attList>
-                            <attDef ident="notBefore" mode="change">
-                                <gloss>Not before</gloss>
-                            </attDef>
-                            <attDef ident="notAfter" mode="change">
-                                <gloss>Not after</gloss>
-                            </attDef>
                             <attDef ident="when" mode="change">
                                 <gloss>When</gloss>
                             </attDef>
+                            <attDef ident="atLeast" mode="delete"/>
+                            <attDef ident="atMost" mode="delete"/>
+                            <attDef ident="calendar" mode="delete"/>
+                            <attDef ident="confidence" mode="delete"/>
+                            <attDef ident="duration" mode="delete"/>
+                            <attDef ident="extent" mode="delete"/>
+                            <attDef ident="max" mode="delete"/>
+                            <attDef ident="min" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"/>
+                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="precision" mode="delete"/>
+                            <attDef ident="quantity" mode="delete"/>
+                            <attDef ident="scope" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="unit" mode="delete"/>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
-                        <gloss>Person name</gloss>
+                        <gloss>Person</gloss>
                         <gloss type="tei">&lt;persName&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out automatically
-                            when you link a record to this element.)</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -386,10 +373,21 @@ End license statement: do not remove --><!--requirements:
                             <textNode/>
                         </content>
                         <attList>
-                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="role" mode="change">
+                                <gloss>Role</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="owner">
+                                        <gloss>Owner</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="seller">
+                                        <gloss>Seller</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="type" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change">
+                            <attDef ident="ref" mode="change" style="restricted">
                                 <gloss>Person identifier</gloss>
                             </attDef>
                         </attList>
@@ -398,8 +396,8 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="stamp" mode="change">
                         <gloss>Stamp</gloss>
                         <gloss type="tei">&lt;stamp&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Describe the stamps left by libraries or other institutions, usually to mark
-                            manuscripts as their property.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Describe stamps left by libraries or other institutions to mark manuscripts as
+                            their property.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
