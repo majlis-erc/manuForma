@@ -77,9 +77,49 @@ End license statement: do not remove -->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-                    <moduleRef key="core" include="bibl listBibl ptr"/>
+                    <moduleRef key="core" include="bibl listBibl ptr publisher term"/>
+                    <moduleRef key="linking" include="ab"/>
+                    
+                    <elementSpec ident="ab" module="linking" mode="change">
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="reproductions"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                        <content>
+                            <elementRef key="listBibl"/>
+                        </content>
+                    </elementSpec>
 
-                    <elementSpec ident="listBibl" mode="change">
+                    <elementSpec ident="listBibl" mode="change" module="core">
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -98,12 +138,10 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
 
-                    <elementSpec ident="bibl" mode="change">
+                    <elementSpec ident="bibl" mode="change" module="core">
                         <gloss>Reproduction</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">Specify the reproduction type. Distinguish between restricted (consultation on premises only) and
-                            unrestricted access. Other types may include: microfilms, microfiche, photostats/photocopies, or photographs. For
-                            non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
+                        <desc xml:lang="en"/>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -119,40 +157,59 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="type" mode="replace" usage="opt">
-                                <gloss>Type of reproduction</gloss>
-                                <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="microfilm">
-                                        <gloss>Microfilm</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="microfiche">
-                                        <gloss>Microfiche</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="photostat">
-                                        <gloss>Photostat</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="digitalImageOffline">
-                                        <gloss>Digital image offline</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="digitalImageOnline">
-                                        <gloss>Digital image online</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
-                            <attDef ident="source" mode="replace" usage="opt">
-                                <gloss>Source of reproduction</gloss>
-                                <valList mode="change" type="closed">
-                                    <valItem mode="add" ident="nli">
-                                        <gloss>National Library of Israel</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="bl">
-                                        <gloss>British Library</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
                         </attList>
                         <content>
+                            <elementRef key="term" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="publisher" minOccurrence="0" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="term" mode="change" module="core">
+                        <gloss>Type of reproduction</gloss>
+                        <gloss type="tei">&lt;term&gt;</gloss>
+                        <desc>Specify the reproduction type. Distinguish between restricted (consultation on premises only) and unrestricted access.
+                            Other types may include: microfilms, microfiche, photostats/photocopies, or photographs.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+
+                    <elementSpec ident="publisher" mode="change" module="core">
+                        <gloss>Source of reproduction</gloss>
+                        <gloss type="tei">&lt;publisher&gt;</gloss>
+                        <desc> For non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.canonical" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
                         </content>
                     </elementSpec>
 
