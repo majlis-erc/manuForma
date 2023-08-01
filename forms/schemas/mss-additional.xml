@@ -117,9 +117,10 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef name="xml:id" mode="change">
+                            <attDef ident="xml:id" mode="delete">
                                 <gloss>Bibliographic identifier</gloss>
                             </attDef>
+                            <attDef ident="type" mode="delete"/>
                         </attList>
                         <content>
                             <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
@@ -131,7 +132,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
-                        <desc>The title to the Zotero record should be filled out automatically.</desc>
+                        <desc>The title to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -173,7 +174,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <desc>The link to the Zotero should be filled out automatically.</desc>
+                        <desc>The link to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -192,7 +193,7 @@ End license statement: do not remove --><!--requirements:
                             <empty/>
                         </content>
                         <attList>
-                            <attDef ident="target" mode="change">
+                            <attDef ident="target" mode="change" style="restricted">
                                 <gloss>Link</gloss>
                             </attDef>
                             <attDef ident="targetLang" mode="delete"/>
@@ -219,10 +220,18 @@ End license statement: do not remove --><!--requirements:
                             <attDef ident="unit" mode="change">
                                 <gloss>Unit</gloss>
                                 <valList mode="change">
-                                    <valItem mode="add" ident="page"><gloss>Pages</gloss></valItem>
-                                    <valItem mode="add" ident="folio"><gloss>Folios</gloss></valItem>
-                                    <valItem mode="add" ident="cols"><gloss>Columns</gloss></valItem>
-                                    <valItem mode="add" ident="section"><gloss>Sections</gloss></valItem>
+                                    <valItem mode="add" ident="page">
+                                        <gloss>Pages</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="folio">
+                                        <gloss>Folios</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="cols">
+                                        <gloss>Columns</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="section">
+                                        <gloss>Sections</gloss>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
