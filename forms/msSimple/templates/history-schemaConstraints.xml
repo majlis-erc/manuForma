@@ -433,18 +433,12 @@
                popup="2"
                teiElement="&lt;provenance/&gt;">
       <desc>Give an account of how the manuscript passed into the hands of
-                            later owners using vestiges they left inside the manuscript or some external records. Use the appropriate fields to
-                            describe relevant persons, dates, etc.</desc>
+                            later owners according to the following criteria relevant persons, dates, etc.</desc>
       <availableAtts elementName="provenance"/>
       <childElements>
          <child>
             <element ident="date"
                      label="Date"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -454,17 +448,12 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="locus"
-                     label="Folios"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="persName"
-                     label="Person name"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="signatures"
-                     label="signatures"
+                     label="Person"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -478,6 +467,11 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </provenance>
@@ -488,25 +482,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;date/&gt;">
-      <desc>Fill in the date in the agreed-upon calendrical system. Use the "when" field for
-                            precise values. In case the date can only be approximated, use the "not After "and "not Before" fields together.</desc>
+      <desc>Fill in the date in CE.</desc>
       <availableAtts elementName="date">
-         <attDef attLabel="atLeast" ident="atLeast"/>
-         <attDef attLabel="atMost" ident="atMost"/>
-         <attDef attLabel="calendar" ident="calendar" usage="opt" mode="replace">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
-               <valItem ident="alexander"
-                        attLabel="alexander"
-                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
-               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
-               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="confidence" ident="confidence"/>
          <attDef attLabel="duration" ident="dur" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -581,111 +558,6 @@
                    xml:lang="ja"
                    versionDate="2019-05-20">時間幅</gloss>
          </attDef>
-         <attDef attLabel="extent" ident="extent" usage="opt"/>
-         <attDef attLabel="max" ident="max"/>
-         <attDef attLabel="min" ident="min"/>
-         <attDef attLabel="Not after" ident="notAfter" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Not after</gloss>
-         </attDef>
-         <attDef attLabel="Not before" ident="notBefore" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Not before</gloss>
-         </attDef>
-         <attDef attLabel="precision" ident="precision" mode="replace">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="low" attLabel="low"/>
-               <valItem ident="medium" attLabel="medium"/>
-               <valItem ident="high" attLabel="high"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="quantity" ident="quantity"/>
-         <attDef attLabel="scope" ident="scope" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open"
-                     mode="">
-               <valItem ident="all"
-                        attLabel="all"
-                        desc="measurement applies to all instances. 측정은 모두 사례에 적용된다. 度量可應用於所有實例。 la medida se aplica a todos los casos. 全インスタンスに当てはまる単位。 la mesure s'applique à tous les cas. la misurazione fa riferimento a tutti i&#xA;          casi"/>
-               <valItem ident="most"
-                        attLabel="most"
-                        desc="measurement applies to most of the instances inspected. 측정은 대부분의 사례에 적용된다. 度量可應用於大部分實例。 la medida se aplica a la mayoría de los casos&#xA;            examinados. 計測インスタンスの殆どに当てはまる単位。 la mesure s'applique à la plupart des cas&#xA;            examinés la misurazione fa riferimento alla maggior parte&#xA;            dei casi esaminati"/>
-               <valItem ident="range"
-                        attLabel="range"
-                        desc="measurement applies to only the specified range of instances. 측정이 사례의 명시적 범위에 한정하여 적용된다. 度量僅應用於特定範圍的實例。 la medida se aplica solamente a los casos&#xA;            especificados 特定インスタンスにのみ当てはまる単位。 la mesure s'applique seulement à l'ensemble des&#xA;            exemples indiqués. la misurazione fa riferimento solo ai casi&#xA;            specificati"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open"
-                     mode="">
-               <valItem ident="age"
-                        attLabel="age"
-                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="reign"
-                        attLabel="reign"
-                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="life"
-                        attLabel="life"
-                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="marriage"
-                        attLabel="marriage"
-                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="generic-duration"
-                        attLabel="generic-duration"
-                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
-               <valItem ident="composition"
-                        attLabel="composition"
-                        desc="Date of the composition of a work"/>
-               <valItem ident="translation"
-                        attLabel="translation"
-                        desc="Date of the translation of a work"/>
-               <valItem ident="revision"
-                        attLabel="revision"
-                        desc="Date of the revision of a work"/>
-               <valItem ident="recension"
-                        attLabel="recension"
-                        desc="Date of the composition of a specific recension"/>
-               <valItem ident="diesNatalis"
-                        attLabel="diesNatalis"
-                        desc="Date of a saint’s martyrdom"/>
-               <valItem ident="birth"
-                        attLabel="birth"
-                        desc="Date of birth (do not use this in a person record, use element birth)"/>
-               <valItem ident="ascension"
-                        attLabel="ascension"
-                        desc="Date of a person’s ascension to power"/>
-               <valItem ident="death" attLabel="death" desc="Date of death"/>
-               <valItem ident="production"
-                        attLabel="production"
-                        desc="The date of production of the document (EMA)"/>
-               <valItem ident="repeated"
-                        attLabel="repeated"
-                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="unit" ident="unit" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="cm" attLabel="centimetres"/>
-               <valItem ident="mm" attLabel="millimetres"/>
-               <valItem ident="in" attLabel="inches"/>
-               <valItem ident="line"
-                        attLabel="line"
-                        desc="lines of text 텍스트의 행 líneas de texto テキスト行 lignes de texte righe di testo"/>
-               <valItem ident="char"
-                        attLabel="characters"
-                        desc="characters of text 텍스트의 문자 caracteres del texto 文字列 caractères du texte caratteri di testo"/>
-            </valList>
-         </attDef>
          <attDef attLabel="When" ident="when" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">When</gloss>
@@ -696,21 +568,6 @@
          <child/>
       </childElements>
    </date>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:history/*:provenance/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
@@ -718,24 +575,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Quote from the manuscript. Use the "Language" field to specify the
-                            language.</desc>
+      <desc>Transcribe relevant portion of the text.</desc>
       <availableAtts elementName="quote">
-         <attDef attLabel="defective" ident="defective" usage="opt"/>
-         <attDef attLabel="notation" ident="notation" usage="opt"/>
-         <attDef attLabel="subtype" ident="subtype" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2009-05-29">subtype</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-05-29"
-                   xml:lang="fr">sous-type</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt"/>
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
@@ -759,86 +600,17 @@
    </quote>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="Folios"
+          elementLabel="*Range of folios"
           path="/*:history/*:provenance/*:locus"
           currentLevel="3"
           popup="3"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the
+                            manuscript.</desc>
       <availableAtts elementName="locus">
-         <attDef attLabel="certainty" ident="cert" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">certainty</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확실성</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">certeza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">certitude</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">certezza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">確実性</gloss>
-         </attDef>
-         <attDef attLabel="From" ident="from" mode="change">
+         <attDef attLabel="From" ident="certainty" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">From</gloss>
-         </attDef>
-         <attDef attLabel="number" ident="n" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">number</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">수</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">número</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">nombre</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">numero</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">数値</gloss>
-         </attDef>
-         <attDef attLabel="Target" ident="target" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Target</gloss>
          </attDef>
          <attDef attLabel="To" ident="to" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -851,7 +623,7 @@
    </locus>
    <persName ident="persName"
              elementName="persName"
-             elementLabel="Person name"
+             elementLabel="Person"
              path="/*:history/*:provenance/*:persName"
              currentLevel="3"
              popup="3"
@@ -867,55 +639,25 @@
              elementName="persName"
              label="New Persons"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <desc>Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out automatically
-                            when you link a record to this element.)</desc>
+      <desc>Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
       <availableAtts elementName="persName">
-         <attDef attLabel="Person identifier" ident="ref" mode="change">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
          </attDef>
-         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+         <attDef attLabel="Role" ident="role" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="">
-               <valItem ident="main"
-                        attLabel="main"
-                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
-               <valItem ident="normalized"
-                        attLabel="normalized"
-                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
-               <valItem ident="given"
-                        attLabel="given"
-                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
-               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
-               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
-               <valItem ident="regnal"
-                        attLabel="regnal"
-                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
-               <valItem ident="monastic"
-                        attLabel="monastic"
-                        desc="name given on entering monastic life "/>
-               <valItem ident="horse"
-                        attLabel="horse"
-                        desc="the name of the battle horse of kings and rulers"/>
-               <valItem ident="nick"
-                        attLabel="nick"
-                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
-               <valItem ident="war"
-                        attLabel="war"
-                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
-               <valItem ident="hypocoristic"
-                        attLabel="hypocoristic"
-                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
-               <valItem ident="patronymic"
-                        attLabel="patronymic"
-                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
-               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
-               <valItem ident="tabot"
-                        attLabel="tabot"
-                        desc="the saint to whom the tābot is dedicated"/>
+                     mode="change">
+               <valItem ident="owner" attLabel="Owner"/>
+               <valItem ident="seller" attLabel="Seller"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -924,424 +666,6 @@
          <child/>
       </childElements>
    </persName>
-   <signatures ident="signatures"
-               elementName="signatures"
-               elementLabel="signatures"
-               path="/*:history/*:provenance/*:signatures"
-               currentLevel="3"
-               popup="3"
-               teiElement="&lt;signatures/&gt;">
-      <desc>contains discussion of the leaf or quire signatures found within a codex or similar object.</desc>
-      <availableAtts elementName="signatures">
-         <attDef attLabel="analysis" ident="ana" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">analysis</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">분석</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">análisis</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">analyse</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">analisi</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">分析</gloss>
-         </attDef>
-         <attDef attLabel="certainty" ident="cert" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">certainty</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확실성</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">certeza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">certitude</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">certezza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">確実性</gloss>
-         </attDef>
-         <attDef attLabel="change" ident="change"/>
-         <attDef attLabel="copyOf" ident="copyOf" usage="opt"/>
-         <attDef attLabel="corresponds" ident="corresp" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">corresponds</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">일치</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">correspondencia</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">correspond</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">corrispondente</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">対応</gloss>
-         </attDef>
-         <attDef attLabel="exclude" ident="exclude" usage="opt"/>
-         <attDef attLabel="facsimile" ident="facs" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-08-26"
-                   xml:lang="en">facsimile</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">모사</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">facsímil</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">fac-similé</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-07-21">ファクシミリ</gloss>
-         </attDef>
-         <attDef attLabel="number" ident="n" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">number</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">수</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">número</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">nombre</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">numero</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">数値</gloss>
-         </attDef>
-         <attDef attLabel="next" ident="next" usage="opt"/>
-         <attDef attLabel="previous" ident="prev" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">previous</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">이전</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">anterior</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr"> précédent</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">precedente</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">前の</gloss>
-         </attDef>
-         <attDef attLabel="rendition" ident="rend" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">rendition</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">번역</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">interpretación</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">interprétation</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">resa</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">見た目の表示</gloss>
-         </attDef>
-         <attDef attLabel="rendition" ident="rendition" usage="opt"/>
-         <attDef attLabel="responsible party" ident="resp" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">responsible party</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">책임 당사자</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">parte responsable</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">responsable</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">responsabile</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">責任者</gloss>
-         </attDef>
-         <attDef attLabel="sameAs" ident="sameAs" usage="opt"/>
-         <attDef attLabel="select" ident="select" usage="opt"/>
-         <attDef attLabel="source" ident="source" usage="opt"/>
-         <attDef attLabel="style" ident="style" usage="opt"/>
-         <attDef attLabel="subtype" ident="subtype" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2009-05-29">subtype</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-05-29"
-                   xml:lang="fr">sous-type</gloss>
-         </attDef>
-         <attDef attLabel="synchronous" ident="synch" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">synchronous</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">동시발생</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">sincrónico</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">synchrone</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">sincrono</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">連動</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt"/>
-         <attDef attLabel="base" ident="xml:base" usage="opt"/>
-         <attDef attLabel="identifier" ident="xml:id" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">identifier</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확인소</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">identificador</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">identifiant</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">identificatore</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">識別子</gloss>
-         </attDef>
-         <attDef attLabel="language" ident="xml:lang" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">language</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">언어</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">lengua</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">langue</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">lingua</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">言語</gloss>
-         </attDef>
-         <attDef attLabel="space" ident="xml:space" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="default"
-                        attLabel="default"
-                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
-               <valItem ident="preserve"
-                        attLabel="preserve"
-                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <child>
-            <element ident="p"
-                     label="Free text box"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </signatures>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:history/*:provenance/*:signatures/*:p"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
    <stamp ident="stamp"
           elementName="stamp"
           elementLabel="Stamp"
@@ -1349,8 +673,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;stamp/&gt;">
-      <desc>Describe the stamps left by libraries or other institutions, usually to mark
-                            manuscripts as their property.</desc>
+      <desc>Describe stamps left by libraries or other institutions to mark manuscripts as
+                            their property.</desc>
       <availableAtts elementName="stamp"/>
       <childElements>
          <textNode type="input" class="stamp"/>
@@ -1375,24 +699,16 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
-                            filled out automatically when you link a place record to this element.)</desc>
+      <desc>Look up the place records. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. The place given here refers to the writing material (and not the production of
+                            the copy).</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="Place identifier" ident="ref" mode="change">
+         <attDef attLabel="Place identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="">
-               <valItem ident="normalized" attLabel="normalized"/>
-               <valItem ident="library" attLabel="library"/>
-               <valItem ident="academicInstitution" attLabel="academicInstitution"/>
-               <valItem ident="museum" attLabel="museum"/>
-            </valList>
          </attDef>
       </availableAtts>
       <childElements>
@@ -1400,6 +716,20 @@
          <child/>
       </childElements>
    </placeName>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:history/*:provenance/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
    <acquisition ident="acquisition"
                 elementName="acquisition"
                 elementLabel="Acquisition"
@@ -1408,7 +738,7 @@
                 popup="2"
                 teiElement="&lt;acquisition/&gt;">
       <desc>Give an account of how the manuscript came into the
-                            collection where it is now held. Use the available fields to tag relevant persons, dates, etc.</desc>
+                            collection where it is now held according to the following criteria relevant persons, dates, etc.</desc>
       <availableAtts elementName="acquisition"/>
       <childElements>
          <child>
@@ -1427,28 +757,23 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="signatures"
-                     label="signatures"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="p"
-                     label="Free text box"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="persName"
-                     label="Person name"
+                     label="Person"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="locus"
-                     label="Folios"
+                     label="*Range of folios"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -1473,24 +798,16 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records in the database to specify a settlement or town. Try
-                            different spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be
-                            filled out automatically when you link a place record to this element.)</desc>
+      <desc>Look up the place records. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. The place given here refers to the writing material (and not the production of
+                            the copy).</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="Place identifier" ident="ref" mode="change">
+         <attDef attLabel="Place identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type=""
-                     mode="">
-               <valItem ident="normalized" attLabel="normalized"/>
-               <valItem ident="library" attLabel="library"/>
-               <valItem ident="academicInstitution" attLabel="academicInstitution"/>
-               <valItem ident="museum" attLabel="museum"/>
-            </valList>
          </attDef>
       </availableAtts>
       <childElements>
@@ -1505,25 +822,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;date/&gt;">
-      <desc>Fill in the date in the agreed-upon calendrical system. Use the "when" field for
-                            precise values. In case the date can only be approximated, use the "not After "and "not Before" fields together.</desc>
+      <desc>Fill in the date in CE.</desc>
       <availableAtts elementName="date">
-         <attDef attLabel="atLeast" ident="atLeast"/>
-         <attDef attLabel="atMost" ident="atMost"/>
-         <attDef attLabel="calendar" ident="calendar" usage="opt" mode="replace">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="hebrew" attLabel="hebrew" desc="Hebrew calendar"/>
-               <valItem ident="alexander"
-                        attLabel="alexander"
-                        desc="Era of Alexander of Macedon, year 1 = 319 BC"/>
-               <valItem ident="islamic" attLabel="islamic" desc="Islamic Era"/>
-               <valItem ident="julian" attLabel="julian" desc="Julian calendar"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="confidence" ident="confidence"/>
          <attDef attLabel="duration" ident="dur" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1598,111 +898,6 @@
                    xml:lang="ja"
                    versionDate="2019-05-20">時間幅</gloss>
          </attDef>
-         <attDef attLabel="extent" ident="extent" usage="opt"/>
-         <attDef attLabel="max" ident="max"/>
-         <attDef attLabel="min" ident="min"/>
-         <attDef attLabel="Not after" ident="notAfter" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Not after</gloss>
-         </attDef>
-         <attDef attLabel="Not before" ident="notBefore" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Not before</gloss>
-         </attDef>
-         <attDef attLabel="precision" ident="precision" mode="replace">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="low" attLabel="low"/>
-               <valItem ident="medium" attLabel="medium"/>
-               <valItem ident="high" attLabel="high"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="quantity" ident="quantity"/>
-         <attDef attLabel="scope" ident="scope" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open"
-                     mode="">
-               <valItem ident="all"
-                        attLabel="all"
-                        desc="measurement applies to all instances. 측정은 모두 사례에 적용된다. 度量可應用於所有實例。 la medida se aplica a todos los casos. 全インスタンスに当てはまる単位。 la mesure s'applique à tous les cas. la misurazione fa riferimento a tutti i&#xA;          casi"/>
-               <valItem ident="most"
-                        attLabel="most"
-                        desc="measurement applies to most of the instances inspected. 측정은 대부분의 사례에 적용된다. 度量可應用於大部分實例。 la medida se aplica a la mayoría de los casos&#xA;            examinados. 計測インスタンスの殆どに当てはまる単位。 la mesure s'applique à la plupart des cas&#xA;            examinés la misurazione fa riferimento alla maggior parte&#xA;            dei casi esaminati"/>
-               <valItem ident="range"
-                        attLabel="range"
-                        desc="measurement applies to only the specified range of instances. 측정이 사례의 명시적 범위에 한정하여 적용된다. 度量僅應用於特定範圍的實例。 la medida se aplica solamente a los casos&#xA;            especificados 特定インスタンスにのみ当てはまる単位。 la mesure s'applique seulement à l'ensemble des&#xA;            exemples indiqués. la misurazione fa riferimento solo ai casi&#xA;            specificati"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt" mode="change">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="open"
-                     mode="">
-               <valItem ident="age"
-                        attLabel="age"
-                        desc="Age, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="reign"
-                        attLabel="reign"
-                        desc="Duration of a reign, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="life"
-                        attLabel="life"
-                        desc="Duration of life, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="marriage"
-                        attLabel="marriage"
-                        desc="Duration of marriage, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="generic-duration"
-                        attLabel="generic-duration"
-                        desc="Generic duration, the value should be given in a @dur attribute according to W3C datatypes"/>
-               <valItem ident="foundation" attLabel="foundation" desc="Date of foundation"/>
-               <valItem ident="composition"
-                        attLabel="composition"
-                        desc="Date of the composition of a work"/>
-               <valItem ident="translation"
-                        attLabel="translation"
-                        desc="Date of the translation of a work"/>
-               <valItem ident="revision"
-                        attLabel="revision"
-                        desc="Date of the revision of a work"/>
-               <valItem ident="recension"
-                        attLabel="recension"
-                        desc="Date of the composition of a specific recension"/>
-               <valItem ident="diesNatalis"
-                        attLabel="diesNatalis"
-                        desc="Date of a saint’s martyrdom"/>
-               <valItem ident="birth"
-                        attLabel="birth"
-                        desc="Date of birth (do not use this in a person record, use element birth)"/>
-               <valItem ident="ascension"
-                        attLabel="ascension"
-                        desc="Date of a person’s ascension to power"/>
-               <valItem ident="death" attLabel="death" desc="Date of death"/>
-               <valItem ident="production"
-                        attLabel="production"
-                        desc="The date of production of the document (EMA)"/>
-               <valItem ident="repeated"
-                        attLabel="repeated"
-                        desc="If the commemoration is repeated, please add this value as&#xA;                                        well in type"/>
-            </valList>
-         </attDef>
-         <attDef attLabel="unit" ident="unit" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="semi"
-                     mode="">
-               <valItem ident="cm" attLabel="centimetres"/>
-               <valItem ident="mm" attLabel="millimetres"/>
-               <valItem ident="in" attLabel="inches"/>
-               <valItem ident="line"
-                        attLabel="line"
-                        desc="lines of text 텍스트의 행 líneas de texto テキスト行 lignes de texte righe di testo"/>
-               <valItem ident="char"
-                        attLabel="characters"
-                        desc="characters of text 텍스트의 문자 caracteres del texto 文字列 caractères du texte caratteri di testo"/>
-            </valList>
-         </attDef>
          <attDef attLabel="When" ident="when" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">When</gloss>
@@ -1720,450 +915,17 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;stamp/&gt;">
-      <desc>Describe the stamps left by libraries or other institutions, usually to mark
-                            manuscripts as their property.</desc>
+      <desc>Describe stamps left by libraries or other institutions to mark manuscripts as
+                            their property.</desc>
       <availableAtts elementName="stamp"/>
       <childElements>
          <textNode type="input" class="stamp"/>
          <child/>
       </childElements>
    </stamp>
-   <signatures ident="signatures"
-               elementName="signatures"
-               elementLabel="signatures"
-               path="/*:history/*:acquisition/*:signatures"
-               currentLevel="3"
-               popup="3"
-               teiElement="&lt;signatures/&gt;">
-      <desc>contains discussion of the leaf or quire signatures found within a codex or similar object.</desc>
-      <availableAtts elementName="signatures">
-         <attDef attLabel="analysis" ident="ana" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">analysis</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">분석</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">análisis</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">analyse</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">analisi</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">分析</gloss>
-         </attDef>
-         <attDef attLabel="certainty" ident="cert" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">certainty</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확실성</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">certeza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">certitude</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">certezza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">確実性</gloss>
-         </attDef>
-         <attDef attLabel="change" ident="change"/>
-         <attDef attLabel="copyOf" ident="copyOf" usage="opt"/>
-         <attDef attLabel="corresponds" ident="corresp" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">corresponds</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">일치</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">correspondencia</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">correspond</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">corrispondente</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">対応</gloss>
-         </attDef>
-         <attDef attLabel="exclude" ident="exclude" usage="opt"/>
-         <attDef attLabel="facsimile" ident="facs" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-08-26"
-                   xml:lang="en">facsimile</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">모사</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">facsímil</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">fac-similé</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-07-21">ファクシミリ</gloss>
-         </attDef>
-         <attDef attLabel="number" ident="n" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">number</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">수</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">número</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">nombre</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">numero</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">数値</gloss>
-         </attDef>
-         <attDef attLabel="next" ident="next" usage="opt"/>
-         <attDef attLabel="previous" ident="prev" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">previous</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">이전</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">anterior</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr"> précédent</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">precedente</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">前の</gloss>
-         </attDef>
-         <attDef attLabel="rendition" ident="rend" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">rendition</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">번역</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">interpretación</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">interprétation</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">resa</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">見た目の表示</gloss>
-         </attDef>
-         <attDef attLabel="rendition" ident="rendition" usage="opt"/>
-         <attDef attLabel="responsible party" ident="resp" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">responsible party</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">책임 당사자</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">parte responsable</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">responsable</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">responsabile</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">責任者</gloss>
-         </attDef>
-         <attDef attLabel="sameAs" ident="sameAs" usage="opt"/>
-         <attDef attLabel="select" ident="select" usage="opt"/>
-         <attDef attLabel="source" ident="source" usage="opt"/>
-         <attDef attLabel="style" ident="style" usage="opt"/>
-         <attDef attLabel="subtype" ident="subtype" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2009-05-29">subtype</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-05-29"
-                   xml:lang="fr">sous-type</gloss>
-         </attDef>
-         <attDef attLabel="synchronous" ident="synch" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-04"
-                   xml:lang="en">synchronous</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">동시발생</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">sincrónico</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">synchrone</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">sincrono</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-07-21"
-                   xml:lang="ja">連動</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt"/>
-         <attDef attLabel="base" ident="xml:base" usage="opt"/>
-         <attDef attLabel="identifier" ident="xml:id" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">identifier</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확인소</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">identificador</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">identifiant</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">identificatore</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">識別子</gloss>
-         </attDef>
-         <attDef attLabel="language" ident="xml:lang" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">language</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">언어</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">lengua</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">langue</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">lingua</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">言語</gloss>
-         </attDef>
-         <attDef attLabel="space" ident="xml:space" usage="opt">
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="">
-               <valItem ident="default"
-                        attLabel="default"
-                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
-               <valItem ident="preserve"
-                        attLabel="preserve"
-                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <child>
-            <element ident="p"
-                     label="Free text box"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </signatures>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:history/*:acquisition/*:signatures/*:p"
-      currentLevel="4"
-      popup="4"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
-   <p ident="p"
-      elementName="p"
-      elementLabel="Free text box"
-      path="/*:history/*:acquisition/*:p"
-      currentLevel="3"
-      popup="3"
-      teiElement="&lt;p/&gt;">
-      <desc>Enter prose text to connect the fields dedicated to specific elements and form a
-                            coherent descriptive text.</desc>
-      <availableAtts elementName="p"/>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </p>
    <persName ident="persName"
              elementName="persName"
-             elementLabel="Person name"
+             elementLabel="Person"
              path="/*:history/*:acquisition/*:persName"
              currentLevel="3"
              popup="3"
@@ -2179,55 +941,25 @@
              elementName="persName"
              label="New Persons"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <desc>Look up the person records in the database to identify the person. Try different
-                            spellings in different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out automatically
-                            when you link a record to this element.)</desc>
+      <desc>Look up the person records in the database. Try different spellings in different
+                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
       <availableAtts elementName="persName">
-         <attDef attLabel="Person identifier" ident="ref" mode="change">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
          </attDef>
-         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+         <attDef attLabel="Role" ident="role" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
-                     mode="">
-               <valItem ident="main"
-                        attLabel="main"
-                        desc="to be used only in person records, to idenfity a preferred option among the names provided."/>
-               <valItem ident="normalized"
-                        attLabel="normalized"
-                        desc="the normalized transcription of the name in fidal or&#xA;                                        another script"/>
-               <valItem ident="given"
-                        attLabel="given"
-                        desc="name received later in life, different from the other&#xA;                                        specified types of names"/>
-               <valItem ident="birth" attLabel="birth" desc="name given at birth"/>
-               <valItem ident="baptismal" attLabel="baptismal" desc="name given at baptism"/>
-               <valItem ident="regnal"
-                        attLabel="regnal"
-                        desc="name given on coronation (kings and queens but also&#xA;                                        patriarchs)"/>
-               <valItem ident="monastic"
-                        attLabel="monastic"
-                        desc="name given on entering monastic life "/>
-               <valItem ident="horse"
-                        attLabel="horse"
-                        desc="the name of the battle horse of kings and rulers"/>
-               <valItem ident="nick"
-                        attLabel="nick"
-                        desc="a name given to a person associated to his occupation or&#xA;                                        other deeds"/>
-               <valItem ident="war"
-                        attLabel="war"
-                        desc="nom de guerre (if different from horse name, e.g.&#xA;                                        Malas)"/>
-               <valItem ident="hypocoristic"
-                        attLabel="hypocoristic"
-                        desc="short form (diminutive or abbreviated, e.g. Taklo for&#xA;                                        Takla Māryām)"/>
-               <valItem ident="patronymic"
-                        attLabel="patronymic"
-                        desc="father's name, esp. for eventual Russian names, but could&#xA;                                        be also highlighted in others"/>
-               <valItem ident="alt" attLabel="alt" desc="alternative name"/>
-               <valItem ident="tabot"
-                        attLabel="tabot"
-                        desc="the saint to whom the tābot is dedicated"/>
+                     mode="change">
+               <valItem ident="owner" attLabel="Owner"/>
+               <valItem ident="seller" attLabel="Seller"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -2238,86 +970,17 @@
    </persName>
    <locus ident="locus"
           elementName="locus"
-          elementLabel="Folios"
+          elementLabel="*Range of folios"
           path="/*:history/*:acquisition/*:locus"
           currentLevel="3"
           popup="3"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify the location of a text or another feature within the
-                            manuscript. The "target" field is used for single folio. The "from" and "to" fields are used together to describe a range
-                            of folios.</desc>
+      <desc>Specify range of folios of a text within the
+                            manuscript.</desc>
       <availableAtts elementName="locus">
-         <attDef attLabel="certainty" ident="cert" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-11-02"
-                   xml:lang="en">certainty</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">확실성</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">certeza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">certitude</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">certezza</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2019-09-16"
-                   xml:lang="ja">確実性</gloss>
-         </attDef>
-         <attDef attLabel="From" ident="from" mode="change">
+         <attDef attLabel="From" ident="certainty" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">From</gloss>
-         </attDef>
-         <attDef attLabel="number" ident="n" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-07-02"
-                   xml:lang="en">number</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">수</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-04-06"
-                   xml:lang="es">número</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-03-30"
-                   xml:lang="fr">nombre</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">numero</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-06-08">数値</gloss>
-         </attDef>
-         <attDef attLabel="Target" ident="target" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Target</gloss>
          </attDef>
          <attDef attLabel="To" ident="to" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2335,24 +998,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Quote from the manuscript. Use the "Language" field to specify the
-                            language.</desc>
+      <desc>Transcribe relevant portion of the text.</desc>
       <availableAtts elementName="quote">
-         <attDef attLabel="defective" ident="defective" usage="opt"/>
-         <attDef attLabel="notation" ident="notation" usage="opt"/>
-         <attDef attLabel="subtype" ident="subtype" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="en"
-                   versionDate="2009-05-29">subtype</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2009-05-29"
-                   xml:lang="fr">sous-type</gloss>
-         </attDef>
-         <attDef attLabel="type" ident="type" usage="opt"/>
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
@@ -2374,4 +1021,18 @@
          <child/>
       </childElements>
    </quote>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         path="/*:history/*:acquisition/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note"/>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
 </TEI>
