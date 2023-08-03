@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.29 Beta 
+        Version: 1.30 Beta 
 
             -1.22 marks a major redesign
         
@@ -1789,7 +1789,7 @@
                                                 <!-- If controlled attribute values in schemaConstraints file -->
                                                 <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                                     <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
-                                                        <xf:label ref="@ident"/>
+                                                        <xf:label ref="@attLabel"/>
                                                         <xf:value ref="@ident"/>
                                                     </xf:itemset>
                                                 </xf:select1>
