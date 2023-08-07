@@ -215,7 +215,7 @@
             -->
             <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
             <elementGroups>
-                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',/*/@style)" groupNo="1" repeatable="no">
+                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style)" groupNo="1" repeatable="no">
                     <element xpath="tei:objectType"/>
                 </group>
                 <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
@@ -237,13 +237,13 @@
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup elementName="persName" suppress="true"/>
-            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/author.xhtml" elementName="author" formName="author" lookupLabel="Look up authors"/>
+            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/author.xhtml" elementName="author" formName="author" lookupLabel="Look up author"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
                 <group groupLabel="Summary of contents" groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus,')')" groupNo="2" repeatable="yes">
+                <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from,'–',./*:locus/@to,')')" groupNo="2" repeatable="yes">
                     <element xpath="tei:msItem"/>
                 </group>
             </elementGroups>
@@ -318,7 +318,7 @@
                 <group groupLabel="Summary of page layout." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupNo="2"  repeatable="yes">
+                <group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupLabelConditionalElement="./*:locus/@from" groupLabelXPath="concat('Page layout: fols. ',./*:locus/@from,'–',./*:locus/@to,')" groupNo="2"  repeatable="yes">
                     <element xpath="tei:layout"/>
                 </group>
             </elementGroups>
@@ -420,13 +420,10 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe script type(s) and hand(s) of the manuscript.</formDesc>
             <elementGroups>
-                <!--<group groupLabel="Script definition." groupLabelConditionalElement="." groupLabelXPath="concat('Script definition: ',./@script,' ',./@rend,' ',./@style)" groupNo="2"  repeatable="yes">
+                <group groupLabel="Definition of script." groupLabelConditionalElement="." groupLabelXPath="concat('Definition of script: ',./*/@script,' ',./*/@rend,' ',./*/@style)" groupNo="2"  repeatable="yes">
                     <element xpath="tei:scriptDesc/tei:scriptNote"/>
-                </group>-->
-                <group groupLabel="Definition of script." groupNo="1"  repeatable="no">
-                    <element xpath="tei:scriptDesc"/>
                 </group>
-                <group groupLabel="Scribal hand(s)." groupNo="2" repeatable="no">
+                <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="./*:locus/@from" groupLabelXPath="concat('Scribal hand: fols. ',./*:locus/@from,'–',./*:locus/@to,')" groupNo="2" repeatable="no">
                     <element xpath="tei:handDesc"/>
                 </group>
             </elementGroups>
@@ -437,7 +434,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.).</formDesc>
             <elementGroups>
-                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="./*:objectType" groupNo="1" repeatable="yes">
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType)" groupNo="1" repeatable="yes">
 
                     <element xpath="tei:item"/>
                 </group>

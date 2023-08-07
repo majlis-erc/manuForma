@@ -517,11 +517,15 @@
                <div class="accordion-item">
                   <xf:switch xmlns="http://www.w3.org/2002/xforms">
                      <xf:case id="closedlayoutDescGrpRepeatLevel21">
-                        <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">Detailed description of page layout: text block, justification, ruling and pricking.</xf:label><xf:toggle case="openlayoutDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
+                        <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">
+                              <xf:group ref=".[./*:locus/@from != '']"><xf:output value="concat('Page layout: fols. ',./*:locus/@from,'–',./*:locus/@to,')"></xf:output></xf:group>
+                              <xf:group ref=".[./*:locus/@from = '']"><xf:output value="'Detailed description of page layout: text block, justification, ruling and pricking.'"></xf:output></xf:group></xf:label><xf:toggle case="openlayoutDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                      </xf:case>
                      <xf:case id="openlayoutDescGrpRepeatLevel21">
-                        <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">Detailed description of page layout: text block, justification, ruling and pricking.</xf:label><xf:toggle case="closedlayoutDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
+                        <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">
+                              <xf:group ref=".[./*:locus/@from != '']"><xf:output value="concat('Page layout: fols. ',./*:locus/@from,'–',./*:locus/@to,')"></xf:output></xf:group>
+                              <xf:group ref=".[./*:locus/@from = '']"><xf:output value="'Detailed description of page layout: text block, justification, ruling and pricking.'"></xf:output></xf:group></xf:label><xf:toggle case="closedlayoutDescGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                         <div xmlns="http://www.w3.org/1999/xhtml" class="accordion-collapse">
                            <div class="accordion-body">
