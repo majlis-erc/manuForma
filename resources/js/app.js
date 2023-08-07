@@ -144,9 +144,11 @@ function merci_firefox() {
 	$(".btn .bi-x-circle").removeClass("bi-x-circle").addClass("bi-x");
 	$("img[src='resources/images/TEI-175.jpg']").attr("src","resources/images/hn/Text_Encoding_InitiativeTEI_Logo.svg");
 	 */ 
+	/*  
 	$(".btn-toolbar .input-group").each(function(){
 		if ($(this).children(".xforms-enabled").length <= 0) $(this).addClass("avoiditem"); // hide();
 	});
+	 */ 
 	$(".xforms-alert-icon").addClass("nobackground").html($('<i class="bi bi-x-circle"></i> Cancel'));
 	$("#edit .elementControls .justify-content-between").removeClass("justify-content-between");
 	
