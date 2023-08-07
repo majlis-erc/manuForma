@@ -117,7 +117,6 @@ body {
 /* ***********************************
 Adapatations charte Hélène Nicolas
 *********************************** */
- 
 @font-face {
 font-family: 'interstate';
 src: url('../fonts/Interstate-font/interstate-regular-comp-58b641cc0aca1.otf') format('truetype');
@@ -170,8 +169,7 @@ font-style: bold;
 }
 
 body {
-    font-family: Arial;
-/*	font-family: 'source sans pro';*/
+	font-family: 'source sans pro';
 	font-style:normal;
 	font-weight:normal;
 	font-size:16px;
@@ -355,7 +353,7 @@ div.btn-toolbar div.submission span.btn.xforms-trigger,
 div.btn-toolbar div.submission span.btn.xforms-submit {
 	border:1px solid var(--light-colortext);
 	border-radius:5px;
-	margin:0 5px;
+	margin:0 5px 5px;
 }
 div.btn-toolbar .xforms-trigger a, 
 div.btn-toolbar .xforms-trigger a:link, 
@@ -420,6 +418,7 @@ body .accordion-item:last-of-type .accordion-button.collapsed {
 #edit.panel select option {
 	color:var(--form-colortext);
 	padding: 6px;
+	background: transparent;
 }
 #edit.panel .element not(.input-group) select, 
 #edit.panel .element not(.input-group) input, 
@@ -478,7 +477,7 @@ body .accordion-button:not(.collapsed)::after {
 	margin:5rem 2rem 2rem;
 	border-top-left-radius:0;
 }
-.input-group-text {
+.accordion-body > span.input-group-text {
 	display:inline-block;
 	width:auto;
     margin-top: -4.5rem;
@@ -495,6 +494,9 @@ body .accordion-button:not(.collapsed)::after {
 }
 .xforms-group-content .alert {
 	margin:0 1rem 1rem;
+}
+#edit.panel .headerxform h2 + p.alert {
+	margin:0;
 }
 #edit.panel h2 + p.alert {
 	margin:0 2rem 1rem;
@@ -514,8 +516,8 @@ body .elementControls i.bi {
 	color:var(--color-secondary-light);
 	font-size:16px;
 }
-body .elementControls .input-group {
-	padding:0 5px;
+body .elementControls .input-group:not(.avoiditem) {
+	padding: 5px;
 	background-color:white;
 	border-radius:var(--small-radius);
 	border:1px solid var(--color-secondary-light);
@@ -525,12 +527,15 @@ body .elementControls .input-group {
 body .elementControls .btn {
 	border:0 none;
 }
-body .btn button.  body .btn{
+body button {
+  line-height: 1rem;
+}
+body .btn button {
 	font-size:14px;
 	color: var(--color-secondary);
 	background-color:var(--color-secondary-extralight);
 	border-radius:var(--big-radius);
-	height: 20px;
+	height: inherit; /* 20px; */
     padding: 0;
 	margin:0 10px;
 }
@@ -546,9 +551,13 @@ body #edit .input-group span.btn, #view-admin > span.btn {
     line-height: 27px;
     padding: 0 5px;
 }
+
+body #edit .input-group span.btn button, #view-admin > span.btn button {
+	background:transparent;
+}
 body #edit .input-group span.btn {
     height: 36px;
-    line-height: 36px;
+    line-height: 34px;
     padding: 0 20px;
 	margin: 0 0 0 10px !important;
 }
@@ -567,13 +576,10 @@ body #edit .fileLoading + .input-group {
 	padding-top:1rem !important;
 }
 body i.bi {
-    vertical-align: baseline;
 	font-size:18px;
-	color:var(--color-secondary-light);
 }
-body .elementControls .btn button i.bi, body .elementControls .btn i.bi {
-    vertical-align: baseline;
-	font-size:18px;
+body .elementControls .btn button i.bi {
+	font-size:16px;
 	color:var(--color-secondary-light);
 }
 body .element {
@@ -581,7 +587,7 @@ body .element {
 	border:0 none;
 	margin-bottom:0;
 }
-body .input-group {
+body .input-group:not(.avoiditem) {
 	border:1px solid var(--lmu-dark);
 	border-radius:var(--small-radius);
 }
@@ -606,12 +612,16 @@ body .fileLoading {
 	width:100%;
 }
 .fileLoading h4 {
+	position:absolute;
 	width:auto;
 	display:inline-block;
 	background-color:white;
-	padding:0 1rem 0rem !important;
+	padding:0 1rem 1rem !important;
 	margin:-1.7rem 1rem 0 -1rem;
 	font-size:22px;
+}
+.fileLoading h4 + div {
+	margin-top: 0.5rem;
 }
 hr + h4 {
 	margin-top:2rem;
@@ -664,13 +674,13 @@ body .fileLoading .input-group {
 .navbar .navbar-brand object { cursor:pointer; }
 #edit .input-group > * {
 	margin-left:0 !important;
+	background: transparent;
 }
 #edit .input-group .value {
 	width:auto;
-/*    width:100%;*/
+	height:inherit;
 	display:inline-block;
 }
-
 #edit .btn-group2 { float:right; }
 #edit .btn-group .elementLabel { 
 	padding-left:0;
@@ -679,11 +689,6 @@ body .fileLoading .input-group {
 	color:var(--form-colortext);
 	/* padding: 0 5px; */
 }
-.xforms-trigger .xforms-value {
-	color:var(--color-secondary) !important;
-	/* padding: 0 5px; */
-}
-
 body main h1.h2, body main h1.h2 span {
 	font-size:0;
 }
@@ -711,7 +716,7 @@ body span.xforms-required-icon,
 body span.xforms-alert, 
 body span.xforms-help, 
 body span.xforms-hint {
-	vertical-align: baseline;
+	vertical-align: middle;
 }
 #view-admin br + .input-group {
 	margin-top:3rem;
@@ -725,6 +730,54 @@ body .elementInput {
 body span.xforms-alert-icon.nobackground {
 	background:none;
 }
+
+@media screen and (max-width: 850px) {
+	#homemenu {
+		padding:35px 0 0;
+	}
+	.blochome {
+		padding: 60px 30px 30px;
+		margin-bottom:10px;
+	}
+	.blochome object {
+		width: 50px;
+		height: 50px;
+	}
+	.blochome h2 {
+		font-size:20px;
+	}
+	#logoszone {
+	    text-align: center!important;
+	}
+	#logoszone img {
+		margin:0;
+		max-width:100%;
+	}
+	.navbar-brand img { width:140px; }
+	#navbarCollapse {
+		padding: 10px 40px;
+		border-bottom:1px solid #FFF;
+	}
+	body .navbar-dark .navbar-nav .nav-link {
+		height: auto;
+		padding: 10px 0 0;
+	}
+	.mainContent {
+		margin: 1em 0;
+	}
+	#edit.panel {
+		background: white;
+		margin: 2rem -1.5rem;
+		padding: 3rem 2rem;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
+	}
+	#sidebarMenu.collapse:not(.show) {
+		display:block;
+	}
+}
+
 /*
 div.submission span.btn.xforms-submit {
 	border:1px solid var(--light-colortext);
@@ -735,7 +788,6 @@ xforms-submit a, .xforms-submit a:link, .xforms-submit a:visited, .xforms-submit
 	color:var(--light-colortext);
 }
 */
-
 /* WS additions */
 input[type=text] { 
  width:100% !important;
