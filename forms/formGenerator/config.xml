@@ -253,6 +253,7 @@
             <localSchema src="../schemas/mss-support.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="origPlace" lookupLabel="Look up places"/>
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
                 <group groupLabel="Writing material of the manuscript." groupLabelConditionalElement="./*:material"
@@ -444,7 +445,6 @@
             <formDesc>Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.).</formDesc>
             <elementGroups>
                 <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType)" groupNo="1" repeatable="yes">
-
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
@@ -488,6 +488,7 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="origPlace" lookupLabel="Look up places"/>
             <elementGroups>
                 <group groupLabel="Binding's origin, material, and dimensions." groupNo="1">
                     <element xpath="tei:decoNote"/>
