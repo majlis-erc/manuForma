@@ -8,10 +8,10 @@ function manuforma_changecolorsvg(domsvg, mycolor)
 }
 
 function manuforma_adapthtml()
-{  
+{
 	var logobutton = $(".navbar .navbar-brand");
-	logobutton.html('<object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo_manuforma.svg" type="image/svg+xml"></object>');
-	logobutton.find("object").click(function(){
+	logobutton.html('<img width="200" height="40" class="logo-filtered" src="resources/images/hn/logo_manuforma.svg" type="image/svg+xml" />');
+	logobutton.find("img").click(function(){
 		var mylink = $(this).parent().attr("href");
 		document.location = mylink;
 	});
@@ -44,8 +44,8 @@ function manuforma_adapthtml()
 		$("#edit").prepend(newheader);
 	}
 	
-/*	$("#sidebarMenu").removeClass("bg-light").addClass("bg-dark");*/
-/*	$("main").addClass("bg-dark");*/
+	//$("#sidebarMenu").removeClass("bg-light").addClass("bg-dark");
+	//$("main").addClass("bg-dark");
 	
 	$("input[type=file]:not(.withlabel)").each(function(){
 		var finalId = $(this).attr("id");
@@ -96,7 +96,7 @@ function manuforma_adapthtml()
 	manuforma_adaptmorehtml()
 }
 
-function manuforma_adaptmorehtml()
+function manuforma_adaptmorehtml(mutationList)
 {
 	$(".accordion-body hr:first-child").remove();
 	$(".headerxform").show();
@@ -105,6 +105,10 @@ function manuforma_adaptmorehtml()
 		$(this).remove();
 	});
 	
+	merci_firefox();
+}
+
+function merci_firefox() {
 	var titleform = $(".accordion-body .btn-group:first-child span.input-group-text");
 	titleform.each(function(){
 		var accordion = $(this).closest(".accordion-body");
@@ -112,43 +116,45 @@ function manuforma_adaptmorehtml()
 		accordion.addClass("with-title");
 	});
 	
-/*	$(".btn-group").removeClass("border-bottom");*/
-	/*  I do not like having the attributes in this menu, it makes it crowded and messy, will check with max before removing it though. */
+	$(".btn-group").removeClass("border-bottom");
+	// $(".element .btn-toolbar").removeClass("mt-3");
+	//WS: Comment out this, as it moves the attribute values into the toolbar, to crowded and to confusing.
 	/* 
 	$(".element").each(function(){
 		var latoolbar = $(this).siblings(".btn-toolbar");
 		latoolbar.find(".btn-group").append($(this).find("> .attr-group"));
 	}); 
 	*/
-	$(".btn-toolbar.elementControls").each(function(){
-		if ($(this).find(".btn-group2").length <= 0) $(this).append($('<div class="btn-group2"></div>'));
-		var mybtngrp2 = $(this).find(".btn-group2");
-		mybtngrp2.append($(this).find(".btn-group > span.btn.controls"));
-	});
 	
-	/* changed in the xslt 
+	$(".btn-toolbar.elementControls").each(function(){
+		if ($(this).find(".btn-group2").length <= 0) 
+		{
+			var mybtngrp2 = $('<div class="btn-group2" />');
+			var tabelts = $(this).find(".btn-group > span.btn.controls");
+			if (tabelts.length > 0) 
+			{
+				mybtngrp2.append(tabelts); 
+				$(this).append(mybtngrp2);
+			}
+		} 
+	});
+	 
+	/* WS: commented out as I made the change in the xslt  
 	$(".btn .bi-plus-circle").removeClass("bi-plus-circle").addClass("bi-plus");
 	$(".btn .bi-x-circle").removeClass("bi-x-circle").addClass("bi-x");
 	$("img[src='resources/images/TEI-175.jpg']").attr("src","resources/images/hn/Text_Encoding_InitiativeTEI_Logo.svg");
 	 */ 
-	 
-	 /* Hide empty buttons.  */
-	 /* 
-       $(".btn-toolbar .input-group").each(function() {
-            if ($(this).find(".xforms-group-content").children(".xforms-disabled").length > 0) $(this).hide();
-      })
-       */ 
-/* 
-    $(".btn-toolbar .input-group").each(function(){
-		if ($(this).children("span").length <= $(this).children(".xforms-disabled").length) $(this).hide();
+	$(".btn-toolbar .input-group").each(function(){
+		if ($(this).children(".xforms-enabled").length <= 0) $(this).addClass("avoiditem"); // hide();
 	});
-*/	 
 	$(".xforms-alert-icon").addClass("nobackground").html($('<i class="bi bi-x-circle"></i> Cancel'));
 	$("#edit .elementControls .justify-content-between").removeClass("justify-content-between");
+	
+	//if ($("#subform").text().length <= 0) setTimeout(merci_firefox, 5000);
 }
 
 function manuforma_prepareLoadObjectSVG(myobj) {
-	console.log("loaded",$(myobj));
+	// console.log("loaded",$(myobj));
 	var domsvg = myobj.getSVGDocument();
 	// console.log("Loaded",domsvg);
 	// setTimeout(manuforma_changecolorsvg,200,obj2,"white");
@@ -192,6 +198,11 @@ function manuforma_started() {
 	$("#edit > div").each(function() {
 		myObserver.observe(this, obsConfig);
 	});
+	/* 
+	$("#subform").each(function() {
+		myObserver.observe(this, obsConfig);
+	});
+	 */ 
 }
 
 const randomId = function(length = 6) {
