@@ -15,7 +15,6 @@
             - eXist-db 
             
         Version: 1.30 Beta 
-
             -1.22 marks a major redesign
         
 
@@ -675,7 +674,7 @@
                     <!-- Save record to github -->
                     <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
                         <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"/>
-                       <xf:action ev:event="xforms-submit-done">
+                        <xf:action ev:event="xforms-submit-done">
                             <xf:message ref="instance('i-submission')//*:message"/>
                         </xf:action>
                         <xf:action ev:event="xforms-submit-error">
@@ -1352,7 +1351,7 @@
                     <h2 class="h3 mainElement"><xsl:value-of select="$lookup/@lookupLabel"/></h2>
                     <p>Search controlled vocabulary  <xf:output value="local-name(current())"/></p>
                     <xsl:choose>
-                        <xsl:when test="$lookup/@elementName='bibl'">
+                        <xsl:when test="$lookup/@elementName='bibl' and $lookup/@formName!='titleBibl'">
                             <div class="input-group">
                                 <xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true">
                                     <xf:label/>
@@ -1785,12 +1784,13 @@
                                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                             <div class="input-group">
                                                 <!-- Attribute value -->
-                                                <xf:input ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
+                                                <xf:input xmlns="http://www.w3.org/2002/xforms" ref=".[not(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList)]" class="attVal"/>
                                                 <!-- If controlled attribute values in schemaConstraints file -->
-                                                <xf:select1 ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
+                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList]" class="attVal">
                                                     <xf:itemset ref="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]//*:valList/*:valItem" class="attVal">
                                                         <xf:label ref="@attLabel"/>
                                                         <xf:value ref="@ident"/>
+                                                        <xf:hint ref="@desc"/>
                                                     </xf:itemset>
                                                 </xf:select1>
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
@@ -2640,17 +2640,22 @@
             <xsl:attribute name="teiElement">
                 <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
             </xsl:attribute>
-            <xsl:if test="$configDoc/descendant::*:lookup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
+            <xsl:for-each-group select="$configDoc/descendant::*:lookup[@elementName = $elementName]" group-by="@elementName">
                 <xsl:choose>
-                    <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
+                    <xsl:when test="current-group()[parent::*:subform]">
+                        <xsl:if test="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]">
+                            <xsl:variable name="lookup" select="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]"/>
+                            <lookup>
+                                <xsl:copy-of select="$lookup/@*"/>
+                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup/@formURL,'/')[last()])"/>
+                            </lookup> 
+                        </xsl:if>
+                    </xsl:when>
                     <xsl:otherwise>
-                        <lookup>
-                            <xsl:copy-of select="$configDoc/descendant::*:lookup[@elementName = $elementName]/@*"/>
-                            <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',$elementName,'.xhtml')"/>
-                        </lookup>
-                    </xsl:otherwise>
+                        <xsl:copy-of select="current-group()[1]"/>
+                    </xsl:otherwise>    
                 </xsl:choose>
-            </xsl:if>      
+            </xsl:for-each-group>
             <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
                 <xsl:choose>
                     <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
