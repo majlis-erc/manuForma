@@ -61,6 +61,7 @@
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
+               <url></url>
             </response>
          </xf:instance>
          <xf:instance id="i-insert-elements">
@@ -121,7 +122,7 @@
                <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
                <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"></xf:setvalue>
                <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"></xf:setvalue>
-               <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
+               <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
             </xf:action>
@@ -129,7 +130,15 @@
          </xf:submission>
          <xf:submission id="s-load-template-search" method="post" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
             <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"></xf:resource>
-            <xf:message level="modeless" ev:event="xforms-submit-done"> Data Loaded! </xf:message>
+            <xf:action ev:event="xforms-submit-done">
+               <xf:message level="modeless"> Data Loaded! </xf:message>
+               <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"></xf:insert>
+               <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"></xf:setvalue>
+               <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"></xf:setvalue>
+               <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
+               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
+               <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
+            </xf:action>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
@@ -164,6 +173,7 @@
             <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
+               <xf:load value="instance('i-submission')//*:url"></xf:load>
             </xf:action>
             <xf:action ev:event="xforms-submit-error">
                <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email
