@@ -15,5 +15,6 @@ declare variable $target external;
    sm:chmod(xs:anyURI($target || '/modules/git-sync.xql'), "rwsr-xr-x"),
    sm:chmod(xs:anyURI($target || '/modules/login-helper.xql'), "rwsr-xr-x"),
    sm:chmod(xs:anyURI($target || '/modules/userManager.xql'), "rwsr-xr-x"),
-   sm:chmod(xs:anyURI($target || '/services/submit.xql'), "rwsr-xr-x")
+   sm:chmod(xs:anyURI($target || '/services/submit.xql'), "rwsr-xr-x"),
+   sm:create-group('manuForma')
 )

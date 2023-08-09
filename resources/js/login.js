@@ -61,7 +61,6 @@ $("#newUserForm").submit(function( event ) {
   var form = $(this);
   var url = $(this).attr('action');
   var data = ConvertFormToJSON(form);
-  
   $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
   });
@@ -73,7 +72,85 @@ $("#newUserForm").submit(function( event ) {
       //window.location.reload();
    } else {
         alert('This username already exists.');
-      //$('#responseBody').html('Username already exists.');
+      $('#responseBody').html('Username already exists.');
+      $(form)[0].reset();
+    }
+  }).fail( function(jqXHR, textStatus, errorThrown) {
+    // do fail notice
+    console.log(textStatus);
+  });
+  //end post
+});
+$("#newUserForm2").submit(function( event ) {
+  event.preventDefault();
+  var form = $(this);
+  var url = $(this).attr('action');
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   // Return success 
+   if(message == 'success') {
+      alert('Success');
+      $('#responseBody2').html(message);
+      window.location.href = "index.html";
+   } else {
+      alert('This username already exists.');
+      $('#responseBody2').html(message);
+      $(form)[0].reset();
+    }
+  }).fail( function(jqXHR, textStatus, errorThrown) {
+    // do fail notice
+    console.log(textStatus);
+  });
+  //end post
+});
+$("#resetForm").submit(function( event ) {
+  event.preventDefault();
+  var form = $(this);
+  var url = $(this).attr('action');
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   // Return success 
+   if(message == 'success') {
+      alert('Success');
+      $('#resetResponseBody2').html(message);
+      window.location.href = "index.html";
+   } else {
+      alert(message);
+      $('#resetResponseBody2').html(message);;
+      $(form)[0].reset();
+    }
+  }).fail( function(jqXHR, textStatus, errorThrown) {
+    // do fail notice
+    console.log(textStatus);
+  });
+  //end post
+});
+$("#resetForm2").submit(function( event ) {
+  event.preventDefault();
+  var form = $(this);
+  var url = $(this).attr('action');
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   // Return success 
+   if(message == 'success') {
+      alert('Success');
+      $('#resetResponseBody2').html(message);
+      window.location.href = "index.html";
+   } else {
+      alert(message);
+      $('#resetResponseBody2').html(message);;
       $(form)[0].reset();
     }
   }).fail( function(jqXHR, textStatus, errorThrown) {
@@ -88,17 +165,71 @@ $("#loginForm").submit(function( event ) {
   event.preventDefault();
   var form = $(this);
   var url = $(this).attr('action');
+  
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   // Return success 
+   if(message == 'success') {
+      $('#loginResponseBody').html(message);
+      window.location.reload();
+   } else {
+        alert('This username already exists.');
+      $('#loginResponseBody').html('Username already exists.');
+      $(form)[0].reset();
+    }
+  }).fail( function(jqXHR, textStatus, errorThrown) {
+    // do fail notice
+    console.log(textStatus);
+  });
+  /* 
   var formData = form.serialize();
   $.get(url, formData, function(data) {
     console.log(data);
     if (data.fail) {
-        $('#loginResponseBody').html('Wrong user or password');
+        $('#loginResponseBody').text('Fail');
+        $('#loginResponseBody').html(success);
         $(form)[0].reset();
         console.log(data);
     } else {
-       $('#loginResponseBody').html('Success.');
+       $('#loginResponseBody').text('Good job');
+       $('#loginResponseBody').html(JSON.stringify(data));
        window.location.reload();
        console.log(data);
+    }
+  }).fail( function(jqXHR, textStatus, errorThrown) {
+     do fail notice
+    console.log(textStatus);
+  });
+   */ 
+  //end post
+});
+
+//login page
+$("#loginForm2").submit(function( event ) {
+  event.preventDefault();
+  var form = $(this);
+  var url = $(this).attr('action');
+  
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   // Return success 
+   if(message == 'success') {
+      alert('Success');
+      $('#loginResponseBody2').html(message);
+      window.location.href = "index.html";
+      //window.location.reload();
+   } else {
+      alert(message);
+      $('#loginResponseBody2').html(message);
+      $(form)[0].reset();
     }
   }).fail( function(jqXHR, textStatus, errorThrown) {
     // do fail notice
@@ -106,7 +237,6 @@ $("#loginForm").submit(function( event ) {
   });
   //end post
 });
-
 //loginModal
 $('#logout').click(function(event) {
   event.preventDefault();
