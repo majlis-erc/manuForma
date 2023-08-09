@@ -112,4 +112,5 @@ declare variable $config:login-domain :=
     let $config := doc(concat($config:app-root, "/repo.xml"))
     return 
         if($config//repo:login-domain/text() != '') then $config//repo:login-domain/text()
-        else 'localHost';
+        else if($config//repo:login-domain/text() = '/') then 'org.exist.login'
+        else '';

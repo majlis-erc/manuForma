@@ -29,24 +29,26 @@ else if ($exist:resource = "login") then
         let $user := request:get-attribute($config:login-domain || ".user")
         return
            if ($user and sm:list-users() = $user) then
-                <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
+                <response>
                     <user>{$user}</user>
+                    <logged>{$loggedIn}</logged>
                 </response>
             else if($userParam and sm:list-users() = $userParam) then
-                <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
+                <response>
                     <user>{$user}</user>
+                    <logged>{$loggedIn}</logged>
                 </response>
             else if($logout = 'true') then 
-               <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
+               <response>
                     <success>You have been logged out.</success>
                 </response> 
             else (
-                <response status="fail" xmlns="http://www.w3.org/1999/xhtml" message="Username already exists">
-                    <fail>Wrong user or password user: {$user}</fail>
+                <response>
+                    <fail>Wrong user or password user: {$user} userParam: {$userParam}</fail>
                 </response>
             )
     } catch * {
-        <response status="fail" xmlns="http://www.w3.org/1999/xhtml" message="{$err:description}">
+        <response>
             <fail>{$err:description}</fail>
         </response>
     })
@@ -57,7 +59,7 @@ else if ($exist:resource = "userInfo") then
     ((:util:declare-option("exist:serialize", "method=json media-type=application/json"),:)
      let $currentUser := 
                 if(request:get-attribute($config:login-domain || ".user")) then request:get-attribute($config:login-domain || ".user") 
-                else sm:id()/sm:id/sm:real/sm:username/string(.)
+                else(: xmldb:get-current-user():) sm:id()/sm:id/sm:real/sm:username/string(.)
     let $group :=  
                 if($currentUser) then 
                     sm:get-user-groups($currentUser) 
@@ -73,32 +75,7 @@ else if ($exist:resource = "userInfo") then
                 </message>
             </response>)    
    )
-(: Restrict forms to logged in users :)   
-else if (ends-with($exist:path, "forms.xq")) then (
-        login:set-user($config:login-domain, (), true()),
-        let $user := request:get-attribute($config:login-domain || ".user")
-        let $userParam := request:get-parameter("user","")
-        let $logout := request:get-parameter("logout",())
-        return
-            if($logout = "true") then (
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <redirect url="index.html"/>
-                </dispatch>
-            )
-            else if ($user and sm:list-users() = $user) then
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <cache-control cache="no"/>
-                </dispatch>
-            else if(not(string($userParam) eq string($user))) then
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <redirect url="index.html"/>
-                </dispatch>
-            else
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="login.html"/>
-                </dispatch>
-)
-
+   
 else if ($exist:path eq "/") then
     (: forward root path to index.xql :)
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
