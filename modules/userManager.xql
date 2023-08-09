@@ -19,10 +19,6 @@ declare namespace json = "http://www.json.org";
 declare variable $metadata-fullname-key := xs:anyURI("http://axschema.org/namePerson");
 declare variable $metadata-description-key := xs:anyURI("http://exist-db.org/security/description");
 
-(:
-sm:create-account($username as xs:string, $password as xs:string, $primary-group as xs:string, $groups as xs:string*, $full-name as xs:string, $description as xs:string) as empty-sequence()
-:)
-
 (: Create a new user :)
 declare function local:create-user($data as item()*) as xs:string? {
     let $user := $data?user
@@ -36,32 +32,20 @@ declare function local:create-user($data as item()*) as xs:string? {
         )
 };
 
+(: Reset existing password :)
+declare function local:resetPW($data as item()*) as xs:string? {
+    let $user := $data?user
+    let $fullName := $data?fullName
+    let $password := $data?password
+    return
+        sm:passwd($user, $password)
+};
+
+
 (: Delete user :)
 declare function local:delete-user($data as item()*) as xs:string? {
     let $user := $data?user
     return sm:remove-account($user) 
-};
-
-(:
- : Login new user
- : Borrowed from persistent login module: resource:org/exist/xquery/modules/persistentlogin/login.xql
- :)
-declare function local:set-user($user as xs:string?, $password as xs:string?, $maxAge as xs:dayTimeDuration?) {
-''
-(:
-    let $duration :=
-        if (exists($maxAge)) then
-            $maxAge
-        else ()
-    let $cookie := request:get-cookie-value($config:login-domain)
-    return
-       (
-        login:set-user($config:login-domain, (), true()),
-        request:set-attribute($config:login-domain || ".user", $user),
-        request:set-attribute("xquery.user", $user),
-        request:set-attribute("xquery.password", $password)
-       )
-:)       
 };
 
 (: Create new user :)
@@ -72,14 +56,35 @@ let $payload := util:base64-decode($post-data)
 let $json-data := parse-json($payload)
 let $userName := $json-data?user
 let $user := $json-data?user
-let $password := $json-data?password              
+let $password := $json-data?password  
+let $reset := $json-data?reset
 return 
    if(sm:list-users() = $userName) then 
-        (response:set-status-code( 200 ), 
-        util:declare-option("exist:serialize", "method=json media-type=application/json"),
-        <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="username already exists">
-            <message><div>Username already exists, please select a different username {$userName}.</div></message>
-        </response>)
+        if($reset = 'true') then
+            try {
+                let $newUser := local:resetPW($json-data)
+                return 
+                    (
+                    response:set-status-code( 200 ),
+                    util:declare-option("exist:serialize", "method=json media-type=application/json"),
+                    <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
+                        <message><div>Password for {$userName} has been reset.</div></message>
+                    </response>,
+                    login:set-user($config:login-domain, (), true())
+                    )
+                } catch * {
+                    (response:set-status-code( 500 ),
+                    util:declare-option("exist:serialize", "method=json media-type=application/json"),
+                    <response status="fail" xmlns="http://www.w3.org/1999/xhtml" message="Failed to update user {$err:code}: {$err:description}">
+                        <message>Failed to update user: <error>Caught error {$err:code}: {$err:description}</error></message>
+                    </response>)
+                }
+        else 
+            (response:set-status-code( 200 ), 
+            util:declare-option("exist:serialize", "method=json media-type=application/json"),
+            <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="Username already exists">
+                <message><div>Username already exists, please select a different username {$userName}.</div></message>
+            </response>)
    else if($user != '') then 
       try {
         let $newUser := local:create-user($json-data)
@@ -90,12 +95,12 @@ return
             <response status="success" xmlns="http://www.w3.org/1999/xhtml" message="success">
                 <message><div>New user {$userName} has been created. userParam: {request:get-parameter('user', '')}</div></message>
             </response>,
-            login:set-user("org.exist.login", (), true())
+            login:set-user($config:login-domain, (), true())
             )
         } catch * {
             (response:set-status-code( 500 ),
             util:declare-option("exist:serialize", "method=json media-type=application/json"),
-            <response status="fail" xmlns="http://www.w3.org/1999/xhtml" message="failed to create user {$err:code}: {$err:description}">
+            <response status="fail" xmlns="http://www.w3.org/1999/xhtml" message="Failed to create user {$err:code}: {$err:description}">
                 <message>Failed to create user: <error>Caught error {$err:code}: {$err:description}</error></message>
             </response>)
         }

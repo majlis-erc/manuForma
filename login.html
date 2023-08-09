@@ -1,0 +1,132 @@
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+  <section class="bg-light">
+    <div class="container login page-content">  
+    <br/>
+    <h1>manuForma Login</h1>
+    <p>Only registered users can use manuForma</p>
+    <div>
+      <div class="accordion" id="loginGrp">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading1">
+            <button class="accordion-button collapsed" 
+              type="button" data-bs-toggle="collapse" 
+              data-bs-target="#login1" aria-expanded="false" 
+              aria-controls="login1">Login</button></h2>
+              <div id="login1" class="accordion-collapse collapse in" aria-labelledby="heading1" data-bs-parent="#loginGrp">
+                  <div class="accordion-body">
+                    <form method="POST" action="$nav-base/login" class="form-horizontal loginForm" id="loginForm2">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Login</h5>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container" id="loginResponse">
+                            <div class="mb-3">
+                              <label for="user" class="form-label">User name</label>
+                              <input type="text" class="form-control" name="user" required="required"/>
+                            </div>
+                            <div class="mb-3">
+                              <label for="password" class="form-label">Password</label>
+                              <input type="password" class="form-control" name="password"/>
+                            </div>
+                            <div id="loginResponseBody2">
+                               
+                            </div>
+                          </div>  
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-sm btn btn-outline-dark" type="submit">Login</button>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </form>
+                  </div>
+                </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading2">
+            <button class="accordion-button collapsed" 
+              type="button" data-bs-toggle="collapse" 
+              data-bs-target="#login2" aria-expanded="false" 
+              aria-controls="login2">New User</button></h2>
+              <div id="login2" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#loginGrp">
+                <form method="POST" action="$nav-base/modules/userManager.xql" class="form-horizontal newUserForm" id="newUserForm2">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Create an Account</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div id="formBody"> 
+                        <div class="mb-3">
+                          <label for="user" class="form-label">User name</label>
+                          <input type="text" class="form-control" name="user" required="required"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="fullName" class="form-label">Full name</label>
+                          <input type="text" class="form-control" name="fullName"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label">Password</label>
+                          <input type="password" class="form-control" name="password" required="required"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="passwordConfirm" class="form-label">Confirm Password</label>
+                          <input type="password" class="form-control" name="passwordConfirm" required="required"/>
+                        </div>
+                      </div>                        
+                      <div id="responseBody2">
+                        
+                      </div>                        
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" type="submit">Create Account</button>
+                    </div>
+                  </div>
+              
+            </form>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading3">
+            <button class="accordion-button collapsed" 
+              type="button" data-bs-toggle="collapse" 
+              data-bs-target="#login3" aria-expanded="false" 
+              aria-controls="login3">Reset Password</button></h2>
+              <div id="login3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#loginGrp">
+                <form method="POST" action="$nav-base/modules/userManager.xql" class="form-horizontal resetForm" id="resetForm2">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Reset Password</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container" id="resetResponse">
+                        <div class="mb-3">
+                          <label for="user" class="form-label">User name</label>
+                          <input type="text" class="form-control" name="user" required="required"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label">New Password</label>
+                          <input type="password" class="form-control" name="password" required="required"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="passwordConfirm" class="form-label">Confirm New Password</label>
+                          <input type="password" class="form-control" name="passwordConfirm" required="required"/>
+                        </div>
+                        <input type="hidden" class="form-control" name="reset" value="true"/>
+                        <div id="resetResponseBody2"/> 
+                      </div>  
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" type="submit"><span class="bi bi-person"/> Reset password</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </form>
+              </div>
+        </div>
+        
+      </div>
+      
+      
+    </div>
+    </div>
+  </section>
+</div>
