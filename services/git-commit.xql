@@ -45,7 +45,7 @@ declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace json = "http://www.json.org";
 
 (: Set up global varaibles :)
-declare variable $gitcommit:authorization-token := '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';
+declare variable $gitcommit:authorization-token := '';
 declare variable $gitcommit:apiURL := 'https://api.github.com';
 declare variable $gitcommit:owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'wsalesky';
 declare variable $gitcommit:repoName := if(request:get-parameter('githubRepoName','') != '') then request:get-parameter('githubRepoName','') else 'blogs';
@@ -286,7 +286,7 @@ declare function gitcommit:step7($path as xs:string?, $branch-name as xs:string?
                                     <http:body media-type="application/json" method="text">{$pull-request-data}</http:body>
                                 </http:request>)
             let $pull-request-data := util:base64-decode($pull-request[2])
-            return ('pull request ',string($pull-request[1]/@message))
+            return $pull-request-data?html_url
         else ('fail pull request',$commit-ref/@message)   
 };
 
