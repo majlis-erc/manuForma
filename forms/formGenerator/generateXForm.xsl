@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.31 Beta 
+        Version: 1.32 Beta 
             -1.22 marks a major redesign
         
 
@@ -623,7 +623,7 @@
                             <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
-                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="before"/>
+                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
                         </xf:action>
@@ -632,7 +632,15 @@
                     
                     <xf:submission id="s-load-template-search" method="post" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"/>
-                        <xf:message level="modeless" ev:event="xforms-submit-done"> Data Loaded! </xf:message>
+                        <xf:action ev:event="xforms-submit-done">
+                        <xf:message level="modeless"> Data Loaded! </xf:message>
+                            <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
+                            <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
+                            <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
+                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
+                        </xf:action>    
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
@@ -2647,7 +2655,7 @@
                             <xsl:variable name="lookup" select="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]"/>
                             <lookup>
                                 <xsl:copy-of select="$lookup/@*"/>
-                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup/@formURL,'/')[last()])"/>
+                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup[1]/@formURL,'/')[last()])"/>
                             </lookup> 
                         </xsl:if>
                     </xsl:when>
