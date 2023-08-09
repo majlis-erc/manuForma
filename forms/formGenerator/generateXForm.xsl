@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.31 Beta 
+        Version: 1.33 Beta 
             -1.22 marks a major redesign
         
 
@@ -584,6 +584,7 @@
                     <xf:instance id="i-submission">
                         <response status="success">
                             <message>Submission result</message>
+                            <url></url>
                         </response>
                     </xf:instance>
                     <!-- i-insert-elements -->
@@ -676,6 +677,7 @@
                         <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"/>
                         <xf:action ev:event="xforms-submit-done">
                             <xf:message ref="instance('i-submission')//*:message"/>
+                            <xf:load value="instance('i-submission')//*:url"/>
                         </xf:action>
                         <xf:action ev:event="xforms-submit-error">
                             <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email them to us.</xf:message>
