@@ -33,11 +33,18 @@ function app:display-userinfo($node as node(), $model as map(*)) {
             else $user 
     (:let $coursepacks := collection($config:app-root || '/coursepacks')/coursepack[@user = $user]:)            
     return
-        <div>
-            <h1>{$user} : {$userName}</h1>
-            <h3>Your Records:</h3>
-            { 'Work in progress' }
-        </div>
+       if ($user and not(matches($user,'[gG]uest'))) then
+            <div class="content-grey">
+                <h1>{$user} : {$userName}</h1>
+                <h3>Your Records:</h3>
+                { 'Work in progress' }
+            </div>
+        else 
+            <div class="content-grey">
+                <h1>User : Guest</h1>
+                <h3>Please Log in to see you records.</h3>
+                { 'Work in progress' }
+            </div>
 };
 
 (: Login functions :)
