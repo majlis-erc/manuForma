@@ -111,7 +111,7 @@ End license statement: do not remove -->
                             <attDef ident="ref" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
-                            <attDef name="xml:id" mode="change">
+                            <attDef ident="xml:id" mode="change">
                                 <gloss>Person identifier</gloss>
                             </attDef>
                             <attDef ident="xml:lang" mode="change">
@@ -137,17 +137,14 @@ End license statement: do not remove -->
                                     </valItem>
                                 </valList>
                             </attDef>
-                            <attDef name="source" mode="change">
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
                             </attDef>
                             <attDef ident="resp" mode="delete">
                                 <gloss>Responsible team member</gloss>
                             </attDef>
-                            <attDef ident="type" usage="change">
+                            <attDef ident="type" mode="change">
                                 <gloss>Type</gloss>
-                                <datatype>
-                                    <dataRef key="teidata.enumerated"/>
-                                </datatype>
                                 <valList type="closed">
                                     <valItem mode="add" ident="majlis-headword">
                                         <gloss>MAJLIS headword</gloss>
@@ -206,7 +203,7 @@ End license statement: do not remove -->
                             </attDef>
                             <attDef ident="sex" mode="delete"/>
                             <attDef ident="age" mode="delete"/>
-                            <attRef name="xml:id" class="att.global"/>
+                            <attDef ident="xml:id" class="att.global"/>
                         </attList>
                     </elementSpec>
 
@@ -375,9 +372,7 @@ End license statement: do not remove -->
                             <attDef ident="notAfter" mode="delete"/>
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
-                            <attRef name="source" mode="change">
-                                <gloss>Source</gloss>
-                            </attRef>
+                            <attDef ident="source" mode="delete"></attDef>
                         </attList>
                     </elementSpec>
 
@@ -400,17 +395,19 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="calendar" mode="delete"/>
                             <attDef ident="dur" mode="delete"/>
-                            <attDef ident="dur.iso" mode="delete"/>
+                            <attDef ident="dur-iso" mode="delete"/>
                             <attDef ident="notAfter" mode="delete"/>
                             <attDef ident="notBefore" mode="delete"/>
                             <attDef ident="type" mode="delete"/>
-                            <attRef name="when" mode="delete"/>
-                            <attRef name="notBefore" class="att.datable.w3c"/>
-                            <attRef name="notAfter" class="att.datable.w3c"/>
-                            <attRef name="source" mode="change">
+                            <attDef ident="when" mode="delete"/>
+                            <attDef ident="when-iso" mode="delete"/>
+                            <attDef ident="when-custom" mode="delete"/>
+                            <attDef ident="notBefore" class="att.datable.w3c"/>
+                            <attDef ident="notAfter" class="att.datable.w3c"/>
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
-                            </attRef>
-                            <attDef name="cert" mode="change">
+                            </attDef>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
@@ -445,7 +442,7 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
                         </attList>
                     </elementSpec>
 
@@ -464,10 +461,10 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="source" mode="change">
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
-                            </attRef>
-                            <attDef name="cert" mode="change">
+                            </attDef>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
@@ -498,11 +495,19 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="from" mode="delete"/>
-                            <attRef name="to" mode="delete"/>
-                            <attRef name="notBefore" mode="delete"/>
-                            <attRef name="notAfter" mode="delete"/>
-                            <attDef name="cert" mode="change">
+                            <attDef ident="from" mode="delete"/>
+                            <attDef ident="from-iso" mode="delete"/>
+                            <attDef ident="from-custom" mode="delete"/>
+                            <attDef ident="to" mode="delete"/>
+                            <attDef ident="to-iso" mode="delete"/>
+                            <attDef ident="to-custom" mode="delete"/>
+                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="notBefore-iso" mode="delete"/>
+                            <attDef ident="notBefore-custom" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"/>
+                            <attDef ident="notAfter-iso" mode="delete"/>
+                            <attDef ident="notAfter-custom" mode="delete"/>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
@@ -570,11 +575,11 @@ End license statement: do not remove -->
                             <attDef ident="code" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" mode="change">
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
-                            </attRef>
-                            <attRef name="type" mode="delete"/>
-                            <attDef name="cert" mode="change">
+                            </attDef>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
@@ -613,11 +618,11 @@ End license statement: do not remove -->
                             <attDef ident="type" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
-                            <attRef name="ref" class="att.canonical"/>
-                            <attRef name="source" mode="change">
+                            <attDef ident="ref" class="att.canonical"/>
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
-                            </attRef>
-                            <attDef name="cert" mode="change">
+                            </attDef>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
@@ -651,9 +656,7 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" mode="change">
-                                <gloss>Source</gloss>
-                            </attRef>
+                            <attDef ident="source" mode="delete"></attDef>
                         </attList>
                     </elementSpec>
 
@@ -671,11 +674,11 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="source" mode="change">
+                            <attDef ident="source" mode="change">
                                 <gloss>Source</gloss>
-                            </attRef>
-                            <attRef name="value" mode="delete"/>
-                            <attDef name="cert" mode="change">
+                            </attDef>
+                            <attDef ident="value" mode="delete"/>
+                            <attDef ident="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
                                     <valItem mode="add" ident="high">
