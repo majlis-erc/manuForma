@@ -24,7 +24,7 @@
                <valItem ident="author" attLabel="Author"/>
             </valList>
          </attDef>
-         <attDef attLabel="id" ident="xml:id"/>
+         <attDef attLabel="id" ident="xml:id" class="att.global"/>
       </availableAtts>
       <childElements>
          <child>
@@ -91,7 +91,11 @@
       <desc>You have two options: 1) Create Additional name fields for every name component, like ism, kunya, etc., OR
                             2) you enter the full name form into the Full name field.</desc>
       <availableAtts elementName="persName">
-         <attDef attLabel="Type" ident="type" usage="change">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+         <attDef attLabel="Type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -103,6 +107,10 @@
                <valItem ident="alternate" attLabel="Alternate name form"/>
                <valItem ident="canon" attLabel="Canonic name form"/>
             </valList>
+         </attDef>
+         <attDef attLabel="Person identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
          </attDef>
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -215,9 +223,7 @@
           popup="2"
           teiElement="&lt;birth/&gt;">
       <desc>Provide the date and place of birth in the fields below.</desc>
-      <availableAtts elementName="birth">
-         <attDef attLabel="source" ident="source"/>
-      </availableAtts>
+      <availableAtts elementName="birth"/>
       <childElements>
          <child>
             <element ident="date"
@@ -243,45 +249,22 @@
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "When" field for precise values. In case
                             the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
       <availableAtts elementName="date">
-         <attDef attLabel="duration" ident="dur-iso" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-04-09"
-                   xml:lang="en">duration</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">지속 기간</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-05-02"
-                   xml:lang="zh-TW">時間長度</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-12-09"
-                   xml:lang="fr">durée</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">durata</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-05-04"
-                   xml:lang="es">duración</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-05-20">時間幅</gloss>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
          </attDef>
-         <attDef attLabel="source" ident="source"/>
-         <attDef attLabel="when" ident="when"/>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="date"/>
@@ -310,8 +293,23 @@
                             different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out
                             automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="ref" ident="ref" mode="change" usage="rec"/>
-         <attDef attLabel="source" ident="source"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="ref" ident="ref" class="att.canonical"/>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="placeName"/>
@@ -326,9 +324,7 @@
           popup="2"
           teiElement="&lt;death/&gt;">
       <desc>Provide the date and place of death in the fields below.</desc>
-      <availableAtts elementName="death">
-         <attDef attLabel="source" ident="source"/>
-      </availableAtts>
+      <availableAtts elementName="death"/>
       <childElements>
          <child>
             <element ident="date"
@@ -354,45 +350,22 @@
       <desc>Fill in the date in the agreed-upon calendrical system. Use the "When" field for precise values. In case
                             the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
       <availableAtts elementName="date">
-         <attDef attLabel="duration" ident="dur-iso" usage="opt">
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-04-09"
-                   xml:lang="en">duration</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-12-20"
-                   xml:lang="ko">지속 기간</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-05-02"
-                   xml:lang="zh-TW">時間長度</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2008-12-09"
-                   xml:lang="fr">durée</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-11-06"
-                   xml:lang="it">durata</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   versionDate="2007-05-04"
-                   xml:lang="es">duración</gloss>
-            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xml:lang="ja"
-                   versionDate="2019-05-20">時間幅</gloss>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
          </attDef>
-         <attDef attLabel="source" ident="source"/>
-         <attDef attLabel="when" ident="when"/>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="date"/>
@@ -421,8 +394,23 @@
                             different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out
                             automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="ref" ident="ref" mode="change" usage="rec"/>
-         <attDef attLabel="source" ident="source"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="ref" ident="ref" class="att.canonical"/>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="placeName"/>
@@ -439,10 +427,18 @@
       <desc>Fill in the date of the period of intellectual activity. Use the "When" field for precise values. In case
                             the date can only be approximated, use the "Not after "and "Not before" fields together.</desc>
       <availableAtts elementName="floruit">
-         <attDef attLabel="from" ident="from"/>
-         <attDef attLabel="notAfter" ident="notAfter"/>
-         <attDef attLabel="notBefore" ident="notBefore"/>
-         <attDef attLabel="to" ident="to"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="floruit"/>
@@ -458,8 +454,22 @@
         teiElement="&lt;sex/&gt;">
       <desc>Choose the gender of the person from the list.</desc>
       <availableAtts elementName="sex">
-         <attDef attLabel="source" ident="source"/>
-         <attDef attLabel="value" ident="value"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="sex">
@@ -483,7 +493,22 @@
           teiElement="&lt;faith/&gt;">
       <desc>Specify the denomination of the person.</desc>
       <availableAtts elementName="faith">
-         <attDef attLabel="source" ident="source"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <controlledValues>
          <element xmlns="" ident="faith">
@@ -509,8 +534,22 @@
       <desc>Describe the person's profession, i.e. what job did they perform to earn a living? This is NOT the role
                             the person played with regard to the manuscripts.</desc>
       <availableAtts elementName="occupation">
-         <attDef attLabel="source" ident="source"/>
-         <attDef attLabel="type" ident="type"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="occupation"/>
@@ -525,9 +564,7 @@
               popup="2"
               teiElement="&lt;residence/&gt;">
       <desc>Enter the information where the person lived in the field below.</desc>
-      <availableAtts elementName="residence">
-         <attDef attLabel="source" ident="source"/>
-      </availableAtts>
+      <availableAtts elementName="residence"/>
       <childElements>
          <child>
             <element ident="placeName"
@@ -560,8 +597,23 @@
                             different languages! If no suitable record exists, create a new one. (The "reference" field will be filled out
                             automatically when you link a place record to this element.)</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="ref" ident="ref" mode="change" usage="rec"/>
-         <attDef attLabel="source" ident="source"/>
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="ref" ident="ref" class="att.canonical"/>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
       </availableAtts>
       <childElements>
          <textNode type="input" class="placeName"/>
