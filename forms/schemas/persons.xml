@@ -108,7 +108,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="opt"/>
+                            <attDef ident="ref" mode="delete"/>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef name="xml:id" mode="change">
@@ -140,7 +140,7 @@ End license statement: do not remove -->
                             <attDef name="source" mode="change">
                                 <gloss>Source</gloss>
                             </attDef>
-                            <attDef name="resp" mode="change">
+                            <attDef ident="resp" mode="delete">
                                 <gloss>Responsible team member</gloss>
                             </attDef>
                             <attDef ident="type" usage="change">
@@ -214,7 +214,7 @@ End license statement: do not remove -->
                         <gloss>Additional name</gloss>
                         <gloss type="tei">&lt;addName&gt;</gloss>
                         <desc xml:lang="en">Enter name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the
-                            type of name from the list on the right side.</desc>
+                            name type from the dropdown list.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -229,7 +229,7 @@ End license statement: do not remove -->
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="type" mode="change">
-                                <gloss>Type</gloss>
+                                <gloss>Name type</gloss>
                                 <datatype>
                                     <dataRef key="teidata.enumerated"/>
                                 </datatype>
@@ -263,10 +263,10 @@ End license statement: do not remove -->
                                     </valItem>
                                 </valList>
                             </attDef>
-                            <attDef name="xml:id" mode="change">
+                            <attDef ident="xml:id" mode="change">
                                 <gloss>Identifier</gloss>
                             </attDef>
-                            <attRef name="ref" class="att.canonical"/>
+                            <attDef ident="ref" class="att.canonical"/>
                         </attList>
                     </elementSpec>
 
@@ -274,7 +274,7 @@ End license statement: do not remove -->
                     <elementSpec ident="forename" mode="change">
                         <gloss>Forename</gloss>
                         <gloss type="tei">&lt;forename&gt;</gloss>
-                        <desc xml:lang="en">A person's given name.</desc>
+                        <desc xml:lang="en">Give the person's given name.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -375,7 +375,9 @@ End license statement: do not remove -->
                             <attDef ident="notAfter" mode="delete"/>
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
                         </attList>
                     </elementSpec>
 
@@ -396,10 +398,18 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="when" class="att.datable.w3c"/>
+                            <attDef ident="calendar" mode="delete"/>
+                            <attDef ident="dur" mode="delete"/>
+                            <attDef ident="dur.iso" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"/>
+                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attRef name="when" mode="delete"/>
                             <attRef name="notBefore" class="att.datable.w3c"/>
                             <attRef name="notAfter" class="att.datable.w3c"/>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -435,7 +445,7 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="delete"/>
                         </attList>
                     </elementSpec>
 
@@ -454,7 +464,9 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -486,10 +498,10 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="from" class="att.citing"/>
-                            <attRef name="to" class="att.citing"/>
-                            <attRef name="notBefore" class="att.datable.w3c"/>
-                            <attRef name="notAfter" class="att.datable.w3c"/>
+                            <attRef name="from" mode="delete"/>
+                            <attRef name="to" mode="delete"/>
+                            <attRef name="notBefore" mode="delete"/>
+                            <attRef name="notAfter" mode="delete"/>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -509,7 +521,7 @@ End license statement: do not remove -->
                     <elementSpec ident="idno" mode="change">
                         <gloss>Link</gloss>
                         <gloss type="tei">&lt;idno&gt;</gloss>
-                        <desc>Enter persistent identifiers of external projects for the same person.</desc>
+                        <desc>Enter persistent identifiers of external projects for the same person and choose the source from the list.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -520,6 +532,7 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="subtype" mode="change">
+                                <gloss>Source</gloss>
                                 <valList type="open" mode="change">
                                     <valItem mode="add" ident="isni"><gloss>ISNI</gloss></valItem>
                                     <valItem mode="add" ident="viaf"><gloss>VIAF</gloss></valItem>
@@ -531,7 +544,10 @@ End license statement: do not remove -->
                                     <valItem mode="add" ident="ktiv"><gloss>Ktiv</gloss></valItem>
                                 </valList>
                             </attDef>
-                            <attRef name="resp" class="att.global.responsibility"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="resp" mode="delete">
+                                <gloss>Responsible team member</gloss>
+                            </attDef>
                         </attList>
                     </elementSpec>
 
@@ -554,8 +570,10 @@ End license statement: do not remove -->
                             <attDef ident="code" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="type" class="att.entryLike"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
+                            <attRef name="type" mode="delete"/>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -596,7 +614,9 @@ End license statement: do not remove -->
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attRef name="ref" class="att.canonical"/>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -631,7 +651,9 @@ End license statement: do not remove -->
                         <attList>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="ref" mode="delete"/>
-                            <attRef name="source" class="att.global.source"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
                         </attList>
                     </elementSpec>
 
@@ -649,8 +671,10 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="source" class="att.global.source"/>
-                            <attRef name="value" class="teidata.sex"/>
+                            <attRef name="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attRef>
+                            <attRef name="value" mode="delete"/>
                             <attDef name="cert" mode="change">
                                 <gloss>Degree of certainty</gloss>
                                 <valList type="closed" mode="change">
@@ -671,7 +695,7 @@ End license statement: do not remove -->
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">Add a bibliographic item, like a monograph, journal article, or manuscript.</desc>
+                        <desc xml:lang="en">Add a bibliographic item, like a monograph or journal article.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -686,6 +710,9 @@ End license statement: do not remove -->
                             <memberOf key="att.sortable" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
                         <content>
                             <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
@@ -696,7 +723,7 @@ End license statement: do not remove -->
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
-                        <desc>The title to the Zotero should be filled out automatically.</desc>
+                        <desc>The title to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -738,7 +765,7 @@ End license statement: do not remove -->
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <desc>The link to the Zotero should be filled out automatically.</desc>
+                        <desc>The link to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -757,7 +784,9 @@ End license statement: do not remove -->
                             <empty/>
                         </content>
                         <attList>
-                            <attDef ident="target" mode="change"/>
+                            <attDef ident="target" mode="change" rend="restricted">
+                                <gloss>Target</gloss>
+                            </attDef>
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
@@ -774,6 +803,26 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
+                            <attDef ident="unit" mode="change">
+                                <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="page">
+                                        <gloss>Page</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="folio">
+                                        <gloss>Folio</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="cols">
+                                        <gloss>Column</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="section">
+                                        <gloss>Section</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="chapter">
+                                        <gloss>Chapter</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>

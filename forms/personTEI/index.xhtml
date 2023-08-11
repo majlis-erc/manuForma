@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
       <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
+      <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
       <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
@@ -48,6 +49,7 @@
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
+               <url></url>
             </response>
          </xf:instance>
          <xf:instance id="i-insert-elements">
@@ -149,6 +151,7 @@
             <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
+               <xf:load value="instance('i-submission')//*:url"></xf:load>
             </xf:action>
             <xf:action ev:event="xforms-submit-error">
                <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email
@@ -160,7 +163,7 @@
    <body>
       <header>
          <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/">manuForma</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="container-fluid"><a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/exist/apps/manuForma/"><object width="200" height="40" class="logo-filtered" data="resources/images/hn/logo-manuForma-white.svg" type="image/svg+xml"></object></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav me-auto mb-2 mb-md-0">
                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="/exist/apps/manuForma/">Home</a></li>
                      <li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -176,7 +179,7 @@
       </header>
       <div class="container-fluid">
          <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                <div class="position-sticky pt-3">
                   <ul class="nav flex-column">
                      <li class="nav-item">
@@ -212,7 +215,7 @@
                   </ul>
                </div>
             </nav>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-dark">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                   <h1 class="h2">
                      Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"></xf:output></h1>
@@ -232,7 +235,10 @@
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
                            </xf:trigger>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-github" appearance="minimal"><xf:label> Submit to GitHub </xf:label></xf:submit>
+                           <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label> Submit to GitHub </xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="changeElementUnHide"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
                            <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
@@ -325,19 +331,22 @@
                         <div class="input-group mb-3">
                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                            </xf:trigger><xf:input ref="." class="form-control"><xf:label>What did you change? be concise </xf:label></xf:input></div>
-                        <div class="input-group mb-3 indent"><xf:select ref="@who" class="form-control"><xf:label>Select your name.</xf:label><xf:item><xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
+                        <div class="input-group mb-3 indent">
+                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="@who" class="form-control"><xf:label>Select your name.</xf:label><xf:item><xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
                               </xf:item>
                               <xf:item><xf:label>Gregor Schwarb</xf:label><xf:value>#gschwarb</xf:value>
                               </xf:item>
                               <xf:item><xf:label>Maximilian de Molière</xf:label><xf:value>#mmoliere</xf:value>
                               </xf:item>
                               <xf:item><xf:label>Nadine Urbiczek</xf:label><xf:value>#nurbiczek</xf:value>
-                              </xf:item></xf:select></div>
-                        <div class="input-group mb-3 indent"><xf:input ref="@when" class="form-control small"><xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label></xf:input></div>
-                        <div class="input-group mb-3 indent"><xf:input ref="@ref" class="form-control small"><xf:label>Your identifier (e.g. #msteinschneider): </xf:label></xf:input></div>
+                              </xf:item>
+                           </xf:select1>
+                        </div>
+                        <div class="input-group mb-3 indent"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="@when" class="form-control small"><xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label></xf:input></div>
+                        <div class="input-group mb-3 indent"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="@ref" class="form-control small"><xf:label>Your identifier (e.g. #msteinschneider): </xf:label></xf:input></div>
                         <hr />
                      </xf:repeat>
-                     <div class="input-group mb-3"><xf:input ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
+                     <div class="input-group mb-3"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
                   </xf:case>
                   <xf:case id="view-data-entry">
                      <xf:group ref="instance('i-rec')">
@@ -349,6 +358,29 @@
                   </xf:case>
                </xf:switch>
             </main>
+            <xf:switch class="lookupSwitch" style="width:.5em;">
+               <xf:case id="changeElementHide" style="display:none;"></xf:case>
+               <xf:case id="changeElementUnHide">
+                  <div class="lookupDisplay changeElement">
+                     <div class="fileLoading">
+                        <h4 class="h6">What did you change?</h4>
+                        <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
+                        <div class="mb-3">
+                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                 <xf:send submission="s-github"></xf:send>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Cancel</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                 <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"></xf:setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </div>
+                     </div>
+                  </div>
+               </xf:case>
+            </xf:switch>
          </div>
       </div>
    </body>
