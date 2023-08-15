@@ -20,45 +20,71 @@ if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{request:get-uri()}/"/>
     </dispatch>
-    
-(: Log users in or out :)
-else if ($exist:resource = "login") then 
-    (util:declare-option("exist:serialize", "method=json media-type=application/json"),
-    try {
-        let $loggedIn := login:set-user($config:login-domain, (), true())
-        let $user := request:get-attribute($config:login-domain || ".user")
-        return
-           if ($user and sm:list-users() = $user) then
-                <response>
-                    <user>{$user}</user>
-                    <logged>{$loggedIn}</logged>
-                </response>
-            else if($userParam and sm:list-users() = $userParam) then
-                <response>
-                    <user>{$user}</user>
-                    <logged>{$loggedIn}</logged>
-                </response>
-            else if($logout = 'true') then 
-               <response>
-                    <success>You have been logged out.</success>
-                </response> 
-            else (
-                <response>
-                    <fail>Wrong user or password user: {$user} userParam: {$userParam}</fail>
-                </response>
-            )
-    } catch * {
-        <response>
-            <fail>{$err:description}</fail>
-        </response>
-    })
-    
-    
+
+else if ($exist:resource = "form.xq") then (
+    login:set-user("org.exist.login", (), true()),
+    let $user := sm:id()/sm:id/sm:real/sm:username/string(.)
+    let $form := substring-after($exist:path,'/form/')
+    return
+        if($user != 'guest') then 
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <cache-control cache="no"/>
+            </dispatch>
+       else 
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+              <redirect url="index.html?login=required"/>
+            </dispatch>
+)
+
+(:
+ : Login a user via AJAX. Just returns a 401 if login fails.
+ :)
+else if ($exist:resource eq 'login') then
+    let $loggedIn := login:set-user("org.exist.login", (), false())
+    let $user := request:get-attribute("org.exist.login.user")
+    return (
+        util:declare-option("exist:serialize", "method=json"),
+        try {
+            <status xmlns:json="http://www.json.org" message="{if($logout = 'true') then 'Logged out' else if($user) then 'Success' else 'Fail'}">
+                <user>{$user}</user>
+                {
+                    if ($user) then (
+                        for $item in sm:get-user-groups($user) return <groups json:array="true">{$item}</groups>,
+                        <dba>{sm:is-dba($user)}</dba>
+                    ) else
+                        ()
+                }
+            </status>
+        } catch * {
+            response:set-status-code(401),
+            <status>{$err:description}</status>
+        }
+    )
+else if ($exist:path = "/admin") then (
+    login:set-user("org.exist.login", (), true()),
+    let $user := request:get-attribute("org.exist.login.user")
+    let $route := request:get-parameter("route","")
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="index.html">
+                <cache-control cache="no"/>
+                <set-header name="Cache-Control" value="no-cache"/>
+            </forward>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql"/>
+             </view>
+     		<error-handler>
+     			<forward url="{$exist:controller}/error-page.html" method="get"/>
+     			<forward url="{$exist:controller}/modules/view.xql"/>
+     		</error-handler>
+        </dispatch>
+)   
+
 (: Check user credentials :)
 else if ($exist:resource = "userInfo") then 
     ((:util:declare-option("exist:serialize", "method=json media-type=application/json"),:)
      let $currentUser := 
-                if(request:get-attribute($config:login-domain || ".user")) then request:get-attribute($config:login-domain || ".user") 
+                if(request:get-attribute("org.exist.login.user.user")) then request:get-attribute("org.exist.login.user.user") 
                 else(: xmldb:get-current-user():) sm:id()/sm:id/sm:real/sm:username/string(.)
     let $group :=  
                 if($currentUser) then 
@@ -74,8 +100,7 @@ else if ($exist:resource = "userInfo") then
                 <description>{sm:get-account-metadata($currentUser, xs:anyURI("http://exist-db.org/security/description"))}</description>
                 </message>
             </response>)    
-   )
-   
+   )   
 else if ($exist:path eq "/") then
     (: forward root path to index.xql :)
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">

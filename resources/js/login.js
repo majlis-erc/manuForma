@@ -61,62 +61,55 @@ $("#newUserForm").submit(function( event ) {
   var form = $(this);
   var url = $(this).attr('action');
   var data = ConvertFormToJSON(form);
-  
   $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
   });
   $.post(url, JSON.stringify(data), function(data) {
    var message = $(data).attr('message')
-   // Return success 
    if(message == 'success') {
       $('#responseBody').html(message);
-      //window.location.reload();
    } else {
-        alert('This username already exists.');
-      //$('#responseBody').html('Username already exists.');
+      alert('This username already exists.');
       $(form)[0].reset();
     }
   }).fail( function(jqXHR, textStatus, errorThrown) {
-    // do fail notice
     console.log(textStatus);
   });
   //end post
 });
 
-//loginModal
-$("#loginForm").submit(function( event ) {
+$("#resetForm").submit(function( event ) {
   event.preventDefault();
   var form = $(this);
   var url = $(this).attr('action');
-  var formData = form.serialize();
-  $.get(url, formData, function(data) {
-    console.log(data);
-    if (data.fail) {
-        $('#loginResponseBody').html('Wrong user or password');
-        $(form)[0].reset();
-        console.log(data);
-    } else {
-       $('#loginResponseBody').html('Success.');
-       window.location.reload();
-       console.log(data);
+  var data = ConvertFormToJSON(form);
+  $.ajaxSetup({
+    contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, JSON.stringify(data), function(data) {
+   var message = $(data).attr('message')
+   if(message == 'success') {
+      $('#resetResponseBody').html(message);
+   } else {
+      alert('Error');
+      $(form)[0].reset();
     }
   }).fail( function(jqXHR, textStatus, errorThrown) {
-    // do fail notice
     console.log(textStatus);
   });
   //end post
 });
 
 //loginModal
+/* 
 $('#logout').click(function(event) {
   event.preventDefault();
   var url = $(this).attr('href');
   $.get(url, function(data) {
     window.location.reload()
  });
-  //end post
 });
-
+*/
 /* 
 $('.authenticate').click(function(event) {
   event.preventDefault();
