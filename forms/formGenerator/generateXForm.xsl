@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.33 Beta 
+        Version: 1.34 Beta 
             -1.22 marks a major redesign
         
 
@@ -624,7 +624,7 @@
                             <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
-                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change[1]" position="before"/>
+                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
                         </xf:action>
@@ -633,7 +633,15 @@
                     
                     <xf:submission id="s-load-template-search" method="post" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"/>
-                        <xf:message level="modeless" ev:event="xforms-submit-done"> Data Loaded! </xf:message>
+                        <xf:action ev:event="xforms-submit-done">
+                        <xf:message level="modeless"> Data Loaded! </xf:message>
+                            <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
+                            <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
+                            <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
+                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
+                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
+                        </xf:action>    
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
@@ -999,52 +1007,6 @@
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-admin">
-                                    <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full">
-                                        <xf:label><i class="bi bi-plus"/> Add change</xf:label>
-                                        <xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change" position="before"/>
-                                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
-                                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
-                                    </xf:trigger>
-                                    <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
-                                        <!-- <change who="#" when=""/> -->
-                                        <div class="input-group mb-3">
-                                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline">
-                                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/></xf:label>
-                                                <xf:delete ev:event="DOMActivate" ref="."/>
-                                            </xf:trigger>
-                                            <xf:input ref="." class="form-control">
-                                                <xf:label>What did you change? be concise </xf:label>
-                                            </xf:input>
-                                        </div>
-                                        <div class="input-group mb-3 indent">    
-                                            <xf:select1  xmlns="http://www.w3.org/2002/xforms" ref="@who" class="form-control">
-                                                <xf:label>Select your name.</xf:label>
-                                                <xf:item>
-                                                    <xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
-                                                </xf:item>
-                                                <xf:item>
-                                                    <xf:label>Gregor Schwarb</xf:label><xf:value>#gschwarb</xf:value>
-                                                </xf:item>
-                                                <xf:item>
-                                                    <xf:label>Maximilian de Molière</xf:label><xf:value>#mmoliere</xf:value>
-                                                </xf:item>
-                                                <xf:item>
-                                                    <xf:label>Nadine Urbiczek</xf:label><xf:value>#nurbiczek</xf:value>
-                                                </xf:item>
-                                            </xf:select1>
-                                        </div>                                         
-                                        <div class="input-group mb-3 indent">
-                                            <xf:input  xmlns="http://www.w3.org/2002/xforms" ref="@when" class="form-control small">
-                                                <xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label>
-                                            </xf:input>
-                                        </div>
-                                        <div class="input-group mb-3 indent">
-                                            <xf:input  xmlns="http://www.w3.org/2002/xforms" ref="@ref" class="form-control small">
-                                                <xf:label>Your identifier (e.g. #msteinschneider): </xf:label>
-                                            </xf:input>
-                                        </div>
-                                        <hr/>
-                                    </xf:repeat>
                                     <div class="input-group mb-3">
                                         <xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control">
                                             <xf:label>URI: </xf:label>
@@ -2649,7 +2611,7 @@
                             <xsl:variable name="lookup" select="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]"/>
                             <lookup>
                                 <xsl:copy-of select="$lookup/@*"/>
-                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup/@formURL,'/')[last()])"/>
+                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup[1]/@formURL,'/')[last()])"/>
                             </lookup> 
                         </xsl:if>
                     </xsl:when>
