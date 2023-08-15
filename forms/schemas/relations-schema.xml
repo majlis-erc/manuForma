@@ -77,7 +77,7 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
-                    <moduleRef key="core" include="bibl citedRange date desc gloss ptr"/>
+                    <moduleRef key="core" include="bibl citedRange date desc gloss quote ptr title"/>
                     <moduleRef key="linking" include="ab"/>
                     <moduleRef key="header" include="idno"/>
                     <moduleRef key="msdescription" include="msDesc"/>
@@ -99,48 +99,31 @@ End license statement: do not remove -->
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="type" mode="change"/>
-                            <attDef ident="subtype" mode="change"/>
-                            <attDef ident="xml:id" mode="change"/>
-                            <attDef ident="resp" mode="change"/>
+                            <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
+                            </attDef>
+                            <attDef ident="subtype" mode="change">
+                                <gloss>Subtype</gloss>
+                            </attDef>
+                            <attDef ident="xml:id" mode="change">
+                                <gloss>Identifier</gloss>
+                            </attDef>
+                            <attDef ident="resp" mode="change">
+                                <gloss>Responsible team member</gloss>
+                            </attDef>
                         </attList>
                         <content>
-                            <elementRef key="idno"/>
+                            <!--<elementRef key="idno"/>-->
                             <elementRef key="listRelation"/>
                             <elementRef key="bibl"/>
                         </content>
                     </elementSpec>
 
-                    <elementSpec ident="idno" mode="change">
-                        <gloss>*Number of Relation in this source &lt;idno/&gt;</gloss>
-                        <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.global.rendition" mode="delete"/>
-                            <memberOf key="att.global.linking" mode="delete"/>
-                            <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/>
-                            <memberOf key="att.global.change" mode="delete"/>
-                            <memberOf key="att.global.responsibility" mode="delete"/>
-                            <memberOf key="att.global.source" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.datable.w3c" mode="delete"/>
-                            <memberOf key="att.datable.iso" mode="delete"/>
-                            <memberOf key="att.datable.custom" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
-                        </classes>
-                        <attList>
-                            <attDef ident="type" mode="change"/>
-                        </attList>
-                        <content>
-                            <textNode/>
-                        </content>
-                    </elementSpec>
-                    <!--                    -->
-
 
                     <elementSpec ident="desc" mode="change">
-                        <gloss>*Relation Description &lt;desc/&gt;</gloss>
+                        <desc>Describe the relation and pay attention to the Note and Transcription fields – the other fields are to be filled out if they are relevant to the relation.</desc>
+                        <gloss>*Relation Description</gloss>
+                        <gloss type="tei">&lt;desc&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -155,15 +138,19 @@ End license statement: do not remove -->
                         </classes>
                         <content>
                             <elementRef key="gloss"/>
+                            <elementRef key="quote"/>
                             <elementRef key="persName"/>
                             <elementRef key="placeName"/>
                             <elementRef key="date"/>
-                            <elementRef key="objectName"/>
+                            <elementRef key="idno"/>
+                            <elementRef key="title"/>
                         </content>
                     </elementSpec>
 
                     <elementSpec ident="listRelation" mode="change">
-                        <gloss>*Relation Container (2/3) &lt;listRelation/&gt;</gloss>
+                        <gloss>This field signifies that you are describing a relation between to records.</gloss>
+                        <gloss>*Relation</gloss>
+                        <gloss type="tei"> &lt;listRelation/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -180,9 +167,11 @@ End license statement: do not remove -->
                             <elementRef key="relation"/>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="gloss" mode="change">
-                        <gloss>*Text Block &lt;gloss/&gt;</gloss>
+                        <desc>Give a brief account of the relation you are describing, including the names of all the persons, places and objects involved.</desc>
+                        <gloss>*Note</gloss>
+                        <gloss type="tei"> &lt;gloss/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -203,8 +192,44 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
 
+                    <elementSpec ident="quote" mode="change">
+                        <desc>Transcribe relevant portion of the text.</desc>
+                        <gloss>*Transcription</gloss>
+                        <gloss type="tei">&lt;quote&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.ascribed.directed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="who" mode="delete"/>
+                            <attList>
+                                <attDef ident="lang" mode="change">
+                                    <gloss>Language</gloss>
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="ar">
+                                            <gloss>Arabic</gloss>
+                                        </valItem>
+                                        <valItem mode="add" ident="he">
+                                            <gloss>Hebrew</gloss>
+                                        </valItem>
+                                        <valItem mode="add" ident="en">
+                                            <gloss>English</gloss>
+                                        </valItem>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </attList>
+                    </elementSpec>
+
                     <elementSpec ident="persName" mode="change">
-                        <gloss>Person &lt;persName/&gt;</gloss>
+                        <desc>Look up the person records in the database. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
+                        <gloss>Person</gloss>
+                        <gloss type="tei">&lt;persName&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -229,14 +254,18 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change"/>
+                            <attDef ident="ref" mode="change" rend="restricted">
+                                <gloss>Identifier</gloss>
+                            </attDef>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="placeName" mode="change">
-                        <gloss>Place &lt;placeName/&gt;</gloss>
+                        <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one.</desc>
+                        <gloss>Place name</gloss>
+                        <gloss type="tei">&lt;placeName/&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
@@ -261,52 +290,66 @@ End license statement: do not remove -->
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change"/>
+                            <attDef ident="ref" mode="change" rend="restricted">
+                                <gloss>Identifier</gloss>
+                            </attDef>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                         </attList>
                     </elementSpec>
 
-                    <elementSpec ident="objectName" mode="change">
-                        <gloss>Manuscript or Text &lt;objectName/&gt;</gloss>
+                    <elementSpec ident="title" mode="change">
+                        <gloss>Canonical title</gloss>
+                        <gloss type="tei">&lt;title&gt;</gloss>
+                        <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record!</desc>
                         <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.global.rendition" mode="delete"/>
-                            <memberOf key="att.global.linking" mode="delete"/>
-                            <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/>
-                            <memberOf key="att.global.change" mode="delete"/>
-                            <memberOf key="att.global.responsibility" mode="delete"/>
-                            <memberOf key="att.global.source" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.datable.w3c" mode="delete"/>
-                            <memberOf key="att.datable.iso" mode="delete"/>
-                            <memberOf key="att.datable.custom" mode="delete"/>
-                            <memberOf key="att.editLike" mode="delete"/>
-                            <memberOf key="att.personal" mode="delete"/>
-                            <memberOf key="att.naming" mode="delete"/>
-                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
                             <textNode/>
                         </content>
                         <attList>
+                            <attDef ident="level" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change"/>
-                            <attDef ident="type" mode="change">
-                                <valList type="closed">
-                                    <valItem ident="manuscript"/>
-                                    <valItem ident="text"/>
-                                </valList>
+                            <attDef ident="xml:lang" mode="delete">
                             </attDef>
-                            <attDef ident="role" mode="delete"/>
-                            <attDef ident="nymRef" mode="delete"/>
-                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="ref" mode="change">
+                                <gloss>Text identifier</gloss>
+                            </attDef>
+                            <attDef ident="cert" mode="delete"></attDef>
                         </attList>
                     </elementSpec>
                     
+                    <elementSpec ident="idno" mode="change">
+                        <gloss>Shelfmark</gloss>
+                        <gloss type="tei">&lt;idno&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the records in the database to identify the shelfmark. Try different spellings!</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content><attList>
+                            <attDef ident="level" mode="delete"/>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete">
+                            </attDef>
+                            <attDef ident="ref" mode="change">
+                                <gloss>Identifier</gloss>
+                            </attDef>
+                            <attDef ident="cert" mode="delete"></attDef>
+                        </attList>
+                    </elementSpec>
+
                     <elementSpec ident="date" mode="change">
-                        <gloss>Date &lt;date/&gt;</gloss>
+                        <desc>Fill in the date in CE.</desc>
+                        <gloss>Date</gloss>
+                        <gloss type="tei">&lt;date&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -323,17 +366,19 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attRef name="when" class="att.datable.w3c"/>
-                            <attRef name="notBefore" class="att.datable.w3c"/>
-                            <attRef name="notAfter" class="att.datable.w3c"/>
-                            <attRef name="source" mode="delete"/>
+                            <attDef ident="when" class="att.datable.w3c"/>
+                            <attDef ident="notBefore" class="att.datable.w3c"/>
+                            <attDef ident="notAfter" class="att.datable.w3c"/>
+                            <attDef ident="source" mode="delete"/>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="relation" mode="change">
-                        <gloss>*Relation Container (3/3) &lt;relation/&gt;</gloss>
+                        <gloss>*Description of relation</gloss>
+                        <gloss type="tei">&lt;relation&gt;</gloss>
                         <desc xml:lang="en">Specify the relationship between the person and another person or object. Choose the kind of relation from
-                            the list provided in the "name" attributea and add the URIs of the respective records.</desc>
+                            the list provided. Distinguish between the Subject of the relation and the Object. In case the relation ends with the word
+                            "with each other" only fill the names in the Mutual field.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -346,81 +391,269 @@ End license statement: do not remove -->
                             <elementRef key="desc"/>
                         </content>
                         <attList>
-                            <attDef ident="mutual" mode="change" usage="opt"/>
-                            <attDef ident="active" mode="change" usage="opt"/>
-                            <attDef ident="passive" mode="change" usage="opt"/>
-                            <attDef ident="source" mode="change" usage="opt"/>
-                            <attDef ident="type" mode="replace" usage="req">
+                            <attDef ident="mutual" mode="change" usage="opt">
+                                <gloss>Mutual</gloss>
+                            </attDef>
+                            <attDef ident="active" mode="change" usage="opt">
+                                <gloss>Subject</gloss>
+                            </attDef>
+                            <attDef ident="passive" mode="change" usage="opt">
+                                <gloss>Object</gloss>
+                            </attDef>
+                            <attDef ident="source" mode="change" usage="opt">
+                                <gloss>Source ID</gloss>
+                            </attDef>
+                            <attDef ident="name" mode="replace" usage="req">
+                                <gloss>Choose type of relation</gloss>
                                 <valList type="closed">
-                                    <valItem ident="majlis:wifeOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:husbandOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:motherInLawOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:fatherInLawOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:sonInLawOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:daughterInLawOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:fatherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:grandchildOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:granddaughterOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:grandfatherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:grandmotherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:grandsonOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:greatgrandfatherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:sisterOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:sonOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:motherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:nephewOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:nieceOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:stepFamilyRelationship"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:siblingOf"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:uncleOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:daughterOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:brotherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:kinOf"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:ancestorOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:cousinOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:claimedFamilyRelationship"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:familyOf"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:disciplinaryAssociate"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:followerOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:studentOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:refuterOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:adresseeOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:citedNegatively"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:citedPositively"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:cited"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:correspondedWith"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:debatedWith"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:teacherOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:assistantOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:acquaintedWith"><desc>@mutual: Person.</desc></valItem>
-                                    <valItem ident="majlis:patronOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:successorOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:predecessorOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:enemyOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:friendOf"><desc>@active: Person, @passive: Person.</desc></valItem>
-                                    <valItem ident="majlis:affiliatedWith"><desc>@active: Person, @passive: Place.</desc></valItem>
-                                    <valItem ident="majlis:bornAt"><desc>@active: Person, @passive: Place.</desc></valItem>
-                                    <valItem ident="majlis:diedAt"><desc>@active: Person, @passive: Place.</desc></valItem>
-                                    <valItem ident="majlis:relationWith"><desc>@active: Person, @passive: Place.</desc></valItem>
-                                    <valItem ident="majlis:literaryRelationWith"><desc>@active: Person, @passive: Place.</desc></valItem>
-                                    <valItem ident="majlis:attended"><desc>@active: Person,@ passive: ?.</desc></valItem>
-                                    <valItem ident="majlis:organized"><desc>@active: Person,@ passive: ?.</desc></valItem>
-                                    <valItem ident="majlis:dictated"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:refuted"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:commentatorOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:translatorOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:adapterOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:mulaḫḫiṣOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:muḫtaṣirOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:mujmilOf"><desc>@active: Person, @passive: Text.</desc></valItem>
-                                    <valItem ident="majlis:mentionedIn"><desc>@active: Person, @passive: Text.</desc></valItem>
+                                    <valItem ident="majlis:wifeOf">
+                                        <gloss>is the wife of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:husbandOf">
+                                        <gloss>is the husband of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:motherInLawOf">
+                                        <gloss>is the mother-in-law of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:fatherInLawOf">
+                                        <gloss>is the father-in-law of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:sonInLawOf">
+                                        <gloss>is the son-in-law of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:daughterInLawOf">
+                                        <gloss>is the daughter-in-law of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:fatherOf">
+                                        <gloss>is the father of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:motherOf">
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:grandsonOf">
+                                        <gloss>is the grandson of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:granddaughterOf">
+                                        <gloss>is the granddaughter of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:grandfatherOf">
+                                        <gloss>is the grandfather of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:grandmotherOf">
+                                        <gloss>is the grandmother of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:greatgrandfatherOf">
+                                        <gloss>is the greatgrandfather of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:sisterOf">
+                                        <gloss>is the sister of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:sonOf">
+                                        <gloss>is the son of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:nephewOf">
+                                        <gloss>is the nephew of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:nieceOf">
+                                        <gloss>is the niece of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:stepFamilyRelationship">
+                                        <gloss>have a family relationship with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:uncleOf">
+                                        <gloss>is the uncle of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:daughterOf">
+                                        <gloss>is the daughter of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:brotherOf">
+                                        <gloss>is the brother of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:kinOf">
+                                        <gloss>are kin of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:ancestorOf">
+                                        <gloss>is the ancestor of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:cousinOf">
+                                        <gloss>is the cousin of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:claimedFamilyRelationship">
+                                        <gloss>have claimed a family relationship with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:familyOf">
+                                        <gloss>are the family of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:disciplinaryAssociate">
+                                        <gloss>are the discilinary associates of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:followerOf">
+                                        <gloss>is the follower of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:studentOf">
+                                        <gloss>is the student of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:refuterOf">
+                                        <gloss>is the refuter of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:adresseeOf">
+                                        <gloss>is the addressee of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:citedNegatively">
+                                        <gloss>cited negatively</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:citedPositively">
+                                        <gloss>cited positively</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:cited">
+                                        <gloss>cited</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:correspondedWith">
+                                        <gloss>corresponded with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:debatedWith">
+                                        <gloss>debated with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:teacherOf">
+                                        <gloss>is the teacher of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:assistantOf">
+                                        <gloss>is the assistant of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:acquaintedWith">
+                                        <gloss>are acquainted with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:patronOf">
+                                        <gloss>is the patron of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:successorOf">
+                                        <gloss>is the successor of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:predecessorOf">
+                                        <gloss>is the predecessor of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:enemyOf">
+                                        <gloss>is the enemy of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:friendOf">
+                                        <gloss>is the friend of</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:affiliatedWith">
+                                        <gloss>(Person) is affiliated with (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:bornAt">
+                                        <gloss>(Person) is born at (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:diedAt">
+                                        <gloss>(Person) has died at (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:relationWith">
+                                        <gloss>(Person) has a relation with (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:literaryRelationWith">
+                                        <gloss>(Person) has a literary relation with (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:attended">
+                                        <gloss>attended</gloss>
+                                        <desc>@active: Person,@ passive: ?.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:organized">
+                                        <gloss>organized</gloss>
+                                        <desc>@active: Person,@ passive: ?.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:dictated">
+                                        <gloss>(Person) dictated (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:refuted">
+                                        <gloss>(Person) refuted (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:commentatorOf">
+                                        <gloss>(Person) is commentator of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:translatorOf">
+                                        <gloss>(Person) is translator of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:adapterOf">
+                                        <gloss>(Person) is adapter of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mulaḫḫiṣOf">
+                                        <gloss>(Person) is mulaḫḫiṣ of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:muḫtaṣirOf">
+                                        <gloss>(Person) is muḫtaṣir of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mujmilOf">
+                                        <gloss>(Person) is mujmil of (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mentionedIn">
+                                        <gloss>(Person) is mentioned in (text)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
                                 </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="bibl" mode="change">
-                        <gloss>*Reference &lt;bibl/&gt;</gloss>
+                        <desc>Add a bibliographic reference to the source you are describing.</desc>
+                        <gloss>*Reference</gloss>
+                        <gloss type="tei">&lt;bibl&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -433,18 +666,24 @@ End license statement: do not remove -->
                             <elementRef key="ptr"/>
                         </content>
                         <attList>
-                            <attRef name="xml:id" mode="delete"/>
-                            <attRef name="type" mode="change">
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <gloss>Type of source</gloss>
                                 <valList type="closed">
-                                    <valItem ident="primary"/>
-                                    <valItem ident="secondary"/>
+                                    <valItem ident="primary">
+                                        <gloss>Primary source</gloss>
+                                    </valItem>
+                                    <valItem ident="secondary">
+                                        <gloss>Secondary source</gloss>
+                                    </valItem>
                                 </valList>
-                            </attRef>
+                            </attDef>
                         </attList>
                     </elementSpec>
 
                     <elementSpec ident="ptr" mode="change">
-                        <gloss>*Source Identifier &lt;ptr/&gt;</gloss>
+                        <gloss>*Source Identifier</gloss>
+                        <gloss type="tei">&lt;ptr&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -460,7 +699,9 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="citedRange" mode="change">
-                        <gloss>*Pages, Folios, or Columns &lt;citedRange/&gt;</gloss>
+                        <desc>Specify which pages, columns, etc. you are refering to.</desc>
+                        <gloss>*Referenced section(s)</gloss>
+                        <gloss type="tei">&lt;citedRange&gt;</gloss>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.pointing" mode="delete"/>
@@ -472,11 +713,18 @@ End license statement: do not remove -->
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
                             <attDef ident="unit" mode="change">
+                                <gloss>Choose</gloss>
                                 <valList type="closed">
-                                <valItem ident="p"/>
-                                <valItem ident="fol"/>
-                                <valItem ident="col"/>
-                            </valList>
+                                    <valItem ident="page">
+                                        <gloss>Page</gloss>
+                                    </valItem>
+                                    <valItem ident="folio">
+                                        <gloss>Page</gloss>
+                                    </valItem>
+                                    <valItem ident="column">
+                                        <gloss>Column</gloss>
+                                    </valItem>
+                                </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
