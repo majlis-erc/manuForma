@@ -245,7 +245,7 @@
                            </xf:action>
                         </xf:trigger>
                      </li>
-                     <xf:repeat ref="instance('i-rec')//*:msDesc/*:physDesc/*:objectDesc/*:ab/*:listBibl[position() &gt; 1]" id="navRepeatreproductions">
+                     <xf:repeat ref="instance('i-rec')//*:msDesc/*:additional/*:surrogates/*:listBibl[position() &gt; 1]" id="navRepeatreproductions">
                         <li class="nav-item">
                            <xf:trigger appearance="minimal" class="nav-link"><xf:label>Reproductions  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
@@ -633,29 +633,6 @@
                      </div>
                   </xf:case>
                   <xf:case id="view-admin">
-                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add change</xf:label><xf:insert ev:event="DOMActivate" ref="instance('i-rec')//*:revisionDesc/child::*" at="last()" origin="instance('i-admin')//*:change" position="before"></xf:insert>
-                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
-                        <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
-                     </xf:trigger>
-                     <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change">
-                        <div class="input-group mb-3">
-                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
-                           </xf:trigger><xf:input ref="." class="form-control"><xf:label>What did you change? be concise </xf:label></xf:input></div>
-                        <div class="input-group mb-3 indent">
-                           <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="@who" class="form-control"><xf:label>Select your name.</xf:label><xf:item><xf:label>Ronny Vollandt</xf:label><xf:value>#rvollandt</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>Gregor Schwarb</xf:label><xf:value>#gschwarb</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>Maximilian de Molière</xf:label><xf:value>#mmoliere</xf:value>
-                              </xf:item>
-                              <xf:item><xf:label>Nadine Urbiczek</xf:label><xf:value>#nurbiczek</xf:value>
-                              </xf:item>
-                           </xf:select1>
-                        </div>
-                        <div class="input-group mb-3 indent"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="@when" class="form-control small"><xf:label>When did you make your changes? (Format: YYYY-MM-DD)</xf:label></xf:input></div>
-                        <div class="input-group mb-3 indent"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="@ref" class="form-control small"><xf:label>Your identifier (e.g. #msteinschneider): </xf:label></xf:input></div>
-                        <hr />
-                     </xf:repeat>
                      <div class="input-group mb-3"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
                   </xf:case>
                   <xf:case id="view-data-entry">
