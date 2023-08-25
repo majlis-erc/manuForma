@@ -22,11 +22,11 @@
    <body>
       <h2 class="h3 mainElement">Reproductions</h2>
       <p class="alert alert-light hint">Add information on reproductions, such as digital images, microfilms or other types.</p>
-      <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(///*:msDesc/*:physDesc/*:objectDesc/*:ab/*:listBibl)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:msDesc/*:physDesc/*:objectDesc/*:ab/*:listBibl[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-reproductions-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+      <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(///*:msDesc/*:additional/*:surrogates/*:listBibl)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:msDesc/*:additional/*:surrogates/*:listBibl[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-reproductions-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = $elementName][instance('i-reproductions-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
       </xf:trigger>
-      <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:msDesc/*:physDesc/*:objectDesc/*:ab/*:listBibl[position() = instance('i-repeatIndex')/index]" id="listBibl-root">
+      <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:msDesc/*:additional/*:surrogates/*:listBibl[position() = instance('i-repeatIndex')/index]" id="listBibl-root">
          <div class="accordion" id="elementGroup">
             <xf:repeat id="reproductionsGrpRepeatLevel11" ref="./*[self::*:bibl]">
                <div class="accordion-item">

@@ -43,7 +43,7 @@
       <availableAtts elementName="bibl"/>
       <childElements>
          <child>
-            <element ident="term"
+            <element ident="title"
                      label="Type of reproduction"
                      minOccurs="1"
                      maxOccurs="1"
@@ -61,18 +61,23 @@
          </child>
       </childElements>
    </bibl>
-   <term ident="term"
-         elementName="term"
-         elementLabel="Type of reproduction"
-         path="/*:listBibl/*:bibl/*:term"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;term/&gt;">
+   <title ident="title"
+          elementName="title"
+          elementLabel="Type of reproduction"
+          path="/*:listBibl/*:bibl/*:title"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;title/&gt;">
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>Specify the reproduction type. Distinguish between restricted (consultation on premises only) and unrestricted access.
                             Other types may include: microfilms, microfiche, photostats/photocopies, or photographs.</desc>
-      <availableAtts elementName="term"/>
+      <availableAtts elementName="title"/>
       <controlledValues>
-         <element xmlns="" ident="term">
+         <element xmlns="" ident="title">
             <valList type="closed">
                <valItem ident="Microfilm"/>
                <valItem ident="Microfiche"/>
@@ -85,7 +90,7 @@
       <childElements>
          <child/>
       </childElements>
-   </term>
+   </title>
    <publisher ident="publisher"
               elementName="publisher"
               elementLabel="Source of reproduction"
@@ -93,7 +98,7 @@
               currentLevel="3"
               popup="3"
               teiElement="&lt;publisher/&gt;">
-      <desc> For non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
+      <desc>For non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
       <availableAtts elementName="publisher"/>
       <controlledValues>
          <element xmlns="" ident="publisher">

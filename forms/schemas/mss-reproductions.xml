@@ -77,24 +77,20 @@ End license statement: do not remove -->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-                    <moduleRef key="core" include="bibl listBibl ptr publisher term"/>
-                    <moduleRef key="linking" include="ab"/>
-                    
-                    <elementSpec ident="ab" module="linking" mode="change">
+                    <moduleRef key="core" include="bibl listBibl ptr publisher title"/>
+                    <moduleRef key="msdescription" include="surrogates"/>
+
+                    <elementSpec ident="surrogates" module="msdescription" mode="change">
                         <attList>
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
                             <attDef ident="change" mode="delete"/>
                             <attDef ident="copyOf" mode="delete"/>
                             <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="decls" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="hand" mode="delete"/>
-                            <attDef ident="subtype" mode="delete"/>
                             <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
-                            <attDef ident="part" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
                             <attDef ident="rend" mode="delete"/>
@@ -103,12 +99,6 @@ End license statement: do not remove -->
                             <attDef ident="select" mode="delete"/>
                             <attDef ident="source" mode="delete"/>
                             <attDef ident="style" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="type" mode="delete">
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="reproductions"/>
-                                </valList>
-                            </attDef>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete"/>
@@ -161,42 +151,59 @@ End license statement: do not remove -->
                             <attDef ident="source" mode="delete"/>
                         </attList>
                         <content>
-                            <elementRef key="term" minOccurrence="1" maxOccurrence="1"/>
+                            <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="publisher" minOccurrence="0" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
                         </content>
                     </elementSpec>
 
-                    <elementSpec ident="term" mode="change" module="core">
+                    <elementSpec ident="title" mode="change">
                         <gloss>Type of reproduction</gloss>
-                        <gloss type="tei">&lt;term&gt;</gloss>
+                        <gloss type="tei">&lt;title&gt;</gloss>
                         <desc>Specify the reproduction type. Distinguish between restricted (consultation on premises only) and unrestricted access.
                             Other types may include: microfilms, microfiche, photostats/photocopies, or photographs.</desc>
                         <classes mode="change">
-                            <memberOf key="att.global" mode="delete"/>
-                            <memberOf key="att.global.rendition" mode="delete"/>
-                            <memberOf key="att.global.linking" mode="delete"/>
-                            <memberOf key="att.global.analytic" mode="delete"/>
-                            <memberOf key="att.global.facs" mode="delete"/>
-                            <memberOf key="att.global.change" mode="delete"/>
-                            <memberOf key="att.global.responsibility" mode="delete"/>
-                            <memberOf key="att.global.source" mode="delete"/>
-                            <memberOf key="att.declaring" mode="delete"/>
-                            <memberOf key="att.pointing" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
                             <memberOf key="att.canonical" mode="delete"/>
-                            <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
                             <textNode/>
                         </content>
+                        <attList>
+                            <attDef ident="level" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="evidence" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
                     </elementSpec>
-
+                    
                     <elementSpec ident="publisher" mode="change" module="core">
                         <gloss>Source of reproduction</gloss>
                         <gloss type="tei">&lt;publisher&gt;</gloss>
-                        <desc> For non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
+                        <desc>For non-digital images, specify the institution where the reproduction is located in the Source of reproduction field. </desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.global.rendition" mode="delete"/>
