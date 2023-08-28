@@ -29,7 +29,7 @@
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:msDesc/*:msContents[position() = instance('i-repeatIndex')/index]" id="msContents-root">
          <div class="accordion" id="elementGroup">
             <div class="accordion-item">
-               <h2 class="accordion-header" id="heading1"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Summary of contents</button></h2>
+               <h2 class="accordion-header" id="heading1"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Summary of contents.</button></h2>
                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">
                      <div class="btn-group full-width" role="group">
@@ -517,13 +517,13 @@
                   <xf:switch xmlns="http://www.w3.org/2002/xforms">
                      <xf:case id="closedmsContentsGrpRepeatLevel21">
                         <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button collapsed">
-                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from,'–',./*:locus/@to,')')"></xf:output></xf:group>
+                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from, if (./*:locus/@to!='') then (,'–',@isbn) else (),').')"></xf:output></xf:group>
                               <xf:group ref=".[./*:title = '']"><xf:output value="'Detailed description of text unit: title, author, language, rubrics, etc.'"></xf:output></xf:group></xf:label><xf:toggle case="openmsContentsGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                      </xf:case>
                      <xf:case id="openmsContentsGrpRepeatLevel21">
                         <xf:trigger appearance="minimal" class="accordion-header"><xf:label class="accordion-button">
-                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from,'–',./*:locus/@to,')')"></xf:output></xf:group>
+                              <xf:group ref=".[./*:title != '']"><xf:output value="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from, if (./*:locus/@to!='') then (,'–',@isbn) else (),').')"></xf:output></xf:group>
                               <xf:group ref=".[./*:title = '']"><xf:output value="'Detailed description of text unit: title, author, language, rubrics, etc.'"></xf:output></xf:group></xf:label><xf:toggle case="closedmsContentsGrpRepeatLevel21" ev:event="DOMActivate"></xf:toggle>
                         </xf:trigger>
                         <div xmlns="http://www.w3.org/1999/xhtml" class="accordion-collapse">
