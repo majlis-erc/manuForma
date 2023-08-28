@@ -182,8 +182,8 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add information on reproductions, such as digital images, microfilms or other types.</formDesc>
             <elementGroups>
-                <group groupLabel="Reproduction" groupLabelConditionalElement="./*:term"
-                    groupLabelXPath="./*:term" groupNo="1" repeatable="yes">
+                <group groupLabel="Reproduction" groupLabelConditionalElement="./*:title"
+                    groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>
@@ -216,7 +216,7 @@
             <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="bibl" formName="titleBibl" lookupLabel="Look up manuscript"/>
             <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
             <elementGroups>
-                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style)" groupNo="1" repeatable="no">
+                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,', ',./*/@rend,', ',./*/@style,'.')" groupNo="1" repeatable="no">
                     <element xpath="tei:objectType"/>
                 </group>
                 <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
@@ -241,10 +241,10 @@
             <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/author.xhtml" elementName="author" formName="author" lookupLabel="Look up author"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
-                <group groupLabel="Summary of contents" groupNo="1">
+                <group groupLabel="Summary of contents." groupNo="1">
                     <element xpath="tei:summary"/>
                 </group>
-                <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from,'–',./*:locus/@to,')')" groupNo="2" repeatable="yes">
+                <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from, if (./*:locus/@to!='') then (,'–',@isbn) else (),').')" groupNo="2" repeatable="yes">
                     <element xpath="tei:msItem"/>
                 </group>
             </elementGroups>
@@ -258,7 +258,7 @@
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
                 <group groupLabel="Writing material of the manuscript." groupLabelConditionalElement="./*:material"
-                    groupLabelXPath="concat('Writing material of the manuscript: ',./*:material)" groupNo="1">
+                    groupLabelXPath="concat('Writing material of the manuscript: ',./*:material,'.')" groupNo="1">
                     <element xpath="tei:support"/>
                 </group>
                 <group groupLabel="Measurements of the page (number of folios, height and width)." groupNo="2">
@@ -445,7 +445,7 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.).</formDesc>
             <elementGroups>
-                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType)" groupNo="1" repeatable="yes">
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType,'.')" groupNo="1" repeatable="yes">
                     <element xpath="tei:item"/>
                 </group>
             </elementGroups>
