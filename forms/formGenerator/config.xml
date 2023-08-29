@@ -237,8 +237,7 @@
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <lookup elementName="persName" suppress="true"/>
-            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/author.xhtml" elementName="author" formName="author" lookupLabel="Look up author"/>
+            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="author" formName="persName" lookupLabel="Look up author"/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
                 <group groupLabel="Summary of contents." groupNo="1">
@@ -254,7 +253,7 @@
             <localSchema src="../schemas/mss-support.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="origPlace" lookupLabel="Look up places"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
             <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
             <elementGroups>
                 <group groupLabel="Writing material of the manuscript." groupLabelConditionalElement="./*:material"
@@ -423,6 +422,7 @@
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
             <formDesc>Describe script type(s) and hand(s) of the manuscript.</formDesc>
             <elementGroups>
                 <!--<group groupLabel="Definition of script." groupLabelConditionalElement="." groupLabelXPath="concat('Definition of script: ',./*/@script,' ',./*/@rend,' ',./*/@style)" groupNo="2"  repeatable="yes">
@@ -489,7 +489,7 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="origPlace" lookupLabel="Look up places"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
             <elementGroups>
                 <group groupLabel="Binding's origin, material, and dimensions." groupNo="1">
                     <element xpath="tei:decoNote"/>
@@ -560,7 +560,6 @@
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup elementName="title" suppress="true"/>
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
-            <lookup elementName="title" suppress="true"/>
             <elementGroups>
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
                     <element xpath="tei:bibl"/>
