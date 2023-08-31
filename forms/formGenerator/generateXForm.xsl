@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.35 Beta 
+        Version: 1.36 Beta 
             -1.22 marks a major redesign
         
 
@@ -1053,6 +1053,7 @@
                                 <div class="lookupDisplay changeElement">
                                     <div class="fileLoading">
                                         <h4 class="h6">What did you change?</h4>
+                                        <p>Write a one-sentence description of the changes you made to the file.</p>
                                         <div class="input-group mb-3 full-width">
                                             <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
                                         </div>
