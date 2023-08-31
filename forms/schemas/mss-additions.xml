@@ -81,11 +81,12 @@ End license statement: do not remove --><!--requirements:
                         except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription"
                         except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
-                    <moduleRef key="tei"/>
+                    <moduleRef key="linking" include="ab"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
                         <gloss>*Range of folios</gloss>
                         <gloss type="tei">&lt;locus&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the manuscript.</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios of a text within the
+                            manuscript.</desc>
                         <classes mode="replace">
                             <memberOf key="model.pPart.msdesc"/>
                             <memberOf key="att.pointing"/>
@@ -160,7 +161,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="bindingDesc" module="msdescription" mode="delete"/>
                     <elementSpec ident="decoNote" module="msdescription" mode="delete"/>
                     <elementSpec ident="depth" module="msdescription" mode="delete"/>
-                    
+
                     <elementSpec ident="lb" module="core" mode="delete"/>
                     <elementSpec ident="item" module="core" mode="change">
                         <gloss>Document</gloss>
@@ -170,6 +171,7 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="locus"/>
                             <elementRef key="persName"/>
                             <elementRef key="quote"/>
+                            <elementRef key="ab"/>
                             <elementRef key="note"/>
                         </content>
                         <attList>
@@ -250,7 +252,8 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Transcribe relevant portion of the text. Specify language and script of the document.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Transcribe relevant portion of the text. Specify language and script of the
+                            document.</desc>
                         <classes mode="change">
                             <memberOf key="att.ascribed.directed" mode="delete"/>
                         </classes>
@@ -313,6 +316,49 @@ End license statement: do not remove --><!--requirements:
                                 </valList>
                             </attDef>
                         </attList>
+                    </elementSpec>
+                    <elementSpec ident="ab" module="linking" mode="change">
+                        <gloss>Translation</gloss>
+                        <gloss type="tei">&lt;ab&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Provide a translation of the relevant portion of the text.</desc>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete">
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="translation">
+                                        <gloss>Translation</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                        <content>
+                            <elementRef key="textNode"/>
+                        </content>
                     </elementSpec>
                     <elementSpec ident="note" mode="change">
                         <gloss>Notes</gloss>
