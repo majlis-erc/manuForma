@@ -96,6 +96,11 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="ab"
+                     label="Translation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="note"
                      label="Notes"
                      minOccurs=""
@@ -158,7 +163,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;locus/&gt;">
-      <desc>Specify range of folios of a text within the manuscript.</desc>
+      <desc>Specify range of folios of a text within the
+                            manuscript.</desc>
       <availableAtts elementName="locus">
          <attDef attLabel="From" ident="from" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -224,7 +230,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;quote/&gt;">
-      <desc>Transcribe relevant portion of the text. Specify language and script of the document.</desc>
+      <desc>Transcribe relevant portion of the text. Specify language and script of the
+                            document.</desc>
       <availableAtts elementName="quote">
          <attDef attLabel="Script" ident="rend" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -256,6 +263,37 @@
          <child/>
       </childElements>
    </quote>
+   <ab ident="ab"
+       elementName="ab"
+       elementLabel="Translation"
+       path="/*:list/*:item/*:ab"
+       currentLevel="3"
+       popup="3"
+       teiElement="&lt;ab/&gt;">
+      <desc>Provide a translation of the relevant portion of the text.</desc>
+      <availableAtts elementName="ab"/>
+      <childElements>
+         <child>
+            <element ident="textNode"
+                     label="ab"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </ab>
+   <textNode ident="textNode"
+             elementName="textNode"
+             elementLabel="textNode"
+             path="/*:list/*:item/*:ab/*:textNode"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;textNode/&gt;">
+      <availableAtts elementName="textNode"/>
+      <childElements>
+         <child/>
+      </childElements>
+   </textNode>
    <note ident="note"
          elementName="note"
          elementLabel="Notes"
