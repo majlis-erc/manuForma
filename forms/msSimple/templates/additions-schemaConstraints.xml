@@ -271,29 +271,21 @@
        popup="3"
        teiElement="&lt;ab/&gt;">
       <desc>Provide a translation of the relevant portion of the text.</desc>
-      <availableAtts elementName="ab"/>
+      <availableAtts elementName="ab">
+         <attDef attLabel="type" ident="type" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="translation" attLabel="Translation"/>
+            </valList>
+         </attDef>
+      </availableAtts>
       <childElements>
-         <child>
-            <element ident="textNode"
-                     label="ab"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-         </child>
-      </childElements>
-   </ab>
-   <textNode ident="textNode"
-             elementName="textNode"
-             elementLabel="textNode"
-             path="/*:list/*:item/*:ab/*:textNode"
-             currentLevel="4"
-             popup="4"
-             teiElement="&lt;textNode/&gt;">
-      <availableAtts elementName="textNode"/>
-      <childElements>
+         <textNode type="input" class="ab"/>
          <child/>
       </childElements>
-   </textNode>
+   </ab>
    <note ident="note"
          elementName="note"
          elementLabel="Notes"
