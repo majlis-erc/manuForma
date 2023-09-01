@@ -131,12 +131,13 @@
              currentLevel="3"
              popup="3"
              teiElement="&lt;persName/&gt;">
-      <lookup xmlns=""
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
-              formURL="forms/mssTEI/lookup/persName.xhtml"
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
               elementName="persName"
               formName="persName"
-              lookupLabel="Look up persons"/>
+              lookupLabel="Look up persons"
+              level="toplevel"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="personTEI"
              elementName="persName"
@@ -185,7 +186,8 @@
               formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
               elementName="bibl"
               formName="titleBibl"
-              lookupLabel="Look up manuscript"/>
+              lookupLabel="Look up manuscript"
+              level="subform"/>
       <desc>Reference the quotation by adding an entry from the Zotero database.</desc>
       <availableAtts elementName="bibl"/>
       <childElements>
@@ -215,6 +217,13 @@
           currentLevel="4"
           popup="4"
           teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title"
+              level="toplevel"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="worksTEI"
              elementName="title"

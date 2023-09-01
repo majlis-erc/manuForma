@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.36 Beta 
+        Version: 1.38 Beta 
             -1.22 marks a major redesign
         
 
@@ -578,6 +578,13 @@
                         <data>
                             <xsl:for-each select="$configDoc//subforms/subform">
                                 <subform formName="{@formName}" selected="false"/>
+                            </xsl:for-each>
+                        </data>
+                    </xf:instance>
+                    <xf:instance id="i-lookups">
+                        <data>
+                            <xsl:for-each select="$configDoc//lookup">
+                                <lookup formName="{@formName}" selected="false"/>
                             </xsl:for-each>
                         </data>
                     </xf:instance>
@@ -2001,7 +2008,9 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;">
+                            <xf:unload targetid="{$grpRepeatID}subformLookup"/>
+                        </xf:case>
                         <xf:case id="{$grpRepeatID}LookupUnHide">
                             <div class="lookupDisplay">
                                 <xf:group id="{$grpRepeatID}subformLookup"/>
@@ -2009,7 +2018,7 @@
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
                                         <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$grpRepeatID}subformLookup"/>
+                                        <xf:unload targetid="{$grpRepeatID}subformLookup" ev:event="DOMActivate"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2152,7 +2161,7 @@
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
                                         <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$repeatID}subformLookup"/>
+                                        <xf:unload targetid="{$repeatID}subformLookup" ev:event="DOMActivate"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2607,33 +2616,39 @@
             <xsl:attribute name="teiElement">
                 <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
             </xsl:attribute>
-            <xsl:for-each-group select="$configDoc/descendant::*:lookup[@elementName = $elementName]" group-by="@elementName">
-                <xsl:choose>
-                    <xsl:when test="current-group()[parent::*:subform]">
-                        <xsl:if test="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]">
-                            <xsl:variable name="lookup" select="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]"/>
+            <xsl:variable name="lookupList">
+                <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName]">
+                    <xsl:choose>
+                        <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"><lookup supress="true"/></xsl:when>
+                        <xsl:otherwise>
                             <lookup>
-                                <xsl:copy-of select="$lookup/@*"/>
-                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup[1]/@formURL,'/')[last()])"/>
+                                <xsl:copy-of select="@*"/>
+                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
+                                <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
                             </lookup> 
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="current-group()[1]"/>
-                    </xsl:otherwise>    
-                </xsl:choose>
-            </xsl:for-each-group>
-            <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$lookupList/*[@level='subform']">
+                    <xsl:copy-of select="$lookupList/*[@level='subform']"></xsl:copy-of>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="$lookupList/*[@level='toplevel']"></xsl:copy-of>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:for-each-group select="$configDoc/descendant::*:popup[@elementName = $elementName]" group-by="@elementName">
                 <xsl:choose>
-                    <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
+                    <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"></xsl:when>
                     <xsl:otherwise>
-                     <popup>
-                         <xsl:copy-of select="$configDoc/descendant::*:popup[@elementName = $elementName]/@*"/>
-                         <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
-                     </popup>
+                        <popup>
+                            <xsl:copy-of select="@*"/>
+                            <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
+                        </popup>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:if>  
+            </xsl:for-each-group>
             <xsl:if test="$elementRules/descendant::tei:desc">
                 <desc xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:choose>
