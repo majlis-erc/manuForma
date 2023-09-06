@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.38 Beta 
+        Version: 1.39 Beta 
             -1.22 marks a major redesign
         
 
@@ -2639,6 +2639,11 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:for-each-group select="$configDoc/descendant::*:popup[@elementName = $elementName]" group-by="@elementName">
+                <popup>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
+                </popup>
+                <!--
                 <xsl:choose>
                     <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"></xsl:when>
                     <xsl:otherwise>
@@ -2648,6 +2653,7 @@
                         </popup>
                     </xsl:otherwise>
                 </xsl:choose>
+                -->
             </xsl:for-each-group>
             <xsl:if test="$elementRules/descendant::tei:desc">
                 <desc xmlns="http://www.tei-c.org/ns/1.0">
