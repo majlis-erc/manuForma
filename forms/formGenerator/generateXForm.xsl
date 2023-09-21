@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.39 Beta 
+        Version: 1.40 Beta 
             -1.22 marks a major redesign
         
 
@@ -1704,7 +1704,15 @@
                                 <div class="input-group mb-3 float-end btn-no-border">
                                     <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
                                         <xf:label><i class="bi bi-plus"/> Add "<xsl:value-of select="@groupLabel"/>"</xf:label>
-                                        <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
+                                        <xsl:choose>
+                                            <xsl:when test="contains($elementName,'/')">
+                                                <xsl:variable name="parent" select="tokenize($elementName,'/')[1]"/>
+                                                <xf:insert ev:event="DOMActivate" context="parent::*/parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="after"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xf:trigger>   
                                 </div>
                             </div>
