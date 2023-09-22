@@ -68,22 +68,33 @@
                 </group>
             </elementGroups>
         </subform>
-        <!--<subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/tei:persName" formName="listPersons" formLabel="Person">
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/@xml:id='names'" formName="listPersons" formLabel="Person">
             <formDesc>Personal name(s).</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
                 <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
-                    <element xpath="."/>
+                    <element xpath="tei:persName"/>
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/tei:birth | /tei:TEI/descendant::tei:listPerson/tei:person/tei:death | /tei:TEI/descendant::tei:listPerson/tei:person/tei:floruit | /tei:TEI/descendant::tei:listPerson/tei:person/tei:sex | /tei:TEI/descendant::tei:listPerson/tei:person/tei:faith | /tei:TEI/descendant::tei:listPerson/tei:person/tei:occupation | /tei:TEI/descendant::tei:listPerson/tei:person/tei:residence" formName="listPersons" formLabel="Person">
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/@xml:id='bio'" formName="listPersons" formLabel="Person">
             <formDesc>Biographical data.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Personal name." groupNo="1" repeatable="no">
+                    <element xpath="tei:birth"/>
+                    <element xpath="tei:death"/>
+                    <element xpath="tei:floruit"/>
+                    <element xpath="tei:sex"/>
+                    <element xpath="tei:faith"/>
+                    <element xpath="tei:occupation"/>
+                    <element xpath="tei:residence"/>
+                </group>
+            </elementGroups>
             <controlledValuesElements>
                 <element ident="sex">
                     <valList type="closed">
@@ -102,29 +113,29 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/tei:bibl" formName="listPersons" formLabel="Person">
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/@xml:id='bibl'" formName="listPersons" formLabel="Person">
             <formDesc>Bibliographic reference.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
-                    <element xpath="."/>
+                    <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/tei:idno" formName="listPersons" formLabel="Person">
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/@xml:id='idno'" formName="listPersons" formLabel="Person">
             <formDesc>Linked Open Data references.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
                 <group groupLabel="Linked Open Data references." groupNo="1" repeatable="yes">
-                    <element xpath="."/>
+                    <element xpath="tei:idno"/>
                 </group>
             </elementGroups>
-        </subform>-->
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
+        </subform>
+        <!--<subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
             <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
@@ -166,6 +177,6 @@
                     </valList>
                 </element>
             </controlledValuesElements>
-        </subform>
+        </subform>-->
     </subforms>
 </config>
