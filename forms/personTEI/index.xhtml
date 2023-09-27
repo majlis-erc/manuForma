@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Personal name(s). Biographical data. Bibliographic reference. Linked Open Data references." />
+      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -45,10 +45,7 @@
          <xf:instance id="i-selectTemplate"><data><template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"></template></data></xf:instance>
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
-               <subform formName="names" selected="false"></subform>
-               <subform formName="bio" selected="false"></subform>
-               <subform formName="bibl" selected="false"></subform>
-               <subform formName="idno" selected="false"></subform></data></xf:instance>
+               <subform formName="listPersons" selected="false"></subform></data></xf:instance>
          <xf:instance id="i-lookups"><data>
                <lookup formName="placeName" selected="false"></lookup>
                <lookup formName="bibl" selected="false"></lookup></data></xf:instance>
@@ -205,97 +202,25 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'names']" class="nav-link"><xf:label>Names</xf:label><xf:action ev:event="DOMActivate">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPersons']" class="nav-link"><xf:label>Person</xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
                               <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/names.xhtml"></xf:load>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
                               <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                               <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                            </xf:action>
                         </xf:trigger>
                      </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person/@xml:id='names'[position() &gt; 1]" id="navRepeatnames">
+                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[position() &gt; 1]" id="navRepeatlistPersons">
                         <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Names  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Person  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
                                  <xf:unload targetid="subform"></xf:unload>
                                  <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/names.xhtml"></xf:load>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatnames') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'bio']" class="nav-link"><xf:label>Biography</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/bio.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person/@xml:id='bio'[position() &gt; 1]" id="navRepeatbio">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Biography  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/bio.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatbio') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'bibl']" class="nav-link"><xf:label>Bibliography</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/bibl.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person/@xml:id='bibl'[position() &gt; 1]" id="navRepeatbibl">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Bibliography  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/bibl.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatbibl') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'idno']" class="nav-link"><xf:label>Linked Open Data</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/idno.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person/@xml:id='idno'[position() &gt; 1]" id="navRepeatidno">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Linked Open Data  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/idno.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatidno') + 1"></setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatlistPersons') + 1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                         </li>
