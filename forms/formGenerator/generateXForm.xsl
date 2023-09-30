@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.40 Beta 
+        Version: 1.41 Beta 
             -1.22 marks a major redesign
         
 
@@ -551,7 +551,12 @@
                         <xml-base64 xsi:type="xs:base64Binary"/>
                     </xf:instance>
                     <xf:instance id="i-search">
-                        <data><q/></data>
+                        <data>
+                            <search>
+                                <q/>
+                                <facets/>
+                            </search>
+                        </data>
                     </xf:instance>
                     <xf:instance id="i-search-id">
                         <data><q/></data>
@@ -561,6 +566,11 @@
                     </xf:instance>
                     <xf:instance id="i-selected-search">
                         <data>
+                        </data>
+                    </xf:instance>
+                    <xf:instance id="i-selected-facet">
+                        <data>
+                            <facetGrp label="" facet=""></facetGrp>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-selected">
@@ -653,10 +663,14 @@
                     </xf:submission>
                     
                     <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
-
+                    
+                    <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/><xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    </xf:submission>
+                    
                     <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
@@ -933,12 +947,18 @@
                                                 <div class="accordion-body">
                                                     <div class="fileLoading">
                                                         <div class="input-group mb-3 full-width">
-                                                            <xf:input class="form-control" ref="instance('i-search')" incremental="true">
+                                                            <xf:input class="form-control" ref="instance('i-search')//*:q" incremental="true">
                                                                 <xf:label/>
                                                             </xf:input>
-                                                            <xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal">
+                                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
                                                                 <xf:label> Search </xf:label>
-                                                            </xf:submit>
+                                                                <xf:action ev:event="DOMActivate">
+                                                                    <!-- Set value and send submit?  -->
+                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="''"/>
+                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="''"/>
+                                                                    <xf:send submission="s-search-saved"/>
+                                                                </xf:action>
+                                                            </xf:trigger>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
                                                                 <xf:label> Browse </xf:label>
                                                             </xf:submit>
@@ -954,16 +974,48 @@
                                                             </xf:submit>
                                                         </div>
                                                         <div class="input-group mb-3 full-width">
-                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
-                                                                <xf:label/>
-                                                                <xf:itemset ref="instance('i-search-results')//*:record">
-                                                                    <xf:label value="concat(@name, ' ', @idno)"/>
-                                                                    <xf:value ref="@src"/>
-                                                                </xf:itemset>
-                                                            </xf:select1>
+                                                            <div class="row">
+                                                                <div class="col-md-3" style="color:black;">
+                                                                    <h5>Filter</h5>
+                                                                    <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
+                                                                        <h5><xf:output value="@label"/></h5>
+                                                                        <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
+                                                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
+                                                                                <xf:label><xf:output value="concat(@label, ' (',@count,')')"/> </xf:label>
+                                                                                <xf:action ev:event="DOMActivate">
+                                                                                    <!-- Set value and send submit?  -->
+                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"/>
+                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"/>
+                                                                                    <xf:send submission="s-search-saved"/>
+                                                                                </xf:action>
+                                                                            </xf:trigger>
+                                                                        </xf:repeat>
+                                                                    </xf:repeat>
+                                                                </div>
+                                                                <div class="col-md-9" style="color:black;">
+                                                                    <h5><xf:output value="instance('i-search-results')//*:info/@count"/> Results 
+                                                                        <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next">
+                                                                            <xf:label>Next</xf:label>
+                                                                            <xf:action ev:event="DOMActivate">
+                                                                                <xf:send submission="s-search-saved-next"/>
+                                                                            </xf:action>
+                                                                        </xf:trigger>
+                                                                    </h5>
+                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
+                                                                        <xf:label/>
+                                                                        <xf:itemset ref="instance('i-search-results')//*:record">
+                                                                            <xf:label value="concat(@name, ' ', @idno)"/>
+                                                                            <xf:value ref="@src"/>
+                                                                        </xf:itemset>
+                                                                    </xf:select1>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="pull-right">
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
                                                                 <xf:label> Load Selected Record </xf:label>
                                                             </xf:submit>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2473,7 +2525,13 @@
     <!-- Full list of schema rules -->
     <xsl:template name="generateSchemaInstance">
         <xsl:param name="subform"/>
-        <xsl:variable name="elementName" select="substring-after(tokenize($subform/@xpath,'/')[last()],':')"/>
+        <xsl:variable name="elementName">
+            <xsl:variable name="last" select="tokenize($subform/@xpath,'/')[last()]"/>
+            <xsl:choose>
+                <xsl:when test="contains($last,'[')"><xsl:value-of select="substring-after(substring-before($last,'['),':')"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="substring-after($last,':')"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="mainFormName" select="$configDoc//formName"/>
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:call-template name="xformElementSchemaInstance">
