@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.41 Beta 
+        Version: 1.43 Beta 
             -1.22 marks a major redesign
         
 
@@ -1759,10 +1759,12 @@
                                         <xsl:choose>
                                             <xsl:when test="contains($elementName,'/')">
                                                 <xsl:variable name="parent" select="tokenize($elementName,'/')[1]"/>
-                                                <xf:insert ev:event="DOMActivate" context="parent::*/parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="after"/>
+                                                <!--<xf:insert ev:event="DOMActivate" context="parent::*/parent::*"  at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="after"/>-->
+                                                <xf:insert ev:event="DOMActivate" ref="parent::*" at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="before"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
+<!--                                                <xf:insert ev:event="DOMActivate" context="parent::*" at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>-->
+                                                <xf:insert ev:event="DOMActivate" ref="." at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="before"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xf:trigger>   
@@ -2264,7 +2266,7 @@
                     </xf:textarea>    
                     <!-- Element attributes -->
                     <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
-                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group"> 
                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                             <div class="input-group">
                                 <!-- Attribute value -->
@@ -2284,7 +2286,13 @@
                             </div>    
                         </div>
                     </xf:repeat>
-                
+                    <xf:select1 ref="@source" class="input-small">
+                        <xf:label>Source:</xf:label>
+                        <xf:itemset ref="instance('i-rec')//tei:text/descendant::tei:bibl[tei:title[@level='citation'] != '']">
+                            <xf:label value="concat(tei:title[@level='citation'],' Cited Range: ', tei:citedRange[1]/@unit,' ',tei:citedRange[1], ' ',tei:citedRange[2]/@unit,' ',tei:citedRange[2])"/>
+                            <xf:value ref="@xml:id"/>
+                        </xf:itemset>
+                    </xf:select1>
                 </div>
             <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
