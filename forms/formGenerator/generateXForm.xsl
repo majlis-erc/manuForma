@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.42 Beta 
+        Version: 1.43 Beta 
             -1.22 marks a major redesign
         
 
@@ -1764,7 +1764,7 @@
                                             </xsl:when>
                                             <xsl:otherwise>
 <!--                                                <xf:insert ev:event="DOMActivate" context="parent::*" at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>-->
-                                                <xf:insert ev:event="DOMActivate" ref="parent::*" at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="before"/>
+                                                <xf:insert ev:event="DOMActivate" ref="." at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="before"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xf:trigger>   
