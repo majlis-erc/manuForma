@@ -4,11 +4,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-<<<<<<< Updated upstream
       <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
-=======
-      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Personal name(s). Biographical data. Bibliographic reference. Linked Open Data references." />
->>>>>>> Stashed changes
+
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -49,16 +46,9 @@
          <xf:instance id="i-selectTemplate"><data><template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"></template></data></xf:instance>
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
-<<<<<<< Updated upstream
                <subform formName="persNames" selected="false"></subform>
                <subform formName="biographicalData" selected="false"></subform>
                <subform formName="biblData" selected="false"></subform></data></xf:instance>
-=======
-               <subform formName="listPersons" selected="false"></subform>
-               <subform formName="listPersons" selected="false"></subform>
-               <subform formName="listPersons" selected="false"></subform>
-               <subform formName="listPersons" selected="false"></subform></data></xf:instance>
->>>>>>> Stashed changes
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
@@ -222,83 +212,8 @@
                            </xf:action>
                         </xf:trigger>
                      </li>
-<<<<<<< Updated upstream
                      <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[position() &gt; 1]" id="navRepeatpersNames">
-=======
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[@type='names'][position() &gt; 1]" id="navRepeatlistPersons">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Person  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatlistPersons') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPersons']" class="nav-link"><xf:label>Person</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[*:@type='bio'][position() &gt; 1]" id="navRepeatlistPersons">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Person  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatlistPersons') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPersons']" class="nav-link"><xf:label>Person</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[@type='bibl'][position() &gt; 1]" id="navRepeatlistPersons">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Person  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatlistPersons') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'listPersons']" class="nav-link"><xf:label>Person</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/listPersons.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[@type='idno'][position() &gt; 1]" id="navRepeatlistPersons">
->>>>>>> Stashed changes
+
                         <li class="nav-item">
                            <xf:trigger appearance="minimal" class="nav-link"><xf:label>Personal name  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
@@ -488,6 +403,7 @@
                   <div class="lookupDisplay changeElement">
                      <div class="fileLoading">
                         <h4 class="h6">What did you change?</h4>
+                        <p>Write a one-sentence description of the changes you made to the file.</p>
                         <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
                         <div class="mb-3">
                            <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">

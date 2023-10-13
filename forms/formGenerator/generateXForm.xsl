@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.35 Beta 
+        Version: 1.43 Beta 
             -1.22 marks a major redesign
         
 
@@ -551,7 +551,12 @@
                         <xml-base64 xsi:type="xs:base64Binary"/>
                     </xf:instance>
                     <xf:instance id="i-search">
-                        <data><q/></data>
+                        <data>
+                            <search>
+                                <q/>
+                                <facets/>
+                            </search>
+                        </data>
                     </xf:instance>
                     <xf:instance id="i-search-id">
                         <data><q/></data>
@@ -561,6 +566,11 @@
                     </xf:instance>
                     <xf:instance id="i-selected-search">
                         <data>
+                        </data>
+                    </xf:instance>
+                    <xf:instance id="i-selected-facet">
+                        <data>
+                            <facetGrp label="" facet=""></facetGrp>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-selected">
@@ -578,6 +588,13 @@
                         <data>
                             <xsl:for-each select="$configDoc//subforms/subform">
                                 <subform formName="{@formName}" selected="false"/>
+                            </xsl:for-each>
+                        </data>
+                    </xf:instance>
+                    <xf:instance id="i-lookups">
+                        <data>
+                            <xsl:for-each select="$configDoc//lookup">
+                                <lookup formName="{@formName}" selected="false"/>
                             </xsl:for-each>
                         </data>
                     </xf:instance>
@@ -646,10 +663,14 @@
                     </xf:submission>
                     
                     <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
-
+                    
+                    <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/><xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    </xf:submission>
+                    
                     <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
@@ -926,12 +947,18 @@
                                                 <div class="accordion-body">
                                                     <div class="fileLoading">
                                                         <div class="input-group mb-3 full-width">
-                                                            <xf:input class="form-control" ref="instance('i-search')" incremental="true">
+                                                            <xf:input class="form-control" ref="instance('i-search')//*:q" incremental="true">
                                                                 <xf:label/>
                                                             </xf:input>
-                                                            <xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal">
+                                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
                                                                 <xf:label> Search </xf:label>
-                                                            </xf:submit>
+                                                                <xf:action ev:event="DOMActivate">
+                                                                    <!-- Set value and send submit?  -->
+                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="''"/>
+                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="''"/>
+                                                                    <xf:send submission="s-search-saved"/>
+                                                                </xf:action>
+                                                            </xf:trigger>
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal">
                                                                 <xf:label> Browse </xf:label>
                                                             </xf:submit>
@@ -947,16 +974,48 @@
                                                             </xf:submit>
                                                         </div>
                                                         <div class="input-group mb-3 full-width">
-                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
-                                                                <xf:label/>
-                                                                <xf:itemset ref="instance('i-search-results')//*:record">
-                                                                    <xf:label value="concat(@name, ' ', @idno)"/>
-                                                                    <xf:value ref="@src"/>
-                                                                </xf:itemset>
-                                                            </xf:select1>
+                                                            <div class="row">
+                                                                <div class="col-md-3" style="color:black;">
+                                                                    <h5>Filter</h5>
+                                                                    <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
+                                                                        <h5><xf:output value="@label"/></h5>
+                                                                        <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
+                                                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
+                                                                                <xf:label><xf:output value="concat(@label, ' (',@count,')')"/> </xf:label>
+                                                                                <xf:action ev:event="DOMActivate">
+                                                                                    <!-- Set value and send submit?  -->
+                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"/>
+                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"/>
+                                                                                    <xf:send submission="s-search-saved"/>
+                                                                                </xf:action>
+                                                                            </xf:trigger>
+                                                                        </xf:repeat>
+                                                                    </xf:repeat>
+                                                                </div>
+                                                                <div class="col-md-9" style="color:black;">
+                                                                    <h5><xf:output value="instance('i-search-results')//*:info/@count"/> Results 
+                                                                        <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next">
+                                                                            <xf:label>Next</xf:label>
+                                                                            <xf:action ev:event="DOMActivate">
+                                                                                <xf:send submission="s-search-saved-next"/>
+                                                                            </xf:action>
+                                                                        </xf:trigger>
+                                                                    </h5>
+                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
+                                                                        <xf:label/>
+                                                                        <xf:itemset ref="instance('i-search-results')//*:record">
+                                                                            <xf:label value="concat(@name, ' ', @idno)"/>
+                                                                            <xf:value ref="@src"/>
+                                                                        </xf:itemset>
+                                                                    </xf:select1>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="pull-right">
                                                             <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
                                                                 <xf:label> Load Selected Record </xf:label>
                                                             </xf:submit>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1053,6 +1112,7 @@
                                 <div class="lookupDisplay changeElement">
                                     <div class="fileLoading">
                                         <h4 class="h6">What did you change?</h4>
+                                        <p>Write a one-sentence description of the changes you made to the file.</p>
                                         <div class="input-group mb-3 full-width">
                                             <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
                                         </div>
@@ -1696,7 +1756,17 @@
                                 <div class="input-group mb-3 float-end btn-no-border">
                                     <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
                                         <xf:label><i class="bi bi-plus"/> Add "<xsl:value-of select="@groupLabel"/>"</xf:label>
-                                        <xf:insert ev:event="DOMActivate" context="parent::*"  origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>
+                                        <xsl:choose>
+                                            <xsl:when test="contains($elementName,'/')">
+                                                <xsl:variable name="parent" select="tokenize($elementName,'/')[1]"/>
+                                                <!--<xf:insert ev:event="DOMActivate" context="parent::*/parent::*"  at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="after"/>-->
+                                                <xf:insert ev:event="DOMActivate" ref="parent::*" at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="before"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+<!--                                                <xf:insert ev:event="DOMActivate" context="parent::*" at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>-->
+                                                <xf:insert ev:event="DOMActivate" ref="." at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="before"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2000,7 +2070,9 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;">
+                            <xf:unload targetid="{$grpRepeatID}subformLookup"/>
+                        </xf:case>
                         <xf:case id="{$grpRepeatID}LookupUnHide">
                             <div class="lookupDisplay">
                                 <xf:group id="{$grpRepeatID}subformLookup"/>
@@ -2008,7 +2080,7 @@
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
                                         <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$grpRepeatID}subformLookup"/>
+                                        <xf:unload targetid="{$grpRepeatID}subformLookup" ev:event="DOMActivate"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2151,7 +2223,7 @@
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
                                         <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$repeatID}subformLookup"/>
+                                        <xf:unload targetid="{$repeatID}subformLookup" ev:event="DOMActivate"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2194,7 +2266,7 @@
                     </xf:textarea>    
                     <!-- Element attributes -->
                     <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
-                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group"> 
                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                             <div class="input-group">
                                 <!-- Attribute value -->
@@ -2214,7 +2286,13 @@
                             </div>    
                         </div>
                     </xf:repeat>
-                
+                    <xf:select1 ref="@source" class="input-small">
+                        <xf:label>Source:</xf:label>
+                        <xf:itemset ref="instance('i-rec')//tei:text/descendant::tei:bibl[tei:title[@level='citation'] != '']">
+                            <xf:label value="concat(tei:title[@level='citation'],' Cited Range: ', tei:citedRange[1]/@unit,' ',tei:citedRange[1], ' ',tei:citedRange[2]/@unit,' ',tei:citedRange[2])"/>
+                            <xf:value ref="@xml:id"/>
+                        </xf:itemset>
+                    </xf:select1>
                 </div>
             <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
@@ -2455,7 +2533,13 @@
     <!-- Full list of schema rules -->
     <xsl:template name="generateSchemaInstance">
         <xsl:param name="subform"/>
-        <xsl:variable name="elementName" select="substring-after(tokenize($subform/@xpath,'/')[last()],':')"/>
+        <xsl:variable name="elementName">
+            <xsl:variable name="last" select="tokenize($subform/@xpath,'/')[last()]"/>
+            <xsl:choose>
+                <xsl:when test="contains($last,'[')"><xsl:value-of select="substring-after(substring-before($last,'['),':')"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="substring-after($last,':')"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="mainFormName" select="$configDoc//formName"/>
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:call-template name="xformElementSchemaInstance">
@@ -2606,33 +2690,45 @@
             <xsl:attribute name="teiElement">
                 <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
             </xsl:attribute>
-            <xsl:for-each-group select="$configDoc/descendant::*:lookup[@elementName = $elementName]" group-by="@elementName">
-                <xsl:choose>
-                    <xsl:when test="current-group()[parent::*:subform]">
-                        <xsl:if test="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]">
-                            <xsl:variable name="lookup" select="current-group()[not(@suppress='true')][parent::*:subform[not(@lookup='no')]]"/>
+            <xsl:variable name="lookupList">
+                <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName]">
+                    <xsl:choose>
+                        <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"><lookup supress="true"/></xsl:when>
+                        <xsl:otherwise>
                             <lookup>
-                                <xsl:copy-of select="$lookup/@*"/>
-                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize($lookup[1]/@formURL,'/')[last()])"/>
+                                <xsl:copy-of select="@*"/>
+                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
+                                <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
                             </lookup> 
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="current-group()[1]"/>
-                    </xsl:otherwise>    
-                </xsl:choose>
-            </xsl:for-each-group>
-            <xsl:if test="$configDoc/descendant::*:popup[@elementName = $elementName] and not($configDoc/descendant::*:subform[@formName = $subformName][@lookup='no'])">
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$lookupList/*[@level='subform']">
+                    <xsl:copy-of select="$lookupList/*[@level='subform']"></xsl:copy-of>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="$lookupList/*[@level='toplevel']"></xsl:copy-of>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:for-each-group select="$configDoc/descendant::*:popup[@elementName = $elementName]" group-by="@elementName">
+                <popup>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
+                </popup>
+                <!--
                 <xsl:choose>
-                    <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/descendant::lookup[@elementName = $elementName][@suppress='true']"/>
+                    <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"></xsl:when>
                     <xsl:otherwise>
-                     <popup>
-                         <xsl:copy-of select="$configDoc/descendant::*:popup[@elementName = $elementName]/@*"/>
-                         <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
-                     </popup>
+                        <popup>
+                            <xsl:copy-of select="@*"/>
+                            <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
+                        </popup>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:if>  
+                -->
+            </xsl:for-each-group>
             <xsl:if test="$elementRules/descendant::tei:desc">
                 <desc xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:choose>

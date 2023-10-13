@@ -31,17 +31,9 @@
         <template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"/>
     </blankTemplates>
     <lookups>
-<<<<<<< Updated upstream
         <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
         <popup formName="placeTEI" elementName="placeName" label="New Places"/>
         <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
-=======
-        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName"
-            formName="placeName" lookupLabel="Look up places"/>
-        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
-        <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl"
-            formName="bibl" lookupLabel="Look up bibliographic record"/>
->>>>>>> Stashed changes
         <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
     </lookups>
     <projectSpecificData>
@@ -74,63 +66,12 @@
                 </group>
             </elementGroups>
         </subform>
-<<<<<<< Updated upstream
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="persNames" formLabel="Personal name">
             <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
-=======
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person[@type='names']" formName="listPersons" formLabel="Person">
-            <formDesc>Personal name(s).</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
-                <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
-                    <element xpath="tei:persName"/>
-                </group>
-            </elementGroups>
-        </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person[tei:@type='bio']" formName="listPersons" formLabel="Person">
-            <formDesc>Biographical data.</formDesc>
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
-            <elementGroups>
-                <group groupLabel="Biographical Data." groupNo="1" repeatable="yes">
-                    <element xpath="tei:birth"/>
-                    <element xpath="tei:death"/>
-                    <element xpath="tei:floruit"/>
-                    <element xpath="tei:sex"/>
-                    <element xpath="tei:faith"/>
-                    <element xpath="tei:occupation"/>
-                    <element xpath="tei:residence"/>
-                </group>
-            </elementGroups>
-            <controlledValuesElements>
-                <element ident="sex">
-                    <valList type="closed">
-                        <valItem ident="Unknown"/>
-                        <valItem ident="Female"/>
-                        <valItem ident="Male"/>
-                    </valList>
-                </element>
-                <element ident="faith">
-                    <valList type="closed">
-                        <valItem ident="Karaite"/>
-                        <valItem ident="Rabbanite"/>
-                        <valItem ident="Muslim"/>
-                        <valItem ident="Christian"/>
-                    </valList>
-                </element>
-            </controlledValuesElements>
-        </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person[@type='bibl']" formName="listPersons" formLabel="Person">
-            <formDesc>Bibliographic reference.</formDesc>
->>>>>>> Stashed changes
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
-            <elementGroups>
-<<<<<<< Updated upstream
                 <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
                     <element xpath="tei:persName"/>
                 </group>
@@ -184,21 +125,6 @@
                     <element xpath="tei:faith"/>
                     <element xpath="tei:occupation"/>
                     <element xpath="tei:residence"/>
-=======
-                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
-                    <element xpath="tei:bibl"/>
-                </group>
-            </elementGroups>
-        </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person[@type='idno']" formName="listPersons" formLabel="Person">
-            <formDesc>Linked Open Data references.</formDesc>
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
-            <elementGroups>
-                <group groupLabel="Linked Open Data references." groupNo="1" repeatable="yes">
-                    <element xpath="tei:idno"/>
->>>>>>> Stashed changes
                 </group>
             </elementGroups>
             <controlledValuesElements>
@@ -220,40 +146,15 @@
             </controlledValuesElements>
             
         </subform>
-<<<<<<< Updated upstream
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="biblData" formLabel="Bibliographic reference">
-=======
-        <!--<subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="listPersons" formLabel="Person">
->>>>>>> Stashed changes
             <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
             <localSchema src="../schemas/persons.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
-<<<<<<< Updated upstream
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="3" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
-=======
-                <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
-                    <element xpath="tei:persName"/>
-                </group>
-                <group groupLabel="Biographical data." groupNo="2" repeatable="no">
-                    <element xpath="tei:birth"/>
-                    <element xpath="tei:death"/>
-                    <element xpath="tei:floruit"/>
-                    <element xpath="tei:sex"/>
-                    <element xpath="tei:faith"/>
-                    <element xpath="tei:occupation"/>
-                    <element xpath="tei:residence"/>
-                </group>
-                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="3" repeatable="yes">
-                    <element xpath="tei:bibl"/>
-                </group>
-                <group groupLabel="Linked Open Data references." groupNo="4" repeatable="no">
-                    <element xpath="tei:idno"/>
-                </group>
->>>>>>> Stashed changes
             </elementGroups>
             <controlledValuesElements>
                 <element ident="sex">
@@ -272,10 +173,6 @@
                     </valList>
                 </element>
             </controlledValuesElements>
-<<<<<<< Updated upstream
         </subform>
-=======
-        </subform>-->
->>>>>>> Stashed changes
     </subforms>
 </config>

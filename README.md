@@ -1,4 +1,7 @@
 # manuForma [BETA]
+
+[![DOI](https://zenodo.org/badge/474991717.svg)](https://zenodo.org/badge/latestdoi/474991717)
+
 The manuForma application is designed to make TEI data creation and distributed editing faster and easier. The application features easy to use multi-step forms, Github interactions and more.
 
 Custom XForms are built using an XSLT stylesheet, a custom XML configuration file, and a custom XML Schema. The schema is used to define the elements and attributes required for your project. The schema must define all of the elements and attributes you would like in your forms. All controlled values, labels, language, and available elements and attributes will be defined in your custom schema. The more restrictive your schema is the faster your forms will perform. 

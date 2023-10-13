@@ -68,9 +68,15 @@
               formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
               elementName="bibl"
               formName="titleBibl"
-              lookupLabel="Look up manuscript"/>
+              lookupLabel="Look up manuscript"
+              level="subform"/>
       <desc>Add a bibliographic item.</desc>
-      <availableAtts elementName="bibl"/>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Bibliographic identifier" ident="xml:id" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Bibliographic identifier</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="title"
@@ -98,6 +104,18 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title"
+              level="toplevel"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
       <desc>The title to the Zotero will be filled out automatically.</desc>
       <availableAtts elementName="title"/>
       <childElements>
