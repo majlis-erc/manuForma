@@ -1,47 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config>
+<config type="wizard">
     <appTitle>manuForma</appTitle>
-    <formTitle>Edit Person TEI records</formTitle>
+    <formTitle>Edit MS TEI Records</formTitle>
     <formURL>/exist/apps/manuForma/</formURL>
-    <formName>personTEI</formName>
+    <formName>msSimple</formName>
     <formAuthor>majlis-erc</formAuthor>
-    <formDesc></formDesc>
+    <formDesc> </formDesc>
+    
     <!-- Language to output lables, hints etc, if empty defaults to English -->
     <formLang>en</formLang>
+    <formDesc> </formDesc>
+    
+    <!-- Language to output lables, hints etc, if empty defaults to English -->
+    <formLang>en</formLang>
+    
+    <!-- Saving and managing created TEI files -->
     <recordManagement>
+        <baseURI>https://jalit.org/manuscript/</baseURI>
         <saveOptions>
             <option name="github" enable="true">
                 <parameter name="githubRepoName">majlis-data</parameter>
-                <parameter name="githubPath">data/persons/tei/</parameter>
+                <parameter name="githubPath">data/manuscripts/tei/</parameter>
                 <parameter name="githubOwner">majlis-erc</parameter>
                 <parameter name="githubBranch">main</parameter>
             </option>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/manuscripts/tei</parameter>
             </option>
             <option name="download" enable="true"/>
         </saveOptions>
         <retrieveOptions>
             <option name="exist-db" enable="true">
-                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/manuscripts/tei</parameter>
             </option>
         </retrieveOptions>
     </recordManagement>
+    <!-- Blank templates can be used as a starting point for editing. Multiple templates can be included here.  -->
     <blankTemplates>
-        <template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"/>
+        <template name="Manuscript template" src="/forms/templates/full-mss-template.xml"/>
     </blankTemplates>
+    
+    <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
+        <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
+        <popup formName="personTEI" elementName="persName" label="New persons"/>
         <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
-        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
+        <popup formName="placeTEI" elementName="placeName" label="New places"/>
+        <!-- Does not work, no easy way to tie xpath to look up
+            <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" xpath="not(parent::*:bibl)" elementName="title" formName="title" lookupLabel="Look up title"/> -->
+        <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
+        <popup formName="worksTEI" elementName="title" label="New work"/>
         <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
-        <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
     </lookups>
     <projectSpecificData>
         <xmlPath name="Project Picker" src="/forms/templates/editionStmtProjectOptions.xml" element="editionStmt"/>
     </projectSpecificData>
     <!--
-        For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
-        and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
+        For better performance the TEI records are into sections. Each section will output a form. 
+        This will allow better load and response time for forms, and a step-by-step method of editing records. 
+        In process records can be stored in the eXist-db database or downloaded to the file system, where they can be loaded 
         into the form again as needed. 
         
         List forms in order of editing preference.
@@ -49,10 +66,10 @@
     -->
     <subforms>
         <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
-            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
+            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-fulltemplate.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
             <elementGroups>
                 <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
                     <element xpath="tei:title"/>
@@ -60,119 +77,495 @@
                     <element xpath="tei:funder"/>
                 </group>
                 <group groupLabel="Project team." groupNo="2" repeatable="no">
-                    <element xpath="tei:principal"/>
                     <element xpath="tei:editor"/>
                     <element xpath="tei:respStmt"/>
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="persNames" formLabel="Personal name">
-            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identification" repeat="no">
+            <localSchema src="../schemas/mss-msidentifier.xml"/>
+            <globalSchema src="../schemas/mss-msidentifier.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Add shelfmark and information on the holding institution. Add alternate identifiers in existing catalogues and external databases.</formDesc>
+            <controlledValuesElements>
+                <element ident="country">
+                    <valList type="closed">
+                        <valItem ident="Russia"/>
+                        <valItem ident="USA"/>
+                        <valItem ident="Great Britain"/>
+                        <valItem ident="Israel"/>
+                        <valItem ident="Hungary"/>
+                        <valItem ident="France"/>
+                        <valItem ident="Egypt"/>
+                        <valItem ident="Germany"/>
+                        <valItem ident="Ukraine"/>
+                    </valList>
+                </element>
+                <element ident="settlement">
+                    <valList type="closed">
+                        <valItem ident="St Petersburg"/>
+                        <valItem ident="London"/>
+                        <valItem ident="Jerusalem"/>
+                        <valItem ident="Budapest"/>
+                        <valItem ident="Cambridge"/>
+                        <valItem ident="Paris"/>
+                        <valItem ident="New York"/>
+                        <valItem ident="Cairo"/>
+                        <valItem ident="Leipzig"/>
+                        <valItem ident="Kyiv"/>
+                    </valList>
+                </element>
+                <element ident="repository">
+                    <valList type="closed">
+                        <valItem ident="National Library of Russia"/>
+                        <valItem ident="British Library"/>
+                        <valItem ident="Ben Zvi Institute"/>
+                        <valItem ident="Library of the Hungarian Academy of Sciences"/>
+                        <valItem ident="Cambridge University Library"/>
+                        <valItem ident="Bibliothèque Nationale de France"/>
+                        <valItem ident="Alliance Israélite Universelle"/>
+                        <valItem ident="Jewish Theological Seminary"/>
+                        <valItem ident="Karaite Synogogue"/>
+                        <valItem ident="Universitätsbibliothek Leipzig"/>
+                        <valItem ident="Institute of Oriental Manuscripts"/>
+                        <valItem ident="Sassoon"/>
+                        <valItem ident="Vernadsky National Library of Ukraine"/>
+                    </valList>
+                </element>
+                <element ident="collection">
+                    <valList type="closed">
+                        <valItem ident="Arab.-Yevr."/>
+                        <valItem ident="Firk. Arab."/>
+                        <valItem ident="Yevr. I"/>
+                        <valItem ident="Yevr. I A"/>
+                        <valItem ident="Yevr. I B"/>
+                        <valItem ident="Yevr. I Bibl."/>
+                        <valItem ident="Yevr. II A"/>
+                        <valItem ident="Yevr. II B"/>
+                        <valItem ident="Yevr. II C"/>
+                        <valItem ident="Yevr. II K"/>
+                        <valItem ident="Yevr. III A"/>
+                        <valItem ident="Yevr. III B"/>
+                        <valItem ident="Yevr. IV"/>
+                        <valItem ident="Yevr.-Arab. I"/>
+                        <valItem ident="Yevr.-Arab. II"/>
+                        <valItem ident="Kaufmann"/>
+                        <valItem ident="Oriental"/>
+                        <valItem ident="T-S"/>
+                        <valItem ident="Hébr."/>
+                        <valItem ident="Vollers"/>
+                        <valItem ident="Add."/>
+                        <valItem ident="Harkavy"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
             <elementGroups>
-                <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
-                    <element xpath="tei:persName"/>
-                </group>
-                <!--
-                <group groupLabel="Biographical data." groupNo="2" repeatable="no">
-                    <element xpath="tei:birth"/>
-                    <element xpath="tei:death"/>
-                    <element xpath="tei:floruit"/>
-                    <element xpath="tei:sex"/>
-                    <element xpath="tei:faith"/>
-                    <element xpath="tei:occupation"/>
-                    <element xpath="tei:residence"/>
-                </group>
-                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="3" repeatable="yes">
-                    <element xpath="tei:bibl"/>
-                </group>
-                <group groupLabel="Linked Open Data references." groupNo="4" repeatable="no">
+                <group groupLabel="Identification via location, place, institution, collection, shelfmark." groupNo="1" repeatable="no">
+                    <element xpath="tei:country"/>
+                    <element xpath="tei:settlement"/>
+                    <element xpath="tei:repository"/>
                     <element xpath="tei:idno"/>
+                    <element xpath="tei:institution"/>
+                    <element xpath="tei:collection"/>
                 </group>
-                -->
-            </elementGroups>
-            <controlledValuesElements>
-                <element ident="sex">
-                    <valList type="closed">
-                        <valItem ident="Unknown"/>
-                        <valItem ident="Female"/>
-                        <valItem ident="Male"/>
-                    </valList>
-                </element>
-                <element ident="faith">
-                    <valList type="closed">
-                        <valItem ident="Karaite"/>
-                        <valItem ident="Rabbanite"/>
-                        <valItem ident="Muslim"/>
-                        <valItem ident="Christian"/>
-                    </valList>
-                </element>
-            </controlledValuesElements>
-        </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="biographicalData" formLabel="Biographical data">
-            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
-            <elementGroups>
-                <group groupLabel="Biographical data." groupNo="2" repeatable="no">
-                    <element xpath="tei:birth"/>
-                    <element xpath="tei:death"/>
-                    <element xpath="tei:floruit"/>
-                    <element xpath="tei:sex"/>
-                    <element xpath="tei:faith"/>
-                    <element xpath="tei:occupation"/>
-                    <element xpath="tei:residence"/>
+                <group groupLabel="Identification via old shelfmark or via catalogues and external databases." groupNo="2" repeatable="no">
+                    <element xpath="tei:altIdentifier"/>
+                    <element xpath="tei:msName"/>
                 </group>
             </elementGroups>
-            <controlledValuesElements>
-                <element ident="sex">
-                    <valList type="closed">
-                        <valItem ident="Unknown"/>
-                        <valItem ident="Female"/>
-                        <valItem ident="Male"/>
-                    </valList>
-                </element>
-                <element ident="faith">
-                    <valList type="closed">
-                        <valItem ident="Karaite"/>
-                        <valItem ident="Rabbanite"/>
-                        <valItem ident="Muslim"/>
-                        <valItem ident="Christian"/>
-                    </valList>
-                </element>
-            </controlledValuesElements>
-            
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="biblData" formLabel="Bibliographic reference">
-            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
-            <localSchema src="../schemas/persons.xml"/>
-            <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/persons-template.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:surrogates/tei:listBibl" formName="reproductions"
+            formLabel="Reproductions" repeat="no">
+            <lookup elementName="bibl" suppress="true"/>
+            <localSchema src="../schemas/mss-reproductions.xml"/>
+            <globalSchema src="../schemas/mss-reproductions.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup elementName="bibl" suppress="true"/>
+            <formDesc>Add information on reproductions, such as digital images, microfilms or other types.</formDesc>
             <elementGroups>
-                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="3" repeatable="yes">
+                <group groupLabel="Reproduction" groupLabelConditionalElement="./*:title"
+                    groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
                     <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>
             <controlledValuesElements>
-                <element ident="sex">
+                <element ident="title">
                     <valList type="closed">
-                        <valItem ident="Unknown"/>
-                        <valItem ident="Female"/>
-                        <valItem ident="Male"/>
+                        <valItem ident="Microfilm"/>
+                        <valItem ident="Microfiche"/>
+                        <valItem ident="Photostat"/>
+                        <valItem ident="Digital image offline"/>
+                        <valItem ident="Digital image online"/>
                     </valList>
                 </element>
-                <element ident="faith">
+                <element ident="publisher">
                     <valList type="closed">
-                        <valItem ident="Karaite"/>
-                        <valItem ident="Rabbanite"/>
-                        <valItem ident="Muslim"/>
-                        <valItem ident="Christian"/>
+                        <valItem ident="National Library of Israel"/>
+                        <valItem ident="British Library"/>
                     </valList>
                 </element>
             </controlledValuesElements>
         </subform>
+        <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
+            <localSchema src="../schemas/mss-definition.xml"/>
+            <globalSchema src="../schemas/mss-definition.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <!--
+            <lookup elementName="bibl" suppress="true"/>
+            <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+            -->
+            <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="bibl" formName="titleBibl" lookupLabel="Look up manuscript"/>
+            <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
+            <elementGroups>
+                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,', ',./*/@rend,', ',./*/@style,'.')" groupNo="1" repeatable="no">
+                    <element xpath="tei:objectType"/>
+                </group>
+                <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
+                    <element xpath="tei:listBibl"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Single manuscript"/>
+                        <valItem ident="Composite manuscript"/>
+                        <valItem ident="Multiple text manuscript"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
+            <localSchema src="../schemas/mss-msitem.xml"/>
+            <globalSchema src="../schemas/mss-msitem.xml"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="author" formName="persName" lookupLabel="Look up author"/>
+            <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summary of contents." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Detailed description of text unit: title, author, language, rubrics, etc." groupLabelConditionalElement="./*:title" groupLabelXPath="concat(./*:author, ' – ', ./*:title,' (fols. ',./*:locus/@from, '–',./*:locus/@to, ').')" groupNo="2" repeatable="yes">
+                    <element xpath="tei:msItem"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport"
+            formLabel="Physical description: writing material" repeat="no">
+            <localSchema src="../schemas/mss-support.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
+            <formDesc>Describe the writing material, measurements and related additional properties of the manuscript.</formDesc>
+            <elementGroups>
+                <group groupLabel="Writing material of the manuscript." groupLabelConditionalElement="./*:material"
+                    groupLabelXPath="concat('Writing material of the manuscript: ',./*:material,'.')" groupNo="1">
+                    <element xpath="tei:support"/>
+                </group>
+                <group groupLabel="Measurements of the page (number of folios, height and width)." groupNo="2">
+                    <element xpath="tei:extent"/>
+                </group>
+                <group groupLabel="Additional properties of the page (foliation, composition of quires, catchwords, state of conservation)."
+                    groupNo="3">
+                    <element xpath="tei:foliation"/>
+                    <element xpath="tei:collation"/>
+                    <element xpath="tei:condition"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="catchwords">
+                    <valList type="closed">
+                        <valItem ident="No marking"/>
+                        <valItem ident="Catchwords at the end of quires"/>
+                        <valItem ident="Catchwords at the end of folios"/>
+                        <valItem ident="Catchwords at the end of pages"/>
+                        <valItem ident="Middle markings"/>
+                        <valItem ident="Signatures at the end of quires"/>
+                        <valItem ident="Signatures at the beginning of quires"/>
+                    </valList>
+                </element>
+                <element ident="material">
+                    <valList type="closed">
+                        <valItem ident="Paper"/>
+                        <valItem ident="Parchment"/>
+                        <valItem ident="Papyrus"/>
+                        <valItem ident="Cardboard"/>
+                        <valItem ident="Leather"/>
+                        <valItem ident="Textile"/>
+                        <valItem ident="Cotton"/>
+                        <valItem ident="Other"/>
+                    </valList>
+                </element>
+                <element ident="formula">
+                    <valList type="closed">
+                        <valItem ident="1"/>
+                        <valItem ident="2"/>
+                        <valItem ident="3"/>
+                        <valItem ident="4"/>
+                        <valItem ident="5"/>
+                        <valItem ident="6"/>
+                        <valItem ident="7"/>
+                        <valItem ident="8"/>
+                        <valItem ident="9"/>
+                        <valItem ident="10"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Physical description: page layout" repeat="no">
+            <localSchema src="../schemas/mss-layout.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summary of page layout." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupNo="2"  repeatable="yes">
+                    <element xpath="tei:layout"/>
+                </group>
+                <!--<group groupLabel="Detailed description of page layout: text block, justification, ruling and pricking." groupLabelConditionalElement="." groupLabelXPath="concat('Page layout: fols. ',./*:locus/@from,'–',./*:locus/@to,')" groupNo="2"  repeatable="yes">
+                    <element xpath="tei:layout"/>
+                </group>-->
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="desc">
+                    <valList type="closed">
+                        <valItem ident="Text on recto and verso"/>
+                        <valItem ident="Recto always in flesh side"/>
+                        <valItem ident="Recto always in hair side"/>
+                        <valItem ident="Text on one side only"/>
+                        <valItem ident="Text on flesh side only"/>
+                        <valItem ident="Text on hair side only"/>
+                        <valItem ident="Text on the verso upside down in respect to the recto"/>
+                        <valItem ident="Long lines"/>
+                        <valItem ident="Additional blocks of text"/>
+                        <valItem ident="Text in blocks on the page"/>
+                        <valItem ident="Cul-de-lampe"/>
+                        <valItem ident="Tables"/>
+                    </valList>
+                </element>
+                <element ident="ab">
+                    <valList type="closed">
+                        <valItem ident="There is pricking"/>
+                        <valItem ident="No pricking"/>
+                        <valItem ident="No pricking can be seen"/>
+                        <valItem ident=" "/>
+                        <valItem ident="There is ruling"/>
+                        <valItem ident="No ruling"/>
+                        <valItem ident="No ruling can be seen"/>
+                        <valItem ident=" "/>
+                        <valItem ident="Prickings for horizontal lines"/>
+                        <valItem ident="Prickings for vertical lines"/>
+                        <valItem ident="Prickings for horizontal and vertical lines"/>
+                        <valItem ident="Prickings for additional lines"/>
+                        <valItem ident="Double prickings for certain lines"/>
+                        <valItem ident=" "/>
+                        <valItem ident="Framework only"/>
+                        <valItem ident="Grid of single vertical and horizontal lines"/>
+                        <valItem ident="Variable"/>
+                    </valList>
+                </element>
+                <element ident="metamark">
+                    <valList type="closed">
+                        <valItem ident="Left-hand margin is not even"/>
+                        <valItem ident="Space fillers"/>
+                        <valItem ident="Extended letters"/>
+                        <valItem ident="Reduced letters"/>
+                        <valItem ident="Broken letters"/>
+                        <valItem ident="Anticipation"/>
+                        <valItem ident="Abbreviation"/>
+                        <valItem ident="Change of script register"/>
+                        <valItem ident="Writing above the line horizontal"/>
+                        <valItem ident="Writing above the line oblique"/>
+                        <valItem ident="Writing below the line"/>
+                        <valItem ident="Vertical writing"/>
+                        <valItem ident="Change of orientation of letter components"/>
+                        <valItem ident="Other"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:decoDesc" formName="decoDesc" formLabel="Physical description: text layout"
+            repeat="no">
+            <localSchema src="../schemas/mss-decoDesc.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe features of the text layout facilitating navigation through the text (e.g. numbering of sections, enlarged titles,
+                decoration, etc.).</formDesc>
+            <elementGroups>
+                <group groupLabel="Summary of text layout." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Detailed description(s) of text layout." groupNo="2">
+                    <element xpath="tei:decoNote"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="desc">
+                    <valList type="closed">
+                        <valItem ident="No graphic marks of text navigation"/>
+                        <valItem ident="Spaces between paragraphs"/>
+                        <valItem ident="Paragraph marks and textual dividers"/>
+                        <valItem ident="Rubric"/>
+                        <valItem ident="Numbering of sections"/>
+                        <valItem ident="Enlarged titles and incipits"/>
+                        <valItem ident="Explicits"/>
+                        <valItem ident="Colours"/>
+                        <valItem ident="Other"/>
+                        <valItem ident="Change of script type"/>
+                        <valItem ident="Decoration"/>
+                        <valItem ident="Other"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc" formName="handDesc" formLabel="Physical description: script/hand description" repeat="no">
+            <localSchema src="../schemas/mss-hand.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
+            <formDesc>Describe script type(s) and hand(s) of the manuscript.</formDesc>
+            <elementGroups>
+                <!--<group groupLabel="Definition of script." groupLabelConditionalElement="." groupLabelXPath="concat('Definition of script: ',./*/@script,' ',./*/@rend,' ',./*/@style)" groupNo="2"  repeatable="yes">
+                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
+                </group>
+                <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="." groupLabelXPath="concat('Scribal hand: fols. ',./*:locus/@from,'–',./*:locus/@to,')" groupNo="2" repeatable="no">
+                    <element xpath="tei:handDesc"/>
+                </group>-->
+                <group groupLabel="Definition of script." groupNo="1"  repeatable="yes">
+                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
+                </group>
+                <group groupLabel="Scribal hand(s)." groupNo="2" repeatable="no">
+                    <element xpath="tei:handDesc"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="additions" formLabel="Incodicated documents" repeat="no">
+            <localSchema src="../schemas/mss-additions.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.).</formDesc>
+            <elementGroups>
+                <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType,'.')" groupNo="1" repeatable="yes">
+                    <element xpath="tei:item"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Colophon"/> 
+                        <valItem ident="Patronage"/>
+                        <valItem ident="Certificates of transmission"/>
+                        <valItem ident="Certificates of endowment"/>	
+                        <valItem ident="Bequest statements"/>
+                        <valItem ident="Ownership statements"/> 
+                        <valItem ident="Contract – Sale"/> 
+                        <valItem ident="Contract – Donation"/>
+                        <valItem ident="Contract – Personal status"/>
+                        <valItem ident="Contract of employment of a scribe"/>
+                        <valItem ident="Ex libris"/>
+                        <valItem ident="Inventory"/>
+                        <valItem ident="Book list"/>
+                        <valItem ident="Family genealogy"/>
+                        <valItem ident="Note"/>
+                        <valItem ident="Proofreading note"/>
+                        <valItem ident="Ijāza"/>
+                        <valItem ident="Transmission note"/>
+                        <valItem ident="Reader’s formula"/>
+                        <valItem ident="Signatures"/> 
+                        <valItem ident="Stamps"/> 
+                        <valItem ident="Talismanic inscriptions"/>
+                        <valItem ident="Magic squares"/>
+                        <valItem ident="Magic letters"/>
+                        <valItem ident="Solomon seal"/>
+                        <valItem ident="Kabīkaj"/>
+                        <valItem ident="Geomantic figures"/>
+                        <valItem ident="Observations"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc/tei:binding" formName="bindingDesc" formLabel="Binding description" repeat="no">
+            <localSchema src="../schemas/mss-binding.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe the binding of the manuscript.</formDesc>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
+            <elementGroups>
+                <group groupLabel="Binding's origin, material, and dimensions." groupNo="1">
+                    <element xpath="tei:decoNote"/>
+                </group>
+            </elementGroups>
+            <elementGroups>
+                <group groupLabel="State of conservation of the binding." groupNo="2">
+                    <element xpath="tei:condition"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="objectType">
+                    <valList type="closed">
+                        <valItem ident="Original"/>
+                        <valItem ident="Later"/>
+                        <valItem ident="Unbound"/> 
+                    </valList>
+                </element>
+                <element ident="material">
+                    <valList type="closed">
+                        <valItem ident="Paper"/>
+                        <valItem ident="Parchment"/>
+                        <valItem ident="Cardboard"/>
+                        <valItem ident="Wood"/>
+                        <valItem ident="Papyrus"/>
+                        <valItem ident="Cotton"/>
+                        <valItem ident="Leather"/>
+                        <valItem ident="Metal"/>
+                        <valItem ident="Textile"/>
+                        <valItem ident="Other"/>
+                        <valItem ident="Silk"/>
+                        <valItem ident="Bronze"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat/tei:list" formName="accMat" formLabel="Heritage data" repeat="no">
+            <localSchema src="../schemas/mss-accMat.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
+            <elementGroups>
+                <group groupLabel="Quotation from and information about the heritage material." groupNo="1" repeatable="yes">
+                    <element xpath="tei:item"/>
+                </group>
+            </elementGroups>
+        </subform> 
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="Manuscript history" repeat="no">
+            <localSchema src="../schemas/mss-history.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <formDesc>Describe the history of acquisition, in particular modern, and how the manuscript became part of its present holding institution.</formDesc>
+            <elementGroups>
+                <group groupLabel="Summary of the acquisition history of the manuscript." groupNo="1">
+                    <element xpath="tei:summary"/>
+                </group>
+                <group groupLabel="Traces left by modern owners of the manuscript (date, place, folios, person, quotation)." groupLabelConditionalElement="./*:persName" groupLabelXPath="concat('Later owner: ', ./*:persName)" groupNo="2"  repeatable="yes">
+                    <element xpath="tei:provenance"/>
+                </group>
+                <group groupLabel="Traces left by the present holding institution (date, place, folios, person, quotation, stamp)." groupNo="3">
+                    <element xpath="tei:acquisition"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:listBibl" formName="additional" formLabel="Bibliography" repeat="no">
+            <localSchema src="../schemas/mss-additional.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup elementName="title" suppress="true"/>
+            <formDesc>Add bibliographic references from the Zotero database.</formDesc>
+            <elementGroups>
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
+                    <element xpath="tei:bibl"/>
+                </group>
+            </elementGroups>
+        </subform>        
     </subforms>
 </config>
