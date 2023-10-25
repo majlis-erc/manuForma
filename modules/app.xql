@@ -74,7 +74,7 @@ declare function app:username-login($node as node(), $model as map(*)) {
                             <span class="glyphicon glyphicon-user"/> {$userName} <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a href="{$app:navbase}/user.html?user={$user}">Account</a></li>
+                          <!--<li><a href="{$app:navbase}/user.html?user={$user}">Account</a></li>-->
                           <li><a href="{$app:navbase}/admin?logout=true" id="logout">Logout</a></li>
                         </ul>
                       </div>
