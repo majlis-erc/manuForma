@@ -1816,7 +1816,7 @@
                                     <!-- Element input for textbox style input -->
                                     <xf:textarea class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]"/>    
                                     <!-- Element attributes -->
-                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group">
                                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                             <div class="input-group">
                                                 <!-- Attribute value -->
@@ -1834,6 +1834,24 @@
                                                     <xf:delete ev:event="DOMActivate" ref="."/>    
                                                 </xf:trigger>
                                             </div>    
+                                        </div>
+                                    </xf:repeat>
+                                    <!-- There are no xml:ids on inserted bibls...  -->
+                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
+                                        <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                                            <div class="input-group">
+                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
+                                                    <xf:label> </xf:label>
+                                                    <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
+                                                        <xf:label value="*:title"/>
+                                                        <xf:value ref="@xml:id"/>
+                                                    </xf:itemset>
+                                                </xf:select1>
+                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
+                                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
+                                                    <xf:delete ev:event="DOMActivate" ref="."/>    
+                                                </xf:trigger>
+                                            </div>
                                         </div>
                                     </xf:repeat>
                                 </div>
@@ -1904,7 +1922,7 @@
                 <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
             </xf:textarea>    
             <!-- Element attributes -->
-            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group"> 
+            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group"> 
                 <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                     <div class="input-group">
                         <!-- Attribute value -->
@@ -1924,6 +1942,24 @@
                     </div>    
                 </div>
             </xf:repeat>
+            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                    <div class="input-group">
+                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
+                            <xf:label></xf:label>
+                            <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
+                                <xf:label value="*:title"/>
+                                <xf:value ref="@xml:id"/>
+                            </xf:itemset>
+                        </xf:select1>
+                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
+                            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
+                            <xf:delete ev:event="DOMActivate" ref="."/>    
+                        </xf:trigger>
+                    </div>
+                </div>
+            </xf:repeat>
+            
             
                 <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
@@ -2266,7 +2302,8 @@
                     </xf:textarea>    
                     <!-- Element attributes -->
                     <!-- WS:Note there seems to be a bug in deleting the last attribute, can not see any obviouse reason for this.  -->
-                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group"> 
+<!--                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group">-->
+                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group">
                         <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                             <div class="input-group">
                                 <!-- Attribute value -->
@@ -2286,13 +2323,25 @@
                             </div>    
                         </div>
                     </xf:repeat>
-                    <xf:select1 ref="@source" class="input-small">
-                        <xf:label>Source:</xf:label>
-                        <xf:itemset ref="instance('i-rec')//tei:text/descendant::tei:bibl[tei:title[@level='citation'] != '']">
-                            <xf:label value="concat(tei:title[@level='citation'],' Cited Range: ', tei:citedRange[1]/@unit,' ',tei:citedRange[1], ' ',tei:citedRange[2]/@unit,' ',tei:citedRange[2])"/>
-                            <xf:value ref="@xml:id"/>
-                        </xf:itemset>
-                    </xf:select1>
+                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
+                        <div class="input-group">
+                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
+                                <xf:label/>
+                                <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
+                                    <xf:label value="*:title"/>
+                                    <xf:value ref="@xml:id"/>
+                                </xf:itemset>
+                            </xf:select1>
+                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
+                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
+                                <xf:delete ev:event="DOMActivate" ref="."/>    
+                            </xf:trigger>
+                        </div>
+                    </div>
+                </xf:repeat>
+                
+                
                 </div>
             <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
