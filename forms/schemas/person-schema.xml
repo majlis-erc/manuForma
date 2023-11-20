@@ -33,9 +33,8 @@ End license statement: do not remove -->
         <fileDesc>
             <titleStmt>
                 <title>Partial Manuscripts Schema, constrained for usage in XForms</title>
-                <author xml:id="PL">Maximilian de Molière</author>
-                <author xml:id="NG">Nathan Gibson</author>
                 <author xml:id="MM">Maximilian de Molière</author>
+                <author xml:id="NG">Nathan Gibson</author>
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
@@ -77,8 +76,8 @@ End license statement: do not remove -->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-
-                    <moduleRef key="core" include="bible citedRange ptr title"/>
+                    <moduleRef key="linking" include="ab"/>
+                    <moduleRef key="core" include="bible citedRange item list ptr quote title"/>
                     <moduleRef key="namesdates"
                         include="persName listPerson person addName forename birth placeName death floruit sex faith occupation residence"/>
                     <moduleRef key="header" include="idno"/>
@@ -189,6 +188,7 @@ End license statement: do not remove -->
                                 <elementRef key="faith" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="occupation" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="residence" minOccurs="0" maxOccurs="1"/>
+                                <elementRef key="ab" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/>
                             </sequence>
@@ -712,10 +712,20 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
 
+                    
+
+                    
+
+                    
+
+                    
+                    
+                    
+                    
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">Add a bibliographic item, like a monograph or journal article.</desc>
+                        <desc xml:lang="en">Reference the information by adding an entry from the Zotero database.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -742,11 +752,12 @@ End license statement: do not remove -->
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
                         </content>
                     </elementSpec>
-
+                    
+                    
                     <elementSpec ident="title" mode="change">
                         <gloss>Title of publication</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
-                        <desc>The title to the Zotero will be filled out automatically.</desc>
+                        <desc xml:lang="en">The title to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -784,11 +795,11 @@ End license statement: do not remove -->
                             <attDef ident="xml:space" mode="delete"/>
                         </attList>
                     </elementSpec>
-
+                    
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <desc>The link to the Zotero will be filled out automatically.</desc>
+                        <desc xml:lang="en">The link to the Zotero will be filled out automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -807,18 +818,18 @@ End license statement: do not remove -->
                             <empty/>
                         </content>
                         <attList>
-                            <attDef ident="target" mode="change" rend="restricted">
-                                <gloss>Target</gloss>
+                            <attDef ident="target" mode="change" style="restricted">
+                                <gloss>Link</gloss>
                             </attDef>
                             <attDef ident="targetLang" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-
+                    
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
-                        <desc>Specify which pages, columns, etc. you are refering to.</desc>
+                        <desc xml:lang="en">Define the range of content. Indicate whether the reference is to pages, columns, etc.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -826,32 +837,181 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attDef ident="unit" mode="change">
-                                <gloss>Unit</gloss>
-                                <valList mode="change">
-                                    <valItem mode="add" ident="page">
-                                        <gloss>Page</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="folio">
-                                        <gloss>Folio</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="cols">
-                                        <gloss>Column</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="section">
-                                        <gloss>Section</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="chapter">
-                                        <gloss>Chapter</gloss>
-                                    </valItem>
-                                </valList>
-                            </attDef>
                             <attDef ident="from" mode="delete"/>
                             <attDef ident="to" mode="delete"/>
                             <attDef ident="evaluate" mode="delete"/>
                             <attDef ident="target" mode="delete"/>
                             <attDef ident="targetLang" mode="delete"/>
+                            <attDef ident="unit" mode="change">
+                                <gloss>Unit</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="page">
+                                        <gloss>Pages</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="folio">
+                                        <gloss>Folios</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="cols">
+                                        <gloss>Columns</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="section">
+                                        <gloss>Sections</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
+                    </elementSpec>
+                    
+                    
+                    
+                    
+                    <elementSpec ident="item" module="core" mode="change">
+                        <gloss>Document</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the document and give a transcription.</desc>
+                        <content>
+                            <elementRef key="quote"/>
+                            <elementRef key="note"/>
+                            <elementRef key="bibl"/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="sortKey" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    <elementSpec ident="list" module="core" mode="change">
+                        <gloss>List of heritage data documents</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">A sequence of bullet points ("item") organized as a list.</desc>
+                        <content>
+                            <elementRef key="item"/>
+                        </content>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="sortKey" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
+                    <elementSpec ident="quote" mode="change">
+                        <gloss>Transcription</gloss>
+                        <gloss type="tei">&lt;quote/&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.ascribed.directed" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="who" mode="delete"/>
+                            <attDef ident="defective" mode="delete"/>
+                            <attDef ident="notation" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <gloss>Language</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar">
+                                        <gloss>Arabic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="en">
+                                        <gloss>English</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="he">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="ru">
+                                        <gloss>Russian</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="fr">
+                                        <gloss>French</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="ge">
+                                        <gloss>German</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    
+                    
+                    <elementSpec ident="ab" module="linking" mode="change">
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="decls" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="hand" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="part" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete">
+                            </attDef>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                        <content>
+                            <elementRef key="list"/>
+                        </content>
                     </elementSpec>
                 </schemaSpec>
             </div>

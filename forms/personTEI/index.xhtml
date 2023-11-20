@@ -4,8 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references." />
-
+      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add descriptions of the person from earlier reference works and internal library records. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database. Add Linked Open Data references of the person." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -38,17 +37,26 @@
          <xf:instance id="i-upload">
             <xml-base64 xsi:type="xs:base64Binary"></xml-base64>
          </xf:instance>
-         <xf:instance id="i-search"><data><q></q></data></xf:instance>
+         <xf:instance id="i-search"><data>
+               <search><q></q><facets></facets>
+               </search></data></xf:instance>
          <xf:instance id="i-search-id"><data><q></q></data></xf:instance>
          <xf:instance id="i-search-results"><data></data></xf:instance>
          <xf:instance id="i-selected-search"><data></data></xf:instance>
+         <xf:instance id="i-selected-facet"><data>
+               <facetGrp label="" facet=""></facetGrp></data></xf:instance>
          <xf:instance id="i-selected"><data></data></xf:instance>
          <xf:instance id="i-selectTemplate"><data><template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"></template></data></xf:instance>
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
                <subform formName="persNames" selected="false"></subform>
                <subform formName="biographicalData" selected="false"></subform>
-               <subform formName="biblData" selected="false"></subform></data></xf:instance>
+               <subform formName="heritageData" selected="false"></subform>
+               <subform formName="biblData" selected="false"></subform>
+               <subform formName="idnoData" selected="false"></subform></data></xf:instance>
+         <xf:instance id="i-lookups"><data>
+               <lookup formName="placeName" selected="false"></lookup>
+               <lookup formName="bibl" selected="false"></lookup></data></xf:instance>
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
@@ -131,8 +139,12 @@
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
+         </xf:submission>
+         <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
          </xf:submission>
          <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
             <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"></xf:resource>
@@ -213,7 +225,6 @@
                         </xf:trigger>
                      </li>
                      <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[position() &gt; 1]" id="navRepeatpersNames">
-
                         <li class="nav-item">
                            <xf:trigger appearance="minimal" class="nav-link"><xf:label>Personal name  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-data-entry"></xf:toggle>
@@ -251,6 +262,30 @@
                         </li>
                      </xf:repeat>
                      <li class="nav-item">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'heritageData']" class="nav-link"><xf:label>Heritage data</xf:label><xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-data-entry"></xf:toggle>
+                              <xf:unload targetid="subform"></xf:unload>
+                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/heritageData.xhtml"></xf:load>
+                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person/*:ab/*:list[position() &gt; 1]" id="navRepeatheritageData">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Heritage data  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/heritageData.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatheritageData') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
+                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'biblData']" class="nav-link"><xf:label>Bibliographic reference</xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
@@ -270,6 +305,30 @@
                                  <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/biblData.xhtml"></xf:load>
                                  <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
                                  <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatbiblData') + 1"></setvalue>
+                              </xf:action>
+                           </xf:trigger>
+                        </li>
+                     </xf:repeat>
+                     <li class="nav-item">
+                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'idnoData']" class="nav-link"><xf:label>Linked Open Data</xf:label><xf:action ev:event="DOMActivate">
+                              <xf:toggle case="view-data-entry"></xf:toggle>
+                              <xf:unload targetid="subform"></xf:unload>
+                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/idnoData.xhtml"></xf:load>
+                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
+                           </xf:action>
+                        </xf:trigger>
+                     </li>
+                     <xf:repeat ref="instance('i-rec')//*:listPerson/*:person[position() &gt; 1]" id="navRepeatidnoData">
+                        <li class="nav-item">
+                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Linked Open Data  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/personTEI/idnoData.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeatidnoData') + 1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                         </li>
@@ -301,7 +360,6 @@
                                  <xf:toggle case="changeElementUnHide"></xf:toggle>
                               </xf:action>
                            </xf:trigger>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
@@ -341,7 +399,12 @@
                            <div id="collapseExistingRecord" class="accordion-collapse collapse" aria-labelledby="headingExistingRecord" data-bs-parent="#loadRecords">
                               <div class="accordion-body">
                                  <div class="fileLoading">
-                                    <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
+                                    <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search')//*:q" incremental="true"><xf:label></xf:label></xf:input><xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label> Search </xf:label><xf:action ev:event="DOMActivate">
+                                             <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="''"></xf:setvalue>
+                                             <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="''"></xf:setvalue>
+                                             <xf:send submission="s-search-saved"></xf:send>
+                                          </xf:action>
+                                       </xf:trigger>
                                        <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
                                     </div>
                                  </div>
@@ -349,10 +412,36 @@
                                     <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search-id')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-id" appearance="minimal"><xf:label> Search by ID </xf:label></xf:submit>
                                     </div>
                                     <div class="input-group mb-3 full-width">
-                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label value="concat(@name, ' ', @idno)"></xf:label><xf:value ref="@src"></xf:value>
-                                          </xf:itemset>
-                                       </xf:select1>
-                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
+                                       <div class="row">
+                                          <div class="col-md-3" style="color:black;">
+                                             <h5>Filter</h5>
+                                             <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
+                                                <h5><xf:output value="@label"></xf:output></h5>
+                                                <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
+                                                   <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><xf:output value="concat(@label, ' (',@count,')')"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                         <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"></xf:setvalue>
+                                                         <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"></xf:setvalue>
+                                                         <xf:send submission="s-search-saved"></xf:send>
+                                                      </xf:action>
+                                                   </xf:trigger>
+                                                </xf:repeat>
+                                             </xf:repeat>
+                                          </div>
+                                          <div class="col-md-9" style="color:black;">
+                                             <h5><xf:output value="instance('i-search-results')//*:info/@count"></xf:output> Results 
+                                                
+                                                <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next"><xf:label>Next</xf:label><xf:action ev:event="DOMActivate">
+                                                      <xf:send submission="s-search-saved-next"></xf:send>
+                                                   </xf:action>
+                                                </xf:trigger>
+                                             </h5>
+                                             <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label value="concat(@name, ' ', @idno)"></xf:label><xf:value ref="@src"></xf:value>
+                                                </xf:itemset>
+                                             </xf:select1>
+                                          </div>
+                                       </div><br /><div class="pull-right">
+                                          <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
