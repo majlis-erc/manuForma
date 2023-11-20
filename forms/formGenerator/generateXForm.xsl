@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.43 Beta 
+        Version: 1.45 Beta 
             -1.22 marks a major redesign
         
 
@@ -872,9 +872,11 @@
                                                 </xf:submit>
                                             </xsl:if>
                                             -->
+                                            <!--
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal">
                                                 <xf:label> Download XML (Chrome Only)</xf:label>
                                             </xf:submit>
+                                            -->
                                             <!--
                                             <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-view-xml" appearance="minimal">
                                                 <xf:label> View XML </xf:label>
