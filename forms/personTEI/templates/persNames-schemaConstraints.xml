@@ -16,12 +16,15 @@
            popup="1"
            teiElement="&lt;person/&gt;">
       <availableAtts elementName="person">
-         <attDef attLabel="role" ident="role" mode="change">
+         <attDef attLabel="type" ident="type" mode="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="author" attLabel="Author"/>
+               <valItem ident="names" attLabel="names"/>
+               <valItem ident="bio" attLabel="bio"/>
+               <valItem ident="bibl" attLabel="bibl"/>
+               <valItem ident="idno" attLabel="idno"/>
             </valList>
          </attDef>
          <attDef attLabel="id" ident="xml:id" class="att.global"/>
@@ -278,12 +281,13 @@
               currentLevel="3"
               popup="3"
               teiElement="&lt;placeName/&gt;">
-      <lookup xmlns=""
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
-              formURL="forms/mssTEI/lookup/placeName.xhtml"
+              formURL="form.xq?form=forms/personTEI/lookup/placeName.xhtml"
               elementName="placeName"
               formName="placeName"
-              lookupLabel="Look up places"/>
+              lookupLabel="Look up places"
+              level="toplevel"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="placeTEI"
              elementName="placeName"
@@ -379,12 +383,13 @@
               currentLevel="3"
               popup="3"
               teiElement="&lt;placeName/&gt;">
-      <lookup xmlns=""
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
-              formURL="forms/mssTEI/lookup/placeName.xhtml"
+              formURL="form.xq?form=forms/personTEI/lookup/placeName.xhtml"
               elementName="placeName"
               formName="placeName"
-              lookupLabel="Look up places"/>
+              lookupLabel="Look up places"
+              level="toplevel"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="placeTEI"
              elementName="placeName"
@@ -471,16 +476,8 @@
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
          </attDef>
       </availableAtts>
-      <controlledValues>
-         <element xmlns="" ident="sex">
-            <valList type="closed">
-               <valItem ident="Unknown"/>
-               <valItem ident="Female"/>
-               <valItem ident="Male"/>
-            </valList>
-         </element>
-      </controlledValues>
       <childElements>
+         <textNode type="input" class="sex"/>
          <child/>
       </childElements>
    </sex>
@@ -510,17 +507,8 @@
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
          </attDef>
       </availableAtts>
-      <controlledValues>
-         <element xmlns="" ident="faith">
-            <valList type="closed">
-               <valItem ident="Karaite"/>
-               <valItem ident="Rabbanite"/>
-               <valItem ident="Muslim"/>
-               <valItem ident="Christian"/>
-            </valList>
-         </element>
-      </controlledValues>
       <childElements>
+         <textNode type="input" class="faith"/>
          <child/>
       </childElements>
    </faith>
@@ -582,12 +570,13 @@
               currentLevel="3"
               popup="3"
               teiElement="&lt;placeName/&gt;">
-      <lookup xmlns=""
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
-              formURL="forms/mssTEI/lookup/placeName.xhtml"
+              formURL="form.xq?form=forms/personTEI/lookup/placeName.xhtml"
               elementName="placeName"
               formName="placeName"
-              lookupLabel="Look up places"/>
+              lookupLabel="Look up places"
+              level="toplevel"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="placeTEI"
              elementName="placeName"
@@ -627,14 +616,20 @@
          currentLevel="2"
          popup="2"
          teiElement="&lt;bibl/&gt;">
-      <lookup xmlns=""
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
-              formURL="forms/mssTEI/lookup/bibl.xhtml"
+              formURL="form.xq?form=forms/personTEI/lookup/bibl.xhtml"
               elementName="bibl"
               formName="bibl"
-              lookupLabel="Look up bibliographic record"/>
-      <desc>Add a bibliographic item, like a monograph or journal article.</desc>
-      <availableAtts elementName="bibl"/>
+              lookupLabel="Look up bibliographic record"
+              level="toplevel"/>
+      <desc>Reference the information by adding an entry from the Zotero database.</desc>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Local identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Local identifier</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <child>
             <element ident="title"
@@ -662,7 +657,7 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;title/&gt;">
-      <desc>contains a title for any kind of work.</desc>
+      <desc>The title to the Zotero will be filled out automatically.</desc>
       <availableAtts elementName="title"/>
       <childElements>
          <textNode type="input" class="title"/>
@@ -678,12 +673,9 @@
         teiElement="&lt;ptr/&gt;">
       <desc>The link to the Zotero will be filled out automatically.</desc>
       <availableAtts elementName="ptr">
-         <attDef attLabel="Target"
-                 ident="target"
-                 mode="change"
-                 rend="restricted">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Target</gloss>
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Link</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -697,7 +689,7 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
-      <desc>defines the range of cited content, often represented by pages or other units</desc>
+      <desc>Define the range of content. Indicate whether the reference is to pages, columns, etc.</desc>
       <availableAtts elementName="citedRange">
          <attDef attLabel="Unit" ident="unit" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -706,11 +698,10 @@
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
-               <valItem ident="page" attLabel="Page"/>
-               <valItem ident="folio" attLabel="Folio"/>
-               <valItem ident="cols" attLabel="Column"/>
-               <valItem ident="section" attLabel="Section"/>
-               <valItem ident="chapter" attLabel="Chapter"/>
+               <valItem ident="page" attLabel="Pages"/>
+               <valItem ident="folio" attLabel="Folios"/>
+               <valItem ident="cols" attLabel="Columns"/>
+               <valItem ident="section" attLabel="Sections"/>
             </valList>
          </attDef>
       </availableAtts>
