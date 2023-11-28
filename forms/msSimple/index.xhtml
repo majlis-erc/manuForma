@@ -551,7 +551,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-dark">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                   <h1 class="h2">
-                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"></xf:output></h1>
+                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',substring-after(substring-before(instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],'/tei'),'https://jalit.org/'),']')" class="elementLabel"></xf:output></h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
@@ -572,7 +572,6 @@
                                  <xf:toggle case="changeElementUnHide"></xf:toggle>
                               </xf:action>
                            </xf:trigger>
-                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
