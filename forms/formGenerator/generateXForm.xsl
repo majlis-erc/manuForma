@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.48 Beta 
+        Version: 1.50 Beta 
             -1.22 marks a major redesign
         
 
@@ -1075,6 +1075,20 @@
                                             <xf:label>URI: </xf:label>
                                             <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
                                         </xf:input>
+                                        
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <h3>Credits</h3>
+                                        <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change" id="changeRec">
+                                            <div class="change">
+                                                <xf:output value="concat(@who,' (', @when,'): ', .)"/>
+                                            </div>
+                                            
+                                            <!-- *:revisionDesc/*:change
+                                            <xf:repeat ref="instance('i-rec'){replace($path,'///','//')}[position() &gt; 1]" id="{$repeatIndexId}">
+                                            <change when="2013-07-07" who="http://syriaca.org/documentation/editors.xml#tcarlson">CREATED: bibliographic entry</change>
+                                            -->
+                                        </xf:repeat>
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-data-entry">    
@@ -1114,6 +1128,7 @@
                                 <div class="lookupDisplay changeElement">
                                     <div class="fileLoading">
                                         <h4 class="h6">What did you change?</h4>
+                                        <div class="fileLoading">
                                         <p>Write a one-sentence description of the changes you made to the file.</p>
                                         <div class="input-group mb-3 full-width">
                                             <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
@@ -1133,6 +1148,7 @@
                                                     <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"/>
                                                 </xf:action>
                                             </xf:trigger>   
+                                        </div>
                                         </div>
                                     </div> 
                                 </div>
@@ -1821,24 +1837,6 @@
                                     <xsl:call-template name="attributeDisplay">
                                         <xsl:with-param name="subformName" select="$subformName"/>
                                     </xsl:call-template>
-                                    <!-- There are no xml:ids on inserted bibls...  -->
-                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
-                                        <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                                            <div class="input-group">
-                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
-                                                    <xf:label> </xf:label>
-                                                    <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
-                                                        <xf:label value="*:title"/>
-                                                        <xf:value ref="@xml:id"/>
-                                                    </xf:itemset>
-                                                </xf:select1>
-                                                <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                                    <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
-                                                    <xf:delete ev:event="DOMActivate" ref="."/>    
-                                                </xf:trigger>
-                                            </div>
-                                        </div>
-                                    </xf:repeat>
                                 </div>
                                 
                                 <xsl:if test="$currentLevel &lt;= $maxLevel">
@@ -1910,25 +1908,6 @@
             <xsl:call-template name="attributeDisplay">
                 <xsl:with-param name="subformName" select="$subformName"/>
             </xsl:call-template>
-            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
-                <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                    <div class="input-group">
-                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
-                            <xf:label></xf:label>
-                            <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
-                                <xf:label value="*:title"/>
-                                <xf:value ref="@xml:id"/>
-                            </xf:itemset>
-                        </xf:select1>
-                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                            <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
-                            <xf:delete ev:event="DOMActivate" ref="."/>    
-                        </xf:trigger>
-                    </div>
-                </div>
-            </xf:repeat>
-            
-            
                 <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
                     <xsl:value-of select="concat($grpRepeatID,'GrpRepeatLevel',if(string($currentLevel) != '') then string($currentLevel) else '1')"/>
@@ -2274,25 +2253,6 @@
                 <xsl:call-template name="attributeDisplay">
                     <xsl:with-param name="subformName" select="$subformName"/>
                 </xsl:call-template>
-                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
-                    <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
-                        <div class="input-group">
-                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
-                                <xf:label/>
-                                <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
-                                    <xf:label value="*:title"/>
-                                    <xf:value ref="@xml:id"/>
-                                </xf:itemset>
-                            </xf:select1>
-                            <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref=".">
-                                <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
-                                <xf:delete ev:event="DOMActivate" ref="."/>    
-                            </xf:trigger>
-                        </div>
-                    </div>
-                </xf:repeat>
-                
-                
                 </div>
             <xsl:if test="$currentLevel &lt;= $maxLevel">
                 <xsl:variable name="childRepeatID">
@@ -2872,7 +2832,7 @@
                     <xsl:if test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
                         <xsl:choose>
                             <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]"/>
-                            <xsl:when test="$elementName = ('p','desc','note','summary')">
+                            <xsl:when test="$elementName = ('p','desc','note','summary','quote')">
                                 <textNode type="textarea"/>
                             </xsl:when>
                             <xsl:when test="$elementRules/descendant-or-self::*:textNode">
