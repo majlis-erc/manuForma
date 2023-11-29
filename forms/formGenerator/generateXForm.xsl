@@ -13,8 +13,9 @@
             - Main schema as an ODD file
             - XSLTForms
             - eXist-db 
-            
-        Version: 1.49 Beta 
+
+        Version: 1.50 Beta 
+
             -1.22 marks a major redesign
         
 
@@ -1075,6 +1076,20 @@
                                             <xf:label>URI: </xf:label>
                                             <xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert>
                                         </xf:input>
+                                        
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <h3>Credits</h3>
+                                        <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change" id="changeRec">
+                                            <div class="change">
+                                                <xf:output value="concat(@who,' (', @when,'): ', .)"/>
+                                            </div>
+                                            
+                                            <!-- *:revisionDesc/*:change
+                                            <xf:repeat ref="instance('i-rec'){replace($path,'///','//')}[position() &gt; 1]" id="{$repeatIndexId}">
+                                            <change when="2013-07-07" who="http://syriaca.org/documentation/editors.xml#tcarlson">CREATED: bibliographic entry</change>
+                                            -->
+                                        </xf:repeat>
                                     </div>
                                 </xf:case>
                                 <xf:case id="view-data-entry">    
@@ -1114,6 +1129,7 @@
                                 <div class="lookupDisplay changeElement">
                                     <div class="fileLoading">
                                         <h4 class="h6">What did you change?</h4>
+                                        <div class="fileLoading">
                                         <p>Write a one-sentence description of the changes you made to the file.</p>
                                         <div class="input-group mb-3 full-width">
                                             <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
@@ -1133,6 +1149,7 @@
                                                     <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"/>
                                                 </xf:action>
                                             </xf:trigger>   
+                                        </div>
                                         </div>
                                     </div> 
                                 </div>
