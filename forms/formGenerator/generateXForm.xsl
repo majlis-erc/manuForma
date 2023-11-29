@@ -13,8 +13,9 @@
             - Main schema as an ODD file
             - XSLTForms
             - eXist-db 
-            
+
         Version: 1.50 Beta 
+
             -1.22 marks a major redesign
         
 
