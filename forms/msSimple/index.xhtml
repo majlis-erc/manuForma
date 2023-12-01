@@ -687,6 +687,12 @@
                   </xf:case>
                   <xf:case id="view-admin">
                      <div class="input-group mb-3"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
+                     <div class="input-group mb-3">
+                        <h3>Credits</h3>
+                        <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change" id="changeRec">
+                           <div class="change"><xf:output value="concat(@who,' (', @when,'): ', .)"></xf:output></div>
+                        </xf:repeat>
+                     </div>
                   </xf:case>
                   <xf:case id="view-data-entry">
                      <xf:group ref="instance('i-rec')">
@@ -704,19 +710,21 @@
                   <div class="lookupDisplay changeElement">
                      <div class="fileLoading">
                         <h4 class="h6">What did you change?</h4>
-                        <p>Write a one-sentence description of the changes you made to the file.</p>
-                        <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
-                        <div class="mb-3">
-                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
-                                 <xf:send submission="s-github"></xf:send>
-                              </xf:action>
-                           </xf:trigger>
-                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Cancel</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
-                                 <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"></xf:setvalue>
-                              </xf:action>
-                           </xf:trigger>
+                        <div class="fileLoading">
+                           <p>Write a one-sentence description of the changes you made to the file.</p>
+                           <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
+                           <div class="mb-3">
+                              <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">
+                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                    <xf:send submission="s-github"></xf:send>
+                                 </xf:action>
+                              </xf:trigger>
+                              <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Cancel</xf:label><xf:action ev:event="DOMActivate">
+                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                    <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"></xf:setvalue>
+                                 </xf:action>
+                              </xf:trigger>
+                           </div>
                         </div>
                      </div>
                   </div>
