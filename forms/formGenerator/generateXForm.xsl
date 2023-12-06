@@ -13,9 +13,8 @@
             - Main schema as an ODD file
             - XSLTForms
             - eXist-db 
-
-        Version: 1.50 Beta 
-
+            
+        Version: 1.51 Beta 
             -1.22 marks a major redesign
         
 
@@ -978,7 +977,7 @@
                                                         </div>
                                                         <div class="input-group mb-3 full-width">
                                                             <div class="row">
-                                                                <div class="col-md-3" style="color:black;">
+                                                                <div class="col-md-4" style="color:black;">
                                                                     <h5>Filter</h5>
                                                                     <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
                                                                         <h5><xf:output value="@label"/></h5>
@@ -995,7 +994,7 @@
                                                                         </xf:repeat>
                                                                     </xf:repeat>
                                                                 </div>
-                                                                <div class="col-md-9" style="color:black;">
+                                                                <div class="col-md-8" style="color:black;">
                                                                     <h5><xf:output value="instance('i-search-results')//*:info/@count"/> Results 
                                                                         <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next">
                                                                             <xf:label>Next</xf:label>
