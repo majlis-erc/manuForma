@@ -104,26 +104,26 @@ declare function local:transform($nodes as node()*) as item()* {
         case element(tei:bibl) return
             if($node[parent::tei:place/parent::tei:listPlace] or $node[parent::tei:person/parent::tei:listPerson or parent::tei:note/parent::tei:bibl/parent::tei:body] or $node[parent::tei:bibl/parent::tei:bibl/parent::tei:body]) then
                 element { local-name($node) } 
-                    {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
-                        attribute xml:id { concat('bibl-',count($node/preceding-sibling::tei:bibl) + 1 )},
+                    {   $node/@*[not(name(.) = 'source')],
+                        (:attribute xml:id { concat('bibl-',count($node/preceding-sibling::tei:bibl) + 1 )},:)
                         for $n in $node/node()
                         return local:transform($n)
                     } 
             else if($node[parent::tei:body/parent::tei:text]) then
                 element { local-name($node) } 
-                    {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
-                        attribute xml:id { concat('work-',$id)},
+                    {   $node/@*[not(name(.) = 'source')],
+                        (:attribute xml:id { concat('work-',$id)},:)
                         for $n in $node/node()
                         return local:transform($n)
                     }  
             else if($node[parent::tei:listBibl/parent::tei:additional/parent::tei:msDesc]) then
                 element { local-name($node) } 
-                    {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
-                        attribute xml:id { concat('bibl-',
+                    {   $node/@*[not(name(.) = 'source')],
+                        (:attribute xml:id { concat('bibl-',
                         (count($node/parent::tei:listBibl/parent::tei:additional/preceding-sibling::tei:additional) + 1),
                         (count($node/parent::tei:listBibl/preceding-sibling::tei:listBibl) + 1),
                         (count($node/preceding-sibling::tei:bibl) + 1 ))
-                        },
+                        },:)
                         for $n in $node/node()
                         return local:transform($n)
                     } 
@@ -258,15 +258,15 @@ return
             }
          else if(request:get-parameter('type', '') = 'github') then
             try {
-                let $save := 
-                    (gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name)),
-                    xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)
-                    )
+                let $save := gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name))
+                let $saveDB := xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)
                 return
-                 <response status="okay" code="200">
-                    <message>Record saved to the {$github-repo} GitHub. Thank you for your contribution. </message>
+                 (<response status="okay" code="200">
+                    <message>Record saved to the {$github-repo} GitHub. Thank you for your contribution. {xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)}</message>
+                    <existURL>{$saveDB}</existURL>
                     <url>{$save}</url>
-                 </response>  
+                 </response>
+                 )
             } catch * {
                 (response:set-status-code( 500 ),
                 <response status="fail">
