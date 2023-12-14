@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.51 Beta 
+        Version: 1.52 Beta 
             -1.22 marks a major redesign
         
 
@@ -2299,7 +2299,7 @@
     
     <xsl:template name="attributeDisplay">
         <xsl:param name="subformName"/>
-        <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*" class="attr-group">
+        <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group">
             <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                 <div class="input-group">
                     <!-- Controlled value -->
@@ -2323,14 +2323,13 @@
                 </div>    
             </div>
         </xf:repeat>
-        <!---
         <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
             <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                 <div class="input-group">
                     <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
                         <xf:label/>
-                        <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl">
-                            <xf:label value="*:title"/>
+                        <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]">
+                            <xf:label value="*:idno"/>
                             <xf:value ref="@xml:id"/>
                         </xf:itemset>
                     </xf:select1>
@@ -2341,7 +2340,6 @@
                 </div>
             </div>
         </xf:repeat>
-        -->
     </xsl:template>
     <!-- Element Bind rules -->
     <xsl:template name="elementBinds">
