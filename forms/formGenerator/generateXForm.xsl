@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.52 Beta 
+        Version: 1.53 Beta 
             -1.22 marks a major redesign
         
 
@@ -975,48 +975,57 @@
                                                                 <xf:label> Search by ID </xf:label>
                                                             </xf:submit>
                                                         </div>
-                                                        <div class="input-group mb-3 full-width">
-                                                            <div class="row">
-                                                                <div class="col-md-4" style="color:black;">
-                                                                    <h5>Filter</h5>
-                                                                    <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
-                                                                        <h5><xf:output value="@label"/></h5>
-                                                                        <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
-                                                                            <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
-                                                                                <xf:label><xf:output value="concat(@label, ' (',@count,')')"/> </xf:label>
-                                                                                <xf:action ev:event="DOMActivate">
-                                                                                    <!-- Set value and send submit?  -->
-                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"/>
-                                                                                    <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"/>
-                                                                                    <xf:send submission="s-search-saved"/>
-                                                                                </xf:action>
-                                                                            </xf:trigger>
-                                                                        </xf:repeat>
-                                                                    </xf:repeat>
-                                                                </div>
-                                                                <div class="col-md-8" style="color:black;">
-                                                                    <h5><xf:output value="instance('i-search-results')//*:info/@count"/> Results 
-                                                                        <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next">
-                                                                            <xf:label>Next</xf:label>
+                                                        
+                                                    </div>
+                                                    <br/>
+                                                    <div class="full-width">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="color:black;">
+                                                                <h5>Filter</h5>
+                                                            </div>
+                                                            <div class="col-md-4" style="color:black;">
+                                                                <h5><xf:output value="instance('i-search-results')//*:info/@count"/> Results 
+                                                                    <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next">
+                                                                        <xf:label>Next</xf:label>
+                                                                        <xf:action ev:event="DOMActivate">
+                                                                            <xf:send submission="s-search-saved-next"/>
+                                                                        </xf:action>
+                                                                    </xf:trigger>
+                                                                </h5>
+                                                            </div>
+                                                            <div class="col-md-4" style="color:black;">
+                                                                <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
+                                                                    <xf:label> Load Selected Record </xf:label>
+                                                                </xf:submit>
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                    <div class="full-width">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="color:black;">
+                                                                <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
+                                                                    <h5><xf:output value="@label"/></h5>
+                                                                    <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
+                                                                        <xf:trigger appearance="minimal"  class="btn btn-outline-secondary btn-sm">
+                                                                            <xf:label><xf:output value="concat(@label, ' (',@count,')')"/> </xf:label>
                                                                             <xf:action ev:event="DOMActivate">
-                                                                                <xf:send submission="s-search-saved-next"/>
+                                                                                <!-- Set value and send submit?  -->
+                                                                                <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"/>
+                                                                                <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"/>
+                                                                                <xf:send submission="s-search-saved"/>
                                                                             </xf:action>
                                                                         </xf:trigger>
-                                                                    </h5>
-                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
-                                                                        <xf:label/>
-                                                                        <xf:itemset ref="instance('i-search-results')//*:record">
-                                                                            <xf:label value="concat(@name, ' ', @idno)"/>
-                                                                            <xf:value ref="@src"/>
-                                                                        </xf:itemset>
-                                                                    </xf:select1>
-                                                                </div>
+                                                                    </xf:repeat>
+                                                                </xf:repeat>
                                                             </div>
-                                                            <br/>
-                                                            <div class="pull-right">
-                                                            <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal">
-                                                                <xf:label> Load Selected Record </xf:label>
-                                                            </xf:submit>
+                                                            <div class="col-md-8" style="color:black;">
+                                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')">
+                                                                    <xf:label/>
+                                                                    <xf:itemset ref="instance('i-search-results')//*:record">
+                                                                        <xf:label value="concat(@name, ' ', @idno)"/>
+                                                                        <xf:value ref="@src"/>
+                                                                    </xf:itemset>
+                                                                </xf:select1>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1098,7 +1107,7 @@
                                 </xf:case>
                                 <xf:case id="view-html">
                                     <div class="htmlPreview">
-                                       
+                                        
                                     </div>
                                 </xf:case>
                             </xf:switch>
