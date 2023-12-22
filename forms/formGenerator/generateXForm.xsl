@@ -1001,7 +1001,7 @@
                                                                 <xf:label> Search by ID </xf:label>
                                                             </xf:submit>
                                                         </div>
-                                                       
+
                                                     </div>
                                                     <br/>
                                                     <div class="full-width">
@@ -1133,7 +1133,7 @@
                                 </xf:case>
                                 <xf:case id="view-html">
                                     <div class="htmlPreview">
-                                       
+                                        
                                     </div>
                                 </xf:case>
                             </xf:switch>
