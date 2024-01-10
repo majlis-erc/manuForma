@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.54 Beta 
+        Version: 1.55 Beta 
             -1.22 marks a major redesign
         
 
@@ -481,9 +481,7 @@
     <xsl:template name="formMainPage">
         <xsl:variable name="mainFormName" select="$configDoc//formName"/>
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
-        <html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ev="http://www.w3.org/2001/xml-events" 
-            xmlns:xsltforms="http://www.agencexml.com/xsltforms" 
-            xmlns:rte="http://www.agencexml.com/xsltforms/rte">
+        <html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -502,7 +500,6 @@
                 <script type="text/javascript" src="resources/js/jquery.validate.min.js"/>
                 <script type="text/javascript" src="resources/js/login.js"/>
                 <script language="text/javascript" src="resources/js/app.js"></script>
-                <script type="text/javascript" src="/exist/apps/xsltforms/scripts/tinymce_4.7.1/tinymce.min.js" data-uri="http://www.tinymce.com" data-version="tinymce_4.7.1">/* */</script>
                 <script type="text/javascript">
                     function getXMLDate(){
                     var d = new Date();
@@ -511,23 +508,6 @@
                 </script>
                 <!-- XForms Model -->
                 <xf:model id="m-mss">
-                    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.agencexml.com/xsltforms/rte">
-                        <simpleType name="standardHTML">
-                            <restriction base="xforms:HTMLFragment" xsltforms:rte="TinyMCE"/>
-                            <annotation>
-                                <appinfo>
-                                    {
-                                    plugins: [
-                                    "advlist autolink lists link image charmap print preview anchor",
-                                    "searchreplace visualblocks code fullscreen",
-                                    "insertdatetime media table contextmenu paste"
-                                    ],
-                                    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                                    }
-                                </appinfo>
-                            </annotation>
-                        </simpleType>
-                    </schema>
                     <xf:instance id="i-rec">
                         <data/>
                     </xf:instance>
@@ -734,12 +714,6 @@
                             <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email them to us.</xf:message>
                         </xf:action>
                     </xf:submission>
-                    <xf:bind nodeset="*:p" type="rte:standardHTML"/>
-                    <xf:bind nodeset="*:desc" type="rte:standardHTML"/>
-                    <xf:bind nodeset="*:quote" type="rte:standardHTML"/>
-                    <xf:bind nodeset="*:note" type="rte:standardHTML"/>
-                    <xf:bind nodeset="*:summary" type="rte:standardHTML"/>
-                    <!-- 'p','desc','note','summary','quote' -->
                 </xf:model>       
             </head>
             <body>
@@ -821,7 +795,7 @@
                             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                                 <h1 class="h2"><!--<xsl:value-of select="$configDoc//formTitle"/>-->
                                    Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"/>
-                                    <xf:output value="concat('[',substring-after(substring-before(instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],'/tei'),'https://jalit.org/'),']')" class="elementLabel"/>
+                                    <xf:output value="concat('[',substring-after(instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],'https://jalit.org/'),']')" class="elementLabel"/>
                                 </h1>
                                 <div class="btn-toolbar mb-2 mb-md-0">
                                     <div class="btn-group me-2">
@@ -1001,7 +975,7 @@
                                                                 <xf:label> Search by ID </xf:label>
                                                             </xf:submit>
                                                         </div>
-
+                                                        
                                                     </div>
                                                     <br/>
                                                     <div class="full-width">
@@ -1936,10 +1910,9 @@
             </xf:input>
             <!--<xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>-->
             <!-- Element input for textbox style input -->
-            <strong style="color:black;">TEST TEXTAREA GRP</strong>
-            <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea large-textarea" mediatype="application/xhtml+xml" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
+            <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
                 <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
-            </xf:textarea>      
+            </xf:textarea>    
             <!-- Element attributes -->
             <xsl:call-template name="attributeDisplay">
                 <xsl:with-param name="subformName" select="$subformName"/>
@@ -2280,8 +2253,7 @@
                     </xf:input>
                     <!--<xf:input class="elementInput" ref=".[(instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='input']"/>-->
                     <!-- Element input for textbox style input -->
-                    <strong style="color:black;">TEST TEXTAREA</strong>
-                    <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea large-textarea" mediatype="application/xhtml+xml" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
+                    <xf:textarea xmlns="http://www.w3.org/2002/xforms" class="elementTextArea" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:childElements/*:textNode[@type='textarea']]">
                         <xf:alert><xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*[1])][1]/*:childElements[1]/descendant-or-self::*:element[@ident = local-name(current())]/@errorMessage"/></xf:alert>
                     </xf:textarea>    
                     <!-- Element attributes -->
