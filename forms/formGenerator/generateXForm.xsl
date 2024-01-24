@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns" version="3.0">
     <!-- 
         Generate XForms from a schema. Designed for TEI XML creation and editing. Run as an eXist-db application. 
@@ -14,7 +15,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.55 Beta 
+        Version: 1.56 Beta 
             -1.22 marks a major redesign
         
 
@@ -1246,6 +1247,9 @@
                             <index>1</index>
                         </data>
                     </xf:instance>
+                    <xf:instance id="i-lookup-uri">
+                        <data xmlns=""><uri></uri></data>
+                    </xf:instance>
                     <!-- Element binds specifically for min/max occurrence  -->
                     <!-- Does not work due to the way elements are referenced in the form (not named) -->
                     <xsl:call-template name="elementBinds">
@@ -1389,13 +1393,17 @@
                         <data xmlns="">
                         </data>
                     </xf:instance>
+                    <xf:instance id="i-lookup-uri">
+                        <data xmlns=""><uri></uri></data>
+                    </xf:instance>
                     <!--
                     <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/getControlledVocab.xql?apiURL=','{string($lookup/@api)}', instance('i-lookup-query')//q),"/>
                     </xf:submission>
                     -->
                     <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('{string($lookup/@api)}', instance('i-lookup-query')//q),"/>
+<!--                        <xf:resource value="concat('{string($lookup/@api)}', instance('i-lookup-query')//q),"/>-->
+                        <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q),"/>
                     </xf:submission>
                 </xf:model>
             </head>
@@ -2047,10 +2055,11 @@
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
+                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"/>
                         </xf:action>
                     </xf:trigger>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
@@ -2062,17 +2071,16 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;">
-                            <xf:unload targetid="{$grpRepeatID}subformLookup"/>
-                        </xf:case>
-                        <xf:case id="{$grpRepeatID}LookupUnHide">
+                        <xf:case id="{$repeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$repeatID}LookupUnHide">
                             <div class="lookupDisplay">
-                                <xf:group id="{$grpRepeatID}subformLookup"/>
+                                <xf:group id="{$repeatID}subformLookup"/>
                                 <div class="text-right">
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
-                                        <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$grpRepeatID}subformLookup" ev:event="DOMActivate"/>
+                                        <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
+                                        <xf:unload targetid="{$repeatID}subformLookup" ev:event="DOMActivate"/>
+                                        <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2196,6 +2204,7 @@
                             <xf:load show="embed" targetid="{$repeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"/>
                         </xf:action>
                     </xf:trigger>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add">
@@ -2216,6 +2225,7 @@
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
                                         <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
                                         <xf:unload targetid="{$repeatID}subformLookup" ev:event="DOMActivate"/>
+                                        <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"/>
                                     </xf:trigger>   
                                 </div>
                             </div>
@@ -2306,6 +2316,7 @@
         </div>
     </xsl:template>
     
+    <!-- Display of element attributes, works for all elements -->
     <xsl:template name="attributeDisplay">
         <xsl:param name="subformName"/>
         <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@*[local-name() != 'source']" class="attr-group">
@@ -2350,6 +2361,7 @@
             </div>
         </xf:repeat>
     </xsl:template>
+    
     <!-- Element Bind rules -->
     <xsl:template name="elementBinds">
         <xsl:param name="subform"/>
