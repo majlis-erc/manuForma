@@ -17,8 +17,10 @@
          <xf:instance id="i-lookup-selected"><data xmlns="">
                <selected></selected></data></xf:instance>
          <xf:instance id="i-lookup-add"><data xmlns=""></data></xf:instance>
+         <xf:instance id="i-lookup-uri"><data xmlns="">
+               <uri></uri></data></xf:instance>
          <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('/exist/apps/majlis/api/search/placeName?format=xml&amp;q=', instance('i-lookup-query')//q),"></xf:resource>
+            <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q),"></xf:resource>
          </xf:submission>
       </xf:model>
    </head>

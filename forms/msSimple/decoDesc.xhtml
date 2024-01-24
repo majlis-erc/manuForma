@@ -17,6 +17,8 @@
          <xf:instance id="i-decoDesc-subforms"><data xmlns=""></data></xf:instance>
          <xf:instance id="i-decoDesc-repeatIndex"><data xmlns="">
                <index>1</index></data></xf:instance>
+         <xf:instance id="i-lookup-uri"><data xmlns="">
+               <uri></uri></data></xf:instance>
       </xf:model>
    </head>
    <body>
@@ -87,10 +89,11 @@
                                     </xf:trigger>
                                  </xf:group>
                                  <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
-                                       <xf:toggle case="decoDescGrpRepeatLevel11LookupUnHide" ev:event="DOMActivate"></xf:toggle>
-                                       <xf:load show="embed" targetid="decoDescGrpRepeatLevel11subformLookup">
+                                       <xf:toggle case="d1e695LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                       <xf:load show="embed" targetid="d1e695subformLookup">
                                           <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                        </xf:load>
+                                       <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                     </xf:action>
                                  </xf:trigger>
                                  <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -100,15 +103,14 @@
                                     </xf:action>
                                  </xf:trigger>
                                  <xf:switch class="lookupSwitch" style="width:.5em;">
-                                    <xf:case id="decoDescGrpRepeatLevel11LookupHide" style="display:none;">
-                                       <xf:unload targetid="decoDescGrpRepeatLevel11subformLookup"></xf:unload>
-                                    </xf:case>
-                                    <xf:case id="decoDescGrpRepeatLevel11LookupUnHide">
+                                    <xf:case id="d1e695LookupHide" style="display:none;"></xf:case>
+                                    <xf:case id="d1e695LookupUnHide">
                                        <div class="lookupDisplay">
-                                          <xf:group id="decoDescGrpRepeatLevel11subformLookup"></xf:group>
+                                          <xf:group id="d1e695subformLookup"></xf:group>
                                           <div class="text-right">
-                                             <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel11LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                                <xf:unload targetid="decoDescGrpRepeatLevel11subformLookup" ev:event="DOMActivate"></xf:unload>
+                                             <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="d1e695LookupHide" ev:event="DOMActivate"></xf:toggle>
+                                                <xf:unload targetid="d1e695subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                              </xf:trigger>
                                           </div>
                                        </div>
@@ -193,6 +195,7 @@
                                                 <xf:load show="embed" targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1subformLookup">
                                                    <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                 </xf:load>
+                                                <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                              </xf:action>
                                           </xf:trigger>
                                           <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -209,6 +212,7 @@
                                                    <div class="text-right">
                                                       <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel11GrpRepeatLevel1LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                          <xf:unload targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                         <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                       </xf:trigger>
                                                    </div>
                                                 </div>
@@ -294,6 +298,7 @@
                                                             <xf:load show="embed" targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2subformLookup">
                                                                <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                             </xf:load>
+                                                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                                          </xf:action>
                                                       </xf:trigger>
                                                       <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -310,6 +315,7 @@
                                                                <div class="text-right">
                                                                   <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                                      <xf:unload targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                                     <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                                   </xf:trigger>
                                                                </div>
                                                             </div>
@@ -395,6 +401,7 @@
                                                                         <xf:load show="embed" targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup">
                                                                            <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                                         </xf:load>
+                                                                        <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                                                      </xf:action>
                                                                   </xf:trigger>
                                                                   <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -411,6 +418,7 @@
                                                                            <div class="text-right">
                                                                               <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                                                  <xf:unload targetid="decoDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                                                 <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                                               </xf:trigger>
                                                                            </div>
                                                                         </div>
@@ -523,10 +531,11 @@
                                     </xf:trigger>
                                  </xf:group>
                                  <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
-                                       <xf:toggle case="decoDescGrpRepeatLevel21LookupUnHide" ev:event="DOMActivate"></xf:toggle>
-                                       <xf:load show="embed" targetid="decoDescGrpRepeatLevel21subformLookup">
+                                       <xf:toggle case="d1e695LookupUnHide" ev:event="DOMActivate"></xf:toggle>
+                                       <xf:load show="embed" targetid="d1e695subformLookup">
                                           <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                        </xf:load>
+                                       <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                     </xf:action>
                                  </xf:trigger>
                                  <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -536,15 +545,14 @@
                                     </xf:action>
                                  </xf:trigger>
                                  <xf:switch class="lookupSwitch" style="width:.5em;">
-                                    <xf:case id="decoDescGrpRepeatLevel21LookupHide" style="display:none;">
-                                       <xf:unload targetid="decoDescGrpRepeatLevel21subformLookup"></xf:unload>
-                                    </xf:case>
-                                    <xf:case id="decoDescGrpRepeatLevel21LookupUnHide">
+                                    <xf:case id="d1e695LookupHide" style="display:none;"></xf:case>
+                                    <xf:case id="d1e695LookupUnHide">
                                        <div class="lookupDisplay">
-                                          <xf:group id="decoDescGrpRepeatLevel21subformLookup"></xf:group>
+                                          <xf:group id="d1e695subformLookup"></xf:group>
                                           <div class="text-right">
-                                             <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel21LookupHide" ev:event="DOMActivate"></xf:toggle>
-                                                <xf:unload targetid="decoDescGrpRepeatLevel21subformLookup" ev:event="DOMActivate"></xf:unload>
+                                             <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="d1e695LookupHide" ev:event="DOMActivate"></xf:toggle>
+                                                <xf:unload targetid="d1e695subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                              </xf:trigger>
                                           </div>
                                        </div>
@@ -629,6 +637,7 @@
                                                 <xf:load show="embed" targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1subformLookup">
                                                    <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                 </xf:load>
+                                                <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                              </xf:action>
                                           </xf:trigger>
                                           <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -645,6 +654,7 @@
                                                    <div class="text-right">
                                                       <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel21GrpRepeatLevel1LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                          <xf:unload targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                         <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                       </xf:trigger>
                                                    </div>
                                                 </div>
@@ -730,6 +740,7 @@
                                                             <xf:load show="embed" targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2subformLookup">
                                                                <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                             </xf:load>
+                                                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                                          </xf:action>
                                                       </xf:trigger>
                                                       <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -746,6 +757,7 @@
                                                                <div class="text-right">
                                                                   <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                                      <xf:unload targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                                     <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                                   </xf:trigger>
                                                                </div>
                                                             </div>
@@ -831,6 +843,7 @@
                                                                         <xf:load show="embed" targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup">
                                                                            <xf:resource value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
                                                                         </xf:load>
+                                                                        <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
                                                                      </xf:action>
                                                                   </xf:trigger>
                                                                   <xf:trigger appearance="minimal" ref=".[instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-decoDesc-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
@@ -847,6 +860,7 @@
                                                                            <div class="text-right">
                                                                               <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full"><xf:label><i class="bi bi-x"></i> Close</xf:label><xf:toggle case="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3LookupHide" ev:event="DOMActivate"></xf:toggle>
                                                                                  <xf:unload targetid="decoDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup" ev:event="DOMActivate"></xf:unload>
+                                                                                 <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"></xf:setvalue>
                                                                               </xf:trigger>
                                                                            </div>
                                                                         </div>
