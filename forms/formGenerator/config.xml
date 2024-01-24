@@ -73,13 +73,13 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:text/tei:body" formName="relation" formLabel="Relation">
+        <subform xpath="/tei:TEI/tei:text/tei:body" formName="relation" formLabel="Relation">
             <formDesc>Record relational information from the source.</formDesc>
             <localSchema src="../schemas/relations-schema.xml"/>
             <globalSchema src="../schemas/relations-schema.xml"/>
             <xmlTemplate src="../templates/relations-template.xml"/>
             <lookup elementName="bibl" suppress="true"/>
-            <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="idno" formName="titleBibl" lookupLabel="Look up manuscript"/>
+            <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="idno" formName="titleBibl" lookupLabel="Look up source"/>
             <elementGroups>
                 <group groupLabel="Factoid." groupLabelConditionalElement="./*:gloss" groupLabelXPath="./*:gloss" groupNo="1" repeatable="yes">
                     <element xpath="tei:ab"/>

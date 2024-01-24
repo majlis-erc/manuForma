@@ -22,7 +22,7 @@
    <body>
       <h2 class="h3 mainElement">Relation</h2>
       <p class="alert alert-light hint">Record relational information from the source.</p>
-      <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(///*:text/*:body)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:text/*:body[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
+      <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(//*:text/*:body)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:text/*:body[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-relation-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = $elementName][instance('i-relation-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
       </xf:trigger>
