@@ -37,26 +37,15 @@
          <xf:instance id="i-upload">
             <xml-base64 xsi:type="xs:base64Binary"></xml-base64>
          </xf:instance>
-         <xf:instance id="i-search"><data>
-               <search><q></q><facets></facets>
-               </search></data></xf:instance>
+         <xf:instance id="i-search"><data><q></q></data></xf:instance>
          <xf:instance id="i-search-id"><data><q></q></data></xf:instance>
          <xf:instance id="i-search-results"><data></data></xf:instance>
          <xf:instance id="i-selected-search"><data></data></xf:instance>
-         <xf:instance id="i-selected-facet"><data>
-               <facetGrp label="" facet=""></facetGrp></data></xf:instance>
          <xf:instance id="i-selected"><data></data></xf:instance>
          <xf:instance id="i-selectTemplate"><data><template name="Relations Template" src="/forms/templates/relations-fulltemplate.xml"></template></data></xf:instance>
          <xf:instance id="i-subforms"><data>
                <subform formName="titleStmt" selected="false"></subform>
                <subform formName="relation" selected="false"></subform></data></xf:instance>
-         <xf:instance id="i-lookups"><data>
-               <lookup formName="persName" selected="false"></lookup>
-               <lookup formName="placeName" selected="false"></lookup>
-               <lookup formName="title" selected="false"></lookup>
-               <lookup formName="bibl" selected="false"></lookup>
-               <lookup formName="" selected="false"></lookup>
-               <lookup formName="titleBibl" selected="false"></lookup></data></xf:instance>
          <xf:instance id="i-submission">
             <response status="success">
                <message>Submission result</message>
@@ -140,12 +129,8 @@
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
          <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
+            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"></xf:resource>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
-         </xf:submission>
-         <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
-            <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"></xf:resource>
          </xf:submission>
          <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
             <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"></xf:resource>
@@ -175,9 +160,7 @@
             <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
-               <xf:load show="new">
-                  <xf:resource value="instance('i-submission')//*:url"></xf:resource>
-               </xf:load>
+               <xf:load value="instance('i-submission')//*:url"></xf:load>
             </xf:action>
             <xf:action ev:event="xforms-submit-error">
                <xf:message ev:event="xforms-submit-error" level="modal">Unable to submit your additions at this time, you may download your changes and email
@@ -244,7 +227,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-dark">
                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
                   <h1 class="h2">
-                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',substring-after(instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],'https://jalit.org/'),']')" class="elementLabel"></xf:output></h1>
+                     Edit Record: <xf:output value="instance('i-rec')//*:titleStmt/*:title[1]" class="elementLabel"></xf:output><xf:output value="concat('[',instance('i-rec')//*:publicationStmt/*:idno[@type='URI'],']')" class="elementLabel"></xf:output></h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                      <div class="btn-group me-2">
                         <div class="submission float-end">
@@ -265,6 +248,7 @@
                                  <xf:toggle case="changeElementUnHide"></xf:toggle>
                               </xf:action>
                            </xf:trigger>
+                           <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-download-xml" appearance="minimal"><xf:label> Download XML (Chrome Only)</xf:label></xf:submit>
                         </div>
                      </div>
                   </div>
@@ -305,57 +289,18 @@
                            <div id="collapseExistingRecord" class="accordion-collapse collapse" aria-labelledby="headingExistingRecord" data-bs-parent="#loadRecords">
                               <div class="accordion-body">
                                  <div class="fileLoading">
-                                    <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search')//*:q" incremental="true"><xf:label></xf:label></xf:input><xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label> Search </xf:label><xf:action ev:event="DOMActivate">
-                                             <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="''"></xf:setvalue>
-                                             <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="''"></xf:setvalue>
-                                             <xf:send submission="s-search-saved"></xf:send>
-                                          </xf:action>
-                                       </xf:trigger>
+                                    <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-saved" appearance="minimal"><xf:label> Search </xf:label></xf:submit>
                                        <xf:submit class="btn btn-outline-secondary" submission="s-browse-saved" appearance="minimal"><xf:label> Browse </xf:label></xf:submit>
                                     </div>
                                  </div>
                                  <div class="fileLoading">
                                     <div class="input-group mb-3 full-width"><xf:input class="form-control" ref="instance('i-search-id')" incremental="true"><xf:label></xf:label></xf:input><xf:submit class="btn btn-outline-secondary" submission="s-search-id" appearance="minimal"><xf:label> Search by ID </xf:label></xf:submit>
                                     </div>
-                                 </div><br /><div class="full-width">
-                                    <div class="row">
-                                       <div class="col-md-4" style="color:black;">
-                                          <h5>Filter</h5>
-                                       </div>
-                                       <div class="col-md-4" style="color:black;">
-                                          <h5><xf:output value="instance('i-search-results')//*:info/@count"></xf:output> Results 
-                                             
-                                             <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm" ref="instance('i-search-results')//*:next"><xf:label>Next</xf:label><xf:action ev:event="DOMActivate">
-                                                   <xf:send submission="s-search-saved-next"></xf:send>
-                                                </xf:action>
-                                             </xf:trigger>
-                                          </h5>
-                                       </div>
-                                       <div class="col-md-4" style="color:black;">
-                                          <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="full-width">
-                                    <div class="row">
-                                       <div class="col-md-4" style="color:black;">
-                                          <xf:repeat ref="instance('i-search-results')//*:facetGrp" id="searchResultsFacetGrp">
-                                             <h5><xf:output value="@label"></xf:output></h5>
-                                             <xf:repeat ref="*:facet" id="searchResultsFacetGrpFacet">
-                                                <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><xf:output value="concat(@label, ' (',@count,')')"></xf:output></xf:label><xf:action ev:event="DOMActivate">
-                                                      <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@label" value="current()/parent::*/@label"></xf:setvalue>
-                                                      <xf:setvalue ref="instance('i-selected-facet')//*:facetGrp/@facet" value="current()/@label"></xf:setvalue>
-                                                      <xf:send submission="s-search-saved"></xf:send>
-                                                   </xf:action>
-                                                </xf:trigger>
-                                             </xf:repeat>
-                                          </xf:repeat>
-                                       </div>
-                                       <div class="col-md-8" style="color:black;">
-                                          <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label value="concat(@name, ' ', @idno)"></xf:label><xf:value ref="@src"></xf:value>
-                                             </xf:itemset>
-                                          </xf:select1>
-                                       </div>
+                                    <div class="input-group mb-3 full-width">
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" appearance="full" class="checkbox select-group form-control" ref="instance('i-selected-search')"><xf:label></xf:label><xf:itemset ref="instance('i-search-results')//*:record"><xf:label value="concat(@name, ' ', @idno)"></xf:label><xf:value ref="@src"></xf:value>
+                                          </xf:itemset>
+                                       </xf:select1>
+                                       <xf:submit class="btn btn-outline-secondary" submission="s-load-template-search" appearance="minimal"><xf:label> Load Selected Record </xf:label></xf:submit>
                                     </div>
                                  </div>
                               </div>
@@ -389,12 +334,6 @@
                   </xf:case>
                   <xf:case id="view-admin">
                      <div class="input-group mb-3"><xf:input xmlns="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:publicationStmt[1]/*:idno[@type='URI']" class="form-control"><xf:label>URI: </xf:label><xf:alert>* Use the following URI pattern: https://majlis.net/COLLECTION/UNIQUE_ID/tei</xf:alert></xf:input></div>
-                     <div class="input-group mb-3">
-                        <h3>Credits</h3>
-                        <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change" id="changeRec">
-                           <div class="change"><xf:output value="concat(@who,' (', @when,'): ', .)"></xf:output></div>
-                        </xf:repeat>
-                     </div>
                   </xf:case>
                   <xf:case id="view-data-entry">
                      <xf:group ref="instance('i-rec')">
@@ -412,21 +351,18 @@
                   <div class="lookupDisplay changeElement">
                      <div class="fileLoading">
                         <h4 class="h6">What did you change?</h4>
-                        <div class="fileLoading">
-                           <p>Write a one-sentence description of the changes you made to the file.</p>
-                           <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
-                           <div class="mb-3">
-                              <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">
-                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
-                                    <xf:send submission="s-github"></xf:send>
-                                 </xf:action>
-                              </xf:trigger>
-                              <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Cancel</xf:label><xf:action ev:event="DOMActivate">
-                                    <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
-                                    <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"></xf:setvalue>
-                                 </xf:action>
-                              </xf:trigger>
-                           </div>
+                        <div class="input-group mb-3 full-width"><xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"></xf:textarea></div>
+                        <div class="mb-3">
+                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Save</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                 <xf:send submission="s-github"></xf:send>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label> Cancel</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="changeElementHide" ev:event="DOMActivate"></xf:toggle>
+                                 <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"></xf:setvalue>
+                              </xf:action>
+                           </xf:trigger>
                         </div>
                      </div>
                   </div>
