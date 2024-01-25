@@ -33,7 +33,7 @@
          <div class="accordion" id="elementGroup">
             <div class="accordion-item">
                <h2 class="accordion-header" id="heading1"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                     <xf:group ref=".[./* != '']"><xf:output value="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style,'.'"></xf:output></xf:group>
+                     <xf:group ref=".[./* != '']"><xf:output value="concat('Codicological definition: ', string-join((./*[string()] | ./*/@*[string()]), ' '), '.')"></xf:output></xf:group>
                      <xf:group ref=".[./* = '']"><xf:output value="'Codicological definition.'"></xf:output></xf:group></button></h2>
                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#elementGroup">
                   <div class="accordion-body">

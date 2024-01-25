@@ -217,12 +217,12 @@
             <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="bibl" formName="titleBibl" lookupLabel="Look up manuscript"/>
             <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
             <elementGroups>
-                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style,'.'" groupNo="1" repeatable="no">
-                    <element xpath="tei:objectType"/>
-                </group>
-                <!--<group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', string-join((./*[string()] | ./*/@*[string()]), ', '), '.')" groupNo="1" repeatable="no">
+                <!--<group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style,'.'" groupNo="1" repeatable="no">
                     <element xpath="tei:objectType"/>
                 </group>-->
+                <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', string-join((./*[string()] | ./*/@*[string()]), ' '), '.')" groupNo="1" repeatable="no">
+                    <element xpath="tei:objectType"/>
+                </group>
                 <group groupLabel="List of manuscript joins." groupNo="2" repeatable="no">
                     <element xpath="tei:listBibl"/>
                 </group>
