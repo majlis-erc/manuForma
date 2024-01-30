@@ -433,7 +433,31 @@
             popup="2"
             teiElement="&lt;floruit/&gt;">
       <desc>Fill in the date of the period of intellectual activity.</desc>
-      <availableAtts elementName="floruit">
+      <availableAtts elementName="floruit"/>
+      <childElements>
+         <child>
+            <element ident="date"
+                     label="Date"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="placeName"
+                     label="Place"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </floruit>
+   <date ident="date"
+         elementName="date"
+         elementLabel="Date"
+         path="/*:person/*:floruit/*:date"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;date/&gt;">
+      <desc>Fill in the date in CE. Reference items from the bibliography in the "Source" field.</desc>
+      <availableAtts elementName="date">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
@@ -452,10 +476,57 @@
          </attDef>
       </availableAtts>
       <childElements>
-         <textNode type="input" class="floruit"/>
+         <textNode type="input" class="date"/>
          <child/>
       </childElements>
-   </floruit>
+   </date>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place"
+              path="/*:person/*:floruit/*:placeName"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
+              formURL="form.xq?form=forms/personTEI/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up places"
+              level="toplevel"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New Places"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy). Reference items from the bibliography in the "Source" field.</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Identifier" ident="ref" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
    <sex ident="sex"
         elementName="sex"
         elementLabel="Gender"
