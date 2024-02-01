@@ -60,17 +60,18 @@ let $data :=
                             request:get-parameter('idno','')
                          else if(request:get-parameter('baseURI','') != '') then
                             concat(request:get-parameter('baseURI',''),request:get-parameter('idno',''))
-                         else ()
+                         else concat('/',request:get-parameter('idno',''))
             return 
                 if($idno != '') then
                     <data idno="{$idno}">{
                         for $r in collection($eXistCollection)//tei:idno[. = $idno] | collection($eXistCollection)//tei:idno[. = ($idno || '/tei')] 
+                        | collection($eXistCollection)//tei:idno[ends-with(.,$idno)] 
                         let $title := string($r/ancestor::tei:TEI/descendant::tei:title[1])
                         let $idno := $r
                         order by $title
                         return <record src="{document-uri(root($r))}" name="{$title}" idno="{concat('[',$idno,']')}"/>
                     }</data>
-                else ()
+                else <div>Empty idno</div>
         else  ()  
     else if(request:get-parameter('github','') = 'browse') then
         gitcommit:list-files()        
