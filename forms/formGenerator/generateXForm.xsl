@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.56 Beta 
+        Version: 1.57 Beta 
             -1.22 marks a major redesign
         
 
@@ -2577,7 +2577,7 @@
             </xsl:call-template> 
         </TEI>
      </xsl:template>
-    <xsl:template name="xformElementSchemaInstance">
+        <xsl:template name="xformElementSchemaInstance">
         <xsl:param name="elementName"/>
         <xsl:param name="parentElementName"/>
         <xsl:param name="subform"/>
@@ -2716,6 +2716,14 @@
             </xsl:attribute>
             <xsl:variable name="lookupList">
                 <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName]">
+                    <lookup>
+                        <xsl:copy-of select="@*"/>
+                        <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
+                        <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
+                        <xsl:attribute name="supress" select="if(@suppress='true' or parent::*:subform[@lookup='no']) then 'true' else 'false'"/>
+                        <xsl:attribute name="form" select="if(parent::*:subform) then string(parent::*:subform/@formName) else ()"/>
+                    </lookup> 
+                    <!--
                     <xsl:choose>
                         <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"><lookup supress="true"/></xsl:when>
                         <xsl:otherwise>
@@ -2726,10 +2734,11 @@
                             </lookup> 
                         </xsl:otherwise>
                     </xsl:choose>
+                    -->
                 </xsl:for-each>
             </xsl:variable>
             <xsl:choose>
-                <xsl:when test="$lookupList/*[@level='subform']">
+                <xsl:when test="$lookupList/*[@level='subform'][@form = $subformName]">
                     <xsl:copy-of select="$lookupList/*[@level='subform']"></xsl:copy-of>
                 </xsl:when>
                 <xsl:otherwise>
@@ -2972,5 +2981,4 @@
             </xsl:for-each-group>
         </xsl:if>
     </xsl:template>
-
 </xsl:stylesheet>
