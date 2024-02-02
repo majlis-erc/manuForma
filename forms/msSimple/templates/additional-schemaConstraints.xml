@@ -64,12 +64,14 @@
          popup="2"
          teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
               elementName="bibl"
-              formName="titleBibl"
-              lookupLabel="Look up manuscript"
-              level="subform"/>
+              formName="bibl"
+              lookupLabel="Look up bibliographic record"
+              level="toplevel"
+              supress="false"
+              form=""/>
       <desc>Add a bibliographic item.</desc>
       <availableAtts elementName="bibl">
          <attDef attLabel="Bibliographic identifier" ident="xml:id" mode="change">
@@ -105,12 +107,12 @@
           popup="3"
           teiElement="&lt;title/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
               elementName="title"
-              formName="title"
-              lookupLabel="Look up title"
-              level="toplevel"/>
+              suppress="true"
+              formURL="form.xq?form=forms/msSimple/lookup/"
+              level="subform"
+              supress="true"
+              form="additional"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="worksTEI"
              elementName="title"
