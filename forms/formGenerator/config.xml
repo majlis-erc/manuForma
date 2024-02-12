@@ -63,17 +63,29 @@
         List forms in order of editing preference.
     -->
     <subforms>
-        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
-            <formDesc>Record title information</formDesc>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
+            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
-            <xmlTemplate src="../templates/place-fulltemplate.xml"/>
+            <xmlTemplate src="../templates/work-fulltemplate.xml"/>
+            <elementGroups>
+                <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:sponsor"/>
+                    <element xpath="tei:funder"/>
+                </group>
+                <group groupLabel="Project team." groupNo="2" repeatable="no">
+                    <element xpath="tei:editor"/>
+                    <element xpath="tei:respStmt"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Work" repeat="no">
             <formDesc>Information about work.</formDesc>
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
+            <lookup elementName="title" suppress="true"/>
             <elementGroups>
                 <group groupLabel="Add bibliographic information about work."  groupNo="1" repeatable="no">
                     <element xpath="tei:title"/>
@@ -93,6 +105,7 @@
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
+            <lookup elementName="title" suppress="true"/>
             <elementGroups>
                 <group groupLabel="Add information about manuscript or edition." groupLabelConditionalElement="./*:bibl/title" groupLabelXPath="./*:bibl/title"  groupNo="1" repeatable="yes">
                     <element xpath="tei:note"/>

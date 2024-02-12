@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information Information about work. Add manuscripts and editions from the database. Add bibliographic references from the Zotero database." />
+      <meta name="description" content="Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record information pertaining the institutions and people behind the project. Information about work. Add manuscripts and editions from the database. Add bibliographic references from the Zotero database." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Works TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -57,6 +57,8 @@
                <lookup formName="placeName" selected="false"></lookup>
                <lookup formName="title" selected="false"></lookup>
                <lookup formName="bibl" selected="false"></lookup>
+               <lookup formName="" selected="false"></lookup>
+               <lookup formName="" selected="false"></lookup>
                <lookup formName="" selected="false"></lookup></data></xf:instance>
          <xf:instance id="i-submission">
             <response status="success">
@@ -215,30 +217,6 @@
                         </xf:trigger>
                      </li>
                      <li class="nav-item">
-                        <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="nav-link"><xf:label>Title</xf:label><xf:action ev:event="DOMActivate">
-                              <xf:toggle case="view-data-entry"></xf:toggle>
-                              <xf:unload targetid="subform"></xf:unload>
-                              <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                              <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/worksTEI/titleStmt.xhtml"></xf:load>
-                              <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                              <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
-                           </xf:action>
-                        </xf:trigger>
-                     </li>
-                     <xf:repeat ref="instance('i-rec')//*:teiHeader/*:fileDesc/*:titleStmt[position() &gt; 1]" id="navRepeattitleStmt">
-                        <li class="nav-item">
-                           <xf:trigger appearance="minimal" class="nav-link"><xf:label>Title  [<xf:output value="position() + 1"></xf:output>]</xf:label><xf:action ev:event="DOMActivate">
-                                 <xf:toggle case="view-data-entry"></xf:toggle>
-                                 <xf:unload targetid="subform"></xf:unload>
-                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
-                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/worksTEI/titleStmt.xhtml"></xf:load>
-                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
-                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="index('navRepeattitleStmt') + 1"></setvalue>
-                              </xf:action>
-                           </xf:trigger>
-                        </li>
-                     </xf:repeat>
-                     <li class="nav-item">
                         <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'bibl']" class="nav-link"><xf:label>Work</xf:label><xf:action ev:event="DOMActivate">
                               <xf:toggle case="view-data-entry"></xf:toggle>
                               <xf:unload targetid="subform"></xf:unload>
@@ -322,6 +300,15 @@
                         <div class="submission float-end">
                            <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label><span data-feather="home"></span> Admin Metadata  </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:toggle case="view-admin"></xf:toggle>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger appearance="minimal" ref="instance('i-subforms')//*:subform[@formName = 'titleStmt']" class="btn btn-outline-secondary btn-sm"><xf:label>Header</xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:toggle case="view-data-entry"></xf:toggle>
+                                 <xf:unload targetid="subform"></xf:unload>
+                                 <xf:setvalue ref="instance('i-subforms')//*:subform[@selected = 'true']/@selected" value="'false'"></xf:setvalue>
+                                 <xf:load if="@selected != 'true'" show="embed" targetid="subform" resource="form.xq?form=forms/worksTEI/titleStmt.xhtml"></xf:load>
+                                 <xf:setvalue ref="@selected" value="'true'"></xf:setvalue>
+                                 <setvalue xmlns="http://www.w3.org/2002/xforms" ref="instance('i-repeatIndex')/index" value="1"></setvalue>
                               </xf:action>
                            </xf:trigger>
                            <xf:trigger appearance="minimal" class="btn btn-outline-secondary btn-sm"><xf:label> Submit to GitHub </xf:label><xf:action ev:event="DOMActivate">
