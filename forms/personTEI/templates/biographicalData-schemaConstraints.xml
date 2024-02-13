@@ -94,10 +94,6 @@
       <desc>You have two options: 1) Create "Additional name" fields for every name component, like ism, kunya, etc.,
                             2) you enter the full name form into the "Full name" field. Reference items from the bibliography in the "Source" field.</desc>
       <availableAtts elementName="persName">
-         <attDef attLabel="Source" ident="source" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
-         </attDef>
          <attDef attLabel="Type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
@@ -159,7 +155,12 @@
              popup="3"
              teiElement="&lt;forename/&gt;">
       <desc>Give the person's given name.</desc>
-      <availableAtts elementName="forename"/>
+      <availableAtts elementName="forename">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="forename"/>
          <child/>
@@ -178,6 +179,10 @@
          <attDef attLabel="Identifier" ident="ref" class="att.canonical">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
          </attDef>
          <attDef attLabel="Name type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -215,7 +220,12 @@
          popup="3"
          teiElement="&lt;name/&gt;">
       <desc>Write out the full form of a person's name.</desc>
-      <availableAtts elementName="name"/>
+      <availableAtts elementName="name">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+      </availableAtts>
       <childElements>
          <textNode type="input" class="name"/>
          <child/>
