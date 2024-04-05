@@ -65,9 +65,39 @@
             <xmlTemplate src="../templates/place-fulltemplate.xml"/>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="listPlace" formLabel="Place" repeat="no">
+            <formDesc>Information about the place.</formDesc>
+            <localSchema src="../schemas/place-schema.xml"/>
+            <localSchema src="../schemas/place-schema.xml"/>
+            <xmlTemplate src="../templates/place-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Place name." groupLabelConditionalElement="./*:placeName[@xml:lang='en']" groupLabelXPath="./*:placeName[@xml:lang='en']" groupNo="1" repeatable="no">
+                    <element xpath="tei:placeName"/>
+                    <element xpath="tei:desc"/>
+                    <element xpath="tei:location"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="idnoData" formLabel="Linked Open Data">
+            <formDesc>Add Linked Open Data references of the place.</formDesc>
+            <localSchema src="../schemas/place-schema.xml"/>
+            <localSchema src="../schemas/place-schema.xml"/>
+            <xmlTemplate src="../templates/place-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Linked Open Data entry." groupLabelConditionalElement="./*" groupLabelXPath="concat('Linked Open Data: ',./*/@subtype,'.')" groupNo="1" repeatable="yes">
+                    <element xpath="tei:idno"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="additional" formLabel="Bibliography" repeat="no">
             <localSchema src="../schemas/place-schema.xml"/>
             <globalSchema src="../schemas/place-schema.xml"/>
             <xmlTemplate src="../templates/place-fulltemplate.xml"/>
-        </subform>        
+            <formDesc>Add bibliographic references from the Zotero database.</formDesc>
+            <elementGroups>
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
+                    <element xpath="tei:bibl"/>
+                </group>
+            </elementGroups>
+        </subform>
     </subforms>
 </config>
