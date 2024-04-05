@@ -11,6 +11,9 @@
    <titleStmt ident="titleStmt"
               elementName="titleStmt"
               elementLabel="title statement"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
               path="/*:titleStmt"
               currentLevel="1"
               popup="1"
@@ -55,14 +58,17 @@
    <title ident="title"
           elementName="title"
           elementLabel="Title"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
           path="/*:titleStmt/*:title"
           currentLevel="2"
           popup="2"
           teiElement="&lt;title/&gt;">
       <desc>contains a title for any kind of work.</desc>
       <availableAtts elementName="title">
-         <attDef ident="evidence" attLabel="evidence"/>
-         <attDef ident="level" attLabel="level">
+         <attDef attLabel="evidence" ident="evidence" usage="opt"/>
+         <attDef attLabel="level" ident="level" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -84,7 +90,7 @@
                         desc="the title applies to any unpublished material (including&#xA;                                                  theses and dissertations unless&#xA;                                                  published by a commercial press) 미간행물(출판사에서 출판되지 않은 석박사 논문을 포함하여)의 제목 未出版的項目題名 (包括未經商業刊物發表的專題論文) título de&#xA;                                                  un material inédito (incluidas tesis y&#xA;                                                  disertaciones que no sean publicadas por&#xA;                                                  una editorial comercial) 非刊行物のタイトル(未刊の学位論文など)． titre de&#xA;                                                  matéria non publié (thèses et&#xA;                                                  dissertations comprises, à l'exception&#xA;                                                  de leurs éditions commerciales) titolo di&#xA;                                                  materiale non pubblicato (incluse tesi&#xA;                                                  non pubblicate da case editrici) der Titel bezieht sich auf unveröffentliches Material (incl. universitäre&#xA;            Qualifikationsarbeiten, soweit sie nicht von einem Verlag veröffentlicht worden sind)."/>
             </valList>
          </attDef>
-         <attDef ident="subtype" attLabel="subtype">
+         <attDef attLabel="subtype" ident="subtype" mode="change" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -97,7 +103,7 @@
                <valItem ident="translation" attLabel="translation"/>
             </valList>
          </attDef>
-         <attDef ident="type" attLabel="type">
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
@@ -152,7 +158,7 @@
                         desc="The title is of a collection"/>
             </valList>
          </attDef>
-         <attDef ident="xml:lang" attLabel="language">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -193,13 +199,16 @@
    <sponsor ident="sponsor"
             elementName="sponsor"
             elementLabel="Sponsor"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
             path="/*:titleStmt/*:sponsor"
             currentLevel="2"
             popup="2"
             teiElement="&lt;sponsor/&gt;">
       <desc>specifies the name of a sponsoring organization or institution.</desc>
       <availableAtts elementName="sponsor">
-         <attDef ident="ref" attLabel="reference">
+         <attDef attLabel="reference" ident="ref" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -230,13 +239,16 @@
    <orgName ident="orgName"
             elementName="orgName"
             elementLabel="Organization name"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
             path="/*:titleStmt/*:sponsor/*:orgName"
             currentLevel="3"
             popup="3"
             teiElement="&lt;orgName/&gt;">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef ident="xml:lang" attLabel="language">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -277,6 +289,9 @@
    <funder ident="funder"
            elementName="funder"
            elementLabel="Funding body"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
            path="/*:titleStmt/*:funder"
            currentLevel="2"
            popup="2"
@@ -284,7 +299,7 @@
       <desc>specifies the name of an individual, institution, or organization responsible for the
     funding of a project or text.</desc>
       <availableAtts elementName="funder">
-         <attDef ident="ref" attLabel="reference">
+         <attDef attLabel="reference" ident="ref" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -315,13 +330,16 @@
    <orgName ident="orgName"
             elementName="orgName"
             elementLabel="Organization name"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
             path="/*:titleStmt/*:funder/*:orgName"
             currentLevel="3"
             popup="3"
             teiElement="&lt;orgName/&gt;">
       <desc>contains an organizational name.</desc>
       <availableAtts elementName="orgName">
-         <attDef ident="xml:lang" attLabel="language">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -362,6 +380,9 @@
    <principal ident="principal"
               elementName="principal"
               elementLabel="Principal investigator"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
               path="/*:titleStmt/*:principal"
               currentLevel="2"
               popup="2"
@@ -369,7 +390,7 @@
       <desc>supplies the name of the principal researcher responsible for the
 creation of an electronic text.</desc>
       <availableAtts elementName="principal">
-         <attDef ident="ref" attLabel="reference">
+         <attDef attLabel="reference" ident="ref" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -395,6 +416,9 @@ creation of an electronic text.</desc>
    <editor ident="editor"
            elementName="editor"
            elementLabel="Team member"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
            path="/*:titleStmt/*:editor"
            currentLevel="2"
            popup="2"
@@ -403,7 +427,7 @@ creation of an electronic text.</desc>
     individual, institution or organization, (or of several such) acting as editor, compiler,
     translator, etc.</desc>
       <availableAtts elementName="editor">
-         <attDef ident="ref" attLabel="reference">
+         <attDef attLabel="reference" ident="ref" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -420,8 +444,8 @@ creation of an electronic text.</desc>
                    xml:lang="ja"
                    versionDate="2018-12-31">参照</gloss>
          </attDef>
-         <attDef ident="role" attLabel="role"/>
-         <attDef ident="xml:id" attLabel="identifier">
+         <attDef attLabel="role" ident="role" usage="opt"/>
+         <attDef attLabel="identifier" ident="xml:id" usage="opt">
             <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -462,6 +486,9 @@ creation of an electronic text.</desc>
    <respStmt ident="respStmt"
              elementName="respStmt"
              elementLabel="Statement of responsibility"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
              path="/*:titleStmt/*:respStmt"
              currentLevel="2"
              popup="2"
@@ -489,6 +516,9 @@ creation of an electronic text.</desc>
    <resp ident="resp"
          elementName="resp"
          elementLabel="Responsibility"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
          path="/*:titleStmt/*:respStmt/*:resp"
          currentLevel="3"
          popup="3"
@@ -504,14 +534,17 @@ creation of an electronic text.</desc>
    <name ident="name"
          elementName="name"
          elementLabel="Team member"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
          path="/*:titleStmt/*:respStmt/*:name"
          currentLevel="3"
          popup="3"
          teiElement="&lt;name/&gt;">
       <desc>contains a proper noun or noun phrase.</desc>
       <availableAtts elementName="name">
-         <attDef ident="ref" attLabel="ref"/>
-         <attDef ident="type" attLabel="type">
+         <attDef attLabel="ref" ident="ref"/>
+         <attDef attLabel="type" ident="type" mode="change">
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="semi"
