@@ -103,7 +103,7 @@
                 </element>
                 <element ident="settlement">
                     <valList type="closed">
-                        <valItem ident="St Petersburg"/>
+                        <valItem ident="St. Petersburg"/>
                         <valItem ident="London"/>
                         <valItem ident="Jerusalem"/>
                         <valItem ident="Budapest"/>
@@ -160,13 +160,12 @@
                 </element>
             </controlledValuesElements>
             <elementGroups>
-                <group groupLabel="Identification via location, place, institution, collection, shelfmark." groupNo="1" repeatable="no">
+                <group groupLabel="Identification via location, place, institution, collection, shelfmark." groupLabelConditionalElement="./*" groupLabelXPath="string-join((./*:country[string()] | ./*:settlement[string()]) | ./*:repository[string()]) |  ./*:collection[string()]) | ./*:idno[string()]), ' ')" groupNo="1" repeatable="no">
                     <element xpath="tei:country"/>
                     <element xpath="tei:settlement"/>
                     <element xpath="tei:repository"/>
-                    <element xpath="tei:idno"/>
-                    <element xpath="tei:institution"/>
                     <element xpath="tei:collection"/>
+                    <element xpath="tei:idno"/>
                 </group>
                 <group groupLabel="Identification via old shelfmark or via catalogues and external databases." groupNo="2" repeatable="no">
                     <element xpath="tei:altIdentifier"/>
