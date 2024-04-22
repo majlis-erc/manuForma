@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.58 Beta 
+        Version: 1.59 Beta 
             -1.22 marks a major redesign
         
 
@@ -2304,6 +2304,19 @@
                         <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
                         <xf:delete ev:event="DOMActivate" ref="."/>    
                     </xf:trigger>
+                    <!-- Do a lookup across all data types to insert into  box -->
+                    <!--
+                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
+                        <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
+                        <xf:action ev:event="DOMActivate">
+                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
+                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
+                            </xf:load>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"/>
+                        </xf:action>
+                    </xf:trigger>
+                    -->
                 </div>    
             </div>
         </xf:repeat>
@@ -2688,7 +2701,7 @@
                 <xsl:value-of select="concat('&lt;',$elementName,'/&gt;')"/>
             </xsl:attribute>
             <xsl:variable name="lookupList">
-                <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName]">
+                <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName][not(@suppress='true')]">
                     <lookup>
                         <xsl:copy-of select="@*"/>
                         <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
