@@ -16,17 +16,24 @@ declare variable $nav-base := '/exist/apps/manuForma';
 declare variable $userParam := request:get-parameter("user", ());
 declare variable $logout := request:get-parameter("logout", ());
 
+declare function local:get-user() as xs:string? {
+    let $login := login:set-user("org.exist.login", "P7D", false())
+    let $user-id := request:get-attribute("org.exist.login" || ".user")
+    return $user-id
+};
+
+let $user := local:get-user()
+return 
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{request:get-uri()}/"/>
     </dispatch>
 
 else if ($exist:resource = "form.xq") then (
-    login:set-user("org.exist.login", (), true()),
-    let $user := sm:id()/sm:id/sm:real/sm:username/string(.)
+    (:let $user := sm:id()/sm:id/sm:real/sm:username/string(.):)
     let $form := substring-after($exist:path,'/form/')
     return
-        if($user != 'guest') then 
+        if(not($user = ('guest', 'nobody'))) then 
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <cache-control cache="no"/>
             </dispatch>
@@ -40,9 +47,7 @@ else if ($exist:resource = "form.xq") then (
  : Login a user via AJAX. Just returns a 401 if login fails.
  :)
 else if ($exist:resource eq 'login') then
-    let $loggedIn := login:set-user("org.exist.login", (), false())
-    let $user := request:get-attribute("org.exist.login.user")
-    return (
+    (
         util:declare-option("exist:serialize", "method=json"),
         try {
             <status xmlns:json="http://www.json.org" message="{if($logout = 'true') then 'Logged out' else if($user) then 'Success' else 'Fail'}">
@@ -61,10 +66,6 @@ else if ($exist:resource eq 'login') then
         }
     )
 else if ($exist:path = "/admin") then (
-    login:set-user("org.exist.login", (), true()),
-    let $user := request:get-attribute("org.exist.login.user")
-    let $route := request:get-parameter("route","")
-    return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="index.html">
                 <cache-control cache="no"/>
@@ -83,9 +84,7 @@ else if ($exist:path = "/admin") then (
 (: Check user credentials :)
 else if ($exist:resource = "userInfo") then 
     ((:util:declare-option("exist:serialize", "method=json media-type=application/json"),:)
-     let $currentUser := 
-                if(request:get-attribute("org.exist.login.user.user")) then request:get-attribute("org.exist.login.user.user") 
-                else(: xmldb:get-current-user():) sm:id()/sm:id/sm:real/sm:username/string(.)
+    let $currentUser := $user
     let $group :=  
                 if($currentUser) then 
                     sm:get-user-groups($currentUser) 
