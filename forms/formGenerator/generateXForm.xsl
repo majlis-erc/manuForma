@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.59 Beta 
+        Version: 1.60 Beta 
             -1.22 marks a major redesign
         
 
@@ -1619,7 +1619,7 @@
                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal">
                                                             <xf:label><i class="bi bi-plus"/> Add field </xf:label>
                                                             <!-- Add conditions here -->
-                                                            <xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                            <xf:action ev:event="DOMActivate">
                                                                 <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                                                             </xf:action>
                                                             <!--<xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>-->
@@ -1997,7 +1997,7 @@
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]">
                         <xf:label><i class="bi bi-plus"/> Add field </xf:label>
-                        <xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                        <xf:action ev:event="DOMActivate">
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         </xf:action>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
@@ -2141,7 +2141,8 @@
                     </xf:select1>
                     <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]">
                         <xf:label><i class="bi bi-plus"/> Add field </xf:label>
-                        <xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                        <!--Does not work <xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@maxOccurs"> -->
+                        <xf:action ev:event="DOMActivate">
                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"/>
                         </xf:action>
                         <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"/>
@@ -2325,8 +2326,12 @@
                 <div class="input-group">
                     <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal">
                         <xf:label/>
-                        <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]">
-                            <xf:label value="*:idno"/>
+                        <xf:item>
+                            <xf:label>Select Source</xf:label>
+                            <xf:value></xf:value> 
+                        </xf:item>
+                        <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]">
+                            <xf:label value="*:title"/>
                             <xf:value ref="@xml:id"/>
                         </xf:itemset>
                     </xf:select1>
@@ -2704,7 +2709,7 @@
                 <xsl:for-each select="$configDoc/descendant::*:lookup[@elementName = $elementName][not(@suppress='true')]">
                     <lookup>
                         <xsl:copy-of select="@*"/>
-                        <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
+                        <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',@formName,'.xhtml')"/>
                         <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
                         <xsl:attribute name="supress" select="if(@suppress='true' or parent::*:subform[@lookup='no']) then 'true' else 'false'"/>
                         <xsl:attribute name="form" select="if(parent::*:subform) then string(parent::*:subform/@formName) else ()"/>
