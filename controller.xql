@@ -19,7 +19,7 @@ declare variable $logout := request:get-parameter("logout", ());
 declare function local:get-user() as xs:string? {
     let $login := login:set-user("org.exist.login", "P7D", false())
     let $user-id := request:get-attribute("org.exist.login" || ".user")
-    return $user-id
+    return if($user-id != '') then $user-id else 'guest'
 };
 
 let $user := local:get-user()
@@ -33,7 +33,7 @@ else if ($exist:resource = "form.xq") then (
     (:let $user := sm:id()/sm:id/sm:real/sm:username/string(.):)
     let $form := substring-after($exist:path,'/form/')
     return
-        if(not($user = ('guest', 'nobody'))) then 
+        if($user != 'guest') then 
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <cache-control cache="no"/>
             </dispatch>
