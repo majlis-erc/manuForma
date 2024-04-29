@@ -186,7 +186,7 @@ End license statement: do not remove -->
                                 <elementRef key="faith" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="occupation" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="residence" minOccurs="0" maxOccurs="1"/>
-                                <!--<elementRef key="ab" minOccurs="0" maxOccurs="unbounded"/>-->
+                                <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
                                 <elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/>
                             </sequence>
@@ -725,7 +725,7 @@ End license statement: do not remove -->
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
-                        <desc xml:lang="en">Add a bibliographic item.</desc>
+                        <desc xml:lang="en">Add a bibliographic item and specify whether it is a manuscript or not.</desc>
                         <classes mode="change">
                             <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
@@ -741,7 +741,17 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
+                                <valList mode="change">
+                                    <valItem mode="add" ident="bibliography">
+                                        <gloss>Bibliography</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="manuscript">
+                                        <gloss>Manuscript</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                             <attDef ident="xml:id" mode="change">
                                 <gloss>Local identifier</gloss>
                             </attDef>
