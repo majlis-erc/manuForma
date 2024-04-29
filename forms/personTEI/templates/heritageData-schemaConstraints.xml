@@ -122,16 +122,27 @@
          popup="3"
          teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
-              formURL="form.xq?form=forms/personTEI/lookup/bibl.xhtml"
+              api="/exist/apps/majlis/api/search/biblWorksCitation?format=xml&amp;collection=manuscripts,bibl&amp;q="
               elementName="bibl"
               formName="bibl"
               lookupLabel="Look up bibliographic record"
+              formURL="form.xq?form=forms/personTEI/lookup/bibl.xhtml"
               level="toplevel"
               supress="false"
               form=""/>
-      <desc>Add a bibliographic item.</desc>
+      <desc>Add a bibliographic item and specify whether it is a manuscript or not.</desc>
       <availableAtts elementName="bibl">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="bibliography" attLabel="Bibliography"/>
+               <valItem ident="manuscript" attLabel="Manuscript"/>
+            </valList>
+         </attDef>
          <attDef attLabel="Local identifier" ident="xml:id" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Local identifier</gloss>
