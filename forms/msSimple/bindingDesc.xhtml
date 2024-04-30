@@ -41,7 +41,7 @@
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               </xf:action>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -73,7 +73,7 @@
                                        <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                     </xf:action>
                                  </xf:select1>
-                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                     </xf:action>
                                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -91,7 +91,7 @@
                                        <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                     </xf:trigger>
                                  </xf:group>
-                                 <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                        <xf:toggle case="d1e873LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                        <xf:load show="embed" targetid="d1e873subformLookup">
                                           <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -142,7 +142,9 @@
                               <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                  <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                     <div class="input-group">
-                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                          </xf:item>
+                                          <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                           </xf:itemset>
                                        </xf:select1>
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -176,7 +178,7 @@
                                                 <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                              </xf:action>
                                           </xf:select1>
-                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                 <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                              </xf:action>
                                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -194,7 +196,7 @@
                                                 <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                              </xf:trigger>
                                           </xf:group>
-                                          <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                          <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                 <xf:toggle case="bindingDescGrpRepeatLevel11GrpRepeatLevel1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                 <xf:load show="embed" targetid="bindingDescGrpRepeatLevel11GrpRepeatLevel1subformLookup">
                                                    <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -245,7 +247,9 @@
                                        <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                           <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                              <div class="input-group">
-                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                   </xf:item>
+                                                   <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                    </xf:itemset>
                                                 </xf:select1>
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -280,7 +284,7 @@
                                                             <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                          </xf:action>
                                                       </xf:select1>
-                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                             <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                          </xf:action>
                                                          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -298,7 +302,7 @@
                                                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                          </xf:trigger>
                                                       </xf:group>
-                                                      <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                      <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                             <xf:toggle case="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                             <xf:load show="embed" targetid="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2subformLookup">
                                                                <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -349,7 +353,9 @@
                                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                       <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                          <div class="input-group">
-                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                               </xf:item>
+                                                               <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                </xf:itemset>
                                                             </xf:select1>
                                                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -384,7 +390,7 @@
                                                                         <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                                      </xf:action>
                                                                   </xf:select1>
-                                                                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                                      </xf:action>
                                                                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -402,7 +408,7 @@
                                                                         <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                      </xf:trigger>
                                                                   </xf:group>
-                                                                  <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                                  <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                                         <xf:toggle case="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                         <xf:load show="embed" targetid="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup">
                                                                            <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -453,7 +459,9 @@
                                                                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                      <div class="input-group">
-                                                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                                           </xf:item>
+                                                                           <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                            </xf:itemset>
                                                                         </xf:select1>
                                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -488,7 +496,7 @@
                                                                                     <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                                                  </xf:action>
                                                                               </xf:select1>
-                                                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                                                     <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                                                  </xf:action>
                                                                                  <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -506,7 +514,7 @@
                                                                                     <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                                  </xf:trigger>
                                                                               </xf:group>
-                                                                              <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                                              <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                                                     <xf:toggle case="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3RepeatLevel4LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                                     <xf:load show="embed" targetid="bindingDescGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3RepeatLevel4subformLookup">
                                                                                        <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -557,7 +565,9 @@
                                                                            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                                               <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                                  <div class="input-group">
-                                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                                                       </xf:item>
+                                                                                       <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                                        </xf:itemset>
                                                                                     </xf:select1>
                                                                                     <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -597,7 +607,7 @@
                                  <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                               </xf:action>
                            </xf:select1>
-                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                           <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls add" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                  <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                               </xf:action>
                               <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -629,7 +639,7 @@
                                        <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                     </xf:action>
                                  </xf:select1>
-                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                 <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/descendant-or-self::*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                        <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                     </xf:action>
                                     <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -647,7 +657,7 @@
                                        <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                     </xf:trigger>
                                  </xf:group>
-                                 <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                 <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                        <xf:toggle case="d1e873LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                        <xf:load show="embed" targetid="d1e873subformLookup">
                                           <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -698,7 +708,9 @@
                               <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                  <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                     <div class="input-group">
-                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                       <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                          </xf:item>
+                                          <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                           </xf:itemset>
                                        </xf:select1>
                                        <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -732,7 +744,7 @@
                                                 <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                              </xf:action>
                                           </xf:select1>
-                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                          <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                 <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                              </xf:action>
                                              <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -750,7 +762,7 @@
                                                 <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                              </xf:trigger>
                                           </xf:group>
-                                          <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                          <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                 <xf:toggle case="bindingDescGrpRepeatLevel21GrpRepeatLevel1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                 <xf:load show="embed" targetid="bindingDescGrpRepeatLevel21GrpRepeatLevel1subformLookup">
                                                    <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -801,7 +813,9 @@
                                        <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                           <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                              <div class="input-group">
-                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                   </xf:item>
+                                                   <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                    </xf:itemset>
                                                 </xf:select1>
                                                 <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -836,7 +850,7 @@
                                                             <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                          </xf:action>
                                                       </xf:select1>
-                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                      <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                             <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                          </xf:action>
                                                          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -854,7 +868,7 @@
                                                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                          </xf:trigger>
                                                       </xf:group>
-                                                      <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                      <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                             <xf:toggle case="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                             <xf:load show="embed" targetid="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2subformLookup">
                                                                <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -905,7 +919,9 @@
                                                    <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                       <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                          <div class="input-group">
-                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                            <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                               </xf:item>
+                                                               <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                </xf:itemset>
                                                             </xf:select1>
                                                             <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -940,7 +956,7 @@
                                                                         <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                                      </xf:action>
                                                                   </xf:select1>
-                                                                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                                  <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                                         <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                                      </xf:action>
                                                                      <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -958,7 +974,7 @@
                                                                         <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                      </xf:trigger>
                                                                   </xf:group>
-                                                                  <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                                  <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                                         <xf:toggle case="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                         <xf:load show="embed" targetid="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup">
                                                                            <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -1009,7 +1025,9 @@
                                                                <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                                   <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                      <div class="input-group">
-                                                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                                        <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                                           </xf:item>
+                                                                           <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                            </xf:itemset>
                                                                         </xf:select1>
                                                                         <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
@@ -1044,7 +1062,7 @@
                                                                                     <xf:setvalue ref="instance('i-insert-elements')//*:element" value="instance('i-availableElements')/*[local-name() = local-name(current())]"></xf:setvalue>
                                                                                  </xf:action>
                                                                               </xf:select1>
-                                                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate" if="count(child::*[local-name() = instance('i-insert-elements')//*:element]) &lt; instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element]/@mmaxOccurs">
+                                                                              <xf:trigger class="btn btn-outline-secondary btn-sm controls add" appearance="full" ref=".[instance('i-availableElements')/*[local-name() = local-name(current())][instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]]"><xf:label><i class="bi bi-plus"></i> Add field </xf:label><xf:action ev:event="DOMActivate">
                                                                                     <xf:insert ev:event="DOMActivate" context="." at="." origin="instance('i-bindingDesc-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
                                                                                  </xf:action>
                                                                                  <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
@@ -1062,7 +1080,7 @@
                                                                                     <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                                  </xf:trigger>
                                                                               </xf:group>
-                                                                              <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                                              <xf:trigger appearance="minimal" ref=".[instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
                                                                                     <xf:toggle case="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3RepeatLevel4LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                                     <xf:load show="embed" targetid="bindingDescGrpRepeatLevel21GrpRepeatLevel1RepeatLevel2RepeatLevel3RepeatLevel4subformLookup">
                                                                                        <xf:resource value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
@@ -1113,7 +1131,9 @@
                                                                            <xf:repeat xmlns="http://www.w3.org/2002/xforms" ref="@source" class="attr-group">
                                                                               <div xmlns="http://www.w3.org/1999/xhtml" class="btn-group" role="group">
                                                                                  <div class="input-group">
-                                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:idno]"><xf:label value="*:idno"></xf:label><xf:value ref="@xml:id"></xf:value>
+                                                                                    <xf:select1 xmlns="http://www.w3.org/2002/xforms" ref="." class="attVal"><xf:label></xf:label><xf:item><xf:label>Select Source</xf:label><xf:value></xf:value>
+                                                                                       </xf:item>
+                                                                                       <xf:itemset ref="instance('i-rec')//*:text/descendant::*:bibl[*:title]"><xf:label value="*:title"></xf:label><xf:value ref="@xml:id"></xf:value>
                                                                                        </xf:itemset>
                                                                                     </xf:select1>
                                                                                     <xf:trigger xmlns="http://www.w3.org/2002/xforms" class="btn btn-outline-secondary btn-sm controls" appearance="full" ref="."><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i><xf:output value="instance('i-bindingDesc-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"></xf:output></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
