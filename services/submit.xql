@@ -56,6 +56,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[@type='factoid'][@subtype='relation']) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('factoid-',$id )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -65,6 +68,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:idno) + 1 )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -87,6 +93,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:listPlace]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute xml:id {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('place-',$id )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -96,6 +105,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:place/parent::tei:listPlace]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:placeName) + 1 )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -132,6 +144,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:bibl/parent::tei:body]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute xml:id {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('title-',count($node/preceding-sibling::tei:title) + 1 )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -141,6 +156,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:listPerson]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('person-',$id )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -150,6 +168,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:person/parent::tei:listPerson]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('name-',count($node/preceding-sibling::tei:persName) + 1 )},
                         for $n in $node/node()
                         return local:transform($n)
@@ -158,6 +179,9 @@ declare function local:transform($nodes as node()*) as item()* {
         case element(tei:msDesc) return
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('ms-',$id)},
                         for $n in $node/node()
                         return local:transform($n)
@@ -166,6 +190,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:msContents/parent::tei:msDesc]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('item-',(count($node/parent::tei:msContents/preceding-sibling::tei:msContents) + 1),
                         (count($node/preceding-sibling::tei:msItem) + 1 ))},
                         for $n in $node/node()
@@ -176,6 +203,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:layoutDesc/parent::tei:objectDesc/parent::tei:physDesc/parent::tei:msDesc]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('layout-',
                         (count($node/parent::tei:layoutDesc/parent::tei:objectDesc/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
                         (count($node/parent::tei:layoutDesc/parent::tei:objectDesc/preceding-sibling::tei:objectDesc) + 1),
@@ -189,6 +219,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:handDesc/parent::tei:physDesc/parent::tei:msDesc]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('hand-',
                         (count($node/parent::tei:handDesc/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
                         (count($node/parent::tei:handDesc/preceding-sibling::tei:handDesc) + 1),
@@ -201,6 +234,9 @@ declare function local:transform($nodes as node()*) as item()* {
             if($node[parent::tei:list/parent::tei:additions/parent::tei:physDesc/parent::tei:msDesc]) then
                 element { local-name($node) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
+                        if($node[@source != '']) then
+                            attribute source {concat('#',$node/@source)}
+                        else (),
                         attribute xml:id { concat('add-',
                         (count($node/parent::tei:list/parent::tei:additions/parent::tei:physDesc/preceding-sibling::tei:physDesc) + 1),
                         (count($node/parent::tei:list/parent::tei:additions/preceding-sibling::tei:additions) + 1),
@@ -224,7 +260,13 @@ declare function local:transform($nodes as node()*) as item()* {
 
 (: Recurse through child nodes :)
 declare function local:passthru($node as node()*) as item()* { 
-    element {local-name($node)} {($node/@*, local:transform($node/node()))}
+    element {local-name($node)} 
+    {($node/@*[not(name(.) = 'source')],
+        if($node[@source != '']) then
+            attribute source {concat('#',$node/@source)}
+        else (),
+    local:transform($node/node()))
+    }
 };
 
 let $data := if(request:get-parameter('postdata','')) then request:get-parameter('postdata','') else request:get-data()
