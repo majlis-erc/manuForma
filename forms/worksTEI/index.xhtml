@@ -28,6 +28,11 @@
                <idno type="URI"></idno>
             </TEI>
          </xf:instance>
+         <xf:instance id="i-new">
+            <TEI xmlns="http://www.tei-c.org/ns/1.0">
+               <new></new>
+            </TEI>
+         </xf:instance>
          <xf:instance id="i-projectSpecificData" src="forms/templates/editionStmtProjectOptions.xml"></xf:instance>
          <xf:instance id="i-projectSpecificDataSelected"><data>
                <selected id="" value="TEST"></selected></data></xf:instance>
@@ -123,6 +128,7 @@
                <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
+               <xf:setvalue ref="instance('i-new')//*:new" value="'true'"></xf:setvalue>
             </xf:action>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
@@ -136,6 +142,7 @@
                <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"></xf:insert>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"></xf:setvalue>
                <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"></xf:setvalue>
+               <xf:setvalue ref="instance('i-new')//*:new" value="'false'"></xf:setvalue>
             </xf:action>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
          </xf:submission>
@@ -158,6 +165,7 @@
          <xf:submission id="s-post-to-update" action="services/upload.xql" ref="instance('i-upload')" replace="instance" instance="i-rec" method="post">
             <xf:message level="modeless" ev:event="xforms-submit-done"> Data Loaded! </xf:message>
             <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
+            <xf:setvalue ref="instance('i-new')//*:new" value="'true'"></xf:setvalue>
          </xf:submission>
          <xf:submission id="s-download-xml" ref="instance('i-rec')" show="new" method="post" replace="all" action="form.xq?form=services/download.xml?type=download"></xf:submission>
          <xf:submission id="s-view-xml" ref="instance('i-rec')" show="new" method="post" replace="instance" instance="i-submission" action="services/submit.xql?type=view"></xf:submission>
@@ -172,7 +180,7 @@
             </xf:action>
          </xf:submission>
          <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
-            <xf:resource value="concat('services/submit.xql?type=github&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
+            <xf:resource value="concat('services/submit.xql?type=github','&amp;new=',string(instance('i-new')//*:new),'&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"></xf:resource>
             <xf:action ev:event="xforms-submit-done">
                <xf:message ref="instance('i-submission')//*:message"></xf:message>
                <xf:load show="new">
