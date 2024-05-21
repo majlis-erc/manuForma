@@ -51,6 +51,20 @@
         <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
         <popup formName="worksTEI" elementName="title" label="New work"/>
         <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+        <!-- 
+        formatting a request to the lookup api
+        api: formats the request, parameters: 
+            /name of request - usually specifies the type of request or element to be searched. 
+            @format - xml/json/html
+            @collection - collections to be searched, should match collections in your data directory
+            @wrapElement - element that will contain the search results, if different from the name of the request
+                example the following searches all persNames, but returns results wrapped in author element for insertion into TEI record: 
+                /exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=
+            @q - query to search 
+        elementName - the element that will trigger the lookup
+        formName - the name of the lookup form (usually uses same name as element, for simplicity)
+        lookupLabel - Label to show up in forms
+        -->
     </lookups>
     <projectSpecificData>
         <xmlPath name="Project Picker" src="/forms/templates/editionStmtProjectOptions.xml" element="editionStmt"/>
@@ -176,11 +190,10 @@
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:surrogates/tei:listBibl" formName="reproductions"
             formLabel="Reproductions" repeat="no">
-            <lookup elementName="bibl" suppress="true"/>
+            <lookup elementName="title" suppress="true"/>
             <localSchema src="../schemas/mss-reproductions.xml"/>
             <globalSchema src="../schemas/mss-reproductions.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <lookup elementName="bibl" suppress="true"/>
             <formDesc>Add information on reproductions, such as digital images, microfilms or other types.</formDesc>
             <elementGroups>
                 <group groupLabel="Reproduction" groupLabelConditionalElement="./*:title"
@@ -210,10 +223,6 @@
             <localSchema src="../schemas/mss-definition.xml"/>
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <!--
-            <lookup elementName="bibl" suppress="true"/>
-            <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
-            -->
             <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="bibl" formName="titleBibl" lookupLabel="Look up manuscript"/>
             <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
             <elementGroups>
@@ -429,12 +438,6 @@
             <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
             <formDesc>Describe script type(s) and hand(s) of the manuscript.</formDesc>
             <elementGroups>
-                <!--<group groupLabel="Definition of script." groupLabelConditionalElement="." groupLabelXPath="concat('Definition of script: ',./*/@script,' ',./*/@rend,' ',./*/@style)" groupNo="2"  repeatable="yes">
-                    <element xpath="tei:scriptDesc/tei:scriptNote"/>
-                </group>
-                <group groupLabel="Scribal hand(s)." groupLabelConditionalElement="." groupLabelXPath="concat('Scribal hand: fols. ',./*:locus/@from,'–',./*:locus/@to,')" groupNo="2" repeatable="no">
-                    <element xpath="tei:handDesc"/>
-                </group>-->
                 <group groupLabel="Definition of script." groupNo="1"  repeatable="yes">
                     <element xpath="tei:scriptDesc/tei:scriptNote"/>
                 </group>
@@ -534,6 +537,7 @@
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup elementName="title" suppress="true"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
                 <group groupLabel="Quotation from and information about the heritage material." groupLabelConditionalElement="./*:bibl/*:title" groupLabelXPath="./*:bibl/*:title" groupNo="1" repeatable="yes">
