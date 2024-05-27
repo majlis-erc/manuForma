@@ -176,6 +176,7 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="objectType"/>
                             <elementRef key="locus"/>
                             <elementRef key="persName"/>
+                            <elementRef key="placeName"/>
                             <elementRef key="quote"/>
                             <elementRef key="ab"/>
                             <elementRef key="note"/>
@@ -245,7 +246,38 @@ End license statement: do not remove --><!--requirements:
 
                     <elementSpec ident="ref" module="core" mode="delete"/>
 
-                    <elementSpec ident="persName" module="namesdates" mode="delete"/>
+                    <elementSpec ident="placeName" mode="change">
+                        <gloss>Place name</gloss>
+                        <gloss type="tei">&lt;placeName&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
+                        <classes mode="change">
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.personal" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="key" mode="delete"/>
+                            <attDef ident="ref" mode="change" style="restricted">
+                                <gloss>Place identifier</gloss>
+                            </attDef>
+                            <attDef ident="role" mode="change" style="restricted">
+                                <gloss>Role</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem mode="add" ident="mentioned">
+                                        <gloss>Mentioned</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                        </attList>
+                    </elementSpec>
+                    
                     <elementSpec ident="title" module="core" mode="delete"/>
 
                     <elementSpec ident="additions" mode="change">
