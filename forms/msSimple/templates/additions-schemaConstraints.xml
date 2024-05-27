@@ -99,6 +99,11 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="placeName"
+                     label="Place name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
                      minOccurs=""
@@ -246,6 +251,55 @@
          <child/>
       </childElements>
    </persName>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place name"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:list/*:item/*:placeName"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up places"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New places"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Place identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
