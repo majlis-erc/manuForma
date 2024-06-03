@@ -59,12 +59,22 @@ declare function local:transform($nodes as node()*) as item()* {
         case comment() return $node 
         case text() return parse-xml-fragment($node)
         case element(tei:TEI) return 
-            <TEI xmlns="http://www.tei-c.org/ns/1.0">
+            <TEI xmlns="http://www.tei-c.org/ns/1.0" class="test6">
                 {($node/@*, local:transform($node/node()))}
             </TEI>
+        case element(tei:desc) return 
+            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+        case element(tei:note) return 
+            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+        case element(tei:summary) return 
+           element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+        case element(tei:quote) return 
+            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+        case element(tei:p) return 
+            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}               
         case element(tei:ab) return
             if($node[@type='factoid'][@subtype='relation']) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -76,7 +86,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)
         case element(tei:idno) return
             if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -86,11 +96,11 @@ declare function local:transform($nodes as node()*) as item()* {
                         return local:transform($n)
                     }
             else if(($new = 'true') and $node/parent::tei:publicationStmt) then                     
-                    element {local-name($node)} {($node/@*, $URI)}
+                    element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, $URI)}
             else local:passthru($node)  
         case element(tei:place) return
             if($node[parent::tei:listPlace]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute xml:id {concat('#',$node/@source)}
@@ -102,7 +112,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)             
         case element(tei:placeName) return
             if($node[parent::tei:place/parent::tei:listPlace]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -114,21 +124,21 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)
         case element(tei:bibl) return
             if($node[parent::tei:place/parent::tei:listPlace] or $node[parent::tei:person/parent::tei:listPerson or parent::tei:note/parent::tei:bibl/parent::tei:body] or $node[parent::tei:bibl/parent::tei:bibl/parent::tei:body]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'source')],
                         (:attribute xml:id { concat('bibl-',count($node/preceding-sibling::tei:bibl) + 1 )},:)
                         for $n in $node/node()
                         return local:transform($n)
                     } 
             else if($node[parent::tei:body/parent::tei:text]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'source')],
                         (:attribute xml:id { concat('work-',$id)},:)
                         for $n in $node/node()
                         return local:transform($n)
                     }  
             else if($node[parent::tei:listBibl/parent::tei:additional/parent::tei:msDesc]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'source')],
                         (:attribute xml:id { concat('bibl-',
                         (count($node/parent::tei:listBibl/parent::tei:additional/preceding-sibling::tei:additional) + 1),
@@ -141,7 +151,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)        
         case element(tei:title) return
             if($node[parent::tei:bibl/parent::tei:body]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute xml:id {concat('#',$node/@source)}
@@ -153,7 +163,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)
         case element(tei:person) return
             if($node[parent::tei:listPerson]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -165,7 +175,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node) 
         case element(tei:persName) return
             if($node[parent::tei:person/parent::tei:listPerson]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -176,7 +186,7 @@ declare function local:transform($nodes as node()*) as item()* {
                     } 
             else local:passthru($node)
         case element(tei:msDesc) return
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -187,7 +197,7 @@ declare function local:transform($nodes as node()*) as item()* {
                     }
         case element(tei:msItem) return
             if($node[parent::tei:msContents/parent::tei:msDesc]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -200,7 +210,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)  
         case element(tei:layout) return
             if($node[parent::tei:layoutDesc/parent::tei:objectDesc/parent::tei:physDesc/parent::tei:msDesc]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -216,7 +226,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)
         case element(tei:handNote) return
             if($node[parent::tei:handDesc/parent::tei:physDesc/parent::tei:msDesc]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -231,7 +241,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)   
         case element(tei:item) return
             if($node[parent::tei:list/parent::tei:additions/parent::tei:physDesc/parent::tei:msDesc]) then
-                element { local-name($node) } 
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
                     {   $node/@*[not(name(.) = 'xml:id') and not(name(.) = 'source')],
                         if($node[@source != '']) then
                             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -257,9 +267,10 @@ declare function local:transform($nodes as node()*) as item()* {
         default return local:transform($node/node())
 };
 
+
 (: Recurse through child nodes :)
 declare function local:passthru($node as node()*) as item()* { 
-    element {local-name($node)} 
+    element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} 
     {($node/@*[not(name(.) = 'source')],
         if($node[@source != '']) then
             attribute source {concat('#',substring-after($node/@source,'#'))}
@@ -268,10 +279,34 @@ declare function local:passthru($node as node()*) as item()* {
     }
 };
 
+(: Markdown to TEI :)
+declare function local:markdown2TEI($node){
+        for $l in tokenize($node, '\n\n')
+    return 
+        <p>{local:lineBreak($l)}</p>
+};
+    
+declare function local:lineBreak($s){
+   for $node in fn:analyze-string($s, "(.*?)\n")/child::*
+   return 
+       typeswitch($node)
+        case element(fn:match) return (local:markdown($node),<lb/>)
+        default return local:markdown($node/node())
+};
+
+declare function local:markdown($s){
+   for $node in fn:analyze-string($s, "\*(.*?)\*")/child::*
+   return 
+       typeswitch($node)
+        case element(fn:match) return <em>{$node/fn:group/node()}</em>
+        default return $node/node()
+   
+};  
+
 let $data := if(request:get-parameter('postdata','')) then request:get-parameter('postdata','') else request:get-data()
 let $record := 
         if($data instance of node()) then
-            $data//tei:TEI
+            $data/node()
         else parse-xml-fragment($data) 
 let $post-processed-xml := local:transform($record)    
 let $uri := replace($post-processed-xml/descendant::tei:idno[1],'/tei','')
@@ -297,7 +332,7 @@ return
                     <message>Failed to update resource {$id}: {concat($err:code, ": ", $err:description)}</message>
                 </response>)
             }
-         else if(request:get-parameter('type', '') = 'github') then
+         else if(request:get-parameter('type', '') = 'github') then 
             try {
                 let $save := gitcommit:run-commit($post-processed-xml, concat($github-path,$file-name), concat("User submitted content for ",$file-name))
                 let $saveDB := xmldb:store($eXistCollection, xmldb:encode-uri($file-name), $post-processed-xml)
@@ -313,7 +348,7 @@ return
                 <response status="fail">
                     <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
                 </response>)
-            }             
+            }         
         else if(request:get-parameter('type', '') = 'download') then
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
                  response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)  
