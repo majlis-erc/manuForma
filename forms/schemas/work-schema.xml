@@ -449,16 +449,7 @@ End license statement: do not remove -->
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="type" mode="change">
-                                <gloss>Type</gloss>
-                                <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="edition">
-                                        <gloss>Edition</gloss>
-                                    </valItem>
-                                    <valItem mode="add" ident="manuscript">
-                                        <gloss>Manuscript</gloss>
-                                    </valItem>
-                                </valList>
+                            <attDef ident="type" mode="delete">
                             </attDef>
                             <attDef ident="xml:lang" mode="delete"></attDef>
                         </attList>
@@ -544,7 +535,17 @@ End license statement: do not remove -->
                             <attDef ident="xml:id" mode="change">
                                 <gloss>Bibliographic identifier</gloss>
                             </attDef>
-                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="edition">
+                                        <gloss>Edition</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="manuscript">
+                                        <gloss>Manuscript</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
                         <content>
                             <elementRef key="author"/>
@@ -558,6 +559,7 @@ End license statement: do not remove -->
                             <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
+                            <elementRef key="listRelation"/>
                         </content>
                     </elementSpec>
                     
@@ -628,7 +630,116 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
+                    <elementSpec ident="desc" mode="change">
+                        <desc>Describe the relation in your own words.</desc>
+                        <gloss>*Relation Description</gloss>
+                        <gloss type="tei">&lt;desc&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.translatable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
                     
+                    <elementSpec ident="listRelation" mode="change">
+                        <gloss>This field signifies that you are describing a relation between to records.</gloss>
+                        <gloss>*Relation</gloss>
+                        <gloss type="tei"> &lt;listRelation/&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="relation"/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="relation" mode="change">
+                        <gloss>*Description of relation</gloss>
+                        <gloss type="tei">&lt;relation&gt;</gloss>
+                        <desc xml:lang="en">Specify the relationship between the work and another work or person. Choose the kind of relation from
+                            the list provided. Distinguish between the Subject of the relation and the Object. In case the relation ends with the word
+                            "with each other" only fill the names in the Mutual field.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="desc"/>
+                        </content>
+                        <attList>
+                            <attDef ident="mutual" mode="change" usage="opt">
+                                <gloss>Mutual</gloss>
+                            </attDef>
+                            <attDef ident="active" mode="change" usage="opt">
+                                <gloss>Subject</gloss>
+                            </attDef>
+                            <attDef ident="passive" mode="change" usage="opt">
+                                <gloss>Object</gloss>
+                            </attDef>
+                            <attDef ident="source" mode="change" usage="opt">
+                                <gloss>Source ID</gloss>
+                            </attDef>
+                            <attDef ident="name" mode="replace" usage="req">
+                                <gloss>Choose type of relation</gloss>
+                                <valList type="closed">
+                                    <valItem ident="majlis:refuted">
+                                        <gloss>refuted</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:commentatorOf">
+                                        <gloss>is commentator of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:translatorOf">
+                                        <gloss>is translator of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:adapterOf">
+                                        <gloss>is adapter of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mulahhisOf">
+                                        <gloss>is mulahhis of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:muhtasirOf">
+                                        <gloss>is muḫtaṣir of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mujmilOf">
+                                        <gloss>is mujmil of</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mentionedIn">
+                                        <gloss>is mentioned in</gloss>
+                                        <desc>@active: Person, Text @passive: Text.</desc>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
                 </schemaSpec>
             </div>
         </body>
