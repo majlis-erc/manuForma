@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <org ident="org"
+        elementName="org"
+        elementLabel="Institution entry"
+        minOccur="0"
+        maxOccur="50"
+        errorMessage=""
+        path="/*:org"
+        currentLevel="1"
+        popup="1"
+        teiElement="&lt;org/&gt;">
+      <availableAtts elementName="org">
+         <attDef attLabel="type" ident="type" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="names" attLabel="names"/>
+               <valItem ident="bio" attLabel="bio"/>
+               <valItem ident="bibl" attLabel="bibl"/>
+               <valItem ident="idno" attLabel="idno"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="id" class="att.global" ident="xml:id"/>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="orgName"
+                     label="Name of the institution"
+                     minOccurs="1"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 50 time(s)."/>
+            <element ident="persName"
+                     label="Name of the person"
+                     minOccurs="0"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 0 time(s) and no more than 50 time(s)."/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs="0"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 0 time(s) and no more than 50 time(s)."/>
+            <element ident="placeName"
+                     label="Place"
+                     minOccurs="0"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 0 time(s) and no more than 50 time(s)."/>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs="0"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 0 time(s) and no more than 50 time(s)."/>
+            <element ident="idno"
+                     label="Link"
+                     minOccurs="0"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 0 time(s) and no more than 50 time(s)."/>
+         </child>
+      </childElements>
+   </org>
+   <orgName ident="orgName"
+            elementName="orgName"
+            elementLabel="Name of the institution"
+            minOccur="1"
+            maxOccur="50"
+            errorMessage="Element must occur at least 1."
+            path="/*:org/*:orgName"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;orgName/&gt;">
+      <desc>Enter the name forms and reference items from the
+                            bibliography in the "Source" field.</desc>
+      <availableAtts elementName="orgName">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="majlis-headword" attLabel="MAJLIS headword"/>
+               <valItem ident="attested" attLabel="Attested name form"/>
+               <valItem ident="alternate" attLabel="Alternate name form"/>
+               <valItem ident="canon" attLabel="Canonic name form"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Institution identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Institution identifier</gloss>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="orgName"/>
+         <child/>
+      </childElements>
+   </orgName>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Name of the person"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:org/*:persName"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;persName/&gt;">
+      <desc>Look up the person records in the database. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional persons as required. Reference items from the
+                            bibliography in the "Source" field.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="majlis-headword" attLabel="MAJLIS headword"/>
+               <valItem ident="attested" attLabel="Attested name form"/>
+               <valItem ident="alternate" attLabel="Alternate name form"/>
+               <valItem ident="canon" attLabel="Canonic name form"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Person identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:org/*:note"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;note/&gt;">
+      <desc>Add your observations on the
+                            person.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="fr" attLabel="French"/>
+               <valItem ident="de" attLabel="German"/>
+               <valItem ident="ru" attLabel="Russian"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:org/*:placeName"
+              currentLevel="2"
+              popup="2"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q="
+              formURL="form.xq?form=forms/personTEI/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up places"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New Places"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The
+                            place given here refers to the acquisition (and not the production of
+                            the copy). Reference items from the bibliography in the "Source"
+                            field.</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Degree of certainty" ident="cert" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Degree of certainty</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="high" attLabel="High"/>
+               <valItem ident="medium" attLabel="Medium"/>
+               <valItem ident="low" attLabel="Low"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Identifier" ident="ref" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="Bibliographic reference"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:org/*:bibl"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;bibl/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/biblWorksCitation?format=xml&amp;collection=manuscripts,bibl&amp;q="
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record"
+              formURL="form.xq?form=forms/personTEI/lookup/bibl.xhtml"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <desc>Add a bibliographic item and specify whether it is a
+                            manuscript or not.</desc>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="bibliography" attLabel="Bibliography"/>
+               <valItem ident="manuscript" attLabel="Manuscript"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Local identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Local identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="title"
+                     label="Title of publication"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="1"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 50 time(s)."/>
+         </child>
+      </childElements>
+   </bibl>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Title of publication"
+          minOccur="1"
+          maxOccur="1"
+          errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+          path="/*:org/*:bibl/*:title"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;title/&gt;">
+      <desc>The title to the Zotero will be filled out
+                            automatically.</desc>
+      <availableAtts elementName="title"/>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="Link to Zotero record"
+        minOccur="1"
+        maxOccur="1"
+        errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+        path="/*:org/*:bibl/*:ptr"
+        currentLevel="3"
+        popup="3"
+        teiElement="&lt;ptr/&gt;">
+      <desc>The link to the Zotero will be filled out
+                            automatically.</desc>
+      <availableAtts elementName="ptr">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Link</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </ptr>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="Referenced section(s)"
+               minOccur="1"
+               maxOccur="50"
+               errorMessage="Element must occur at least 1."
+               path="/*:org/*:bibl/*:citedRange"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;citedRange/&gt;">
+      <desc>Specify which pages, columns, etc. you are refering
+                            to.</desc>
+      <availableAtts elementName="citedRange">
+         <attDef attLabel="Unit" ident="unit" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="page" attLabel="Pages"/>
+               <valItem ident="folio" attLabel="Folios"/>
+               <valItem ident="cols" attLabel="Columns"/>
+               <valItem ident="section" attLabel="Sections"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="citedRange"/>
+         <child/>
+      </childElements>
+   </citedRange>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="Link"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:org/*:idno"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;idno/&gt;">
+      <desc>Enter persistent identifiers of external projects for the same person
+                            and choose the source from the list.</desc>
+      <availableAtts elementName="idno">
+         <attDef attLabel="Source" ident="subtype" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="change">
+               <valItem ident="isni" attLabel="ISNI"/>
+               <valItem ident="viaf" attLabel="VIAF"/>
+               <valItem ident="wiki" attLabel="Wikidata"/>
+               <valItem ident="gnd" attLabel="GND"/>
+               <valItem ident="merhav" attLabel="Merhav"/>
+               <valItem ident="rambi" attLabel="RAMBI"/>
+               <valItem ident="imhm" attLabel="IMHM"/>
+               <valItem ident="ktiv" attLabel="Ktiv"/>
+               <valItem ident="other" attLabel="Other"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="idno"/>
+         <child/>
+      </childElements>
+   </idno>
+</TEI>

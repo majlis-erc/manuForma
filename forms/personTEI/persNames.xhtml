@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references. Add descriptions of the person from earlier reference works and internal library records. Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database. Add Linked Open Data references of the person." />
+      <meta name="description" content=" Record information pertaining to the institutions and people behind the project. Add names of the person in various forms and writings systems. Add biographical data. Add bibliographic references from the Zotero database. Add Linked Open Data references of the person. Add names of the institution in various forms and writings systems. Add names of the persons associated with the institution and prose descriptions. Add bibliographic references from the Zotero database. Add Linked Open Data references of the institution. Add descriptions of the person or institution from earlier reference works and internal library records." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Edit Person TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -22,9 +22,8 @@
       </xf:model>
    </head>
    <body>
-      <h2 class="h3 mainElement">Personal name</h2>
-      <p class="alert alert-light hint">Add names of the person in various forms and writings systems, biographical data,
-         bibliographic references from the Zotero database and Linked Open Data references.</p>
+      <h2 class="h3 mainElement">Person: Personal name</h2>
+      <p class="alert alert-light hint">Add names of the person in various forms and writings systems.</p>
       <xf:trigger ref="instance('i-rec')/descendant-or-self::*:TEI[not(///*:listPerson/*:person)]" class="btn btn-outline-secondary btn-sm controls add" appearance="full"><xf:label><i class="bi bi-plus"></i> Add element </xf:label><xf:insert ev:event="DOMActivate" context="instance('i-rec')//*:listPerson/*:person[position() = instance('i-repeatIndex')/index]/parent::*[1]" at="." origin="instance('i-persNames-elementTemplate')/*[local-name() = instance('i-insert-elements')//*:element][1]" position="after"></xf:insert>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-insert-elements')//*:element"></xf:setvalue>
          <xf:setvalue ev:event="DOMActivate" ref="instance('i-availableElements')/*[local-name() = $elementName][instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:childElements[1]/*:child/*:element]"></xf:setvalue>
