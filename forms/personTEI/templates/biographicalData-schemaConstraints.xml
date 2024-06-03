@@ -30,7 +30,7 @@
                <valItem ident="idno" attLabel="idno"/>
             </valList>
          </attDef>
-         <attDef attLabel="id" ident="xml:id" class="att.global"/>
+         <attDef attLabel="id" class="att.global" ident="xml:id"/>
       </availableAtts>
       <childElements>
          <child>
@@ -102,9 +102,15 @@
              currentLevel="2"
              popup="2"
              teiElement="&lt;persName/&gt;">
-      <desc>You have two options: 1) Create "Additional name" fields for every name component, like ism, kunya, etc.,
-                            2) you enter the full name form into the "Full name" field. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>You have two options: 1) Create "Additional name" fields
+                            for every name component, like ism, kunya, etc., 2) you enter the full
+                            name form into the "Full name" field. Reference items from the
+                            bibliography in the "Source" field.</desc>
       <availableAtts elementName="persName">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
+         </attDef>
          <attDef attLabel="Type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
@@ -169,12 +175,7 @@
              popup="3"
              teiElement="&lt;forename/&gt;">
       <desc>Give the person's given name.</desc>
-      <availableAtts elementName="forename">
-         <attDef attLabel="Source" ident="source" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="forename"/>
       <childElements>
          <textNode type="input" class="forename"/>
          <child/>
@@ -190,16 +191,13 @@
             currentLevel="3"
             popup="3"
             teiElement="&lt;addName/&gt;">
-      <desc>Enter name elements like kunya or patronym that do not fit the mold of forenames and surnames. Choose the
-                            name type from the dropdown list.</desc>
+      <desc>Enter name elements like kunya or patronym that do not
+                            fit the mold of forenames and surnames. Choose the name type from the
+                            dropdown list.</desc>
       <availableAtts elementName="addName">
-         <attDef attLabel="Identifier" ident="ref" class="att.canonical">
+         <attDef attLabel="Identifier" class="att.canonical" ident="ref">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Identifier</gloss>
-         </attDef>
-         <attDef attLabel="Source" ident="source" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
          </attDef>
          <attDef attLabel="Name type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -240,12 +238,7 @@
          popup="3"
          teiElement="&lt;name/&gt;">
       <desc>Write out the full form of a person's name.</desc>
-      <availableAtts elementName="name">
-         <attDef attLabel="Source" ident="source" mode="change">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Source</gloss>
-         </attDef>
-      </availableAtts>
+      <availableAtts elementName="name"/>
       <childElements>
          <textNode type="input" class="name"/>
          <child/>
@@ -261,7 +254,8 @@
           currentLevel="2"
           popup="2"
           teiElement="&lt;birth/&gt;">
-      <desc>Provide the date and place of birth in the fields below.</desc>
+      <desc>Provide the date and place of birth in the fields
+                            below.</desc>
       <availableAtts elementName="birth"/>
       <childElements>
          <child>
@@ -288,7 +282,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;date/&gt;">
-      <desc>Fill in the date in CE. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Fill in the date in CE. Reference items from the
+                            bibliography in the "Source" field.</desc>
       <availableAtts elementName="date">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -336,7 +331,11 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy). Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The
+                            place given here refers to the acquisition (and not the production of
+                            the copy). Reference items from the bibliography in the "Source"
+                            field.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -374,7 +373,8 @@
           currentLevel="2"
           popup="2"
           teiElement="&lt;death/&gt;">
-      <desc>Provide the date and place of death in the fields below.</desc>
+      <desc>Provide the date and place of death in the fields
+                            below.</desc>
       <availableAtts elementName="death"/>
       <childElements>
          <child>
@@ -401,7 +401,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;date/&gt;">
-      <desc>Fill in the date in CE. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Fill in the date in CE. Reference items from the
+                            bibliography in the "Source" field.</desc>
       <availableAtts elementName="date">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -449,7 +450,11 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy). Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The
+                            place given here refers to the acquisition (and not the production of
+                            the copy). Reference items from the bibliography in the "Source"
+                            field.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -487,7 +492,8 @@
             currentLevel="2"
             popup="2"
             teiElement="&lt;floruit/&gt;">
-      <desc>Fill in the date of the period of intellectual activity.</desc>
+      <desc>Fill in the date of the period of intellectual
+                            activity.</desc>
       <availableAtts elementName="floruit"/>
       <childElements>
          <child>
@@ -514,7 +520,8 @@
          currentLevel="3"
          popup="3"
          teiElement="&lt;date/&gt;">
-      <desc>Fill in the date in CE. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Fill in the date in CE. Reference items from the
+                            bibliography in the "Source" field.</desc>
       <availableAtts elementName="date">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -562,7 +569,11 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy). Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The
+                            place given here refers to the acquisition (and not the production of
+                            the copy). Reference items from the bibliography in the "Source"
+                            field.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -600,7 +611,8 @@
         currentLevel="2"
         popup="2"
         teiElement="&lt;sex/&gt;">
-      <desc>Choose the gender of the person from the list. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Choose the gender of the person from the list. Reference items from
+                            the bibliography in the "Source" field.</desc>
       <availableAtts elementName="sex">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -642,7 +654,8 @@
           currentLevel="2"
           popup="2"
           teiElement="&lt;faith/&gt;">
-      <desc>Specify the denomination of the person. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Specify the denomination of the person. Reference items
+                            from the bibliography in the "Source" field.</desc>
       <availableAtts elementName="faith">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -685,8 +698,10 @@
                currentLevel="2"
                popup="2"
                teiElement="&lt;occupation/&gt;">
-      <desc>Describe the person's profession, i.e. what job did they perform to earn a living? This is NOT the role
-                            the person played with regard to the manuscripts. Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Describe the person's profession, i.e. what job did they
+                            perform to earn a living? This is NOT the role the person played with
+                            regard to the manuscripts. Reference items from the bibliography in the
+                            "Source" field.</desc>
       <availableAtts elementName="occupation">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -720,7 +735,8 @@
               currentLevel="2"
               popup="2"
               teiElement="&lt;residence/&gt;">
-      <desc>Enter the information where the person lived in the field below.</desc>
+      <desc>Enter the information where the person lived in the
+                            field below.</desc>
       <availableAtts elementName="residence"/>
       <childElements>
          <child>
@@ -756,7 +772,11 @@
              elementName="placeName"
              label="New Places"
              formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
-      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy). Reference items from the bibliography in the "Source" field.</desc>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The
+                            place given here refers to the acquisition (and not the production of
+                            the copy). Reference items from the bibliography in the "Source"
+                            field.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Degree of certainty" ident="cert" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -794,7 +814,8 @@
          currentLevel="2"
          popup="2"
          teiElement="&lt;note/&gt;">
-      <desc>Add your observations on the person.</desc>
+      <desc>Add your observations on the
+                            person.</desc>
       <availableAtts elementName="note">
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -836,7 +857,8 @@
               level="toplevel"
               supress="false"
               form=""/>
-      <desc>Add a bibliographic item and specify whether it is a manuscript or not.</desc>
+      <desc>Add a bibliographic item and specify whether it is a
+                            manuscript or not.</desc>
       <availableAtts elementName="bibl">
          <attDef attLabel="Type" ident="type" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -884,7 +906,8 @@
           currentLevel="3"
           popup="3"
           teiElement="&lt;title/&gt;">
-      <desc>The title to the Zotero will be filled out automatically.</desc>
+      <desc>The title to the Zotero will be filled out
+                            automatically.</desc>
       <availableAtts elementName="title"/>
       <childElements>
          <textNode type="input" class="title"/>
@@ -901,7 +924,8 @@
         currentLevel="3"
         popup="3"
         teiElement="&lt;ptr/&gt;">
-      <desc>The link to the Zotero will be filled out automatically.</desc>
+      <desc>The link to the Zotero will be filled out
+                            automatically.</desc>
       <availableAtts elementName="ptr">
          <attDef attLabel="Link" ident="target" mode="change" style="restricted">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -922,7 +946,8 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;citedRange/&gt;">
-      <desc>Specify which pages, columns, etc. you are refering to.</desc>
+      <desc>Specify which pages, columns, etc. you are refering
+                            to.</desc>
       <availableAtts elementName="citedRange">
          <attDef attLabel="Unit" ident="unit" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -953,7 +978,8 @@
          currentLevel="2"
          popup="2"
          teiElement="&lt;idno/&gt;">
-      <desc>Enter persistent identifiers of external projects for the same person and choose the source from the list.</desc>
+      <desc>Enter persistent identifiers of external projects for the same person
+                            and choose the source from the list.</desc>
       <availableAtts elementName="idno">
          <attDef attLabel="Source" ident="subtype" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
