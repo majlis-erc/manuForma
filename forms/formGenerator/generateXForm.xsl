@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.62 Beta 
+        Version: 1.63 Beta 
             -1.22 marks a major redesign
         
 
@@ -2034,8 +2034,8 @@
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
+                            <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
+                            <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
                             </xf:load>
                             <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"/>
@@ -2050,15 +2050,15 @@
                         </xf:action>
                     </xf:trigger>
                     <xf:switch class="lookupSwitch" style="width:.5em;">
-                        <xf:case id="{$repeatID}LookupHide" style="display:none;"/>
-                        <xf:case id="{$repeatID}LookupUnHide">
+                        <xf:case id="{$grpRepeatID}LookupHide" style="display:none;"/>
+                        <xf:case id="{$grpRepeatID}LookupUnHide">
                             <div class="lookupDisplay">
-                                <xf:group id="{$repeatID}subformLookup"/>
+                                <xf:group id="{$grpRepeatID}subformLookup"/>
                                 <div class="text-right">
                                     <xf:trigger class="btn btn-outline-secondary btn-sm close" appearance="full">
                                         <xf:label><i class="bi bi-x"/> Close</xf:label>
-                                        <xf:toggle case="{$repeatID}LookupHide" ev:event="DOMActivate"/>
-                                        <xf:unload targetid="{$repeatID}subformLookup" ev:event="DOMActivate"/>
+                                        <xf:toggle case="{$grpRepeatID}LookupHide" ev:event="DOMActivate"/>
+                                        <xf:unload targetid="{$grpRepeatID}subformLookup" ev:event="DOMActivate"/>
                                         <xf:setvalue ref="instance('i-lookup-uri')//*:uri" value="''"/>
                                     </xf:trigger>   
                                 </div>
