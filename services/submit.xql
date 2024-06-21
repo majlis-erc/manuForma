@@ -59,8 +59,8 @@ declare function local:transform($nodes as node()*) as item()* {
         case comment() return $node 
         case text() return parse-xml-fragment($node)
         case element(tei:TEI) return 
-            <TEI xmlns="http://www.tei-c.org/ns/1.0" class="test6">
-                {($node/@*, local:transform($node/node()))}
+            <TEI xmlns="http://www.tei-c.org/ns/1.0">
+                {($node/@*[not(name(.) = 'class')], local:transform($node/node()))}
             </TEI>
         case element(tei:desc) return 
             element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
@@ -347,6 +347,7 @@ return
                 (response:set-status-code( 500 ),
                 <response status="fail">
                     <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
+                    
                 </response>)
             }         
         else if(request:get-parameter('type', '') = 'download') then
