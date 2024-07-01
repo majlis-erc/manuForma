@@ -57,7 +57,7 @@ declare function local:transform($nodes as node()*) as item()* {
     typeswitch($node)
         case processing-instruction() return $node 
         case comment() return $node 
-        case text() return parse-xml-fragment($node)
+        case text() return (:parse-xml-fragment($node):) $node
         case element(tei:TEI) return 
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
                 {($node/@*[not(name(.) = 'class')], local:transform($node/node()))}
@@ -304,11 +304,11 @@ declare function local:markdown($s){
 };  
 
 let $data := if(request:get-parameter('postdata','')) then request:get-parameter('postdata','') else request:get-data()
-let $record := 
-        if($data instance of node()) then
+let $record := $data
+        (:if($data instance of node()) then
             $data/node()
-        else parse-xml-fragment($data) 
-let $post-processed-xml := local:transform($record)    
+        else parse-xml-fragment($data):)
+let $post-processed-xml := local:transform($record) 
 let $uri := replace($post-processed-xml/descendant::tei:idno[1],'/tei','')
 let $id := tokenize($uri,'/')[last()]
 let $file-name := 
@@ -349,7 +349,7 @@ return
                     <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
                     
                 </response>)
-            }         
+            }   
         else if(request:get-parameter('type', '') = 'download') then
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
                  response:set-header("Content-Disposition", fn:concat("attachment; filename=", $file-name)),$post-processed-xml)  
