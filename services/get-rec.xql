@@ -21,7 +21,7 @@ declare function local:markdown($nodes as node()*) as item()* {
     typeswitch($node)
         case processing-instruction() return $node 
         case comment() return $node   
-        case text() return $node
+        case text() return normalize-space($node)
         case element(tei:TEI) return 
             <TEI xmlns="http://www.tei-c.org/ns/1.0">
                 {($node/@*, local:markdown($node/node()))}
