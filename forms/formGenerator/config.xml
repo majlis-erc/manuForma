@@ -139,7 +139,7 @@
                         <valItem ident="Bibliothèque Nationale de France"/>
                         <valItem ident="Alliance Israélite Universelle"/>
                         <valItem ident="Jewish Theological Seminary"/>
-                        <valItem ident="Karaite Synogogue"/>
+                        <valItem ident="Karaite Synagogue"/>
                         <valItem ident="Universitätsbibliothek Leipzig"/>
                         <valItem ident="Institute of Oriental Manuscripts"/>
                         <valItem ident="Sassoon"/>
@@ -583,12 +583,6 @@
                 elementName="persName" 
                 formName="persName" 
                 lookupLabel="Look up person record."/>
-            <lookup
-                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=placeName&amp;q=" 
-                formURL="forms/msSimple/lookup/placeName.xhtml" 
-                elementName="placeName" 
-                formName="placeName" 
-                lookupLabel="Look up place record."/>
             <lookup elementName="title" suppress="true"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
@@ -631,6 +625,12 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup elementName="title" suppress="true"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/bibl?format=xml&amp;collection=bibl&amp;wrapElement=title&amp;q=" 
+                formURL="forms/msSimple/lookup/bibl.xhtml" 
+                elementName="bibl" 
+                formName="bibl" 
+                lookupLabel="Look up manuscript record."/>
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
             <elementGroups>
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
