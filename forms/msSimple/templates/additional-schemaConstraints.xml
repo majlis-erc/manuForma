@@ -70,14 +70,23 @@
          popup="2"
          teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
+              elementName="bibl"
+              formName="titleBibl"
+              lookupLabel="Look up manuscript record."
+              level="subform"
+              supress="false"
+              form="ab"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/bibl?format=xml&amp;collection=bibl&amp;wrapElement=title&amp;q="
               formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
               elementName="bibl"
               formName="bibl"
-              lookupLabel="Look up bibliographic record"
-              level="toplevel"
+              lookupLabel="Look up manuscript record."
+              level="subform"
               supress="false"
-              form=""/>
+              form="additional"/>
       <desc>Add a bibliographic item.</desc>
       <availableAtts elementName="bibl">
          <attDef attLabel="Bibliographic identifier" ident="xml:id" mode="change">
