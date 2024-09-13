@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution. Add alternate identifiers in existing catalogues and external databases. Add information on reproductions, such as digital images, microfilms or other types. Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks. Describe the textual unit(s) in general terms and in detail. Describe the writing material, measurements and related additional properties of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe features of the text layout facilitating navigation through the text (e.g. numbering of sections, enlarged titles,&#xA;                decoration, etc.). Describe script type(s) and hand(s) of the manuscript. Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.). Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the production of the manuscript, traces left by previous owners, and how it was acquired by its present library. Add bibliographic references from the Zotero database." />
+      <meta name="description" content="    Record information pertaining the institutions and people behind the project. Add shelfmark and information on the holding institution. Add alternate identifiers in existing catalogues and external databases. Add information on reproductions, such as digital images, microfilms or other types. Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks. Describe the textual unit(s) in general terms and in detail. Describe the writing material, measurements and related additional properties of the manuscript. Describe the page layout of the manuscript. If necessary, you can define multiple page layouts. Describe features of the text layout facilitating navigation through the text (e.g. numbering of sections, enlarged titles,&#xA;                decoration, etc.). Describe script type(s) and hand(s) of the manuscript. Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.). Describe the binding of the manuscript. Add descriptions of the manuscript from earlier catalogs and internal library records. Describe the history of acquisition, in particular modern, and how the manuscript became part of its present holding institution. Add bibliographic references from the Zotero database." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Controlled Vocabulary Form for Edit MS TEI Records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -17,14 +17,16 @@
          <xf:instance id="i-lookup-selected"><data xmlns="">
                <selected></selected></data></xf:instance>
          <xf:instance id="i-lookup-add"><data xmlns=""></data></xf:instance>
+         <xf:instance id="i-lookup-uri"><data xmlns="">
+               <uri></uri></data></xf:instance>
          <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat('/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=', instance('i-lookup-query')//q),"></xf:resource>
+            <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q),"></xf:resource>
          </xf:submission>
       </xf:model>
    </head>
    <body>
       <div class="d-flex flex-column justify-content-center align-items-center">
-         <h2 class="h3 mainElement">Look up author</h2>
+         <h2 class="h3 mainElement">Look up author record.</h2>
          <p>Search controlled vocabulary  <xf:output value="local-name(current())"></xf:output></p>
          <div class="input-group"><xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true"><xf:label></xf:label><xf:toggle ev:event="DOMFocusIn" case="show-autocompletion"></xf:toggle></xf:input><xf:submit class="btn btn-outline-secondary btn-sm" submission="s-lookup" appearance="minimal"><xf:label><i class="bi bi-search"></i></xf:label></xf:submit>
          </div>
