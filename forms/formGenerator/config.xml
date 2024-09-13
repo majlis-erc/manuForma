@@ -148,6 +148,7 @@
                 </element>
                 <element ident="collection">
                     <valList type="closed">
+                        <valItem ident=""/>
                         <valItem ident="Arab.-Yevr."/>
                         <valItem ident="Firk. Arab."/>
                         <valItem ident="Yevr. I"/>
@@ -255,7 +256,18 @@
             <localSchema src="../schemas/mss-msitem.xml"/>
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="author" formName="persName" lookupLabel="Look up author"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/author?format=xml&amp;collection=persons&amp;wrapElement=author&amp;q=" 
+                formURL="forms/msSimple/lookup/author.xhtml" 
+                elementName="author" 
+                formName="author" 
+                lookupLabel="Look up author record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;wrapElement=title&amp;q=" 
+                formURL="forms/msSimple/lookup/title.xhtml" 
+                elementName="title" 
+                formName="title" 
+                lookupLabel="Look up title record."/>
             <formDesc>Describe the textual unit(s) in general terms and in detail.</formDesc>
             <elementGroups>
                 <group groupLabel="Summary of contents." groupNo="1">
@@ -440,7 +452,18 @@
             <localSchema src="../schemas/mss-hand.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=persName&amp;q=" 
+                formURL="forms/msSimple/lookup/persName.xhtml" 
+                elementName="persName" 
+                formName="persName" 
+                lookupLabel="Look up person record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=placeName&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="placeName" 
+                formName="placeName" 
+                lookupLabel="Look up place record."/>
             <formDesc>Describe script type(s) and hand(s) of the manuscript.</formDesc>
             <elementGroups>
                 <group groupLabel="Definition of script." groupNo="1"  repeatable="yes">
@@ -455,6 +478,18 @@
             <localSchema src="../schemas/mss-additions.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=persName&amp;q=" 
+                formURL="forms/msSimple/lookup/persName.xhtml" 
+                elementName="persName" 
+                formName="persName" 
+                lookupLabel="Look up person record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=placeName&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="placeName" 
+                formName="placeName" 
+                lookupLabel="Look up place record."/>
             <formDesc>Describe and transcribe incodicated documents (colophons, certificates of endowments, ownership statements, etc.).</formDesc>
             <elementGroups>
                 <group groupLabel="Incodicated document." groupLabelConditionalElement="./*:objectType" groupLabelXPath="concat('fols. ',./*:locus/@from,'–',./*:locus/@to,' ',./*:objectType,'.')" groupNo="1" repeatable="yes">
@@ -542,6 +577,18 @@
             <localSchema src="../schemas/mss-accMat.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=persName&amp;q=" 
+                formURL="forms/msSimple/lookup/persName.xhtml" 
+                elementName="persName" 
+                formName="persName" 
+                lookupLabel="Look up person record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=placeName&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="placeName" 
+                formName="placeName" 
+                lookupLabel="Look up place record."/>
             <lookup elementName="title" suppress="true"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
@@ -553,6 +600,18 @@
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="Manuscript history" repeat="no">
             <localSchema src="../schemas/mss-history.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=persName&amp;q=" 
+                formURL="forms/msSimple/lookup/persName.xhtml" 
+                elementName="persName" 
+                formName="persName" 
+                lookupLabel="Look up person record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=placeName&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="placeName" 
+                formName="placeName" 
+                lookupLabel="Look up place record."/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the history of acquisition, in particular modern, and how the manuscript became part of its present holding institution.</formDesc>
             <elementGroups>
