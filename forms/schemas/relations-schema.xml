@@ -392,6 +392,7 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
+                            <elementRef key="mutual"/>
                             <elementRef key="desc"/>
                         </content>
                         <attList>
@@ -406,6 +407,9 @@ End license statement: do not remove -->
                             </attDef>
                             <attDef ident="source" mode="change" usage="opt">
                                 <gloss>Source ID</gloss>
+                            </attDef>
+                            <attDef ident="ref" mode="change" usage="opt">
+                                <gloss>Ref</gloss>
                             </attDef>
                             <attDef ident="name" mode="replace" usage="req">
                                 <gloss>Choose type of relation</gloss>
@@ -653,7 +657,17 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-
+                    
+                    <!-- Constructed element to allow multiple values in mutual lookup. -->
+                    <elementSpec ident="mutual" mode="change">
+                        <gloss>*Description of mutual relation</gloss>
+                        <gloss type="tei">&lt;mutual attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
                     <elementSpec ident="bibl" mode="change">
                         <desc>Add a bibliographic reference to the source you are describing.</desc>
                         <gloss>*Reference</gloss>
