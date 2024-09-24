@@ -262,7 +262,21 @@ declare function local:transform($nodes as node()*) as item()* {
                 {($node/@*[. != ''], local:transform($node/node()))}
                 <change when="{current-dateTime()}" who="#{string($user)}" test="{concat($config:nav-base,'/userInfo')}">XForms Editing by {string($user)}</change>
             </revisionDesc>   
-         :)   
+         :) 
+         case element(tei:relation) return 
+            if($node/tei:mutual or $node/tei:active or $node/tei:passive)  then
+                let $passiveString := string-join($node/tei:passive/@ref,' ') 
+                let $activeString := string-join($node/tei:active/@ref,' ')
+                let $mutualString := string-join($node/tei:mutual/@ref,' ')
+                return 
+                    <relation xmlns="http://www.tei-c.org/ns/1.0">
+                        {$node/@*[not(local-name() = 'mutual') and not(local-name() = 'active') and not(local-name() = 'passive')],
+                         attribute active {$activeString},
+                         attribute passive {$passiveString},
+                         attribute mutual {$mutualString}
+                        }
+                    </relation>
+            else local:passthru($node)
         case element() return local:passthru($node)
         default return local:transform($node/node())
 };

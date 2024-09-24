@@ -33,6 +33,38 @@ declare function local:markdown($nodes as node()*) as item()* {
         case element(tei:lb) return '&#10;'   
         case element(tei:em) return 
             ('*',local:markdown($node/node()),'*')
+        case element(tei:relation) return 
+            if($node[@mutual] or $node[@active] or $node[@passive]) then
+                <relation xmlns="http://www.tei-c.org/ns/1.0">
+                    {$node/@*[not(local-name() = 'mutual') and not(local-name() = 'active') and not(local-name() = 'passive')]}
+                    {
+                        let $active := 
+                            if(contains($node/@active,' ')) then
+                                for $a in tokenize($node/@active,' ')
+                                return  
+                                    <active xmlns="http://www.tei-c.org/ns/1.0">{$a}</active>
+                            else 
+                                <active xmlns="http://www.tei-c.org/ns/1.0">{string($node/@active)}</active>
+                        let $passive := 
+                            if(contains($node/@passive,' ')) then
+                                for $p in tokenize($node/@passive,' ')
+                                return  
+                                    <passive xmlns="http://www.tei-c.org/ns/1.0">{$p}</passive>
+                            else 
+                                <passive xmlns="http://www.tei-c.org/ns/1.0">{string($node/@passive)}</passive>
+                        let $mutual := 
+                            if(contains($node/@mutual,' ')) then
+                                for $m in tokenize($node/@mutual,' ')
+                                return  
+                                    <mutual xmlns="http://www.tei-c.org/ns/1.0">{$m}</mutual>
+                            else 
+                                <mutual xmlns="http://www.tei-c.org/ns/1.0">{string($node/@mutual)}</mutual>
+                       return ($active,$passive,$mutual)
+                        
+                    }
+                    {local:markdown($node/node())}
+                </relation>
+            else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown($node/node()))}
         case element() return local:passthru($node)
         default return local:markdown($node/node())
 };
