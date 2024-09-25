@@ -109,14 +109,6 @@
                             the list provided. Distinguish between the Subject of the relation and the Object. In case the relation ends with the word
                             "with each other" only fill the names in the Mutual field.</desc>
       <availableAtts elementName="relation">
-         <attDef attLabel="Subject" ident="active" mode="change" usage="opt">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Subject</gloss>
-         </attDef>
-         <attDef attLabel="Mutual" ident="mutual" mode="change" usage="opt">
-            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Mutual</gloss>
-         </attDef>
          <attDef attLabel="Choose type of relation"
                  ident="name"
                  mode="replace"
@@ -309,9 +301,9 @@
                         desc="@active: Person, @passive: Text."/>
             </valList>
          </attDef>
-         <attDef attLabel="Object" ident="passive" mode="change" usage="opt">
+         <attDef attLabel="Ref" ident="ref" mode="change" usage="opt">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Object</gloss>
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Ref</gloss>
          </attDef>
          <attDef attLabel="Source ID" ident="source" mode="change" usage="opt">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -320,6 +312,21 @@
       </availableAtts>
       <childElements>
          <child>
+            <element ident="mutual"
+                     label="*Description of mutual relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="active"
+                     label="*Subject of relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="passive"
+                     label="*Object of relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="desc"
                      label="*Relation Description"
                      minOccurs=""
@@ -328,6 +335,84 @@
          </child>
       </childElements>
    </relation>
+   <mutual ident="mutual"
+           elementName="mutual"
+           elementLabel="*Description of mutual relation"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:body/*:ab/*:listRelation/*:relation/*:mutual"
+           currentLevel="5"
+           popup="5"
+           teiElement="&lt;mutual/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q="
+              formURL="form.xq?form=forms/relationTEI/lookup/mutual.xhtml"
+              elementName="mutual"
+              formName="mutual"
+              lookupLabel="Look up mutual relations"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <desc/>
+      <availableAtts elementName="mutual"/>
+      <childElements>
+         <textNode type="input" class="mutual"/>
+         <child/>
+      </childElements>
+   </mutual>
+   <active ident="active"
+           elementName="active"
+           elementLabel="*Subject of relation"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:body/*:ab/*:listRelation/*:relation/*:active"
+           currentLevel="5"
+           popup="5"
+           teiElement="&lt;active/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/active?format=xml&amp;q="
+              formURL="form.xq?form=forms/relationTEI/lookup/active.xhtml"
+              elementName="active"
+              formName="active"
+              lookupLabel="Look up subject of relation"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <desc/>
+      <availableAtts elementName="active"/>
+      <childElements>
+         <textNode type="input" class="active"/>
+         <child/>
+      </childElements>
+   </active>
+   <passive ident="passive"
+            elementName="passive"
+            elementLabel="*Object of relation"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:body/*:ab/*:listRelation/*:relation/*:passive"
+            currentLevel="5"
+            popup="5"
+            teiElement="&lt;passive/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/passive?format=xml&amp;q="
+              formURL="form.xq?form=forms/relationTEI/lookup/passive.xhtml"
+              elementName="passive"
+              formName="passive"
+              lookupLabel="Look object of relation"
+              level="toplevel"
+              supress="false"
+              form=""/>
+      <desc/>
+      <availableAtts elementName="passive"/>
+      <childElements>
+         <textNode type="input" class="passive"/>
+         <child/>
+      </childElements>
+   </passive>
    <desc ident="desc"
          elementName="desc"
          elementLabel="*Relation Description"
