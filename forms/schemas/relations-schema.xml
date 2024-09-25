@@ -392,9 +392,13 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
+                            <elementRef key="mutual"/>
+                            <elementRef key="active"/>
+                            <elementRef key="passive"/>
                             <elementRef key="desc"/>
                         </content>
                         <attList>
+                            <!--
                             <attDef ident="mutual" mode="change" usage="opt">
                                 <gloss>Mutual</gloss>
                             </attDef>
@@ -404,8 +408,12 @@ End license statement: do not remove -->
                             <attDef ident="passive" mode="change" usage="opt">
                                 <gloss>Object</gloss>
                             </attDef>
+                            -->
                             <attDef ident="source" mode="change" usage="opt">
                                 <gloss>Source ID</gloss>
+                            </attDef>
+                            <attDef ident="ref" mode="change" usage="opt">
+                                <gloss>Ref</gloss>
                             </attDef>
                             <attDef ident="name" mode="replace" usage="req">
                                 <gloss>Choose type of relation</gloss>
@@ -653,7 +661,33 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-
+                    
+                    <!-- Constructed element to allow multiple values in mutual lookup. -->
+                    <elementSpec ident="mutual" mode="change">
+                        <gloss>*Description of mutual relation</gloss>
+                        <gloss type="tei">&lt;mutual attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="active" mode="change">
+                        <gloss>*Subject of relation</gloss>
+                        <gloss type="tei">&lt;active attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="passive" mode="change">
+                        <gloss>*Object of relation</gloss>
+                        <gloss type="tei">&lt;passive attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
                     <elementSpec ident="bibl" mode="change">
                         <desc>Add a bibliographic reference to the source you are describing.</desc>
                         <gloss>*Reference</gloss>
