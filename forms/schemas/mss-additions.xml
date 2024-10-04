@@ -83,10 +83,13 @@ End license statement: do not remove --><!--requirements:
                 -->
 
                     <moduleRef key="core"
-                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del desc distinct divGen editor ellipsis email emph expan foreign gap gb gloss graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
                     <moduleRef key="msdescription"
                         except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
                     <moduleRef key="linking" include="ab"/>
+                    
+                    <moduleRef key="namesdates" include="listRelation relation"/>
+                    
                     <elementSpec ident="locus" module="msdescription" mode="change">
                         <gloss>*Range of folio(s)</gloss>
                         <gloss type="tei">&lt;locus&gt;</gloss>
@@ -180,6 +183,7 @@ End license statement: do not remove --><!--requirements:
                             <elementRef key="quote"/>
                             <elementRef key="ab"/>
                             <elementRef key="note"/>
+                            <elementRef key="listRelation"/>
                         </content>
                         <attList>
                             <attDef ident="ana" mode="delete"/>
@@ -514,6 +518,385 @@ End license statement: do not remove --><!--requirements:
                             </attDef>
                         </attList>
                     </elementSpec>
+                    
+                    
+                    <elementSpec ident="listRelation" mode="change">
+                        <gloss>This field signifies that you are describing a relation between to records.</gloss>
+                        <gloss>*Relation</gloss>
+                        <gloss type="tei"> &lt;listRelation/&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="relation"/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="relation" mode="change">
+                        <gloss>*Description of relation</gloss>
+                        <gloss type="tei">&lt;relation&gt;</gloss>
+                        <desc xml:lang="en">Specify the relationship between the person and another person or object. Choose the kind of relation from
+                            the list provided. Create and use fields for "Subject", "Object", and "Mutual" as indicated in the relation description. 
+                            Additional "Mutual" fields can be created at your discretion.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="mutual"/>
+                            <elementRef key="active"/>
+                            <elementRef key="passive"/>
+                            <elementRef key="desc"/>
+                        </content>
+                        <attList>
+                            <!--
+                            <attDef ident="mutual" mode="change" usage="opt">
+                                <gloss>Mutual</gloss>
+                            </attDef>
+                            <attDef ident="active" mode="change" usage="opt">
+                                <gloss>Subject</gloss>
+                            </attDef>
+                            <attDef ident="passive" mode="change" usage="opt">
+                                <gloss>Object</gloss>
+                            </attDef>
+                            -->
+                            <attDef ident="source" mode="change" usage="opt">
+                                <gloss>Source ID</gloss>
+                            </attDef>
+                            <attDef ident="ref" mode="change" usage="opt">
+                                <gloss>Ref</gloss>
+                            </attDef>
+                            <attDef ident="name" mode="replace" usage="req">
+                                <gloss>Choose type of relation</gloss>
+                                <valList type="closed">
+                                    <valItem ident="snap:wifeOf">
+                                        <gloss>[Subject] is the wife of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:husbandOf">
+                                        <gloss>[Subject] is the husband of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:motherInLawOf">
+                                        <gloss>[Subject] is the mother-in-law of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:fatherInLawOf">
+                                        <gloss>[Subject] is the father-in-law of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:sonInLawOf">
+                                        <gloss>[Subject] is the son-in-law of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:daughterInLawOf">
+                                        <gloss>[Subject] is the daughter-in-law of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:fatherOf">
+                                        <gloss>[Subject] is the father of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:motherOf">
+                                        <gloss>[Subject] is the mother of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:grandsonOf">
+                                        <gloss>[Subject] is the grandson of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:granddaughterOf">
+                                        <gloss>[Subject] is the granddaughter of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:grandfatherOf">
+                                        <gloss>[Subject] is the grandfather of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:grandmotherOf">
+                                        <gloss>[Subject] is the grandmother of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:greatgrandfatherOf">
+                                        <gloss>[Subject] is the greatgrandfather of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:sisterOf">
+                                        <gloss>[Subject] is the sister of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:sonOf">
+                                        <gloss>[Subject] is the son of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:nephewOf">
+                                        <gloss>[Subject] is the nephew of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:nieceOf">
+                                        <gloss>[Subject] is the niece of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:stepFamilyRelationship">
+                                        <gloss>[Mutual] and [Mutual] have a family relationship with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:uncleOf">
+                                        <gloss>[Subject] is the uncle of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:daughterOf">
+                                        <gloss>[Subject] is the daughter of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:brotherOf">
+                                        <gloss>[Subject] is the brother of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:kinOf">
+                                        <gloss>[Mutual] and [Mutual] are kin of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:ancestorOf">
+                                        <gloss>[Subject] is the ancestor of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:cousinOf">
+                                        <gloss>[Subject] is the cousin of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:claimedFamilyRelationship">
+                                        <gloss>[Mutual] and [Mutual] have claimed a family relationship with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:familyOf">
+                                        <gloss>[Mutual] and [Mutual] are the family of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:disciplinaryAssociate">
+                                        <gloss>[Mutual] and [Mutual] are the discilinary associates of each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:followerOf">
+                                        <gloss>[Subject] is the follower of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:studentOf">
+                                        <gloss>[Subject] is the student of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:refuterOf">
+                                        <gloss>[Subject] is the refuter of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:addresseeOf">
+                                        <gloss>[Subject] is the addressee of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:citedNegatively">
+                                        <gloss>[Subject] cited negatively [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:citedPositively">
+                                        <gloss>[Subject] cited positively [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:cited">
+                                        <gloss>[Subject] cited [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:correspondedWith">
+                                        <gloss>[Mutual] and [Mutual] corresponded with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:debatedWith">
+                                        <gloss>[Mutual] and [Mutual] debated with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="snap:teacherOf">
+                                        <gloss>[Subject] is the teacher of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:assistantOf">
+                                        <gloss>[Subject] is the assistant of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:acquaintedWith">
+                                        <gloss>[Mutual] and [Mutual] are acquainted with each other</gloss>
+                                        <desc>@mutual: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:patronOf">
+                                        <gloss>[Subject] is the patron of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="betmas:isSuccessorOf">
+                                        <gloss>[Subject] is the successor of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="betmas:isPredecessorOf">
+                                        <gloss>[Subject] is the predecessor of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="rel:enemyOf">
+                                        <gloss>[Subject] is the enemy of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:friendOf">
+                                        <gloss>[Subject] is the friend of [Object]</gloss>
+                                        <desc>@active: Person, @passive: Person.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:affiliatedWith">
+                                        <gloss>[Subject] is affiliated with [Object] (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="syriaca:born-at">
+                                        <gloss>[Subject] is born at [Object]</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="syriaca:died-at">
+                                        <gloss>[Subject] has died at [Object]</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:relationWith">
+                                        <gloss>[Subject] has a relation with [Object] (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="syriaca:has-literary-connection-to-place">
+                                        <gloss>[Subject] has a literary relation with [Object] (place)</gloss>
+                                        <desc>@active: Person, @passive: Place.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:attended">
+                                        <gloss>[Subject] attended [Object]</gloss>
+                                        <desc>@active: Person,@ passive: ?.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:organized">
+                                        <gloss>[Subject] organized [Object]</gloss>
+                                        <desc>@active: Person,@ passive: ?.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:dictated">
+                                        <gloss>[Subject] dictated [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:refuted">
+                                        <gloss>[Subject] refuted [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:commentatorOf">
+                                        <gloss>[Subject] is commentator of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:translatorOf">
+                                        <gloss>[Subject] is translator of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:adapterOf">
+                                        <gloss>[Subject] is adapter of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mulahhisOf">
+                                        <gloss>[Subject] is mulahhis of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:muhtasirOf">
+                                        <gloss>[Subject] is muḫtaṣir of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mujmilOf">
+                                        <gloss>[Subject] is mujmil of [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                    <valItem ident="majlis:mentionedIn">
+                                        <gloss>[Subject] is mentioned in [Object] (work)</gloss>
+                                        <desc>@active: Person, @passive: Text.</desc>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    <!-- Constructed element to allow multiple values in mutual lookup. -->
+                    <elementSpec ident="mutual" mode="change">
+                        <gloss>*Mutual relation</gloss>
+                        <gloss type="tei">&lt;mutual attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="active" mode="change">
+                        <gloss>*Subject of relation</gloss>
+                        <gloss type="tei">&lt;active attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    <elementSpec ident="passive" mode="change">
+                        <gloss>*Object of relation</gloss>
+                        <gloss type="tei">&lt;passive attribute&gt;</gloss>
+                        <desc xml:lang="en"></desc>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="desc" mode="change">
+                        <desc>Describe the relation and pay attention to the Note and Transcription fields – the other fields are to be filled out if they are relevant to the relation.</desc>
+                        <gloss>*Relation Description</gloss>
+                        <gloss type="tei">&lt;desc&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.translatable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="gloss"/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="gloss" mode="change">
+                        <desc>Give a brief account of the relation you are describing, including the names of all the persons, places and objects involved.</desc>
+                        <gloss>*Note</gloss>
+                        <gloss type="tei"> &lt;gloss/&gt;</gloss>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.global.rendition" mode="delete"/>
+                            <memberOf key="att.global.linking" mode="delete"/>
+                            <memberOf key="att.global.analytic" mode="delete"/>
+                            <memberOf key="att.global.facs" mode="delete"/>
+                            <memberOf key="att.global.change" mode="delete"/>
+                            <memberOf key="att.global.responsibility" mode="delete"/>
+                            <memberOf key="att.global.source" mode="delete"/>
+                            <memberOf key="att.translatable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
+                    
                 </schemaSpec>
             </div>
         </body>
