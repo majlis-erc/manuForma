@@ -35,30 +35,81 @@ declare function local:markdown($nodes as node()*) as item()* {
             ('*',local:markdown($node/node()),'*')
         case element(tei:relation) return 
             if($node[@mutual] or $node[@active] or $node[@passive]) then
+                let $collection := '/db/apps/majlis-data/data'
+                return 
                 <relation xmlns="http://www.tei-c.org/ns/1.0">
                     {$node/@*[not(local-name() = 'mutual') and not(local-name() = 'active') and not(local-name() = 'passive')]}
                     {
                         let $active := 
                             if(contains($node/@active,' ')) then
                                 for $a in tokenize($node/@active,' ')
+                                let $ref := $a
+                                let $doc := 
+                                    (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                    collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                    collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()    
                                 return  
-                                    <active xmlns="http://www.tei-c.org/ns/1.0">{$a}</active>
+                                    <active xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</active>
                             else 
-                                <active xmlns="http://www.tei-c.org/ns/1.0">{string($node/@active)}</active>
+                                let $ref := string($node/@active)
+                                let $doc := 
+                                    if($ref != '') then 
+                                        (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                    else ()
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text() 
+                                return 
+                                    <active xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</active>
                         let $passive := 
                             if(contains($node/@passive,' ')) then
                                 for $p in tokenize($node/@passive,' ')
+                                let $ref := $p
+                                let $doc := 
+                                    if($ref != '') then 
+                                        (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                    else ()
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()    
                                 return  
-                                    <passive xmlns="http://www.tei-c.org/ns/1.0">{$p}</passive>
+                                    <passive xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</passive>
                             else 
-                                <passive xmlns="http://www.tei-c.org/ns/1.0">{string($node/@passive)}</passive>
+                                let $ref := string($node/@passive)
+                                let $doc := 
+                                    if($ref != '') then 
+                                        (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                    else ()
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text() 
+                                return
+                                    <passive xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</passive>
                         let $mutual := 
                             if(contains($node/@mutual,' ')) then
                                 for $m in tokenize($node/@mutual,' ')
+                                let $ref := $m
+                                let $doc := 
+                                    if($ref != '') then 
+                                        (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                    else ()
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()  
                                 return  
-                                    <mutual xmlns="http://www.tei-c.org/ns/1.0">{$m}</mutual>
+                                    <mutual xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</mutual>
                             else 
-                                <mutual xmlns="http://www.tei-c.org/ns/1.0">{string($node/@mutual)}</mutual>
+                                let $ref := string($node/@mutual)
+                                let $doc := 
+                                    if($ref != '') then 
+                                        (collection($collection)//tei:idno[@type='URI'][. = $ref]/ancestor::tei:TEI | 
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/')]/ancestor::tei:TEI |
+                                        collection($collection)//tei:idno[@type='URI'][. = concat($ref,'/tei')]/ancestor::tei:TEI)[1]
+                                    else ()
+                                let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()     
+                                return 
+                                    <mutual xmlns="http://www.tei-c.org/ns/1.0" ref="{$ref}">{normalize-space($label)}</mutual>
                        return ($active,$passive,$mutual)
                         
                     }
