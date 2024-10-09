@@ -15,7 +15,7 @@
             - eXist-db 
             
         Version: 1.64 Beta 
-            -1.22 marks a major redesign
+            -1.23 marks a major redesign
         
 
         NOTES: 
@@ -1388,6 +1388,11 @@
                             <q/>
                         </data>
                     </xf:instance>
+                    <xf:instance id="i-lookup-limit">
+                        <data xmlns="">
+                            <limit/>
+                        </data>
+                    </xf:instance>
                     <xf:instance id="i-lookup-results">
                         <data xmlns=""/>
                     </xf:instance>
@@ -1410,7 +1415,7 @@
                     -->
                     <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
 <!--                        <xf:resource value="concat('{string($lookup/@api)}', instance('i-lookup-query')//q),"/>-->
-                        <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q),"/>
+                        <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q,'&amp;limit=',instance('i-lookup-limit')//limit),"/>
                     </xf:submission>
                 </xf:model>
             </head>
@@ -1419,6 +1424,55 @@
                     <h2 class="h3 mainElement"><xsl:value-of select="$lookup/@lookupLabel"/></h2>
                     <p>Search controlled vocabulary  <xf:output value="local-name(current())"/></p>
                     <xsl:choose>
+                        <xsl:when test="$lookup/@elementName='mutual' or  $lookup/@elementName='active' or $lookup/@elementName='passive'">
+                            <div class="input-group">    
+                                <xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true">
+                                    <xf:label/>
+                                    <xf:toggle ev:event="DOMFocusIn" case="show-autocompletion"/>    
+                                </xf:input>
+                                <xf:select1 ref="instance('i-lookup-limit')//limit" >
+                                    <xf:label>Limit by: </xf:label>
+                                    <xf:item>
+                                        <xf:label>Person</xf:label>
+                                        <xf:value>person</xf:value> 
+                                    </xf:item>
+                                    <xf:item>
+                                        <xf:label>Place</xf:label>
+                                        <xf:value>place</xf:value>
+                                    </xf:item>
+                                    <xf:item>
+                                        <xf:label>Manuscript</xf:label>
+                                        <xf:value>manuscript</xf:value>
+                                    </xf:item>
+                                    <xf:item>
+                                        <xf:label>Work</xf:label>
+                                        <xf:value>work</xf:value>
+                                    </xf:item>
+                                </xf:select1>
+                                <xf:submit class="btn btn-outline-secondary btn-sm" submission="s-lookup" appearance="minimal">
+                                    <xf:label> <i class="bi bi-search"/> </xf:label>    
+                                </xf:submit>
+                            </div>
+                            <xf:select1 ref="instance('i-lookup-selected')/child::*" appearance="full" class="checkbox select-group">
+                                <xf:itemset ref="instance('i-lookup-results')//*:title/child::*[1]">
+                                    <xf:label ref="."/>
+                                    <xf:value ref="."/>
+                                </xf:itemset>
+                                <xf:action ev:event="xforms-value-changed">
+                                    <xf:insert ev:event="DOMActivate" ref="instance('i-lookup-add')/child::*" origin="instance('i-lookup-results')//*:title/child::*[1][. = instance('i-lookup-selected')//selected]"/>
+                                </xf:action>
+                            </xf:select1>
+                            <xf:trigger class="btn btn-outline-secondary btn-sm" appearance="full" ref=".">
+                                <xf:label><i class="bi bi-plus"/> Add to Record</xf:label>
+                                <xf:insert ev:event="DOMActivate" ref="." at="." origin="instance('i-lookup-selected')/selected/child::*" position="after"/>
+                                <xf:delete ev:event="DOMActivate" ref="."/>
+                                <xf:setvalue ref="instance('i-lookup-query')/q" value="''"/>
+                                <xf:delete ref="instance('i-lookup-results')//child::*"/>
+                                <xf:delete ref="instance('i-lookup-selected')//child::*"/>
+                                <!--                            <message level="modal" ev:event="DOMActivate">Added</message>-->
+                                <xf:message level="modeless" ev:event="DOMActivate"> Added </xf:message>
+                            </xf:trigger>
+                        </xsl:when>
                         <xsl:when test="$lookup/@elementName='bibl' and $lookup/@formName!='titleBibl'">
                             <div class="input-group">
                                 <xf:input id="search-q" ref="instance('i-lookup-query')/q" incremental="true">
