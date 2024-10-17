@@ -83,26 +83,28 @@
             </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Work" repeat="no">
-            <formDesc>Information about work.</formDesc>
+            <formDesc>Information about the work.</formDesc>
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
             <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="author" formName="persName" lookupLabel="Look up author"/>
             <elementGroups>
-                <group groupLabel="Add bibliographic information about work."  groupNo="1" repeatable="no">
+                <group groupLabel="Add bibliographic information about the work." groupNo="1" repeatable="no">
                     <element xpath="tei:title"/>
                     <element xpath="tei:author"/>
                     <element xpath="tei:persName"/>
                     <element xpath="tei:textLang"/>
+                    <element xpath="tei:term"/>
+                    <element xpath="tei:date"/>
                 </group>
-                <group groupLabel="Add notable quotations from work." groupNo="2" repeatable="no">
+                <group groupLabel="Add notable quotations from the work." groupNo="2" repeatable="no">
                     <element xpath="tei:incipit"/>
                     <element xpath="tei:explicit"/>
                     <element xpath="tei:quote"/>
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl/tei:listRelation" formName="listRelation" formLabel="Related Works" repeat="no">
+        <!--<subform xpath="/tei:TEI/descendant::tei:body/tei:bibl/tei:listRelation" formName="listRelation" formLabel="Related Works" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
@@ -112,8 +114,8 @@
                     <element xpath="tei:relation"/>
                 </group>
             </elementGroups>
-        </subform>
-        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl/tei:note" formName="ms" formLabel="Manuscripts and Editions" repeat="no">
+        </subform>-->
+        <!--<subform xpath="/tei:TEI/descendant::tei:body/tei:bibl/tei:note" formName="ms" formLabel="Manuscripts and Editions" repeat="no">
             <formDesc>Add manuscripts and editions from the database.</formDesc>
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
@@ -123,8 +125,19 @@
                     <element xpath="tei:bibl"/>
                 </group>
             </elementGroups>
+        </subform>-->
+        <subform xpath="/tei:TEI/descendant::tei:textClass/tei:keywords/tei:list" formName="bibl" formLabel="Discipline" repeat="no">
+            <localSchema src="../schemas/work-schema.xml"/>
+            <globalSchema src="../schemas/work-schema.xml"/>
+            <xmlTemplate src="../templates/work-fulltemplate.xml"/>
+            <formDesc>Add information about the work's discipline.</formDesc>
+            <elementGroups>
+                <group groupLabel="Disciplines." groupNo="1" repeatable="yes">
+                    <element xpath="tei:item"/>
+                </group>
+            </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="additional" formLabel="Bibliography" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibliography" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
