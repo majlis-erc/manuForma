@@ -42,6 +42,21 @@
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
+        <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q=" 
+            formURL="forms/mssTEI/lookup/mutual.xhtml" 
+            elementName="mutual" 
+            formName="mutual" 
+            lookupLabel="Look up mutual relations"/>
+        <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q=" 
+            formURL="forms/mssTEI/lookup/mutual.xhtml" 
+            elementName="active" 
+            formName="active" 
+            lookupLabel="Look up subject of relation"/>
+        <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q=" 
+            formURL="forms/mssTEI/lookup/mutual.xhtml" 
+            elementName="passive" 
+            formName="passive" 
+            lookupLabel="Look up object of relation"/>
         <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
         <popup formName="personTEI" elementName="persName" label="New persons"/>
         <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
@@ -104,51 +119,52 @@
             <controlledValuesElements>
                 <element ident="country">
                     <valList type="closed">
+                        <valItem ident="Egypt"/>
+                        <valItem ident="France"/>
+                        <valItem ident="Germany"/>
+                        <valItem ident="Great Britain"/>
+                        <valItem ident="Hungary"/>
+                        <valItem ident="Israel"/>
+                        <valItem ident="Ukraine"/>
                         <valItem ident="Russia"/>
                         <valItem ident="USA"/>
-                        <valItem ident="Great Britain"/>
-                        <valItem ident="Israel"/>
-                        <valItem ident="Hungary"/>
-                        <valItem ident="France"/>
-                        <valItem ident="Egypt"/>
-                        <valItem ident="Germany"/>
-                        <valItem ident="Ukraine"/>
                     </valList>
                 </element>
                 <element ident="settlement">
                     <valList type="closed">
-                        <valItem ident="St. Petersburg"/>
-                        <valItem ident="London"/>
-                        <valItem ident="Jerusalem"/>
                         <valItem ident="Budapest"/>
-                        <valItem ident="Cambridge"/>
-                        <valItem ident="Paris"/>
-                        <valItem ident="New York"/>
                         <valItem ident="Cairo"/>
-                        <valItem ident="Leipzig"/>
+                        <valItem ident="Cambridge"/>
+                        <valItem ident="Jerusalem"/>
                         <valItem ident="Kyiv"/>
+                        <valItem ident="Leipzig"/>
+                        <valItem ident="London"/>
+                        <valItem ident="Paris"/>
+                        <valItem ident="Princeton"/>
+                        <valItem ident="New York"/>
+                        <valItem ident="St. Petersburg"/>
                     </valList>
                 </element>
                 <element ident="repository">
                     <valList type="closed">
-                        <valItem ident="National Library of Russia"/>
-                        <valItem ident="British Library"/>
-                        <valItem ident="Ben Zvi Institute"/>
-                        <valItem ident="Library of the Hungarian Academy of Sciences"/>
-                        <valItem ident="Cambridge University Library"/>
-                        <valItem ident="Bibliothèque Nationale de France"/>
                         <valItem ident="Alliance Israélite Universelle"/>
+                        <valItem ident="Ben Zvi Institute"/>
+                        <valItem ident="Bibliothèque Nationale de France"/>
+                        <valItem ident="British Library"/>
+                        <valItem ident="Cambridge University Library"/>
+                        <valItem ident="Institute of Oriental Manuscripts"/>
                         <valItem ident="Jewish Theological Seminary"/>
                         <valItem ident="Karaite Synagogue"/>
-                        <valItem ident="Universitätsbibliothek Leipzig"/>
-                        <valItem ident="Institute of Oriental Manuscripts"/>
+                        <valItem ident="Library of the Hungarian Academy of Sciences"/>
+                        <valItem ident="National Library of Russia"/>
+                        <valItem ident="Princeton University Library"/>
                         <valItem ident="Sassoon"/>
+                        <valItem ident="Universitätsbibliothek Leipzig"/>
                         <valItem ident="Vernadsky National Library of Ukraine"/>
                     </valList>
                 </element>
                 <element ident="collection">
                     <valList type="closed">
-                        <valItem ident=""/>
                         <valItem ident="Arab.-Yevr."/>
                         <valItem ident="Firk. Arab."/>
                         <valItem ident="Yevr. I"/>
@@ -164,13 +180,14 @@
                         <valItem ident="Yevr. IV"/>
                         <valItem ident="Yevr.-Arab. I"/>
                         <valItem ident="Yevr.-Arab. II"/>
+                        <valItem ident=""/>
+                        <valItem ident="Add."/>
+                        <valItem ident="Harkavy"/>
+                        <valItem ident="Hébr."/>
                         <valItem ident="Kaufmann"/>
                         <valItem ident="Oriental"/>
                         <valItem ident="T-S"/>
-                        <valItem ident="Hébr."/>
                         <valItem ident="Vollers"/>
-                        <valItem ident="Add."/>
-                        <valItem ident="Harkavy"/>
                     </valList>
                 </element>
             </controlledValuesElements>

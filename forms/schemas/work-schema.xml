@@ -27,8 +27,9 @@ End license statement: do not remove -->
     
 
 -->
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
-    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+    xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -38,11 +39,12 @@ End license statement: do not remove -->
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
-                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
+                    Arabic in the Islamicate World</publisher>
                 <pubPlace>München</pubPlace>
                 <availability>
-                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
-                        Attribution-ShareAlike 4.0. </licence>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
+                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
                 </availability>
             </publicationStmt>
             <notesStmt>
@@ -53,8 +55,10 @@ End license statement: do not remove -->
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
-            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
-            <change who="MM" when="2022-05-16">Created schema on basis of work by Nathan Gibson</change>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
+                created by Pietro Liuzzo</change>
+            <change who="MM" when="2022-05-16">Created schema on basis of work by Nathan
+                Gibson</change>
         </revisionDesc>
     </teiHeader>
     <text>
@@ -64,31 +68,36 @@ End license statement: do not remove -->
         <body>
             <div>
                 <head>Information on this customization</head>
-                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript support using XForms.</p>
-                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
-                    customization.</p>
-                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
-                        schema</ref> of FIRHIST</p>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering
+                    descriptions of the manuscript support using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
+                        Guidelines</ref> contain examples and details of that customization.</p>
+                <p>Added Rules from the <ref
+                        target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd"
+                        >consolidated schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
-                <schemaSpec ident="works" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                <schemaSpec ident="works" docLang="en" prefix="tei_" start="TEI" xml:lang="en"
+                    targetLang="en">
                     <!--source="mss-compiled.odd"-->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
 
                     <moduleRef key="core"
-                        include="author date note textLang title quote bibl citedRange ptr"/>
+                        include="author date list note textLang title quote bibl citedRange ptr term"/>
                     <moduleRef key="msdescription" include="incipit explicit"/>
                     <moduleRef key="namesdates" include="persName"/>
+                    <moduleRef key="header" include="keywords textClass"/>
 
-                    
-                    
+
+
                     <elementSpec ident="quote" mode="change">
                         <gloss>Transcription</gloss>
                         <gloss type="tei">&lt;quote&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of the text.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Transcribe relevant portion of
+                            the text.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.ascribed.directed" mode="delete"/>
@@ -135,12 +144,14 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
-                    
+
+
                     <elementSpec ident="incipit" mode="change">
                         <gloss>Incipit</gloss>
                         <gloss type="tei">&lt;incipit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en">Transcribe the opening words of the text unit of sufficient length to identify the work with confidence.</desc>
+                        <desc versionDate="2022-05-27" xml:id="incipit.desc" xml:lang="en"
+                            >Transcribe the opening words of the text unit of sufficient length to
+                            identify the work with confidence.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -181,7 +192,9 @@ End license statement: do not remove -->
                     <elementSpec ident="explicit" mode="change">
                         <gloss>Explicit</gloss>
                         <gloss type="tei">&lt;explicit/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en">Transcribe the closing words of the text unit, exclusive of any rubric or colophon which might follow.</desc>
+                        <desc versionDate="2022-05-27" xml:id="explicit.desc" xml:lang="en"
+                            >Transcribe the closing words of the text unit, exclusive of any rubric
+                            or colophon which might follow.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.msExcerpt" mode="delete"/>
@@ -220,11 +233,36 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     
+                    <elementSpec ident="item" mode="change">
+                        <gloss>Discipline</gloss>
+                        <gloss type="tei">&lt;item&gt;</gloss>
+                        <desc xml:lang="en">Choose a discipline from the list that describes the work.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
                     
+                    <elementSpec ident="list" mode="change">
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.cmc" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="item"/>
+                        </content>
+                    </elementSpec>
+
                     <elementSpec ident="date" mode="change">
                         <gloss>Date</gloss>
                         <gloss type="tei">&lt;date&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in CE. The date refers to the acquisition (not the production of the copy).</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in CE. The
+                            date refers to the acquisition (not the production of the copy).</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -258,14 +296,14 @@ End license statement: do not remove -->
                             <attDef ident="unit" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                     <moduleRef key="textstructure" include="text body"/>
-                    
-                    
+
+
                     <elementSpec ident="text" mode="change">
                         <classes mode="change">
                             <memberOf key="att.declaring" mode="delete"/>
@@ -283,18 +321,21 @@ End license statement: do not remove -->
                             <elementRef key="listPlace"/>
                         </alternate>
                     </elementSpec>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
+
                     <elementSpec ident="author" mode="change">
                         <gloss>*Canonical author name</gloss>
                         <gloss type="tei">&lt;author/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the canonical author. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional authors as required.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in
+                            the database to identify the canonical author. Try different spellings
+                            in different languages! If no suitable record exists, create a new one.
+                            Add additional authors as required.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -330,7 +371,9 @@ End license statement: do not remove -->
                     <elementSpec ident="textLang" mode="change">
                         <gloss>Text language</gloss>
                         <gloss type="tei">&lt;textLang/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a primary language. If the text contains passages in other languages, enter them in the field Other languages. </desc>
+                        <desc versionDate="2022-05-27" xml:id="textlang.desc" xml:lang="en">Choose a
+                            primary language. If the text contains passages in other languages,
+                            enter them in the field Other languages. </desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -429,14 +472,44 @@ End license statement: do not remove -->
                                     </valItem>
                                 </valList>
                             </attDef>
-                            <attDef ident="ref" mode="delete">
+                            <attDef ident="ref" mode="delete"> </attDef>
+                            <attDef ident="cert" mode="delete"> </attDef>
+                        </attList>
+                    </elementSpec>
+
+                    <elementSpec ident="term" mode="change">
+                        <gloss>*Attested in Script</gloss>
+                        <gloss type="tei">&lt;term/&gt;</gloss>
+                        <desc>Choose from the list in which script the work is attested.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.declaring" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                            <memberOf key="att.cReferencing" mode="delete"/>
+                            <memberOf key="att.cmc" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="source" mode="change">
+                                <gloss>Source</gloss>
                             </attDef>
-                            <attDef ident="cert" mode="delete">
+                            <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="script">
+                                        <gloss>Script</gloss>
+                                    </valItem>
+                                </valList>
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
-                    <elementSpec ident="note" mode="change">
+
+                    <!--<elementSpec ident="note" mode="change">
                         <gloss>Manuscript/Edition</gloss>
                         <gloss type="tei">&lt;note/&gt;</gloss>
                         <desc versionDate="2022-05-27" xml:lang="en">Choose between manuscript witness or text edition in the type field.</desc>
@@ -456,13 +529,15 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="bibl"/>
                         </content>
-                    </elementSpec>
-                    
+                    </elementSpec>-->
+
                     <elementSpec ident="persName" mode="change">
                         <gloss>Person</gloss>
                         <gloss type="tei">&lt;persName&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in the database. Try different spellings in different
-                            languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
+                        <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in
+                            the database. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. Add additional persons as
+                            required.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -511,8 +586,8 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
-                    
+
+
                     <elementSpec ident="bibl" mode="change">
                         <gloss>Bibliographic reference</gloss>
                         <gloss type="tei">&lt;bibl&gt;</gloss>
@@ -538,8 +613,17 @@ End license statement: do not remove -->
                             <attDef ident="type" mode="change">
                                 <gloss>Type</gloss>
                                 <valList type="closed" mode="change">
-                                    <valItem mode="add" ident="edition">
-                                        <gloss>Edition</gloss>
+                                    <valItem mode="add" ident="mentioned">
+                                        <gloss>Mentioned</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="edited">
+                                        <gloss>Edited</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="partlyEdited">
+                                        <gloss>Partly Edited</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="translated">
+                                        <gloss>Translated</gloss>
                                     </valItem>
                                     <valItem mode="add" ident="manuscript">
                                         <gloss>Manuscript</gloss>
@@ -548,27 +632,28 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                         <content>
+                            <elementRef key="title" minOccurrence="1"/>
                             <elementRef key="author"/>
                             <elementRef key="persName"/>
+                            <elementRef key="textLang"/>
+                            <elementRef key="term"/>
                             <elementRef key="incipit"/>
                             <elementRef key="explicit"/>
                             <elementRef key="quote"/>
                             <elementRef key="date"/>
-                            <elementRef key="textLang"/>
-                            <elementRef key="note"/>
-                            <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
-                            <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
-                            <elementRef key="listRelation"/>
+                            <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"
+                            />
                         </content>
                     </elementSpec>
-                    
-                    
-                    
+
+
+
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
                         <gloss type="tei">&lt;ptr&gt;</gloss>
-                        <desc xml:lang="en">The link to the Zotero will be filled out automatically.</desc>
+                        <desc xml:lang="en">The link to the Zotero will be filled out
+                            automatically.</desc>
                         <classes mode="change">
                             <memberOf key="att.cReferencing" mode="delete"/>
                             <memberOf key="att.declaring" mode="delete"/>
@@ -594,11 +679,12 @@ End license statement: do not remove -->
                             <attDef ident="evaluate" mode="delete"/>
                         </attList>
                     </elementSpec>
-                    
+
                     <elementSpec ident="citedRange" mode="change">
                         <gloss>Referenced section(s)</gloss>
                         <gloss type="tei">&lt;citedRange&gt;</gloss>
-                        <desc xml:lang="en">Specify which pages, columns, etc. you are refering to.</desc>
+                        <desc xml:lang="en">Specify which pages, columns, etc. you are refering
+                            to.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -650,9 +736,10 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                     </elementSpec>
-                    
+
                     <elementSpec ident="listRelation" mode="change">
-                        <gloss>This field signifies that you are describing a relation between to records.</gloss>
+                        <gloss>This field signifies that you are describing a relation between to
+                            records.</gloss>
                         <gloss>*Relation</gloss>
                         <gloss type="tei"> &lt;listRelation/&gt;</gloss>
                         <classes mode="change">
@@ -674,9 +761,11 @@ End license statement: do not remove -->
                     <elementSpec ident="relation" mode="change">
                         <gloss>*Description of relation</gloss>
                         <gloss type="tei">&lt;relation&gt;</gloss>
-                        <desc xml:lang="en">Specify the relationship between the work and another work or person. Choose the kind of relation from
-                            the list provided. Distinguish between the Subject of the relation and the Object. In case the relation ends with the word
-                            "with each other" only fill the names in the Mutual field.</desc>
+                        <desc xml:lang="en">Specify the relationship between the work and another
+                            work or person. Choose the kind of relation from the list provided.
+                            Distinguish between the Subject of the relation and the Object. In case
+                            the relation ends with the word "with each other" only fill the names in
+                            the Mutual field.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
