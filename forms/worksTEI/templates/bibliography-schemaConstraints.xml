@@ -90,6 +90,11 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="date"
                      label="Date"
                      minOccurs=""
@@ -483,6 +488,37 @@
          <child/>
       </childElements>
    </quote>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:bibl/*:note"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields mentioned above.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="fr" attLabel="French"/>
+               <valItem ident="de" attLabel="German"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
    <date ident="date"
          elementName="date"
          elementLabel="Date"
