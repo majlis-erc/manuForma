@@ -653,6 +653,7 @@ End license statement: do not remove -->
                             <elementRef key="incipit"/>
                             <elementRef key="explicit"/>
                             <elementRef key="quote"/>
+                            <elementRef key="note"/>
                             <elementRef key="date"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"
@@ -660,7 +661,42 @@ End license statement: do not remove -->
                         </content>
                     </elementSpec>
 
-
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc xml:lang="en">Add observations on fields mentioned above.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <gloss>Language</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="en">
+                                        <gloss>English</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="fr">
+                                        <gloss>French</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="de">
+                                        <gloss>German</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="he">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                        <content>
+                            <textNode/>
+                        </content>
+                    </elementSpec>
 
                     <elementSpec ident="ptr" mode="change">
                         <gloss>Link to Zotero record</gloss>
