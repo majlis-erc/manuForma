@@ -182,7 +182,7 @@
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="personTEI"
              elementName="persName"
-             label="New persons"
+             label="New person"
              formURL="form.xq?form=forms/personTEI/index.xhtml"/>
       <desc>Look up the person records in the database to identify the author. Try different
                             spellings in different languages! If no suitable record exists, create a new one. Add additional authors as
@@ -245,14 +245,41 @@
          popup="3"
          teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
+              elementName="bibl"
+              formName="titleBibl"
+              lookupLabel="Look up manuscript record."
+              level="subform"
+              supress="false"
+              form="ab"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
               api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
               formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
               elementName="bibl"
               formName="bibl"
-              lookupLabel="Look up bibliographic record"
-              level="toplevel"
+              lookupLabel="Look up bibliographic record."
+              level="subform"
               supress="false"
-              form=""/>
+              form="additions"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record."
+              level="subform"
+              supress="false"
+              form="accMat"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/bibl?format=xml&amp;collection=bibl&amp;wrapElement=title&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up manuscript record."
+              level="subform"
+              supress="false"
+              form="additional"/>
       <desc>Reference the quotation by adding an entry from the Zotero database.</desc>
       <availableAtts elementName="bibl"/>
       <childElements>

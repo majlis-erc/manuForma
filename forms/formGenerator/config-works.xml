@@ -101,8 +101,17 @@
                     <element xpath="tei:incipit"/>
                     <element xpath="tei:explicit"/>
                     <element xpath="tei:quote"/>
+                    <element xpath="tei:note"/>
                 </group>
             </elementGroups>
+            <controlledValuesElements>
+                <element ident="term">
+                    <valList type="closed">
+                        <valItem ident="Hebrew"/>
+                        <valItem ident="Arabic"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
         <!--<subform xpath="/tei:TEI/descendant::tei:body/tei:bibl/tei:listRelation" formName="listRelation" formLabel="Related Works" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
@@ -126,18 +135,35 @@
                 </group>
             </elementGroups>
         </subform>-->
-        <subform xpath="/tei:TEI/descendant::tei:textClass/tei:keywords/tei:list" formName="bibl" formLabel="Discipline" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:textClass/tei:keywords" formName="textClass" formLabel="Discipline" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
             <formDesc>Add information about the work's discipline.</formDesc>
             <elementGroups>
-                <group groupLabel="Disciplines." groupNo="1" repeatable="yes">
-                    <element xpath="tei:item"/>
+                <group groupLabel="Disciplines." groupNo="1" repeatable="no">
+                    <element xpath="tei:list"/>
                 </group>
             </elementGroups>
+            <controlledValuesElements>
+                <element ident="item">
+                    <valList type="closed">
+                        <valItem ident="Bible"/>
+                        <valItem ident="Biblical Exegesis"/>
+                        <valItem ident="Rabbinic Literature"/>
+                        <valItem ident="Halakhic Literature"/>
+                        <valItem ident="Derashot"/>
+                        <valItem ident="Philosophy"/>
+                        <valItem ident="Kabbalah"/>
+                        <valItem ident="Polemics"/>
+                        <valItem ident="Historiography"/>
+                        <valItem ident="Occult Sciences"/>
+                        <valItem ident="Sciences"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibl" formLabel="Bibliography" repeat="no">
+        <subform xpath="/tei:TEI/descendant::tei:body/tei:bibl" formName="bibliography" formLabel="Bibliography" repeat="no">
             <localSchema src="../schemas/work-schema.xml"/>
             <globalSchema src="../schemas/work-schema.xml"/>
             <xmlTemplate src="../templates/work-fulltemplate.xml"/>
