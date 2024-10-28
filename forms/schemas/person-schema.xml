@@ -83,9 +83,9 @@ End license statement: do not remove -->
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
                     <moduleRef include="ab" key="linking"/>
-                    <moduleRef include="bible citedRange item list ptr quote title" key="core"/>
+                    <moduleRef include="bible citedRange item label list ptr quote title" key="core"/>
                     <moduleRef
-                        include="persName listPerson person addName forename birth placeName death floruit sex faith occupation residence"
+                        include="persName listPerson person addName forename birth placeName death floruit sex state faith occupation residence"
                         key="namesdates"/>
                     <moduleRef include="idno" key="header"/>
                     <elementSpec ident="persName" mode="change">
@@ -188,6 +188,8 @@ End license statement: do not remove -->
                         <content>
                             <sequence>
                                 <elementRef key="persName" maxOccurs="unbounded" minOccurs="1"/>
+                                <elementRef key="note" maxOccurs="unbounded" minOccurs="0"/>
+                                <elementRef key="state" maxOccurs="unbounded" minOccurs="0"/>
                                 <elementRef key="birth" maxOccurs="1" minOccurs="0"/>
                                 <elementRef key="death" maxOccurs="1" minOccurs="0"/>
                                 <elementRef key="floruit" maxOccurs="unbounded" minOccurs="0"/>
@@ -195,7 +197,6 @@ End license statement: do not remove -->
                                 <elementRef key="faith" maxOccurs="unbounded" minOccurs="0"/>
                                 <elementRef key="occupation" maxOccurs="unbounded" minOccurs="0"/>
                                 <elementRef key="residence" maxOccurs="1" minOccurs="0"/>
-                                <elementRef key="note" maxOccurs="unbounded" minOccurs="0"/>
                                 <elementRef key="bibl" maxOccurs="unbounded" minOccurs="0"/>
                                 <elementRef key="idno" maxOccurs="unbounded" minOccurs="0"/>
                             </sequence>
@@ -704,7 +705,7 @@ End license statement: do not remove -->
                             <memberOf key="att.cmc" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="label" maxOccurrence="unbounded" minOccurrence="1"
+                            <elementRef key="label" maxOccurrence="unbounded" minOccurrence="0"
                             />
                         </content>
                     </elementSpec>
