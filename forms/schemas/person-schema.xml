@@ -651,6 +651,64 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
+                    
+                    <elementSpec ident="label" mode="change">
+                        <gloss>Role</gloss>
+                        <gloss type="tei">&lt;label&gt;</gloss>
+                        <desc xml:lang="en">Choose the roles the person fulfilled from the list. Create as many fields as necessary.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.placing" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                            <memberOf key="att.cmc" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="role" mode="delete"/>
+                            <attDef ident="nymRef" mode="delete"/>
+                            <attDef ident="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attDef>
+                            <attDef ident="cert" mode="change">
+                                <gloss>Degree of certainty</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem ident="high" mode="add">
+                                        <gloss>High</gloss>
+                                    </valItem>
+                                    <valItem ident="medium" mode="add">
+                                        <gloss>Medium</gloss>
+                                    </valItem>
+                                    <valItem ident="low" mode="add">
+                                        <gloss>Low</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                    </elementSpec>
+                    
+                    <elementSpec ident="state" mode="change">
+                        <gloss>List of Roles</gloss>
+                        <gloss type="tei">&lt;state&gt;</gloss>
+                        <desc xml:lang="en">Create as many role fields as necessary.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.naming" mode="delete"/>
+                            <memberOf key="att.dimensions" mode="delete"/>
+                            <memberOf key="att.cmc" mode="delete"/>
+                        </classes>
+                        <content>
+                            <elementRef key="label" maxOccurrence="unbounded" minOccurrence="1"
+                            />
+                        </content>
+                    </elementSpec>
+                    
                     <elementSpec ident="residence" mode="change">
                         <gloss>Place of residence</gloss>
                         <gloss type="tei">&lt;residence&gt;</gloss>
@@ -972,7 +1030,7 @@ End license statement: do not remove -->
                     <elementSpec ident="note" mode="change">
                         <gloss>Note</gloss>
                         <gloss type="tei">&lt;note&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Add your observations on the
+                        <desc xml:lang="en">Add your observations on the
                             person.</desc>
                         <classes mode="change">
                             <memberOf key="att.anchoring" mode="delete"/>
@@ -1004,6 +1062,26 @@ End license statement: do not remove -->
                                     </valItem>
                                     <valItem ident="ru" mode="add">
                                         <gloss>Russian</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                            <attDef ident="resp" mode="change">
+                                <gloss>Author</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem ident="gschwarb" mode="add">
+                                        <gloss>Gregor Schwarb</gloss>
+                                    </valItem>
+                                    <valItem ident="rvollandt" mode="add">
+                                        <gloss>Ronny Vollandt</gloss>
+                                    </valItem>
+                                    <valItem ident="ptarras" mode="add">
+                                        <gloss>Peter Tarras</gloss>
+                                    </valItem>
+                                    <valItem ident="nurbiczek" mode="add">
+                                        <gloss>Nadine Urbiczek</gloss>
+                                    </valItem>
+                                    <valItem ident="mmoliere" mode="add">
+                                        <gloss>Maximilian de Molière</gloss>
                                     </valItem>
                                 </valList>
                             </attDef>
