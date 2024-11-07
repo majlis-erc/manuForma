@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="author" content="majlis-erc" />
-      <meta name="description" content="Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record title information Information about the place. Add Linked Open Data references of the place. Add bibliographic references from the Zotero database." />
+      <meta name="description" content="Create and edit Place records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World. Record information pertaining the institutions and people behind the project. Information about the place. Add Linked Open Data references of the place. Add bibliographic references from the Zotero database." />
       <link rel="shortcut icon" href="resources/images/hn/favicon-16.png" />
       <title>Controlled Vocabulary Form for Edit Place TEI records</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
@@ -13,6 +13,8 @@
       <link rel="stylesheet" type="text/css" href="resources/css/xforms.css" /><script type="text/javascript" src="resources/js/jquery.min.js"></script><script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script><xf:model id="m-lookup">
          <xf:instance id="i-rec"><data></data></xf:instance>
          <xf:instance id="i-lookup-query"><data xmlns=""><q></q></data></xf:instance>
+         <xf:instance id="i-lookup-limit"><data xmlns="">
+               <limit></limit></data></xf:instance>
          <xf:instance id="i-lookup-results"><data xmlns=""></data></xf:instance>
          <xf:instance id="i-lookup-selected"><data xmlns="">
                <selected></selected></data></xf:instance>
@@ -20,7 +22,7 @@
          <xf:instance id="i-lookup-uri"><data xmlns="">
                <uri></uri></data></xf:instance>
          <xf:submission id="s-lookup" method="get" replace="instance" instance="i-lookup-results" serialization="none" mode="synchronous">
-            <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q),"></xf:resource>
+            <xf:resource value="concat(instance('i-lookup-uri')//*:uri, instance('i-lookup-query')//q,'&amp;limit=',instance('i-lookup-limit')//limit),"></xf:resource>
          </xf:submission>
       </xf:model>
    </head>
