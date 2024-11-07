@@ -144,13 +144,6 @@
               teiElement="&lt;placeName/&gt;">
       <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
       <availableAtts elementName="placeName">
-         <attDef attLabel="Place identifier"
-                 ident="ref"
-                 mode="change"
-                 style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
-         </attDef>
          <attDef attLabel="Source"
                  ident="source"
                  mode="change"
@@ -158,20 +151,15 @@
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
          </attDef>
-         <attDef attLabel="type" ident="type" mode="change">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
                      mode="change">
                <valItem ident="majlis-headword" attLabel="MAJLIS headword"/>
             </valList>
-         </attDef>
-         <attDef attLabel="Identifier"
-                 ident="xml:id"
-                 mode="change"
-                 style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
          </attDef>
          <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -322,7 +310,7 @@
                currentLevel="3"
                popup="3"
                teiElement="&lt;settlement/&gt;">
-      <desc>Add information on the city where the place is located.</desc>
+      <desc>If applicable, add information on the city where the place is located.</desc>
       <availableAtts elementName="settlement">
          <attDef attLabel="Identifier"
                  ident="ref"
@@ -403,7 +391,9 @@
          teiElement="&lt;idno/&gt;">
       <desc>Add external identifier.</desc>
       <availableAtts elementName="idno">
-         <attDef attLabel="type" ident="type" mode="change">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type=""
@@ -445,55 +435,18 @@
               form=""/>
       <desc>Add a bibliographic item.</desc>
       <availableAtts elementName="bibl">
-         <attDef attLabel="Bibliographic identifier" ident="xml:id" mode="change">
+         <attDef attLabel="Bibliographic identifier"
+                 ident="xml:id"
+                 mode="change"
+                 style="restricted">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                    xmlns:rng="http://relaxng.org/ns/structure/1.0">Bibliographic identifier</gloss>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
-            <element ident="author"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="persName"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="incipit"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="explicit"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="quote"
-                     label="Transcription"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="date"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="textLang"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="note"
-                     label="bibl"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="title"
-                     label="*Title"
+                     label="*Title of publication"
                      minOccurs="1"
                      maxOccurs="1"
                      errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
@@ -510,165 +463,9 @@
          </child>
       </childElements>
    </bibl>
-   <author ident="author"
-           elementName="author"
-           elementLabel="author"
-           minOccur="0"
-           maxOccur="50"
-           errorMessage=""
-           path="/*:place/*:bibl/*:author"
-           currentLevel="3"
-           popup="3"
-           teiElement="&lt;author/&gt;">
-      <availableAtts elementName="author"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </author>
-   <persName ident="persName"
-             elementName="persName"
-             elementLabel="persName"
-             minOccur="0"
-             maxOccur="50"
-             errorMessage=""
-             path="/*:place/*:bibl/*:persName"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;persName/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;q="
-              formURL="form.xq?form=forms/placeTEI/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up persons"
-              level="toplevel"
-              supress="false"
-              form=""/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="personTEI"
-             elementName="persName"
-             label="New Persons"
-             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
-      <availableAtts elementName="persName"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </persName>
-   <incipit ident="incipit"
-            elementName="incipit"
-            elementLabel="incipit"
-            minOccur="0"
-            maxOccur="50"
-            errorMessage=""
-            path="/*:place/*:bibl/*:incipit"
-            currentLevel="3"
-            popup="3"
-            teiElement="&lt;incipit/&gt;">
-      <availableAtts elementName="incipit"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </incipit>
-   <explicit ident="explicit"
-             elementName="explicit"
-             elementLabel="explicit"
-             minOccur="0"
-             maxOccur="50"
-             errorMessage=""
-             path="/*:place/*:bibl/*:explicit"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;explicit/&gt;">
-      <availableAtts elementName="explicit"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </explicit>
-   <quote ident="quote"
-          elementName="quote"
-          elementLabel="Transcription"
-          minOccur="0"
-          maxOccur="50"
-          errorMessage=""
-          path="/*:place/*:bibl/*:quote"
-          currentLevel="3"
-          popup="3"
-          teiElement="&lt;quote/&gt;">
-      <desc>Transcribe relevant portion of the text.</desc>
-      <availableAtts elementName="quote">
-         <attDef attLabel="Source" ident="source" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
-         </attDef>
-         <attDef attLabel="Language" ident="xml:lang" mode="change">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="en" attLabel="English"/>
-               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
-               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
-               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="textarea"/>
-         <child/>
-      </childElements>
-   </quote>
-   <date ident="date"
-         elementName="date"
-         elementLabel="date"
-         minOccur="0"
-         maxOccur="50"
-         errorMessage=""
-         path="/*:place/*:bibl/*:date"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;date/&gt;">
-      <availableAtts elementName="date"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </date>
-   <textLang ident="textLang"
-             elementName="textLang"
-             elementLabel="textLang"
-             minOccur="0"
-             maxOccur="50"
-             errorMessage=""
-             path="/*:place/*:bibl/*:textLang"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;textLang/&gt;">
-      <availableAtts elementName="textLang"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </textLang>
-   <note ident="note"
-         elementName="note"
-         elementLabel="note"
-         minOccur="0"
-         maxOccur="50"
-         errorMessage=""
-         path="/*:place/*:bibl/*:note"
-         currentLevel="3"
-         popup="3"
-         teiElement="&lt;note/&gt;">
-      <availableAtts elementName="note"/>
-      <childElements>
-         <child/>
-      </childElements>
-   </note>
    <title ident="title"
           elementName="title"
-          elementLabel="*Title"
+          elementLabel="*Title of publication"
           minOccur="1"
           maxOccur="1"
           errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."

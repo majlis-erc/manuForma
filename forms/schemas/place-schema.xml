@@ -115,6 +115,7 @@ End license statement: do not remove --><!--requirements:
                                 <gloss>Identifier</gloss>
                             </attDef>
                             <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
                                 <valList mode="change">
                                     <valItem mode="add" ident="URL">
                                         <gloss>URL</gloss>
@@ -140,19 +141,21 @@ End license statement: do not remove --><!--requirements:
                         </content>
                         <attList>
                             <attDef ident="key" mode="delete"/>
-                            <attDef ident="ref" mode="change" style="restricted">
+                            <attDef ident="ref" mode="delete" style="restricted">
                                 <gloss>Place identifier</gloss>
                             </attDef>
                             <attDef ident="role" mode="delete"/>
                             <attDef ident="nymRef" mode="delete"/>
                             <attDef ident="type" mode="change">
+                                <gloss>Type</gloss>
                                 <valList mode="change">
                                     <valItem mode="add" ident="majlis-headword">
                                         <gloss>MAJLIS headword</gloss>
+                                        <gloss></gloss>
                                     </valItem>
                                 </valList>
                             </attDef>
-                            <attDef ident="xml:id" mode="change" style="restricted">
+                            <attDef ident="xml:id" mode="delete" style="restricted">
                                 <gloss>Identifier</gloss>
                             </attDef>
                             <attDef ident="source" mode="change" style="restricted">
@@ -203,20 +206,12 @@ End license statement: do not remove --><!--requirements:
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <attList>
-                            <attDef ident="xml:id" mode="change">
+                            <attDef ident="xml:id" mode="change" style="restricted">
                                 <gloss>Bibliographic identifier</gloss>
                             </attDef>
                             <attDef ident="type" mode="delete"/>
                         </attList>
                         <content>
-                            <elementRef key="author"/>
-                            <elementRef key="persName"/>
-                            <elementRef key="incipit"/>
-                            <elementRef key="explicit"/>
-                            <elementRef key="quote"/>
-                            <elementRef key="date"/>
-                            <elementRef key="textLang"/>
-                            <elementRef key="note"/>
                             <elementRef key="title" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="ptr" minOccurrence="1" maxOccurrence="1"/>
                             <elementRef key="citedRange" minOccurrence="1" maxOccurrence="unbounded"/>
@@ -359,7 +354,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="settlement" mode="change">
                         <gloss>City</gloss>
                         <gloss type="tei">&lt;settlement&gt;</gloss>
-                        <desc xml:lang="en">Add information on the city where the place is located.</desc>
+                        <desc xml:lang="en">If applicable, add information on the city where the place is located.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.naming" mode="delete"/>
@@ -400,7 +395,7 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     <elementSpec ident="title" mode="change">
-                        <gloss>*Title</gloss>
+                        <gloss>*Title of publication</gloss>
                         <gloss type="tei">&lt;title/&gt;</gloss>
                         <desc>Title information.</desc>
                         <classes mode="change">
