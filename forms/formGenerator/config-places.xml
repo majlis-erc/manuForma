@@ -58,11 +58,22 @@
         List forms in order of editing preference.
     -->
     <subforms>
-        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Title" repeat="no">
-            <formDesc>Record title information</formDesc>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
+            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
             <localSchema src="../schemas/titleStmt.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/place-fulltemplate.xml"/>
+            <elementGroups>
+                <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:sponsor"/>
+                    <element xpath="tei:funder"/>
+                </group>
+                <group groupLabel="Project team." groupNo="2" repeatable="no">
+                    <element xpath="tei:editor"/>
+                    <element xpath="tei:respStmt"/>
+                </group>
+            </elementGroups>
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:body/tei:listPlace/tei:place" formName="listPlace" formLabel="Place" repeat="no">
             <formDesc>Information about the place.</formDesc>
