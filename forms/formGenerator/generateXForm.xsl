@@ -2092,7 +2092,7 @@
                             <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
                                 <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}'][@formURL != ''][1]/@formURL"/>
                             </xf:load>
-                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form={$subformName}][@formURL != ''][1]/@api"/>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}'][@formURL != ''][1]/@api"/>
                         </xf:action>
                     </xf:trigger>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add">
