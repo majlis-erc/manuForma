@@ -269,7 +269,7 @@
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
-                api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q=" 
+                api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=bibl&amp;wrapElement=idno&amp;q=" 
                 formURL="forms/msSimple/lookup/titleBibl.xhtml" 
                 elementName="bibl" 
                 formName="titleBibl" 
@@ -301,7 +301,7 @@
             <globalSchema src="../schemas/mss-msitem.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
-                api="/exist/apps/majlis/api/search/author?format=xml&amp;collection=persons&amp;wrapElement=author&amp;q=" 
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=author&amp;q=" 
                 formURL="forms/msSimple/lookup/author.xhtml" 
                 elementName="author" 
                 formName="author" 
@@ -655,6 +655,8 @@
                 formName="persName" 
                 lookupLabel="Look up person record."/>
             <lookup elementName="title" suppress="true"/>
+            <popup suppress="true"
+                elementName="title"/>
             <formDesc>Add descriptions of the manuscript from earlier catalogs and internal library records.</formDesc>
             <elementGroups>
                 <group groupLabel="Quotation from and information about the heritage material." groupLabelConditionalElement="./*:bibl/*:title" groupLabelXPath="./*:bibl/*:title" groupNo="1" repeatable="yes">
