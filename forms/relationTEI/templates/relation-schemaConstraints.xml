@@ -62,7 +62,7 @@
       <childElements>
          <child>
             <element ident="listRelation"
-                     label="This field signifies that you are describing a relation between to records."
+                     label="*Relation"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -76,7 +76,7 @@
    </ab>
    <listRelation ident="listRelation"
                  elementName="listRelation"
-                 elementLabel="This field signifies that you are describing a relation between to records."
+                 elementLabel="*Relation"
                  minOccur="0"
                  maxOccur="50"
                  errorMessage=""
@@ -352,7 +352,7 @@
               formName="mutual"
               lookupLabel="Look up mutual relations"
               level="toplevel"
-              supress="false"
+              suppress="false"
               form=""/>
       <desc/>
       <availableAtts elementName="mutual"/>
@@ -378,7 +378,7 @@
               formName="active"
               lookupLabel="Look up subject of relation"
               level="toplevel"
-              supress="false"
+              suppress="false"
               form=""/>
       <desc/>
       <availableAtts elementName="active"/>
@@ -404,7 +404,7 @@
               formName="passive"
               lookupLabel="Look object of relation"
               level="toplevel"
-              supress="false"
+              suppress="false"
               form=""/>
       <desc/>
       <availableAtts elementName="passive"/>
@@ -458,7 +458,7 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="title"
-                     label="Canonical title"
+                     label="Title"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -529,13 +529,15 @@
               formName="persName"
               lookupLabel="Look up persons"
               level="toplevel"
-              supress="false"
+              suppress="false"
               form=""/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="personTEI"
              elementName="persName"
              label="New persons"
-             formURL="form.xq?form=forms/personTEI/index.xhtml"/>
+             formURL="form.xq?form=forms/personTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
       <desc>Look up the person records in the database. Try different spellings in different languages! If no suitable record exists, create a new one. Add additional persons as required.</desc>
       <availableAtts elementName="persName">
          <attDef attLabel="Identifier"
@@ -568,13 +570,15 @@
               formName="placeName"
               lookupLabel="Look up places"
               level="toplevel"
-              supress="false"
+              suppress="false"
               form=""/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="placeTEI"
              elementName="placeName"
              label="New places"
-             formURL="form.xq?form=forms/placeTEI/index.xhtml"/>
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
       <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one.</desc>
       <availableAtts elementName="placeName">
          <attDef attLabel="Identifier"
@@ -617,15 +621,6 @@
          currentLevel="6"
          popup="6"
          teiElement="&lt;idno/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q="
-              formURL="form.xq?form=forms/relationTEI/lookup/titleBibl.xhtml"
-              elementName="idno"
-              formName="titleBibl"
-              lookupLabel="Look up source"
-              level="subform"
-              supress="false"
-              form="relation"/>
       <desc>Look up the records in the database to identify the shelfmark. Try different spellings!</desc>
       <availableAtts elementName="idno">
          <attDef attLabel="Identifier" ident="ref" mode="change">
@@ -640,7 +635,7 @@
    </idno>
    <title ident="title"
           elementName="title"
-          elementLabel="Canonical title"
+          elementLabel="Title"
           minOccur="0"
           maxOccur="50"
           errorMessage=""
@@ -649,24 +644,26 @@
           popup="6"
           teiElement="&lt;title/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/title?format=xml&amp;q="
-              formURL="form.xq?form=forms/relationTEI/lookup/title.xhtml"
               elementName="title"
-              formName="title"
-              lookupLabel="Look up title"
-              level="toplevel"
-              supress="false"
-              form=""/>
+              suppress="true"
+              level="subform"
+              form="relation"/>
       <popup xmlns="http://www.w3.org/1999/xhtml"
              formName="worksTEI"
              elementName="title"
              label="New work"
-             formURL="form.xq?form=forms/worksTEI/index.xhtml"/>
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
       <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record!</desc>
       <availableAtts elementName="title">
          <attDef attLabel="Text identifier" ident="ref" mode="change">
             <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
                    xmlns:sch="http://purl.oclc.org/dsdl/schematron">Text identifier</gloss>
+         </attDef>
+         <attDef attLabel="Title identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Title identifier</gloss>
          </attDef>
       </availableAtts>
       <childElements>
@@ -685,11 +682,13 @@
          popup="3"
          teiElement="&lt;bibl/&gt;">
       <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/relationTEI/lookup/bibl.xhtml"
               elementName="bibl"
-              suppress="true"
-              formURL="form.xq?form=forms/relationTEI/lookup/.xhtml"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record."
               level="subform"
-              supress="true"
+              suppress="false"
               form="relation"/>
       <desc>Add a bibliographic reference to the source you are describing.</desc>
       <availableAtts elementName="bibl">
@@ -701,12 +700,18 @@
                      type="closed"
                      mode="">
                <valItem ident="primary" attLabel="Primary source"/>
+               <valItem ident="translation" attLabel="Translation"/>
                <valItem ident="secondary" attLabel="Secondary source"/>
             </valList>
          </attDef>
       </availableAtts>
       <childElements>
          <child>
+            <element ident="title"
+                     label="Title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
             <element ident="citedRange"
                      label="*Referenced section(s)"
                      minOccurs=""
@@ -720,6 +725,44 @@
          </child>
       </childElements>
    </bibl>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Title"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:body/*:ab/*:bibl/*:title"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              elementName="title"
+              suppress="true"
+              level="subform"
+              form="relation"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record!</desc>
+      <availableAtts elementName="title">
+         <attDef attLabel="Text identifier" ident="ref" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Text identifier</gloss>
+         </attDef>
+         <attDef attLabel="Title identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Title identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
    <citedRange ident="citedRange"
                elementName="citedRange"
                elementLabel="*Referenced section(s)"
