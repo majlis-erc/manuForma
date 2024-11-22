@@ -302,7 +302,7 @@ End license statement: do not remove -->
                     </elementSpec>
 
                     <elementSpec ident="title" mode="change">
-                        <gloss>Canonical title</gloss>
+                        <gloss>Title</gloss>
                         <gloss type="tei">&lt;title&gt;</gloss>
                         <desc>Look up the records in the database to identify the canonical title. Try different spellings in different languages! If the manuscript exhibits an alternate title, add it to the record!</desc>
                         <classes mode="change">
@@ -317,6 +317,9 @@ End license statement: do not remove -->
                             <attDef ident="level" mode="delete"/>
                             <attDef ident="key" mode="delete"/>
                             <attDef ident="xml:lang" mode="delete">
+                            </attDef>
+                            <attDef ident="xml:id" mode="change">
+                                <gloss>Title identifier</gloss>
                             </attDef>
                             <attDef ident="ref" mode="change">
                                 <gloss>Text identifier</gloss>
@@ -700,6 +703,7 @@ End license statement: do not remove -->
                             <memberOf key="att.typed" mode="delete"/>
                         </classes>
                         <content>
+                            <elementRef key="title"/>
                             <elementRef key="citedRange"/>
                             <elementRef key="ptr"/>
                         </content>
@@ -710,6 +714,9 @@ End license statement: do not remove -->
                                 <valList type="closed">
                                     <valItem ident="primary">
                                         <gloss>Primary source</gloss>
+                                    </valItem>
+                                    <valItem ident="translation">
+                                        <gloss>Translation</gloss>
                                     </valItem>
                                     <valItem ident="secondary">
                                         <gloss>Secondary source</gloss>

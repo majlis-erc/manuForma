@@ -269,16 +269,13 @@
             <globalSchema src="../schemas/mss-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
-                api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=bibl&amp;wrapElement=idno&amp;q=" 
+                api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q=" 
                 formURL="forms/msSimple/lookup/titleBibl.xhtml" 
                 elementName="bibl" 
                 formName="titleBibl" 
                 lookupLabel="Look up manuscript record."/>
             <formDesc>Give a basic codicological definition of the book and specify the type and form. Indicate joins to other shelfmarks.</formDesc>
             <elementGroups>
-                <!--<group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', ./*,' ',./*/@rend,' ',./*/@style,'.'" groupNo="1" repeatable="no">
-                    <element xpath="tei:objectType"/>
-                </group>-->
                 <group groupLabel="Codicological definition." groupLabelConditionalElement="./*" groupLabelXPath="concat('Codicological definition: ', string-join((./*:objectType[string()] | ./*:objectType/@*[string()]), ' '), '.')" groupNo="1" repeatable="no">
                     <element xpath="tei:objectType"/>
                 </group>
@@ -698,12 +695,12 @@
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup elementName="title" suppress="true"/>
-            <lookup
-                api="/exist/apps/majlis/api/search/biblWorksCitation?format=xml&amp;collection=bibl&amp;q=" 
+            <lookup 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
                 formURL="forms/msSimple/lookup/bibl.xhtml" 
                 elementName="bibl" 
                 formName="bibl" 
-                lookupLabel="Look up manuscript record."/>
+                lookupLabel="Look up bibliographic record."/>
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
             <elementGroups>
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1"  repeatable="yes">
