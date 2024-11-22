@@ -80,8 +80,13 @@
             <localSchema src="../schemas/relations-schema.xml"/>
             <globalSchema src="../schemas/relations-schema.xml"/>
             <xmlTemplate src="../templates/relations-template.xml"/>
-            <lookup elementName="bibl" suppress="true"/>
-            <lookup api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;=collection=manuscripts&amp;q=" formURL="forms/mssTEI/lookup/titleBibl.xhtml" elementName="idno" formName="titleBibl" lookupLabel="Look up source"/>
+            <lookup elementName="title" suppress="true"/>
+            <lookup 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                formURL="forms/relationTEI/lookup/bibl.xhtml" 
+                elementName="bibl" 
+                formName="bibl" 
+                lookupLabel="Look up bibliographic record."/>
             <elementGroups>
                 <group groupLabel="Factoid." groupLabelConditionalElement="./*:gloss" groupLabelXPath="./*:gloss" groupNo="1" repeatable="yes">
                     <element xpath="tei:ab"/>
