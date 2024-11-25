@@ -138,9 +138,9 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="msIdentifier" formLabel="Identification" repeat="no">
-            <localSchema src="../schemas/mss-msidentifier.xml"/>
-            <globalSchema src="../schemas/mss-msidentifier.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msIdentifier" formName="identification" formLabel="Identification" repeat="no">
+            <localSchema src="../schemas/mss-identification.xml"/>
+            <globalSchema src="../schemas/mss-identification.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Add shelfmark and information on the holding institution. Add alternate identifiers in existing catalogues and external databases.</formDesc>
             <controlledValuesElements>
@@ -264,9 +264,9 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="ab" formLabel="Codicological definition" repeat="no">
-            <localSchema src="../schemas/mss-definition.xml"/>
-            <globalSchema src="../schemas/mss-definition.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:physDesc/tei:ab" formName="codicological-definition" formLabel="Codicological definition" repeat="no">
+            <localSchema src="../schemas/mss-codicological-definition.xml"/>
+            <globalSchema src="../schemas/mss-codicological-definition.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
                 api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q=" 
@@ -293,9 +293,9 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="msContents" formLabel="Content description" repeat="no">
-            <localSchema src="../schemas/mss-msitem.xml"/>
-            <globalSchema src="../schemas/mss-msitem.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:msContents" formName="content-description" formLabel="Content description" repeat="no">
+            <localSchema src="../schemas/mss-content-description.xml"/>
+            <globalSchema src="../schemas/mss-content-description.xml"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
                 api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=author&amp;q=" 
@@ -319,9 +319,9 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="mssSupport"
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:supportDesc" formName="writing-material"
             formLabel="Physical description: writing material" repeat="no">
-            <localSchema src="../schemas/mss-support.xml"/>
+            <localSchema src="../schemas/mss-writing-material.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/msSimple/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
@@ -381,8 +381,8 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="layoutDesc" formLabel="Physical description: page layout" repeat="no">
-            <localSchema src="../schemas/mss-layout.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:objectDesc/tei:layoutDesc" formName="page-layout" formLabel="Physical description: page layout" repeat="no">
+            <localSchema src="../schemas/mss-page-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the page layout of the manuscript. If necessary, you can define multiple page layouts.</formDesc>
@@ -455,9 +455,9 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:decoDesc" formName="decoDesc" formLabel="Physical description: text layout"
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:decoDesc" formName="text-layout" formLabel="Physical description: text layout"
             repeat="no">
-            <localSchema src="../schemas/mss-decoDesc.xml"/>
+            <localSchema src="../schemas/mss-text-layout.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe features of the text layout facilitating navigation through the text (e.g. numbering of sections, enlarged titles,
@@ -489,8 +489,8 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc" formName="handDesc" formLabel="Physical description: script/hand description" repeat="no">
-            <localSchema src="../schemas/mss-hand.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc" formName="script-hand-description" formLabel="Physical description: script/hand description" repeat="no">
+            <localSchema src="../schemas/mss-script-hand-description.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup
@@ -515,8 +515,8 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="additions" formLabel="Incodicated documents" repeat="no">
-            <localSchema src="../schemas/mss-additions.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:additions/tei:list" formName="incodicated-documents" formLabel="Incodicated documents" repeat="no">
+            <localSchema src="../schemas/mss-incodicated-documents.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup 
@@ -593,8 +593,8 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc/tei:binding" formName="bindingDesc" formLabel="Binding description" repeat="no">
-            <localSchema src="../schemas/mss-binding.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:bindingDesc/tei:binding" formName="binding-description" formLabel="Binding description" repeat="no">
+            <localSchema src="../schemas/mss-binding-description.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
@@ -635,8 +635,8 @@
                 </element>
             </controlledValuesElements>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat/tei:list" formName="accMat" formLabel="Heritage data" repeat="no">
-            <localSchema src="../schemas/mss-accMat.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:physDesc/tei:accMat/tei:list" formName="heritage-data" formLabel="Heritage data" repeat="no">
+            <localSchema src="../schemas/mss-heritage-data.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup 
@@ -661,8 +661,8 @@
                 </group>
             </elementGroups>
         </subform> 
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="history" formLabel="Manuscript history" repeat="no">
-            <localSchema src="../schemas/mss-history.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:history" formName="manuscript-history" formLabel="Manuscript history" repeat="no">
+            <localSchema src="../schemas/mss-manuscript-history.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <lookup
                 api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
@@ -690,8 +690,8 @@
                 </group>
             </elementGroups>
         </subform>
-        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:listBibl" formName="additional" formLabel="Bibliography" repeat="no">
-            <localSchema src="../schemas/mss-additional.xml"/>
+        <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:listBibl" formName="bibliography" formLabel="Bibliography" repeat="no">
+            <localSchema src="../schemas/mss-bibliography.xml"/>
             <globalSchema src="../schemas/mss-compiled.odd"/>
             <xmlTemplate src="../templates/full-mss-template.xml"/>
             <lookup elementName="title" suppress="true"/>
