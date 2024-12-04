@@ -94,16 +94,6 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
-            <element ident="persName"
-                     label="Person mentioned"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
-            <element ident="placeName"
-                     label="Place name"
-                     minOccurs=""
-                     maxOccurs=""
-                     errorMessage=""/>
             <element ident="quote"
                      label="Transcription"
                      minOccurs=""
@@ -204,156 +194,6 @@
          <child/>
       </childElements>
    </locus>
-   <persName ident="persName"
-             elementName="persName"
-             elementLabel="Person mentioned"
-             minOccur="0"
-             maxOccur="50"
-             errorMessage=""
-             path="/*:list/*:item/*:persName"
-             currentLevel="3"
-             popup="3"
-             teiElement="&lt;persName/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up person record."
-              level="subform"
-              suppress="false"
-              form="script-hand-description"/>
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up person record."
-              level="subform"
-              suppress="false"
-              form="incodicated-documents"/>
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up person record."
-              level="subform"
-              suppress="false"
-              form="heritage-data"/>
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
-              elementName="persName"
-              formName="persName"
-              lookupLabel="Look up person record."
-              level="subform"
-              suppress="false"
-              form="manuscript-history"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="personTEI"
-             elementName="persName"
-             label="New person"
-             formURL="form.xq?form=forms/personTEI/index.xhtml"
-             level="toplevel"
-             form=""/>
-      <desc>Look up the person records in
-                            the database. Try different spellings in different languages! If no
-                            suitable record exists, create a new one. Add additional persons as
-                            required.</desc>
-      <availableAtts elementName="persName">
-         <attDef attLabel="Person identifier"
-                 ident="ref"
-                 mode="change"
-                 style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
-         </attDef>
-         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="mentioned" attLabel="Mentioned"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="persName"/>
-         <child/>
-      </childElements>
-   </persName>
-   <placeName ident="placeName"
-              elementName="placeName"
-              elementLabel="Place name"
-              minOccur="0"
-              maxOccur="50"
-              errorMessage=""
-              path="/*:list/*:item/*:placeName"
-              currentLevel="3"
-              popup="3"
-              teiElement="&lt;placeName/&gt;">
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
-              elementName="placeName"
-              formName="placeName"
-              lookupLabel="Look up place record."
-              level="subform"
-              suppress="false"
-              form="script-hand-description"/>
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
-              elementName="placeName"
-              formName="placeName"
-              lookupLabel="Look up place record."
-              level="subform"
-              suppress="false"
-              form="incodicated-documents"/>
-      <lookup xmlns="http://www.w3.org/1999/xhtml"
-              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
-              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
-              elementName="placeName"
-              formName="placeName"
-              lookupLabel="Look up place record."
-              level="subform"
-              suppress="false"
-              form="manuscript-history"/>
-      <popup xmlns="http://www.w3.org/1999/xhtml"
-             formName="placeTEI"
-             elementName="placeName"
-             label="New place"
-             formURL="form.xq?form=forms/placeTEI/index.xhtml"
-             level="toplevel"
-             form=""/>
-      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
-      <availableAtts elementName="placeName">
-         <attDef attLabel="Place identifier"
-                 ident="ref"
-                 mode="change"
-                 style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
-         </attDef>
-         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
-            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
-            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                     type="closed"
-                     mode="change">
-               <valItem ident="mentioned" attLabel="Mentioned"/>
-            </valList>
-         </attDef>
-      </availableAtts>
-      <childElements>
-         <textNode type="input" class="placeName"/>
-         <child/>
-      </childElements>
-   </placeName>
    <quote ident="quote"
           elementName="quote"
           elementLabel="Transcription"
@@ -738,7 +578,7 @@
               level="subform"
               suppress="false"
               form="incodicated-documents"/>
-      <desc/>
+      <desc>Use the lookup to reference entities that have a mutual relation.</desc>
       <availableAtts elementName="mutual"/>
       <childElements>
          <textNode type="input" class="mutual"/>
@@ -764,7 +604,7 @@
               level="subform"
               suppress="false"
               form="incodicated-documents"/>
-      <desc/>
+      <desc>Use the lookup to reference the subject in the relation.</desc>
       <availableAtts elementName="active"/>
       <childElements>
          <textNode type="input" class="active"/>
@@ -790,7 +630,7 @@
               level="subform"
               suppress="false"
               form="incodicated-documents"/>
-      <desc/>
+      <desc>Use the lookup to reference the object in the relation.</desc>
       <availableAtts elementName="passive"/>
       <childElements>
          <textNode type="input" class="passive"/>
@@ -882,6 +722,31 @@
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
+            <element ident="persName"
+                     label="Person"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="placeName"
+                     label="Place"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="idno"
+                     label="Manuscript shelfmark"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="title"
+                     label="Work title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="date"
+                     label="Date"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
          </child>
       </childElements>
    </desc>
@@ -902,4 +767,257 @@
          <child/>
       </childElements>
    </gloss>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:persName"
+             currentLevel="6"
+             popup="6"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="script-hand-description"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="heritage-data"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="manuscript-history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New person"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the person records in
+                            the database. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. Add additional persons as
+                            required.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:placeName"
+              currentLevel="6"
+              popup="6"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="script-hand-description"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="manuscript-history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New place"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Place identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="Manuscript shelfmark"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:idno"
+         currentLevel="6"
+         popup="6"
+         teiElement="&lt;idno/&gt;">
+      <desc>Specify the shelfmark of a manuscript section.</desc>
+      <availableAtts elementName="idno">
+         <attDef attLabel="Identifier"
+                 ident="ref"
+                 mode="change"
+                 type="closed"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="type" ident="type" usage="opt" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="ISBN"
+                        attLabel="ISBN"
+                        desc="International Standard Book Number: a 13- or (if assigned prior to 2007) 10-digit identifying number assigned by the publishing industry to a published book or similar item, registered with the  International ISBN Agency.&#xA;        "/>
+               <valItem ident="ISSN"
+                        attLabel="ISSN"
+                        desc="International Standard Serial Number: an eight-digit number to uniquely identify a serial publication."/>
+               <valItem ident="DOI"
+                        attLabel="DOI"
+                        desc="Digital Object Identifier: a unique string of letters and numbers assigned to an electronic document."/>
+               <valItem ident="URI"
+                        attLabel="URI"
+                        desc="Uniform Resource Identifier: a string of characters to uniquely identify a resource which usually contains indication of the means of accessing that resource, the name of its host, and its filepath."/>
+               <valItem ident="VIAF"
+                        attLabel="VIAF"
+                        desc="A data number in the Virtual Internet Authority File assigned to link different names in catalogs around the world for the same entity."/>
+               <valItem ident="ESTC"
+                        attLabel="ESTC"
+                        desc="English Short-Title Catalogue number: an identifying number assigned to a document in English printed in the British Isles or North America before 1801."/>
+               <valItem ident="OCLC"
+                        attLabel="OCLC"
+                        desc="OCLC control number (record number) for the union catalog record in WorldCat, a union catalog for member libraries in the Online Computer Library Center global cooperative."/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </idno>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Work title"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:title"
+          currentLevel="6"
+          popup="6"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title."
+              level="toplevel"
+              suppress="false"
+              form=""/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Use the lookup to search for the title of the work.</desc>
+      <availableAtts elementName="title"/>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <date ident="date"
+         elementName="date"
+         elementLabel="Date"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:date"
+         currentLevel="6"
+         popup="6"
+         teiElement="&lt;date/&gt;">
+      <desc>Fill in the date in CE. The date refers to the acquisition (not the production of the copy).</desc>
+      <availableAtts elementName="date"/>
+      <childElements>
+         <textNode type="input" class="date"/>
+         <child/>
+      </childElements>
+   </date>
 </TEI>
