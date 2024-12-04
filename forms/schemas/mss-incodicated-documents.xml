@@ -83,11 +83,11 @@ End license statement: do not remove --><!--requirements:
                 -->
 
                     <moduleRef key="core"
-                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr date del distinct divGen editor ellipsis email emph expan foreign gap gb graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time title unclear unit"/>
+                        except="abbr add addrLine address analytic author biblScope biblStruct binaryObject cb choice cit citedRange corr del distinct divGen editor ellipsis email emph expan foreign gap gb graphic head headItem headLabel hi imprint index l label lb lg listBibl measure measureGrp media meeting mentioned milestone monogr name noteGrp num orig pb postBox postCode ptr pubPlace publisher quote rb ref reg relatedItem resp respStmt rs rt ruby said sic soCalled sp speaker stage street teiCorpus term textLang time unclear unit"/>
                     <moduleRef key="msdescription"
                         except="material origDate origPlace layoutDesc dimensions layout summary height width binding bindingDesc decoNote depth catchwords collation condition dim foliation msFrag accMat acquisition additional adminInfo altIdentifier collection colophon custEvent custodialHist decoDesc explicit filiation finalRubric handDesc heraldry history incipit institution locusGrp msContents msDesc msIdentifier msItem msItemStruct msName msPart musicNotation objectDesc origin physDesc provenance recordHist repository rubric scriptDesc seal sealDesc secFol signatures source stamp support supportDesc surrogates typeDesc typeNote watermark"/>
                     <moduleRef key="linking" include="ab"/>
-                    
+                    <moduleRef key="header" include="idno"/>
                     <moduleRef key="namesdates" include="listRelation relation"/>
                     
                     <elementSpec ident="locus" module="msdescription" mode="change">
@@ -178,8 +178,6 @@ End license statement: do not remove --><!--requirements:
                         <content>
                             <elementRef key="objectType"/>
                             <elementRef key="locus"/>
-                            <elementRef key="persName"/>
-                            <elementRef key="placeName"/>
                             <elementRef key="quote"/>
                             <elementRef key="ab"/>
                             <elementRef key="note"/>
@@ -251,7 +249,7 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="ref" module="core" mode="delete"/>
 
                     <elementSpec ident="placeName" mode="change">
-                        <gloss>Place name</gloss>
+                        <gloss>Place</gloss>
                         <gloss type="tei">&lt;placeName&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
                         <classes mode="change">
@@ -282,7 +280,47 @@ End license statement: do not remove --><!--requirements:
                         </attList>
                     </elementSpec>
                     
-                    <elementSpec ident="title" module="core" mode="delete"/>
+                    <elementSpec ident="title" mode="change">
+                        <gloss>Work title</gloss>
+                        <gloss type="tei">&lt;title&gt;</gloss>
+                        <desc xml:lang="en">Use the lookup to search for the title of the work.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="level" mode="delete"/>
+                            <attDef ident="xml:lang" mode="delete"/>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="evidence" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="n" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:id" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
+                    </elementSpec>
 
                     <elementSpec ident="additions" mode="change">
                         <desc versionDate="2022-05-27" xml:id="additions.desc" xml:lang="en">Any
@@ -484,7 +522,7 @@ End license statement: do not remove --><!--requirements:
                         </content>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
-                        <gloss>Person mentioned</gloss>
+                        <gloss>Person</gloss>
                         <gloss type="tei">&lt;persName&gt;</gloss>
                         <desc versionDate="2022-05-26" xml:lang="en">Look up the person records in
                             the database. Try different spellings in different languages! If no
@@ -827,24 +865,24 @@ End license statement: do not remove --><!--requirements:
                     <!-- Constructed element to allow multiple values in mutual lookup. -->
                     <elementSpec ident="mutual" mode="change">
                         <gloss>*Mutual relation</gloss>
-                        <gloss type="tei">&lt;mutual attribute&gt;</gloss>
-                        <desc xml:lang="en"></desc>
+                        <gloss type="tei">mutual attribute</gloss>
+                        <desc xml:lang="en">Use the lookup to reference entities that have a mutual relation.</desc>
                         <content>
                             <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="active" mode="change">
                         <gloss>*Subject of relation</gloss>
-                        <gloss type="tei">&lt;active attribute&gt;</gloss>
-                        <desc xml:lang="en"></desc>
+                        <gloss type="tei">active attribute</gloss>
+                        <desc xml:lang="en">Use the lookup to reference the subject in the relation.</desc>
                         <content>
                             <textNode/>
                         </content>
                     </elementSpec>
                     <elementSpec ident="passive" mode="change">
                         <gloss>*Object of relation</gloss>
-                        <gloss type="tei">&lt;passive attribute&gt;</gloss>
-                        <desc xml:lang="en"></desc>
+                        <gloss type="tei">passive attribute</gloss>
+                        <desc xml:lang="en">Use the lookup to reference the object in the relation.</desc>
                         <content>
                             <textNode/>
                         </content>
@@ -868,9 +906,66 @@ End license statement: do not remove --><!--requirements:
                         </classes>
                         <content>
                             <elementRef key="gloss"/>
+                            <elementRef key="persName"/>
+                            <elementRef key="placeName"/>
+                            <elementRef key="idno"/>
+                            <elementRef key="title"/>
+                            <elementRef key="date"/>
                         </content>
                     </elementSpec>
                     
+                    <elementSpec ident="idno" mode="change">
+                        <gloss>Manuscript shelfmark</gloss>
+                        <gloss type="tei">&lt;idno&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Specify the shelfmark of a manuscript section.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.sortable" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="ref" mode="change" type="closed" style="restricted">
+                                <gloss>Identifier</gloss>
+                            </attDef>
+                        </attList>
+                    </elementSpec><elementSpec ident="date" mode="change">
+                        <gloss>Date</gloss>
+                        <gloss type="tei">&lt;date&gt;</gloss>
+                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in CE. The date refers to the acquisition (not the production of the copy).</desc>
+                        <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.editLike" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                        </classes>
+                        <content>
+                            <textNode/>
+                        </content>
+                        <attList>
+                            <attDef ident="when" mode="delete"/>
+                            <attDef ident="atLeast" mode="delete"/>
+                            <attDef ident="atMost" mode="delete"/>
+                            <attDef ident="calendar" mode="delete"/>
+                            <attDef ident="confidence" mode="delete"/>
+                            <attDef ident="dur" mode="delete"/>
+                            <attDef ident="dur-iso" mode="delete"/>
+                            <attDef ident="extent" mode="delete"/>
+                            <attDef ident="max" mode="delete"/>
+                            <attDef ident="min" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"/>
+                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="precision" mode="delete"/>
+                            <attDef ident="quantity" mode="delete"/>
+                            <attDef ident="scope" mode="delete"/>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="unit" mode="delete"/>
+                        </attList>
+                    </elementSpec>
                     <elementSpec ident="gloss" mode="change">
                         <desc>Give a brief account of the relation you are describing, including the names of all the persons, places and objects involved.</desc>
                         <gloss>*Note</gloss>
