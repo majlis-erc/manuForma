@@ -84,6 +84,9 @@ declare function local:transform($nodes as node()*) as item()* {
                         return local:transform($n)
                     }
             else local:passthru($node)
+        case element(tei:editor) return
+            if($node/descendant-or-self::text() = '') then ()
+            else local:passthru($node)            
         case element(tei:idno) return
             if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
                 element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
