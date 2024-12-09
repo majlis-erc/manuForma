@@ -86,7 +86,7 @@ declare function local:transform($nodes as node()*) as item()* {
             else local:passthru($node)
         case element(tei:editor) return
             if($node/descendant-or-self::text() = '') then ()
-            else local:passthru($node)            
+            else local:passthru($node) 
         case element(tei:idno) return
             if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
                 element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
@@ -298,9 +298,11 @@ declare function local:passthru($node as node()*) as item()* {
 
 (: Markdown to TEI :)
 declare function local:markdown2TEI($node){
-        for $l in tokenize($node, '\n\n')
+    for $l in tokenize($node, '\n\n')
     return 
-        <p>{local:lineBreak($l)}</p>
+    (: edit for 639 rollback is <p>{local:lineBreak($l)}</p> :)
+        if(local:lineBreak($l) = '') then () 
+        else <p>{local:lineBreak($l)}</p>
 };
     
 declare function local:lineBreak($s){
