@@ -299,10 +299,7 @@ declare function local:passthru($node as node()*) as item()* {
 (: Markdown to TEI :)
 declare function local:markdown2TEI($node){
     for $l in tokenize($node, '\n\n')
-    return 
-    (: edit for 639 rollback is <p>{local:lineBreak($l)}</p> :)
-        if(local:lineBreak($l) = '') then () 
-        else <p>{local:lineBreak($l)}</p>
+    return <p>{local:lineBreak($l)}</p>
 };
     
 declare function local:lineBreak($s){
