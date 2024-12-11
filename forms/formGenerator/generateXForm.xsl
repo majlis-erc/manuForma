@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.65 Beta 
+        Version: 1.68 Beta 
             -1.23 marks a major redesign
         
 
@@ -2085,7 +2085,7 @@
                         </xf:trigger>
                     </xf:group>
                     
-                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}'][@formURL != ''][1]]" class="btn btn-outline-secondary btn-sm controls add showLookup">
+                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != ''][1]]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
                             <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
@@ -2229,7 +2229,7 @@
                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                         </xf:trigger>
                     </xf:group>
-                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}'][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup">
+                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup">
                         <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
                         <xf:action ev:event="DOMActivate">
                             <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
