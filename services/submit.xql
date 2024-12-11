@@ -71,7 +71,9 @@ declare function local:transform($nodes as node()*) as item()* {
         case element(tei:quote) return 
             element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
         case element(tei:p) return 
-            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}               
+            if($node/ancestor::tei:note or $node/ancestor::tei:desc or $node/ancestor::tei:summary) then
+                element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}    
+            else local:passthru($node)                
         case element(tei:ab) return
             if($node[@type='factoid'][@subtype='relation']) then
                 element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
