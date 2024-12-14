@@ -63,7 +63,7 @@ declare function local:transform($nodes as node()*) as item()* {
                 {($node/@*[not(name(.) = 'class')], local:transform($node/node()))}
             </TEI>
         case element(tei:desc) return 
-            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+            element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}                
         case element(tei:note) return 
             element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
         case element(tei:summary) return 
@@ -71,7 +71,7 @@ declare function local:transform($nodes as node()*) as item()* {
         case element(tei:quote) return 
             element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
         case element(tei:p) return 
-            if($node/ancestor::tei:note or $node/ancestor::tei:desc or $node/ancestor::tei:summary) then
+            if($node/ancestor::tei:note or $node/ancestor::tei:desc or $node/ancestor::tei:summary or $node/ancestor::tei:ab) then
                 element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}    
             else local:passthru($node)                
         case element(tei:ab) return
@@ -85,7 +85,7 @@ declare function local:transform($nodes as node()*) as item()* {
                         for $n in $node/node()
                         return local:transform($n)
                     }
-            else local:passthru($node)
+            else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
         case element(tei:editor) return
             if($node/descendant-or-self::text() = '') then ()
             else local:passthru($node) 
