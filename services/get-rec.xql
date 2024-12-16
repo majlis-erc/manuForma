@@ -27,7 +27,7 @@ declare function local:markdown($nodes as node()*) as item()* {
                 {($node/@*, local:markdown($node/node()))}
             </TEI>
         case element(tei:p) return 
-            if($node/parent::tei:quote or $node/parent::tei:summary or $node/parent::tei:note or $node/parent::tei:desc) then
+            if($node/parent::tei:quote or $node/parent::tei:summary or $node/parent::tei:note or $node/parent::tei:desc or $node/parent::tei:ab) then
                 if($node/following-sibling::tei:p) then (local:markdown($node/node()),'&#10;&#10;')
                 else (local:markdown($node/node()))
             else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown($node/node()))}
