@@ -1258,7 +1258,7 @@
                         <data xmlns=""><uri></uri></data>
                     </xf:instance>
                     <!-- Element binds specifically for min/max occurrence  -->
-                    <!-- Does not work due to the way elements are referenced in the form (not named) -->
+                    <!-- Does not work due to the way elements are referenced in the form (not named) 
                     <xsl:call-template name="elementBinds">
                         <xsl:with-param name="subform" select="$subform"/>
                         <xsl:with-param name="xpath" select="$elementPath"/>
@@ -1267,6 +1267,7 @@
                         <xsl:with-param name="maxLevel" select="$maxLevel"/>
                         <xsl:with-param name="schemaConstraints" select="$schemaConstraints"/>
                     </xsl:call-template>
+                    -->
                 </xf:model>
             </head>
             <body>
@@ -2084,15 +2085,14 @@
                             <xf:setvalue ref="instance('i-availableElements')/*" value="''"/>
                         </xf:trigger>
                     </xf:group>
-                    
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != ''][1]]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                        <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
+                        <xf:label> <i class="bi bi-search"/> Lookup </xf:label>
                         <xf:action ev:event="DOMActivate">
                             <xf:toggle case="{$grpRepeatID}LookupUnHide" ev:event="DOMActivate"/>
                             <xf:load show="embed" targetid="{$grpRepeatID}subformLookup">
-                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}'][@formURL != ''][1]/@formURL"/>
+                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}' or @form=''][@formURL != ''][1]/@formURL"/>
                             </xf:load>
-                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}'][@formURL != ''][1]/@api"/>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='{$subformName}' or @form=''][@formURL != ''][1]/@api"/>
                         </xf:action>
                     </xf:trigger>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add">
@@ -2230,13 +2230,13 @@
                         </xf:trigger>
                     </xf:group>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                        <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
+                        <xf:label> <i class="bi bi-search"/> Lookup </xf:label>
                         <xf:action ev:event="DOMActivate">
                             <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
                             <xf:load show="embed" targetid="{$repeatID}subformLookup">
-                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}'][@formURL != '']/@formURL"/>
+                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != '']/@formURL"/>
                             </xf:load>
-                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}'][@formURL != '']/@api"/>
+                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='{$subformName}' or @form=''][@formURL != '']/@api"/>
                         </xf:action>
                     </xf:trigger>
                     <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add">
@@ -2367,19 +2367,6 @@
                         <xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"/> <xf:output value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current()/parent::*)][1]//*:availableAtts/*:attDef[@ident = name(current())]/@attLabel"/></xf:label>
                         <xf:delete ev:event="DOMActivate" ref="."/>    
                     </xf:trigger>
-                    <!-- Do a lookup across all data types to insert into  box -->
-                    <!--
-                    <xf:trigger appearance="minimal" ref=".[instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup]" class="btn btn-outline-secondary btn-sm controls add showLookup">
-                        <xf:label> <i class="bi bi-search"/> Lookup  </xf:label>
-                        <xf:action ev:event="DOMActivate">
-                            <xf:toggle case="{$repeatID}LookupUnHide" ev:event="DOMActivate"/>
-                            <xf:load show="embed" targetid="{$repeatID}subformLookup">
-                                <xf:resource value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"/>
-                            </xf:load>
-                            <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-{$subformName}-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"/>
-                        </xf:action>
-                    </xf:trigger>
-                    -->
                 </div>    
             </div>
         </xf:repeat>
@@ -2777,22 +2764,11 @@
                                 <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',@formName,'.xhtml')"/>
                             </xsl:otherwise>
                         </xsl:choose>
+                        <!--<xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',@formName,'.xhtml')"/>-->
                         <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
                         <xsl:attribute name="suppress" select="if(@suppress='true' or @supress='true' or  parent::*:subform[@lookup='no']) then 'true' else 'false'"/>
                         <xsl:attribute name="form" select="if(parent::*:subform) then string(parent::*:subform/@formName) else ()"/>
                     </lookup> 
-                    <!--
-                    <xsl:choose>
-                        <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"><lookup supress="true"/></xsl:when>
-                        <xsl:otherwise>
-                            <lookup>
-                                <xsl:copy-of select="@*"/>
-                                <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc//formName/text(),'/lookup/',tokenize(@formURL,'/')[last()])"/>
-                                <xsl:attribute name="level" select="if(parent::*:subform) then 'subform' else 'toplevel'"/>
-                            </lookup> 
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    -->
                 </xsl:for-each>
             </xsl:variable>
             <xsl:choose>
@@ -2803,9 +2779,9 @@
                     <xsl:copy-of select="$lookupList/*[@level='toplevel']"></xsl:copy-of>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:variable name="popupList">
-                <xsl:for-each select="$configDoc/descendant::*:popup[@elementName = $elementName]">
-                    <popup>
+                <xsl:variable name="popupList">
+                    <xsl:for-each select="$configDoc/descendant::*:popup[@elementName = $elementName]">
+                        <popup>
                             <xsl:copy-of select="@*"/>
                             <xsl:choose>
                                 <xsl:when test="@suppress='true' or @supress='true' or  parent::*:subform[@popup='no']"/>
@@ -2826,21 +2802,10 @@
                             <xsl:attribute name="suppress" select="if(@suppress='true' or @supress='true' or parent::*:subform[@popup='no']) then 'true' else 'false'"/>
                             <xsl:attribute name="form" select="$subformName"/>
                             -->
-                        </popup>
+                        </popup> 
                     </xsl:for-each>
-                <!--
+                </xsl:variable>
                 <xsl:choose>
-                    <xsl:when test="@suppress='true' or parent::*:subform[@lookup='no']"></xsl:when>
-                    <xsl:otherwise>
-                        <popup>
-                            <xsl:copy-of select="@*"/>
-                            <xsl:attribute name="formURL" select="concat('form.xq?form=forms/',$configDoc/descendant::*:popup[@elementName = $elementName]/@formName,'/index.xhtml')"/>
-                        </popup>
-                    </xsl:otherwise>
-                </xsl:choose>
-                -->
-            </xsl:variable>
-            <xsl:choose>
                     <xsl:when test="$popupList/*[@level='subform'][@form = $subformName]">
                         <xsl:copy-of select="$popupList/*[@level='subform']"></xsl:copy-of>
                     </xsl:when>
