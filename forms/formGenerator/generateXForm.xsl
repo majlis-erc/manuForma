@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.68 Beta 
+        Version: 1.69 Beta 
             -1.23 marks a major redesign
         
 
@@ -2910,7 +2910,7 @@
                 <xsl:if test="$elementRules/descendant-or-self::*:content/descendant-or-self::*:textNode">
                     <xsl:choose>
                             <xsl:when test="$configDoc/descendant::*:subform[@formName = $subformName]/*:controlledValuesElements/*:element[@ident = $elementName]"/>
-                            <xsl:when test="$elementName = ('p','desc','note','summary','quote')">
+                            <xsl:when test="$elementName = ('p','desc','note','summary','quote','ab')">
                                 <textNode type="textarea"/>
                             </xsl:when>
                             <xsl:when test="$elementRules/descendant-or-self::*:textNode">
