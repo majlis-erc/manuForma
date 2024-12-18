@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.69 Beta 
+        Version: 1.70 Beta 
             -1.23 marks a major redesign
         
 
@@ -1859,12 +1859,28 @@
                                         <xsl:choose>
                                             <xsl:when test="contains($elementName,'/')">
                                                 <xsl:variable name="parent" select="tokenize($elementName,'/')[1]"/>
+                                                <xsl:variable name="stripConditions">
+                                                    <xsl:choose>
+                                                        <xsl:when test="contains($parent,'[')">
+                                                            <xsl:value-of select="replace(substring-before($parent,'['),'tei:','')"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise><xsl:value-of select="replace($parent,'tei:','')"/></xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:variable>
                                                 <!--<xf:insert ev:event="DOMActivate" context="parent::*/parent::*"  at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="after"/>-->
-                                                <xf:insert ev:event="DOMActivate" ref="parent::*" at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($parent,'tei:','')}']" position="before"/>
+                                                <xf:insert ev:event="DOMActivate" ref="parent::*" at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{$stripConditions}']" position="before"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-<!--                                                <xf:insert ev:event="DOMActivate" context="parent::*" at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>-->
-                                                <xf:insert ev:event="DOMActivate" ref="." at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="before"/>
+                                                <xsl:variable name="stripConditions">
+                                                    <xsl:choose>
+                                                        <xsl:when test="contains($elementName,'[')">
+                                                            <xsl:value-of select="replace(substring-before($elementName,'['),'tei:','')"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise><xsl:value-of select="replace($elementName,'tei:','')"/></xsl:otherwise>
+                                                    </xsl:choose>
+                                                </xsl:variable>
+                                                <!--                                                <xf:insert ev:event="DOMActivate" context="parent::*" at="index('{$grpRepeatID}')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{replace($elementName,'tei:','')}']" position="after"/>-->
+                                                <xf:insert ev:event="DOMActivate" ref="." at="index('{$grpRepeatID}a')" origin="instance('i-{$subformName}-elementTemplate')/*[local-name() = '{$stripConditions}']" position="before"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xf:trigger>   
