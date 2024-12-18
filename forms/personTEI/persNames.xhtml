@@ -30,7 +30,7 @@
       </xf:trigger>
       <xf:group namespace="http://www.w3.org/2002/xforms" ref="instance('i-rec')//*:listPerson/*:person[position() = instance('i-repeatIndex')/index]" id="person-root">
          <div class="accordion" id="elementGroup">
-            <xf:repeat id="persNamesGrpRepeatLevel11" ref="./*[self::*:persName]">
+            <xf:repeat id="persNamesGrpRepeatLevel11" ref="./*[self::*:persName[not(contains(@type, 'alternate'))]]">
                <div class="accordion-item">
                   <xf:switch xmlns="http://www.w3.org/2002/xforms">
                      <xf:case id="closedpersNamesGrpRepeatLevel11">
@@ -48,22 +48,22 @@
                            <div class="accordion-body">
                               <div class="btn-group" role="group">
                                  <div class="input-group mb-3 float-end btn-no-border">
-                                    <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add "Personal name."</xf:label><xf:insert ev:event="DOMActivate" ref="." at="index('persNamesGrpRepeatLevel11a')" origin="instance('i-persNames-elementTemplate')/*[local-name() = 'persName']" position="before"></xf:insert>
+                                    <xf:trigger class="btn btn-outline-secondary" appearance="minimal"><xf:label><i class="bi bi-plus"></i> Add "Personal name."</xf:label><xf:insert ev:event="DOMActivate" ref="." at="index('persNamesGrpRepeatLevel11a')" origin="instance('i-persNames-elementTemplate')/*[local-name() = 'persName[not(contains(@type, 'alternate'))]']" position="before"></xf:insert>
                                     </xf:trigger>
                                  </div>
                               </div>
                               <div class="btn-toolbar justify-content-between mt-3 elementControls" role="toolbar">
                                  <div class="btn-group" role="group">
-                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline" ref=".[count(preceding-sibling::*[self::*:persName]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
+                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls remove inline" ref=".[count(preceding-sibling::*[self::*:persName[not(contains(@type, 'alternate'))]]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-x"></i></xf:label><xf:delete ev:event="DOMActivate" ref="."></xf:delete>
                                     </xf:trigger>
-                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref=".[count(preceding-sibling::*[self::*:persName]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                          <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:persName][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveUp inline" ref=".[count(preceding-sibling::*[self::*:persName[not(contains(@type, 'alternate'))]]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-up-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                          <setvalue ref="instance('i-move')/tmp" value="count(context()/preceding-sibling::*[self::*:persName[not(contains(@type, 'alternate'))]][1]/preceding-sibling::*) + 1"></setvalue>
                                           <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="before"></insert>
                                           <delete ref="."></delete>
                                        </xf:action>
                                     </xf:trigger>
-                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref=".[count(following-sibling::*[self::*:persName]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
-                                          <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:persName][1]/preceding-sibling::*) + 1"></setvalue>
+                                    <xf:trigger xmlns="http://www.w3.org/2002/xforms" appearance="minimal" class="btn controls moveDown inline" ref=".[count(following-sibling::*[self::*:persName[not(contains(@type, 'alternate'))]]) != 0]"><xf:label><i xmlns="http://www.w3.org/1999/xhtml" class="bi bi-arrow-down-circle"></i></xf:label><xf:action ev:event="DOMActivate">
+                                          <setvalue ref="instance('i-move')/tmp" value="count(context()/following-sibling::*[self::*:persName[not(contains(@type, 'alternate'))]][1]/preceding-sibling::*) + 1"></setvalue>
                                           <insert origin="." ref="parent::*/*" at="instance('i-move')/tmp" position="after"></insert>
                                           <delete ref="."></delete>
                                        </xf:action>
@@ -93,17 +93,17 @@
                                              <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                           </xf:trigger>
                                        </xf:group>
-                                       <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != ''][1]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup </xf:label><xf:action ev:event="DOMActivate">
                                              <xf:toggle case="persNamesGrpRepeatLevel11LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                              <xf:load show="embed" targetid="persNamesGrpRepeatLevel11subformLookup">
-                                                <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='persNames' or @form=''][@formURL != ''][1]/@formURL"></xf:resource>
                                              </xf:load>
-                                             <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
+                                             <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[@form='persNames' or @form=''][@formURL != ''][1]/@api"></xf:setvalue>
                                           </xf:action>
                                        </xf:trigger>
-                                       <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                       <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
                                              <xf:load show="new">
-                                                <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']/@formURL"></xf:resource>
                                              </xf:load>
                                           </xf:action>
                                        </xf:trigger>
@@ -199,17 +199,17 @@
                                                          <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                       </xf:trigger>
                                                    </xf:group>
-                                                   <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                   <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup </xf:label><xf:action ev:event="DOMActivate">
                                                          <xf:toggle case="persNamesGrpRepeatLevel11GrpRepeatLevel1LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                          <xf:load show="embed" targetid="persNamesGrpRepeatLevel11GrpRepeatLevel1subformLookup">
-                                                            <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                            <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@formURL"></xf:resource>
                                                          </xf:load>
-                                                         <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
+                                                         <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@api"></xf:setvalue>
                                                       </xf:action>
                                                    </xf:trigger>
-                                                   <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                   <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
                                                          <xf:load show="new">
-                                                            <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                            <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']/@formURL"></xf:resource>
                                                          </xf:load>
                                                       </xf:action>
                                                    </xf:trigger>
@@ -305,17 +305,17 @@
                                                                      <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                   </xf:trigger>
                                                                </xf:group>
-                                                               <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                               <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup </xf:label><xf:action ev:event="DOMActivate">
                                                                      <xf:toggle case="persNamesGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                      <xf:load show="embed" targetid="persNamesGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2subformLookup">
-                                                                        <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                                        <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@formURL"></xf:resource>
                                                                      </xf:load>
-                                                                     <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
+                                                                     <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@api"></xf:setvalue>
                                                                   </xf:action>
                                                                </xf:trigger>
-                                                               <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                               <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
                                                                      <xf:load show="new">
-                                                                        <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                                        <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']/@formURL"></xf:resource>
                                                                      </xf:load>
                                                                   </xf:action>
                                                                </xf:trigger>
@@ -411,17 +411,17 @@
                                                                                  <xf:setvalue ref="instance('i-availableElements')/*" value="''"></xf:setvalue>
                                                                               </xf:trigger>
                                                                            </xf:group>
-                                                                           <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup[not(@supress='true')]]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup  </xf:label><xf:action ev:event="DOMActivate">
+                                                                           <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add showLookup"><xf:label><i class="bi bi-search"></i> Lookup </xf:label><xf:action ev:event="DOMActivate">
                                                                                  <xf:toggle case="persNamesGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3LookupUnHide" ev:event="DOMActivate"></xf:toggle>
                                                                                  <xf:load show="embed" targetid="persNamesGrpRepeatLevel11GrpRepeatLevel1RepeatLevel2RepeatLevel3subformLookup">
-                                                                                    <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@formURL"></xf:resource>
+                                                                                    <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@formURL"></xf:resource>
                                                                                  </xf:load>
-                                                                                 <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:lookup/@api"></xf:setvalue>
+                                                                                 <xf:setvalue ref="instance('i-lookup-uri')//uri" value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/*:lookup[@form='persNames' or @form=''][@formURL != '']/@api"></xf:setvalue>
                                                                               </xf:action>
                                                                            </xf:trigger>
-                                                                           <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
+                                                                           <xf:trigger appearance="minimal" ref=".[instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']]" class="btn btn-outline-secondary btn-sm controls add"><xf:label><i class="bi bi-plus"></i> New  <xf:output value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())]/@elementLabel"></xf:output></xf:label><xf:action ev:event="DOMActivate">
                                                                                  <xf:load show="new">
-                                                                                    <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup/@formURL"></xf:resource>
+                                                                                    <xf:resource value="instance('i-persNames-schemaConstraints')/*[local-name() = local-name(current())][1]/*:popup[@formURL != '']/@formURL"></xf:resource>
                                                                                  </xf:load>
                                                                               </xf:action>
                                                                            </xf:trigger>
