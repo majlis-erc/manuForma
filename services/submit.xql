@@ -44,6 +44,10 @@ declare function local:createID(){
 
 (: Any post processing to TEI form data happens here :)
 declare function local:transform($nodes as node()*) as item()* {
+  let $user:=         
+        if(request:get-attribute("org.exist.login.user")) then request:get-attribute("org.exist.login.user") 
+        else(: xmldb:get-current-user():) sm:id()/sm:id/sm:real/sm:username/string(.)
+  let $name := if ($user) then sm:get-account-metadata($user, xs:anyURI('http://axschema.org/namePerson')) else 'Guest'
   for $node in $nodes
   let $new := request:get-parameter('new','')
   let $URI := 
@@ -87,8 +91,13 @@ declare function local:transform($nodes as node()*) as item()* {
                     }
             else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
         case element(tei:editor) return
-            if($node/descendant-or-self::text() = '') then ()
-            else local:passthru($node) 
+            if($node/parent::tei:titleStmt) then 
+                if($user != 'guest') then
+                    if(not($node/following-sibling::tei:editor) and $node/preceding-sibling::tei:editor[. != $name]) then 
+                        <editor xmlns="http://www.tei-c.org/ns/1.0" xml:id="{$user}" role="contributor">{$name}</editor>
+                    else local:passthru($node)
+                else local:passthru($node)
+            else local:passthru($node)
         case element(tei:idno) return
             if($node/parent::tei:ab[@type='factoid'][@subtype='relation']) then
                 element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node)) } 
