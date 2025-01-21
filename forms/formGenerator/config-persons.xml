@@ -94,7 +94,7 @@
             <xmlTemplate src="../templates/persons-template.xml"/>
             <elementGroups>
                 <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
-                    <element xpath="tei:persName"/>
+                    <element xpath="tei:persName[not(contains(@type, 'alternate'))]"/>
                 </group>
             </elementGroups>
         </subform>
