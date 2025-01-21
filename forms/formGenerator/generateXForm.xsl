@@ -14,7 +14,7 @@
             - XSLTForms
             - eXist-db 
             
-        Version: 1.70 Beta 
+        Version: 1.71 Beta 
             -1.23 marks a major redesign
         
 
@@ -643,9 +643,11 @@
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"/>
                         <xf:action ev:event="xforms-submit-done">
                             <xf:message level="modeless"> Data Loaded! </xf:message>
+                            <!--
                             <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
+                            -->
                             <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
@@ -658,9 +660,11 @@
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"/>
                         <xf:action ev:event="xforms-submit-done">
                         <xf:message level="modeless"> Data Loaded! </xf:message>
+                            <!--
                             <xf:insert ref="instance('i-rec')//*:titleStmt/child::*" at="last()" origin="instance('i-admin')//*:editor" position="after"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
+                            -->
                             <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
                             <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
