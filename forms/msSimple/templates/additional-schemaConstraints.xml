@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <listBibl ident="listBibl"
+             elementName="listBibl"
+             elementLabel="citation list"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:listBibl"
+             currentLevel="1"
+             popup="1"
+             teiElement="&lt;listBibl/&gt;">
+      <desc>A list of bibliographic items.</desc>
+      <availableAtts elementName="listBibl">
+         <attDef attLabel="type" ident="type" mode="replace" usage="req">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="catalogue"
+                        attLabel="catalogue"
+                        desc="Descriptions in manuscript catalogues of the subject of&#xA;                                        the record. This only makes sense if you are editing a manuscript record. "/>
+               <valItem ident="editions"
+                        attLabel="editions"
+                        desc="Editions of the Textual Unit (Work). This only makes sense if you are editing a Textual Unit."/>
+               <valItem ident="text"
+                        attLabel="text"
+                        desc="Bibliography about the Textual Unit (Work), which is not an edition. This could also find its place in secondary bibliography."/>
+               <valItem ident="otherLanguages"
+                        attLabel="otherLanguages"
+                        desc="About the same textual unit in a different literary tradition."/>
+               <valItem ident="clavis"
+                        attLabel="clavis"
+                        desc="ID of the work in other clavis (CC, CPG etc.) "/>
+               <valItem ident="translation"
+                        attLabel="translation"
+                        desc="Modern translations of the work "/>
+               <valItem ident="secondary"
+                        attLabel="secondary"
+                        desc="Secondary bibliography on the subject of the record. "/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </listBibl>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="Bibliographic reference"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:listBibl/*:bibl"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;bibl/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/titleBibl?format=xml&amp;collection=manuscripts&amp;wrapElement=idno&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/titleBibl.xhtml"
+              elementName="bibl"
+              formName="titleBibl"
+              lookupLabel="Look up manuscript record."
+              level="subform"
+              suppress="false"
+              form="ab"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record."
+              level="subform"
+              suppress="false"
+              form="additions"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record."
+              level="subform"
+              suppress="false"
+              form="accMat"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record."
+              level="subform"
+              suppress="false"
+              form="additional"/>
+      <desc>Add a bibliographic item.</desc>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Bibliographic identifier" ident="xml:id" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Bibliographic identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="title"
+                     label="Title of publication"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="1"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 50 time(s)."/>
+         </child>
+      </childElements>
+   </bibl>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Title of publication"
+          minOccur="1"
+          maxOccur="1"
+          errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+          path="/*:listBibl/*:bibl/*:title"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              elementName="title"
+              suppress="true"
+              level="subform"
+              form="reproductions"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title record."
+              level="subform"
+              suppress="false"
+              form="msContents"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              elementName="title"
+              suppress="true"
+              level="subform"
+              form="accMat"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              elementName="title"
+              suppress="true"
+              level="subform"
+              form="additional"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>The title to the Zotero will be filled out automatically.</desc>
+      <availableAtts elementName="title"/>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="Link to Zotero record"
+        minOccur="1"
+        maxOccur="1"
+        errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+        path="/*:listBibl/*:bibl/*:ptr"
+        currentLevel="3"
+        popup="3"
+        teiElement="&lt;ptr/&gt;">
+      <desc>The link to the Zotero will be filled out automatically.</desc>
+      <availableAtts elementName="ptr">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Link</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </ptr>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="Referenced section(s)"
+               minOccur="1"
+               maxOccur="50"
+               errorMessage="Element must occur at least 1."
+               path="/*:listBibl/*:bibl/*:citedRange"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;citedRange/&gt;">
+      <desc>Specify which pages, columns, etc. you are refering to.</desc>
+      <availableAtts elementName="citedRange">
+         <attDef attLabel="Unit" ident="unit" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="page" attLabel="Pages"/>
+               <valItem ident="folio" attLabel="Folios"/>
+               <valItem ident="cols" attLabel="Columns"/>
+               <valItem ident="section" attLabel="Sections"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="citedRange"/>
+         <child/>
+      </childElements>
+   </citedRange>
+</TEI>
