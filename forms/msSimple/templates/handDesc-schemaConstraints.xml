@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <physDesc ident="physDesc"
+             elementName="physDesc"
+             elementLabel="physical description"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc"
+             currentLevel="1"
+             popup="1"
+             teiElement="&lt;physDesc/&gt;">
+      <desc>This element contains descriptions of the codicological
+                            and paleographic features of a manuscript. </desc>
+      <availableAtts elementName="physDesc">
+         <attDef attLabel="number" ident="n" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">number</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">수</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">número</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">nombre</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">numero</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">数値</gloss>
+         </attDef>
+         <attDef attLabel="responsible party" ident="resp" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-11-02"
+                   xml:lang="en">responsible party</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">책임 당사자</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">parte responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">responsabile</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-09-16"
+                   xml:lang="ja">責任者</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="handDesc"
+                     label="Scribal hand entries"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="scriptDesc"
+                     label="Script definition entries"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </physDesc>
+   <handDesc ident="handDesc"
+             elementName="handDesc"
+             elementLabel="Scribal hand entries"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc/*:handDesc"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;handDesc/&gt;">
+      <desc>Create a distinct entry for each scribal hand.</desc>
+      <availableAtts elementName="handDesc"/>
+      <childElements>
+         <child>
+            <element ident="summary"
+                     label="Summary of hand"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="handNote"
+                     label="*Description of scribal hand"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </handDesc>
+   <summary ident="summary"
+            elementName="summary"
+            elementLabel="Summary of hand"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:physDesc/*:handDesc/*:summary"
+            currentLevel="3"
+            popup="3"
+            teiElement="&lt;summary/&gt;">
+      <desc>Provide a summary of the main features of the hand.</desc>
+      <availableAtts elementName="summary">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </summary>
+   <handNote ident="handNote"
+             elementName="handNote"
+             elementLabel="*Description of scribal hand"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc/*:handDesc/*:handNote"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;handNote/&gt;">
+      <desc>Describe the hand according to basic categories and the kind of ink used.</desc>
+      <availableAtts elementName="handNote">
+         <attDef attLabel="Ink" ident="medium" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Ink</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="brown" attLabel="Brown ink"/>
+               <valItem ident="black" attLabel="Black ink"/>
+               <valItem ident="pigments" attLabel="Pigments"/>
+               <valItem ident="mixed" attLabel="Mixed ink"/>
+               <valItem ident="plantBased" attLabel="Plant based ink"/>
+               <valItem ident="unidentified" attLabel="Unidentified ink"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Add HebrewPal link" ident="source" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Add HebrewPal link</gloss>
+         </attDef>
+         <attDef attLabel="Internal hand identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Internal hand identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="locus"
+                     label="*Range of folio(s)"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="persName"
+                     label="Person"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="placeName"
+                     label="Place of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="metamark"
+                     label="Special graphic signs"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="origDate"
+                     label="Date of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </handNote>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="*Range of folio(s)"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:physDesc/*:handDesc/*:handNote/*:locus"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;locus/&gt;">
+      <desc>Specify range of folios within the manuscript. Recto and verso are indicated as "r" and "v".</desc>
+      <availableAtts elementName="locus">
+         <attDef attLabel="From" ident="from" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
+         </attDef>
+         <attDef attLabel="To" ident="to" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </locus>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc/*:handDesc/*:handNote/*:persName"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="handDesc"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="additions"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="accMat"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New person"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the person records in the database to identify the scribe, vocalizer, or
+                            masorator. Try different spellings in different languages! If no suitable record exists, create a new one. Select which
+                            role the person played in the production from the dropdown list. Add additional fields as required. </desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier" ident="ref">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" usage="opt">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="scribe" attLabel="Scribe"/>
+               <valItem ident="vocalizer" attLabel="Vocalizer"/>
+               <valItem ident="masorator" attLabel="Masorator"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place of origin"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:physDesc/*:handDesc/*:handNote/*:placeName"
+              currentLevel="4"
+              popup="4"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="handDesc"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="additions"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New place"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the place records in the database to specify a location. Try different
+                            spellings in different languages! If no suitable record exists, create a new one.</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Place identifier" ident="ref">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <metamark ident="metamark"
+             elementName="metamark"
+             elementLabel="Special graphic signs"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc/*:handDesc/*:handNote/*:metamark"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;metamark/&gt;">
+      <desc>Describe the use of vocalization or recitation and choose the appropriate
+                            "Function" from the dropdown list.</desc>
+      <availableAtts elementName="metamark">
+         <attDef attLabel="Pick type" ident="function" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Pick type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="vocalization" attLabel="Vocalization"/>
+               <valItem ident="recitation" attLabel="Recitation"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="metamark"/>
+         <child/>
+      </childElements>
+   </metamark>
+   <origDate ident="origDate"
+             elementName="origDate"
+             elementLabel="Date of origin"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:physDesc/*:handDesc/*:handNote/*:origDate"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;origDate/&gt;">
+      <desc>Fill in the date of origin in CE.</desc>
+      <availableAtts elementName="origDate">
+         <attDef attLabel="when" ident="when" usage="delete"/>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </origDate>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:physDesc/*:handDesc/*:handNote/*:note"
+         currentLevel="4"
+         popup="4"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+   <scriptDesc ident="scriptDesc"
+               elementName="scriptDesc"
+               elementLabel="Script definition entries"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:physDesc/*:scriptDesc"
+               currentLevel="2"
+               popup="2"
+               teiElement="&lt;scriptDesc/&gt;">
+      <desc>Define the script according to basic categories.</desc>
+      <availableAtts elementName="scriptDesc"/>
+      <childElements>
+         <child>
+            <element ident="scriptNote"
+                     label="*Description of script"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </scriptDesc>
+   <scriptNote ident="scriptNote"
+               elementName="scriptNote"
+               elementLabel="*Description of script"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:physDesc/*:scriptDesc/*:scriptNote"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;scriptNote/&gt;">
+      <desc>Specify script according to the following criteria: "Script type" (Oriental,
+                            Sefardic …), "Script mode" (square, non-square …), "Script quality" (careless, trained …). Indicate the range of folios.
+                            If necessary, add detailed observations in the Note field.</desc>
+      <availableAtts elementName="scriptNote">
+         <attDef attLabel="Script quality" ident="rend">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script quality</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="unidentified" attLabel="Unidentified"/>
+               <valItem ident="untrained" attLabel="Untrained"/>
+               <valItem ident="careless" attLabel="Careless"/>
+               <valItem ident="current" attLabel="Current"/>
+               <valItem ident="calligraphic" attLabel="Calligraphic"/>
+               <valItem ident="monumental" attLabel="Monumental"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Script type" ident="script" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="oriental" attLabel="Oriental"/>
+               <valItem ident="yemenite" attLabel="Yemenite"/>
+               <valItem ident="sephardi" attLabel="Sephardi"/>
+               <valItem ident="byzantine" attLabel="Byzantine"/>
+               <valItem ident="italian" attLabel="Italian"/>
+               <valItem ident="ashkenazi" attLabel="Ashkenazi"/>
+               <valItem ident="unidentified" attLabel="Unidentified"/>
+               <valItem ident="abbasidBookHand" attLabel="Abbasid book hand"/>
+               <valItem ident="newStyle" attLabel="New Style"/>
+               <valItem ident="naskh" attLabel="Naskh"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Script mode" ident="style">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Script mode</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="square" attLabel="Square"/>
+               <valItem ident="nonSquare" attLabel="Non square"/>
+               <valItem ident="cursive" attLabel="Cursive"/>
+               <valItem ident="unidentified" attLabel="Unidentified"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Graphic system" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Graphic system</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="la" attLabel="Latin"/>
+               <valItem ident="gr" attLabel="Greek"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="locus"
+                     label="*Range of folio(s)"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </scriptNote>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="*Range of folio(s)"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:physDesc/*:scriptDesc/*:scriptNote/*:locus"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;locus/&gt;">
+      <desc>Specify range of folios within the manuscript. Recto and verso are indicated as "r" and "v".</desc>
+      <availableAtts elementName="locus">
+         <attDef attLabel="From" ident="from" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">From</gloss>
+         </attDef>
+         <attDef attLabel="To" ident="to" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">To</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </locus>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:physDesc/*:scriptDesc/*:scriptNote/*:note"
+         currentLevel="4"
+         popup="4"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+</TEI>

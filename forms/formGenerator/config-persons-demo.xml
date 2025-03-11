@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <appTitle>manuForma</appTitle>
+    <formTitle>Edit Person TEI records</formTitle>
+    <formURL>/exist/apps/manuForma/</formURL>
+    <formName>personTEI</formName>
+    <formAuthor>majlis-erc</formAuthor>
+    <formDesc></formDesc>
+    <!-- Language to output lables, hints etc, if empty defaults to English -->
+    <formLang>en</formLang>
+    <recordManagement>
+        <saveOptions>
+            <option name="github" enable="true">
+                <parameter name="githubRepoName">majlis-data</parameter>
+                <parameter name="githubPath">data/persons/tei/</parameter>
+                <parameter name="githubOwner">majlis-erc</parameter>
+                <parameter name="githubBranch">main</parameter>
+            </option>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+            </option>
+            <option name="download" enable="true"/>
+        </saveOptions>
+        <retrieveOptions>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/persons/tei</parameter>
+            </option>
+        </retrieveOptions>
+    </recordManagement>
+    <blankTemplates>
+        <template name="Generic Persons Template" src="/forms/templates/persons-fulltemplate.xml"/>
+    </blankTemplates>
+    <lookups>
+        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
+        <popup formName="placeTEI" elementName="placeName" label="New Places"/>
+        <lookup api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+        <!--        <popup formName="biblTEI" elementName="bibl" label="New Bibliographic Record"></popup>-->
+    </lookups>
+    <projectSpecificData>
+        <xmlPath name="Project Picker" src="/forms/templates/editionStmtProjectOptions.xml" element="editionStmt"/>
+    </projectSpecificData>
+    <!--
+        For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
+        and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
+        into the form again as needed. 
+        
+        List forms in order of editing preference.
+        additions
+    -->
+    <subforms>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
+            <formDesc>Record information pertaining to the institutions and people behind the project.</formDesc>
+            <localSchema src="../schemas/titleStmt.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-fulltemplate.xml"/>
+            <elementGroups>
+                <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:sponsor"/>
+                    <element xpath="tei:funder"/>
+                </group>
+                <group groupLabel="Project team." groupNo="2" repeatable="no">
+                    <element xpath="tei:principal"/>
+                    <element xpath="tei:editor"/>
+                    <element xpath="tei:respStmt"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="persNames" formLabel="Personal name">
+            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
+            <localSchema src="../schemas/person-schema.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Personal name." groupLabelConditionalElement="./*:name | ./*:addName | ./*:forename" groupLabelXPath="concat(./*:name, ' ', ./*:forename, ' ', ./*:addName[1], ' ', ./*:addName[2], ' ', ./*:addName[3], ' ', ./*:addName[4], ' ', ./*:addName[5], ' ', ./*:addName[6], ' ', ./*:addName[7], ' ', ./*:addName[8], ' ', ./*:addName[9], '(',./@type, ' name)')" groupNo="1" repeatable="yes">
+                    <element xpath="tei:persName"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="biographicalData" formLabel="Biographical data">
+            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database and Linked Open Data references.</formDesc>
+            <localSchema src="../schemas/person-schema.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Biographical data." groupNo="1" repeatable="no">
+                    <element xpath="tei:birth"/>
+                    <element xpath="tei:death"/>
+                    <element xpath="tei:floruit"/>
+                    <element xpath="tei:sex"/>
+                    <element xpath="tei:faith"/>
+                    <element xpath="tei:occupation"/>
+                    <element xpath="tei:residence"/>
+                </group>
+            </elementGroups>
+            <controlledValuesElements>
+                <element ident="sex">
+                    <valList type="closed">
+                        <valItem ident="Unknown"/>
+                        <valItem ident="Female"/>
+                        <valItem ident="Male"/>
+                    </valList>
+                </element>
+                <element ident="faith">
+                    <valList type="closed">
+                        <valItem ident="Karaite"/>
+                        <valItem ident="Rabbanite"/>
+                        <valItem ident="Muslim"/>
+                        <valItem ident="Christian"/>
+                    </valList>
+                </element>
+            </controlledValuesElements>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person/tei:ab/tei:list" formName="heritageData" formLabel="Heritage data">
+            <formDesc>Add descriptions of the person from earlier reference works and internal library records.</formDesc>
+            <localSchema src="../schemas/person-schema.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Quotation from and information about the heritage material." groupNo="1" repeatable="yes">
+                    <element xpath="tei:item"/>
+                </group>
+            </elementGroups>
+        </subform>
+        
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="biblData" formLabel="Bibliographic reference">
+            <formDesc>Add names of the person in various forms and writings systems, biographical data, bibliographic references from the Zotero database.</formDesc>
+            <localSchema src="../schemas/person-schema.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
+                    <element xpath="tei:bibl"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:person" formName="idnoData" formLabel="Linked Open Data">
+            <formDesc>Add Linked Open Data references of the person.</formDesc>
+            <localSchema src="../schemas/person-schema.xml"/>
+            <globalSchema src="../schemas/mss-compiled.odd"/>
+            <xmlTemplate src="../templates/persons-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Linked Open Data entry." groupLabelConditionalElement="./*" groupLabelXPath="concat('Linked Open Data: ',./*/@subtype,'.')" groupNo="1" repeatable="yes">
+                    <element xpath="tei:idno"/>
+                </group>
+            </elementGroups>
+        </subform>
+    </subforms>
+</config>

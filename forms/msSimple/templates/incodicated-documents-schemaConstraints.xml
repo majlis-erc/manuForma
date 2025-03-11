@@ -95,7 +95,12 @@
                      maxOccurs=""
                      errorMessage=""/>
             <element ident="quote"
-                     label="Transcription or Translation"
+                     label="Transcription"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="ab"
+                     label="Translation"
                      minOccurs=""
                      maxOccurs=""
                      errorMessage=""/>
@@ -191,7 +196,7 @@
    </locus>
    <quote ident="quote"
           elementName="quote"
-          elementLabel="Transcription or Translation"
+          elementLabel="Transcription"
           minOccur="0"
           maxOccur="50"
           errorMessage=""
@@ -200,17 +205,45 @@
           popup="3"
           teiElement="&lt;quote/&gt;">
       <desc>Transcribe relevant portion of
-                            the text. Specify language and script of the document. Alternatively, provide a translation of the
-                            relevant portion of the text.</desc>
+                            the text. Specify language and script of the document.</desc>
       <availableAtts elementName="quote">
-         <attDef attLabel="Type" ident="type" mode="change">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
             <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
             <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                      type="closed"
                      mode="change">
-               <valItem ident="transcription" attLabel="Transcription"/>
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="pe" attLabel="Persian"/>
+               <valItem ident="en" attLabel="English"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </quote>
+   <ab ident="ab"
+       elementName="ab"
+       elementLabel="Translation"
+       minOccur="0"
+       maxOccur="50"
+       errorMessage=""
+       path="/*:list/*:item/*:ab"
+       currentLevel="3"
+       popup="3"
+       teiElement="&lt;ab/&gt;">
+      <desc>Provide a translation of the
+                            relevant portion of the text.</desc>
+      <availableAtts elementName="ab">
+         <attDef attLabel="type" ident="type" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
                <valItem ident="translation" attLabel="Translation"/>
             </valList>
          </attDef>
@@ -222,9 +255,11 @@
                      type="closed"
                      mode="change">
                <valItem ident="ar" attLabel="Arabic"/>
-               <valItem ident="en" attLabel="English"/>
                <valItem ident="he" attLabel="Hebrew"/>
-               <valItem ident="pe" attLabel="Persian"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
             </valList>
          </attDef>
       </availableAtts>
@@ -232,7 +267,7 @@
          <textNode type="textarea"/>
          <child/>
       </childElements>
-   </quote>
+   </ab>
    <note ident="note"
          elementName="note"
          elementLabel="Notes"
