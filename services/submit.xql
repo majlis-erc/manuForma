@@ -89,7 +89,8 @@ declare function local:transform($nodes as node()*) as item()* {
                         for $n in $node/node()
                         return local:transform($n)
                     }
-            else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+            else
+              local:passthru($node)
         case element(tei:editor) return
             if($node/parent::tei:titleStmt) then 
                 if($user != 'guest') then
