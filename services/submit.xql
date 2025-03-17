@@ -89,7 +89,8 @@ declare function local:transform($nodes as node()*) as item()* {
                         for $n in $node/node()
                         return local:transform($n)
                     }
-            else element {fn:QName("http://www.tei-c.org/ns/1.0",local-name($node))} {($node/@*, local:markdown2TEI($node/node()))}
+            else
+              local:passthru($node)
         case element(tei:editor) return
             if($node/parent::tei:titleStmt) then 
                 if($user != 'guest') then
@@ -354,10 +355,13 @@ return
                 return 
                  <response status="okay" code="200"><message>{$save} Record {$id} saved, thank you for your contribution. </message></response>  
             } catch * {
-                (response:set-status-code( 500 ),
-                <response status="fail">
-                    <message>Failed to update resource {$id}: {concat($err:code, ": ", $err:description)}</message>
-                </response>)
+                (
+                    util:log("ERROR", concat("Failed to update resource: ", $id, ". [", $err:line-number, ":", $err:column-number, "]", $err:module, ": ", $err:code, " ", $err:description)),
+                    response:set-status-code(500),
+                    <response status="fail">
+                      <message>Failed to update resource: {$id}. {concat($err:code, ": ", $err:description)}</message>
+                    </response>
+                )
             }
          else if(request:get-parameter('type', '') = 'github') then 
             try {
@@ -371,11 +375,13 @@ return
                  </response>
                  )
             } catch * {
-                (response:set-status-code( 500 ),
-                <response status="fail">
-                    <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
-                    
-                </response>)
+                (
+                  util:log("ERROR", concat("Failed to submit, please download your changes and send via email. [", $err:line-number, ":", $err:column-number, "]", $err:module, ": ", $err:code, " ", $err:description)),
+                  response:set-status-code(500),
+                  <response status="fail">
+                      <message>Failed to submit, please download your changes and send via email. {concat($err:code, ": ", $err:description)}</message>
+                  </response>
+                )
             }   
         else if(request:get-parameter('type', '') = 'download') then
                 (response:set-header("Content-Type", "application/xml; charset=utf-8"),
