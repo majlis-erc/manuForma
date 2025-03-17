@@ -84,7 +84,7 @@ declare function gitcommit:step1($data as item()*,$path as xs:string?, $commit-m
 
 declare function gitcommit:step2($data as item()*,$path as xs:string?, $commit-message as xs:string?, $branch-sha as xs:string?){
     (: 2. create a new branch :)
-    let $branch-name := concat(replace($path,'/|\.',''),'-',replace(util:random(),'\.',''))
+    let $branch-name := concat(replace($path,'/|\.',''),'-',replace(xs:string(util:random()),'\.',''))
     let $new-branch-name := 
         serialize(
             <object>
