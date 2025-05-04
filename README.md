@@ -59,12 +59,20 @@ The manuForma application can be compiled into an EXPath Package for deployment 
 
 Build Requirements:
     * [Java JDK](https://bell-sw.com/pages/downloads/) version 8 (or newer)
-    * [Apache Maven](https://maven.apache.org/) version 3.9.9 (or newer)
 
-To build the manuForma application, run:
+To build the manuForma application:
+
+### macOS / Linux / Unix Platforms
+Run the following from a Terminal/Shell:
 
 ```shell
-mvn clean package
+./mvnw clean package
+```
+
+### Microsoft Windows Platforms
+Run the following from a Command Prompt:
+```cmd
+mvnw.cmd clean package
 ```
 
 You can then find the EXPath Package file in the `target/` folder, it will be named like `manuforma-X.Y.Z-SNAPSHOT.xar`. You can take this file and upload it into eXist-db via eXist-db's `autodeploy` folder or its Package Manager application.
