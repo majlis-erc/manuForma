@@ -1,5 +1,7 @@
 # manuForma [BETA]
 
+[![Build Status](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml/badge.svg)](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml)
+[![Java 8+](https://img.shields.io/badge/java-8+-blue.svg)](https://bell-sw.com/pages/downloads/)
 [![DOI](https://zenodo.org/badge/474991717.svg)](https://zenodo.org/badge/latestdoi/474991717)
 
 The manuForma application is designed to make TEI data creation and distributed editing faster and easier. The application features easy to use multi-step forms, Github interactions and more.
