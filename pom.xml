@@ -49,6 +49,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <exist-db.version>6.3.0</exist-db.version>
+
+        <!-- NOTE(AR): this is used for generating forms in the xml-maven-plugin below -->
+        <saxon.version>9.9.1-8</saxon.version>
         
         <!-- used in the EXPath Package Descriptor -->
         <package-title>${project.name}</package-title>
@@ -68,26 +71,108 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/xar-resources</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>templates/**</include>
-                </includes>
-            </resource>            
-        </resources>
 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-xar-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/xar-resources</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/xar-resources</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-formGenerator-templates</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <!-- NOTE(AR): the templates are also needed at runtime by the generated forms -->
+                                <resource>
+                                    <directory>src/main/formGenerator/templates</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/xar-resources/forms/templates</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <transformerFactory>net.sf.saxon.TransformerFactoryImpl</transformerFactory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>${saxon.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>generate-forms</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                        <configuration>
+                            <transformationSets>
+                                <transformationSet>
+                                    <dir>src/main/formGenerator</dir>
+                                    <includes>
+                                        <!-- NOTE(AR): config.xml appears to be identical to config-mss.xml -->
+                                        <!-- include>config.xml</include -->
+                                        <include>config-mss.xml</include>
+                                        <include>config-persons.xml</include>
+                                        <include>config-places.xml</include>
+                                        <include>config-relations.xml</include>
+                                        <include>config-works.xml</include>
+                                        <!-- NOTE(AR): Winona Salesky emailed me about config-documentation.xml
+                                        and said "The config-documentation.xml is really just a template so you
+                                        can create new forms based on it, the file has some comments in it
+                                        about how to structure the forms. This could be removed and translated
+                                        into true documentation."
+                                        -->
+                                        <!--
+                                        <include>config-documentation.xml</include>
+                                        -->
+                                    </includes>
+                                    <parameters>
+                                        <parameter>
+                                            <name>output-base-uri</name>
+                                            <value>file:${project.build.directory}/generated-xar-resources/forms</value>
+                                        </parameter>
+                                    </parameters>
+                                    <stylesheet>src/main/formGenerator/generateXForm.xsl</stylesheet>
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>ro.kuberam.maven.plugins</groupId>
