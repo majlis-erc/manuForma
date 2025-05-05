@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config type="wizard">
+    <appTitle>manuForma</appTitle>
+    <formTitle>Edit Relation TEI Records</formTitle>
+    <formURL>/exist/apps/manuForma/</formURL>
+    <formName>relationTEI</formName>
+    <formAuthor>majlis-erc</formAuthor>
+    <formDesc>Create and edit relation records for MAJLIS: The Transformation of Jewish Literature in Arabic in the Islamicate World</formDesc>
+    
+    <!-- Language to output lables, hints etc, if empty defaults to English -->
+    <formLang>en</formLang>
+    <recordManagement>
+        <saveOptions>
+            <option name="github" enable="true">
+                <parameter name="githubRepoName">majlis-data</parameter>
+                <parameter name="githubPath">data/relations/tei/</parameter>
+                <parameter name="githubOwner">majlis-erc</parameter>
+                <parameter name="githubBranch">main</parameter>
+            </option>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/relations/tei</parameter>
+            </option>
+            <option name="download" enable="true"/>
+        </saveOptions>
+        <retrieveOptions>
+            <option name="exist-db" enable="true">
+                <parameter name="eXistCollection">/db/apps/majlis-data/data/relations/tei</parameter>
+                
+            </option>
+        </retrieveOptions>
+    </recordManagement>
+    <blankTemplates>
+        <template name="Relations Template" src="/forms/templates/relations-fulltemplate.xml"/>
+    </blankTemplates>
+    <lookups>
+        <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q=" formURL="forms/mssTEI/lookup/mutual.xhtml" elementName="mutual" formName="mutual" lookupLabel="Look up mutual relations"/>
+        <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q=" formURL="forms/mssTEI/lookup/mutual.xhtml" elementName="active" formName="active" lookupLabel="Look up subject of relation"/>
+        <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q=" formURL="forms/mssTEI/lookup/mutual.xhtml" elementName="passive" formName="passive" lookupLabel="Look object of relation"/>
+        <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="persName" formName="persName" lookupLabel="Look up persons"/>
+        <popup formName="personTEI" elementName="persName" label="New persons"/>
+        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
+        <popup formName="placeTEI" elementName="placeName" label="New places"/>
+        <!-- Does not work, no easy way to tie xpath to look up
+            <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" xpath="not(parent::*:bibl)" elementName="title" formName="title" lookupLabel="Look up title"/> -->
+        <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/mssTEI/lookup/title.xhtml" elementName="title" formName="title" lookupLabel="Look up title"/>
+        <popup formName="worksTEI" elementName="title" label="New work"/>
+        <lookup api="/exist/apps/majlis/api/search/simpleCite?format=xml&amp;q=" formURL="forms/mssTEI/lookup/bibl.xhtml" elementName="bibl" formName="bibl" lookupLabel="Look up bibliographic record"/>
+    </lookups>
+    <projectSpecificData>
+        <xmlPath name="Project Picker" src="/forms/templates/editionStmtProjectOptions.xml" element="editionStmt"/>
+    </projectSpecificData>
+    <!--
+        For better performance the TEI records are into sections. Each section will output a form. This will allow better load and response time for forms, 
+        and a step-by-step method of editing records. In process records will be stored in the DB or downloaded to the file system, where they can be loaded 
+        into the form again as needed. 
+        
+        List forms in order of editing preference.
+        additions
+    -->
+    <subforms>
+        <subform xpath="/tei:TEI/descendant::tei:teiHeader/tei:fileDesc/tei:titleStmt" formName="titleStmt" formLabel="Header" repeat="no" lookup="no">
+            <formDesc>Record information pertaining the institutions and people behind the project.</formDesc>
+            <localSchema src="schemas/titleStmt.xml"/>
+            <globalSchema src="schemas/mss-compiled.odd"/>
+            <xmlTemplate src="templates/full-mss-template.xml"/>
+            <elementGroups>
+                <group groupLabel="Record title and project information." groupNo="1" repeatable="no">
+                    <element xpath="tei:title"/>
+                    <element xpath="tei:sponsor"/>
+                    <element xpath="tei:funder"/>
+                </group>
+                <group groupLabel="Project team." groupNo="2" repeatable="no">
+                    <element xpath="tei:editor"/>
+                    <element xpath="tei:respStmt"/>
+                </group>
+            </elementGroups>
+        </subform>
+        <subform xpath="/tei:TEI/tei:text/tei:body" formName="relation" formLabel="Relation">
+            <formDesc>Record relational information from the source.</formDesc>
+            <localSchema src="schemas/relations-schema.xml"/>
+            <globalSchema src="schemas/relations-schema.xml"/>
+            <xmlTemplate src="templates/relations-template.xml"/>
+            <lookup elementName="title" suppress="true"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
+                formURL="forms/msSimple/lookup/persName.xhtml" 
+                elementName="persName" 
+                formName="persName" 
+                lookupLabel="Look up person record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="placeName" 
+                formName="placeName" 
+                lookupLabel="Look up place record."/>
+            <lookup 
+                api="/exist/apps/majlis/api/search/simpleCite?format=xml&amp;q=" 
+                formURL="forms/relationTEI/lookup/bibl.xhtml" 
+                elementName="bibl" 
+                formName="bibl" 
+                lookupLabel="Look up bibliographic record."/>
+            <elementGroups>
+                <group groupLabel="Factoid." groupLabelConditionalElement="./*:gloss" groupLabelXPath="./*:gloss" groupNo="1" repeatable="yes">
+                    <element xpath="tei:ab"/>
+                </group>
+            </elementGroups>
+        </subform>
+    </subforms>
+</config>
