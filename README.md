@@ -1,17 +1,19 @@
 # manuForma [BETA]
 
+[![Build Status](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml/badge.svg)](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml)
+[![Java 8+](https://img.shields.io/badge/java-8+-blue.svg)](https://bell-sw.com/pages/downloads/)
 [![DOI](https://zenodo.org/badge/474991717.svg)](https://zenodo.org/badge/latestdoi/474991717)
 
 The manuForma application is designed to make TEI data creation and distributed editing faster and easier. The application features easy to use multi-step forms, Github interactions and more.
 
 Custom XForms are built using an XSLT stylesheet, a custom XML configuration file, and a custom XML Schema. The schema is used to define the elements and attributes required for your project. The schema must define all of the elements and attributes you would like in your forms. All controlled values, labels, language, and available elements and attributes will be defined in your custom schema. The more restrictive your schema is the faster your forms will perform. 
 
-TEI is a complex and large schema, so it is necessary to break the forms up into subforms. The subforms make for easier data entry and faster form load and processing time. We recommend breaking your TEI files up into the smallest meaningful blocks that you can. The application comes bundled with a few example forms, including TEI manuscripts. Use these example forms as templates to build your own custom forms. 
+TEI is a complex and large schema, so it is necessary to break the forms up into sub-forms. The sub-forms make for easier data entry and faster form load and processing time. We recommend breaking your TEI files up into the smallest meaningful blocks that you can. The application comes bundled with a few example forms, including TEI manuscripts. Use these example forms as templates to build your own custom forms. 
 
-We use our manuscripts forms as an exmple for the documentation, there are also, forms for person and place records. The manuscript forms are broken up into 8 different subforms as shown below.
+We use our manuscripts forms as an example for the documentation, there are also, forms for person and place records. The manuscript forms are broken up into 8 different sub-forms as shown below.
 
 ## Building the forms
-Structure of the configuration file, forms/formGenerator/config.xml
+Structure of the configuration file: [`forms/formGenerator/config.xml`](src/main/xar-resources/forms/formGenerator/config.xml)
 
 General settings including Application Name, a base url for generating working navigation once the application has been deployed. Form titles, and descriptions. 
 ```
@@ -49,4 +51,63 @@ The forms use a two step process, a ‘local schema’ which should be a very re
 
 To create usable and quick forms it is important to be as restrictive as possible when designing your local shema. For example, only reference child elements that you will use, avoid broad classes or module references such as pLike. Instead for a paragraph, simply use a textNode as the only child. The XForms do not do well with mixed content nodes, so you will have to avoid this in your data design. 
 
-To build the form you will simply need to run the XSLT, it will use the values defined in your config.xml file to generate the necessary files to create all the form components necessary. Once the form is built, ant can be run and the applicaiton can be deployed to eXist-db. Forms were built and tested with eXist-db 5.3.1 and up. 
+To build the form you will simply need to run the XSLT, it will use the values defined in your config.xml file to generate the necessary files to create all the form components necessary. Once the form is built, ant can be run and the application can be deployed to Elemental (or eXist-db). Forms were built and tested with eXist-db 6.3.0 and up.
+
+## Building the manuForma EXPath Package
+
+The manuForma application can be compiled into an EXPath Package for deployment to an Elemental (or eXist-db) server.
+
+Build Requirements:
+    * [Java JDK](https://bell-sw.com/pages/downloads/) version 8 (or newer)
+
+To build the manuForma application:
+
+### macOS / Linux / Unix Platforms
+Run the following from a Terminal/Shell:
+
+```shell
+./mvnw clean package
+```
+
+### Microsoft Windows Platforms
+Run the following from a Command Prompt:
+```cmd
+mvnw.cmd clean package
+```
+
+You can then find the EXPath Package file in the `target/` folder, it will be named like `manuforma-X.Y.Z-SNAPSHOT.xar`. You can take this file and upload it into Elemental (or eXist-db) via its `autodeploy` folder or its Package Manager application.
+
+## Docker Image
+The manuForma application can also be compiled into a Docker Image where its EXPath Package is already deployed to Elemental.
+
+If you would like to build the Docker Image, you simply need to make sure you have Docker installed,
+and then include the build argument `-Pdocker`, for example:
+
+### macOS / Linux / Unix Platforms
+Run the following from a Terminal/Shell:
+
+```shell
+./mvnw -Pdocker clean package
+```
+
+### Microsoft Windows Platforms
+Run the following from a Command Prompt:
+```cmd
+mvnw.cmd -Pdocker clean package
+```
+
+### Running manuForma with Docker
+You should first create a Docker Volume to hold your Elemental database files. You need do this only once:
+```shell
+docker volume create manuforma-database
+```
+
+Once you have built (or obtained) the Docker Image, you can run manuForma in Docker like so:
+
+```shell
+docker run -it -p 8080:8080 --mount type=volume,src=manuforma-database,dst=/elemental/data majlis/manuforma:latest
+```
+
+manuForma will then be available in your web-browser at `http://localhost:8080/exist/apps/manuForma/index.html`
+NOTE: The first time you use the Docker Image, you will need to deploy the [Majlis Data Package](https://github.com/majlis-erc/majlis-data/blob/main/build/majlis-data-0.01.xar).
+
