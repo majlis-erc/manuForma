@@ -76,3 +76,38 @@ mvnw.cmd clean package
 ```
 
 You can then find the EXPath Package file in the `target/` folder, it will be named like `manuforma-X.Y.Z-SNAPSHOT.xar`. You can take this file and upload it into Elemental (or eXist-db) via its `autodeploy` folder or its Package Manager application.
+
+## Docker Image
+The manuForma application can also be compiled into a Docker Image where its EXPath Package is already deployed to Elemental.
+
+If you would like to build the Docker Image, you simply need to make sure you have Docker installed,
+and then include the build argument `-Pdocker`, for example:
+
+### macOS / Linux / Unix Platforms
+Run the following from a Terminal/Shell:
+
+```shell
+./mvnw -Pdocker clean package
+```
+
+### Microsoft Windows Platforms
+Run the following from a Command Prompt:
+```cmd
+mvnw.cmd -Pdocker clean package
+```
+
+### Running manuForma with Docker
+You should first create a Docker Volume to hold your Elemental database files. You need do this only once:
+```shell
+docker volume create manuforma-database
+```
+
+Once you have built (or obtained) the Docker Image, you can run manuForma in Docker like so:
+
+```shell
+docker run -it -p 8080:8080 --mount type=volume,src=manuforma-database,dst=/elemental/data majlis/manuforma:latest
+```
+
+manuForma will then be available in your web-browser at `http://localhost:8080/exist/apps/manuForma/index.html`
+NOTE: The first time you use the Docker Image, you will need to deploy the [Majlis Data Package](https://github.com/majlis-erc/majlis-data/blob/main/build/majlis-data-0.01.xar).
+
