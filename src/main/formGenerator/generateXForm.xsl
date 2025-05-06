@@ -638,7 +638,7 @@
                         </data>
                     </xf:instance>
                     <!-- Pretty print -->
-                    <xf:instance id="i-prettyPrint" src="forms/formGenerator/prettyPrint.xsl"></xf:instance>
+                    <xf:instance id="i-prettyPrint" src="forms/prettyPrint.xsl"></xf:instance>
                     <xf:instance id="i-preview">
                         <data></data>
                     </xf:instance>
