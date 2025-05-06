@@ -51,6 +51,9 @@
         <elemental.version>6.4.0</elemental.version>
         <exist-db.version>6.3.0</exist-db.version>
 
+        <!-- NOTE(AR): URL of the Public Repo for downloading XAR files, used for the Docker build -->
+        <public.xar.repo.uri>https://exist-db.org/exist/apps/public-repo</public.xar.repo.uri>
+
         <!-- NOTE(AR): this is used for generating forms in the xml-maven-plugin below -->
         <saxon.version>9.9.1-8</saxon.version>
         
@@ -60,6 +63,12 @@
         <package-abbrev>${project.artifactId}</package-abbrev>
         <package-final-name>${project.artifactId}-${project.version}</package-final-name>
         <package-target>${project.name}</package-target>
+
+        <!-- EXPath package dependencies -->
+        <xsltforms.xar.version>1.3.0</xsltforms.xar.version>
+        <crypto.xar.version>6.0.1</crypto.xar.version>
+        <githubxq.xar.version>1.0.0</githubxq.xar.version>
+
     </properties>
 
     <dependencies>
@@ -72,6 +81,16 @@
     </dependencies>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
         <plugins>
             <plugin>
@@ -193,5 +212,153 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <properties>
+                <!-- directory that contains the filtered Dockerfile -->
+                <docker.dir>${project.build.directory}/docker</docker.dir>
+                <!-- directory for placing files that will be added to the Docker Image -->
+                <docker.context.dir>${project.build.directory}/docker-context</docker.context.dir>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>process-dockerfile</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/docker</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                    <outputDirectory>${docker.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.exist-db.maven.plugins</groupId>
+                        <artifactId>public-xar-repo-plugin</artifactId>
+                        <version>1.2.0</version>
+                        <executions>
+                            <execution>
+                            <id>fetch-xars</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>resolve</goal>
+                            </goals>
+                            <configuration>
+                                <repoUri>${public.xar.repo.uri}</repoUri>
+                                <outputDirectory>${docker.context.dir}</outputDirectory>
+                                <existDbVersion>${project.version}</existDbVersion>
+                                <packages>
+                                    <package>
+                                        <abbrev>xsltforms</abbrev>
+                                        <version>${xsltforms.xar.version}</version>
+                                    </package>
+                                    <package>
+                                        <abbrev>crypto</abbrev>
+                                        <version>${crypto.xar.version}</version>
+                                    </package>
+                                    <package>
+                                        <abbrev>githubxq</abbrev>
+                                        <version>${githubxq.xar.version}</version>
+                                    </package>
+                                </packages>
+                            </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.evolvedbinary.maven.mfrey</groupId>
+                        <artifactId>copy-maven-plugin</artifactId>
+                        <version>2.1.0</version>
+                        <configuration>
+                            <showfiles>true</showfiles>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>copy-xar-to-docker-context</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <resources>
+                                        <resource>
+                                            <workOnFullPath>true</workOnFullPath>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>*.xar</includes>
+                                            <paths>
+                                                <path>
+                                                    <from>${project.build.directory}</from>
+                                                    <to>${docker.context.dir}</to>
+                                                </path>
+                                            </paths>
+                                            <replaceExisting>true</replaceExisting>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>0.46.0</version>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <images>
+                                <image>
+                                    <name>majlis/manuforma:%v</name>
+                                    <alias>manuforma</alias>
+                                    <registry>docker.io</registry>
+                                    <build>
+                                        <tags>
+                                            <tag>latest</tag>
+                                        </tags>
+                                        <dockerFile>${docker.dir}/Dockerfile</dockerFile>
+                                        <contextDir>${docker.context.dir}</contextDir>
+                                        <buildx>
+                                            <platforms>
+                                                <platform>linux/amd64</platform>
+                                                <platform>linux/arm64</platform>
+                                            </platforms>
+                                        </buildx>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-image</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>push-image</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 
