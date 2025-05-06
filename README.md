@@ -51,11 +51,11 @@ The forms use a two step process, a ‘local schema’ which should be a very re
 
 To create usable and quick forms it is important to be as restrictive as possible when designing your local shema. For example, only reference child elements that you will use, avoid broad classes or module references such as pLike. Instead for a paragraph, simply use a textNode as the only child. The XForms do not do well with mixed content nodes, so you will have to avoid this in your data design. 
 
-To build the form you will simply need to run the XSLT, it will use the values defined in your config.xml file to generate the necessary files to create all the form components necessary. Once the form is built, ant can be run and the application can be deployed to eXist-db. Forms were built and tested with eXist-db 6.3.0 and up.
+To build the form you will simply need to run the XSLT, it will use the values defined in your config.xml file to generate the necessary files to create all the form components necessary. Once the form is built, ant can be run and the application can be deployed to Elemental (or eXist-db). Forms were built and tested with eXist-db 6.3.0 and up.
 
 ## Building the manuForma EXPath Package
 
-The manuForma application can be compiled into an EXPath Package for deployment to an eXist-db server.
+The manuForma application can be compiled into an EXPath Package for deployment to an Elemental (or eXist-db) server.
 
 Build Requirements:
     * [Java JDK](https://bell-sw.com/pages/downloads/) version 8 (or newer)
@@ -75,4 +75,4 @@ Run the following from a Command Prompt:
 mvnw.cmd clean package
 ```
 
-You can then find the EXPath Package file in the `target/` folder, it will be named like `manuforma-X.Y.Z-SNAPSHOT.xar`. You can take this file and upload it into eXist-db via eXist-db's `autodeploy` folder or its Package Manager application.
+You can then find the EXPath Package file in the `target/` folder, it will be named like `manuforma-X.Y.Z-SNAPSHOT.xar`. You can take this file and upload it into Elemental (or eXist-db) via its `autodeploy` folder or its Package Manager application.
