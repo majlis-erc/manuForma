@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <place ident="place"
+          elementName="place"
+          elementLabel="place"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:place"
+          currentLevel="1"
+          popup="1"
+          teiElement="&lt;place/&gt;">
+      <desc>A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates.</desc>
+      <availableAtts elementName="place">
+         <attDef attLabel="type" ident="type" mode="replace" usage="req">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="replace">
+               <valItem ident="building"
+                        attLabel="building"
+                        desc="A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates."/>
+               <valItem ident="cemetery" attLabel="cemetery"/>
+               <valItem ident="church" attLabel="church"/>
+               <valItem ident="composite"
+                        attLabel="composite"
+                        desc="A named place concept which merges multiple distinct place types, such as a city and a diocese. More specific types are preferred."/>
+               <valItem ident="designated-space"
+                        attLabel="designated-space"
+                        desc="An area with artificial boundaries which is not necessarily built up, such as a cemetery, town square, or polo ground."/>
+               <valItem ident="diocese"
+                        attLabel="diocese"
+                        desc="An ecclesiastical province governed by a bishop, archbishop, or metropolitan."/>
+               <valItem ident="fortification"
+                        attLabel="fortification"
+                        desc="A military outpost such as a fort or a castle."/>
+               <valItem ident="island"
+                        attLabel="island"
+                        desc="A land-mass smaller than a continent surrounded on all sides by water."/>
+               <valItem ident="madrasa"
+                        attLabel="madrasa"
+                        desc="A building or space designated for instruction in the Islamic sciences."/>
+               <valItem ident="monastery"
+                        attLabel="monastery"
+                        desc="A whole monastic complex, including living quarters for the monks or nuns, the church(es), and potentially a refectory, library, school, or other part."/>
+               <valItem ident="mosque"
+                        attLabel="mosque"
+                        desc="A building or designated space used for Muslim congregational prayers. It can be part of a larger building complex."/>
+               <valItem ident="mountain"
+                        attLabel="mountain"
+                        desc="An elevated physical feature, from Mt. Ararat down to a prominent hill."/>
+               <valItem ident="natural-feature"
+                        attLabel="natural-feature"
+                        desc="A natural feature for which there is no narrower category, such as a mountain or open water. Examples of this type include forests and hot springs."/>
+               <valItem ident="open-water"
+                        attLabel="open-water"
+                        desc="A broad category for seas, lakes, oceans, and ponds."/>
+               <valItem ident="parish"
+                        attLabel="parish"
+                        desc="An ecclesiastical region below a diocese, presided over by a priest."/>
+               <valItem ident="province"
+                        attLabel="province"
+                        desc="A political unit subject to a &#34;state&#34; but larger than a city. States often have multiple levels of administrative units (e.g. the late Ottoman vilayets, sanjaks, kazas, and nahiyes), all of which can be indicated as a &#34;province.&#34;"/>
+               <valItem ident="quarter"
+                        attLabel="quarter"
+                        desc="A subdivision of an urban center."/>
+               <valItem ident="region"
+                        attLabel="region"
+                        desc="A term indicating a geographic extent larger than a city, without a corresponding politico-administrative apparatus. The size could range from a small valley to an entire continent."/>
+               <valItem ident="river"
+                        attLabel="river"
+                        desc="A stream of water of whatever size, from the smallest creek to the Amazon. Wadis are also included, even if they are not filled with water year-round."/>
+               <valItem ident="settlement"
+                        attLabel="settlement"
+                        desc="Any collection of civilian residences, from the smallest village to the largest metropolis."/>
+               <valItem ident="state"
+                        attLabel="state"
+                        desc="A sovereign government such as an empire, kingdom, caliphate, or independent emirate."/>
+               <valItem ident="synagogue"
+                        attLabel="synagogue"
+                        desc="A building designated for use in Jewish worship."/>
+               <valItem ident="temple"
+                        attLabel="temple"
+                        desc="A building designated for use in pagan worship."/>
+               <valItem ident="unknown"
+                        attLabel="unknown"
+                        desc="A place whose name is known, but what sort of place it represents is unknown."/>
+               <valItem ident="valley" attLabel="valley"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="placeName"
+                     label="*Place name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="desc"
+                     label="Description"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="location"
+                     label="Location"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="state"
+                     label="place"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="idno"
+                     label="Identifier"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </place>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="*Place name"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:place/*:placeName"
+              currentLevel="2"
+              popup="2"
+              teiElement="&lt;placeName/&gt;">
+      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Source"
+                 ident="source"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="majlis-headword" attLabel="MAJLIS headword"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <desc ident="desc"
+         elementName="desc"
+         elementLabel="Description"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:place/*:desc"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;desc/&gt;">
+      <desc>Add information in the field below.</desc>
+      <availableAtts elementName="desc">
+         <attDef attLabel="type" ident="type"/>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </desc>
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:place/*:desc/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
+      <desc>Transcribe relevant portion of the text.</desc>
+      <availableAtts elementName="quote">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </quote>
+   <location ident="location"
+             elementName="location"
+             elementLabel="Location"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:place/*:location"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;location/&gt;">
+      <desc>Add information on the physical location of the place.</desc>
+      <availableAtts elementName="location"/>
+      <childElements>
+         <child>
+            <element ident="geo"
+                     label="Coordinates"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="settlement"
+                     label="City"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="region"
+                     label="Region"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </location>
+   <geo ident="geo"
+        elementName="geo"
+        elementLabel="Coordinates"
+        minOccur="0"
+        maxOccur="50"
+        errorMessage=""
+        path="/*:place/*:location/*:geo"
+        currentLevel="3"
+        popup="3"
+        teiElement="&lt;geo/&gt;">
+      <desc>Provide the coordinates of the place thus: "latitude space longitude".</desc>
+      <availableAtts elementName="geo">
+         <attDef attLabel="Source"
+                 ident="source"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="geo"/>
+         <child/>
+      </childElements>
+   </geo>
+   <settlement ident="settlement"
+               elementName="settlement"
+               elementLabel="City"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:place/*:location/*:settlement"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;settlement/&gt;">
+      <desc>If applicable, add information on the city where the place is located.</desc>
+      <availableAtts elementName="settlement">
+         <attDef attLabel="Identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="Source"
+                 ident="source"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="settlement"/>
+         <child/>
+      </childElements>
+   </settlement>
+   <region ident="region"
+           elementName="region"
+           elementLabel="Region"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:place/*:location/*:region"
+           currentLevel="3"
+           popup="3"
+           teiElement="&lt;region/&gt;">
+      <desc>Add information on the region where the place is located.</desc>
+      <availableAtts elementName="region">
+         <attDef attLabel="Identifier"
+                 ident="ref"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="Source"
+                 ident="source"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="region"/>
+         <child/>
+      </childElements>
+   </region>
+   <state ident="state"
+          elementName="state"
+          elementLabel="state"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:place/*:state"
+          currentLevel="2"
+          popup="2"
+          teiElement="&lt;state/&gt;">
+      <availableAtts elementName="state"/>
+      <childElements>
+         <child/>
+      </childElements>
+   </state>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="Identifier"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:place/*:idno"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;idno/&gt;">
+      <desc>Add external identifier.</desc>
+      <availableAtts elementName="idno">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="URL" attLabel="URL"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Identifier"
+                 ident="xml:id"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="idno"/>
+         <child/>
+      </childElements>
+   </idno>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="Bibliographic reference"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:place/*:bibl"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;bibl/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
+              formURL="form.xq?form=forms/placeTEI/lookup/bibl.xhtml"
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record"
+              level="toplevel"
+              suppress="false"
+              form=""/>
+      <desc>Add a bibliographic item.</desc>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Bibliographic identifier"
+                 ident="xml:id"
+                 mode="change"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Bibliographic identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="title"
+                     label="*Title of publication"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="1"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 50 time(s)."/>
+         </child>
+      </childElements>
+   </bibl>
+   <title ident="title"
+          elementName="title"
+          elementLabel="*Title of publication"
+          minOccur="1"
+          maxOccur="1"
+          errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+          path="/*:place/*:bibl/*:title"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;title/&gt;">
+      <desc>Title information.</desc>
+      <availableAtts elementName="title">
+         <attDef attLabel="Source" ident="source" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Source</gloss>
+         </attDef>
+         <attDef attLabel="type" ident="type" mode="change"/>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="Link to Zotero record"
+        minOccur="1"
+        maxOccur="1"
+        errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+        path="/*:place/*:bibl/*:ptr"
+        currentLevel="3"
+        popup="3"
+        teiElement="&lt;ptr/&gt;">
+      <desc>The link to the Zotero will be filled out automatically.</desc>
+      <availableAtts elementName="ptr">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Link</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </ptr>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="Referenced section(s)"
+               minOccur="1"
+               maxOccur="50"
+               errorMessage="Element must occur at least 1."
+               path="/*:place/*:bibl/*:citedRange"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;citedRange/&gt;">
+      <desc>Specify which pages, columns, etc. you are refering to.</desc>
+      <availableAtts elementName="citedRange">
+         <attDef attLabel="Unit" ident="unit" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="page" attLabel="Pages"/>
+               <valItem ident="folio" attLabel="Folios"/>
+               <valItem ident="cols" attLabel="Columns"/>
+               <valItem ident="section" attLabel="Sections"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="citedRange"/>
+         <child/>
+      </childElements>
+   </citedRange>
+</TEI>

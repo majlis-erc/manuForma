@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <titleStmt ident="titleStmt"
+              elementName="titleStmt"
+              elementLabel="title statement"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:titleStmt"
+              currentLevel="1"
+              popup="1"
+              teiElement="&lt;titleStmt/&gt;">
+      <desc>groups information about the title of a work and those responsible for its content.</desc>
+      <availableAtts elementName="titleStmt"/>
+      <childElements>
+         <child>
+            <element ident="title"
+                     label="Title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="sponsor"
+                     label="Sponsor"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="funder"
+                     label="Funding body"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="principal"
+                     label="Principal investigator"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="editor"
+                     label="Team member"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="respStmt"
+                     label="Statement of responsibility"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </titleStmt>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Title"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:titleStmt/*:title"
+          currentLevel="2"
+          popup="2"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title."
+              level="toplevel"
+              suppress="false"
+              form=""/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>contains a title for any kind of work.</desc>
+      <availableAtts elementName="title">
+         <attDef attLabel="evidence" ident="evidence" usage="opt"/>
+         <attDef attLabel="level" ident="level" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="a"
+                        attLabel="analytic"
+                        desc="the title applies to an analytic item, such as an&#xA;&#x9;  article, poem, or other work published as part of a larger item. 분석적 제목(보다&#xA;                                                  큰 항목의 일부로 출판된 논문, 시, 또는 기타 항목) 分析層題名&#xA;                                                  (文章、詩、或其他隸屬於一個較大作品的項目) título&#xA;                                                  analítico (de artículo, de poema, o de&#xA;                                                  otro elemento publicado como parte de un&#xA;                                                  elemento más grande) 分析的タイトル(例えば，論文や詩など，大きめの刊行物の部分と なるもの)． titre&#xA;                                                  analytique (article, poème ou autre,&#xA;                                                  publié comme partie d'un ensemble plus&#xA;                                                  grand) titolo&#xA;                                                  analitico (articolo, poesia o altra&#xA;                                                  unità bibliografica pubblicata come&#xA;                                                  parte di un'unità più grande) der Titel gehört zu einer unselbständigen Publikation, wie einem Artikel, Gedicht oder&#xA;            einem anderen Werk, das als Teil einer umfangreicheren Einheit publiziert wurde."/>
+               <valItem ident="m"
+                        attLabel="monographic"
+                        desc="the title applies to a monograph such as a book or&#xA;          other item considered to be a distinct publication, including single&#xA;          volumes of multi-volume works 단행본 제목(여러&#xA;                                                  권 중 한 권으로 출판된 경우를 포함하여, 독립된 항목으로 출판된 책,&#xA;                                                  모음집, 또는 기타 항목) 專題層題名&#xA;                                                  (書、選集、或其他獨立出版的項目，包含多冊作品的其中一冊) título&#xA;                                                  monográfico (libro, colección, u otro&#xA;                                                  elemento publicado como elemento&#xA;                                                  distinto, incluído los volúmenes&#xA;                                                  individuales de trabajos multivolúmenes) 単行物のタイトル(例えば，書籍や叢書など，複数の巻に別れる作&#xA;                                                  品のうちのひとつや，独立してある出版物)． titre de&#xA;                                                  monographie (livre, ensemble ou autre,&#xA;                                                  publié comme un document distinct, y&#xA;                                                  compris les volumes isolés d'ouvrages en&#xA;                                                  plusieurs volumes) titolo&#xA;                                                  della monografia (libro, raccolta o&#xA;                                                  altra unità bibliografica pubblicata&#xA;                                                  indipendentemente, inculso il singolo&#xA;                                                  volume di opere a più volumi) der Titel bezieht sich auf Monografien wie z.B. ein Bücher oder andere selbständige&#xA;            Publikationen, also auch auf einzelne Bände in einem mehrbändigen Werk."/>
+               <valItem ident="j"
+                        attLabel="journal"
+                        desc="the title applies to any serial or periodical&#xA;&#x9;  publication such as a journal, magazine, or newspaper 학술지 제목 期刊層題名 título de&#xA;                                                  diario, periódico o revista 雑誌のタイトル． titre de&#xA;                                                  revue titolo di&#xA;                                                  rivista der Titel bezieht sich auf jede Art fortlaufender oder periodischer Veröffentlichungen wie&#xA;            z. B. Zeitschriften, Magazine oder Zeitungen."/>
+               <valItem ident="s"
+                        attLabel="series"
+                        desc="the title applies to a series of otherwise distinct&#xA;&#x9;  publications such as a collection 연간물 제목 叢書層題名 título de&#xA;                                                  serie 叢書のタイトル． titre de&#xA;                                                  publication en série titolo di&#xA;                                                  collana der Titel bezeichnet eine Reihe von ansonsten selbständig publizierten Veröffentlichungen,&#xA;            wie z. B. eine Buchreihe."/>
+               <valItem ident="u"
+                        attLabel="unpublished"
+                        desc="the title applies to any unpublished material (including&#xA;                                                  theses and dissertations unless&#xA;                                                  published by a commercial press) 미간행물(출판사에서 출판되지 않은 석박사 논문을 포함하여)의 제목 未出版的項目題名 (包括未經商業刊物發表的專題論文) título de&#xA;                                                  un material inédito (incluidas tesis y&#xA;                                                  disertaciones que no sean publicadas por&#xA;                                                  una editorial comercial) 非刊行物のタイトル(未刊の学位論文など)． titre de&#xA;                                                  matéria non publié (thèses et&#xA;                                                  dissertations comprises, à l'exception&#xA;                                                  de leurs éditions commerciales) titolo di&#xA;                                                  materiale non pubblicato (incluse tesi&#xA;                                                  non pubblicate da case editrici) der Titel bezieht sich auf unveröffentliches Material (incl. universitäre&#xA;            Qualifikationsarbeiten, soweit sie nicht von einem Verlag veröffentlicht worden sind)."/>
+            </valList>
+         </attDef>
+         <attDef attLabel="subtype" ident="subtype" mode="change" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="supplication" attLabel="supplication"/>
+               <valItem ident="expanded" attLabel="expanded"/>
+               <valItem ident="inscriptio" attLabel="inscriptio"/>
+               <valItem ident="subscriptio" attLabel="subscriptio"/>
+               <valItem ident="embedded" attLabel="embedded"/>
+               <valItem ident="translation" attLabel="translation"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="altMain"
+                        attLabel="altMain"
+                        desc="Alternative version of main title."/>
+               <valItem ident="secondary" attLabel="secondary" desc="A secondary title."/>
+               <valItem ident="altSecondary"
+                        attLabel="altSecondary"
+                        desc="Alternative version of secondary title."/>
+               <valItem ident="tertiary" attLabel="tertiary" desc="A tertiary title."/>
+               <valItem ident="altTertiary"
+                        attLabel="altTertiary"
+                        desc="Alternative version of tertiary title."/>
+               <valItem ident="complete"
+                        attLabel="complete"
+                        desc="the work is contained completely in the manuscript"/>
+               <valItem ident="incomplete"
+                        attLabel="incomplete"
+                        desc="the work is contained incompletely in the manuscript, i.e.&#xA;                                        even only a small part is missing "/>
+               <valItem ident="normalized"
+                        attLabel="normalized"
+                        desc="Transliteration of the title"/>
+               <valItem ident="supplied"
+                        attLabel="supplied"
+                        desc="syriaca.org: an existing print catalogue provides a&#xA;                                        descriptive title"/>
+               <valItem ident="uniform"
+                        attLabel="uniform"
+                        desc="syriaca.org: a title for such work established by the&#xA;                                        editor or cataloguer"/>
+               <valItem ident="main"
+                        attLabel="main"
+                        desc="for titleStmt, specifies to which title to give priority&#xA;                                        in output."/>
+               <valItem ident="short"
+                        attLabel="short"
+                        desc="for titleStmt, contains an abbreviated form of the title,&#xA;                                        typically citation forms like Sal. Mar. or Jn. or&#xA;                                        Gen.."/>
+               <valItem ident="D'usage" attLabel="D'usage" desc="EMA"/>
+               <valItem ident="académique" attLabel="académique" desc="EMA"/>
+               <valItem ident="Forgé" attLabel="Forgé" desc="EMA"/>
+               <valItem ident="Original" attLabel="Original" desc="EMA"/>
+               <valItem ident="sub"
+                        attLabel="sub"
+                        desc="The title is a subtitle or title of a part"/>
+               <valItem ident="alt"
+                        attLabel="alt"
+                        desc="The title is an alternate title, translation, or&#xA;                                        alias"/>
+               <valItem ident="desc"
+                        attLabel="desc"
+                        desc="The title is a descriptive paraphrase of the work&#xA;                                        functioning as a title"/>
+               <valItem ident="collection"
+                        attLabel="collection"
+                        desc="The title is of a collection"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <sponsor ident="sponsor"
+            elementName="sponsor"
+            elementLabel="Sponsor"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:titleStmt/*:sponsor"
+            currentLevel="2"
+            popup="2"
+            teiElement="&lt;sponsor/&gt;">
+      <desc>specifies the name of a sponsoring organization or institution.</desc>
+      <availableAtts elementName="sponsor">
+         <attDef attLabel="reference" ident="ref" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="orgName"
+                     label="Organization name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </sponsor>
+   <orgName ident="orgName"
+            elementName="orgName"
+            elementLabel="Organization name"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:titleStmt/*:sponsor/*:orgName"
+            currentLevel="3"
+            popup="3"
+            teiElement="&lt;orgName/&gt;">
+      <desc>contains an organizational name.</desc>
+      <availableAtts elementName="orgName">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="orgName"/>
+         <child/>
+      </childElements>
+   </orgName>
+   <funder ident="funder"
+           elementName="funder"
+           elementLabel="Funding body"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:titleStmt/*:funder"
+           currentLevel="2"
+           popup="2"
+           teiElement="&lt;funder/&gt;">
+      <desc>specifies the name of an individual, institution, or organization responsible for the
+    funding of a project or text.</desc>
+      <availableAtts elementName="funder">
+         <attDef attLabel="reference" ident="ref" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="orgName"
+                     label="Organization name"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </funder>
+   <orgName ident="orgName"
+            elementName="orgName"
+            elementLabel="Organization name"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:titleStmt/*:funder/*:orgName"
+            currentLevel="3"
+            popup="3"
+            teiElement="&lt;orgName/&gt;">
+      <desc>contains an organizational name.</desc>
+      <availableAtts elementName="orgName">
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="orgName"/>
+         <child/>
+      </childElements>
+   </orgName>
+   <principal ident="principal"
+              elementName="principal"
+              elementLabel="Principal investigator"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:titleStmt/*:principal"
+              currentLevel="2"
+              popup="2"
+              teiElement="&lt;principal/&gt;">
+      <desc>supplies the name of the principal researcher responsible for the
+creation of an electronic text.</desc>
+      <availableAtts elementName="principal">
+         <attDef attLabel="reference" ident="ref" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="principal"/>
+         <child/>
+      </childElements>
+   </principal>
+   <editor ident="editor"
+           elementName="editor"
+           elementLabel="Team member"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:titleStmt/*:editor"
+           currentLevel="2"
+           popup="2"
+           teiElement="&lt;editor/&gt;">
+      <desc>contains a secondary statement of responsibility for a bibliographic item, for example the name of an
+    individual, institution or organization, (or of several such) acting as editor, compiler,
+    translator, etc.</desc>
+      <availableAtts elementName="editor">
+         <attDef attLabel="reference" ident="ref" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-09-05"
+                   xml:lang="en">reference</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-25"
+                   xml:lang="fr">référence</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2018-12-31">参照</gloss>
+         </attDef>
+         <attDef attLabel="role" ident="role" usage="opt"/>
+         <attDef attLabel="identifier" ident="xml:id" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">identifier</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">확인소</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">identificador</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">identifiant</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">identificatore</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">識別子</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="editor"/>
+         <child/>
+      </childElements>
+   </editor>
+   <respStmt ident="respStmt"
+             elementName="respStmt"
+             elementLabel="Statement of responsibility"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:titleStmt/*:respStmt"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;respStmt/&gt;">
+      <desc>supplies a statement of responsibility for the intellectual content of a text, edition,
+    recording, or series, where the specialized elements for authors, editors, etc. do not suffice
+    or do not apply. May also be used to encode information about individuals or organizations 
+    which have played a role in the production or distribution of a bibliographic work.</desc>
+      <availableAtts elementName="respStmt"/>
+      <childElements>
+         <child>
+            <element ident="resp"
+                     label="Responsibility"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="name"
+                     label="Team member"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </respStmt>
+   <resp ident="resp"
+         elementName="resp"
+         elementLabel="Responsibility"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:titleStmt/*:respStmt/*:resp"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;resp/&gt;">
+      <desc>contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role 
+    in the production or distribution of a work.</desc>
+      <availableAtts elementName="resp"/>
+      <childElements>
+         <textNode type="input" class="resp"/>
+         <child/>
+      </childElements>
+   </resp>
+   <name ident="name"
+         elementName="name"
+         elementLabel="Team member"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:titleStmt/*:respStmt/*:name"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;name/&gt;">
+      <desc>contains a proper noun or noun phrase.</desc>
+      <availableAtts elementName="name">
+         <attDef attLabel="ref" ident="ref"/>
+         <attDef attLabel="type" ident="type" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="replace">
+               <valItem ident="person" attLabel="person" desc="The name is of a person"/>
+               <valItem ident="place" attLabel="place" desc="The name is of a place"/>
+               <valItem ident="org" attLabel="org" desc="The name is of an organisation"/>
+               <valItem ident="unknown"
+                        attLabel="unknown"
+                        desc="The type of name is unknown"/>
+               <valItem ident="other"
+                        attLabel="other"
+                        desc="The name is of another type (you may also provide a&#xA;                                        custom value)"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="name"/>
+         <child/>
+      </childElements>
+   </name>
+</TEI>

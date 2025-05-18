@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <list ident="list"
+         elementName="list"
+         elementLabel="List of heritage data documents"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list"
+         currentLevel="1"
+         popup="1"
+         teiElement="&lt;list/&gt;">
+      <availableAtts elementName="list"/>
+      <childElements>
+         <child>
+            <element ident="item"
+                     label="Document"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </list>
+   <item ident="item"
+         elementName="item"
+         elementLabel="Document"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;item/&gt;">
+      <desc>Describe the document and give
+                            a transcription.</desc>
+      <availableAtts elementName="item"/>
+      <childElements>
+         <child>
+            <element ident="quote"
+                     label="Transcription"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="bibl"
+                     label="Bibliographic reference"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </item>
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
+      <desc>Transcribe relevant portion of
+                            the text. Specify language and script of the document.</desc>
+      <availableAtts elementName="quote">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="ru" attLabel="Russian"/>
+               <valItem ident="fr" attLabel="French"/>
+               <valItem ident="ge" attLabel="German"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </quote>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add your observations on the
+                            person.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Author" ident="resp" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Author</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="gschwarb" attLabel="Gregor Schwarb"/>
+               <valItem ident="rvollandt" attLabel="Ronny Vollandt"/>
+               <valItem ident="ptarras" attLabel="Peter Tarras"/>
+               <valItem ident="nurbiczek" attLabel="Nadine Urbiczek"/>
+               <valItem ident="mmoliere" attLabel="Maximilian de Molière"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="fr" attLabel="French"/>
+               <valItem ident="de" attLabel="German"/>
+               <valItem ident="ru" attLabel="Russian"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+   <bibl ident="bibl"
+         elementName="bibl"
+         elementLabel="Bibliographic reference"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:bibl"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;bibl/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/biblWorksCitation?format=xml&amp;collection=manuscripts,bibl&amp;q="
+              elementName="bibl"
+              formName="bibl"
+              lookupLabel="Look up bibliographic record"
+              formURL="form.xq?form=forms/personTEI/lookup/bibl.xhtml"
+              level="toplevel"
+              suppress="false"
+              form=""/>
+      <desc>Add a bibliographic item and specify whether it is a
+                            manuscript or not.</desc>
+      <availableAtts elementName="bibl">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="bibliography" attLabel="Bibliography"/>
+               <valItem ident="manuscript" attLabel="Manuscript"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Local identifier" ident="xml:id" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Local identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="title"
+                     label="Title of publication"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="ptr"
+                     label="Link to Zotero record"
+                     minOccurs="1"
+                     maxOccurs="1"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."/>
+            <element ident="citedRange"
+                     label="Referenced section(s)"
+                     minOccurs="1"
+                     maxOccurs="50"
+                     errorMessage="Element must occur at least 1 time(s) and no more than 50 time(s)."/>
+         </child>
+      </childElements>
+   </bibl>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Title of publication"
+          minOccur="1"
+          maxOccur="1"
+          errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+          path="/*:list/*:item/*:bibl/*:title"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;title/&gt;">
+      <desc>The title to the Zotero will be filled out
+                            automatically.</desc>
+      <availableAtts elementName="title"/>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <ptr ident="ptr"
+        elementName="ptr"
+        elementLabel="Link to Zotero record"
+        minOccur="1"
+        maxOccur="1"
+        errorMessage="Element must occur at least 1 time(s) and no more than 1 time(s)."
+        path="/*:list/*:item/*:bibl/*:ptr"
+        currentLevel="4"
+        popup="4"
+        teiElement="&lt;ptr/&gt;">
+      <desc>The link to the Zotero will be filled out
+                            automatically.</desc>
+      <availableAtts elementName="ptr">
+         <attDef attLabel="Link" ident="target" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Link</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </ptr>
+   <citedRange ident="citedRange"
+               elementName="citedRange"
+               elementLabel="Referenced section(s)"
+               minOccur="1"
+               maxOccur="50"
+               errorMessage="Element must occur at least 1."
+               path="/*:list/*:item/*:bibl/*:citedRange"
+               currentLevel="4"
+               popup="4"
+               teiElement="&lt;citedRange/&gt;">
+      <desc>Specify which pages, columns, etc. you are refering
+                            to.</desc>
+      <availableAtts elementName="citedRange">
+         <attDef attLabel="Unit" ident="unit" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="page" attLabel="Pages"/>
+               <valItem ident="folio" attLabel="Folios"/>
+               <valItem ident="cols" attLabel="Columns"/>
+               <valItem ident="section" attLabel="Sections"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="citedRange"/>
+         <child/>
+      </childElements>
+   </citedRange>
+</TEI>
