@@ -82,6 +82,33 @@
 
     <build>
 
+        <resources>
+            <resource>
+                <directory>src/main/xar-resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>modules/git-sync.xql</exclude>
+                    <exclude>services/git-commit.xql</exclude>
+                </excludes>
+                <targetPath>xar-resources</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/xar-resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>modules/git-sync.xql</include>
+                    <include>services/git-commit.xql</include>
+                </includes>
+                <targetPath>xar-resources</targetPath>
+            </resource>
+            <resource>
+                <!-- NOTE(AR): the templates are also needed at runtime by the generated forms -->
+                <directory>src/main/formGenerator/templates</directory>
+                <filtering>false</filtering>
+                <targetPath>xar-resources/forms/templates</targetPath>
+            </resource>
+        </resources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -96,40 +123,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
                 <executions>
                     <execution>
-                        <id>copy-xar-resources</id>
                         <phase>process-resources</phase>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>resources</goal>
                         </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/xar-resources</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                            <outputDirectory>${project.build.directory}/xar-resources</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-formGenerator-templates</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <!-- NOTE(AR): the templates are also needed at runtime by the generated forms -->
-                                <resource>
-                                    <directory>src/main/formGenerator/templates</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                            <outputDirectory>${project.build.directory}/xar-resources/forms/templates</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
