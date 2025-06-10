@@ -69,6 +69,17 @@
         <crypto.xar.version>6.0.1</crypto.xar.version>
         <githubxq.xar.version>1.0.0</githubxq.xar.version>
 
+        <db-tmp-collection>/db/tmp</db-tmp-collection>
+
+        <git-repo-url>https://github.com/majlis-erc/manuForma</git-repo-url>
+        <git-branch>main</git-branch>
+
+        <!-- NOTE(AR) Do not set this below, set it via an Environment Variable. See the `env-github-private-key` profile below -->
+        <github-private-key>YOUR-SECRET-KEY</github-private-key>
+
+        <!-- NOTE(AR) Do not set this below, set it via an Environment Variable. See the `env-github-pat` profile below -->
+        <github-pat>YOUR-TOKEN-HERE</github-pat>
+
     </properties>
 
     <dependencies>
@@ -212,8 +223,57 @@
         </plugins>
     </build>
 
+
     <profiles>
+
         <profile>
+            <!-- NOTE(AR) override the `github-private-key` property if set from an Environment Variable -->
+            <id>env-github-private-key</id>
+            <activation>
+                <property>
+                    <name>env.GITHUB_PRIVATE_KEY</name>
+                </property>
+            </activation>
+            <properties>
+                <github-private-key>${env.GITHUB_PRIVATE_KEY}</github-private-key>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- NOTE(AR) override the `github-pat` property if set from an Environment Variable -->
+            <id>env-github-pat</id>
+            <activation>
+                <property>
+                    <name>env.GITHUB_PAT</name>
+                </property>
+            </activation>
+            <properties>
+                <github-pat>${env.GITHUB_PAT}</github-pat>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- NOTE(AR) Build the scripts needed for use in CI -->
+            <id>ci-resources</id>
+            <activation>
+                <property>
+                    <name>env.CI</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/ci-resources</directory>
+                        <filtering>true</filtering>
+                        <targetPath>ci-resources</targetPath>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- NOTE(AR) Profile to build a Docker Image -->
             <id>docker</id>
             <properties>
                 <!-- directory that contains the filtered Dockerfile -->

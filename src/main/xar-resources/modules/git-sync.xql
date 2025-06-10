@@ -16,11 +16,34 @@ xquery version "3.1";
  
 import module namespace githubxq="http://exist-db.org/lib/githubxq";
 
+(:~
+ : Path to eXist-db application.
+ :)
+declare variable $local:db-application-path := "/db/apps/${package-target}";
+(:~
+ : GitHub repository.
+ :)
+declare variable $local:git-repo := "${git-repo-url}";
+(:~
+ : GitHub branch to get data from.
+ :)
+declare variable $local:git-branch := "${git-branch}";
+(:~
+ : Private key for GitHub authentication.
+ : See: https://developer.github.com/webhooks/securing/
+ :)
+declare variable $local:github-private-key := "${github-private-key}";
+(:~
+ : Git Token used for rate limiting.
+ : See: https://developer.github.com/v3/#rate-limiting
+ :)
+ declare variable $local:github-rate-limit-token :=  "";
+
 let $data := request:get-data()
 return 
     githubxq:execute-webhook($data, 
-        'PATH-TO-YOUR-EXISTDB-REPOSITORY',  
-        'PATH-TO-YOUT-GITHUB-REPOSITORY', 
-        'OPTIONAL-BRANCH-NAME', 
-        'YOUR-SECRET-KEYE', 
-        'OPTIONAL-RATE-LIMIT-KEY')
+        $local:db-application-path,
+        $local:git-repo,
+        $local:git-branch,
+        $local:github-private-key,
+        $local:github-rate-limit-token)
