@@ -44,8 +44,8 @@ import module namespace http="http://expath.org/ns/http-client";
 declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace json = "http://www.json.org";
 
-(: Set up global varaibles :)
-declare variable $gitcommit:authorization-token := 'YOUR-TOKEN-HERE';
+(: Set up global variables :)
+declare variable $gitcommit:authorization-token := '${github-pat}';
 declare variable $gitcommit:apiURL := 'https://api.github.com';
 declare variable $gitcommit:owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'wsalesky';
 declare variable $gitcommit:repoName := if(request:get-parameter('githubRepoName','') != '') then request:get-parameter('githubRepoName','') else 'blogs';
