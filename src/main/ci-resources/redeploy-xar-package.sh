@@ -4,7 +4,6 @@ set -e
 
 # Send a query to have a remote database server redeploy a XAR package
 ## Expects the following environment variables:
-# GITHUB_WORKSPACE - path to the checked out git project
 # REMOTE_EDB_SERVER_USERNAME - username for authenticating to the remote database server
 # REMOTE_EDB_SERVER_PASSWORD - password for authenticating to the remote database server
 # REMOTE_EDB_SERVER_URL - URL of a remote database server to upload the XAR file into

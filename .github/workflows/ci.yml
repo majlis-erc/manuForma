@@ -18,3 +18,56 @@ jobs:
           distribution: 'liberica'
           java-version: ${{ matrix.jdk }}
       - run: mvn clean package
+      - name: Persist built XAR
+        if: matrix.os == 'ubuntu-latest' && matrix.jdk == '8'
+        uses: actions/upload-artifact@v4
+        with:
+          name: xar
+          path: target/manuforma-*.xar
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
+      - name: Persist built ci-resources
+        if: matrix.os == 'ubuntu-latest' && matrix.jdk == '8'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-resources
+          path: target/classes/ci-resources/*
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
+
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: manuforma-dev
+    steps:
+      - name: Retrieve built XAR
+        uses: actions/download-artifact@v4
+        with:
+          name: xar
+      - name: Retrieve built ci-resources
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-resources
+      - name: Set scripts as executable
+        run: chmod +x upload-remote-tmp-xar.sh redeploy-xar-package.sh delete-remote-tmp-xar.sh
+      - name: Upload temp XAR to Remote Database Server
+        env:
+          REMOTE_EDB_SERVER_USERNAME: ${{ secrets.REMOTE_EDB_SERVER_USERNAME }}
+          REMOTE_EDB_SERVER_PASSWORD: ${{ secrets.REMOTE_EDB_SERVER_PASSWORD }}
+          REMOTE_EDB_SERVER_URL: ${{ secrets.REMOTE_EDB_SERVER_URL }}
+        run: ./upload-remote-tmp-xar.sh
+      - name: Redeploy XAR on Remote Database Server
+        env:
+          REMOTE_EDB_SERVER_USERNAME: ${{ secrets.REMOTE_EDB_SERVER_USERNAME }}
+          REMOTE_EDB_SERVER_PASSWORD: ${{ secrets.REMOTE_EDB_SERVER_PASSWORD }}
+          REMOTE_EDB_SERVER_URL: ${{ secrets.REMOTE_EDB_SERVER_URL }}
+        run: ./redeploy-xar-package.sh
+      - name: Delete temp XAR from Remote Database Server
+        env:
+          REMOTE_EDB_SERVER_USERNAME: ${{ secrets.REMOTE_EDB_SERVER_USERNAME }}
+          REMOTE_EDB_SERVER_PASSWORD: ${{ secrets.REMOTE_EDB_SERVER_PASSWORD }}
+          REMOTE_EDB_SERVER_URL: ${{ secrets.REMOTE_EDB_SERVER_URL }}
+        run: ./delete-remote-tmp-xar.sh
