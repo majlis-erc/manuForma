@@ -30,7 +30,8 @@
 
     <!-- The base directory to write output files to -->
     <xsl:param name="output-base-uri" select="replace(base-uri(), '(.+)/.+/.+', '$1')"/>
-    
+    <xsl:variable name="tidied-output-base-uri" select="replace(replace($output-base-uri, '\\', '/'), 'file://([A-Za-z]:.+)', 'file:///$1')"/>  <!-- NOTE(AR) convert Windows path separator to URI -->
+
     <!-- Global Variables -->
     <!-- XForm configuration document from config prameter. Default is config.xml -->
     <xsl:variable name="configDoc" select="document($config)"/>
@@ -401,7 +402,7 @@
     <xsl:template match="/">
         <!-- Create the index page for the current form, creates sub-form navigation-->
         <xsl:variable name="mainFormName" select="$configDoc//formName"/>
-        <xsl:result-document href="{concat($output-base-uri, '/', $mainFormName,'/index.xhtml')}" format="xform">
+        <xsl:result-document href="{concat($tidied-output-base-uri, '/', $mainFormName,'/index.xhtml')}" format="xform">
             <xsl:call-template name="formMainPage"/>
         </xsl:result-document>
         <!-- Output an XForm for each subform listed in the config.xml subforms section -->
@@ -429,16 +430,16 @@
             <xsl:variable name="subform" select="."/>
             <xsl:variable name="formName" select="@formName"/>
             <!-- Ouput XForms xml instance with finalized schema rules -->
-            <xsl:result-document href="{$output-base-uri}/{$mainFormName}/templates/{$formName}-schemaConstraints.xml" format="tei">
+            <xsl:result-document href="{$tidied-output-base-uri}/{$mainFormName}/templates/{$formName}-schemaConstraints.xml" format="tei">
                 <xsl:sequence select="$schemaInstanceDoc"/>
             </xsl:result-document>
-            <xsl:result-document href="{$output-base-uri}/{$mainFormName}/templates/{$formName}-elementTemplate.xml" format="tei">
+            <xsl:result-document href="{$tidied-output-base-uri}/{$mainFormName}/templates/{$formName}-elementTemplate.xml" format="tei">
                 <xsl:call-template name="elementTemplate">
                     <xsl:with-param name="subform" select="$formName"/>
                     <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 </xsl:call-template>
             </xsl:result-document>
-            <xsl:result-document href="{concat($output-base-uri, '/', $mainFormName,'/',$formName)}.xhtml" format="xform">
+            <xsl:result-document href="{concat($tidied-output-base-uri, '/', $mainFormName,'/',$formName)}.xhtml" format="xform">
                 <xsl:call-template name="xform">
                     <xsl:with-param name="subform" select="."/>
                     <xsl:with-param name="schemaConstraints" select="$schemaInstanceDoc"/>
@@ -446,7 +447,7 @@
             </xsl:result-document>
             <xsl:for-each select="subform">
                 <xsl:variable name="subFormName" select="@formName"/>
-                <xsl:result-document href="{concat($output-base-uri, '/', $mainFormName,'/',$formName,'/',$subFormName)}.xhtml" format="xform">
+                <xsl:result-document href="{concat($tidied-output-base-uri, '/', $mainFormName,'/',$formName,'/',$subFormName)}.xhtml" format="xform">
                     <xsl:call-template name="xform">
                         <xsl:with-param name="subform" select="."/>
                         <xsl:with-param name="schemaConstraints" select="$schemaInstanceDoc"/>
@@ -456,7 +457,7 @@
         </xsl:for-each>   
         <!-- Output any controlled vocab subforms -->
         <xsl:for-each-group select="$configDoc//lookup" group-by="@formName">
-            <xsl:result-document href="{concat($output-base-uri, '/', $mainFormName,'/lookup/',@formName)}.xhtml" format="xform">
+            <xsl:result-document href="{concat($tidied-output-base-uri, '/', $mainFormName,'/lookup/',@formName)}.xhtml" format="xform">
                 <xsl:call-template name="controlledVocabLookup">
                     <xsl:with-param name="lookup" select="."/>
                 </xsl:call-template>
@@ -464,17 +465,17 @@
         </xsl:for-each-group>
         
         <!-- Output an XForm with all possible elements, used to add new elements -->
-        <xsl:result-document href="{$output-base-uri}/{$mainFormName}/templates/elementTemplate.xml" format="tei">
+        <xsl:result-document href="{$tidied-output-base-uri}/{$mainFormName}/templates/elementTemplate.xml" format="tei">
             <xsl:call-template name="elementTemplate"/>
         </xsl:result-document>
         
         <!-- Output an XForm with all possible attributes, used to add new attributes -->
-        <xsl:result-document href="{$output-base-uri}/{$mainFormName}/templates/attributesTemplate.xml" format="tei">
+        <xsl:result-document href="{$tidied-output-base-uri}/{$mainFormName}/templates/attributesTemplate.xml" format="tei">
             <xsl:call-template name="attributesTemplate"/>
         </xsl:result-document>
         <!-- Output an XForm with all possible attributes, used to add new attributes -->
         <!--
-        <xsl:result-document href="{$output-base-uri}/{$mainFormName}/templates/availableAttributes.xml" format="tei">
+        <xsl:result-document href="{$tidied-output-base-uri}/{$mainFormName}/templates/availableAttributes.xml" format="tei">
             <xsl:call-template name="availableAttributes"/>
         </xsl:result-document>
         -->
