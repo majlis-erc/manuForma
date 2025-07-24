@@ -19,6 +19,7 @@ LABEL org.label-schema.build-date=${maven.build.timestamp} \
       org.label-schema.url="${project.url}" \
       org.label-schema.vcs-ref=${build-commit-abbrev} \
       org.label-schema.vcs-url="${project.scm.url}" \
-      org.label-schema.vendor="${project.organization.name}"
+      org.label-schema.vendor="${project.organization.name}" \
+      org.opencontainers.image.source="${project.scm.url}"
 
 EXPOSE 8080 8443
