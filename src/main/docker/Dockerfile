@@ -1,6 +1,4 @@
 FROM evolvedbinary/elemental:${elemental.version}
-# Switch to nonroot user
-USER nonroot
 
 # Copy manuForma dependencies XAR fiels to Elemental's autodeploy folder
 COPY xsltforms-${xsltforms.xar.version}.xar /elemental/autodeploy/
