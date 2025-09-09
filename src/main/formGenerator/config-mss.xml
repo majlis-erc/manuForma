@@ -236,6 +236,7 @@
         <subform xpath="/tei:TEI/descendant::tei:msDesc/tei:additional/tei:surrogates/tei:listBibl" formName="reproductions"
             formLabel="Reproductions" repeat="no">
             <lookup elementName="title" suppress="true"/>
+            <lookup elementName="bibl" suppress="true"/>
             <localSchema src="schemas/mss-reproductions.xml"/>
             <globalSchema src="schemas/mss-reproductions.xml"/>
             <xmlTemplate src="templates/full-mss-template.xml"/>
@@ -598,7 +599,11 @@
             <globalSchema src="schemas/mss-compiled.odd"/>
             <xmlTemplate src="templates/full-mss-template.xml"/>
             <formDesc>Describe the binding of the manuscript.</formDesc>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q=" formURL="forms/msSimple/lookup/placeName.xhtml" elementName="origPlace" formName="placeName" lookupLabel="Look up places"/>
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=origPlace&amp;q=" 
+                formURL="forms/msSimple/lookup/placeName.xhtml" 
+                elementName="origPlace" 
+                formName="placeName" 
+                lookupLabel="Look up places"/>
             <elementGroups>
                 <group groupLabel="Binding's origin, material, and dimensions." groupNo="1">
                     <element xpath="tei:decoNote"/>

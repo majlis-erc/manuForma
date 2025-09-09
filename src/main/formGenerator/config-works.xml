@@ -87,7 +87,18 @@
             <localSchema src="schemas/work-schema.xml"/>
             <globalSchema src="schemas/work-schema.xml"/>
             <xmlTemplate src="templates/work-fulltemplate.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/persName?format=xml&amp;wrapElement=author&amp;q=" formURL="forms/mssTEI/lookup/persName.xhtml" elementName="author" formName="persName" lookupLabel="Look up author"/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=author&amp;q="
+                formURL="forms/msSimple/lookup/author.xhtml"
+                elementName="author"
+                formName="author"
+                lookupLabel="Look up author record."/>
+            <lookup
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;wrapElement=persName&amp;q="
+                formURL="forms/msSimple/lookup/author.xhtml"
+                elementName="persName"
+                formName="persName"
+                lookupLabel="Look up person record."/>
             <elementGroups>
                 <group groupLabel="Add bibliographic information about the work." groupNo="1" repeatable="no">
                     <element xpath="tei:title"/>
