@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <binding ident="binding"
+            elementName="binding"
+            elementLabel="*Binding Description Container (2/2)"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:binding"
+            currentLevel="1"
+            popup="1"
+            teiElement="&lt;binding/&gt;">
+      <desc>Description of the material, dimensions, and preservation
+                            of the binding. Specify in the attribute if the binding is contemporary to the manuscript's production or not with the
+                            values "true" or "false".</desc>
+      <availableAtts elementName="binding"/>
+      <childElements>
+         <child>
+            <element ident="decoNote"
+                     label="Detailed description of binding"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="condition"
+                     label="State of the binding"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </binding>
+   <decoNote ident="decoNote"
+             elementName="decoNote"
+             elementLabel="Detailed description of binding"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:binding/*:decoNote"
+             currentLevel="2"
+             popup="2"
+             teiElement="&lt;decoNote/&gt;">
+      <desc>Describe the binding according to its type, material,
+                            origins, and dimensions.</desc>
+      <availableAtts elementName="decoNote"/>
+      <childElements>
+         <child>
+            <element ident="objectType"
+                     label="Binding type"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="material"
+                     label="Binding material"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="origDate"
+                     label="Date of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="origPlace"
+                     label="Place of origin"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="dimensions"
+                     label="*Binding dimensions"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </decoNote>
+   <objectType ident="objectType"
+               elementName="objectType"
+               elementLabel="Binding type"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:binding/*:decoNote/*:objectType"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;objectType/&gt;">
+      <desc>Choose whether the binding type is original, had been added after acquisition, or is absent.</desc>
+      <availableAtts elementName="objectType"/>
+      <controlledValues>
+         <element xmlns="" ident="objectType">
+            <valList type="closed">
+               <valItem ident="Original"/>
+               <valItem ident="Later"/>
+               <valItem ident="Unbound"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <child/>
+      </childElements>
+   </objectType>
+   <material ident="material"
+             elementName="material"
+             elementLabel="Binding material"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:binding/*:decoNote/*:material"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;material/&gt;">
+      <desc>Choose binding material.</desc>
+      <availableAtts elementName="material"/>
+      <controlledValues>
+         <element xmlns="" ident="material">
+            <valList type="closed">
+               <valItem ident="Paper"/>
+               <valItem ident="Parchment"/>
+               <valItem ident="Cardboard"/>
+               <valItem ident="Wood"/>
+               <valItem ident="Papyrus"/>
+               <valItem ident="Cotton"/>
+               <valItem ident="Leather"/>
+               <valItem ident="Metal"/>
+               <valItem ident="Textile"/>
+               <valItem ident="Other"/>
+               <valItem ident="Silk"/>
+               <valItem ident="Bronze"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <child/>
+      </childElements>
+   </material>
+   <origDate ident="origDate"
+             elementName="origDate"
+             elementLabel="Date of origin"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:binding/*:decoNote/*:origDate"
+             currentLevel="3"
+             popup="3"
+             teiElement="&lt;origDate/&gt;">
+      <desc>Fill in the date in CE. The date given here refers to the
+                            binding material (and not the production of the copy).</desc>
+      <availableAtts elementName="origDate"/>
+      <childElements>
+         <child/>
+      </childElements>
+   </origDate>
+   <origPlace ident="origPlace"
+              elementName="origPlace"
+              elementLabel="Place of origin"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:binding/*:decoNote/*:origPlace"
+              currentLevel="3"
+              popup="3"
+              teiElement="&lt;origPlace/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;wrapElement=origPlace&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="origPlace"
+              formName="placeName"
+              lookupLabel="Look up places"
+              level="subform"
+              suppress="false"
+              form="writing-material"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;wrapElement=origPlace&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="origPlace"
+              formName="placeName"
+              lookupLabel="Look up places"
+              level="subform"
+              suppress="false"
+              form="binding-description"/>
+      <desc>Look up the place records. Try different spellings in
+                            different languages! If no suitable record exists, create a new one. The place given here refers to the writing material
+                            (and not the production of the copy).</desc>
+      <availableAtts elementName="origPlace">
+         <attDef attLabel="Place identifier" ident="ref" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Place identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="origPlace"/>
+         <child/>
+      </childElements>
+   </origPlace>
+   <dimensions ident="dimensions"
+               elementName="dimensions"
+               elementLabel="*Binding dimensions"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:binding/*:decoNote/*:dimensions"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;dimensions/&gt;">
+      <desc>Provide measurements of the binding.</desc>
+      <availableAtts elementName="dimensions"/>
+      <childElements>
+         <child>
+            <element ident="dim"
+                     label="dimensions"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="height"
+                     label="Height of the binding"
+                     minOccurs=""
+                     maxOccurs="NA"
+                     errorMessage="Element no more than NA time(s)."/>
+            <element ident="depth"
+                     label="Depth of the binding"
+                     minOccurs=""
+                     maxOccurs="NA"
+                     errorMessage="Element no more than NA time(s)."/>
+            <element ident="width"
+                     label="Width of the binding"
+                     minOccurs=""
+                     maxOccurs="NA"
+                     errorMessage="Element no more than NA time(s)."/>
+         </child>
+      </childElements>
+   </dimensions>
+   <dim ident="dim"
+        elementName="dim"
+        elementLabel="dim"
+        minOccur="0"
+        maxOccur="50"
+        errorMessage=""
+        path="/*:binding/*:decoNote/*:dimensions/*:dim"
+        currentLevel="4"
+        popup="4"
+        teiElement="&lt;dim/&gt;">
+      <desc>contains any single measurement forming part of a dimensional
+specification of some sort.</desc>
+      <availableAtts elementName="dim">
+         <attDef attLabel="analysis" ident="ana" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-04"
+                   xml:lang="en">analysis</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">분석</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">análisis</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">analyse</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">analisi</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">分析</gloss>
+         </attDef>
+         <attDef attLabel="atLeast" ident="atLeast"/>
+         <attDef attLabel="atMost" ident="atMost"/>
+         <attDef attLabel="certainty" ident="cert" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-11-02"
+                   xml:lang="en">certainty</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">확실성</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">certeza</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">certitude</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">certezza</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-09-16"
+                   xml:lang="ja">確実性</gloss>
+         </attDef>
+         <attDef attLabel="change" ident="change"/>
+         <attDef attLabel="confidence" ident="confidence"/>
+         <attDef attLabel="copyOf" ident="copyOf" usage="opt"/>
+         <attDef attLabel="corresponds" ident="corresp" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-04"
+                   xml:lang="en">corresponds</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">일치</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">correspondencia</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">correspond</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">corrispondente</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-07-21"
+                   xml:lang="ja">対応</gloss>
+         </attDef>
+         <attDef attLabel="exclude" ident="exclude" usage="opt"/>
+         <attDef attLabel="extent" ident="extent" usage="opt"/>
+         <attDef attLabel="facsimile" ident="facs" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-08-26"
+                   xml:lang="en">facsimile</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">모사</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">facsímil</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">fac-similé</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-07-21">ファクシミリ</gloss>
+         </attDef>
+         <attDef attLabel="max" ident="max"/>
+         <attDef attLabel="min" ident="min"/>
+         <attDef attLabel="number" ident="n" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">number</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">수</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">número</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">nombre</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">numero</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">数値</gloss>
+         </attDef>
+         <attDef attLabel="next" ident="next" usage="opt"/>
+         <attDef attLabel="precision" ident="precision" mode="replace">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="low" attLabel="low"/>
+               <valItem ident="medium" attLabel="medium"/>
+               <valItem ident="high" attLabel="high"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="previous" ident="prev" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-04"
+                   xml:lang="en">previous</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">이전</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">anterior</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr"> précédent</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">precedente</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-07-21"
+                   xml:lang="ja">前の</gloss>
+         </attDef>
+         <attDef attLabel="quantity" ident="quantity"/>
+         <attDef attLabel="rendition" ident="rend" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">rendition</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">번역</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">interpretación</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">interprétation</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">resa</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-07-21"
+                   xml:lang="ja">見た目の表示</gloss>
+         </attDef>
+         <attDef attLabel="rendition" ident="rendition" usage="opt"/>
+         <attDef attLabel="responsible party" ident="resp" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-11-02"
+                   xml:lang="en">responsible party</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">책임 당사자</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">parte responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">responsable</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">responsabile</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-09-16"
+                   xml:lang="ja">責任者</gloss>
+         </attDef>
+         <attDef attLabel="sameAs" ident="sameAs" usage="opt"/>
+         <attDef attLabel="scope" ident="scope" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="open"
+                     mode="">
+               <valItem ident="all"
+                        attLabel="all"
+                        desc="measurement applies to all instances. 측정은 모두 사례에 적용된다. 度量可應用於所有實例。 la medida se aplica a todos los casos. 全インスタンスに当てはまる単位。 la mesure s'applique à tous les cas. la misurazione fa riferimento a tutti i&#xA;          casi"/>
+               <valItem ident="most"
+                        attLabel="most"
+                        desc="measurement applies to most of the instances inspected. 측정은 대부분의 사례에 적용된다. 度量可應用於大部分實例。 la medida se aplica a la mayoría de los casos&#xA;            examinados. 計測インスタンスの殆どに当てはまる単位。 la mesure s'applique à la plupart des cas&#xA;            examinés la misurazione fa riferimento alla maggior parte&#xA;            dei casi esaminati"/>
+               <valItem ident="range"
+                        attLabel="range"
+                        desc="measurement applies to only the specified range of instances. 측정이 사례의 명시적 범위에 한정하여 적용된다. 度量僅應用於特定範圍的實例。 la medida se aplica solamente a los casos&#xA;            especificados 特定インスタンスにのみ当てはまる単位。 la mesure s'applique seulement à l'ensemble des&#xA;            exemples indiqués. la misurazione fa riferimento solo ai casi&#xA;            specificati"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="select" ident="select" usage="opt"/>
+         <attDef attLabel="source" ident="source" usage="opt"/>
+         <attDef attLabel="style" ident="style" usage="opt"/>
+         <attDef attLabel="subtype" ident="subtype" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2009-05-29">subtype</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2009-05-29"
+                   xml:lang="fr">sous-type</gloss>
+         </attDef>
+         <attDef attLabel="synchronous" ident="synch" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-04"
+                   xml:lang="en">synchronous</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">동시발생</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">sincrónico</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">synchrone</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">sincrono</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2019-07-21"
+                   xml:lang="ja">連動</gloss>
+         </attDef>
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="intercolumn" attLabel="intercolumn"/>
+               <valItem ident="top" attLabel="top"/>
+               <valItem ident="bottom" attLabel="bottom"/>
+               <valItem ident="right" attLabel="right"/>
+               <valItem ident="left" attLabel="left"/>
+               <valItem ident="outer" attLabel="outer"/>
+               <valItem ident="margin" attLabel="margin"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="unit" ident="unit" mode="replace" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="mm" attLabel="mm"/>
+               <valItem ident="leaf" attLabel="leaf"/>
+               <valItem ident="quire" attLabel="quire"/>
+               <valItem ident="page" attLabel="page"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="base" ident="xml:base" usage="opt"/>
+         <attDef attLabel="identifier" ident="xml:id" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">identifier</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">확인소</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">identificador</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">identifiant</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">identificatore</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">識別子</gloss>
+         </attDef>
+         <attDef attLabel="language" ident="xml:lang" usage="opt">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-07-02"
+                   xml:lang="en">language</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-12-20"
+                   xml:lang="ko">언어</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-04-06"
+                   xml:lang="es">lengua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2008-03-30"
+                   xml:lang="fr">langue</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2007-11-06"
+                   xml:lang="it">lingua</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="ja"
+                   versionDate="2019-06-08">言語</gloss>
+         </attDef>
+         <attDef attLabel="space" ident="xml:space" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </dim>
+   <height ident="height"
+           elementName="height"
+           elementLabel="Height of the binding"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:binding/*:decoNote/*:dimensions/*:height"
+           currentLevel="4"
+           popup="4"
+           teiElement="&lt;height/&gt;">
+      <desc>Measure the height in millimeters.</desc>
+      <availableAtts elementName="height">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="space" ident="xml:space" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="default"
+                        attLabel="default"
+                        desc="signals that the application's default white-space processing modes are acceptable アプリケーションがデフォルトで持つ空白文字類処理モードが有効であることを知らせる。"/>
+               <valItem ident="preserve"
+                        attLabel="preserve"
+                        desc="indicates the intent that applications preserve all white space アプリケーションがすべての空白文字類を保持するという意図を示す。"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="height"/>
+         <child/>
+      </childElements>
+   </height>
+   <depth ident="depth"
+          elementName="depth"
+          elementLabel="Depth of the binding"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:binding/*:decoNote/*:dimensions/*:depth"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;depth/&gt;">
+      <desc>Measure the depth with a precision of 5 millimeters.</desc>
+      <availableAtts elementName="depth">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="depth"/>
+         <child/>
+      </childElements>
+   </depth>
+   <width ident="width"
+          elementName="width"
+          elementLabel="Width of the binding"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:binding/*:decoNote/*:dimensions/*:width"
+          currentLevel="4"
+          popup="4"
+          teiElement="&lt;width/&gt;">
+      <desc>Measure the width in millimeters.</desc>
+      <availableAtts elementName="width">
+         <attDef attLabel="Unit" ident="unit" mode="change" style="restricted">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Unit</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type=""
+                     mode="change">
+               <valItem ident="mm" attLabel="Millimeters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="width"/>
+         <child/>
+      </childElements>
+   </width>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Note"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:binding/*:decoNote/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+   <condition ident="condition"
+              elementName="condition"
+              elementLabel="State of the binding"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:binding/*:condition"
+              currentLevel="2"
+              popup="2"
+              teiElement="&lt;condition/&gt;">
+      <desc>Describe preservation, conservation history; damages. Choose a generic description.</desc>
+      <availableAtts elementName="condition">
+         <attDef attLabel="Description" ident="key" usage="opt">
+            <gloss xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron">Description</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="deficient" attLabel="Deficient state"/>
+               <valItem ident="good" attLabel="Good state"/>
+               <valItem ident="intact" attLabel="Intact state"/>
+               <valItem ident="other" attLabel="Other state"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="condition"/>
+         <child/>
+      </childElements>
+   </condition>
+</TEI>
