@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sc="http://www.ascc.net/xml/schematron"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:tei="http://www.tei-c.org/ns/1.0"
+     xmlns:srophe="https://srophe.app"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:xf="http://www.w3.org/2002/xforms"
+     xmlns:local="http://syriaca.org/ns">
+   <list ident="list"
+         elementName="list"
+         elementLabel="List of incodicated documents"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list"
+         currentLevel="1"
+         popup="1"
+         teiElement="&lt;list/&gt;">
+      <desc>A sequence of bullet points
+                            ("item") organized as a list.</desc>
+      <availableAtts elementName="list">
+         <attDef attLabel="type" ident="type" usage="opt" mode="change">
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   xml:lang="en"
+                   versionDate="2017-06-25">type</gloss>
+            <gloss xmlns:teix="http://www.tei-c.org/ns/Examples"
+                   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                   versionDate="2017-06-25"
+                   xml:lang="de">Typ</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="gloss"
+                        attLabel="gloss"
+                        desc="each list item glosses some term or concept, which is given by a label element&#xA;            preceding the list item. 목록의 각 항목은 선행하는 요소에서 제시된 용어 또는 개념에 대한 설명이다. 各列表項目為一些字詞或概念下註解，每個項目之前並帶有標籤元素。 cada item de la lista glosa algun término o&#xA;            concepto de los que han sido dados por un elemento de la lista de la etiqueta que&#xA;            precede. リスト項目は，当該リスト項目に先行してあるラベル要素で示され&#xA;            たある用語や意義をまとめたものである． chaque item de la liste commente un terme ou un&#xA;            concept qui est donné par un élément label précédant l'item de la liste. ogni voce dell'elenco è la glossa di un termine o&#xA;            concetto dato da un elemento legenda che precede la voce stessa jeder Listenpunkt erläutert einen Begriff oder ein Konzept, das von einem voranstehenden label-Element genannt wird."/>
+               <valItem ident="index"
+                        attLabel="index"
+                        desc="each list item is an entry in an index such as the alphabetical topical index &#xA;          at the back of a print volume. jeder Listenpunkt ist ein Registereintrag z. B. in einem alphabetisch geordneten &#xA;                Sachregister am Ende einer Druckausgabe."/>
+               <valItem ident="instructions"
+                        attLabel="instructions"
+                        desc="each list item is a step in a sequence of instructions, as in a&#xA;            recipe. jeder Listenpunkt ist ein Arbeitsschritt in einer Folge von Anweisungen, &#xA;                wie z. B. in einem Rezept."/>
+               <valItem ident="litany"
+                        attLabel="litany"
+                        desc="each list item is one of a sequence of petitions, supplications &#xA;            or invocations, typically in a religious ritual. jeder Listenpunkt ist Teil einer Reihenfolge von Gebeten, Bitten oder Anrufungen die &#xA;                üblicherweise in einem religiösen Ritual verwendet werden."/>
+               <valItem ident="syllogism"
+                        attLabel="syllogism"
+                        desc="each list item is part of an argument consisting of two or more propositions &#xA;            and a final conclusion derived from them. jeder Listenpunkt ist Teil eines Arguments, das aus zwei oder mehr Prämissen &#xA;                und einem daraus gezogenen Schluss besteht."/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="item"
+                     label="Document"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </list>
+   <item ident="item"
+         elementName="item"
+         elementLabel="Document"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item"
+         currentLevel="2"
+         popup="2"
+         teiElement="&lt;item/&gt;">
+      <desc>Describe the incodicated
+                            document.</desc>
+      <availableAtts elementName="item">
+         <attDef attLabel="Document identifier" ident="xml:id" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Document identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="objectType"
+                     label="Type of incodicated document"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="locus"
+                     label="*Range of folio(s)"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="quote"
+                     label="Transcription or Translation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="note"
+                     label="Notes"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="listRelation"
+                     label="*Relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </item>
+   <objectType ident="objectType"
+               elementName="objectType"
+               elementLabel="Type of incodicated document"
+               minOccur="0"
+               maxOccur="50"
+               errorMessage=""
+               path="/*:list/*:item/*:objectType"
+               currentLevel="3"
+               popup="3"
+               teiElement="&lt;objectType/&gt;">
+      <desc>Choose the type of
+                            document.</desc>
+      <availableAtts elementName="objectType"/>
+      <controlledValues>
+         <element xmlns="" ident="objectType">
+            <valList type="closed">
+               <valItem ident="Colophon"/>
+               <valItem ident="Patronage"/>
+               <valItem ident="Certificates of transmission"/>
+               <valItem ident="Certificates of endowment"/>
+               <valItem ident="Bequest statements"/>
+               <valItem ident="Ownership statements"/>
+               <valItem ident="Contract – Sale"/>
+               <valItem ident="Contract – Donation"/>
+               <valItem ident="Contract – Personal status"/>
+               <valItem ident="Contract of employment of a scribe"/>
+               <valItem ident="Ex libris"/>
+               <valItem ident="Inventory"/>
+               <valItem ident="Book list"/>
+               <valItem ident="Family genealogy"/>
+               <valItem ident="Note"/>
+               <valItem ident="Proofreading note"/>
+               <valItem ident="Ijāza"/>
+               <valItem ident="Transmission note"/>
+               <valItem ident="Reader’s formula"/>
+               <valItem ident="Signatures"/>
+               <valItem ident="Stamps"/>
+               <valItem ident="Talismanic inscriptions"/>
+               <valItem ident="Magic squares"/>
+               <valItem ident="Magic letters"/>
+               <valItem ident="Solomon seal"/>
+               <valItem ident="Kabīkaj"/>
+               <valItem ident="Geomantic figures"/>
+               <valItem ident="Observations"/>
+            </valList>
+         </element>
+      </controlledValues>
+      <childElements>
+         <child/>
+      </childElements>
+   </objectType>
+   <locus ident="locus"
+          elementName="locus"
+          elementLabel="*Range of folio(s)"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:locus"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;locus/&gt;">
+      <desc>Specify
+                            range of folios of a text within the manuscript.</desc>
+      <availableAtts elementName="locus">
+         <attDef attLabel="From" ident="from" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">From</gloss>
+         </attDef>
+         <attDef attLabel="To" ident="to" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">To</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </locus>
+   <quote ident="quote"
+          elementName="quote"
+          elementLabel="Transcription or Translation"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:quote"
+          currentLevel="3"
+          popup="3"
+          teiElement="&lt;quote/&gt;">
+      <desc>Transcribe relevant portion of
+                            the text. Specify language and script of the document. Alternatively, provide a translation of the
+                            relevant portion of the text.</desc>
+      <availableAtts elementName="quote">
+         <attDef attLabel="Type" ident="type" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Type</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="transcription" attLabel="Transcription"/>
+               <valItem ident="translation" attLabel="Translation"/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="pe" attLabel="Persian"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </quote>
+   <note ident="note"
+         elementName="note"
+         elementLabel="Notes"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:note"
+         currentLevel="3"
+         popup="3"
+         teiElement="&lt;note/&gt;">
+      <desc>Add observations on fields
+                            mentioned.</desc>
+      <availableAtts elementName="note">
+         <attDef attLabel="Language" ident="xml:lang" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Language</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="ar" attLabel="Arabic"/>
+               <valItem ident="he" attLabel="Hebrew"/>
+               <valItem ident="en" attLabel="English"/>
+               <valItem ident="he-Latn" attLabel="Hebrew in Latin characters"/>
+               <valItem ident="ar-Latn" attLabel="Arabic in Latin characters"/>
+               <valItem ident="ar-Hebr" attLabel="Arabic in Hebrew characters"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="textarea"/>
+         <child/>
+      </childElements>
+   </note>
+   <listRelation ident="listRelation"
+                 elementName="listRelation"
+                 elementLabel="*Relation"
+                 minOccur="0"
+                 maxOccur="50"
+                 errorMessage=""
+                 path="/*:list/*:item/*:listRelation"
+                 currentLevel="3"
+                 popup="3"
+                 teiElement="&lt;listRelation/&gt;">
+      <availableAtts elementName="listRelation"/>
+      <childElements>
+         <child>
+            <element ident="relation"
+                     label="*Description of relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </listRelation>
+   <relation ident="relation"
+             elementName="relation"
+             elementLabel="*Description of relation"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:list/*:item/*:listRelation/*:relation"
+             currentLevel="4"
+             popup="4"
+             teiElement="&lt;relation/&gt;">
+      <desc>Specify the relationship between the person and another person or object. Choose the kind of relation from
+                            the list provided. Create and use fields for "Subject", "Object", and "Mutual" as indicated in the relation description. 
+                            Additional "Mutual" fields can be created at your discretion.</desc>
+      <availableAtts elementName="relation">
+         <attDef attLabel="Choose type of relation"
+                 ident="name"
+                 mode="replace"
+                 usage="req">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Choose type of relation</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="snap:wifeOf"
+                        attLabel="[Subject] is the wife of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:husbandOf"
+                        attLabel="[Subject] is the husband of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:motherInLawOf"
+                        attLabel="[Subject] is the mother-in-law of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:fatherInLawOf"
+                        attLabel="[Subject] is the father-in-law of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:sonInLawOf"
+                        attLabel="[Subject] is the son-in-law of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:daughterInLawOf"
+                        attLabel="[Subject] is the daughter-in-law of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:fatherOf"
+                        attLabel="[Subject] is the father of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:motherOf"
+                        attLabel="[Subject] is the mother of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:grandsonOf"
+                        attLabel="[Subject] is the grandson of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:granddaughterOf"
+                        attLabel="[Subject] is the granddaughter of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:grandfatherOf"
+                        attLabel="[Subject] is the grandfather of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:grandmotherOf"
+                        attLabel="[Subject] is the grandmother of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:greatgrandfatherOf"
+                        attLabel="[Subject] is the greatgrandfather of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:sisterOf"
+                        attLabel="[Subject] is the sister of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:sonOf"
+                        attLabel="[Subject] is the son of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:nephewOf"
+                        attLabel="[Subject] is the nephew of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:nieceOf"
+                        attLabel="[Subject] is the niece of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:stepFamilyRelationship"
+                        attLabel="[Mutual] and [Mutual] have a family relationship with each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:uncleOf"
+                        attLabel="[Subject] is the uncle of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:daughterOf"
+                        attLabel="[Subject] is the daughter of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:brotherOf"
+                        attLabel="[Subject] is the brother of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:kinOf"
+                        attLabel="[Mutual] and [Mutual] are kin of each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:ancestorOf"
+                        attLabel="[Subject] is the ancestor of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:cousinOf"
+                        attLabel="[Subject] is the cousin of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="snap:claimedFamilyRelationship"
+                        attLabel="[Mutual] and [Mutual] have claimed a family relationship with each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:familyOf"
+                        attLabel="[Mutual] and [Mutual] are the family of each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:disciplinaryAssociate"
+                        attLabel="[Mutual] and [Mutual] are the discilinary associates of each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:followerOf"
+                        attLabel="[Subject] is the follower of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:studentOf"
+                        attLabel="[Subject] is the student of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:refuterOf"
+                        attLabel="[Subject] is the refuter of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:addresseeOf"
+                        attLabel="[Subject] is the addressee of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:citedNegatively"
+                        attLabel="[Subject] cited negatively [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:citedPositively"
+                        attLabel="[Subject] cited positively [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:cited"
+                        attLabel="[Subject] cited [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:correspondedWith"
+                        attLabel="[Mutual] and [Mutual] corresponded with each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:debatedWith"
+                        attLabel="[Mutual] and [Mutual] debated with each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="snap:teacherOf"
+                        attLabel="[Subject] is the teacher of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:assistantOf"
+                        attLabel="[Subject] is the assistant of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:acquaintedWith"
+                        attLabel="[Mutual] and [Mutual] are acquainted with each other"
+                        desc="@mutual: Person."/>
+               <valItem ident="majlis:patronOf"
+                        attLabel="[Subject] is the patron of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="betmas:isSuccessorOf"
+                        attLabel="[Subject] is the successor of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="betmas:isPredecessorOf"
+                        attLabel="[Subject] is the predecessor of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="rel:enemyOf"
+                        attLabel="[Subject] is the enemy of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:friendOf"
+                        attLabel="[Subject] is the friend of [Object]"
+                        desc="@active: Person, @passive: Person."/>
+               <valItem ident="majlis:affiliatedWith"
+                        attLabel="[Subject] is affiliated with [Object] (place)"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="syriaca:born-at"
+                        attLabel="[Subject] is born at [Object]"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="syriaca:died-at"
+                        attLabel="[Subject] has died at [Object]"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:relationWith"
+                        attLabel="[Subject] has a relation with [Object] (place)"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="syriaca:has-literary-connection-to-place"
+                        attLabel="[Subject] has a literary relation with [Object] (place)"
+                        desc="@active: Person, @passive: Place."/>
+               <valItem ident="majlis:endowed"
+                        attLabel="[Subject] endowed [Object] (manuscript)"
+                        desc="@active: Person,@passive: Manuscript."/>
+               <valItem ident="majlis:attended"
+                        attLabel="[Subject] attended [Object]"
+                        desc="@active: Person,@ passive: ?."/>
+               <valItem ident="majlis:organized"
+                        attLabel="[Subject] organized [Object]"
+                        desc="@active: Person,@passive: ?."/>
+               <valItem ident="majlis:dictated"
+                        attLabel="[Subject] dictated [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:refuted"
+                        attLabel="[Subject] refuted [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:commentatorOf"
+                        attLabel="[Subject] is commentator of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:translatorOf"
+                        attLabel="[Subject] is translator of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:adapterOf"
+                        attLabel="[Subject] is adapter of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mulahhisOf"
+                        attLabel="[Subject] is mulahhis of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:muhtasirOf"
+                        attLabel="[Subject] is muḫtaṣir of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mujmilOf"
+                        attLabel="[Subject] is mujmil of [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+               <valItem ident="majlis:mentionedIn"
+                        attLabel="[Subject] is mentioned in [Object] (work)"
+                        desc="@active: Person, @passive: Text."/>
+            </valList>
+         </attDef>
+         <attDef attLabel="Ref" ident="ref" mode="change" usage="opt">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Ref</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="mutual"
+                     label="*Mutual relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="active"
+                     label="*Subject of relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="passive"
+                     label="*Object of relation"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="desc"
+                     label="*Relation Description"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </relation>
+   <mutual ident="mutual"
+           elementName="mutual"
+           elementLabel="*Mutual relation"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:list/*:item/*:listRelation/*:relation/*:mutual"
+           currentLevel="5"
+           popup="5"
+           teiElement="&lt;mutual/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/mutual.xhtml"
+              elementName="mutual"
+              formName="mutual"
+              lookupLabel="Look up mutual relations."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <desc>Use the lookup to reference entities that have a mutual relation.</desc>
+      <availableAtts elementName="mutual"/>
+      <childElements>
+         <textNode type="input" class="mutual"/>
+         <child/>
+      </childElements>
+   </mutual>
+   <active ident="active"
+           elementName="active"
+           elementLabel="*Subject of relation"
+           minOccur="0"
+           maxOccur="50"
+           errorMessage=""
+           path="/*:list/*:item/*:listRelation/*:relation/*:active"
+           currentLevel="5"
+           popup="5"
+           teiElement="&lt;active/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/active?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/active.xhtml"
+              elementName="active"
+              formName="active"
+              lookupLabel="Look up subject of relation."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <desc>Use the lookup to reference the subject in the relation.</desc>
+      <availableAtts elementName="active"/>
+      <childElements>
+         <textNode type="input" class="active"/>
+         <child/>
+      </childElements>
+   </active>
+   <passive ident="passive"
+            elementName="passive"
+            elementLabel="*Object of relation"
+            minOccur="0"
+            maxOccur="50"
+            errorMessage=""
+            path="/*:list/*:item/*:listRelation/*:relation/*:passive"
+            currentLevel="5"
+            popup="5"
+            teiElement="&lt;passive/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/passive?format=xml&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/passive.xhtml"
+              elementName="passive"
+              formName="passive"
+              lookupLabel="Look object of relation."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <desc>Use the lookup to reference the object in the relation.</desc>
+      <availableAtts elementName="passive"/>
+      <childElements>
+         <textNode type="input" class="passive"/>
+         <child/>
+      </childElements>
+   </passive>
+   <desc ident="desc"
+         elementName="desc"
+         elementLabel="*Relation Description"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:listRelation/*:relation/*:desc"
+         currentLevel="5"
+         popup="5"
+         teiElement="&lt;desc/&gt;">
+      <desc>contains a brief
+  description of the object documented by its parent element,
+  typically a documentation element or an entity.</desc>
+      <availableAtts elementName="desc">
+         <attDef attLabel="type" ident="type" mode="replace" usage="opt">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="">
+               <valItem ident="DonationNote" attLabel="DonationNote"/>
+               <valItem ident="OwnershipNote" attLabel="OwnershipNote"/>
+               <valItem ident="PurchaseNote" attLabel="PurchaseNote"/>
+               <valItem ident="AcquisitionNote" attLabel="AcquisitionNote"/>
+               <valItem ident="ReceiptNote" attLabel="ReceiptNote"/>
+               <valItem ident="Admonition" attLabel="Admonition"/>
+               <valItem ident="LandGrant" attLabel="LandGrant"/>
+               <valItem ident="FoundationCharter" attLabel="FoundationCharter"/>
+               <valItem ident="Genealogy" attLabel="Genealogy"/>
+               <valItem ident="ScribalSignature" attLabel="ScribalSignature"/>
+               <valItem ident="Supplication" attLabel="Supplication"/>
+               <valItem ident="Subscription" attLabel="Subscription"/>
+               <valItem ident="Doxology" attLabel="Doxology"/>
+               <valItem ident="Exhortation" attLabel="Exhortation"/>
+               <valItem ident="Invocation" attLabel="Invocation"/>
+               <valItem ident="Inventory" attLabel="Inventory"/>
+               <valItem ident="ScribalNoteCommencing" attLabel="ScribalNoteCommencing"/>
+               <valItem ident="ScribalNoteOrdering" attLabel="ScribalNoteOrdering"/>
+               <valItem ident="ScribalNoteCommissioning" attLabel="ScribalNoteCommissioning"/>
+               <valItem ident="ScribalNoteCompleting" attLabel="ScribalNoteCompleting"/>
+               <valItem ident="ScribalNoteAssigningLand" attLabel="ScribalNoteAssigningLand"/>
+               <valItem ident="ScribalNoteBequeathing" attLabel="ScribalNoteBequeathing"/>
+               <valItem ident="RecordReconciliation" attLabel="RecordReconciliation"/>
+               <valItem ident="RecordLitigation" attLabel="RecordLitigation"/>
+               <valItem ident="RecordTransaction" attLabel="RecordTransaction"/>
+               <valItem ident="RecordDistribution" attLabel="RecordDistribution"/>
+               <valItem ident="RecordGuarantors" attLabel="RecordGuarantors"/>
+               <valItem ident="Record" attLabel="Record"/>
+               <valItem ident="ScribalSupplication" attLabel="ScribalSupplication"/>
+               <valItem ident="Unclear" attLabel="Unclear"/>
+               <valItem ident="GuarantorsList" attLabel="GuarantorsList"/>
+               <valItem ident="CommemorativeNote" attLabel="CommemorativeNote"/>
+               <valItem ident="Condemnation" attLabel="Condemnation"/>
+               <valItem ident="ProtectivePrayer" attLabel="ProtectivePrayer"/>
+               <valItem ident="Poem" attLabel="Poem"/>
+               <valItem ident="PoemQene" attLabel="PoemQene"/>
+               <valItem ident="PoemSalam" attLabel="PoemSalam"/>
+               <valItem ident="PoemArke" attLabel="PoemArke"/>
+               <valItem ident="StampExlibris" attLabel="StampExlibris"/>
+               <valItem ident="CalendaricNote" attLabel="CalendaricNote"/>
+               <valItem ident="Excerpt" attLabel="Excerpt"/>
+               <valItem ident="Letter" attLabel="Letter"/>
+               <valItem ident="MagicFormula" attLabel="MagicFormula"/>
+               <valItem ident="MagicText" attLabel="MagicText"/>
+               <valItem ident="Comment" attLabel="Comment"/>
+               <valItem ident="Correction" attLabel="Correction"/>
+               <valItem ident="Gloss" attLabel="Gloss"/>
+               <valItem ident="Excommunication" attLabel="Excommunication"/>
+               <valItem ident="GuestText" attLabel="GuestText"/>
+               <valItem ident="MalkeHymn" attLabel="MalkeHymn"/>
+               <valItem ident="Directive" attLabel="Directive"/>
+               <valItem ident="Asmat" attLabel="Asmat"/>
+               <valItem ident="CustomaryLaw" attLabel="CustomaryLaw"/>
+               <valItem ident="Statutes" attLabel="Statutes"/>
+               <valItem ident="MixedNote" attLabel="MixedNote"/>
+               <valItem ident="findingAid" attLabel="findingAid"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child>
+            <element ident="gloss"
+                     label="*Note"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="persName"
+                     label="Person"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="placeName"
+                     label="Place"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="idno"
+                     label="Manuscript shelfmark"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="title"
+                     label="Work title"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+            <element ident="date"
+                     label="Date"
+                     minOccurs=""
+                     maxOccurs=""
+                     errorMessage=""/>
+         </child>
+      </childElements>
+   </desc>
+   <gloss ident="gloss"
+          elementName="gloss"
+          elementLabel="*Note"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:gloss"
+          currentLevel="6"
+          popup="6"
+          teiElement="&lt;gloss/&gt;">
+      <desc>Give a brief account of the relation you are describing, including the names of all the persons, places and objects involved.</desc>
+      <availableAtts elementName="gloss"/>
+      <childElements>
+         <textNode type="input" class="gloss"/>
+         <child/>
+      </childElements>
+   </gloss>
+   <persName ident="persName"
+             elementName="persName"
+             elementLabel="Person"
+             minOccur="0"
+             maxOccur="50"
+             errorMessage=""
+             path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:persName"
+             currentLevel="6"
+             popup="6"
+             teiElement="&lt;persName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="script-hand-description"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="heritage-data"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/persName.xhtml"
+              elementName="persName"
+              formName="persName"
+              lookupLabel="Look up person record."
+              level="subform"
+              suppress="false"
+              form="manuscript-history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="personTEI"
+             elementName="persName"
+             label="New person"
+             formURL="form.xq?form=forms/personTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the person records in
+                            the database. Try different spellings in different languages! If no
+                            suitable record exists, create a new one. Add additional persons as
+                            required.</desc>
+      <availableAtts elementName="persName">
+         <attDef attLabel="Person identifier" ident="ref" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Person identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="persName"/>
+         <child/>
+      </childElements>
+   </persName>
+   <placeName ident="placeName"
+              elementName="placeName"
+              elementLabel="Place"
+              minOccur="0"
+              maxOccur="50"
+              errorMessage=""
+              path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:placeName"
+              currentLevel="6"
+              popup="6"
+              teiElement="&lt;placeName/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="script-hand-description"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="incodicated-documents"/>
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/placeName.xhtml"
+              elementName="placeName"
+              formName="placeName"
+              lookupLabel="Look up place record."
+              level="subform"
+              suppress="false"
+              form="manuscript-history"/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="placeTEI"
+             elementName="placeName"
+             label="New place"
+             formURL="form.xq?form=forms/placeTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Look up the place records. Try different spellings in different languages! If no suitable record exists, create a new one. The place given here refers to the acquisition (and not the production of the copy).</desc>
+      <availableAtts elementName="placeName">
+         <attDef attLabel="Place identifier" ident="ref" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
+         </attDef>
+         <attDef attLabel="Role" ident="role" mode="change" style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Role</gloss>
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="closed"
+                     mode="change">
+               <valItem ident="mentioned" attLabel="Mentioned"/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="placeName"/>
+         <child/>
+      </childElements>
+   </placeName>
+   <idno ident="idno"
+         elementName="idno"
+         elementLabel="Manuscript shelfmark"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:idno"
+         currentLevel="6"
+         popup="6"
+         teiElement="&lt;idno/&gt;">
+      <desc>Specify the shelfmark of a manuscript section.</desc>
+      <availableAtts elementName="idno">
+         <attDef attLabel="Identifier"
+                 ident="ref"
+                 mode="change"
+                 type="closed"
+                 style="restricted">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Identifier</gloss>
+         </attDef>
+         <attDef attLabel="type" ident="type" usage="opt" mode="change">
+            <valList xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     type="semi"
+                     mode="add">
+               <valItem ident="ISBN"
+                        attLabel="ISBN"
+                        desc="International Standard Book Number: a 13- or (if assigned prior to 2007) 10-digit identifying number assigned by the publishing industry to a published book or similar item, registered with the  International ISBN Agency.&#xA;        "/>
+               <valItem ident="ISSN"
+                        attLabel="ISSN"
+                        desc="International Standard Serial Number: an eight-digit number to uniquely identify a serial publication."/>
+               <valItem ident="DOI"
+                        attLabel="DOI"
+                        desc="Digital Object Identifier: a unique string of letters and numbers assigned to an electronic document."/>
+               <valItem ident="URI"
+                        attLabel="URI"
+                        desc="Uniform Resource Identifier: a string of characters to uniquely identify a resource which usually contains indication of the means of accessing that resource, the name of its host, and its filepath."/>
+               <valItem ident="VIAF"
+                        attLabel="VIAF"
+                        desc="A data number in the Virtual Internet Authority File assigned to link different names in catalogs around the world for the same entity."/>
+               <valItem ident="ESTC"
+                        attLabel="ESTC"
+                        desc="English Short-Title Catalogue number: an identifying number assigned to a document in English printed in the British Isles or North America before 1801."/>
+               <valItem ident="OCLC"
+                        attLabel="OCLC"
+                        desc="OCLC control number (record number) for the union catalog record in WorldCat, a union catalog for member libraries in the Online Computer Library Center global cooperative."/>
+            </valList>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <child/>
+      </childElements>
+   </idno>
+   <title ident="title"
+          elementName="title"
+          elementLabel="Work title"
+          minOccur="0"
+          maxOccur="50"
+          errorMessage=""
+          path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:title"
+          currentLevel="6"
+          popup="6"
+          teiElement="&lt;title/&gt;">
+      <lookup xmlns="http://www.w3.org/1999/xhtml"
+              api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q="
+              formURL="form.xq?form=forms/msSimple/lookup/title.xhtml"
+              elementName="title"
+              formName="title"
+              lookupLabel="Look up title."
+              level="toplevel"
+              suppress="false"
+              form=""/>
+      <popup xmlns="http://www.w3.org/1999/xhtml"
+             formName="worksTEI"
+             elementName="title"
+             label="New work"
+             formURL="form.xq?form=forms/worksTEI/index.xhtml"
+             level="toplevel"
+             form=""/>
+      <desc>Use the lookup to search for the title of the work.</desc>
+      <availableAtts elementName="title">
+         <attDef attLabel="Place identifier" ident="ref" mode="change">
+            <gloss xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                   xmlns:rng="http://relaxng.org/ns/structure/1.0">Place identifier</gloss>
+         </attDef>
+      </availableAtts>
+      <childElements>
+         <textNode type="input" class="title"/>
+         <child/>
+      </childElements>
+   </title>
+   <date ident="date"
+         elementName="date"
+         elementLabel="Date"
+         minOccur="0"
+         maxOccur="50"
+         errorMessage=""
+         path="/*:list/*:item/*:listRelation/*:relation/*:desc/*:date"
+         currentLevel="6"
+         popup="6"
+         teiElement="&lt;date/&gt;">
+      <desc>Fill in the date in CE. The date refers to the acquisition (not the production of the copy).</desc>
+      <availableAtts elementName="date"/>
+      <childElements>
+         <textNode type="input" class="date"/>
+         <child/>
+      </childElements>
+   </date>
+</TEI>
