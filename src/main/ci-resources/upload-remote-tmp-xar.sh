@@ -15,4 +15,4 @@ else
     XAR_PATH=$1
 fi
 
-curl --request PUT --basic --user "${REMOTE_EDB_SERVER_USERNAME}:${REMOTE_EDB_SERVER_PASSWORD}" --header 'Content-Type: application/expath+xar' --data-binary "@${XAR_PATH}" "${REMOTE_EDB_SERVER_URL}/rest${db-tmp-collection}/${package-final-name}.xar"
+curl --request PUT --basic --user "${REMOTE_EDB_SERVER_USERNAME}:${REMOTE_EDB_SERVER_PASSWORD}" --header 'Content-Type: application/expath+xar' --data-binary "@${XAR_PATH}" --fail-with-body "${REMOTE_EDB_SERVER_URL}/rest${db-tmp-collection}/${package-final-name}.xar"

@@ -22,4 +22,4 @@ POST_BODY=`cat << EOF
 EOF
 `
 
-echo "${POST_BODY}" | curl --request POST --basic --user "${REMOTE_EDB_SERVER_USERNAME}:${REMOTE_EDB_SERVER_PASSWORD}" --header "Content-Type: application/xml" --data-binary @- "${REMOTE_EDB_SERVER_URL}/rest${db-tmp-collection}"
+echo "${POST_BODY}" | curl --request POST --basic --user "${REMOTE_EDB_SERVER_USERNAME}:${REMOTE_EDB_SERVER_PASSWORD}" --header "Content-Type: application/xml" --data-binary @- --fail-with-body "${REMOTE_EDB_SERVER_URL}/rest${db-tmp-collection}"
