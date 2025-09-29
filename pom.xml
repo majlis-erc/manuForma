@@ -54,7 +54,9 @@
         <public.xar.repo.uri>https://exist-db.org/exist/apps/public-repo</public.xar.repo.uri>
 
         <!-- NOTE(AR): this is used for generating forms in the xml-maven-plugin below -->
-        <saxon.version>9.9.1-8</saxon.version>
+        <saxon.version>12.9</saxon.version>
+
+        <xspec.version>3.1.3</xspec.version>
         
         <!-- used in the EXPath Package Descriptor -->
         <package-title>${project.name}</package-title>
@@ -213,6 +215,35 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.xspec.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>${xspec.version}</version>
+                <executions>
+                    <execution>
+                        <id>services-xspec-tests</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run-xspec</goal>
+                        </goals>
+                        <configuration>
+                            <testDir>src/test/xar-resources</testDir>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>io.xspec</groupId>
+                        <artifactId>xspec</artifactId>
+                        <version>${xspec.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>${saxon.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>ro.kuberam.maven.plugins</groupId>

@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:tt2m="http://test.tei-to-manuforma-form"
+  run-as="external"
+  stylesheet="../../../main/xar-resources/services/tei-to-manuforma-form.xslt">
+  
+  <!--
+    Tests for converting TEI into a TEI like format for a manuForma form
+    @author Adam Retter
+  -->
+  
+  <x:scenario label="Given a Note Element">
+    
+    <x:scenario label="When it is empty">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:msContents>
+                    <tei:msItem>
+                      <tei:note something="other" another="thing"/>
+                    </tei:msItem>
+                  </tei:msContents>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Copy with attributes">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:msContents>
+                    <tei:msItem>
+                      <tei:note something="other" another="thing"/>
+                    </tei:msItem>
+                  </tei:msContents>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+    
+    <x:scenario label="When it has one empty p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:note>
+                          <tei:p/>
+                        </tei:note>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Drop child elements">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:note/>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+    
+    <x:scenario label="When it has two empty p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:note>
+                          <tei:p/>
+                          <tei:p/>
+                        </tei:note>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Drop child elements">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:note/>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+  
+    <x:scenario label="When it has a single p child element with only text">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Hello World</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element">
+        <tei:TEI>
+          <tei:note>Hello World</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a two p child elements with only text">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Some text.</tei:p>
+            <tei:p>Some more text.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p elements and separate with line break">
+        <tei:TEI>
+          <tei:note>Some text.
+
+Some more text.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element and lb elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+        <tei:TEI>
+          <tei:note>Once upon
+a time
+in
+the
+West</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a two p child elements and lb elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+        <tei:TEI>
+          <tei:note>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with unspecified emphasis type">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph>a time</tei:emph> in the <tei:emph>West</tei:emph></tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and remove unspecified emphasis">
+        <tei:TEI>
+          <tei:note>Once upon a time in the West</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with unknown emphasis type">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph rend="unknown">a time</tei:emph> in the <tei:emph rend="unknown">West</tei:emph></tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and remove unknown emphasis">
+        <tei:TEI>
+          <tei:note>Once upon a time in the West</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with italic emphasis">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and convert to italic">
+        <tei:TEI>
+          <tei:note>Once upon *a time* in the *West*</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+  
+    <x:scenario label="When it has a single p child element with bold emphasis">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and convert to bold">
+        <tei:TEI>
+          <tei:note>Once upon **a time** in the **West**.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 1 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:note># This is a level 1 heading
+Some text here.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 2 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:note>## This is a level 2 heading
+Some text here.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 3 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:note>### This is a level 3 heading
+Some text here.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When there are multiple heading levels and p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:note># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When there are multiple heading that have only whitespace and p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h1"><x:text> </x:text></tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2"><x:text>  </x:text></tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3"><x:text>   </x:text></tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Replace the headings with a single space and remove the wrapper p element">
+        <tei:TEI>
+          <tei:note> Paragraph 1
+
+ Paragraph 2-1.
+
+Paragraph 2-2.
+
+ Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has child elements which are not p, emph, or pi elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:quote>a time</tei:quote> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+            <tei:p>There was a little Panda called <tei:persName>Jennifer</tei:persName></tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the unknown element wrappers but keep their children">
+        <tei:TEI>
+          <tei:note>Once upon a time in the *West*
+
+There was a little Panda called Jennifer</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has child elements with p elements that contains carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West</tei:p>
+            <tei:p>&#xA;There was a little Panda called Jennifer&#xA;</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Normalize line endings to newline characters">
+        <tei:TEI>
+          <tei:note>Once
+upon
+a time
+in the
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+
+  </x:scenario>
+  
+  <x:scenario label="Given a Summary Element">
+
+    <x:scenario label="When its parent is a Layout Description">
+
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:objectDesc>
+                      <tei:layoutDesc class="something">
+                        <tei:summary class="other">
+                          <tei:p>Some text.</tei:p>
+                          <tei:p>Some more text.</tei:p>
+                        </tei:summary>
+                      </tei:layoutDesc>
+                    </tei:objectDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+
+      <x:expect label="Copy as is with attributes">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:objectDesc>
+                      <tei:layoutDesc class="something">
+                        <tei:summary class="other">
+                          <tei:p>Some text.</tei:p>
+                          <tei:p>Some more text.</tei:p>
+                        </tei:summary>
+                      </tei:layoutDesc>
+                    </tei:objectDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When its parent is not a Layout Description">
+    
+      <x:scenario label="When it is empty">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:msContents>
+                      <tei:msItem>
+                        <tei:summary something="other" another="thing"/>
+                      </tei:msItem>
+                    </tei:msContents>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Copy with attributes">
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:msContents>
+                      <tei:msItem>
+                        <tei:summary something="other" another="thing"/>
+                      </tei:msItem>
+                    </tei:msContents>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:expect>
+
+      </x:scenario>
+      
+      <x:scenario label="When it has one empty p child element">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:physDesc>
+                      <tei:scriptDesc>
+                        <tei:scriptNote>
+                          <tei:summary>
+                            <tei:p/>
+                          </tei:summary>
+                        </tei:scriptNote>
+                      </tei:scriptDesc>
+                    </tei:physDesc>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Drop child elements">
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:physDesc>
+                      <tei:scriptDesc>
+                        <tei:scriptNote>
+                          <tei:summary/>
+                        </tei:scriptNote>
+                      </tei:scriptDesc>
+                    </tei:physDesc>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:expect>
+
+      </x:scenario>
+      
+      <x:scenario label="When it has two empty p child elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:physDesc>
+                      <tei:scriptDesc>
+                        <tei:scriptNote>
+                          <tei:summary>
+                            <tei:p/>
+                            <tei:p/>
+                          </tei:summary>
+                        </tei:scriptNote>
+                      </tei:scriptDesc>
+                    </tei:physDesc>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Drop child elements">
+          <tei:TEI>
+            <tei:text>
+              <tei:body>
+                <tei:listBibl>
+                  <tei:msDesc>
+                    <tei:physDesc>
+                      <tei:scriptDesc>
+                        <tei:scriptNote>
+                          <tei:summary/>
+                        </tei:scriptNote>
+                      </tei:scriptDesc>
+                    </tei:physDesc>
+                  </tei:msDesc>
+                </tei:listBibl>
+              </tei:body>
+            </tei:text>
+          </tei:TEI>
+        </x:expect>
+      </x:scenario>
+    
+      <x:scenario label="When it has a single p child element with only text">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Hello World</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary>Hello World</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a two p child elements with only text">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Some text.</tei:p>
+              <tei:p>Some more text.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p elements and separate with line break">
+          <tei:TEI>
+            <tei:summary>Some text.
+
+Some more text.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single p child element and lb elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+          <tei:TEI>
+            <tei:summary>Once upon
+a time
+in
+the
+West</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a two p child elements and lb elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+              <tei:p>Some more<tei:lb/>text.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+          <tei:TEI>
+            <tei:summary>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single p child element with unspecified emphasis type">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph>a time</tei:emph> in the <tei:emph>West</tei:emph></tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element and remove unspecified emphasis">
+          <tei:TEI>
+            <tei:summary>Once upon a time in the West</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single p child element with unknown emphasis type">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph rend="unknown">a time</tei:emph> in the <tei:emph rend="unknown">West</tei:emph></tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element and remove unknown emphasis">
+          <tei:TEI>
+            <tei:summary>Once upon a time in the West</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single p child element with italic emphasis">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element and convert to italic">
+          <tei:TEI>
+            <tei:summary>Once upon *a time* in the *West*</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+    
+      <x:scenario label="When it has a single p child element with bold emphasis">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the wrapper p element and convert to bold">
+          <tei:TEI>
+            <tei:summary>Once upon **a time** in the **West**.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 1 heading and p child element">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Format the heading and remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary># This is a level 1 heading
+Some text here.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 2 heading and p child element">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Format the heading and remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary>## This is a level 2 heading
+Some text here.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 3 heading and p child element">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Format the heading and remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary>### This is a level 3 heading
+Some text here.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple heading levels and p child elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+              <tei:p>Paragraph 1</tei:p>
+              <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+              <tei:p>Paragraph 2-1.</tei:p>
+              <tei:p>Paragraph 2-2.</tei:p>
+              <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+              <tei:p>Paragraph 3-1.</tei:p>
+              <tei:p>Paragraph 3-2</tei:p>
+              <tei:p>Paragraph 3-3.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Format the heading and remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple heading that have only whitespace and p child elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h1"><x:text> </x:text></tei:hi>
+              <tei:p>Paragraph 1</tei:p>
+              <tei:hi rend="h2"><x:text>  </x:text></tei:hi>
+              <tei:p>Paragraph 2-1.</tei:p>
+              <tei:p>Paragraph 2-2.</tei:p>
+              <tei:hi rend="h3"><x:text>   </x:text></tei:hi>
+              <tei:p>Paragraph 3-1.</tei:p>
+              <tei:p>Paragraph 3-2</tei:p>
+              <tei:p>Paragraph 3-3.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Replace the headings with a single space and remove the wrapper p element">
+          <tei:TEI>
+            <tei:summary> Paragraph 1
+
+ Paragraph 2-1.
+
+Paragraph 2-2.
+
+ Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has child elements which are not p, emph, or pi elements">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:summary>a time</tei:summary> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+              <tei:p>There was a little Panda called <tei:persName>Jennifer</tei:persName></tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Remove the unknown element wrappers but keep their children">
+          <tei:TEI>
+            <tei:summary>Once upon a time in the *West*
+
+There was a little Panda called Jennifer</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has child elements with p elements that contains carriage return characters">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West</tei:p>
+              <tei:p>&#xA;There was a little Panda called Jennifer&#xA;</tei:p>
+              <tei:p>who was a sleepy little panda</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <!-- TODO(AR) check this with Max - should  &#xD;&#xA;&#xD; produce one or two &#xA in the output -->
+        
+        <x:expect label="Normalize line endings to newline characters">
+          <tei:TEI>
+            <tei:summary>Once
+upon
+a time
+in the
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+
+    </x:scenario>
+    
+  </x:scenario>
+
+  <x:scenario label="Given a Quote Element">
+    
+    <x:scenario label="When it is empty">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:msContents>
+                    <tei:msItem>
+                      <tei:quote something="other" another="thing"/>
+                    </tei:msItem>
+                  </tei:msContents>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Copy with attributes">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:msContents>
+                    <tei:msItem>
+                      <tei:quote something="other" another="thing"/>
+                    </tei:msItem>
+                  </tei:msContents>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+    
+    <x:scenario label="When it has one empty p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:quote>
+                          <tei:p/>
+                        </tei:quote>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Drop child elements">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:quote/>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+    
+    <x:scenario label="When it has two empty p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:quote>
+                          <tei:p/>
+                          <tei:p/>
+                        </tei:quote>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Drop child elements">
+        <tei:TEI>
+          <tei:text>
+            <tei:body>
+              <tei:listBibl>
+                <tei:msDesc>
+                  <tei:physDesc>
+                    <tei:scriptDesc>
+                      <tei:scriptNote>
+                        <tei:quote/>
+                      </tei:scriptNote>
+                    </tei:scriptDesc>
+                  </tei:physDesc>
+                </tei:msDesc>
+              </tei:listBibl>
+            </tei:body>
+          </tei:text>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+  
+    <x:scenario label="When it has a single p child element with only text">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Hello World</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote>Hello World</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a two p child elements with only text">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Some text.</tei:p>
+            <tei:p>Some more text.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p elements and separate with line break">
+        <tei:TEI>
+          <tei:quote>Some text.
+
+Some more text.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element and lb elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+        <tei:TEI>
+          <tei:quote>Once upon
+a time
+in
+the
+West</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a two p child elements and lb elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon<tei:lb/>a time <tei:lb/>in<tei:lb/> the <tei:lb/> West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element normalize whitespace and line breaks">
+        <tei:TEI>
+          <tei:quote>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with unspecified emphasis type">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph>a time</tei:emph> in the <tei:emph>West</tei:emph></tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and remove unspecified emphasis">
+        <tei:TEI>
+          <tei:quote>Once upon a time in the West</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with unknown emphasis type">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph rend="unknown">a time</tei:emph> in the <tei:emph rend="unknown">West</tei:emph></tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and remove unknown emphasis">
+        <tei:TEI>
+          <tei:quote>Once upon a time in the West</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single p child element with italic emphasis">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and convert to italic">
+        <tei:TEI>
+          <tei:quote>Once upon *a time* in the *West*</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+  
+    <x:scenario label="When it has a single p child element with bold emphasis">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the wrapper p element and convert to bold">
+        <tei:TEI>
+          <tei:quote>Once upon **a time** in the **West**.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 1 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote># This is a level 1 heading
+Some text here.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 2 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote>## This is a level 2 heading
+Some text here.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 3 heading and p child element">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote>### This is a level 3 heading
+Some text here.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When there are multiple heading levels and p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Format the heading and remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When there are multiple heading that have only whitespace and p child elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h1"><x:text> </x:text></tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2"><x:text>  </x:text></tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3"><x:text>   </x:text></tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Replace the headings with a single space and remove the wrapper p element">
+        <tei:TEI>
+          <tei:quote> Paragraph 1
+
+ Paragraph 2-1.
+
+Paragraph 2-2.
+
+ Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has child elements which are not p, emph, or pi elements">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:quote>a time</tei:quote> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+            <tei:p>There was a little Panda called <tei:persName>Jennifer</tei:persName></tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Remove the unknown element wrappers but keep their children">
+        <tei:TEI>
+          <tei:quote>Once upon a time in the *West*
+
+There was a little Panda called Jennifer</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has child elements with p elements that contains carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West</tei:p>
+            <tei:p>&#xA;There was a little Panda called Jennifer&#xA;</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Normalize line endings to newline characters">
+        <tei:TEI>
+          <tei:quote>Once
+upon
+a time
+in the
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="Given a Relation Element">
+    
+    <x:scenario label="That has an active attribute with a single value">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation active="rel-1" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="A single tei:active element with ref and label">
+        <tei:TEI>
+          <tei:active ref="rel-1" class="other">label-1</tei:active>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has a mutual attribute with a single value">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation mutual="rel-1" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="A single tei:mutual element with ref and label">
+        <tei:TEI>
+          <tei:mutual ref="rel-1" class="other">label-1</tei:mutual>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has a passive attribute with a single value">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation passive="rel-1" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="A single tei:passive element with ref and label">
+        <tei:TEI>
+          <tei:passive ref="rel-1" class="other">label-1</tei:passive>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has an active attribute with multiple values">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+          <label ref="rel-2"><text>label-2</text></label>
+          <label ref="rel-3"><text>label-3</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation active="rel-1 rel-2 rel-3" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Multiple tei:active element with ref and label">
+        <tei:TEI>
+          <tei:active ref="rel-1" class="other">label-1</tei:active>
+          <tei:active ref="rel-2" class="other">label-2</tei:active>
+          <tei:active ref="rel-3" class="other">label-3</tei:active>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has a mutual attribute with multiple values">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+          <label ref="rel-2"><text>label-2</text></label>
+          <label ref="rel-3"><text>label-3</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation mutual="rel-1 rel-2 rel-3" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Multiple tei:mutual element with ref and label">
+        <tei:TEI>
+          <tei:mutual ref="rel-1" class="other">label-1</tei:mutual>
+          <tei:mutual ref="rel-2" class="other">label-2</tei:mutual>
+          <tei:mutual ref="rel-3" class="other">label-3</tei:mutual>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has a passive attribute with multiple values">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+          <label ref="rel-2"><text>label-2</text></label>
+          <label ref="rel-3"><text>label-3</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation passive="rel-1 rel-2 rel-3" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Multiple tei:passive element with ref and label">
+        <tei:TEI>
+          <tei:passive ref="rel-1" class="other">label-1</tei:passive>
+          <tei:passive ref="rel-2" class="other">label-2</tei:passive>
+          <tei:passive ref="rel-3" class="other">label-3</tei:passive>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That has a mix of active, mutual, and passive attributes with multiple values">
+      <x:param name="labels">
+        <labels>
+          <label ref="rel-1"><text>label-1</text></label>
+          <label ref="rel-2"><text>label-2</text></label>
+          <label ref="rel-3"><text>label-3</text></label>
+          <label ref="rel-4"><text>label-4</text></label>
+          <label ref="rel-5"><text>label-5</text></label>
+          <label ref="rel-6"><text>label-6</text></label>
+        </labels>
+      </x:param>
+      <x:context>
+        <tei:TEI>
+          <tei:relation active="rel-1" mutual="rel-2 rel-3 rel-4" passive="rel-5 rel-6" class="other"/>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Multiple tei:active element with ref and label">
+        <tei:TEI>
+          <tei:active ref="rel-1" class="other">label-1</tei:active>
+          <tei:mutual ref="rel-2" class="other">label-2</tei:mutual>
+          <tei:mutual ref="rel-3" class="other">label-3</tei:mutual>
+          <tei:mutual ref="rel-4" class="other">label-4</tei:mutual>
+          <tei:passive ref="rel-5" class="other">label-5</tei:passive>
+          <tei:passive ref="rel-6" class="other">label-6</tei:passive>
+        </tei:TEI>
+      </x:expect>
+    </x:scenario>
+
+  </x:scenario>
+
+</x:description>

@@ -1,0 +1,2792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:tm2t="http://test.manuforma-form-to-tei"
+  run-as="external"
+  stylesheet="../../../main/xar-resources/services/manuforma-form-to-tei.xslt">
+  
+  <!--
+    Tests for converting TEI like submission from a manuForma form to TEI
+    @author Adam Retter
+  -->
+
+  <!-- Create an 'id' based on the current date-time - ensures that are tests use different values each time they are run -->
+  <x:variable name="tm2t:id" as="xs:string" select="(((current-dateTime() - xs:dateTime('1970-01-01T00:00:00-00:00')) div xs:dayTimeDuration('PT0.001S')) cast as xs:integer) cast as xs:string"/>
+
+  <x:param name="id" select="$tm2t:id"/>
+  <x:param name="uri" select="concat('https://jalit.org/thing/', $tm2t:id)"/>
+
+  <x:scenario label="Given a TEI Element">
+
+    <x:scenario label="When it contains a class attribute">
+      
+      <x:context>
+        <tei:TEI xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2">
+          <content/>
+        </tei:TEI>
+      </x:context>
+
+      <x:expect label="Then remove the class attribute">
+        <tei:TEI xml:id="xml-id1" attr1="value1" attr2="value2">
+          <content/>
+        </tei:TEI>
+      </x:expect>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Note Element">
+
+    <x:scenario label="When it contains attributes">
+      <x:context>
+        <tei:note xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+      </x:context>
+
+      <x:expect label="Then copy all of the attributes">
+        <tei:note xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains paragraph child elements">
+      <x:context>
+        <tei:note>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:note>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:note>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:note>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains non-paragraph child elements">
+      <x:context>
+        <tei:note>
+          <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+          <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+        </tei:note>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:note>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:note>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains paragraph and non-paragraph child elements">
+      <x:context>
+        <tei:note>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+          <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+        </tei:note>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:note>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:note>
+      </x:expect>
+
+    </x:scenario>
+    
+    <x:scenario label="When it has a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Hello World</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Hello World</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has two markdown paragraphs">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Some text.
+
+Some more text.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Some text.</tei:p>
+            <tei:p>Some more text.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single markdown paragraph with line breaks">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once upon
+a time
+in
+the
+West</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with lb elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+
+    <x:scenario label="When it has two markdown paragraphs with line breaks (without hidden whitespace)">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:note>
+          </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element with lb elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has two markdown paragraphs with line breaks (with hidden whitespace)">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once upon
+a time
+in
+the
+West
+    
+Some more
+text.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element with lb elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single markdown paragraph with italic">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once upon *a time* in the *West*</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with italic emph elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+  
+    <x:scenario label="When it has a single markdown paragraph with bold">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once upon **a time** in the **West**.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with bold emph elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 1 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note># This is a level 1 heading
+Some text here.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h1 element and text in a p element">
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 2 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>## This is a level 2 heading
+Some text here.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h2 element and text in a p element">
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 3 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>### This is a level 3 heading
+Some text here.</tei:note>
+        </tei:TEI>        
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h3 element and text in a p element">
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has multiple heading levels and markdown paragraphs">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap headings in a h* elements and text in p elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has paragraps that contain escaped carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:note>
+        </tei:TEI>
+      </x:context>
+
+      <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+            <tei:p>West</tei:p>
+            <tei:p>There was a little Panda called Jennifer</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has paragraps that contain non-escaped carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:note>Once
+upon
+a time
+in the
+
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:note>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+        <tei:TEI>
+          <tei:note>
+            <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+            <tei:p>West</tei:p>
+            <tei:p>There was a little Panda called Jennifer</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:note>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Summary Element">
+
+    <x:scenario label="Outside of a Layout Description Element">
+
+      <x:scenario label="When it contains attributes">
+        <x:context>
+          <tei:summary xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes">
+          <tei:summary xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraph child elements">
+        <x:context>
+          <tei:summary>
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:summary>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:summary>
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:summary>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains non-paragraph child elements">
+        <x:context>
+          <tei:summary>
+            <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:summary>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:summary>
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:summary>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraph and non-paragraph child elements">
+        <x:context>
+          <tei:summary>
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:summary>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:summary>
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:summary>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it has a single markdown paragraph">
+      
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Hello World</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap text in a p element">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Hello World</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has two markdown paragraphs">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Some text.
+
+Some more text.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap each paragraph in a p element">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Some text.</tei:p>
+              <tei:p>Some more text.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single markdown paragraph with line breaks">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once upon
+a time
+in
+the
+West</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap text in a p element with lb elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+  
+      <x:scenario label="When it has two markdown paragraphs with line breaks (without hidden whitespace)">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:summary>
+            </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap each paragraph in a p element with lb elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+              <tei:p>Some more<tei:lb/>text.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has two markdown paragraphs with line breaks (with hidden whitespace)">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once upon
+a time
+in
+the
+West
+    
+Some more
+text.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap each paragraph in a p element with lb elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+              <tei:p>Some more<tei:lb/>text.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single markdown paragraph with italic">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once upon *a time* in the *West*</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap text in a p element with italic emph elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+    
+      <x:scenario label="When it has a single markdown paragraph with bold">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once upon **a time** in the **West**.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap text in a p element with bold emph elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 1 heading and a single markdown paragraph">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary># This is a level 1 heading
+Some text here.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap heading in a h1 element and text in a p element">
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 2 heading and a single markdown paragraph">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>## This is a level 2 heading
+Some text here.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap heading in a h2 element and text in a p element">
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has a single level 3 heading and a single markdown paragraph">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>### This is a level 3 heading
+Some text here.</tei:summary>
+          </tei:TEI>        
+        </x:context>
+        
+        <x:expect label="Wrap heading in a h3 element and text in a p element">
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+              <tei:p>Some text here.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has multiple heading levels and markdown paragraphs">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap headings in a h* elements and text in p elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+              <tei:p>Paragraph 1</tei:p>
+              <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+              <tei:p>Paragraph 2-1.</tei:p>
+              <tei:p>Paragraph 2-2.</tei:p>
+              <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+              <tei:p>Paragraph 3-1.</tei:p>
+              <tei:p>Paragraph 3-2</tei:p>
+              <tei:p>Paragraph 3-3.</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has paragraps that contain escaped carriage return characters">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:summary>
+          </tei:TEI>
+        </x:context>
+  
+        <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+              <tei:p>West</tei:p>
+              <tei:p>There was a little Panda called Jennifer</tei:p>
+              <tei:p>who was a sleepy little panda</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+      
+      <x:scenario label="When it has paragraps that contain non-escaped carriage return characters">
+        
+        <x:context>
+          <tei:TEI>
+            <tei:summary>Once
+upon
+a time
+in the
+
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:summary>
+          </tei:TEI>
+        </x:context>
+        
+        <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+          <tei:TEI>
+            <tei:summary>
+              <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+              <tei:p>West</tei:p>
+              <tei:p>There was a little Panda called Jennifer</tei:p>
+              <tei:p>who was a sleepy little panda</tei:p>
+            </tei:summary>
+          </tei:TEI>
+        </x:expect>
+        
+      </x:scenario>
+
+    </x:scenario>
+
+    <x:scenario label="Within a Layout Description parent Element">
+
+      <x:scenario label="When it contains attributes">
+        <x:context>
+          <tei:layoutDesc>
+            <tei:summary xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+          </tei:layoutDesc>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes">
+          <tei:layoutDesc>
+            <tei:summary xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+          </tei:layoutDesc>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraphs">
+        <x:context>
+          <tei:layoutDesc>
+            <tei:summary>
+              <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+              <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:layoutDesc>
+            <tei:summary>
+              <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+              <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains non-paragraphs">
+        <x:context>
+          <tei:layoutDesc>
+            <tei:summary>
+              <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+              <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:layoutDesc>
+            <tei:summary>
+              <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+              <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraphs and non-paragraphs">
+        <x:context>
+          <tei:layoutDesc>
+            <tei:summary>
+              <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+              <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:layoutDesc>
+            <tei:summary>
+              <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+              <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+            </tei:summary>
+          </tei:layoutDesc>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Quote Element">
+
+    <x:scenario label="When it contains attributes">
+      <x:context>
+        <tei:quote xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+      </x:context>
+
+      <x:expect label="Then copy all of the attributes">
+        <tei:quote xml:id="xml-id1" attr1="value1" class="some-class" attr2="value2"/>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains paragraph child elements">
+      <x:context>
+        <tei:quote>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:quote>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:quote>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:quote>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains non-paragraph child elements">
+      <x:context>
+        <tei:quote>
+          <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+          <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+        </tei:quote>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:quote>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:quote>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it contains paragraph and non-paragraph child elements">
+      <x:context>
+        <tei:quote>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+          <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+        </tei:quote>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:quote>
+          <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+          <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+        </tei:quote>
+      </x:expect>
+
+    </x:scenario>
+
+    <x:scenario label="When it has a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Hello World</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Hello World</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has two markdown paragraphs">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Some text.
+
+Some more text.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Some text.</tei:p>
+            <tei:p>Some more text.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single markdown paragraph with line breaks">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once upon
+a time
+in
+the
+West</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with lb elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+
+    <x:scenario label="When it has two markdown paragraphs with line breaks (without hidden whitespace)">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once upon
+a time
+in
+the
+West
+
+Some more
+text.</tei:quote>
+          </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element with lb elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has two markdown paragraphs with line breaks (with hidden whitespace)">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once upon
+a time
+in
+the
+West
+    
+Some more
+text.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element with lb elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon<tei:lb/>a time<tei:lb/>in<tei:lb/>the<tei:lb/>West</tei:p>
+            <tei:p>Some more<tei:lb/>text.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single markdown paragraph with italic">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once upon *a time* in the *West*</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with italic emph elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph rend="italic">a time</tei:emph> in the <tei:emph rend="italic">West</tei:emph></tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+  
+    <x:scenario label="When it has a single markdown paragraph with bold">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once upon **a time** in the **West**.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap text in a p element with bold emph elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once upon <tei:emph rend="bold">a time</tei:emph> in the <tei:emph rend="bold">West</tei:emph>.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 1 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote># This is a level 1 heading
+Some text here.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h1 element and text in a p element">
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 2 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>## This is a level 2 heading
+Some text here.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h2 element and text in a p element">
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has a single level 3 heading and a single markdown paragraph">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>### This is a level 3 heading
+Some text here.</tei:quote>
+        </tei:TEI>        
+      </x:context>
+      
+      <x:expect label="Wrap heading in a h3 element and text in a p element">
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Some text here.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has multiple heading levels and markdown paragraphs">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote># This is a level 1 heading
+Paragraph 1
+
+## This is a level 2 heading
+Paragraph 2-1.
+
+Paragraph 2-2.
+
+### This is a level 3 heading
+Paragraph 3-1.
+
+Paragraph 3-2
+
+Paragraph 3-3.</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap headings in a h* elements and text in p elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:hi rend="h1">This is a level 1 heading</tei:hi>
+            <tei:p>Paragraph 1</tei:p>
+            <tei:hi rend="h2">This is a level 2 heading</tei:hi>
+            <tei:p>Paragraph 2-1.</tei:p>
+            <tei:p>Paragraph 2-2.</tei:p>
+            <tei:hi rend="h3">This is a level 3 heading</tei:hi>
+            <tei:p>Paragraph 3-1.</tei:p>
+            <tei:p>Paragraph 3-2</tei:p>
+            <tei:p>Paragraph 3-3.</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has paragraps that contain escaped carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once &#xD;upon&#xD;&#xA;a time&#xD; in the &#xD;&#xA;&#xD; West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:quote>
+        </tei:TEI>
+      </x:context>
+
+      <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+            <tei:p>West</tei:p>
+            <tei:p>There was a little Panda called Jennifer</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+    
+    <x:scenario label="When it has paragraps that contain non-escaped carriage return characters">
+      
+      <x:context>
+        <tei:TEI>
+          <tei:quote>Once
+upon
+a time
+in the
+
+West
+
+There was a little Panda called Jennifer
+
+who was a sleepy little panda</tei:quote>
+        </tei:TEI>
+      </x:context>
+      
+      <x:expect label="Wrap each paragraph in a p element and normalize paragraph breaks with lb elements">
+        <tei:TEI>
+          <tei:quote>
+            <tei:p>Once<tei:lb/>upon<tei:lb/>a time<tei:lb/>in the</tei:p>
+            <tei:p>West</tei:p>
+            <tei:p>There was a little Panda called Jennifer</tei:p>
+            <tei:p>who was a sleepy little panda</tei:p>
+          </tei:quote>
+        </tei:TEI>
+      </x:expect>
+      
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given an Anonymous Block Element">
+
+    <x:scenario label="That is a factoid relation">
+
+      <x:scenario label="When it contains attributes">
+        <x:context>
+          <tei:ab attr1="value1" class="some-class" attr2="value2" type="factoid" subtype="relation"/>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result[@attr1 eq 'value1'][@class eq 'some-class'][@attr2 eq 'value2'][@type eq 'factoid'][@subtype eq 'relation'])"/>
+
+        <x:expect label="Then add an xml:id attribute" test="$x:result/string(@xml:id)" select="concat('factoid-', $tm2t:id)"/>
+
+      </x:scenario>
+
+      <x:scenario label="When it does not contain a source attribute">
+        <x:context>
+          <tei:ab type="factoid" subtype="relation"/>
+        </x:context>
+
+        <x:expect label="Then do not add a source attribute" test="empty($x:result/@source)"/>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains a source attribute">
+
+        <x:scenario label="That contains a fragment">
+          <x:context>
+            <tei:ab source="http://somewhere#some-source" type="factoid" subtype="relation"/>
+          </x:context>
+
+          <x:expect label="Then add a source attribute of the fragment" test="$x:result/string(@source)" select="'#some-source'"/>
+        </x:scenario>
+
+        <x:scenario label="That does not contain a fragment">
+          <x:context>
+            <tei:ab source="some-source" type="factoid" subtype="relation"/>
+          </x:context>
+
+          <x:expect label="Then add a source attribute of the fragment" test="$x:result/string(@source)" select="'#some-source'"/>
+        </x:scenario>
+
+        <x:scenario label="That is only a fragment">
+          <x:context>
+            <tei:ab source="#some-source" type="factoid" subtype="relation"/>
+          </x:context>
+
+          <x:expect label="Then add a source attribute of the fragment" test="$x:result/string(@source)" select="'#some-source'"/>
+        </x:scenario>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraphs">
+        <x:context>
+          <tei:ab type="factoid" subtype="relation">
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:ab>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:ab xml:id="factoid-{$tm2t:id}" type="factoid" subtype="relation">
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there and welcome</tei:p>
+            <tei:p>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</tei:p>
+          </tei:ab>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains non-paragraphs">
+        <x:context>
+          <tei:ab type="factoid" subtype="relation">
+            <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:ab>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:ab xml:id="factoid-{$tm2t:id}" type="factoid" subtype="relation">
+            <something><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</something>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:ab>
+        </x:expect>
+
+      </x:scenario>
+
+      <x:scenario label="When it contains paragraphs and non-paragraphs">
+        <x:context>
+          <tei:ab type="factoid" subtype="relation">
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:ab>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:ab xml:id="factoid-{$tm2t:id}" type="factoid" subtype="relation">
+            <tei:p><tei:emph rend="bold">Hello</tei:emph> there <unknown>and</unknown> welcome</tei:p>
+            <other>Goodbye, and see you <tei:emph rend="italic">again</tei:emph> soon</other>
+          </tei:ab>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given an Editor Element">
+
+    <x:scenario label="Outside of a TitleStmt Element">
+      <x:context>
+        <tei:editor>
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:editor>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:editor>
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:editor>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a TitleStmt parent Element">
+      <x:scenario label="Without a preceeding Editor Element">
+        <x:context>
+          <tei:titleStmt>
+            <tei:editor ref="x">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:editor>
+          </tei:titleStmt>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:titleStmt>
+            <tei:editor ref="x">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:editor>
+          </tei:titleStmt>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="With a preceeding Editor Element of the same user name">
+        <x:context>
+          <tei:titleStmt>
+            <tei:editor>Some user name</tei:editor>
+            <tei:editor>Other user name</tei:editor>
+          </tei:titleStmt>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:titleStmt>
+            <tei:editor>Some user name</tei:editor>
+            <tei:editor>Other user name</tei:editor>
+          </tei:titleStmt>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="With a preceeding Editor Element of a different user">
+        <x:scenario label="With a following Editor Element">
+          <x:context>
+            <tei:titleStmt>
+              <tei:editor>Some user name</tei:editor>
+              <tei:editor>Different user name</tei:editor>
+              <tei:editor>Another user name</tei:editor>
+            </tei:titleStmt>
+          </x:context>
+
+          <x:expect label="Then copy as is">
+            <tei:titleStmt>
+              <tei:editor>Some user name</tei:editor>
+              <tei:editor>Different user name</tei:editor>
+              <tei:editor>Another user name</tei:editor>
+            </tei:titleStmt>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Without a following Editor Element">
+
+          <x:scenario label="When the user id is 'guest'">
+            <x:param name="user-id">guest</x:param>
+            <x:param name="user-name">Guest</x:param>
+            <x:context>
+              <tei:titleStmt>
+                <tei:editor>Some user name</tei:editor>
+                <tei:editor>Different user name</tei:editor>
+              </tei:titleStmt>
+            </x:context>
+
+            <x:expect label="Then copy as is">
+              <tei:titleStmt>
+                <tei:editor>Some user name</tei:editor>
+                <tei:editor>Different user name</tei:editor>
+              </tei:titleStmt>
+            </x:expect>
+          </x:scenario>
+
+          <x:scenario label="When the user id is not 'guest'">
+            <x:param name="user-id">aretter</x:param>
+            <x:param name="user-name">Adam Retter</x:param>
+            
+            <x:scenario label="When the user has previously contributed">
+              <x:context>
+                <tei:titleStmt>
+                  <tei:editor>Some user name</tei:editor>
+                  <tei:editor>Different user name</tei:editor>
+                  <tei:editor xml:id="aretter" role="contributor">Adam Retter</tei:editor>
+                </tei:titleStmt>
+              </x:context>
+              <x:expect label="Then copy as is">
+                <tei:titleStmt>
+                  <tei:editor>Some user name</tei:editor>
+                  <tei:editor>Different user name</tei:editor>
+                  <tei:editor xml:id="aretter" role="contributor">Adam Retter</tei:editor>
+                </tei:titleStmt>
+              </x:expect>
+            </x:scenario>
+            
+            <x:scenario label="When the user has not previously contributed">
+              <x:context>
+                <tei:titleStmt>
+                  <tei:editor>Some user name</tei:editor>
+                  <tei:editor>Different user name</tei:editor>
+                </tei:titleStmt>
+              </x:context>
+              <x:expect label="Then add the user as a Contributor">
+                <tei:titleStmt>
+                  <tei:editor>Some user name</tei:editor>
+                  <tei:editor>Different user name</tei:editor>
+                  <tei:editor xml:id="aretter" role="contributor">Adam Retter</tei:editor>
+                </tei:titleStmt>
+              </x:expect>
+            </x:scenario>
+          </x:scenario>
+        </x:scenario>
+
+      </x:scenario>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="Given an Identifier Element">
+
+    <x:scenario label="Outside of an Anonymous Block or Publication Statement Element">
+      <x:context>
+        <tei:idno type="ascheme">123-456</tei:idno>
+      </x:context>
+
+      <x:expect label="Then copy as is">
+        <tei:idno type="ascheme">123-456</tei:idno>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within an Anonymous Block parent Element">
+      <x:scenario label="That is not a factoid relation">
+
+        <x:context>
+          <tei:ab>
+            <tei:idno type="ascheme">123-456</tei:idno>
+          </tei:ab>
+        </x:context>
+
+        <x:expect label="Then copy as is">
+          <tei:ab>
+            <tei:idno type="ascheme">123-456</tei:idno>
+          </tei:ab>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="That is a factoid relation">
+        <x:context>
+          <tei:ab type="factoid" subtype="relation" class="some-class">
+            <tei:idno source="some-source" type="ascheme" class="some-other-class">123-456</tei:idno>
+          </tei:ab>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:idno[@type eq 'ascheme'][@class eq 'some-other-class'])"/>
+        <x:expect label="Then add an xml:id attribute" test="$x:result/tei:idno/string(@xml:id)" select="'name-1'"/>
+        <x:expect label="Then modify the source attribute" test="$x:result/tei:idno/string(@source)" select="'#some-source'"/>
+
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Within a Publication Statement parent Element">
+
+      <x:context>
+        <tei:publicationStmt class="some-class">
+          <tei:idno source="some-source" type="ascheme" class="some-other-class">123-456</tei:idno>
+        </tei:publicationStmt>
+      </x:context>
+
+      <x:scenario label="When this is an existing record">
+        <x:expect label="Then copy as is">
+          <tei:publicationStmt class="some-class">
+            <tei:idno source="some-source" type="ascheme" class="some-other-class">123-456</tei:idno>
+          </tei:publicationStmt>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="When this is a new record">
+        <x:param name="new" select="true()"/>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:idno[@type eq 'ascheme'][@class eq 'some-other-class'])"/>
+        <x:expect label="Then add the URI" test="ends-with($x:result/tei:idno, concat('https://jalit.org/thing/', $tm2t:id))"/>
+
+      </x:scenario>
+
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="Given a Place Element">
+
+    <x:scenario label="Outside of a List Place Element">
+      <x:context>
+        <tei:place class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:place>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:place class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:place>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a List Place parent Element">
+      <x:context>
+        <tei:listPlace>
+          <tei:place class="some-class" source="http://somewhere#some-source">
+            <tei:p>Paragraph 1</tei:p>
+            <tei:p>Paragraph 2</tei:p>
+          </tei:place>
+        </tei:listPlace>
+      </x:context>
+
+      <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:place[@class eq 'some-class'])"/>
+      <x:expect label="Then add an xml:id attribute" test="$x:result/tei:place/string(@xml:id)" select="concat('place-', $tm2t:id)"/>
+      <x:expect label="Then modify the source attribute" test="$x:result/tei:place/string(@source)" select="'#some-source'"/>
+      <x:expect label="Then copy all children as is" test="$x:result/tei:place/node()">
+        <tei:p>Paragraph 1</tei:p>
+        <tei:p>Paragraph 2</tei:p>
+      </x:expect>
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Place Name Element">
+
+    <x:scenario label="Outside of a Place Element">
+      <x:context>
+        <tei:placeName class="some-class">
+          <tei:idno>place-abc</tei:idno>
+          <tei:idno>place-xyz</tei:idno>
+        </tei:placeName>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:placeName class="some-class">
+          <tei:idno>place-abc</tei:idno>
+          <tei:idno>place-xyz</tei:idno>
+        </tei:placeName>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Place parent Element">
+
+      <x:scenario label="Outside of a List Place Element">
+        <x:context>
+          <tei:place>
+            <tei:placeName class="some-class">
+              <tei:idno>place-abc</tei:idno>
+              <tei:idno>place-xyz</tei:idno>
+            </tei:placeName>
+          </tei:place>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:place>
+            <tei:placeName class="some-class">
+              <tei:idno>place-abc</tei:idno>
+              <tei:idno>place-xyz</tei:idno>
+            </tei:placeName>
+          </tei:place>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a List Place parent Element">
+        <x:context>
+          <tei:listPlace>
+            <tei:place>
+              <tei:placeName class="some-class" source="http://some-where/#some-source">
+                <tei:idno>place-abc</tei:idno>
+                <tei:idno>place-xyz</tei:idno>
+              </tei:placeName>
+            </tei:place>
+          </tei:listPlace>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:place/tei:placeName[@class eq 'some-class'])"/>
+        <x:expect label="Then add an xml:id attribute" test="$x:result/tei:place/tei:placeName/string(@xml:id)" select="'name-1'"/>
+        <x:expect label="Then modify the source attribute" test="$x:result/tei:place/tei:placeName/string(@source)" select="'#some-source'"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:place/tei:placeName/node()">
+          <tei:idno>place-abc</tei:idno>
+          <tei:idno>place-xyz</tei:idno>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Bibliographic Citation Element">
+
+    <x:scenario label="Outside of a Place Element">
+      <x:context>
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Place parent Element">
+
+      <x:scenario label="Outside of a List Place Element">
+        <x:context>
+          <tei:place>
+            <tei:bibl class="some-class">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </tei:bibl>
+          </tei:place>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:place>
+            <tei:bibl class="some-class">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </tei:bibl>
+          </tei:place>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a List Place parent Element">
+        <x:context>
+          <tei:listPlace>
+            <tei:place>
+              <tei:bibl class="some-class" source="http://some-where/#some-source">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:place>
+          </tei:listPlace>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:place/tei:bibl[@class eq 'some-class'])"/>
+        <x:expect label="Remove the source attribute" test="empty($x:result/tei:place/tei:bibl/@source)"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:place/tei:bibl/node()">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </x:expect>
+
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Outside of a Person Element">
+      <x:context>
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Person parent Element">
+
+        <x:scenario label="Outside of a List Person Element">
+          <x:context>
+            <tei:person>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:person>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:person>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:person>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within a List Person parent Element">
+          <x:context>
+            <tei:listPerson>
+              <tei:person>
+                <tei:bibl class="some-class" source="http://some-where/#some-source">
+                  <tei:idno>bibl-abc</tei:idno>
+                  <tei:idno>bibl-xyz</tei:idno>
+                </tei:bibl>
+              </tei:person>
+            </tei:listPerson>
+          </x:context>
+
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:person/tei:bibl[@class eq 'some-class'])"/>
+          <x:expect label="Remove the source attribute" test="empty($x:result/tei:person/tei:bibl/@source)"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:person/tei:bibl/node()">
+            <tei:idno>bibl-abc</tei:idno>
+            <tei:idno>bibl-xyz</tei:idno>
+          </x:expect>
+
+        </x:scenario>
+      </x:scenario>
+
+    <x:scenario label="Outside of a Bibliographic Citation Element">
+      <x:context>
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Bibliographic Citation parent Element">
+
+        <x:scenario label="Outside of a Bibliographic Citation Element">
+          <x:context>
+            <tei:bibl>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:bibl>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:bibl>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:bibl>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within a Bibliographic Citation parent Element">
+
+          <x:scenario label="Outside of a Body Element">
+            <x:context>
+              <tei:bibl>
+                <tei:bibl>
+                  <tei:bibl class="some-class">
+                    <tei:idno>bibl-abc</tei:idno>
+                    <tei:idno>bibl-xyz</tei:idno>
+                  </tei:bibl>
+                </tei:bibl>
+              </tei:bibl>
+            </x:context>
+            <x:expect label="Then copy as is">
+              <tei:bibl>
+                <tei:bibl>
+                  <tei:bibl class="some-class">
+                    <tei:idno>bibl-abc</tei:idno>
+                    <tei:idno>bibl-xyz</tei:idno>
+                  </tei:bibl>
+                </tei:bibl>
+              </tei:bibl>
+            </x:expect>
+          </x:scenario>
+
+          <x:scenario label="Within a Body parent Element">
+            <x:context>
+              <tei:body>
+                <tei:bibl>
+                  <tei:bibl>
+                    <tei:bibl class="some-class" source="http://some-where/#some-source">
+                      <tei:idno>bibl-abc</tei:idno>
+                      <tei:idno>bibl-xyz</tei:idno>
+                    </tei:bibl>
+                  </tei:bibl>
+                </tei:bibl>
+              </tei:body>
+            </x:context>
+
+            <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:bibl/tei:bibl/tei:bibl[@class eq 'some-class'])"/>
+            <x:expect label="Remove the source attribute" test="empty($x:result/tei:bibl/tei:bibl/tei:bibl/@source)"/>
+            <x:expect label="Then copy all children as is" test="$x:result/tei:bibl/tei:bibl/tei:bibl/node()">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </x:expect>
+          </x:scenario>
+        </x:scenario>
+      </x:scenario>
+
+    <x:scenario label="Outside of a Body Element">
+      <x:context>
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Body parent Element">
+
+      <x:scenario label="Outside of a Text Element">
+        <x:context>
+          <tei:body>
+            <tei:bibl class="some-class">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </tei:bibl>
+          </tei:body>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:body>
+            <tei:bibl class="some-class">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </tei:bibl>
+          </tei:body>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a Text parent Element">
+        <x:context>
+          <tei:text>
+            <tei:body>
+              <tei:bibl class="some-class" source="http://some-where/#some-source">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:body>
+          </tei:text>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:body/tei:bibl[@class eq 'some-class'])"/>
+        <x:expect label="Remove the source attribute" test="empty($x:result/tei:body/tei:bibl/@source)"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:body/tei:bibl/node()">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </x:expect>
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Outside of a Citation List Element">
+      <x:context>
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:bibl class="some-class">
+          <tei:idno>bibl-abc</tei:idno>
+          <tei:idno>bibl-xyz</tei:idno>
+        </tei:bibl>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Citation List parent Element">
+
+        <x:scenario label="Outside of an Additional Element">
+          <x:context>
+            <tei:listBibl>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:listBibl>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:listBibl>
+              <tei:bibl class="some-class">
+                <tei:idno>bibl-abc</tei:idno>
+                <tei:idno>bibl-xyz</tei:idno>
+              </tei:bibl>
+            </tei:listBibl>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within an Additional parent Element">
+
+          <x:scenario label="Outside of a Manuscript Description Element">
+            <x:context>
+              <tei:additional>
+                <tei:listBibl>
+                  <tei:bibl class="some-class">
+                    <tei:idno>bibl-abc</tei:idno>
+                    <tei:idno>bibl-xyz</tei:idno>
+                  </tei:bibl>
+                </tei:listBibl>
+              </tei:additional>
+            </x:context>
+            <x:expect label="Then copy as is">
+              <tei:additional>
+                <tei:listBibl>
+                  <tei:bibl class="some-class">
+                    <tei:idno>bibl-abc</tei:idno>
+                    <tei:idno>bibl-xyz</tei:idno>
+                  </tei:bibl>
+                </tei:listBibl>
+              </tei:additional>
+            </x:expect>
+          </x:scenario>
+
+          <x:scenario label="Within a Manuscript Description parent Element">
+            <x:context>
+              <tei:msDesc>
+                <tei:additional>
+                  <tei:listBibl>
+                    <tei:bibl class="some-class" source="http://some-where/#some-source">
+                      <tei:idno>bibl-abc</tei:idno>
+                      <tei:idno>bibl-xyz</tei:idno>
+                    </tei:bibl>
+                  </tei:listBibl>
+                </tei:additional>
+              </tei:msDesc>
+            </x:context>
+
+            <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:additional/tei:listBibl/tei:bibl[@class eq 'some-class'])"/>
+            <x:expect label="Remove the source attribute" test="empty($x:result/tei:additional/tei:listBibl/tei:bibl/@source)"/>
+            <x:expect label="Then copy all children as is" test="$x:result/tei:additional/tei:listBibl/tei:bibl/node()">
+              <tei:idno>bibl-abc</tei:idno>
+              <tei:idno>bibl-xyz</tei:idno>
+            </x:expect>
+          </x:scenario>
+        </x:scenario>
+      </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Title Element">
+    
+    <x:scenario label="That is empty (has no text and is not a reference)">
+      <x:context>
+        <tei:note>
+          <tei:title class="some-class"/>
+        </tei:note>
+      </x:context>
+      <x:expect label="Then drop the title element">
+        <tei:note/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="That contains only whitespace">
+      <x:context>
+        <tei:note>
+          <tei:title class="some-class">    </tei:title>
+        </tei:note>
+      </x:context>
+      <x:expect label="Then drop the title element">
+        <tei:note/>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Outside of a Bibliographic Citation Element">
+      <x:context>
+        <tei:title class="some-class" ref="x">
+          <tei:idno>title-abc</tei:idno>
+          <tei:idno>title-xyz</tei:idno>
+        </tei:title>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:title class="some-class" ref="x">
+          <tei:idno>title-abc</tei:idno>
+          <tei:idno>title-xyz</tei:idno>
+        </tei:title>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Bibliographic Citation parent Element">
+
+      <x:scenario label="Outside of a Body Element">
+        <x:context>
+          <tei:bibl>
+            <tei:title class="some-class" ref="x">
+              <tei:idno>title-abc</tei:idno>
+              <tei:idno>title-xyz</tei:idno>
+            </tei:title>
+          </tei:bibl>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:bibl>
+            <tei:title class="some-class" ref="x">
+              <tei:idno>title-abc</tei:idno>
+              <tei:idno>title-xyz</tei:idno>
+            </tei:title>
+          </tei:bibl>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a Body parent Element">
+        
+        <x:scenario label="Title is a reference and has no source">
+          <x:context>
+            <tei:body>
+              <tei:bibl>
+                <tei:title class="some-class" ref="x">
+                  <tei:idno>title-abc</tei:idno>
+                  <tei:idno>title-xyz</tei:idno>
+                </tei:title>
+              </tei:bibl>
+            </tei:body>
+          </x:context>
+          
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:bibl/tei:title[@class eq 'some-class']) and exists($x:result/tei:bibl/tei:title[@ref eq 'x'])"/>
+          <x:expect label="Then add an xml:id attribute" test="$x:result/tei:bibl/tei:title/string(@xml:id)" select="'title-1'"/>
+          <x:expect label="Do not add a source attribute" test="empty($x:result/tei:bibl/tei:title/@source)"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:bibl/tei:title/node()">
+            <tei:idno>title-abc</tei:idno>
+            <tei:idno>title-xyz</tei:idno>
+          </x:expect>
+        </x:scenario>
+        
+        <x:scenario label="Title is a reference and has a source">
+          <x:context>
+            <tei:body>
+              <tei:bibl>
+                <tei:title class="some-class" source="http://some-where/#some-source" ref="x">
+                  <tei:idno>title-abc</tei:idno>
+                  <tei:idno>title-xyz</tei:idno>
+                </tei:title>
+              </tei:bibl>
+            </tei:body>
+          </x:context>
+          
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:bibl/tei:title[@class eq 'some-class']) and exists($x:result/tei:bibl/tei:title[@ref eq 'x'])"/>
+          <x:expect label="Then add an xml:id attribute" test="$x:result/tei:bibl/tei:title/string(@xml:id)" select="'title-1'"/>
+          <x:expect label="Then modify the source attribute" test="$x:result/tei:bibl/tei:title/string(@source)" select="'#some-source'"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:bibl/tei:title/node()">
+            <tei:idno>title-abc</tei:idno>
+            <tei:idno>title-xyz</tei:idno>
+          </x:expect>
+        </x:scenario>
+        
+        <x:scenario label="Title has text and no source">
+          <x:context>
+            <tei:body>
+              <tei:bibl>
+                <tei:title class="some-class" ref="x">This is a title</tei:title>
+              </tei:bibl>
+            </tei:body>
+          </x:context>
+          
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:bibl/tei:title[@class eq 'some-class']) and exists($x:result/tei:bibl/tei:title[@ref eq 'x'])"/>
+          <x:expect label="Then add an xml:id attribute" test="$x:result/tei:bibl/tei:title/string(@xml:id)" select="'title-1'"/>
+          <x:expect label="Do not add a source attribute" test="empty($x:result/tei:bibl/tei:title/@source)"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:bibl/tei:title/text()">This is a title</x:expect>
+        </x:scenario>
+        
+        <x:scenario label="Title has text and a source">
+          <x:context>
+            <tei:body>
+              <tei:bibl>
+                <tei:title class="some-class" source="http://some-where/#some-source" ref="x">This is a title</tei:title>
+              </tei:bibl>
+            </tei:body>
+          </x:context>
+          
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:bibl/tei:title[@class eq 'some-class']) and exists($x:result/tei:bibl/tei:title[@ref eq 'x'])"/>
+          <x:expect label="Then add an xml:id attribute" test="$x:result/tei:bibl/tei:title/string(@xml:id)" select="'title-1'"/>
+          <x:expect label="Then modify the source attribute" test="$x:result/tei:bibl/tei:title/string(@source)" select="'#some-source'"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:bibl/tei:title/text()">This is a title</x:expect>
+        </x:scenario>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Person Element">
+
+    <x:scenario label="Outside of a List Person Element">
+      <x:context>
+        <tei:person class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:person>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:person class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:person>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a List Person parent Element">
+      <x:context>
+        <tei:listPerson>
+          <tei:person class="some-class" source="http://somewhere#some-source">
+            <tei:p>Paragraph 1</tei:p>
+            <tei:p>Paragraph 2</tei:p>
+          </tei:person>
+        </tei:listPerson>
+      </x:context>
+
+      <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:person[@class eq 'some-class'])"/>
+      <x:expect label="Then add an xml:id attribute" test="$x:result/tei:person/string(@xml:id)" select="concat('person-', $tm2t:id)"/>
+      <x:expect label="Then modify the source attribute" test="$x:result/tei:person/string(@source)" select="'#some-source'"/>
+      <x:expect label="Then copy all children as is" test="$x:result/tei:person/node()">
+        <tei:p>Paragraph 1</tei:p>
+        <tei:p>Paragraph 2</tei:p>
+      </x:expect>
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Person Name Element">
+
+    <x:scenario label="Outside of a Person Element">
+      <x:context>
+        <tei:persName class="some-class">
+          <tei:idno>person-abc</tei:idno>
+          <tei:idno>person-xyz</tei:idno>
+        </tei:persName>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:persName class="some-class">
+          <tei:idno>person-abc</tei:idno>
+          <tei:idno>person-xyz</tei:idno>
+        </tei:persName>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Person parent Element">
+
+      <x:scenario label="Outside of a List Person Element">
+        <x:context>
+          <tei:person>
+            <tei:persName class="some-class">
+              <tei:idno>person-abc</tei:idno>
+              <tei:idno>person-xyz</tei:idno>
+            </tei:persName>
+          </tei:person>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:person>
+            <tei:persName class="some-class">
+              <tei:idno>person-abc</tei:idno>
+              <tei:idno>person-xyz</tei:idno>
+            </tei:persName>
+          </tei:person>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a List Person parent Element">
+        <x:context>
+          <tei:listPerson>
+            <tei:person>
+              <tei:persName class="some-class" source="http://some-where/#some-source">
+                <tei:idno>person-abc</tei:idno>
+                <tei:idno>person-xyz</tei:idno>
+              </tei:persName>
+            </tei:person>
+          </tei:listPerson>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:person/tei:persName[@class eq 'some-class'])"/>
+        <x:expect label="Then add an xml:id attribute" test="$x:result/tei:person/tei:persName/string(@xml:id)" select="'name-1'"/>
+        <x:expect label="Then modify the source attribute" test="$x:result/tei:person/tei:persName/string(@source)" select="'#some-source'"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:person/tei:persName/node()">
+          <tei:idno>person-abc</tei:idno>
+          <tei:idno>person-xyz</tei:idno>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Manuscript Description Element">
+
+    <x:scenario label="Outside of a Person Element">
+      <x:context>
+        <tei:msDesc class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:msDesc>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:msDesc class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:msDesc>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Person parent Element">
+
+      <x:scenario label="Outside of a List Person Element">
+        <x:context>
+          <tei:person>
+            <tei:msDesc class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:msDesc>
+          </tei:person>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:person>
+            <tei:msDesc class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:msDesc>
+          </tei:person>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a List Person parent Element">
+        <x:context>
+          <tei:listPerson>
+            <tei:person>
+              <tei:msDesc class="some-class" source="http://some-where/#some-source">
+                <tei:p>Paragraph 1</tei:p>
+                <tei:p>Paragraph 2</tei:p>
+              </tei:msDesc>
+            </tei:person>
+          </tei:listPerson>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:person/tei:msDesc[@class eq 'some-class'])"/>
+        <x:expect label="Then add an xml:id attribute" test="$x:result/tei:person/tei:msDesc/string(@xml:id)" select="concat('ms-', $tm2t:id)"/>
+        <x:expect label="Then modify the source attribute" test="$x:result/tei:person/tei:msDesc/string(@source)" select="'#some-source'"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:person/tei:msDesc/node()">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Manuscript Item Element">
+
+    <x:scenario label="Outside of a Manuscript Contents Element">
+      <x:context>
+        <tei:msItem class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:msItem>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:msItem class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:msItem>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Manuscript Contents parent Element">
+
+      <x:scenario label="Outside of a Manuscript Description Element">
+        <x:context>
+          <tei:msContents>
+            <tei:msItem class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:msItem>
+          </tei:msContents>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:msContents>
+            <tei:msItem class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:msItem>
+          </tei:msContents>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a Manuscript Description parent Element">
+        <x:context>
+          <tei:msDesc>
+            <tei:msContents>
+              <tei:msItem class="some-class" source="http://some-where/#some-source">
+                <tei:p>Paragraph 1</tei:p>
+                <tei:p>Paragraph 2</tei:p>
+              </tei:msItem>
+            </tei:msContents>
+          </tei:msDesc>
+        </x:context>
+
+        <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:msContents/tei:msItem[@class eq 'some-class'])"/>
+        <x:expect label="Then add an xml:id attribute" test="$x:result/tei:msContents/tei:msItem/string(@xml:id)" select="'item-1.1'"/>
+        <x:expect label="Then modify the source attribute" test="$x:result/tei:msContents/tei:msItem/string(@source)" select="'#some-source'"/>
+        <x:expect label="Then copy all children as is" test="$x:result/tei:msContents/tei:msItem/node()">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </x:expect>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Layout Element">
+
+    <x:scenario label="Outside of a Layout Description Element">
+      <x:context>
+        <tei:layout class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:layout>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:layout class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:layout>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Layout Description parent Element">
+
+      <x:scenario label="Outside of an Object Description Element">
+        <x:context>
+          <tei:layoutDesc>
+            <tei:layout class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:layout>
+          </tei:layoutDesc>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:layoutDesc>
+            <tei:layout class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:layout>
+          </tei:layoutDesc>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within an Object Description parent Element">
+
+        <x:scenario label="Outside of a Physical Description Element">
+          <x:context>
+            <tei:objectDesc>
+              <tei:layoutDesc>
+                <tei:layout class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:layout>
+              </tei:layoutDesc>
+            </tei:objectDesc>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:objectDesc>
+              <tei:layoutDesc>
+                <tei:layout class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:layout>
+              </tei:layoutDesc>
+            </tei:objectDesc>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within a Physical Description parent Element">
+
+          <x:scenario label="Outside of a Manuscript Description Element">
+            <x:context>
+              <tei:physDesc>
+                <tei:objectDesc>
+                  <tei:layoutDesc>
+                    <tei:layout class="some-class">
+                      <tei:p>Paragraph 1</tei:p>
+                      <tei:p>Paragraph 2</tei:p>
+                    </tei:layout>
+                  </tei:layoutDesc>
+                </tei:objectDesc>
+              </tei:physDesc>
+            </x:context>
+            <x:expect label="Then copy as is">
+              <tei:physDesc>
+                <tei:objectDesc>
+                  <tei:layoutDesc>
+                    <tei:layout class="some-class">
+                      <tei:p>Paragraph 1</tei:p>
+                      <tei:p>Paragraph 2</tei:p>
+                    </tei:layout>
+                  </tei:layoutDesc>
+                </tei:objectDesc>
+              </tei:physDesc>
+            </x:expect>
+          </x:scenario>
+
+          <x:scenario label="Within a Manuscript Description parent Element">
+            <x:context>
+              <tei:msDesc>
+                <tei:physDesc>
+                  <tei:objectDesc>
+                    <tei:layoutDesc>
+                      <tei:layout class="some-class" source="http://some-where/#some-source">
+                        <tei:p>Paragraph 1</tei:p>
+                        <tei:p>Paragraph 2</tei:p>
+                      </tei:layout>
+                    </tei:layoutDesc>
+                  </tei:objectDesc>
+                </tei:physDesc>
+              </tei:msDesc>
+            </x:context>
+
+            <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:physDesc/tei:objectDesc/tei:layoutDesc/tei:layout[@class eq 'some-class'])"/>
+            <x:expect label="Then add an xml:id attribute" test="$x:result/tei:physDesc/tei:objectDesc/tei:layoutDesc/tei:layout/string(@xml:id)" select="'layout-1.1.1.1'"/>
+            <x:expect label="Then modify the source attribute" test="$x:result/tei:physDesc/tei:objectDesc/tei:layoutDesc/tei:layout/string(@source)" select="'#some-source'"/>
+            <x:expect label="Then copy all children as is" test="$x:result/tei:physDesc/tei:objectDesc/tei:layoutDesc/tei:layout/node()">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </x:expect>
+          </x:scenario>
+        </x:scenario>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Note on Hand Element">
+
+    <x:scenario label="Outside of a Description of Hands Element">
+      <x:context>
+        <tei:handNote class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:handNote>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:handNote class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:handNote>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a Description of Hands parent Element">
+
+      <x:scenario label="Outside of a Physical Description Element">
+        <x:context>
+          <tei:handDesc>
+            <tei:handNote class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:handNote>
+          </tei:handDesc>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:handDesc>
+            <tei:handNote class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:handNote>
+          </tei:handDesc>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within a Physical Description parent Element">
+
+        <x:scenario label="Outside of a Manuscript Description Element">
+          <x:context>
+            <tei:physDesc>
+              <tei:handDesc>
+                <tei:handNote class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:handNote>
+              </tei:handDesc>
+            </tei:physDesc>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:physDesc>
+              <tei:handDesc>
+                <tei:handNote class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:handNote>
+              </tei:handDesc>
+            </tei:physDesc>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within a Manuscript Description parent Element">
+          <x:context>
+            <tei:msDesc>
+              <tei:physDesc>
+                <tei:handDesc>
+                  <tei:handNote class="some-class" source="http://some-where/#some-source">
+                    <tei:p>Paragraph 1</tei:p>
+                    <tei:p>Paragraph 2</tei:p>
+                  </tei:handNote>
+                </tei:handDesc>
+              </tei:physDesc>
+            </tei:msDesc>
+          </x:context>
+
+          <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:physDesc/tei:handDesc/tei:handNote[@class eq 'some-class'])"/>
+          <x:expect label="Then add an xml:id attribute" test="$x:result/tei:physDesc/tei:handDesc/tei:handNote/string(@xml:id)" select="'hand-1.1.1'"/>
+          <x:expect label="Then modify the source attribute" test="$x:result/tei:physDesc/tei:handDesc/tei:handNote/string(@source)" select="'#some-source'"/>
+          <x:expect label="Then copy all children as is" test="$x:result/tei:physDesc/tei:handDesc/tei:handNote/node()">
+            <tei:p>Paragraph 1</tei:p>
+            <tei:p>Paragraph 2</tei:p>
+          </x:expect>
+        </x:scenario>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given an Item Element">
+
+    <x:scenario label="Outside of a List Element">
+      <x:context>
+        <tei:item class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:item>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:item class="some-class">
+          <tei:p>Paragraph 1</tei:p>
+          <tei:p>Paragraph 2</tei:p>
+        </tei:item>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="Within a List parent Element">
+
+      <x:scenario label="Outside of an Additions Element">
+        <x:context>
+          <tei:list>
+            <tei:item class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:item>
+          </tei:list>
+        </x:context>
+        <x:expect label="Then copy as is">
+          <tei:list>
+            <tei:item class="some-class">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </tei:item>
+          </tei:list>
+        </x:expect>
+      </x:scenario>
+
+      <x:scenario label="Within an Additions Element">
+
+        <x:scenario label="Outside of a Physical Description Element">
+          <x:context>
+            <tei:additions>
+              <tei:list>
+                <tei:item class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:item>
+              </tei:list>
+            </tei:additions>
+          </x:context>
+          <x:expect label="Then copy as is">
+            <tei:additions>
+              <tei:list>
+                <tei:item class="some-class">
+                  <tei:p>Paragraph 1</tei:p>
+                  <tei:p>Paragraph 2</tei:p>
+                </tei:item>
+              </tei:list>
+            </tei:additions>
+          </x:expect>
+        </x:scenario>
+
+        <x:scenario label="Within a Physical Description parent Element">
+
+          <x:scenario label="Outside of a Manuscript Description Element">
+            <x:context>
+              <tei:physDesc>
+                <tei:additions>
+                  <tei:list>
+                    <tei:item class="some-class">
+                      <tei:p>Paragraph 1</tei:p>
+                      <tei:p>Paragraph 2</tei:p>
+                    </tei:item>
+                  </tei:list>
+                </tei:additions>
+              </tei:physDesc>
+            </x:context>
+            <x:expect label="Then copy as is">
+              <tei:physDesc>
+                <tei:additions>
+                  <tei:list>
+                    <tei:item class="some-class">
+                      <tei:p>Paragraph 1</tei:p>
+                      <tei:p>Paragraph 2</tei:p>
+                    </tei:item>
+                  </tei:list>
+                </tei:additions>
+              </tei:physDesc>
+            </x:expect>
+          </x:scenario>
+
+          <x:scenario label="Within a Manuscript Description parent Element">
+            <x:context>
+              <tei:msDesc>
+                <tei:physDesc>
+                  <tei:additions>
+                    <tei:list>
+                      <tei:item class="some-class" source="http://some-where/#some-source">
+                        <tei:p>Paragraph 1</tei:p>
+                        <tei:p>Paragraph 2</tei:p>
+                      </tei:item>
+                    </tei:list>
+                  </tei:additions>
+                </tei:physDesc>
+              </tei:msDesc>
+            </x:context>
+
+            <x:expect label="Then copy all of the attributes" test="exists($x:result/tei:physDesc/tei:additions/tei:list/tei:item[@class eq 'some-class'])"/>
+            <x:expect label="Then add an xml:id attribute" test="$x:result/tei:physDesc/tei:additions/tei:list/tei:item/string(@xml:id)" select="'add-1.1.1.1'"/>
+            <x:expect label="Then modify the source attribute" test="$x:result/tei:physDesc/tei:additions/tei:list/tei:item/string(@source)" select="'#some-source'"/>
+            <x:expect label="Then copy all children as is" test="$x:result/tei:physDesc/tei:additions/tei:list/tei:item/node()">
+              <tei:p>Paragraph 1</tei:p>
+              <tei:p>Paragraph 2</tei:p>
+            </x:expect>
+          </x:scenario>
+        </x:scenario>
+
+      </x:scenario>
+
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="Given a Relation Element">
+
+    <x:scenario label="When it has an Active child Element">
+      <x:context>
+        <tei:relation>
+          <tei:active ref="active-1"/>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then transform the Active child Element into an Attribute">
+        <tei:relation active="active-1"/>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When it has a Mutual child Element">
+      <x:context>
+        <tei:relation>
+          <tei:mutual ref="mutual-1"/>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then transform the Mutual child Element into an Attribute">
+        <tei:relation mutual="mutual-1"/>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When it has a Passive child Element">
+      <x:context>
+        <tei:relation>
+          <tei:passive ref="passive-1"/>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then transform the Passive child Element into an Attribute">
+        <tei:relation passive="passive-1"/>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When it has no Active, Mutual, or Passive child Elements">
+      <x:context>
+        <tei:relation>
+          <tei:desc>
+            <tei:idno>desc-1</tei:idno>
+          </tei:desc>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then copy as is">
+        <tei:relation>
+          <tei:desc>
+            <tei:idno>desc-1</tei:idno>
+          </tei:desc>
+        </tei:relation>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When it has Active, Mutual, and Passive child Elements">
+      <x:context>
+        <tei:relation>
+          <tei:active ref="active-1"/>
+          <tei:mutual ref="mutual-1"/>
+          <tei:passive ref="passive-1"/>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then transform the Active, Mutual, and Passive child Elements into an Attributes">
+        <tei:relation active="active-1" mutual="mutual-1" passive="passive-1"/>
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When it has mutiple Active, Mutual, and Passive child Elements">
+      <x:context>
+        <tei:relation>
+          <tei:active ref="active-1"/>
+          <tei:mutual ref="mutual-1"/>
+          <tei:passive ref="passive-1"/>
+          <tei:active ref="active-2"/>
+          <tei:mutual ref="mutual-2"/>
+          <tei:passive ref="passive-2"/>
+          <tei:active ref="active-3"/>
+          <tei:mutual ref="mutual-3"/>
+          <tei:passive ref="passive-3"/>
+        </tei:relation>
+      </x:context>
+      <x:expect label="Then transform the Active, Mutual, and Passive child Elements into an Attributes">
+        <tei:relation active="active-1 active-2 active-3" mutual="mutual-1 mutual-2 mutual-3" passive="passive-1 passive-2 passive-3"/>
+      </x:expect>
+    </x:scenario>
+
+  </x:scenario>
+
+</x:description>
