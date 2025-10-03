@@ -560,7 +560,7 @@
                         <xml-base64 xsi:type="xs:base64Binary"/>
                     </xf:instance>
                     <xf:instance id="i-search">
-                        <data>
+                        <data xmlns="">
                             <search>
                                 <q/>
                                 <facets/>
@@ -568,47 +568,47 @@
                         </data>
                     </xf:instance>
                     <xf:instance id="i-search-id">
-                        <data><q/></data>
+                        <data xmlns=""><q/></data>
                     </xf:instance>
                     <xf:instance id="i-search-results">
-                        <data/>
+                        <data xmlns=""/>
                     </xf:instance>
                     <xf:instance id="i-selected-search">
-                        <data>
+                        <data xmlns="">
                         </data>
                     </xf:instance>
                     <xf:instance id="i-selected-facet">
-                        <data>
+                        <data xmlns="">
                             <facetGrp label="" facet=""></facetGrp>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-selected">
-                        <data>
+                        <data xmlns="">
                         </data>
                     </xf:instance>
                     <xf:instance id="i-selectTemplate">
-                        <data>
+                        <data xmlns="">
                             <xsl:for-each select="$configDoc//template">
                                 <template name="{@name}" src="{@src}"/>
                             </xsl:for-each>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-subforms">
-                        <data>
+                        <data xmlns="">
                             <xsl:for-each select="$configDoc//subforms/subform">
                                 <subform formName="{@formName}" selected="false"/>
                             </xsl:for-each>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-lookups">
-                        <data>
+                        <data xmlns="">
                             <xsl:for-each select="$configDoc//lookup">
                                 <lookup formName="{@formName}" selected="false"/>
                             </xsl:for-each>
                         </data>
                     </xf:instance>
                     <xf:instance id="i-submission">
-                        <response status="success">
+                        <response xmlns="" status="success">
                             <message>Submission result</message>
                             <url></url>
                         </response>
@@ -641,7 +641,7 @@
                     <!-- Pretty print -->
                     <xf:instance id="i-prettyPrint" src="forms/prettyPrint.xsl"></xf:instance>
                     <xf:instance id="i-preview">
-                        <data></data>
+                        <data xmlns=""></data>
                     </xf:instance>
                     <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
                         <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"/>
