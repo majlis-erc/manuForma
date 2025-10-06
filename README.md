@@ -1,7 +1,7 @@
 # manuForma [BETA]
 
 [![Build Status](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml/badge.svg)](https://github.com/majlis-erc/manuForma/actions/workflows/ci.yml)
-[![Java 8+](https://img.shields.io/badge/java-8+-blue.svg)](https://bell-sw.com/pages/downloads/)
+[![Java 11+](https://img.shields.io/badge/java-11+-blue.svg)](https://bell-sw.com/pages/downloads/)
 [![DOI](https://zenodo.org/badge/474991717.svg)](https://zenodo.org/badge/latestdoi/474991717)
 
 The manuForma application is designed to make TEI data creation and distributed editing faster and easier. The application features easy to use multi-step forms, Github interactions and more.
@@ -58,7 +58,7 @@ To build the form you will simply need to run the XSLT, it will use the values d
 The manuForma application can be compiled into an EXPath Package for deployment to an Elemental (or eXist-db) server.
 
 Build Requirements:
-    * [Java JDK](https://bell-sw.com/pages/downloads/) version 8 (or newer)
+    * [Java JDK](https://bell-sw.com/pages/downloads/) version 11 (or newer)
 
 To build the manuForma application:
 
@@ -105,7 +105,7 @@ docker volume create manuforma-database
 Once you have built (or obtained) the Docker Image, you can run manuForma in Docker like so:
 
 ```shell
-docker run -it -p 8080:8080 --mount type=volume,src=manuforma-database,dst=/elemental/data majlis/manuforma:latest
+docker run -it -p 8080:8080 --mount type=volume,src=manuforma-database,dst=/elemental/data majlis-erc/manuforma:latest
 ```
 
 manuForma will then be available in your web-browser at `http://localhost:8080/exist/apps/manuForma/index.html`
