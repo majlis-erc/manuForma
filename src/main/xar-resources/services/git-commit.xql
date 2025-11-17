@@ -145,6 +145,7 @@ declare function gitcommit:step4($data as item()*,
                         <output:version>1.0</output:version>
                         <output:encoding>UTF-8</output:encoding>
                         <output:omit-xml-declaration>no</output:omit-xml-declaration>
+                        <output:indent>yes</output:indent>
                     </output:serialization-parameters>) 
     let $new-blob-content := 
         serialize(
