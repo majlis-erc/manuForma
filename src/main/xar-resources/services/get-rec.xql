@@ -68,7 +68,7 @@ declare function local:markdown($nodes as node()*) as item()* {
             return
                 "&#10;"
 
-            case element(tei:emph)
+            case element(tei:em)
             return
                 (
                     "*",

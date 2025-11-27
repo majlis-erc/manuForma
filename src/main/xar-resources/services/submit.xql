@@ -114,15 +114,22 @@ declare function local:transform($new as xs:boolean, $id as xs:string, $uri as x
             return
                 element {node-name($node)} {
                     $node/@*,
-                    local:markdown2TEI($node/node())
+                    (: NOTE(AR) workaround for max as tei:note has multiple child nodes :)
+                    (: local:markdown2TEI($node/node()) :)
+                    for $child in $node/node()
+                    return
+                        local:markdown2TEI($child)
                 }
 
             case element(tei:summary)
             return
-                element {node-name($node)} {
-                    $node/@*,
-                    local:markdown2TEI($node/node())
-                }
+                if ($node[parent::tei:layoutDesc]) then
+                    local:passthru($new, $id, $uri, $node)
+                else
+                    element {node-name($node)} {
+                        $node/@*,
+                        local:markdown2TEI($node/node())
+                    }
 
             case element(tei:quote)
             return 
@@ -360,6 +367,14 @@ declare function local:attrs-updated-source($attrs as attribute()*) as attribute
 
 (: Markdown to TEI :)
 declare function local:markdown2TEI($node) as element(tei:p)* {
+    if (count($node) gt 1)
+    then
+        (: <document>{root($n)}</document> :)
+        let $nodes := for $n in $node return <node uri="{document-uri(root($n))}">{$n}</node>
+        return
+            util:log("INFO", ("PROBLEM: ", <nodes>{$nodes}</nodes>, <parent>{$node[1]/parent::node()}</parent>))
+    else(),
+    
     for $l in tokenize($node, '\n\n')
     return
         <tei:p>{local:lineBreak($l)}</tei:p>
@@ -377,7 +392,7 @@ declare function local:markdown($s) {
     for $node in fn:analyze-string($s, "\*(.*?)\*")/child::*
     return 
         typeswitch($node)
-            case element(fn:match) return <tei:emph>{$node/fn:group/node()}</tei:emph>
+            case element(fn:match) return <tei:em>{$node/fn:group/node()}</tei:em>
             default return $node/node()
 };  
 
