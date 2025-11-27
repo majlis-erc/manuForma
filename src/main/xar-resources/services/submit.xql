@@ -360,6 +360,14 @@ declare function local:attrs-updated-source($attrs as attribute()*) as attribute
 
 (: Markdown to TEI :)
 declare function local:markdown2TEI($node) as element(tei:p)* {
+    if (count($node) gt 1)
+    then
+        (: <document>{root($n)}</document> :)
+        let $nodes := for $n in $node return <node uri="{document-uri(root($n))}">{$n}</node>
+        return
+            util:log("INFO", ("PROBLEM: ", <nodes>{$nodes}</nodes>, <parent>{$node[1]/parent::node()}</parent>))
+    else(),
+    
     for $l in tokenize($node, '\n\n')
     return
         <tei:p>{local:lineBreak($l)}</tei:p>
