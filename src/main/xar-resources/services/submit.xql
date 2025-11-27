@@ -392,7 +392,7 @@ declare function local:markdown($s) {
     for $node in fn:analyze-string($s, "\*(.*?)\*")/child::*
     return 
         typeswitch($node)
-            case element(fn:match) return <tei:emph>{$node/fn:group/node()}</tei:emph>
+            case element(fn:match) return <tei:em>{$node/fn:group/node()}</tei:em>
             default return $node/node()
 };  
 
