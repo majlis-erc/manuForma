@@ -114,15 +114,22 @@ declare function local:transform($new as xs:boolean, $id as xs:string, $uri as x
             return
                 element {node-name($node)} {
                     $node/@*,
-                    local:markdown2TEI($node/node())
+                    (: NOTE(AR) workaround for max as tei:note has multiple child nodes :)
+                    (: local:markdown2TEI($node/node()) :)
+                    for $child in $node/node()
+                    return
+                        local:markdown2TEI($child)
                 }
 
             case element(tei:summary)
             return
-                element {node-name($node)} {
-                    $node/@*,
-                    local:markdown2TEI($node/node())
-                }
+                if ($node[parent::tei:layoutDesc]) then
+                    local:passthru($new, $id, $uri, $node)
+                else
+                    element {node-name($node)} {
+                        $node/@*,
+                        local:markdown2TEI($node/node())
+                    }
 
             case element(tei:quote)
             return 
