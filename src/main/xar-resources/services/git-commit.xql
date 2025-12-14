@@ -47,17 +47,17 @@ declare namespace json = "http://www.json.org";
 (: Set up global variables :)
 declare variable $gitcommit:authorization-token := '${github-pat}';
 declare variable $gitcommit:apiURL := 'https://api.github.com';
-declare variable $gitcommit:owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'wsalesky';
-declare variable $gitcommit:repoName := if(request:get-parameter('githubRepoName','') != '') then request:get-parameter('githubRepoName','') else 'blogs';
-declare variable $gitcommit:branch := if(request:get-parameter('githubBranch','') != '') then request:get-parameter('githubBranch','') else 'master';
+declare variable $gitcommit:owner := if(request:get-parameter('githubOwner','') != '') then request:get-parameter('githubOwner','') else 'majlis-erc';
+declare variable $gitcommit:repoName := if(request:get-parameter('githubRepoName','') != '') then request:get-parameter('githubRepoName','') else 'majlis-data';
+declare variable $gitcommit:branch := if(request:get-parameter('githubBranch','') != '') then request:get-parameter('githubBranch','') else 'main';
 declare variable $gitcommit:dataPath := if(request:get-parameter('githubPath','') != '') then request:get-parameter('githubPath','') else 'data/tei/';
 
 declare function gitcommit:list-files(){
-(:https://github.com/wsalesky/blogs:)
-(: https://api.github.com/repos/octocat/hello-world/autolinks/42 :)
-(:Step 1: /repos/{owner}/{repo}/contents/{path} :)
+(: https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content :)
+(: Step 1: /repos/{owner}/{repo}/contents/{path}?ref=branch :)
+    let $uri := xs:anyURI(concat($gitcommit:apiURL, '/repos/', $gitcommit:owner, '/', $gitcommit:repoName, '/contents/', $gitcommit:dataPath, "?ref=", $gitcommit:branch))
     let $request :=  
-            http:send-request(<http:request http-version="1.1" href="{xs:anyURI(concat($gitcommit:apiURL,'/repos/',$gitcommit:owner,'/',$gitcommit:repoName,'/contents/',$gitcommit:branch))}" method="get">
+            http:send-request(<http:request http-version="1.1" href="{$uri}" method="get">
                                 <http:header name="Authorization" value="{concat('token ',$gitcommit:authorization-token)}"/>
                                 <http:header name="Connection" value="close"/>
                               </http:request>)
