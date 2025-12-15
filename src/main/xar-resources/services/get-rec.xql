@@ -87,12 +87,12 @@ declare function local:markdown($nodes as node()*) as item()* {
                         return
                             <tei:active ref="{$ref}">{$label}</tei:active>
                         ,
-                        for $ref in tokenize($node/@passive, " ")[. ne ""]
+                        for $ref in tokenize($node/@mutual, " ")[. ne ""]
                         let $label := local:get-label($ref)
                         return
                             <tei:mutual ref="{$ref}">{$label}</tei:mutual>
                         ,
-                        for $ref in tokenize($node/@mutual, " ")[. ne ""]
+                        for $ref in tokenize($node/@passive, " ")[. ne ""]
                         let $label := local:get-label($ref)
                         return
                             <tei:passive ref="{$ref}">{$label}</tei:passive>
