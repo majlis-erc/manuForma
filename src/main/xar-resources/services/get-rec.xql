@@ -9,6 +9,7 @@ import module namespace rh = "http://localhost/manuForma/request-helper" at "../
 
 import module namespace http = "http://expath.org/ns/http-client";
 import module namespace request = "http://exist-db.org/xquery/request";
+import module namespace response = "http://exist-db.org/xquery/response";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace tei = "http://www.tei-c.org/ns/1.0";
@@ -182,14 +183,16 @@ declare function local:get-data() {
 
         else ()
 
-    else if ($local:github = "browse") then
-        gitcommit:list-files()
-
     else
         request:get-data()
 };
 
 
-let $data := local:get-data()
-return
-    local:markdown($data)
+if ($local:github = "browse") then
+    let $json := gitcommit:list-files()
+    return
+        response:stream($json, "method=TEXT media-type=application/json")
+else
+    let $data := local:get-data()
+    return
+        local:markdown($data)
