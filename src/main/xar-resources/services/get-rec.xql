@@ -35,7 +35,7 @@ declare variable $local:exist-collection-path as xs:string := rh:request-param("
 
 
 (: Recurse through child nodes :)
-declare function local:markdown($nodes as node()*) as item()* { 
+declare function local:markdown($nodes as node()*, $labels as element(labels)?) as item()* {
     for $node in $nodes
     return
         typeswitch($node)
@@ -57,13 +57,13 @@ declare function local:markdown($nodes as node()*) as item()* {
                 if ($node[parent::tei:quote] or $node[parent::tei:summary] or $node[parent::tei:note] or $node[parent::tei:desc] or $node[parent::tei:ab]) then
                     if ($node[following-sibling::tei:p]) then
                         (
-                            local:markdown($node/node()),
+                            local:markdown($node/node(), $labels),
                             "&#10;&#10;"
                         )
                     else
-                        local:markdown($node/node())
+                        local:markdown($node/node(), $labels)
                 else
-                    local:passthru($node)
+                    local:passthru($node, $labels)
 
             case element(tei:lb)
             return
@@ -73,7 +73,7 @@ declare function local:markdown($nodes as node()*) as item()* {
             return
                 (
                     "*",
-                    local:markdown($node/node()),
+                    local:markdown($node/node(), $labels),
                     "*"
                 )
 
@@ -83,50 +83,103 @@ declare function local:markdown($nodes as node()*) as item()* {
                     element {node-name($node)} {
                         $node/@*[not(local-name(.) = ('active', 'mutual', 'passive'))],
                         for $ref in tokenize($node/@active, " ")[. ne ""]
-                        let $label := local:get-label($ref)
+                        let $label := $labels/label[@ref eq $ref]/text/text()
                         return
                             <tei:active ref="{$ref}">{$label}</tei:active>
                         ,
                         for $ref in tokenize($node/@mutual, " ")[. ne ""]
-                        let $label := local:get-label($ref)
+                        let $label := $labels/label[@ref eq $ref]/text/text()
                         return
                             <tei:mutual ref="{$ref}">{$label}</tei:mutual>
                         ,
                         for $ref in tokenize($node/@passive, " ")[. ne ""]
-                        let $label := local:get-label($ref)
+                        let $label := $labels/label[@ref eq $ref]/text/text()
                         return
                             <tei:passive ref="{$ref}">{$label}</tei:passive>
                         ,
-                        local:markdown($node/node())
+                        local:markdown($node/node(), $labels)
                     }
 
                 else
-                    local:passthru($node)
+                    local:passthru($node, $labels)
 
             case element()
             return
-                local:passthru($node)
+                local:passthru($node, $labels)
 
             default
             return
-                local:markdown($node/node())
+                local:markdown($node/node(), $labels)
 };
 
 (: Recurse through child nodes :)
-declare function local:passthru($node as node()*) as item()* { 
+declare function local:passthru($node as node()*, $labels as element(labels)?) as item()* {
     element {node-name($node)} {
         $node/@*,
-        local:markdown($node/node())
+        local:markdown($node/node(), $labels)
     }
 };
 
-declare function local:get-label($ref as xs:string) as xs:string {
-    let $collection := "/db/apps/majlis-data/data"
-    let $expanded-refs := ($ref, concat($ref, "/"), concat($ref, "/tei"))
-    let $doc := head(collection($collection)//tei:idno[@type eq "URI"][. = $expanded-refs]/ancestor::tei:TEI)
-    let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()
+(:~
+ : Given the a node from a TEI document, we first extract the refs from all descendant tei:relation active, mutual, or passive attributes.
+ : Secondly, for each ref we try and find a TEI document in the database whose tei:idno matches the ref,
+ : if we find a document, we use it to generate a label for the ref.
+ :
+ : @param $node the TEI node to start resolving tei:relation from
+ :
+ : @return A labels element containing refs and their labels, e.g. <labels><label ref="https://jalit.org/person/34">Bahīya</label></labels>, or if there are no labels, then an empty sequence.
+ :)
+declare function local:get-labels($node as node()?) as element(labels)? {
+
+    (: Get the relation refs from the the source TEI document - these are our lookup keys for later finding the labels :)
+    let $refs as xs:string* :=
+            distinct-values(
+                    for $relation in $node//tei:relation[exists((@active, @mutual, @passive))]
+                    let $active := tokenize($relation/@active[string-length(normalize-space(.)) gt 0]/string(), " ")
+                    let $mutual := tokenize($relation/@mutual[string-length(normalize-space(.)) gt 0]/string(), " ")
+                    let $passive := tokenize($relation/@passive[string-length(normalize-space(.)) gt 0]/string(), " ")
+                    return
+                        ($active, $mutual, $passive)[. ne ""]
+            )
     return
-        normalize-space($label)
+
+        (: Now we try and find a label for each one of those refs in the database :)
+        let $labels :=
+                let $expanded-refs := $refs ! (., concat(., "/"), concat(., "/tei")) (:  Expand each ref to 3 possible refs :)
+                let $collection := "/db/apps/majlis-data/data"
+                let $id-nos := collection($collection)//tei:idno[@type eq "URI"][. = $expanded-refs]
+                return
+
+                    (: Iterate through the expanded-refs in sets of 3 :)
+                    for $i in 1 to xs:integer(count($expanded-refs) div 3)
+                    let $set-of-expanded-refs := ($expanded-refs[$i * 3 - 2], $expanded-refs[$i * 3 - 1], $expanded-refs[$i * 3])
+                    return
+
+                            if ($id-nos[. = $set-of-expanded-refs[1]])
+                            then
+                                <label ref="{$set-of-expanded-refs[1]}">
+                                    <text>{$id-nos[. = $set-of-expanded-refs[1]]/ancestor::tei:TEI[1]/descendant::tei:title[1]/descendant-or-self::text()}</text>
+                                </label>
+
+                            else if ($id-nos[. = $set-of-expanded-refs[2]])
+                            then
+                                <label ref="{$set-of-expanded-refs[2]}">
+                                    <text>{$id-nos[. = $set-of-expanded-refs[2]]/ancestor::tei:TEI[1]/descendant::tei:title[1]/descendant-or-self::text()}</text>
+                                </label>
+
+                            else if ($id-nos[. = $set-of-expanded-refs[3]])
+                            then
+                                <label ref="{$set-of-expanded-refs[3]}">
+                                    <text>{$id-nos[. = $set-of-expanded-refs[3]]/ancestor::tei:TEI[1]/descendant::tei:title[1]/descendant-or-self::text()}</text>
+                                </label>
+                            else
+                                () (: NOTE(AR) there is no label for this ref... that is okay as an @active, @mutual, or @passive attribute may contain multiple refs and some of those refs may be external to the database, and therefore we can't resolve them :)
+        return
+            if (exists($labels))
+            then
+                <labels>{$labels}</labels>
+            else
+                ()
 };
 
 declare function local:get-data() {
@@ -195,5 +248,6 @@ if ($local:github = "browse") then
         response:stream($json, "method=TEXT media-type=application/json")
 else
     let $data := local:get-data()
+    let $labels := local:get-labels($data)
     return
-        local:markdown($data)
+        local:markdown($data, $labels)
