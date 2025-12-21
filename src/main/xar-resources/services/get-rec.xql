@@ -122,7 +122,8 @@ declare function local:passthru($node as node()*) as item()* {
 
 declare function local:get-label($ref as xs:string) as xs:string {
     let $collection := "/db/apps/majlis-data/data"
-    let $doc := (collection($collection)//tei:idno[@type eq "URI"][. = ($ref, concat($ref, "/"), concat($ref, "/tei"))]/ancestor::tei:TEI)[1]
+    let $expanded-refs := ($ref, concat($ref, "/"), concat($ref, "/tei"))
+    let $doc := head(collection($collection)//tei:idno[@type eq "URI"][. = $expanded-refs]/ancestor::tei:TEI)
     let $label := $doc/descendant::tei:title[1]/descendant-or-self::text()
     return
         normalize-space($label)
