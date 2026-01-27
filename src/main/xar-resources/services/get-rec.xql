@@ -34,92 +34,6 @@ declare variable $local:github as xs:string? := rh:request-param("github");
 declare variable $local:exist-collection-path as xs:string := rh:request-param("eXistCollection", concat($config:app-root, "/data"));
 
 
-(: Recurse through child nodes :)
-declare function local:markdown($nodes as node()*, $labels as element(labels)?) as item()* {
-    for $node in $nodes
-    return
-        typeswitch($node)
-
-            case processing-instruction()
-            return
-                $node
-
-            case comment()
-            return
-                $node
-
-            case text()
-            return
-                normalize-space($node)
-
-            case element(tei:p)
-            return
-                if ($node[parent::tei:quote] or $node[parent::tei:summary] or $node[parent::tei:note] or $node[parent::tei:desc] or $node[parent::tei:ab]) then
-                    if ($node[following-sibling::tei:p]) then
-                        (
-                            local:markdown($node/node(), $labels),
-                            "&#10;&#10;"
-                        )
-                    else
-                        local:markdown($node/node(), $labels)
-                else
-                    local:passthru($node, $labels)
-
-            case element(tei:lb)
-            return
-                "&#10;"
-
-            case element(tei:em)
-            return
-                (
-                    "*",
-                    local:markdown($node/node(), $labels),
-                    "*"
-                )
-
-            case element(tei:relation)
-            return
-                if ($node[exists((@active, @mutual, @passive))]) then
-                    element {node-name($node)} {
-                        $node/@*[not(local-name(.) = ('active', 'mutual', 'passive'))],
-                        for $ref in tokenize($node/@active, " ")[. ne ""]
-                        let $label := $labels/label[@ref eq $ref]/text/text()
-                        return
-                            <tei:active ref="{$ref}">{$label}</tei:active>
-                        ,
-                        for $ref in tokenize($node/@mutual, " ")[. ne ""]
-                        let $label := $labels/label[@ref eq $ref]/text/text()
-                        return
-                            <tei:mutual ref="{$ref}">{$label}</tei:mutual>
-                        ,
-                        for $ref in tokenize($node/@passive, " ")[. ne ""]
-                        let $label := $labels/label[@ref eq $ref]/text/text()
-                        return
-                            <tei:passive ref="{$ref}">{$label}</tei:passive>
-                        ,
-                        local:markdown($node/node(), $labels)
-                    }
-
-                else
-                    local:passthru($node, $labels)
-
-            case element()
-            return
-                local:passthru($node, $labels)
-
-            default
-            return
-                local:markdown($node/node(), $labels)
-};
-
-(: Recurse through child nodes :)
-declare function local:passthru($node as node()*, $labels as element(labels)?) as item()* {
-    element {node-name($node)} {
-        $node/@*,
-        local:markdown($node/node(), $labels)
-    }
-};
-
 (:~
  : Given the a node from a TEI document, we first extract the refs from all descendant tei:relation active, mutual, or passive attributes.
  : Secondly, for each ref we try and find a TEI document in the database whose tei:idno matches the ref,
@@ -250,4 +164,10 @@ else
     let $data := local:get-data()
     let $labels := local:get-labels($data)
     return
-        local:markdown($data, $labels)
+        fn:transform(map {
+                "stylesheet-node": doc("/db/apps/manuForma/services/tei-to-manuforma-form.xslt"),
+                "source-node": $data,
+                "stylesheet-params": map {
+                        xs:QName('labels'): $labels
+                }
+        })?output
