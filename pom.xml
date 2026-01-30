@@ -101,6 +101,18 @@
                 <excludes>
                     <exclude>modules/git-sync.xql</exclude>
                     <exclude>services/git-commit.xql</exclude>
+
+                    <!-- NOTE(AR) This is temporary to allow us to fix up the xsl:import URIs
+                    using some XSLT from the xml-maven-plugin below.
+                    For example: xsl:import in Elemental
+                    does not yet correctly resolve:
+                        <xsl:import href="markdown-to-tei.xslt"/>
+                    relative to the importing stylesheet.
+                    See: https://github.com/evolvedbinary/elemental/issues/169
+                    -->
+                    <exclude>services/manuforma-form-to-tei.xslt</exclude>
+                    <exclude>services/tei-to-manuforma-form.xslt</exclude>
+
                 </excludes>
                 <targetPath>xar-resources</targetPath>
             </resource>
@@ -234,6 +246,22 @@
                                         </parameter>
                                     </parameters>
                                     <stylesheet>src/main/formGenerator/generateXForm.xsl</stylesheet>
+                                </transformationSet>
+
+                                <transformationSet>
+                                    <dir>src/main/xar-resources/services</dir>
+                                    <includes>
+                                        <include>manuforma-form-to-tei.xslt</include>
+                                        <include>tei-to-manuforma-form.xslt</include>
+                                    </includes>
+                                    <parameters>
+                                        <parameter>
+                                            <name>db-collection-uri</name>
+                                            <value>xmldb:exist:///db/apps/manuForma/services</value>
+                                        </parameter>
+                                    </parameters>
+                                    <stylesheet>src/main/xslt/fix-xslt-imports-for-edb.xslt</stylesheet>
+                                    <outputDir>${project.build.directory}/generated-xar-resources/services</outputDir>
                                 </transformationSet>
                             </transformationSets>
                         </configuration>
