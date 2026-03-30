@@ -47,6 +47,23 @@ declare function rh:request-param-bool($name as xs:string) as xs:boolean {
 };
 
 (:~
+ : Get a HTTP request parameter as a "yes" or "no" value.
+ : "true" is also considered as "yes".
+ : Unlike request:get-parameter this will ignore parameters that have an empty string value.
+ :
+ : @param $name the name of the HTTP request parameter
+ :
+ : @return either "yes", or "no".
+ :)
+declare function rh:request-param-yes-no($name as xs:string) as xs:string {
+    if (lower-case(rh:request-param($name, "no")[1]) = ("yes", "true"))
+    then
+      "yes"
+    else
+      "no"
+};
+
+(:~
  : Get HTTP request parameters.
  : Unlike request:get-parameter this will ignore parameters that have an empty string value.
  :

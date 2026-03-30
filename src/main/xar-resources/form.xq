@@ -1,7 +1,6 @@
 xquery version "1.0";
 
-declare namespace html="http://www.w3.org/1999/xhtml";
-declare namespace xf="http://www.w3.org/2002/xforms";
+import module namespace rh = "http://localhost/manuForma/request-helper" at "./modules/request-helper.xqm";
 
 (:~
  : Note need to add app:dir var, and use in configuring css
@@ -73,26 +72,14 @@ declare function local:insert-element($node as node()?, $new-node as node(),
          else $node
 };
 
-let $form-name := request:get-parameter("form", "")
-let $form-path := $form-name
+
+let $form-path := rh:request-param("form", "")
+let $xsltforms-debug := rh:request-param-yes-no("xsltforms-debug")
 let $form-doc := doc($form-path)
 let $form-description := <div class="description">Form Place Holder</div>
 let $form-doc := local:insert-element($form-doc, $form-description, 'iframe', 'remove')
-let $dummy := request:set-attribute("betterform.filter.ignoreResponseBody", "true")
-let $xslt-pi := processing-instruction xml-stylesheet {'type="text/xsl" href="/exist/rest/db/apps/xsltforms/xsltforms.xsl"'}
-let $css-pi := processing-instruction css-conversion {'no'}
-let $debug := processing-instruction xsltforms-options {'debug="no"'}
-(: Server side variables :)
-let $transform := doc('/exist/rest/db/apps/xsltforms/xsltforms.xsl')
-let $params :=
-<parameters>
-   <param name="omit-xml-declaration" value="yes"/>
-   <param name="indent" value="no"/>
-   <param name="media-type" value="text/html"/>
-   <param name="method" value="xhtml"/>
-   <param name="baseuri" value="/exist/rest/db/apps/xsltforms/"/>
-</parameters>
-
-let $serialization-options := 'method=xml media-type=text/html omit-xml-declaration=yes indent=no'
-let $cache := current-dateTime()
-return ($xslt-pi,$css-pi, $debug, $form-doc)
+let $xslt-pi := processing-instruction xml-stylesheet { 'type="text/xsl" href="/exist/rest/db/apps/xsltforms/xsltforms.xsl"' }
+let $css-pi := processing-instruction css-conversion { 'no' }
+let $debug := processing-instruction xsltforms-options { concat('debug="', $xsltforms-debug, '"') }
+return
+  ($xslt-pi, $css-pi, $debug, $form-doc)
