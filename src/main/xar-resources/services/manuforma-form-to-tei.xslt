@@ -76,10 +76,23 @@
 
   <xsl:template match="tei:idno[parent::tei:publicationStmt]">
     <xsl:copy>
-      <xsl:apply-templates select="node()|@*"/>
-      <xsl:if test="$new">
-        <xsl:value-of select="$uri"/>
-      </xsl:if>
+      <xsl:apply-templates select="@*"/>
+      <xsl:choose>
+        <xsl:when test="$new">
+          <xsl:choose>
+            <xsl:when test="starts-with($uri, .)">
+              <xsl:value-of select="$uri"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="node()"/>
+              <xsl:value-of select="$uri"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="node()"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:copy>
   </xsl:template>
 
