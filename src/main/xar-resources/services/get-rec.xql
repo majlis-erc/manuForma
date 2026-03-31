@@ -138,11 +138,12 @@ declare function local:get-data() {
                         concat($local:base-uri, $local:idno)
                     else
                         concat("/", $local:idno)
+            let $idnos := ($idno, concat($idno, "/tei"))
             return
                 <data idno="{$idno}">
                 {
-                    for $idno in collection($local:exist-collection-path)//tei:idno[. = ($idno, concat($idno, "/tei")) or ends-with(., $idno)]
-                    let $title := string($idno/ancestor::tei:TEI/descendant::tei:title[1])
+                    for $idno in collection($local:exist-collection-path)//tei:idno[. = $idnos or ends-with(., $idno)]
+                    let $title := $idno/ancestor::tei:TEI/descendant::tei:title[1]/string(.)
                     order by $title
                     return
                         <record src="{document-uri(root($idno))}" name="{$title}" idno="{concat("[", $idno, "]")}"/>
@@ -162,12 +163,17 @@ if ($local:github = "browse") then
         response:stream($json, "method=TEXT media-type=application/json")
 else
     let $data := local:get-data()
-    let $labels := local:get-labels($data)
     return
-        fn:transform(map {
-                "stylesheet-node": doc("/db/apps/manuForma/services/tei-to-manuforma-form.xslt"),
-                "source-node": $data,
-                "stylesheet-params": map {
-                        xs:QName('labels'): $labels
-                }
-        })?output
+      if (exists($data//tei:TEI))
+      then
+        let $labels := local:get-labels($data)
+        return
+            fn:transform(map {
+                    "stylesheet-node": doc("/db/apps/manuForma/services/tei-to-manuforma-form.xslt"),
+                    "source-node": $data,
+                    "stylesheet-params": map {
+                            xs:QName('labels'): $labels
+                    }
+            })?output
+      else
+        $data
