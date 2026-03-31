@@ -643,8 +643,8 @@
                     <xf:instance id="i-preview">
                         <data xmlns=""></data>
                     </xf:instance>
-                    <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"/>
+                    <xf:submission id="s-load-template" method="get" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=', instance('i-selected'))"/>
                         <xf:action ev:event="xforms-submit-done">
                             <xf:message level="modeless"> Data Loaded! </xf:message>
                             <!--
@@ -657,8 +657,8 @@
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-load-template-search" method="post" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"/>
+                    <xf:submission id="s-load-template-search" method="get" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=', instance('i-selected-search'))"/>
                         <xf:action ev:event="xforms-submit-done">
                         <xf:message level="modeless"> Data Loaded! </xf:message>
                             <!--
@@ -671,22 +671,23 @@
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    <xf:submission id="s-search-saved" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=', instance('i-search')//*:q, '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/><xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    <xf:submission id="s-search-saved-next" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=', string(instance('i-search-results')//*:next), '&amp;q=',instance('i-search')//*:q, '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=', instance('i-search')//*:q,'&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
+                    <xf:submission id="s-search-id" method="get" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=', instance('i-search-id'), '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;baseURI=', string(instance('i-submission-params')//*:baseURI))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-browse-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;view=all&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
+                    <xf:submission id="s-browse-saved" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;view=all&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     <xf:submission id="s-post-to-update" action="services/upload.xql" ref="instance('i-upload')" replace="instance" instance="i-rec" method="post">
