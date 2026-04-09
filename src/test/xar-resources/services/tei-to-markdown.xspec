@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
+  stylesheet="../../../main/xar-resources/services/tei-to-markdown.xslt">
+
+  <!--
+    Tests for converting TEI to Markdown for manuForma forms
+    @author Adam Retter
+  -->
+
+  <x:scenario label="Given a TEI container element">
+
+    <x:scenario label="For paragraphs of only text nodes">
+    
+      <x:scenario label="When there is a single paragraph">
+        <x:context>
+          <tei:summary>
+            <tei:p>A first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then extract the text of the paragraph">A first paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple paragraphs">
+        <x:context>
+          <tei:summary>
+            <tei:p>A first paragraph</tei:p>
+            <tei:p>A second paragraph</tei:p>
+            <tei:p>A third paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then extract the text of the paragraph">A first paragraph&#xa;&#xa;A second paragraph&#xa;&#xa;A third paragraph</x:expect>
+      </x:scenario>
+    
+    </x:scenario>
+
+    <x:scenario label="For paragraphs containing line-break elements">
+
+      <x:scenario label="When there is a single paragraph">
+
+        <x:scenario label="Containing a single line-break">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first<tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph">A first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first <tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the preceding white-space">A first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first<tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the following white-space">A first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first <tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the preceding and following white-space">A first&#xa;paragraph</x:expect>
+          </x:scenario>
+        
+        </x:scenario>
+  
+        <x:scenario label="Containing multiple line-breaks">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first<tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A <tei:lb/>first <tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the predceding white-space">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/> first<tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the following white-space">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A <tei:lb/> first <tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the preceding and following white-space">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+  
+        <x:scenario label="Containing a single line-break at the end">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A first paragraph</x:expect>
+          </x:scenario>
+        
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A first paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A first paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A first paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+        
+        <x:scenario label="Containing multiple line-breaks at the end">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/><tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A first paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A first paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/> <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A first paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A first paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+        
+        <x:scenario label="Containing multiple line-breaks and a line-break at the end">
+        
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph<tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+        
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph<tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A&#xa;first&#xa;paragraph</x:expect>
+          </x:scenario>
+  
+          <x:scenario label="Where there is white-space after the line-break">
+          <x:context>
+            <tei:summary>
+              <tei:p>A<tei:lb/>first <tei:lb/> paragraph <tei:lb/> </tei:p>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A&#xa;first&#xa;paragraph</x:expect>
+        </x:scenario>
+
+      </x:scenario>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple paragraphs">
+        
+        <x:scenario label="Containing a single line-break">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first<tei:lb/>paragraph</tei:p>
+                <tei:p>A second<tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph">A first&#xa;paragraph&#xa;&#xa;A second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first <tei:lb/>paragraph</tei:p>
+                <tei:p>A second <tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the preceding white-space">A first&#xa;paragraph&#xa;&#xa;A second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first<tei:lb/> paragraph</tei:p>
+                <tei:p>A second<tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the following white-space">A first&#xa;paragraph&#xa;&#xa;A second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first <tei:lb/> paragraph</tei:p>
+                <tei:p>A second <tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert a line-break character into the text of the paragraph and remove the preceding and following white-space">A first&#xa;paragraph&#xa;&#xa;A second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+        </x:scenario>
+        
+        <x:scenario label="Containing multiple line-breaks">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first<tei:lb/>paragraph</tei:p>
+                <tei:p>A<tei:lb/>second<tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A <tei:lb/>first <tei:lb/>paragraph</tei:p>
+                <tei:p>A <tei:lb/>second <tei:lb/>paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the predceding white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/> first<tei:lb/> paragraph</tei:p>
+                <tei:p>A<tei:lb/> second<tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the following white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A <tei:lb/> first <tei:lb/> paragraph</tei:p>
+                <tei:p>A <tei:lb/> second <tei:lb/> paragraph</tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then insert multiple break characters into the text of the paragraph and remove the preceding and following white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+        
+        <x:scenario label="Containing a single line-break at the end">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/></tei:p>
+                <tei:p>A second paragraph<tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/></tei:p>
+                <tei:p>A second paragraph <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/> </tei:p>
+                <tei:p>A second paragraph<tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> </tei:p>
+                <tei:p>A second paragraph <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+        
+        <x:scenario label="Containing multiple line-breaks at the end">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/><tei:lb/></tei:p>
+                <tei:p>A second paragraph<tei:lb/><tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> <tei:lb/></tei:p>
+                <tei:p>A second paragraph <tei:lb/> <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph<tei:lb/> <tei:lb/> </tei:p>
+                <tei:p>A second paragraph<tei:lb/> <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before and after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A first paragraph <tei:lb/> <tei:lb/> </tei:p>
+                <tei:p>A second paragraph <tei:lb/> <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A first paragraph&#xa;&#xa;A second paragraph</x:expect>
+          </x:scenario>
+        </x:scenario>
+        
+        <x:scenario label="Containing multiple line-breaks and a line-break at the end">
+          
+          <x:scenario label="Where there is no white-space around the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph<tei:lb/></tei:p>
+                <tei:p>A<tei:lb/>second <tei:lb/> paragraph<tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space before the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph <tei:lb/></tei:p>
+                <tei:p>A<tei:lb/>second <tei:lb/> paragraph <tei:lb/></tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph<tei:lb/> </tei:p>
+                <tei:p>A<tei:lb/>second <tei:lb/> paragraph<tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the following white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+          <x:scenario label="Where there is white-space after the line-break">
+            <x:context>
+              <tei:summary>
+                <tei:p>A<tei:lb/>first <tei:lb/> paragraph <tei:lb/> </tei:p>
+                <tei:p>A<tei:lb/>second <tei:lb/> paragraph <tei:lb/> </tei:p>
+              </tei:summary>
+            </x:context>
+            
+            <x:call template="tei-to-markdown"/>
+            
+            <x:expect label="Then do not insert a line-break at the end of the paragraph and remove the preceding and following white-space">A&#xa;first&#xa;paragraph&#xa;&#xa;A&#xa;second&#xa;paragraph</x:expect>
+          </x:scenario>
+          
+        </x:scenario>
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="For paragraphs containing emph italic elements">
+      <x:scenario label="When there is a single emph italic element">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="italic">first</tei:emph> paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic element with markdown italic text">A *first* paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph italic elements separated by one space">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="italic">first</tei:emph><x:text> </x:text><tei:emph rend="italic">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic elements with markdown italic texts">A *first* *paragraph*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph italic elements separated by multiple spaces">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="italic">first</tei:emph><x:text>    </x:text><tei:emph rend="italic">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic elements with markdown italic texts separated by a single space">A *first* *paragraph*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph italic elements separated by a line-break">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="italic">first</tei:emph><x:text>&#xa;</x:text><tei:emph rend="italic">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic elements with markdown italic texts and ignore the line-break">A *first* *paragraph*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an empty emph italic element">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="italic"/>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then remove the empty emph italic element">A first paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an emph italic element containing only a space character, replace it with a space character">
+        <x:context>
+          <tei:summary>
+            <tei:p>A<tei:emph rend="italic"><x:text> </x:text></tei:emph>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic element a single space">A first paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an emph italic element containing only space characters, replace it with a space character">
+        <x:context>
+          <tei:summary>
+            <tei:p>A<tei:emph rend="italic"><x:text>    </x:text></tei:emph>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph italic element a single space">A first paragraph</x:expect>
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="For paragraphs containing emph bold elements">
+      <x:scenario label="When there is a single emph bold element">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="bold">first</tei:emph> paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph bold element with markdown bold text">A **first** paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph bold elements separated by one space">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="bold">first</tei:emph><x:text> </x:text><tei:emph rend="bold">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the bold italic elements with markdown bold texts">A **first** **paragraph**</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph bold elements separated by multiple spaces">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="bold">first</tei:emph><x:text>    </x:text><tei:emph rend="bold">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph bold elements with markdown bold texts separated by a single space">A **first** **paragraph**</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there are multiple emph bold elements separated by a line-break">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="bold">first</tei:emph><x:text>&#xa;</x:text><tei:emph rend="bold">paragraph</tei:emph></tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph bold elements with markdown bold texts and ignore the line-break">A **first** **paragraph**</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an empty emph bold element">
+        <x:context>
+          <tei:summary>
+            <tei:p>A <tei:emph rend="bold"/>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then remove the empty emph bold element">A first paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an emph bold element containing only a space character, replace it with a space character">
+        <x:context>
+          <tei:summary>
+            <tei:p>A<tei:emph rend="bold"><x:text> </x:text></tei:emph>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph bold element a single space">A first paragraph</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="When there is an emph bold element containing only space characters, replace it with a space character">
+        <x:context>
+          <tei:summary>
+            <tei:p>A<tei:emph rend="bold"><x:text>    </x:text></tei:emph>first paragraph</tei:p>
+          </tei:summary>
+        </x:context>
+        
+        <x:call template="tei-to-markdown"/>
+        
+        <x:expect label="Then replace the emph bold element a single space">A first paragraph</x:expect>
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="For hi elements that are headings">
+        
+      <x:scenario label="That are level 1 headings">
+          
+        <x:scenario label="When there is a valid heading">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1">A first heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element with markdown heading 1 text"><x:text># A first heading&#xa;</x:text></x:expect>
+        </x:scenario>
+
+        <x:scenario label="When there is a valid heading with whitespace before it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1"> A first heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element with markdown heading 1 text and remove the preceding whitespace"><x:text># A first heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace after it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1">A first heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element with markdown heading 1 text and remove the following whitespace"><x:text># A first heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace around it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1"> A first heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element with markdown heading 1 text and remove the preceding and following whitespace"><x:text># A first heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an empty hi h1 element">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1"/>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then remove the empty hi h1 element"/>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h1 element containing only a space character, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1"><x:text> </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h1 element containing only space characters, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h1"><x:text>    </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h1 element with a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+      </x:scenario>
+      
+      <x:scenario label="That are level 2 headings">
+        
+        <x:scenario label="When there is a valid heading">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2">A second heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element with markdown heading 2 text"><x:text>## A second heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace before it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2"> A second heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element with markdown heading 2 text and remove the preceding whitespace"><x:text>## A second heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace after it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2">A second heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element with markdown heading 2 text and remove the following whitespace"><x:text>## A second heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace around it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2"> A second heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element with markdown heading 2 text and remove the preceding and following whitespace"><x:text>## A second heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an empty hi h2 element">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2"/>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then remove the empty hi h2 element"/>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h2 element containing only a space character, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2"><x:text> </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h2 element containing only space characters, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h2"><x:text>    </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h2 element with a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+      </x:scenario>
+      
+      <x:scenario label="That are level 3 headings">
+        
+        <x:scenario label="When there is a valid heading">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3">A third heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element with markdown heading 2 text"><x:text>### A third heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace before it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3"> A third heading</tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element with markdown heading 3 text and remove the preceding whitespace"><x:text>### A third heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace after it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3">A third heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element with markdown heading 3 text and remove the following whitespace"><x:text>### A third heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is a valid heading with whitespace around it">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3"> A third heading </tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element with markdown heading 3 text and remove the preceding and following whitespace"><x:text>### A third heading&#xa;</x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an empty hi h3 element">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3"/>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then remove the empty hi h3 element"/>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h3 element containing only a space character, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3"><x:text> </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+        
+        <x:scenario label="When there is an hi h3 element containing only space characters, replace it with a space character">
+          <x:context>
+            <tei:summary>
+              <tei:hi rend="h3"><x:text>    </x:text></tei:hi>
+            </tei:summary>
+          </x:context>
+          
+          <x:call template="tei-to-markdown"/>
+          
+          <x:expect label="Then replace the hi h3 element with a single space"><x:text> </x:text></x:expect>
+        </x:scenario>
+      </x:scenario>
+    </x:scenario>
+
+  </x:scenario>
+
+</x:description>

@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:m2t="http://markdown-2-tei"
+  stylesheet="../../../main/xar-resources/services/markdown-to-tei.xslt">
+  
+  <!--
+    Tests for converting Markdown to TEI from manuForma forms
+    @author Adam Retter
+  -->
+
+  <x:scenario label="Given text containing Italic Markdown">
+    
+    <x:scenario label="When there is no Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">Not italic</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not italic</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()"> Not italic</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not italic</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">Not italic </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not italic </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()"> Not italic </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not italic </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">*This is all Italic*</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic">This is all Italic</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">* This is all Italic*</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic"> This is all Italic</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">*This is all Italic *</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic">This is all Italic </tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">* This is all Italic *</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic"> This is all Italic </tei:emph></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely escaped Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\*This is all Italic\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*This is all Italic\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\* This is all Italic\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\* This is all Italic\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\*This is all Italic \*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*This is all Italic \*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\* This is all Italic \*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\* This is all Italic \*</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text starts with Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">*This* is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic">This</tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">* This* is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic"> This</tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">*This * is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic">This </tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">* This * is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="italic"> This </tei:emph> is some text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text starts with escaped Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\*This\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*This\* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\* This\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\* This\* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\*This \* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*This \* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">\* This \* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\* This \* is some text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text ends with Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some *text*</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="italic">text</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some * text*</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="italic"> text</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some *text *</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="italic">text </tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some * text *</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="italic"> text </tei:emph></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text ends with escaped Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some \*text\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*text\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some \* text\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \* text\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some \*text \*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*text \*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is some \* text \*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \* text \*</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is *some* text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="italic">some</tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is * some* text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="italic"> some</tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is *some * text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="italic">some </tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is * some * text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="italic"> some </tei:emph> text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains escaped Italic Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is \*some\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*some\* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is \* some\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \* some\* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is \*some \* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*some \* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:italic">
+          <x:param name="input" as="text()">This is \* some \* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \* some \* text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of Italic and Bold Markdown">
+      <x:call function="m2t:italic">
+        <x:param name="input" as="text()">*blah* hello **bold** and *italic* with *other italic* then some **other bold** but *finally*</x:param>
+      </x:call>
+      <x:expect label="Then copy as is"><tei:emph rend="italic">blah</tei:emph> hello **bold** and <tei:emph rend="italic">italic</tei:emph> with <tei:emph rend="italic">other italic</tei:emph> then some **other bold** but <tei:emph rend="italic">finally</tei:emph></x:expect>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of escaped Italic and Bold Markdown">
+      <x:call function="m2t:italic">
+        <x:param name="input" as="text()">\*blah\* hello \*\*bold\*\* and \*italic\* with \*other italic\* then some \*\*other bold\*\* but \*finally\*</x:param>
+      </x:call>
+      <x:expect label="Then copy as is">\*blah\* hello \*\*bold\*\* and \*italic\* with \*other italic\* then some \*\*other bold\*\* but \*finally\*</x:expect>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of escaped and non-escaped Italic and Bold Markdown">
+      <x:call function="m2t:italic">
+        <x:param name="input" as="text()">*blah* hello **bold** and *italic* with \*other italic\* then some \*\*other bold\*\* but *finally*</x:param>
+      </x:call>
+      <x:expect label="Then copy as is"><tei:emph rend="italic">blah</tei:emph> hello **bold** and <tei:emph rend="italic">italic</tei:emph> with \*other italic\* then some \*\*other bold\*\* but <tei:emph rend="italic">finally</tei:emph></x:expect>
+    </x:scenario>
+
+  </x:scenario>
+  
+  <x:scenario label="Given text containing Bold Markdown">
+    
+    <x:scenario label="When there is no Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">Not bold</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not bold</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()"> Not bold</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not bold</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">Not bold </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not bold </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()"> Not bold </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not bold </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">**This is all Bold**</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold">This is all Bold</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">** This is all Bold**</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold"> This is all Bold</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">**This is all Bold **</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold">This is all Bold </tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">** This is all Bold **</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold"> This is all Bold </tei:emph></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely escaped Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\*This is all Bold\*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\*This is all Bold\*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\* This is all Bold\*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\* This is all Bold\*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\*This is all Bold \*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\*This is all Bold \*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\* This is all Bold \*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\* This is all Bold \*\*</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text starts with Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">**This** is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold">This</tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">** This** is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold"> This</tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">**This ** is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold">This </tei:emph> is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">** This ** is some text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:emph rend="bold"> This </tei:emph> is some text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text starts with escaped Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\*This\*\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\*This\*\* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\* This\*\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\* This\*\* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\*This \*\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\*This \*\* is some text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">\*\* This \*\* is some text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">\*\* This \*\* is some text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text ends with Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some **text**</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="bold">text</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some ** text**</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="bold"> text</tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some **text **</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="bold">text </tei:emph></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some ** text **</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is some <tei:emph rend="bold"> text </tei:emph></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text ends with escaped Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some \*\*text\*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*\*text\*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some \*\* text\*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*\* text\*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some \*\*text \*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*\*text \*\*</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is some \*\* text \*\*</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is some \*\* text \*\*</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is **some** text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="bold">some</tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is ** some** text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="bold"> some</tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is **some ** text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="bold">some </tei:emph> text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is ** some ** text</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI">This is <tei:emph rend="bold"> some </tei:emph> text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains escaped Bold Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is \*\*some\*\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*\*some\*\* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is \*\* some\*\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*\* some\*\* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is \*\*some \*\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*\*some \*\* text</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:bold">
+          <x:param name="input" as="text()">This is \*\* some \*\* text</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">This is \*\* some \*\* text</x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of Bold and Italic Markdown">
+      <x:call function="m2t:bold">
+        <x:param name="input" as="text()">**blah** hello *italic* and **bold** with **other bold** then some *other italic* but **finally**</x:param>
+      </x:call>
+      <x:expect label="Then convert to TEI"><tei:emph rend="bold">blah</tei:emph> hello *italic* and <tei:emph rend="bold">bold</tei:emph> with <tei:emph rend="bold">other bold</tei:emph> then some *other italic* but <tei:emph rend="bold">finally</tei:emph></x:expect>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of escaped Bold and Italic Markdown">
+      <x:call function="m2t:bold">
+        <x:param name="input" as="text()">\*\*blah\*\* hello \*italic\* and \*\*bold\*\* with \*\*other bold\*\* then some \*other italic\* but \*\*finally\*\*</x:param>
+      </x:call>
+      <x:expect label="Then copy as is">\*\*blah\*\* hello \*italic\* and \*\*bold\*\* with \*\*other bold\*\* then some \*other italic\* but \*\*finally\*\*</x:expect>
+    </x:scenario>
+    
+    <x:scenario label="When the text contains a mix of escaped and non-escaped Bold and Italic Markdown">
+      <x:call function="m2t:bold">
+        <x:param name="input" as="text()">**blah** hello *italic* and **bold** with \*\*other bold\*\* then some \*other italic\* but **finally**</x:param>
+      </x:call>
+      <x:expect label="Then convert to TEI"><tei:emph rend="bold">blah</tei:emph> hello *italic* and <tei:emph rend="bold">bold</tei:emph> with \*\*other bold\*\* then some \*other italic\* but <tei:emph rend="bold">finally</tei:emph></x:expect>
+    </x:scenario>
+    
+  </x:scenario>
+
+  <x:scenario label="Given text containing Heading 1 Markdown">
+    
+    <x:scenario label="When there is no Heading 1 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">Not a heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()"> Not a heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">Not a heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 1 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()"> Not a heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 1 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely Heading 1 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()"># Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:hi rend="h1">Heading 1</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">#  Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then remove preceding whitespace and convert to TEI"><tei:hi rend="h1">Heading 1</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()"># Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then remove following whitespace and convert to TEI"><tei:hi rend="h1">Heading 1</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">#  Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then remove preceding and following whitespace and convert to TEI"><tei:hi rend="h1">Heading 1</tei:hi></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is mistakenly Heading 2 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">## Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">## Heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">##  Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">##  Heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">## Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">## Heading 2 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">##  Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">##  Heading 2 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is mistakenly Heading 3 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">### Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">### Heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">###  Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">###  Heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">### Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">### Heading 3 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h1">
+          <x:param name="input" as="text()">###  Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">###  Heading 3 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="Given text containing Heading 2 Markdown">
+    
+    <x:scenario label="When there is no Heading 2 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">Not a heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()"> Not a heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">Not a heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 2 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()"> Not a heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 2 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely Heading 2 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">## Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:hi rend="h2">Heading 2</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">##  Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then remove preceding whitespace and convert to TEI"><tei:hi rend="h2">Heading 2</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">## Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then remove following whitespace and convert to TEI"><tei:hi rend="h2">Heading 2</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">##  Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then remove preceding and following whitespace and convert to TEI"><tei:hi rend="h2">Heading 2</tei:hi></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is mistakenly Heading 1 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()"># Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"># Heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">#  Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">#  Heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()"># Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"># Heading 1 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">#  Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">#  Heading 1 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is mistakenly Heading 3 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">### Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">### Heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">###  Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">###  Heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">### Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">### Heading 3 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h2">
+          <x:param name="input" as="text()">###  Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">###  Heading 3 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="Given text containing Heading 3 Markdown">
+    
+    <x:scenario label="When there is no Heading 3 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">Not a heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()"> Not a heading 3</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 3</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">Not a heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">Not a heading 3 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()"> Not a heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"> Not a heading 3 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is entirely Heading 3 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">### Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then convert to TEI"><tei:hi rend="h3">Heading 3</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">###  Heading 3</x:param>
+        </x:call>
+        <x:expect label="Then remove preceding whitespace and convert to TEI"><tei:hi rend="h3">Heading 3</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">### Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then remove following whitespace and convert to TEI"><tei:hi rend="h3">Heading 3</tei:hi></x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">###  Heading 3 </x:param>
+        </x:call>
+        <x:expect label="Then remove preceding and following whitespace and convert to TEI"><tei:hi rend="h3">Heading 3</tei:hi></x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="When the text is mistakenly Heading 1 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()"># Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is"># Heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">#  Heading 1</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">#  Heading 1</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()"># Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is"># Heading 1 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">#  Heading 1 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">#  Heading 1 </x:expect>
+      </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="When the text is mistakenly Heading 2 Markdown">
+      <x:scenario label="With no preceding or following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">## Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">## Heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">##  Heading 2</x:param>
+        </x:call>
+        <x:expect label="Then copy as is">##  Heading 2</x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">## Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">## Heading 2 </x:expect>
+      </x:scenario>
+      
+      <x:scenario label="With preceding and following whitespace">
+        <x:call function="m2t:h3">
+          <x:param name="input" as="text()">##  Heading 2 </x:param>
+        </x:call>
+        <x:expect label="Then copy as is">##  Heading 2 </x:expect>
+      </x:scenario>
+    </x:scenario>
+    
+  </x:scenario>
+  
+
+</x:description>

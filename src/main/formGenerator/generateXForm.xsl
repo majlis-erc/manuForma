@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:sc="http://www.ascc.net/xml/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:local="http://syriaca.org/ns" version="3.0">
     <!-- 
-        Generate XForms from a schema. Designed for TEI XML creation and editing. Run as an eXist-db application. 
-        Resulting TEI can be saved to eXist-db, downloaded to local filesystem, or saved to a GitHub repository
+        Generate XForms from a schema. Designed for TEI XML creation and editing. Run as an Elemental application.
+        Resulting TEI can be saved to Elemental, downloaded to local filesystem, or saved to a GitHub repository
         
         Expectations: 
         
@@ -12,7 +12,7 @@
             - Local schema constrainst, such as an ODD file
             - Main schema as an ODD file
             - XSLTForms
-            - eXist-db 
+            - Elemental
             
         Version: 1.72 Beta 
             -1.23 marks a major redesign
@@ -643,8 +643,8 @@
                     <xf:instance id="i-preview">
                         <data xmlns=""></data>
                     </xf:instance>
-                    <xf:submission id="s-load-template" method="post" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected'))"/>
+                    <xf:submission id="s-load-template" method="get" ref="instance('i-selected')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=', instance('i-selected'))"/>
                         <xf:action ev:event="xforms-submit-done">
                             <xf:message level="modeless"> Data Loaded! </xf:message>
                             <!--
@@ -652,16 +652,13 @@
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
                             -->
-                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
                             <xf:setvalue ref="instance('i-new')//*:new" value="'true'"/>
                         </xf:action>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-load-template-search" method="post" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=',instance('i-selected-search'))"/>
+                    <xf:submission id="s-load-template-search" method="get" ref="instance('i-selected-search')" replace="instance" instance="i-rec" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?template=true&amp;path=', instance('i-selected-search'))"/>
                         <xf:action ev:event="xforms-submit-done">
                         <xf:message level="modeless"> Data Loaded! </xf:message>
                             <!--
@@ -669,30 +666,28 @@
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]" value="instance('i-user')//*:fullName"/>
                             <xf:setvalue ref="instance('i-rec')//*:titleStmt/*:editor[last()]/@xml:id" value="instance('i-user')//*:user"/>
                             -->
-                            <xf:insert ref="instance('i-rec')//*:revisionDesc/child::*" at="1" origin="instance('i-admin')//*:change[1]" position="before"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@who" value="concat('#',instance('i-user')//*:user)"/>
-                            <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]/@when" value="getXMLDate()"/>
                             <xf:setvalue ref="instance('i-new')//*:new" value="'false'"/>
                         </xf:action>    
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    <xf:submission id="s-search-saved" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=', instance('i-search')//*:q, '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-saved-next" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=',string(instance('i-search-results')//*:next),'&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/><xf:resource value="concat('services/get-rec.xql?search=true&amp;q=',instance('i-search')//*:q,'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;searchURI=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']),'&amp;facet-',string(instance('i-selected-facet')//*:facetGrp/@label),'=',string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                    <xf:submission id="s-search-saved-next" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;start=', string(instance('i-search-results')//*:next), '&amp;q=',instance('i-search')//*:q, '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;q=', instance('i-search')//*:q,'&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;searchURI=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='searchURI']), '&amp;facet-', string(instance('i-selected-facet')//*:facetGrp/@label), '=', string(instance('i-selected-facet')//*:facetGrp/@facet))"/>
                     </xf:submission>
                     
-                    <xf:submission id="s-search-id" method="post" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=',instance('i-search-id'),'&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;baseURI=',string(instance('i-submission-params')//*:baseURI))"/>
+                    <xf:submission id="s-search-id" method="get" ref="instance('i-search-id')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;idno=', instance('i-search-id'), '&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']), '&amp;baseURI=', string(instance('i-submission-params')//*:baseURI))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     
-                    <xf:submission id="s-browse-saved" method="post" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
-                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;view=all&amp;eXistCollection=',string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
+                    <xf:submission id="s-browse-saved" method="get" ref="instance('i-search')" replace="instance" instance="i-search-results" serialization="none" mode="synchronous">
+                        <xf:resource value="concat('services/get-rec.xql?search=true&amp;view=all&amp;eXistCollection=', string(instance('i-submission-params')//*:retrieveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']))"/>
                         <xf:message level="modeless" ev:event="xforms-submit-error"> Submit error. </xf:message>
                     </xf:submission>
                     <xf:submission id="s-post-to-update" action="services/upload.xql" ref="instance('i-upload')" replace="instance" instance="i-rec" method="post">
@@ -719,6 +714,10 @@
                     
                     <!-- Save record to github -->
                     <xf:submission id="s-github" ref="instance('i-rec')" replace="instance" instance="i-submission" method="post">
+                        <xf:action ev:event="xforms-submit">
+                            <!-- Set the change details in the record before saving -->
+                            <xf:insert context="instance('i-rec')//tei:teiHeader/tei:revisionDesc" nodeset="tei:change" at="1" position="before" origin="instance('i-admin')/tei:change"/>
+                        </xf:action>
                         <xf:resource value="concat('services/submit.xql?type=github','&amp;new=',string(instance('i-new')//*:new),'&amp;eXistCollection=',string(instance('i-submission-params')//*:saveOptions/*:option[@name='exist-db']/*:parameter[@name='eXistCollection']),'&amp;githubRepoName=',string(instance('i-submission-params')//*:parameter[@name='githubRepoName']),'&amp;githubPath=',string(instance('i-submission-params')//*:parameter[@name='githubPath']),'&amp;githubOwner=',string(instance('i-submission-params')//*:parameter[@name='githubOwner']),'&amp;githubBranch=',string(instance('i-submission-params')//*:parameter[@name='githubBranch']))"/>
                         <xf:action ev:event="xforms-submit-done">
                             <xf:message ref="instance('i-submission')//*:message"/>
@@ -1104,7 +1103,7 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <h3>Credits</h3>
-                                        <xf:repeat ref="instance('i-rec')//*:revisionDesc/*:change" id="changeRec">
+                                        <xf:repeat ref="instance('i-rec')//tei:teiHeader/tei:revisionDesc/tei:change" id="changeRec">
                                             <div class="change">
                                                 <xf:output value="concat(@who,' (', @when,'): ', .)"/>
                                             </div>
@@ -1156,12 +1155,14 @@
                                         <div class="fileLoading">
                                         <p>Write a one-sentence description of the changes you made to the file.</p>
                                         <div class="input-group mb-3 full-width">
-                                            <xf:textarea ref="instance('i-rec')//*:revisionDesc/*:change[1]" class="large-textarea"/>
+                                            <xf:textarea ref="instance('i-admin')/tei:change" class="large-textarea"/>
                                         </div>
                                         <div class="mb-3">
                                             <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
                                                 <xf:label> Save</xf:label>
                                                 <xf:action ev:event="DOMActivate">
+                                                    <xf:setvalue ref="instance('i-admin')/tei:change/@who" value="concat('#', instance('i-user')//*:user)"/>
+                                                    <xf:setvalue ref="instance('i-admin')/tei:change/@when" value="getXMLDate()"/>
                                                     <xf:toggle case="changeElementHide" ev:event="DOMActivate"/>
                                                     <xf:send submission="s-github"/>
                                                 </xf:action>
@@ -1169,8 +1170,10 @@
                                             <xf:trigger class="btn btn-outline-secondary" appearance="minimal">
                                                 <xf:label> Cancel</xf:label>
                                                 <xf:action ev:event="DOMActivate">
+                                                    <xf:setvalue ref="instance('i-admin')/tei:change/@who" value="'#'"/>
+                                                    <xf:setvalue ref="instance('i-admin')/tei:change/@when" value="''"/>
+                                                    <xf:setvalue ref="instance('i-admin')/tei:change" value="''"/>
                                                     <xf:toggle case="changeElementHide" ev:event="DOMActivate"/>
-                                                    <xf:setvalue ref="instance('i-rec')//*:revisionDesc/*:change[1]" value="''"/>
                                                 </xf:action>
                                             </xf:trigger>   
                                         </div>
