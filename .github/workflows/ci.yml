@@ -47,6 +47,8 @@ jobs:
       - name: Bump Version Number
         run: mvn versions:set -DnewVersion="${NEW_VERSION}"
       - name: Build Deploy Scripts and Package
+        env:
+          MANUFORMA_GITHUB_PAT: ${{ secrets.MANUFORMA_GITHUB_PAT }}
         run: mvn package -DskipTests -Pbuild-deploy-scripts
       - name: Set Deploy Scripts as executable
         run: chmod +x target/classes/deploy-resources/upload-remote-tmp-xar.sh target/classes/deploy-resources/redeploy-xar-package.sh target/classes/deploy-resources/delete-remote-tmp-xar.sh
