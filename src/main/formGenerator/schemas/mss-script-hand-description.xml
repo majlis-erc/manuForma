@@ -27,8 +27,9 @@ End license statement: do not remove -->
     
 
 -->
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
-    xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="en">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+    xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -38,11 +39,12 @@ End license statement: do not remove -->
             </titleStmt>
             <publicationStmt>
                 <authority>Institut für den Nahen und Mittleren Osten</authority>
-                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in Arabic in the Islamicate World</publisher>
+                <publisher>ERC-funded project: MAJLIS. The Transformation of Jewish Literature in
+                    Arabic in the Islamicate World</publisher>
                 <pubPlace>München</pubPlace>
                 <availability>
-                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is licensed under the Creative Commons
-                        Attribution-ShareAlike 4.0. </licence>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/"> This file is
+                        licensed under the Creative Commons Attribution-ShareAlike 4.0. </licence>
                 </availability>
             </publicationStmt>
             <notesStmt>
@@ -53,7 +55,8 @@ End license statement: do not remove -->
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
-            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema created by Pietro Liuzzo</change>
+            <change who="NG" when="2021-04-21">Created schema on basis of Arabic Manuscripts Schema
+                created by Pietro Liuzzo</change>
         </revisionDesc>
     </teiHeader>
     <text>
@@ -63,27 +66,32 @@ End license statement: do not remove -->
         <body>
             <div>
                 <head>Information on this customization</head>
-                <p>Schema for MAJLIS Project. This part of the schema is used for entering descriptions of the manuscript layout using XForms.</p>
-                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft Guidelines</ref> contain examples and details of that
-                    customization.</p>
-                <p>Added Rules from the <ref target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd">consolidated
-                        schema</ref> of FIRHIST</p>
+                <p>Schema for MAJLIS Project. This part of the schema is used for entering
+                    descriptions of the manuscript layout using XForms.</p>
+                <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
+                        Guidelines</ref> contain examples and details of that customization.</p>
+                <p>Added Rules from the <ref
+                        target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd"
+                        >consolidated schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
-                <schemaSpec ident="mss-hand" docLang="en" prefix="tei_" start="TEI" xml:lang="en" targetLang="en">
+                <schemaSpec ident="mss-hand" docLang="en" prefix="tei_" start="TEI" xml:lang="en"
+                    targetLang="en">
                     <!--source="mss-compiled.odd"-->
                     <!--       MODULES USED BY THE SCHEMA
                 the @source ties the current schema to the pre-compiled Arabic Manuscripts Schema, which is tied to version 4.2.0 of TEI
                 -->
-
                     <moduleRef key="header" include="handNote scriptNote"/>
-                    <moduleRef key="msdescription" include="handDesc locus origDate scriptDesc summary"/>
+                    <moduleRef key="msdescription" include="handDesc locus origDate scriptDesc
+                        summary"/>
                     <moduleRef key="namesdates" include="persName placeName"/>
                     <moduleRef key="transcr" include="metamark"/>
                     <moduleRef key="core" include="note"/>
                     <elementSpec ident="locus" module="msdescription" mode="change">
-                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify range of folios within the manuscript. Recto and verso are indicated as "r" and "v".</desc>
+                        <desc versionDate="2022-05-27" xml:id="locus.desc" xml:lang="en">Specify
+                            range of folios within the manuscript. Recto and verso are indicated as
+                            "r" and "v".</desc>
                         <gloss>*Range of folio(s)</gloss>
                         <gloss type="tei">&lt;locus/&gt;</gloss>
                         <classes mode="replace">
@@ -133,7 +141,8 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="summary" module="msdescription" mode="change">
-                        <desc versionDate="2022-05-27" xml:id="summary.desc" xml:lang="en">Provide a summary of the main features of the hand.</desc>
+                        <desc versionDate="2022-05-27" xml:id="summary.desc" xml:lang="en">Provide a
+                            summary of the main features of the hand.</desc>
                         <gloss>Summary of hand</gloss>
                         <gloss type="tei">&lt;summary/&gt;</gloss>
                         <content>
@@ -230,14 +239,15 @@ End license statement: do not remove -->
                     </elementSpec>
                     <moduleRef key="header" include="handNote"/>
                     <elementSpec ident="handDesc" mode="change">
-                        <gloss>Scribal hand entries</gloss>
+                        <gloss>List of scribal hand entries</gloss>
                         <gloss type="tei">&lt;handDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">Create a distinct entry for each scribal hand.</desc>
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">Create a
+                            distinct entry for each scribal hand. Don't duplicate this field!</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <content>
-                            <sequence maxOccurs="unbounded" minOccurs="1">
+                            <sequence maxOccurs="1" minOccurs="1">
                                 <elementRef key="summary"/>
                                 <elementRef key="handNote"/>
                             </sequence>
@@ -246,10 +256,10 @@ End license statement: do not remove -->
                             <attDef ident="hands" mode="delete"/>
                         </attList>
                     </elementSpec>
-
                     <elementSpec ident="physDesc" module="msdescription" mode="change">
-                        <desc versionDate="2022-05-27" xml:id="physdesc.desc" xml:lang="en">This element contains descriptions of the codicological
-                            and paleographic features of a manuscript. </desc>
+                        <desc versionDate="2022-05-27" xml:id="physdesc.desc" xml:lang="en">This
+                            element contains descriptions of the codicological and paleographic
+                            features of a manuscript. </desc>
                         <content>
                             <sequence maxOccurs="1" minOccurs="1">
                                 <elementRef key="handDesc"/>
@@ -282,7 +292,8 @@ End license statement: do not remove -->
                     <elementSpec ident="scriptDesc" mode="change">
                         <gloss>Script definition entries</gloss>
                         <gloss type="tei">&lt;scriptDesc/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">Define the script according to basic categories.</desc>
+                        <desc versionDate="2022-05-27" xml:id="script.desc" xml:lang="en">Define the
+                            script according to basic categories.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                         </classes>
@@ -292,12 +303,12 @@ End license statement: do not remove -->
                             </sequence>
                         </content>
                     </elementSpec>
-
                     <elementSpec ident="metamark" mode="change">
                         <gloss>Special graphic signs</gloss>
                         <gloss type="tei">&lt;metamark/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the use of vocalization or recitation and choose the appropriate
-                            "Function" from the dropdown list.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the use of
+                            vocalization or recitation and choose the appropriate "Function" from
+                            the dropdown list.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.placement" mode="delete"/>
@@ -330,7 +341,8 @@ End license statement: do not remove -->
                     <elementSpec ident="origDate" mode="change">
                         <gloss>Date of origin</gloss>
                         <gloss type="tei">&lt;origDate/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in the date of origin in CE.</desc>
+                        <desc versionDate="2022-05-27" xml:id="origdate.desc" xml:lang="en">Fill in
+                            the date of origin in CE.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.dimensions" mode="delete"/>
@@ -351,9 +363,11 @@ End license statement: do not remove -->
                     <elementSpec ident="persName" mode="change">
                         <gloss>Person</gloss>
                         <gloss type="tei">&lt;persName/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in the database to identify the scribe, vocalizer, or
-                            masorator. Try different spellings in different languages! If no suitable record exists, create a new one. Select which
-                            role the person played in the production from the dropdown list. Add additional fields as required. </desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the person records in
+                            the database to identify the scribe, vocalizer, or masorator. Try
+                            different spellings in different languages! If no suitable record
+                            exists, create a new one. Select which role the person played in the
+                            production from the dropdown list. Add additional fields as required. </desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -392,8 +406,9 @@ End license statement: do not remove -->
                     <elementSpec ident="placeName" mode="change">
                         <gloss>Place of origin</gloss>
                         <gloss type="tei">&lt;placeName/&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en">Look up the place records in the database to specify a location. Try different
-                            spellings in different languages! If no suitable record exists, create a new one.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Look up the place records in
+                            the database to specify a location. Try different spellings in different
+                            languages! If no suitable record exists, create a new one.</desc>
                         <classes mode="change">
                             <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
@@ -415,7 +430,9 @@ End license statement: do not remove -->
                         </attList>
                     </elementSpec>
                     <elementSpec ident="handNote" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Describe the hand according to basic categories and the kind of ink used.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Describe the hand according to
+                            basic categories and the kind of ink used. Add as many entries as
+                            needed.</desc>
                         <gloss>*Description of scribal hand</gloss>
                         <gloss type="tei">&lt;handNote/&gt;</gloss>
                         <classes mode="change">
@@ -469,11 +486,12 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-
                     <elementSpec ident="scriptNote" mode="change">
-                        <desc versionDate="2022-05-27" xml:lang="en">Specify script according to the following criteria: "Script type" (Oriental,
-                            Sefardic …), "Script mode" (square, non-square …), "Script quality" (careless, trained …). Indicate the range of folios.
-                            If necessary, add detailed observations in the Note field.</desc>
+                        <desc versionDate="2022-05-27" xml:lang="en">Specify script according to the
+                            following criteria: "Script type" (Oriental, Sefardic …), "Script mode"
+                            (square, non-square …), "Script quality" (careless, trained …). Indicate
+                            the range of folios. If necessary, add detailed observations in the Note
+                            field.</desc>
                         <gloss>*Description of script</gloss>
                         <gloss type="tei">&lt;scriptNote/&gt;</gloss>
                         <classes mode="change">
@@ -591,7 +609,6 @@ End license statement: do not remove -->
                             <attDef ident="scriptRef" mode="delete"/>
                         </attList>
                     </elementSpec>
-
                 </schemaSpec>
             </div>
         </body>
