@@ -69,10 +69,10 @@ End license statement: do not remove -->
                 <p>Schema for MAJLIS Project. This part of the schema is used for entering
                     descriptions of the manuscript support using XForms.</p>
                 <p>Built on the <ref target="https://betamasaheft.eu/Guidelines">Beta maṣāḥǝft
-                    Guidelines</ref> contain examples and details of that customization.</p>
+                        Guidelines</ref> contain examples and details of that customization.</p>
                 <p>Added Rules from the <ref
-                    target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd"
-                    >consolidated schema</ref> of FIRHIST</p>
+                        target="https://github.com/msDesc/consolidated-tei-schema/blob/master/msdesc.odd"
+                        >consolidated schema</ref> of FIRHIST</p>
                 <p>Constrained this schema for generating forms.</p>
             </div>
             <div>
@@ -84,9 +84,8 @@ End license statement: do not remove -->
                 -->
                     <moduleRef include="ab" key="linking"/>
                     <moduleRef include="bible citedRange item label list ptr quote title" key="core"/>
-                    <moduleRef
-                        include="persName listPerson person addName forename birth placeName death floruit sex state faith occupation residence"
-                        key="namesdates"/>
+                    <moduleRef include="persName listPerson person addName forename birth placeName
+                        death floruit sex state faith occupation residence" key="namesdates"/>
                     <moduleRef include="idno" key="header"/>
                     <elementSpec ident="persName" mode="change">
                         <gloss>Name of the person</gloss>
@@ -172,7 +171,6 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
                     <elementSpec ident="listPerson" mode="change">
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
@@ -218,7 +216,6 @@ End license statement: do not remove -->
                             <attDef class="att.global" ident="xml:id"/>
                         </attList>
                     </elementSpec>
-                    
                     <elementSpec ident="addName" mode="change">
                         <gloss>Additional name</gloss>
                         <gloss type="tei">&lt;addName&gt;</gloss>
@@ -383,8 +380,11 @@ End license statement: do not remove -->
                     <elementSpec ident="date" mode="change">
                         <gloss>Date</gloss>
                         <gloss type="tei">&lt;date&gt;</gloss>
-                        <desc xml:lang="en">Fill in the date in CE. Reference items from the
-                            bibliography in the "Source" field.</desc>
+                        <desc xml:lang="en">In the main field fill in the date in CE. In the
+                            feature fields, choose between a point in time ("When exactly?"), OR a time range
+                            ("From when?" and "To when?"). Dates in the feature must be given in
+                            this format: YYYY-MM-DD (e.g. "1204-04-12", or "1204-04", or "1204").
+                            Reference items from the bibliography in the "Source" field.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
@@ -400,10 +400,18 @@ End license statement: do not remove -->
                             <attDef ident="calendar" mode="delete"/>
                             <attDef ident="dur" mode="delete"/>
                             <attDef ident="dur-iso" mode="delete"/>
-                            <attDef ident="notAfter" mode="delete"/>
-                            <attDef ident="notBefore" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"> </attDef>
+                            <attDef ident="notBefore" mode="delete"> </attDef>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="when" mode="delete"/>
+                            <attDef ident="when" mode="change">
+                                <gloss>When exactly?</gloss>
+                            </attDef>
+                            <attDef ident="from" mode="change">
+                                <gloss>From when?</gloss>
+                            </attDef>
+                            <attDef ident="to" mode="change">
+                                <gloss>To when?</gloss>
+                            </attDef>
                             <attDef ident="when-iso" mode="delete"/>
                             <attDef ident="when-custom" mode="delete"/>
                             <attDef class="att.datable.w3c" ident="notBefore"/>
@@ -652,11 +660,11 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
                     <elementSpec ident="label" mode="change">
                         <gloss>Role</gloss>
                         <gloss type="tei">&lt;label&gt;</gloss>
-                        <desc xml:lang="en">Choose the roles the person fulfilled from the list. Create as many fields as necessary.</desc>
+                        <desc xml:lang="en">Choose the roles the person fulfilled from the list.
+                            Create as many fields as necessary.</desc>
                         <classes mode="change">
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -690,7 +698,6 @@ End license statement: do not remove -->
                             </attDef>
                         </attList>
                     </elementSpec>
-                    
                     <elementSpec ident="state" mode="change">
                         <gloss>List of Roles</gloss>
                         <gloss type="tei">&lt;state&gt;</gloss>
@@ -705,11 +712,9 @@ End license statement: do not remove -->
                             <memberOf key="att.cmc" mode="delete"/>
                         </classes>
                         <content>
-                            <elementRef key="label" maxOccurrence="unbounded" minOccurrence="0"
-                            />
+                            <elementRef key="label" maxOccurrence="unbounded" minOccurrence="0"/>
                         </content>
                     </elementSpec>
-                    
                     <elementSpec ident="residence" mode="change">
                         <gloss>Place of residence</gloss>
                         <gloss type="tei">&lt;residence&gt;</gloss>
@@ -1031,8 +1036,7 @@ End license statement: do not remove -->
                     <elementSpec ident="note" mode="change">
                         <gloss>Note</gloss>
                         <gloss type="tei">&lt;note&gt;</gloss>
-                        <desc xml:lang="en">Add your observations on the
-                            person.</desc>
+                        <desc xml:lang="en">Add your observations on the person.</desc>
                         <classes mode="change">
                             <memberOf key="att.anchoring" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>

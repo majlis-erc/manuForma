@@ -167,9 +167,15 @@ End license statement: do not remove -->
                     <elementSpec ident="origDate" module="msdescription" mode="change">
                         <gloss>Date of origin</gloss>
                         <gloss type="tei">&lt;origDate&gt;</gloss>
-                        <desc versionDate="2022-05-27" xml:lang="en" xml:id="origdate.desc">Fill in the date in CE. The date given here refers to the
+                        <desc xml:lang="en">In the main field fill in the date in CE. In the
+                            feature fields, choose between a point in time ("When exactly?"), OR a time range
+                            ("From when?" and "To when?"). Dates in the feature must be given in
+                            this format: YYYY-MM-DD (e.g. "1204-04-12", or "1204-04", or "1204").
+                            Reference items from the bibliography in the "Source" field. The date given here refers to the
                             binding material (and not the production of the copy).</desc>
                         <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
+                            <memberOf key="att.datable" mode="delete"/>
                             <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
@@ -179,59 +185,42 @@ End license statement: do not remove -->
                             <textNode/>
                         </content>
                         <attList>
-                            <attDef ident="ana" mode="delete"/>
-                            <attDef ident="atLeast" mode="delete"/>
-                            <attDef ident="atMost" mode="delete"/>
-                            <attDef ident="change" mode="delete"/>
-                            <attDef ident="confidence" mode="delete"/>
-                            <attDef ident="copyOf" mode="delete"/>
-                            <attDef ident="corresp" mode="delete"/>
-                            <attDef ident="datingMethod" mode="delete"/>
-                            <attDef ident="datingPoint" mode="delete"/>
-                            <attDef ident="evidence" mode="delete"/>
-                            <attDef ident="exclude" mode="delete"/>
-                            <attDef ident="extent" mode="delete"/>
-                            <attDef ident="facs" mode="delete"/>
-                            <attDef ident="from-custom" mode="delete"/>
-                            <attDef ident="from-iso" mode="delete"/>
-                            <attDef ident="instant" mode="delete"/>
-                            <attDef ident="max" mode="delete"/>
-                            <attDef ident="min" mode="delete"/>
-                            <attDef ident="next" mode="delete"/>
-                            <attDef ident="notAfter" mode="delete"/>
-                            <attDef ident="notAfter-custom" mode="delete"/>
-                            <attDef ident="notAfter-iso" mode="delete"/>
-                            <attDef ident="notBefore" mode="delete"/>
-                            <attDef ident="notBefore-custom" mode="delete"/>
-                            <attDef ident="notBefore-iso" mode="delete"/>
-                            <attDef ident="precision" mode="delete"/>
-                            <attDef ident="prev" mode="delete"/>
-                            <attDef ident="quantity" mode="delete"/>
-                            <attDef ident="rend" mode="delete"/>
-                            <attDef ident="rendition" mode="delete"/>
-                            <attDef ident="resp" mode="delete"/>
-                            <attDef ident="sameAs" mode="delete"/>
-                            <attDef ident="scope" mode="delete"/>
-                            <attDef ident="select" mode="delete"/>
-                            <attDef ident="source" mode="delete"/>
-                            <attDef ident="style" mode="delete"/>
-                            <attDef ident="subtype" mode="delete"/>
-                            <attDef ident="synch" mode="delete"/>
-                            <attDef ident="to-custom" mode="delete"/>
-                            <attDef ident="to-iso" mode="delete"/>
-                            <attDef ident="type" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
-                            <attDef ident="when-custom" mode="delete"/>
-                            <attDef ident="when-iso" mode="delete"/>
-                            <attDef ident="xml:base" mode="delete"/>
-                            <attDef ident="xml:id" mode="delete"/>
-                            <attDef ident="xml:lang" mode="delete"/>
-                            <attDef ident="xml:space" mode="delete"/>
-                            <attDef ident="period" mode="delete"/>
                             <attDef ident="calendar" mode="delete"/>
-                            <attDef ident="when" mode="delete"/>
-                            <attDef ident="from" mode="delete"/>
-                            <attDef ident="to" mode="delete"/>
+                            <attDef ident="dur" mode="delete"/>
+                            <attDef ident="dur-iso" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"> </attDef>
+                            <attDef ident="notBefore" mode="delete"> </attDef>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="when" mode="change">
+                                <gloss>When exactly?</gloss>
+                            </attDef>
+                            <attDef ident="from" mode="change">
+                                <gloss>From when?</gloss>
+                            </attDef>
+                            <attDef ident="to" mode="change">
+                                <gloss>To when?</gloss>
+                            </attDef>
+                            <attDef ident="when-iso" mode="delete"/>
+                            <attDef ident="when-custom" mode="delete"/>
+                            <attDef class="att.datable.w3c" ident="notBefore"/>
+                            <attDef class="att.datable.w3c" ident="notAfter"/>
+                            <attDef ident="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attDef>
+                            <attDef ident="cert" mode="change">
+                                <gloss>Degree of certainty</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem ident="high" mode="add">
+                                        <gloss>High</gloss>
+                                    </valItem>
+                                    <valItem ident="medium" mode="add">
+                                        <gloss>Medium</gloss>
+                                    </valItem>
+                                    <valItem ident="low" mode="add">
+                                        <gloss>Low</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="origPlace" module="msdescription" mode="delete">
