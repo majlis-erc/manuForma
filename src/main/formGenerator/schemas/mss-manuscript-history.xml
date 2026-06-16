@@ -357,10 +357,15 @@ End license statement: do not remove --><!--requirements:
                     <elementSpec ident="date" mode="change">
                         <gloss>Date</gloss>
                         <gloss type="tei">&lt;date&gt;</gloss>
-                        <desc versionDate="2022-05-26" xml:lang="en">Fill in the date in CE. The date refers to the acquisition (not the production of the copy).</desc>
+                        <desc xml:lang="en">In the main field fill in the date in CE. In the
+                            feature fields, choose between a point in time ("When exactly?"), OR a time range
+                            ("From when?" and "To when?"). Dates in the feature must be given in
+                            this format: YYYY-MM-DD (e.g. "1204-04-12", or "1204-04", or "1204").
+                            Reference items from the bibliography in the "Source" field.</desc>
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
+                            <memberOf key="att.dimensions" mode="delete"/>
                             <memberOf key="att.editLike" mode="delete"/>
                             <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.typed" mode="delete"/>
@@ -369,23 +374,42 @@ End license statement: do not remove --><!--requirements:
                             <textNode/>
                         </content>
                         <attList>
-                            <attDef ident="when" mode="delete"/>
-                            <attDef ident="atLeast" mode="delete"/>
-                            <attDef ident="atMost" mode="delete"/>
                             <attDef ident="calendar" mode="delete"/>
-                            <attDef ident="confidence" mode="delete"/>
                             <attDef ident="dur" mode="delete"/>
                             <attDef ident="dur-iso" mode="delete"/>
-                            <attDef ident="extent" mode="delete"/>
-                            <attDef ident="max" mode="delete"/>
-                            <attDef ident="min" mode="delete"/>
-                            <attDef ident="notAfter" mode="delete"/>
-                            <attDef ident="notBefore" mode="delete"/>
-                            <attDef ident="precision" mode="delete"/>
-                            <attDef ident="quantity" mode="delete"/>
-                            <attDef ident="scope" mode="delete"/>
+                            <attDef ident="notAfter" mode="delete"> </attDef>
+                            <attDef ident="notBefore" mode="delete"> </attDef>
                             <attDef ident="type" mode="delete"/>
-                            <attDef ident="unit" mode="delete"/>
+                            <attDef ident="when" mode="change">
+                                <gloss>When exactly?</gloss>
+                            </attDef>
+                            <attDef ident="from" mode="change">
+                                <gloss>From when?</gloss>
+                            </attDef>
+                            <attDef ident="to" mode="change">
+                                <gloss>To when?</gloss>
+                            </attDef>
+                            <attDef ident="when-iso" mode="delete"/>
+                            <attDef ident="when-custom" mode="delete"/>
+                            <attDef class="att.datable.w3c" ident="notBefore"/>
+                            <attDef class="att.datable.w3c" ident="notAfter"/>
+                            <attDef ident="source" mode="change">
+                                <gloss>Source</gloss>
+                            </attDef>
+                            <attDef ident="cert" mode="change">
+                                <gloss>Degree of certainty</gloss>
+                                <valList mode="change" type="closed">
+                                    <valItem ident="high" mode="add">
+                                        <gloss>High</gloss>
+                                    </valItem>
+                                    <valItem ident="medium" mode="add">
+                                        <gloss>Medium</gloss>
+                                    </valItem>
+                                    <valItem ident="low" mode="add">
+                                        <gloss>Low</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
                         </attList>
                     </elementSpec>
                     <elementSpec ident="persName" mode="change">
