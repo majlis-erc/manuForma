@@ -160,6 +160,12 @@
             <localSchema src="schemas/person-schema.xml"/>
             <localSchema src="schemas/person-schema.xml"/>
             <xmlTemplate src="templates/persons-template.xml"/>
+            <lookup 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                formURL="forms/msSimple/lookup/bibl.xhtml" 
+                elementName="bibl" 
+                formName="bibl" 
+                lookupLabel="Look up bibliographic record."/>
             <elementGroups>
                 <group groupLabel="Bibliographic reference." groupLabelConditionalElement="./*:title" groupLabelXPath="./*:title" groupNo="1" repeatable="yes">
                     <element xpath="tei:bibl"/>
@@ -211,6 +217,12 @@
         </subform>
         <subform xpath="/tei:TEI/descendant::tei:listPerson/tei:org" formName="orgBibl" formLabel="Institution: Bibliographic reference">
             <formDesc>Add bibliographic references from the Zotero database.</formDesc>
+            <lookup 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                formURL="forms/msSimple/lookup/bibl.xhtml" 
+                elementName="bibl" 
+                formName="bibl" 
+                lookupLabel="Look up bibliographic record."/>
             <localSchema src="schemas/org-schema.xml"/>
             <localSchema src="schemas/org-schema.xml"/>
             <xmlTemplate src="templates/org-template.xml"/>
