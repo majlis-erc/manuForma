@@ -42,30 +42,30 @@
     
     <!-- Add lookup options for elements with controlled vocabularly, must have an api already working. Example the Srophe apps person or places api -->
     <lookups>
-        <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q=" 
+        <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q="
             formURL="forms/msSimple/lookup/mutual.xhtml" 
             elementName="mutual" 
             formName="mutual" 
             lookupLabel="Look up mutual relations."/>
-        <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q=" 
+        <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q="
             formURL="forms/msSimple/lookup/mutual.xhtml" 
             elementName="active" 
             formName="active" 
             lookupLabel="Look up subject of relation."/>
-        <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q=" 
+        <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q="
             formURL="forms/msSimple/lookup/mutual.xhtml" 
             elementName="passive" 
             formName="passive" 
             lookupLabel="Look up object of relation."/>
         <lookup 
-            api="/exist/apps/majlis/api/search/persName?format=xml&amp;q=" 
+            api="/exist/apps/majlis/api/search/persName?format=xml&amp;prefixElement=tei&amp;q="
             formURL="forms/msSimple/lookup/persName.xhtml" 
             elementName="persName" 
             formName="persName" 
             lookupLabel="Look up persons."/>
         <popup formName="personTEI" elementName="persName" label="New person"/>
         <lookup 
-            api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" 
+            api="/exist/apps/majlis/api/search/placeName?format=xml&amp;prefixElement=tei&amp;q="
             formURL="forms/msSimple/lookup/placeName.xhtml" 
             elementName="placeName" 
             formName="placeName" 
@@ -79,7 +79,7 @@
             lookupLabel="Look up author record."/>
         <popup formName="authorTEI" elementName="author" label="New author"/>
         <lookup
-            api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q=" 
+            api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;prefixElement=tei&amp;q="
             formURL="forms/msSimple/lookup/title.xhtml" 
             elementName="title" 
             formName="title" 
@@ -88,7 +88,7 @@
             <lookup api="/exist/apps/majlis/api/search/title?format=xml&amp;q=" formURL="forms/msSimple/lookup/title.xhtml" xpath="not(parent::*:bibl)" elementName="title" formName="title" lookupLabel="Look up title"/> -->
         <popup formName="worksTEI" elementName="title" label="New work"/>
         <lookup 
-            api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+            api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
             formURL="forms/msSimple/lookup/bibl.xhtml" 
             elementName="bibl" 
             formName="bibl" 
@@ -99,6 +99,7 @@
             /name of request - usually specifies the type of request or element to be searched. 
             @format - xml/json/html
             @collection - collections to be searched, should match collections in your data directory
+            @prefixElement - a prefix to use for the returned element e.g. 'tei', mutually exclusive with @wrapElement
             @wrapElement - element that will contain the search results, if different from the name of the request
                 example the following searches all persNames, but returns results wrapped in author element for insertion into TEI record: 
                 /exist/apps/majlis/api/search/persName?format=xml&wrapElement=tei:author&q=
@@ -303,7 +304,7 @@
                 formName="author" 
                 lookupLabel="Look up author record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;q=" 
+                api="/exist/apps/majlis/api/search/title?format=xml&amp;collection=works&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/title.xhtml" 
                 elementName="title" 
                 formName="title" 
@@ -492,13 +493,13 @@
             <globalSchema src="schemas/mss-compiled.odd"/>
             <xmlTemplate src="templates/full-mss-template.xml"/>
             <lookup
-                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/persName.xhtml" 
                 elementName="persName" 
                 formName="persName" 
                 lookupLabel="Look up person record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/placeName.xhtml" 
                 elementName="placeName" 
                 formName="placeName" 
@@ -518,7 +519,7 @@
             <globalSchema src="schemas/mss-compiled.odd"/>
             <xmlTemplate src="templates/full-mss-template.xml"/>
             <lookup 
-                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/bibl.xhtml" 
                 elementName="bibl" 
                 formName="bibl" 
@@ -530,28 +531,28 @@
                 formName="idno" 
                 lookupLabel="Look up manuscript record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/persName.xhtml" 
                 elementName="persName" 
                 formName="persName" 
                 lookupLabel="Look up person record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/placeName.xhtml" 
                 elementName="placeName" 
                 formName="placeName" 
                 lookupLabel="Look up place record."/>
-            <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q=" 
+            <lookup api="/exist/apps/majlis/api/search/mutual?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/mutual.xhtml" 
                 elementName="mutual" 
                 formName="mutual" 
                 lookupLabel="Look up mutual relations."/>
-            <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q=" 
+            <lookup api="/exist/apps/majlis/api/search/active?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/mutual.xhtml" 
                 elementName="active" 
                 formName="active" 
                 lookupLabel="Look up subject of relation."/>
-            <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q=" 
+            <lookup api="/exist/apps/majlis/api/search/passive?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/mutual.xhtml" 
                 elementName="passive" 
                 formName="passive" 
@@ -648,13 +649,13 @@
             <globalSchema src="schemas/mss-compiled.odd"/>
             <xmlTemplate src="templates/full-mss-template.xml"/>
             <lookup 
-                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/bibl.xhtml" 
                 elementName="bibl" 
                 formName="bibl" 
                 lookupLabel="Look up bibliographic record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/persName.xhtml" 
                 elementName="persName" 
                 formName="persName" 
@@ -673,13 +674,13 @@
             <localSchema src="schemas/mss-manuscript-history.xml"/>
             <globalSchema src="schemas/mss-compiled.odd"/>
             <lookup
-                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;q=" 
+                api="/exist/apps/majlis/api/search/persName?format=xml&amp;collection=persons&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/persName.xhtml" 
                 elementName="persName" 
                 formName="persName" 
                 lookupLabel="Look up person record."/>
             <lookup
-                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+                api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/placeName.xhtml" 
                 elementName="placeName" 
                 formName="placeName" 
@@ -704,7 +705,7 @@
             <xmlTemplate src="templates/full-mss-template.xml"/>
             <lookup elementName="title" suppress="true"/>
             <lookup 
-                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q=" 
+                api="/exist/apps/majlis/api/search/citation?format=xml&amp;q="
                 formURL="forms/msSimple/lookup/bibl.xhtml" 
                 elementName="bibl" 
                 formName="bibl" 
