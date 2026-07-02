@@ -32,7 +32,7 @@
         <template name="Institutions template" src="/forms/templates/org-fulltemplate.xml"/>
     </blankTemplates>
     <lookups>
-        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
+        <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;prefixElement=tei&amp;q=" formURL="forms/mssTEI/lookup/placeName.xhtml" elementName="placeName" formName="placeName" lookupLabel="Look up places"/>
         <popup formName="placeTEI" elementName="placeName" label="New Places"/>
         <!-- 
         formatting a request to the lookup api
@@ -40,6 +40,7 @@
             /name of request - usually specifies the type of request or element to be searched. 
             @format - xml/json/html
             @collection - collections to be searched, should match collections in your data directory
+            @prefixElement - a prefix to use for the returned element e.g. 'tei', mutually exclusive with @wrapElement
             @wrapElement - element that will contain the search results, if different from the name of the request
                 example the following searches all persNames, but returns results wrapped in author element for insertion into TEI record: 
                 /exist/apps/majlis/api/search/persName?format=xml&wrapElement=author&q=
@@ -103,7 +104,7 @@
             <localSchema src="schemas/person-schema.xml"/>
             <localSchema src="schemas/person-schema.xml"/>
             <xmlTemplate src="templates/persons-template.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/placeName.xhtml" 
                 elementName="placeName" 
                 formName="placeName" 
@@ -202,7 +203,7 @@
             <localSchema src="schemas/org-schema.xml"/>
             <localSchema src="schemas/org-schema.xml"/>
             <xmlTemplate src="templates/org-template.xml"/>
-            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;q=" 
+            <lookup api="/exist/apps/majlis/api/search/placeName?format=xml&amp;collection=places&amp;prefixElement=tei&amp;q="
                 formURL="forms/msSimple/lookup/placeName.xhtml" 
                 elementName="placeName" 
                 formName="placeName" 
