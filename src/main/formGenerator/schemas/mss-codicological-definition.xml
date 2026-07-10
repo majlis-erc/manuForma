@@ -81,7 +81,7 @@ End license statement: do not remove -->
                     <moduleRef key="msdescription" include="physDesc objectType"/>
                     <moduleRef key="linking" include="ab"/>
                     <moduleRef key="header" include="idno"/>
-                    <moduleRef key="core" include="bibl citedRange listBibl ptr"/>
+                    <moduleRef key="core" include="bibl citedRange listBibl note ptr"/>
 
                     <elementSpec ident="listBibl" mode="change">
                         <desc xml:lang="en">List the relevant manuscript joins.</desc>
@@ -304,6 +304,50 @@ End license statement: do not remove -->
                         <content>
                             <elementRef key="objectType"/>
                             <elementRef key="listBibl"/>
+                            <elementRef key="note"/>
+                        </content>
+                    </elementSpec>
+                    
+                    <elementSpec ident="note" mode="change">
+                        <gloss>Note</gloss>
+                        <gloss type="tei">&lt;note/&gt;</gloss>
+                        <desc versionDate="2022-05-27" xml:lang="en">Add your general observations regarding the codicology of the manuscript.</desc>
+                        <classes mode="change">
+                            <memberOf key="att.anchoring" mode="delete"/>
+                            <memberOf key="att.global" mode="delete"/>
+                            <memberOf key="att.placement" mode="delete"/>
+                            <memberOf key="att.pointing" mode="delete"/>
+                            <memberOf key="att.typed" mode="delete"/>
+                            <memberOf key="att.written" mode="delete"/>
+                        </classes>
+                        <attList>
+                            <attDef ident="type" mode="delete"/>
+                            <attDef ident="xml:lang" mode="change">
+                                <gloss>Language</gloss>
+                                <valList type="closed" mode="change">
+                                    <valItem mode="add" ident="ar">
+                                        <gloss>Arabic</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="he">
+                                        <gloss>Hebrew</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="en">
+                                        <gloss>English</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="he-Latn">
+                                        <gloss>Hebrew in Latin characters</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="ar-Latn">
+                                        <gloss>Arabic in Latin characters</gloss>
+                                    </valItem>
+                                    <valItem mode="add" ident="ar-Hebr">
+                                        <gloss>Arabic in Hebrew characters</gloss>
+                                    </valItem>
+                                </valList>
+                            </attDef>
+                        </attList>
+                        <content>
+                            <textNode/>
                         </content>
                     </elementSpec>
 
